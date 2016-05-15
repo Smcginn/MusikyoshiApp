@@ -3,7 +3,8 @@
 //  Trumpet1
 //
 //  Created by Adam Kinney on 11/6/15.
-//  Copyright © 2015 ADKINN, LLC. All rights reserved.
+//  Changed by David S Reich - 2016.
+//  Copyright © 2015 Musikyoshi. All rights reserved.
 //
 
 import UIKit

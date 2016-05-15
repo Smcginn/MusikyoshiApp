@@ -1,5 +1,5 @@
 //
-//  TuneViewController.swift
+//  TuneExerciseViewController.swift
 //  FirstStage
 //
 //  Created by David S Reich on 14/05/2016.
@@ -9,13 +9,22 @@
 import UIKit
 import AVFoundation
 
-class TuneViewController: UIViewController, SSSyControls, SSUTempo, SSNoteHandler {
+class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNoteHandler {
 
     @IBOutlet weak var ssScrollView: SSScrollView!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var countOffLabel: UILabel!
+    @IBOutlet weak var infoLabel: UILabel!
+    @IBOutlet weak var gateView: UIView!
 
+    var exerciseName = ""
+    
     let mxmlService = MusicXMLService()
+    let amplitudeThreshold = NSUserDefaults.standardUserDefaults().doubleForKey(Constants.Settings.AmplitudeThreshold)
+    let timingThreshold = NSUserDefaults.standardUserDefaults().doubleForKey(Constants.Settings.TimingThreshold)
+    let tempoBPM = NSUserDefaults.standardUserDefaults().integerForKey(Constants.Settings.BPS)
+    let showNoteMarkers = NSUserDefaults.standardUserDefaults().boolForKey(Constants.Settings.ShowNoteMarkers)
+//    var beatDuration = 60.0 / NSUserDefaults.standardUserDefaults().doubleForKey(Constants.Settings.BPS)    //seconds
     
     var score: SSScore?
     var showingSinglePart = false // is set when a single part is being displayed
@@ -39,25 +48,43 @@ class TuneViewController: UIViewController, SSSyControls, SSUTempo, SSNoteHandle
     var animValues = [Double]()
     var animKeyTimes = [Double]()
     var playingAnimation = false
-    
+
+    // analysis - timing
+    // all calculations in NSDate().timeIntervalSinceDate(startTime)
+    // if insideNote then a sound before thresholdEndTime => note hit!
+    // if insideRest then a NO-sound before thresholdEndTime => rest hit!
+    // if insideNote a sound after thresholdEndTime ==> nothing -- will be useful later for duration
+    // if insideRest a sound after threshold
+    var startTime : NSDate = NSDate()
+    var thresholdEndTime = 0.0
+    var insideNote = false
+    var insideRest = false
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        gateView.hidden = true
         showingSinglePart = false // is set when a single part is being displayed
         cursorBarIndex = 0
-        loadFile("First Five 84 - O Sapo Nao Lava O Pe")
+        title = "Rhythm"
+        loadFile(exerciseName)
         countOffLabel.text = ""
     }
 
+    override func viewWillDisappear(animated: Bool) {
+        stopPlaying()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     @IBAction func playButtonTapped(sender: UIButton) {
-        if playButton.currentTitle == "Play" {
+        if playButton.currentTitle == "Start Playing" {
+            playButton.setTitle("Stop", forState: UIControlState.Normal)
             playScore()
         } else {
             stopPlaying()
@@ -65,19 +92,19 @@ class TuneViewController: UIViewController, SSSyControls, SSUTempo, SSNoteHandle
     }
 
     func loadFile(scoreFile: String) {
+        playButton.setTitle("Start Playing", forState: UIControlState.Normal)
         playingAnimation = false
-        var fileName = scoreFile
         
-        let scoreWidth = getScoreLength(fileName)
-        //        let scoreWidth = Double(self.view.frame.width)
+        let scoreWidth = getScoreLength(scoreFile)
+        //        let scoreWidth = Double(view.frame.width)
         print("scoreWidth = \(scoreWidth)")
         
         ssScrollView.xmlScoreWidth = scoreWidth
         ssScrollView.xmlScoreWidth = 0
-        if let filePath = NSBundle.mainBundle().pathForResource(fileName, ofType: "xml") {
-            self.ssScrollView.abortBackgroundProcessing({self.loadTheFile(filePath, scoreWidth: scoreWidth)})
+        if let filePath = NSBundle.mainBundle().pathForResource("XML Tunes/" + scoreFile, ofType: "xml") {
+            ssScrollView.abortBackgroundProcessing({self.loadTheFile(filePath, scoreWidth: scoreWidth)})
         } else {
-            print("Couldn't make path??? for ", fileName)
+            print("Couldn't make path??? for ", scoreFile)
             return
             //            throw NSError(domain: NSCocoaErrorDomain, code: NSFileNoSuchFileError, userInfo: [ NSFilePathErrorKey : fileName ])
         }
@@ -85,10 +112,10 @@ class TuneViewController: UIViewController, SSSyControls, SSUTempo, SSNoteHandle
     }
     
     func loadTheFile(filePath: String, scoreWidth: Double) {
-        self.ssScrollView.clearAll()
+        ssScrollView.clearAll()
         score = nil
         showingParts.removeAll()
-        self.cursorBarIndex = 0
+        cursorBarIndex = 0
         let loadOptions = SSLoadOptions(key: sscore_libkey)
         loadOptions.checkxml = true
         let errP = UnsafeMutablePointer<sscore_loaderror>.alloc(1)
@@ -97,10 +124,10 @@ class TuneViewController: UIViewController, SSSyControls, SSUTempo, SSNoteHandle
         print("loadOptions: \(loadOptions)")
         print("errP: \(errP)")
         
-        if let score = SSScore(XMLFile: filePath, options: loadOptions, error: errP) {
-            self.score = score
-            //				self.titleLabel.text = [filePath lastPathComponent];
-            let numParts = score.numParts
+        if let score0 = SSScore(XMLFile: filePath, options: loadOptions, error: errP) {
+            score = score0
+            //				titleLabel.text = [filePath lastPathComponent];
+            let numParts = score!.numParts
             for _ in 0..<numParts {
                 showingParts.append(NSNumber(bool: true)) // display all parts
             }
@@ -109,8 +136,8 @@ class TuneViewController: UIViewController, SSSyControls, SSUTempo, SSNoteHandle
             layOptions.hidePartNames = true
             layOptions.hideBarNumbers = true
             //            sysssScrollView.frame.size.width = CGFloat(scoreWidth * 2.28)
-            //            self.ssScrollView.setupScore(score, openParts: showingParts, mag: kDefaultMagnification, opt: layOptions)
-            self.ssScrollView.setupScore(score, openParts: showingParts, mag: kDefaultMagnification, opt: layOptions, completion: getPlayData)
+            //            ssScrollView.setupScore(score, openParts: showingParts, mag: kDefaultMagnification, opt: layOptions)
+            ssScrollView.setupScore(score, openParts: showingParts, mag: kDefaultMagnification, opt: layOptions, completion: getPlayData)
         }
         else
         {
@@ -157,7 +184,7 @@ class TuneViewController: UIViewController, SSSyControls, SSUTempo, SSNoteHandle
         ssScrollView.contentOffset = CGPointZero
         ssScrollView.scrollEnabled = false
         playingAnimation = false
-        self.countOffLabel.hidden = true;
+        countOffLabel.hidden = true;
         
         guard score != nil else { return }
         playData = SSPData.createPlayDataFromScore(score, tempo: self)
@@ -195,26 +222,28 @@ class TuneViewController: UIViewController, SSSyControls, SSUTempo, SSNoteHandle
                 
                 #if DEBUG
                     // display notes to play in console
-                    self.displayNotes(playData!)
+                    displayNotes(playData!)
                 #endif
-                // setup bar change notification to move cursor
-                let cursorAnimationTime = CATransaction.animationDuration()
-                var cursorAnimationTime_ms = Int32(cursorAnimationTime * 1000)
-                //                cursorAnimationTime_ms = 0
+                // setup bar change notification to set threshold - or move cursor
+                var cursorAnimationTime_ms = Int32(timingThreshold * 1000)
                 
-                ssScrollView.setCursorAtBar(self.cursorBarIndex, type: CursorType_e.cursor_line, scroll: ScrollType_e.scroll_bar)
-                
+                if showNoteMarkers {
+                    let cursorAnimationTime = CATransaction.animationDuration()
+                    cursorAnimationTime_ms = Int32(cursorAnimationTime * 1000)
+                }
+
                 synth?.setNoteHandler(self, delay: -cursorAnimationTime_ms)
+
                 //                synth?.setBarChangeHandler(BarChangeHandler(vc: self), delay: -cursorAnimationTime_ms)
                 //                synth?.setBarChangeHandler(BarChangeHandler(vc: self, anim: anim), delay: 0)
-                //                synth?.setEndHandler(EndHandler(vc: self), delay: 0)
+                synth?.setEndHandler(EndHandler(vc: self), delay: 0)
                 synth?.setBeatHandler(BeatHandler(vc: self), delay: 0)
                 
                 var err = synth?.setup(playData)
                 if err == sscore_NoError {
                     let delayInSeconds = UInt64(2)
                     let startTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delayInSeconds * NSEC_PER_SEC))
-                    err = synth?.startAt(startTime, bar: self.cursorBarIndex, countIn: true)
+                    err = synth?.startAt(startTime, bar: cursorBarIndex, countIn: true)
                     
                 }
                 
@@ -228,20 +257,22 @@ class TuneViewController: UIViewController, SSSyControls, SSUTempo, SSNoteHandle
     }
     
     func stopPlaying () {
+        gateView.hidden = true
+
         if (synth != nil && synth!.isPlaying)
         {
             synth?.reset()
-            self.countOffLabel.hidden = true;
-            self.clearAudioSession()
+            countOffLabel.hidden = true;
+            clearAudioSession()
         }
         
         if playingAnimation {
             playingAnimation = false
-//            ssScrollView.layer.removeAllAnimations()
             ssScrollView.layer.removeAnimationForKey("move")
-            playButton.setTitle("Play", forState: UIControlState.Normal)
         }
 
+        playButton.setTitle("Start Playing", forState: UIControlState.Normal)
+        ssScrollView.hideCursor()
         ssScrollView.scrollEnabled = true
     }
     
@@ -281,6 +312,7 @@ class TuneViewController: UIViewController, SSSyControls, SSUTempo, SSNoteHandle
                 
                 if firstNote {
                     animHorzOffset = thisNoteXPos
+                    print("animHorxOffset= \(animHorzOffset)")
                     firstNote = false
                 }
                 
@@ -299,9 +331,9 @@ class TuneViewController: UIViewController, SSSyControls, SSUTempo, SSNoteHandle
         
         kfAnim.keyPath = "bounds.origin.x"
         //        kfAnim.keyPath = "position.x"
-        kfAnim.values = self.animValues
-        kfAnim.keyTimes = self.animKeyTimes
-        kfAnim.duration = self.exerciseDuration
+        kfAnim.values = animValues
+        kfAnim.keyTimes = animKeyTimes
+        kfAnim.duration = exerciseDuration
         kfAnim.additive = true
     }
     
@@ -340,11 +372,17 @@ class TuneViewController: UIViewController, SSSyControls, SSUTempo, SSNoteHandle
     func bpm() -> Int32 {
         //the limit() calls are probably not needed.  tempo should be constrained when it is set.
         //        print("bpm: \(limit(Float(tempoBPM), min: Float(kMinTempo), max: Float(kMaxTempo)))")
-        return Int32(60)
+        print("tempoBPM = \(tempoBPM)")
+        return Int32(tempoBPM)
     }
     
     func tempoScaling() -> Float {
-        return 1.0
+        let tempo = score!.tempoAtStart
+        let tBPM = Float(tempoBPM) / Float(tempo().bpm)
+        //the limit() calls are probably not needed.  tempo should be constrained when it is set.
+        //        print("tempoScaling: \(limit(tBPM, min: Float(kMinTempoScaling), max: Float(kMaxTempoScaling)))")
+        print("tempoAtStart // tBPM = \(tempo().bpm) // \(tBPM)")
+        return tBPM
     }
     //@end
     
@@ -356,15 +394,20 @@ class TuneViewController: UIViewController, SSSyControls, SSUTempo, SSNoteHandle
     func startNotes(notes: [AnyObject]!) {
         assert(notes.count > 0)
         if !playingAnimation {
+            gateView.frame.origin.x = CGFloat(animHorzOffset - 12.0)
+            gateView.hidden = false
             print("addAnimation!")
             print("anim.values: \(kfAnim.values)")
             print("keyTimes: \(kfAnim.keyTimes)")
             print("anim.duration: \(kfAnim.duration)")
             ssScrollView.layer.addAnimation(kfAnim, forKey: "move")
             playingAnimation = true
-            playButton.setTitle("Stop", forState: UIControlState.Normal)
         }
-        self.moveNoteCursor(notes)
+
+        if !showNoteMarkers {
+        } else {
+            moveNoteCursor(notes)
+        }
     }
     //@end
     
@@ -382,15 +425,19 @@ class TuneViewController: UIViewController, SSSyControls, SSUTempo, SSNoteHandle
         return 0
     }
     
-    func moveNoteCursor(notes: NSArray) {
+    func setNoteThresholdState(notes: NSArray) {
         // normally this will not need to iterate over the whole chord, but will exit as soon as it has a valid xpos
+        // modified for analysis threshold and state
+
         for note in notes as! [SSPDPartNote] {
             // priority given to notes over rests, but ignore cross-bar tied notes
             if note.note.midiPitch > 0 && note.note.start >= 0 {
                 let xpos = noteXPos(note.note)
                 // noteXPos returns 0 if the note isn't found in the layout (it might be in a part which is not shown)
                 if xpos > 0 {
-                    self.ssScrollView.setCursorAtXpos(xpos, barIndex: note.note.startBarIndex, scroll: ScrollType_e.scroll_bar)
+                    if let realNote = note.note {
+                    }
+                    
                     return // abandon iteration
                 }
             }
@@ -401,7 +448,32 @@ class TuneViewController: UIViewController, SSSyControls, SSUTempo, SSNoteHandle
                 let xpos = noteXPos(note.note)
                 // noteXPos returns 0 if the note isn't found in the layout (it might be in a part which is not shown)
                 if xpos > 0 {
-                    self.ssScrollView.setCursorAtXpos(xpos, barIndex: note.note.startBarIndex, scroll: ScrollType_e.scroll_bar)
+                    return // abandon iteration
+                }
+            }
+        }
+    }
+
+    func moveNoteCursor(notes: NSArray) {
+        // normally this will not need to iterate over the whole chord, but will exit as soon as it has a valid xpos
+        for note in notes as! [SSPDPartNote] {
+            // priority given to notes over rests, but ignore cross-bar tied notes
+            if note.note.midiPitch > 0 && note.note.start >= 0 {
+                let xpos = noteXPos(note.note)
+                // noteXPos returns 0 if the note isn't found in the layout (it might be in a part which is not shown)
+                if xpos > 0 {
+                    ssScrollView.setCursorAtXpos(xpos, barIndex: note.note.startBarIndex, scroll: ScrollType_e.scroll_bar)
+                    return // abandon iteration
+                }
+            }
+        }
+        
+        for note in notes as! [SSPDPartNote] {
+            if note.note.midiPitch == 0 {   //rest
+                let xpos = noteXPos(note.note)
+                // noteXPos returns 0 if the note isn't found in the layout (it might be in a part which is not shown)
+                if xpos > 0 {
+                    ssScrollView.setCursorAtXpos(xpos, barIndex: note.note.startBarIndex, scroll: ScrollType_e.scroll_bar)
                     return // abandon iteration
                 }
             }
@@ -514,9 +586,9 @@ class TuneViewController: UIViewController, SSSyControls, SSUTempo, SSNoteHandle
     }
     
     class BeatHandler: SSEventHandler {
-        let svc: TuneViewController
+        let svc: TuneExerciseViewController
         
-        init(vc: TuneViewController) {
+        init(vc: TuneExerciseViewController) {
             svc = vc
         }
         
@@ -529,14 +601,13 @@ class TuneViewController: UIViewController, SSSyControls, SSUTempo, SSNoteHandle
     }
     
     class EndHandler: SSEventHandler {
-        let svc: TuneViewController
+        let svc: TuneExerciseViewController
         
-        init(vc: TuneViewController) {
+        init(vc: TuneExerciseViewController) {
             svc = vc
         }
         
         @objc func event(index: Int32, countIn isCountIn: Bool) {
-            svc.ssScrollView.hideCursor()
             svc.countOffLabel.hidden = true
             svc.cursorBarIndex = 0
             svc.stopPlaying()

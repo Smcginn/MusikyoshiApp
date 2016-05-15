@@ -17,6 +17,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        //initialize Settings
+        NSUserDefaults.standardUserDefaults().registerDefaults([
+            Constants.Settings.BPS: 60.0,
+            Constants.Settings.AmplitudeThreshold: Float(0.1),
+            Constants.Settings.TimingThreshold: 0.2,
+            Constants.Settings.Transposition: -2,
+            Constants.Settings.ShowNoteMarkers: false
+            ])
+        
+        
+        //initialize data
+        NoteService.initNotes()
+        
         return true
     }
 
