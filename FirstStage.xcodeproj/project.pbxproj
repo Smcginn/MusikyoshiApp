@@ -59,6 +59,14 @@
 		633C2AE21CE86915001C5C16 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633C2AE01CE86915001C5C16 /* Constants.swift */; };
 		633C2AE41CE86CF4001C5C16 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633C2AE31CE86CF4001C5C16 /* SettingsViewController.swift */; };
 		633C2AE51CE86CF4001C5C16 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633C2AE31CE86CF4001C5C16 /* SettingsViewController.swift */; };
+		6379EE7D1CE95CDF00188A70 /* NoteAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6379EE7C1CE95CDF00188A70 /* NoteAnalysis.swift */; };
+		6379EE7E1CE95CDF00188A70 /* NoteAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6379EE7C1CE95CDF00188A70 /* NoteAnalysis.swift */; };
+		6379EE8C1CE9C83F00188A70 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6379EE891CE9C81B00188A70 /* AudioKit.framework */; };
+		6379EE8D1CE9C83F00188A70 /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6379EE891CE9C81B00188A70 /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6379EE8E1CE9C84C00188A70 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6379EE891CE9C81B00188A70 /* AudioKit.framework */; };
+		6379EE8F1CE9C84C00188A70 /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6379EE891CE9C81B00188A70 /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6379EE911CE9C8ED00188A70 /* AudioKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6379EE901CE9C8ED00188A70 /* AudioKitManager.swift */; };
+		6379EE921CE9C8ED00188A70 /* AudioKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6379EE901CE9C8ED00188A70 /* AudioKitManager.swift */; };
 		63F9C8071CE74826000F4470 /* Piano.mf.23.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7B11CE74825000F4470 /* Piano.mf.23.m4a */; };
 		63F9C8081CE74826000F4470 /* Piano.mf.23.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7B11CE74825000F4470 /* Piano.mf.23.m4a */; };
 		63F9C8091CE74826000F4470 /* Piano.mf.24.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7B21CE74825000F4470 /* Piano.mf.24.m4a */; };
@@ -327,6 +335,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				6379EE8D1CE9C83F00188A70 /* AudioKit.framework in Embed Frameworks */,
 				6324D3171CE73234001934A5 /* SeeScoreLib.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -338,6 +347,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				6379EE8F1CE9C84C00188A70 /* AudioKit.framework in Embed Frameworks */,
 				6324D31B1CE7327F001934A5 /* SeeScoreLib.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -390,6 +400,9 @@
 		633C2ADC1CE813E7001C5C16 /* XML Tunes */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "XML Tunes"; sourceTree = "<group>"; };
 		633C2AE01CE86915001C5C16 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		633C2AE31CE86CF4001C5C16 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		6379EE7C1CE95CDF00188A70 /* NoteAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteAnalysis.swift; sourceTree = "<group>"; };
+		6379EE891CE9C81B00188A70 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AudioKit.framework; sourceTree = "<group>"; };
+		6379EE901CE9C8ED00188A70 /* AudioKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioKitManager.swift; sourceTree = "<group>"; };
 		63F9C7B11CE74825000F4470 /* Piano.mf.23.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.23.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.23.m4a"; sourceTree = SOURCE_ROOT; };
 		63F9C7B21CE74825000F4470 /* Piano.mf.24.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.24.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.24.m4a"; sourceTree = SOURCE_ROOT; };
 		63F9C7B31CE74825000F4470 /* Piano.mf.25.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.25.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.25.m4a"; sourceTree = SOURCE_ROOT; };
@@ -518,6 +531,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6379EE8E1CE9C84C00188A70 /* AudioKit.framework in Frameworks */,
 				6324D31A1CE7327F001934A5 /* SeeScoreLib.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -540,6 +554,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6379EE8C1CE9C83F00188A70 /* AudioKit.framework in Frameworks */,
 				6324D3161CE73234001934A5 /* SeeScoreLib.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -608,6 +623,7 @@
 		6324D31D1CE7329A001934A5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6379EE891CE9C81B00188A70 /* AudioKit.framework */,
 				6324D3191CE7327F001934A5 /* SeeScoreLib.framework */,
 				6324D3151CE73234001934A5 /* SeeScoreLib.framework */,
 			);
@@ -618,17 +634,17 @@
 			isa = PBXGroup;
 			children = (
 				63F9C7AE1CE747D5000F4470 /* synth-samples */,
-				6324D34E1CE73C46001934A5 /* sampledInstruments.h */,
-				6324D34F1CE73C47001934A5 /* sampledInstruments.m */,
-				6324D3501CE73C47001934A5 /* SSScrollView.m */,
-				6324D3511CE73C47001934A5 /* SSSystemView.m */,
-				6324D3521CE73C47001934A5 /* SSScrollView.h */,
 				6324D3531CE73C47001934A5 /* First Stage_key.m */,
+				6324D34F1CE73C47001934A5 /* sampledInstruments.m */,
+				6324D34E1CE73C46001934A5 /* sampledInstruments.h */,
 				6324D3541CE73C47001934A5 /* SSBarControlProtocol.h */,
 				6324D3551CE73C47001934A5 /* sscore_key.h */,
 				6324D3561CE73C47001934A5 /* SSEditLayerProtocol.h */,
-				6324D3571CE73C47001934A5 /* SSPlayLoopGraphics.h */,
 				6324D3581CE73C47001934A5 /* SSPlayLoopGraphics.m */,
+				6324D3571CE73C47001934A5 /* SSPlayLoopGraphics.h */,
+				6324D3501CE73C47001934A5 /* SSScrollView.m */,
+				6324D3521CE73C47001934A5 /* SSScrollView.h */,
+				6324D3511CE73C47001934A5 /* SSSystemView.m */,
 				6324D3591CE73C47001934A5 /* SSSystemView.h */,
 				6324D35A1CE73C47001934A5 /* SSUpdateScrollProtocol.h */,
 				6324D35B1CE73C47001934A5 /* SSViewInterface.h */,
@@ -639,6 +655,7 @@
 		6324D3661CE73ECB001934A5 /* Brain */ = {
 			isa = PBXGroup;
 			children = (
+				6379EE901CE9C8ED00188A70 /* AudioKitManager.swift */,
 				633C2AE01CE86915001C5C16 /* Constants.swift */,
 				6324D3691CE73ED9001934A5 /* Enums.swift */,
 				6324D36A1CE73ED9001934A5 /* Exercise.swift */,
@@ -646,6 +663,7 @@
 				6324D3671CE73ED9001934A5 /* MusicFont.swift */,
 				6324D37C1CE73F22001934A5 /* MusicXMLService.swift */,
 				6324D36C1CE73ED9001934A5 /* Note.swift */,
+				6379EE7C1CE95CDF00188A70 /* NoteAnalysis.swift */,
 				6324D36D1CE73ED9001934A5 /* NoteOffset.swift */,
 				6324D3681CE73ED9001934A5 /* NoteService.swift */,
 			);
@@ -825,6 +843,7 @@
 				6324D2CC1CE71B19001934A5 /* Frameworks */,
 				6324D2CD1CE71B19001934A5 /* Resources */,
 				6324D31C1CE7327F001934A5 /* Embed Frameworks */,
+				6379EE871CE9C5FD00188A70 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -879,6 +898,7 @@
 				6324D30B1CE72F8D001934A5 /* Frameworks */,
 				6324D30C1CE72F8D001934A5 /* Resources */,
 				6324D3181CE73234001934A5 /* Embed Frameworks */,
+				6379EE881CE9C63B00188A70 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1214,6 +1234,35 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		6379EE871CE9C5FD00188A70 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH/AudioKit.framework/fix-framework.sh\"";
+		};
+		6379EE881CE9C63B00188A70 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH/AudioKit.framework/fix-framework.sh\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		6324D2CB1CE71B19001934A5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1228,12 +1277,14 @@
 				6324D2DB1CE71B1A001934A5 /* FirstStage.xcdatamodeld in Sources */,
 				6324D37E1CE73F22001934A5 /* MusicXMLService.swift in Sources */,
 				6324D3791CE73ED9001934A5 /* Note.swift in Sources */,
+				6379EE921CE9C8ED00188A70 /* AudioKitManager.swift in Sources */,
 				6324D3611CE73C47001934A5 /* SSSystemView.m in Sources */,
 				6324D37B1CE73ED9001934A5 /* NoteOffset.swift in Sources */,
 				6324D3041CE72E5D001934A5 /* TuneExerciseViewController.swift in Sources */,
 				6324D3651CE73C47001934A5 /* SSPlayLoopGraphics.m in Sources */,
 				6324D35F1CE73C47001934A5 /* SSScrollView.m in Sources */,
 				6324D3751CE73ED9001934A5 /* Exercise.swift in Sources */,
+				6379EE7E1CE95CDF00188A70 /* NoteAnalysis.swift in Sources */,
 				6324D35D1CE73C47001934A5 /* sampledInstruments.m in Sources */,
 				6324D3731CE73ED9001934A5 /* Enums.swift in Sources */,
 				6324D2D31CE71B19001934A5 /* AppDelegate.swift in Sources */,
@@ -1270,12 +1321,14 @@
 				6324D3071CE72F8D001934A5 /* FirstStage.xcdatamodeld in Sources */,
 				6324D37D1CE73F22001934A5 /* MusicXMLService.swift in Sources */,
 				6324D3781CE73ED9001934A5 /* Note.swift in Sources */,
+				6379EE911CE9C8ED00188A70 /* AudioKitManager.swift in Sources */,
 				6324D3601CE73C47001934A5 /* SSSystemView.m in Sources */,
 				6324D37A1CE73ED9001934A5 /* NoteOffset.swift in Sources */,
 				6324D3091CE72F8D001934A5 /* TuneExerciseViewController.swift in Sources */,
 				6324D3641CE73C47001934A5 /* SSPlayLoopGraphics.m in Sources */,
 				6324D35E1CE73C47001934A5 /* SSScrollView.m in Sources */,
 				6324D3741CE73ED9001934A5 /* Exercise.swift in Sources */,
+				6379EE7D1CE95CDF00188A70 /* NoteAnalysis.swift in Sources */,
 				6324D35C1CE73C47001934A5 /* sampledInstruments.m in Sources */,
 				6324D3721CE73ED9001934A5 /* Enums.swift in Sources */,
 				6324D30A1CE72F8D001934A5 /* AppDelegate.swift in Sources */,
@@ -1417,6 +1470,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SeeScoreLib/AppStore-Release",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = FirstStage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1439,6 +1493,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SeeScoreLib/AppStore-Release",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = FirstStage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1505,6 +1560,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SeeScoreLib/Universal",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = FirstStage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1525,6 +1581,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SeeScoreLib/Universal",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = FirstStage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

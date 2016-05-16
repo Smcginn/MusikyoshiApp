@@ -1,0 +1,79 @@
+//
+//  AudioKitManager
+//  FirstStage
+//
+//  Created by David S Reich on 12/04/2016.
+//  Copyright © 2016 Musikyoshi. All rights reserved.
+//
+
+import AudioKit
+
+class AudioKitManager: NSObject {
+    static let minTrackingFrequency = Double(50)
+    static let maxTrackingFrequency = Double(2000)
+    static var minimumFrequency = AudioKitManager.minTrackingFrequency
+    static var maximumFrequency = AudioKitManager.maxTrackingFrequency
+    
+    var amplitudeTracker: AKAmplitudeTracker!
+    var frequencyTracker: AKFrequencyTracker!
+    var trackerBooster: AKBooster!
+    var microphone: AKMicrophone!
+    var justAmplitude = false
+    var isStarted = false
+
+    static let sharedInstance = AudioKitManager()
+
+    private override init () {        
+        AKSettings.audioInputEnabled = true
+    }
+
+    func setup(justAmplitude: Bool) {
+        self.justAmplitude = justAmplitude
+
+        AudioKit.stop()
+
+        //monitor
+        microphone = AKMicrophone()
+        if justAmplitude {
+            amplitudeTracker = AKAmplitudeTracker(microphone)
+            trackerBooster = AKBooster(amplitudeTracker, gain: 5.0)
+        } else {
+            frequencyTracker = AKFrequencyTracker(microphone, minimumFrequency: 100, maximumFrequency: 2000)
+            trackerBooster = AKBooster(frequencyTracker, gain: 0.0)
+        }
+
+        AudioKit.output = trackerBooster
+        AudioKit.start()
+    }
+    
+    func start() {
+        //don't start twice
+        guard !isStarted else { return }
+        isStarted = true
+
+        if justAmplitude {
+            amplitudeTracker.start()
+        } else {
+            frequencyTracker.start()
+        }
+
+        trackerBooster.start()
+        microphone.start()
+    }
+
+    func stop() {
+        //don't stop twice
+        guard isStarted else { return }
+        isStarted = false
+        
+        trackerBooster.stop()
+        microphone.stop()
+
+        if justAmplitude {
+            amplitudeTracker.stop()
+        } else {
+            frequencyTracker.stop()
+        }
+    }
+    
+}
