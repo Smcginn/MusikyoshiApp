@@ -18,6 +18,7 @@ class AudioKitManager: NSObject {
     var frequencyTracker: AKFrequencyTracker!
     var trackerBooster: AKBooster!
     var microphone: AKMicrophone!
+    var microphoneBooster: AKBooster!
     var justAmplitude = false
     var isStarted = false
 
@@ -27,25 +28,52 @@ class AudioKitManager: NSObject {
         AKSettings.audioInputEnabled = true
     }
 
+//    func setup(justAmplitude: Bool) {
+//        self.justAmplitude = justAmplitude
+//
+//        AudioKit.stop()
+//
+//        //monitor
+//        microphone = AKMicrophone()
+//        if justAmplitude {
+//            amplitudeTracker = AKAmplitudeTracker(microphone)
+////            AudioKit.output = amplitudeTracker
+//            trackerBooster = AKBooster(amplitudeTracker, gain: 0.0)
+//        } else {
+//            frequencyTracker = AKFrequencyTracker(microphone, minimumFrequency: 100, maximumFrequency: 2000)
+////            AudioKit.output = frequencyTracker
+//            trackerBooster = AKBooster(frequencyTracker, gain: 0.0)
+//        }
+//
+//        AudioKit.output = trackerBooster
+//        AudioKit.start()
+//    }
+    
     func setup(justAmplitude: Bool) {
         self.justAmplitude = justAmplitude
-
+        
         AudioKit.stop()
-
+        
         //monitor
         microphone = AKMicrophone()
         if justAmplitude {
-            amplitudeTracker = AKAmplitudeTracker(microphone)
-            trackerBooster = AKBooster(amplitudeTracker, gain: 5.0)
+//            amplitudeTracker = AKAmplitudeTracker(microphone)
+            microphoneBooster = AKBooster(microphone, gain: 5.0)
+            amplitudeTracker = AKAmplitudeTracker(microphoneBooster)
+            //            AudioKit.output = amplitudeTracker
+            trackerBooster = AKBooster(amplitudeTracker, gain: 0.0)
         } else {
+//            frequencyTracker = AKFrequencyTracker(microphone, minimumFrequency: 100, maximumFrequency: 2000)
+//            microphoneBooster = AKBooster(microphone, gain: 2.0)
             frequencyTracker = AKFrequencyTracker(microphone, minimumFrequency: 100, maximumFrequency: 2000)
+            //            AudioKit.output = frequencyTracker
             trackerBooster = AKBooster(frequencyTracker, gain: 0.0)
         }
-
+        
         AudioKit.output = trackerBooster
         AudioKit.start()
     }
-    
+
     func start() {
         //don't start twice
         guard !isStarted else { return }
@@ -57,7 +85,7 @@ class AudioKitManager: NSObject {
             frequencyTracker.start()
         }
 
-        trackerBooster.start()
+//        trackerBooster.start()
         microphone.start()
     }
 
@@ -66,7 +94,7 @@ class AudioKitManager: NSObject {
         guard isStarted else { return }
         isStarted = false
         
-        trackerBooster.stop()
+//        trackerBooster.stop()
         microphone.stop()
 
         if justAmplitude {
@@ -76,4 +104,14 @@ class AudioKitManager: NSObject {
         }
     }
     
+    func amplitude() -> Double {
+        //don't stop twice
+        guard isStarted else { return 0 }
+        
+        if justAmplitude {
+            return amplitudeTracker.amplitude
+        } else {
+            return frequencyTracker.amplitude
+        }
+    }
 }

@@ -1477,6 +1477,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.musikyoshi.echodsr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "b54529df-4bba-49d0-a6f4-14509af02ecb";
 				SWIFT_OBJC_BRIDGING_HEADER = "FirstStage/FirstStage-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1500,6 +1501,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.musikyoshi.echodsr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "b54529df-4bba-49d0-a6f4-14509af02ecb";
 				SWIFT_OBJC_BRIDGING_HEADER = "FirstStage/FirstStage-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

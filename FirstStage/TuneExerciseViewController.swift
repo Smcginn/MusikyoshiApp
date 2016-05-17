@@ -76,7 +76,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        AudioKitManager.sharedInstance.setup(false)
+        AudioKitManager.sharedInstance.setup(true)
         gateView.hidden = true
         showingSinglePart = false // is set when a single part is being displayed
         cursorBarIndex = 0
@@ -365,7 +365,8 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         
         AudioKitManager.sharedInstance.start()
         print("starting analysis timer")
-        analysisTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(TuneExerciseViewController.analyzePerformance), userInfo: nil, repeats: true)
+//        analysisTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(TuneExerciseViewController.analyzePerformance), userInfo: nil, repeats: true)
+        analysisTimer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(TuneExerciseViewController.analyzePerformance), userInfo: nil, repeats: true)
     }
     
     func stopAnalysisTimer() {
@@ -383,13 +384,11 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         guard insideNote || insideRest else { return }
 
         let inThreshold = NSDate().timeIntervalSinceDate(startTime) < thresholdEndTime
-/*        print("amplitude= \(AudioKitManager.sharedInstance.amplitudeTracker.amplitude)")
-//        let hasSound = AudioKitManager.sharedInstance.amplitudeTracker.amplitude > amplitudeThreshold
-        let hasSound = AudioKitManager.sharedInstance.amplitudeTracker.amplitude > 0.02
- */
-        print("amplitude= \(AudioKitManager.sharedInstance.frequencyTracker.amplitude)")
-        //        let hasSound = AudioKitManager.sharedInstance.frequencyTracker.amplitude > amplitudeThreshold
-        let hasSound = AudioKitManager.sharedInstance.frequencyTracker.amplitude > 0.02
+//        print("amplitude= \(AudioKitManager.sharedInstance.amplitude())")
+//        let hasSound = AudioKitManager.sharedInstance.amplitude() > amplitudeThreshold
+        let amplitude = AudioKitManager.sharedInstance.amplitude()
+        let hasSound = amplitude > 0.1
+
         var result = NoteAnalysis.NoteResult.NoResult
         
         if insideNote {
@@ -412,9 +411,9 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                 guard missedSound else { return }
                 lateSound = true
                 result = NoteAnalysis.NoteResult.NoteRhythmLate
-            } else if hasSound && !inThreshold  && lateSound {
-                //cannot repeat if we haven't already been late
-                result = NoteAnalysis.NoteResult.NoteRhythmLateRepeat
+//            } else if hasSound && !inThreshold  && lateSound {
+//                //cannot repeat if we haven't already been late
+//                result = NoteAnalysis.NoteResult.NoteRhythmLateRepeat
             }
         } else if insideRest {
             // if insideRest then a sound before thresholdEndTime => rest miss
@@ -436,19 +435,19 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                 guard missedSound else { return }
                 lateSound = true
                 result = NoteAnalysis.NoteResult.RestLateMiss
-            } else if hasSound && !inThreshold  && lateSound {
-                //cannot repeat if we haven't already been late
-                result = NoteAnalysis.NoteResult.RestLateMissRepeat
+//            } else if hasSound && !inThreshold  && lateSound {
+//                //cannot repeat if we haven't already been late
+//                result = NoteAnalysis.NoteResult.RestLateMissRepeat
             }
         }
 
         guard result != NoteAnalysis.NoteResult.NoResult else { return }
         if let count = noteResultValues[result] {
             noteResultValues[result] = count + 1
-            print("result: \(result) \(count + 1)")
+            print("result: \(amplitude) - \(result) \(count + 1)")
         } else {
             noteResultValues[result] = 1
-            print("result: \(result) 1")
+            print("result: \(amplitude) - \(result) 1")
         }
     }
     
@@ -577,7 +576,8 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     }
     
     func metronomeVolume() -> Float {
-        return 1.0
+        return 1.5
+//        return 1.0
 //        return 0.50
     }
     
