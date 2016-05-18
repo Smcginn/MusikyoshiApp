@@ -76,12 +76,12 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        AudioKitManager.sharedInstance.setup(true)
+//        AudioKitManager.sharedInstance.setup(true)
         gateView.hidden = true
         showingSinglePart = false // is set when a single part is being displayed
         cursorBarIndex = 0
         title = "Rhythm"
-        loadFile(exerciseName)
+        loadFile("XML Tunes/" + exerciseName)
         countOffLabel.text = ""
 
     }
@@ -114,7 +114,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         
         ssScrollView.xmlScoreWidth = scoreWidth
         ssScrollView.xmlScoreWidth = 0
-        if let filePath = NSBundle.mainBundle().pathForResource("XML Tunes/" + scoreFile, ofType: "xml") {
+        if let filePath = NSBundle.mainBundle().pathForResource(scoreFile, ofType: "xml") {
             ssScrollView.abortBackgroundProcessing({self.loadTheFile(filePath, scoreWidth: scoreWidth)})
         } else {
             print("Couldn't make path??? for ", scoreFile)
@@ -225,6 +225,11 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                 return
             }
             
+//            if !showNoteMarkers {
+//                //do this before setupAudionSession
+//                AudioKitManager.sharedInstance.setup(true)
+//            }
+
             // start playing if not playing
             if setupAudioSession() {
                 print("setupAudioSession == true")
@@ -374,8 +379,10 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         guard analysisStarted else { return }
         analysisStarted = false
 
-        analysisTimer?.invalidate()
-        analysisTimer = nil;
+        if analysisTimer != nil {
+            analysisTimer?.invalidate()
+            analysisTimer = nil;
+        }
         
         AudioKitManager.sharedInstance.stop()
     }
@@ -612,8 +619,8 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
             gateView.frame.origin.x = CGFloat(animHorzOffset - 12.0)
             gateView.hidden = false
             print("addAnimation!")
-            print("anim.values: \(kfAnim.values)")
-            print("keyTimes: \(kfAnim.keyTimes)")
+//            print("anim.values: \(kfAnim.values)")
+//            print("keyTimes: \(kfAnim.keyTimes)")
             print("anim.duration: \(kfAnim.duration)")
             ssScrollView.layer.addAnimation(kfAnim, forKey: "move")
             playingAnimation = true
@@ -747,12 +754,25 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     func setupAudioSession() -> Bool {
         // Configure the audio session
         let sessionInstance = AVAudioSession.sharedInstance()
-        
-        // ???our default category -- we change this for conversion and playback appropriately????
+
+        //set inactive before making changes
+        do {
+            try sessionInstance.setActive(false)
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        } catch let error {
+            print(error)
+        }
+
+        if !showNoteMarkers {
+            AudioKitManager.sharedInstance.setup(true)
+        }
+
         do {
 //            try sessionInstance.setCategory(AVAudioSessionCategoryPlayback)
 //            try sessionInstance.setCategory(AVAudioSessionCategoryAmbient)
-            try sessionInstance.setCategory(AVAudioSessionCategoryPlayAndRecord)
+//            try sessionInstance.setCategory(AVAudioSessionCategoryPlayAndRecord)
+            try sessionInstance.setCategory(AVAudioSessionCategoryPlayAndRecord, withOptions:AVAudioSessionCategoryOptions.DefaultToSpeaker)
         } catch let error as NSError {
             print(error.localizedDescription)
             guard error.code == 0 else { return false }
@@ -771,8 +791,8 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
             return false
         }
 
-        //        let bufferDuration = NSTimeInterval.init(floatLiteral: 0.005)
-        let bufferDuration = NSTimeInterval.init(floatLiteral: 0.5)
+        let bufferDuration = NSTimeInterval.init(floatLiteral: 0.005)
+//        let bufferDuration = NSTimeInterval.init(floatLiteral: 0.5)
         do {
             try sessionInstance.setPreferredIOBufferDuration(bufferDuration)
         } catch let error as NSError {
@@ -837,7 +857,9 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
             svc.countOffLabel.hidden = !isCountIn;
             if isCountIn {
                 svc.countOffLabel.text = "\(index + 1)"
-                svc.startAnalysisTimer()
+                if !svc.showNoteMarkers {
+                    svc.startAnalysisTimer()
+                }
             }
         }
     }

@@ -19,6 +19,7 @@ class AudioKitManager: NSObject {
     var trackerBooster: AKBooster!
     var microphone: AKMicrophone!
     var microphoneBooster: AKBooster!
+    var isSetup = false
     var justAmplitude = false
     var isStarted = false
 
@@ -26,6 +27,7 @@ class AudioKitManager: NSObject {
 
     private override init () {        
         AKSettings.audioInputEnabled = true
+        AKSettings.defaultToSpeaker = true
     }
 
 //    func setup(justAmplitude: Bool) {
@@ -50,6 +52,10 @@ class AudioKitManager: NSObject {
 //    }
     
     func setup(justAmplitude: Bool) {
+        //don't setup twice
+        guard !isSetup else { return }
+        isSetup = true
+
         self.justAmplitude = justAmplitude
         
         AudioKit.stop()
