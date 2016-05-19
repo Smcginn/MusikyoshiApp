@@ -18,13 +18,15 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     @IBOutlet weak var gateView: UIView!
 
     var exerciseName = ""
+    var isTune = false
     
     let mxmlService = MusicXMLService()
     let amplitudeThreshold = NSUserDefaults.standardUserDefaults().doubleForKey(Constants.Settings.AmplitudeThreshold)
     let timingThreshold = NSUserDefaults.standardUserDefaults().doubleForKey(Constants.Settings.TimingThreshold)
     let tempoBPM = NSUserDefaults.standardUserDefaults().integerForKey(Constants.Settings.BPS)
+    let transpositionOffset = NSUserDefaults.standardUserDefaults().integerForKey(Constants.Settings.Transposition)
+    let frequencyThreshold = NSUserDefaults.standardUserDefaults().floatForKey(Constants.Settings.FrequencyThreshold)
     let showNoteMarkers = NSUserDefaults.standardUserDefaults().boolForKey(Constants.Settings.ShowNoteMarkers)
-//    var beatDuration = 60.0 / NSUserDefaults.standardUserDefaults().doubleForKey(Constants.Settings.BPS)    //seconds
     
     var score: SSScore?
     var showingSinglePart = false // is set when a single part is being displayed
@@ -49,25 +51,24 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     var animKeyTimes = [Double]()
     var playingAnimation = false
 
-    // analysis - timing
-    // all calculations in NSDate().timeIntervalSinceDate(startTime)
-    // if insideNote then a sound before thresholdEndTime => note match
-    // if insideNote no sound and reach thresholdEndTime ==> note miss
-    // if insideNote a sound after thresholdEndTime ==> note late
-    // if insideNote after thresholdEndTime any additional sound ==> note late repeat
-
-    // if insideRest then a sound before thresholdEndTime => rest miss
-    // if insideRest then a NO-sound and reach thresholdEndTime => rest match
-    // if insideRest a sound after threshold ==> rest late miss
-    // if insideRest after thresholdEndTime any additional sound ==> rest late miss repeat
     var analysisTimer: NSTimer?
     var startTime : NSDate = NSDate()
     var thresholdEndTime = 0.0
+    var frequencyThresholdPercent = Float(0.0)
+    var targetPitch = Float(0.0)
+    var lowPitchThreshold = Float(0.0)
+    var highPitchThreshold = Float(0.0)
     var insideNote = false
     var insideRest = false
     var foundSound = false
     var missedSound = false
     var lateSound = false
+    var pitchMatched = false
+    var pitchLow = false
+    var pitchHigh = false
+    var pitchMatchedLate = false
+    var pitchLowLate = false
+    var pitchHighLate = false
     var noteResultValues: [NoteAnalysis.NoteResult: Int] = [:]
     var analysisStarted = false
 
@@ -76,14 +77,21 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-//        AudioKitManager.sharedInstance.setup(true)
         gateView.hidden = true
         showingSinglePart = false // is set when a single part is being displayed
         cursorBarIndex = 0
-        title = "Rhythm"
+        if isTune {
+            title = "Tune"
+            infoLabel.text = "Play the notes"
+        } else {
+            title = "Rhythm"
+            infoLabel.text = "Clap at the beginning of each note and count the beats"
+        }
+
         loadFile("XML Tunes/" + exerciseName)
         countOffLabel.text = ""
 
+        frequencyThresholdPercent = 1.0 + frequencyThreshold
     }
 
     override func viewWillDisappear(animated: Bool) {
@@ -194,7 +202,11 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     
     
     func playScore() {
-        infoLabel.text = "Clap at the beginning of each note and count the beats"
+        if isTune {
+            infoLabel.text = "Play the notes"
+        } else {
+            infoLabel.text = "Clap at the beginning of each note and count the beats"
+        }
         ssScrollView.contentOffset = CGPointZero
         ssScrollView.scrollEnabled = false
         playingAnimation = false
@@ -370,8 +382,8 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         
         AudioKitManager.sharedInstance.start()
         print("starting analysis timer")
-//        analysisTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(TuneExerciseViewController.analyzePerformance), userInfo: nil, repeats: true)
-        analysisTimer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(TuneExerciseViewController.analyzePerformance), userInfo: nil, repeats: true)
+        analysisTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(TuneExerciseViewController.analyzePerformance), userInfo: nil, repeats: true)
+//        analysisTimer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(TuneExerciseViewController.analyzePerformance), userInfo: nil, repeats: true)
     }
     
     func stopAnalysisTimer() {
@@ -387,11 +399,28 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         AudioKitManager.sharedInstance.stop()
     }
     
+    // analysis - timing
+    // all calculations in NSDate().timeIntervalSinceDate(startTime)
+    // if insideNote then a sound before thresholdEndTime => note match
+    // if insideNote no sound and reach thresholdEndTime ==> note miss
+    // if insideNote a sound after thresholdEndTime ==> note late
+    // if insideNote after thresholdEndTime any additional sound ==> note late repeat
+    
+    // if insideRest then a sound before thresholdEndTime => rest miss
+    // if insideRest then a NO-sound and reach thresholdEndTime => rest match
+    // if insideRest a sound after threshold ==> rest late miss
+    // if insideRest after thresholdEndTime any additional sound ==> rest late miss repeat
+
+    // analysis - pitch
+    // only care about pitch insideNote
+    // if pitch before thresholdEndTime compare to low/high thresholds and set to pitchlow, pitchhigh, or pitchmatch
+    // if pitch after thresholdEndTime compare to low/high thresholds and set to pitchlowlate, pitchhighlate, or pitchmatchlate
+
     func analyzePerformance() {
         guard insideNote || insideRest else { return }
 
         let inThreshold = NSDate().timeIntervalSinceDate(startTime) < thresholdEndTime
-//        print("amplitude= \(AudioKitManager.sharedInstance.amplitude())")
+        print("amplitude= \(AudioKitManager.sharedInstance.amplitude())")
 //        let hasSound = AudioKitManager.sharedInstance.amplitude() > amplitudeThreshold
         let amplitude = AudioKitManager.sharedInstance.amplitude()
         let hasSound = amplitude > 0.1
@@ -415,12 +444,75 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                 result = NoteAnalysis.NoteResult.NoteRhythmMiss
             } else if hasSound && !inThreshold  && !lateSound {
                 //cannot be late if we have not missed
+    //yes we can on longer notes - one clap on time and then a second one later -- fix this later
                 guard missedSound else { return }
                 lateSound = true
                 result = NoteAnalysis.NoteResult.NoteRhythmLate
 //            } else if hasSound && !inThreshold  && lateSound {
 //                //cannot repeat if we haven't already been late
 //                result = NoteAnalysis.NoteResult.NoteRhythmLateRepeat
+            }
+
+            if isTune && hasSound {
+                //if we have a rhythm result save it first
+                if result != NoteAnalysis.NoteResult.NoResult {
+                    if let count = noteResultValues[result] {
+                        noteResultValues[result] = count + 1
+                        print("result: \(amplitude) - \(result) \(count + 1)")
+                    } else {
+                        noteResultValues[result] = 1
+                        print("result: \(amplitude) - \(result) 1")
+                    }
+
+                    result = NoteAnalysis.NoteResult.NoResult
+                }
+
+                var frequency = Float(0.0)
+                var freqMatch = false
+                var freqLow = false
+                var freqHigh = false
+                
+                if isTune {
+                    frequency = AudioKitManager.sharedInstance.frequency()
+                    if frequency < lowPitchThreshold {
+                        freqLow = true
+                    } else if frequency > highPitchThreshold {
+                        freqHigh = true
+                    } else {
+                        freqMatch = true
+                    }
+                }
+
+                print("freq ... \(freqLow) \(freqHigh) \(freqMatch)")
+                if inThreshold {
+                    if freqLow {
+                        guard !pitchLow else { return }
+                        pitchLow = true
+                        result = NoteAnalysis.NoteResult.PitchLow
+                    } else if freqHigh {
+                        guard !pitchHigh else { return }
+                        pitchHigh = true
+                        result = NoteAnalysis.NoteResult.PitchHigh
+                    } else if freqMatch {
+                        guard !pitchMatched else { return }
+                        pitchMatched = true
+                        result = NoteAnalysis.NoteResult.PitchMatch
+                    }
+                } else {
+                    if freqLow {
+                        guard !pitchLowLate else { return }
+                        pitchLowLate = true
+                        result = NoteAnalysis.NoteResult.PitchLowLate
+                    } else if freqHigh {
+                        guard !pitchHighLate else { return }
+                        pitchHighLate = true
+                        result = NoteAnalysis.NoteResult.PitchHighLate
+                    } else if freqMatch {
+                        guard !pitchMatchedLate else { return }
+                        pitchMatchedLate = true
+                        result = NoteAnalysis.NoteResult.PitchMatchLate
+                    }
+                }
             }
         } else if insideRest {
             // if insideRest then a sound before thresholdEndTime => rest miss
@@ -489,51 +581,90 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
 
     func showScore() {
         var scoreString = "You got"
-        if let numNoteRhythmMatch = noteResultValues[NoteAnalysis.NoteResult.NoteRhythmMatch] {
-            if numNoteRhythmMatch != 0 {
-                scoreString = scoreString + ": NoteRhythmMatch - \(numNoteRhythmMatch)"
+
+        if isTune {
+            if let numResults = noteResultValues[NoteAnalysis.NoteResult.PitchMatch] {
+                if numResults != 0 {
+                    scoreString = scoreString + ": PitchMatch - \(numResults)"
+                }
+            }
+            
+            if let numResults = noteResultValues[NoteAnalysis.NoteResult.PitchLow] {
+                if numResults != 0 {
+                    scoreString = scoreString + ": PitchLow - \(numResults)"
+                }
+            }
+            
+            if let numResults = noteResultValues[NoteAnalysis.NoteResult.PitchHigh] {
+                if numResults != 0 {
+                    scoreString = scoreString + ": PitchHigh - \(numResults)"
+                }
+            }
+            
+            if let numResults = noteResultValues[NoteAnalysis.NoteResult.PitchMatchLate] {
+                if numResults != 0 {
+                    scoreString = scoreString + ": PitchMatchLate - \(numResults)"
+                }
+            }
+            
+            if let numResults = noteResultValues[NoteAnalysis.NoteResult.PitchLowLate] {
+                if numResults != 0 {
+                    scoreString = scoreString + ": PitchLowLate - \(numResults)"
+                }
+            }
+            
+            if let numResults = noteResultValues[NoteAnalysis.NoteResult.PitchHighLate] {
+                if numResults != 0 {
+                    scoreString = scoreString + ": PitchHighLate - \(numResults)"
+                }
             }
         }
 
-        if let numNoteRhythmMiss = noteResultValues[NoteAnalysis.NoteResult.NoteRhythmMiss] {
-            if numNoteRhythmMiss != 0 {
-                scoreString = scoreString + ": NoteRhythmMiss - \(numNoteRhythmMiss)"
+        if let numResults = noteResultValues[NoteAnalysis.NoteResult.NoteRhythmMatch] {
+            if numResults != 0 {
+                scoreString = scoreString + ": NoteRhythmMatch - \(numResults)"
             }
         }
 
-        if let numNoteRhythmLate = noteResultValues[NoteAnalysis.NoteResult.NoteRhythmLate] {
-            if numNoteRhythmLate != 0 {
-                scoreString = scoreString + ": NoteRhythmLate - \(numNoteRhythmLate)"
+        if let numResults = noteResultValues[NoteAnalysis.NoteResult.NoteRhythmMiss] {
+            if numResults != 0 {
+                scoreString = scoreString + ": NoteRhythmMiss - \(numResults)"
             }
         }
 
-        if let numNoteRhythmLateRepeat = noteResultValues[NoteAnalysis.NoteResult.NoteRhythmLateRepeat] {
-            if numNoteRhythmLateRepeat != 0 {
-                scoreString = scoreString + ": NoteRhythmLateRepeat - \(numNoteRhythmLateRepeat)"
+        if let numResults = noteResultValues[NoteAnalysis.NoteResult.NoteRhythmLate] {
+            if numResults != 0 {
+                scoreString = scoreString + ": NoteRhythmLate - \(numResults)"
             }
         }
 
-        if let numRestMatch = noteResultValues[NoteAnalysis.NoteResult.RestMatch] {
-            if numRestMatch != 0 {
-                scoreString = scoreString + ": RestMatch - \(numRestMatch)"
+        if let numResults = noteResultValues[NoteAnalysis.NoteResult.NoteRhythmLateRepeat] {
+            if numResults != 0 {
+                scoreString = scoreString + ": NoteRhythmLateRepeat - \(numResults)"
             }
         }
 
-        if let numRestMiss = noteResultValues[NoteAnalysis.NoteResult.RestMiss] {
-            if numRestMiss != 0 {
-                scoreString = scoreString + ": RestMiss - \(numRestMiss)"
+        if let numResults = noteResultValues[NoteAnalysis.NoteResult.RestMatch] {
+            if numResults != 0 {
+                scoreString = scoreString + ": RestMatch - \(numResults)"
             }
         }
 
-        if let numRestLateMiss = noteResultValues[NoteAnalysis.NoteResult.RestLateMiss] {
-            if numRestLateMiss != 0 {
-                scoreString = scoreString + ": RestLateMiss - \(numRestLateMiss)"
+        if let numResults = noteResultValues[NoteAnalysis.NoteResult.RestMiss] {
+            if numResults != 0 {
+                scoreString = scoreString + ": RestMiss - \(numResults)"
             }
         }
 
-        if let numRestLateMissRepeat = noteResultValues[NoteAnalysis.NoteResult.RestLateMissRepeat] {
-            if numRestLateMissRepeat != 0 {
-                scoreString = scoreString + ": RestLateMissRepeat - \(numRestLateMissRepeat)"
+        if let numResults = noteResultValues[NoteAnalysis.NoteResult.RestLateMiss] {
+            if numResults != 0 {
+                scoreString = scoreString + ": RestLateMiss - \(numResults)"
+            }
+        }
+
+        if let numResults = noteResultValues[NoteAnalysis.NoteResult.RestLateMissRepeat] {
+            if numResults != 0 {
+                scoreString = scoreString + ": RestLateMissRepeat - \(numResults)"
             }
         }
 
@@ -571,7 +702,11 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     }
     
     func partVolume(partIndex: Int32) -> Float {
-        return 1.0
+        if showNoteMarkers {
+            return 1.0
+        } else {
+            return 0.0
+        }
     }
     
     func metronomeEnabled() -> Bool {
@@ -664,7 +799,23 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                     foundSound = false
                     missedSound = false
                     lateSound = false
-                    thresholdEndTime = NSDate().timeIntervalSinceDate(startTime) + timingThreshold
+
+                    thresholdEndTime = NSDate().timeIntervalSinceDate(startTime) + timingThreshold * 2
+
+                    if isTune {
+                        //do all this here so we don't have to do it everytime analyzePerformance is called.
+                        pitchMatched = false
+                        pitchLow = false
+                        pitchHigh = false
+                        pitchMatchedLate = false
+                        pitchLowLate = false
+                        pitchHighLate = false
+                        if let freq = NoteService.getNote(Int(note.note.midiPitch) + transpositionOffset)?.frequency {
+                            targetPitch = freq
+                            lowPitchThreshold = freq / frequencyThresholdPercent
+                            highPitchThreshold = freq * frequencyThresholdPercent
+                        }
+                    }
                     
                     return // abandon iteration
                 }
@@ -681,7 +832,23 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                     foundSound = false
                     missedSound = false
                     lateSound = false
-                    thresholdEndTime = NSDate().timeIntervalSinceDate(startTime) + timingThreshold
+
+                    thresholdEndTime = NSDate().timeIntervalSinceDate(startTime) + timingThreshold * 2
+
+                    if isTune {
+                        //do all this here so we don't have to do it everytime analyzePerformance is called.
+                        pitchMatched = false
+                        pitchLow = false
+                        pitchHigh = false
+                        pitchMatchedLate = false
+                        pitchLowLate = false
+                        pitchHighLate = false
+                        if let freq = NoteService.getNote(Int(note.note.midiPitch) + transpositionOffset)?.frequency {
+                            targetPitch = freq
+                            lowPitchThreshold = freq / frequencyThresholdPercent
+                            highPitchThreshold = freq * frequencyThresholdPercent
+                        }
+                    }
 
                     return // abandon iteration
                 }
@@ -765,7 +932,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         }
 
         if !showNoteMarkers {
-            AudioKitManager.sharedInstance.setup(true)
+            AudioKitManager.sharedInstance.setup()
         }
 
         do {

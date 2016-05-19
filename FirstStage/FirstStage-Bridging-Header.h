@@ -15,3 +15,4 @@
 #include "SSSystemView.h"
 #include "sscore_key.h"
 #include "sampledInstruments.h"
+#import "AKFoundation.h"

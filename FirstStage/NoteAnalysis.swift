@@ -20,6 +20,13 @@ class NoteAnalysis {
         case RestLateMiss
         case RestLateMissRepeat
         case NoResult
+    
+        case PitchMatch
+        case PitchLow
+        case PitchHigh
+        case PitchMatchLate
+        case PitchLowLate
+        case PitchHighLate
     }
 
     var noteResultValues = [NoteResult: Int]()

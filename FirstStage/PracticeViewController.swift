@@ -70,14 +70,16 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         
         if segue.identifier == tuneSegueIdentifier {
             if let destination = segue.destinationViewController as? TuneExerciseViewController {
-                destination.exerciseName = selectedRhythmId
+                destination.exerciseName = selectedTuneId
+                destination.isTune = true
             }
         }
-//        else if segue.identifier == rhythmSegueIdentifier {
-//            if let destination = segue.destinationViewController as? RhythmViewController {
-//                destination.exerciseName = selectedRhythmId
-//            }
-//        }
+        else if segue.identifier == rhythmSegueIdentifier {
+            if let destination = segue.destinationViewController as? TuneExerciseViewController {
+                destination.exerciseName = selectedRhythmId
+                destination.isTune = false
+            }
+        }
 //        else if segue.identifier == longToneSegueIdentifier {
 //            if let destination = segue.destinationViewController as? LongToneViewController {
 //                if let sn = selectedNote

@@ -19,21 +19,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clap at the beginning of each note and count the beats" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4eH-FN-aso">
-                                <rect key="frame" x="0.0" y="72" width="600" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clap at the beginning of each note and count the beats" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4eH-FN-aso">
+                                <rect key="frame" x="0.0" y="72" width="600" height="45"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="9Ov-EI-ERk"/>
+                                    <constraint firstAttribute="height" constant="45" id="9Ov-EI-ERk"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Edi-Oo-gxi" userLabel="SSScrollView" customClass="SSScrollView">
-                                <rect key="frame" x="0.0" y="106" width="600" height="360"/>
+                                <rect key="frame" x="0.0" y="121" width="600" height="360"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4lG-Uj-c1R" userLabel="Gate View">
-                                <rect key="frame" x="70" y="116" width="6" height="210"/>
+                                <rect key="frame" x="70" y="131" width="6" height="210"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="6" id="1qx-iX-iSS"/>
@@ -82,7 +82,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lBo-xE-883" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3700" y="1037"/>
+            <point key="canvasLocation" x="3397" y="793"/>
         </scene>
         <!--Home-->
         <scene sceneID="m9M-pR-XIt">
@@ -155,7 +155,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5ro-iP-5WA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2309" y="1037"/>
+            <point key="canvasLocation" x="2006" y="793"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jfZ-bl-Xfu">
@@ -173,7 +173,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yXk-8u-fxA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1629" y="1037"/>
+            <point key="canvasLocation" x="1326" y="793"/>
         </scene>
         <!--Practice-->
         <scene sceneID="xqv-Sv-Y5a">
@@ -237,7 +237,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="62" height="30"/>
                                                         <state key="normal" title="Play Test"/>
                                                         <connections>
-                                                            <segue destination="RFs-C5-TzE" kind="show" identifier="ShowTuneSegue" id="jE0-YO-Jck"/>
+                                                            <segue destination="RFs-C5-TzE" kind="show" identifier="ShowRhythmSegue" id="jE0-YO-Jck"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jkm-k1-pJh">
@@ -266,6 +266,9 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u3T-Id-nwy">
                                                         <rect key="frame" x="0.0" y="0.0" width="62" height="30"/>
                                                         <state key="normal" title="Play Test"/>
+                                                        <connections>
+                                                            <segue destination="RFs-C5-TzE" kind="show" identifier="ShowTuneSegue" id="bGC-9Y-bIq"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zgb-cY-DrV">
                                                         <rect key="frame" x="86" y="0.0" width="91" height="30"/>
@@ -296,7 +299,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZUV-Fh-GrU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3010" y="1037"/>
+            <point key="canvasLocation" x="2707" y="793"/>
         </scene>
         <!--Settings-->
         <scene sceneID="mEp-Ph-Pk0">
@@ -380,7 +383,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EtB-cQ-0GO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2309" y="1785"/>
+            <point key="canvasLocation" x="2006" y="1541"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="bGC-9Y-bIq"/>
+    </inferredMetricsTieBreakers>
 </document>

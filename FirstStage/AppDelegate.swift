@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Constants.Settings.BPS: 60.0,
             Constants.Settings.AmplitudeThreshold: Float(0.1),
             Constants.Settings.TimingThreshold: 0.2,
+            Constants.Settings.FrequencyThreshold: 0.03,
             Constants.Settings.Transposition: -2,
             Constants.Settings.ShowNoteMarkers: false
             ])

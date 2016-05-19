@@ -61,12 +61,20 @@
 		633C2AE51CE86CF4001C5C16 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633C2AE31CE86CF4001C5C16 /* SettingsViewController.swift */; };
 		6379EE7D1CE95CDF00188A70 /* NoteAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6379EE7C1CE95CDF00188A70 /* NoteAnalysis.swift */; };
 		6379EE7E1CE95CDF00188A70 /* NoteAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6379EE7C1CE95CDF00188A70 /* NoteAnalysis.swift */; };
-		6379EE8C1CE9C83F00188A70 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6379EE891CE9C81B00188A70 /* AudioKit.framework */; };
-		6379EE8D1CE9C83F00188A70 /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6379EE891CE9C81B00188A70 /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6379EE8E1CE9C84C00188A70 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6379EE891CE9C81B00188A70 /* AudioKit.framework */; };
-		6379EE8F1CE9C84C00188A70 /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6379EE891CE9C81B00188A70 /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6379EE911CE9C8ED00188A70 /* AudioKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6379EE901CE9C8ED00188A70 /* AudioKitManager.swift */; };
 		6379EE921CE9C8ED00188A70 /* AudioKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6379EE901CE9C8ED00188A70 /* AudioKitManager.swift */; };
+		6387FDD21CEDB1A60054DE44 /* libAudioKit iOS Dynamic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6387FDC91CEDB15B0054DE44 /* libAudioKit iOS Dynamic.a */; };
+		6387FDD31CEDB1AE0054DE44 /* libAudioKit iOS Dynamic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6387FDC91CEDB15B0054DE44 /* libAudioKit iOS Dynamic.a */; };
+		6387FDDC1CEDB3510054DE44 /* CsoundLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6387FDDA1CEDB3510054DE44 /* CsoundLib.framework */; };
+		6387FDDD1CEDB3510054DE44 /* CsoundLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6387FDDA1CEDB3510054DE44 /* CsoundLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6387FDDE1CEDB3510054DE44 /* libsndfile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6387FDDB1CEDB3510054DE44 /* libsndfile.framework */; };
+		6387FDDF1CEDB3510054DE44 /* libsndfile.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6387FDDB1CEDB3510054DE44 /* libsndfile.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6387FDE01CEDB3E10054DE44 /* CsoundLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6387FDDA1CEDB3510054DE44 /* CsoundLib.framework */; };
+		6387FDE31CEDB41E0054DE44 /* CsoundLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6387FDDA1CEDB3510054DE44 /* CsoundLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6387FDE41CEDB41E0054DE44 /* libsndfile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6387FDDB1CEDB3510054DE44 /* libsndfile.framework */; };
+		6387FDE51CEDB41E0054DE44 /* libsndfile.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6387FDDB1CEDB3510054DE44 /* libsndfile.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6387FDE81CEDB5710054DE44 /* AudioKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6387FDE71CEDB5710054DE44 /* AudioKit.swift */; };
+		6387FDE91CEDB5710054DE44 /* AudioKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6387FDE71CEDB5710054DE44 /* AudioKit.swift */; };
 		63F9C8071CE74826000F4470 /* Piano.mf.23.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7B11CE74825000F4470 /* Piano.mf.23.m4a */; };
 		63F9C8081CE74826000F4470 /* Piano.mf.23.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7B11CE74825000F4470 /* Piano.mf.23.m4a */; };
 		63F9C8091CE74826000F4470 /* Piano.mf.24.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7B21CE74825000F4470 /* Piano.mf.24.m4a */; };
@@ -326,6 +334,48 @@
 			remoteGlobalIDString = 6324D2CE1CE71B19001934A5;
 			remoteInfo = FirstStage;
 		};
+		6387FDC61CEDB15B0054DE44 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6387FDBF1CEDB15B0054DE44 /* AudioKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EA8E93D81AD3C5240057E979;
+			remoteInfo = "AudioKit iOS Static";
+		};
+		6387FDC81CEDB15B0054DE44 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6387FDBF1CEDB15B0054DE44 /* AudioKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EAA0F5941AE71C8F007CD7C9;
+			remoteInfo = "AudioKit iOS Dynamic";
+		};
+		6387FDCA1CEDB15B0054DE44 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6387FDBF1CEDB15B0054DE44 /* AudioKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EA8E96591AD3C6FC0057E979;
+			remoteInfo = "AudioKit OS X";
+		};
+		6387FDCC1CEDB15B0054DE44 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6387FDBF1CEDB15B0054DE44 /* AudioKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EA93645D1BD865230005B849;
+			remoteInfo = "AudioKit tvOS";
+		};
+		6387FDCE1CEDB1840054DE44 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6387FDBF1CEDB15B0054DE44 /* AudioKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = EAA0F4DE1AE71C8F007CD7C9;
+			remoteInfo = "AudioKit iOS Dynamic";
+		};
+		6387FDD01CEDB1890054DE44 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6387FDBF1CEDB15B0054DE44 /* AudioKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = EAA0F4DE1AE71C8F007CD7C9;
+			remoteInfo = "AudioKit iOS Dynamic";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -335,8 +385,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6379EE8D1CE9C83F00188A70 /* AudioKit.framework in Embed Frameworks */,
+				6387FDDD1CEDB3510054DE44 /* CsoundLib.framework in Embed Frameworks */,
 				6324D3171CE73234001934A5 /* SeeScoreLib.framework in Embed Frameworks */,
+				6387FDDF1CEDB3510054DE44 /* libsndfile.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -347,8 +398,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6379EE8F1CE9C84C00188A70 /* AudioKit.framework in Embed Frameworks */,
+				6387FDE31CEDB41E0054DE44 /* CsoundLib.framework in Embed Frameworks */,
 				6324D31B1CE7327F001934A5 /* SeeScoreLib.framework in Embed Frameworks */,
+				6387FDE51CEDB41E0054DE44 /* libsndfile.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -401,8 +453,11 @@
 		633C2AE01CE86915001C5C16 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		633C2AE31CE86CF4001C5C16 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		6379EE7C1CE95CDF00188A70 /* NoteAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteAnalysis.swift; sourceTree = "<group>"; };
-		6379EE891CE9C81B00188A70 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AudioKit.framework; sourceTree = "<group>"; };
 		6379EE901CE9C8ED00188A70 /* AudioKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioKitManager.swift; sourceTree = "<group>"; };
+		6387FDBF1CEDB15B0054DE44 /* AudioKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AudioKit.xcodeproj; path = AudioKit/AudioKit.xcodeproj; sourceTree = "<group>"; };
+		6387FDDA1CEDB3510054DE44 /* CsoundLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CsoundLib.framework; path = AudioKit/AudioKit/Platforms/iOS/CsoundLib.framework; sourceTree = "<group>"; };
+		6387FDDB1CEDB3510054DE44 /* libsndfile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libsndfile.framework; path = AudioKit/AudioKit/Platforms/iOS/libsndfile.framework; sourceTree = "<group>"; };
+		6387FDE71CEDB5710054DE44 /* AudioKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AudioKit.swift; path = AudioKit/AudioKit/Platforms/Swift/AudioKit.swift; sourceTree = SOURCE_ROOT; };
 		63F9C7B11CE74825000F4470 /* Piano.mf.23.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.23.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.23.m4a"; sourceTree = SOURCE_ROOT; };
 		63F9C7B21CE74825000F4470 /* Piano.mf.24.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.24.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.24.m4a"; sourceTree = SOURCE_ROOT; };
 		63F9C7B31CE74825000F4470 /* Piano.mf.25.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.25.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.25.m4a"; sourceTree = SOURCE_ROOT; };
@@ -531,7 +586,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6379EE8E1CE9C84C00188A70 /* AudioKit.framework in Frameworks */,
+				6387FDE01CEDB3E10054DE44 /* CsoundLib.framework in Frameworks */,
+				6387FDE41CEDB41E0054DE44 /* libsndfile.framework in Frameworks */,
+				6387FDD21CEDB1A60054DE44 /* libAudioKit iOS Dynamic.a in Frameworks */,
 				6324D31A1CE7327F001934A5 /* SeeScoreLib.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -554,7 +611,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6379EE8C1CE9C83F00188A70 /* AudioKit.framework in Frameworks */,
+				6387FDDE1CEDB3510054DE44 /* libsndfile.framework in Frameworks */,
+				6387FDDC1CEDB3510054DE44 /* CsoundLib.framework in Frameworks */,
+				6387FDD31CEDB1AE0054DE44 /* libAudioKit iOS Dynamic.a in Frameworks */,
 				6324D3161CE73234001934A5 /* SeeScoreLib.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -570,6 +629,7 @@
 				6324D2E91CE71B1A001934A5 /* FirstStageTests */,
 				6324D2F41CE71B1A001934A5 /* FirstStageUITests */,
 				6324D2D01CE71B19001934A5 /* Products */,
+				6387FDBF1CEDB15B0054DE44 /* AudioKit.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -590,6 +650,7 @@
 				6324D3661CE73ECB001934A5 /* Brain */,
 				633C2ADF1CE81402001C5C16 /* Data */,
 				6324D3341CE7358C001934A5 /* SeeScore */,
+				6387FDE61CEDB5110054DE44 /* Supporting Files */,
 				6324D2D21CE71B19001934A5 /* AppDelegate.swift */,
 				6324D2D61CE71B19001934A5 /* Main.storyboard */,
 				6324D2DC1CE71B1A001934A5 /* Assets.xcassets */,
@@ -597,7 +658,6 @@
 				6324D2E11CE71B1A001934A5 /* Info.plist */,
 				6324D2D91CE71B1A001934A5 /* FirstStage.xcdatamodeld */,
 				633C2AD81CE80D80001C5C16 /* View Controllers */,
-				6324D31E1CE73574001934A5 /* FirstStage-Bridging-Header.h */,
 			);
 			path = FirstStage;
 			sourceTree = "<group>";
@@ -623,7 +683,8 @@
 		6324D31D1CE7329A001934A5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6379EE891CE9C81B00188A70 /* AudioKit.framework */,
+				6387FDDA1CEDB3510054DE44 /* CsoundLib.framework */,
+				6387FDDB1CEDB3510054DE44 /* libsndfile.framework */,
 				6324D3191CE7327F001934A5 /* SeeScoreLib.framework */,
 				6324D3151CE73234001934A5 /* SeeScoreLib.framework */,
 			);
@@ -686,6 +747,26 @@
 				633C2ADC1CE813E7001C5C16 /* XML Tunes */,
 			);
 			name = Data;
+			sourceTree = "<group>";
+		};
+		6387FDC01CEDB15B0054DE44 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6387FDC71CEDB15B0054DE44 /* libAudioKit iOS Static.a */,
+				6387FDC91CEDB15B0054DE44 /* libAudioKit iOS Dynamic.a */,
+				6387FDCB1CEDB15B0054DE44 /* libAudioKit OS X.a */,
+				6387FDCD1CEDB15B0054DE44 /* libAudioKit tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6387FDE61CEDB5110054DE44 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6387FDE71CEDB5710054DE44 /* AudioKit.swift */,
+				6324D31E1CE73574001934A5 /* FirstStage-Bridging-Header.h */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		63F9C7AE1CE747D5000F4470 /* synth-samples */ = {
@@ -848,6 +929,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				6387FDD11CEDB1890054DE44 /* PBXTargetDependency */,
 			);
 			name = FirstStage;
 			productName = FirstStage;
@@ -903,6 +985,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				6387FDCF1CEDB1840054DE44 /* PBXTargetDependency */,
 			);
 			name = "FirstStage-debug";
 			productName = FirstStage;
@@ -921,6 +1004,7 @@
 				TargetAttributes = {
 					6324D2CE1CE71B19001934A5 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = A2SGEM86LX;
 					};
 					6324D2E51CE71B1A001934A5 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -943,6 +1027,12 @@
 			mainGroup = 6324D2C61CE71B19001934A5;
 			productRefGroup = 6324D2D01CE71B19001934A5 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 6387FDC01CEDB15B0054DE44 /* Products */;
+					ProjectRef = 6387FDBF1CEDB15B0054DE44 /* AudioKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				6324D3051CE72F8D001934A5 /* FirstStage-debug */,
@@ -952,6 +1042,37 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		6387FDC71CEDB15B0054DE44 /* libAudioKit iOS Static.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libAudioKit iOS Static.a";
+			remoteRef = 6387FDC61CEDB15B0054DE44 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6387FDC91CEDB15B0054DE44 /* libAudioKit iOS Dynamic.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libAudioKit iOS Dynamic.a";
+			remoteRef = 6387FDC81CEDB15B0054DE44 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6387FDCB1CEDB15B0054DE44 /* libAudioKit OS X.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libAudioKit OS X.a";
+			remoteRef = 6387FDCA1CEDB15B0054DE44 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6387FDCD1CEDB15B0054DE44 /* libAudioKit tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libAudioKit tvOS.a";
+			remoteRef = 6387FDCC1CEDB15B0054DE44 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		6324D2CD1CE71B19001934A5 /* Resources */ = {
@@ -1246,7 +1367,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"$BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH/AudioKit.framework/fix-framework.sh\"";
+			shellScript = "\"AudioKit/AudioKit//Platforms/iOS/run-script.sh\"";
 		};
 		6379EE881CE9C63B00188A70 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1259,7 +1380,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"$BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH/AudioKit.framework/fix-framework.sh\"";
+			shellScript = "\"AudioKit/AudioKit//Platforms/iOS/run-script.sh\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1285,6 +1406,7 @@
 				6324D35F1CE73C47001934A5 /* SSScrollView.m in Sources */,
 				6324D3751CE73ED9001934A5 /* Exercise.swift in Sources */,
 				6379EE7E1CE95CDF00188A70 /* NoteAnalysis.swift in Sources */,
+				6387FDE91CEDB5710054DE44 /* AudioKit.swift in Sources */,
 				6324D35D1CE73C47001934A5 /* sampledInstruments.m in Sources */,
 				6324D3731CE73ED9001934A5 /* Enums.swift in Sources */,
 				6324D2D31CE71B19001934A5 /* AppDelegate.swift in Sources */,
@@ -1329,6 +1451,7 @@
 				6324D35E1CE73C47001934A5 /* SSScrollView.m in Sources */,
 				6324D3741CE73ED9001934A5 /* Exercise.swift in Sources */,
 				6379EE7D1CE95CDF00188A70 /* NoteAnalysis.swift in Sources */,
+				6387FDE81CEDB5710054DE44 /* AudioKit.swift in Sources */,
 				6324D35C1CE73C47001934A5 /* sampledInstruments.m in Sources */,
 				6324D3721CE73ED9001934A5 /* Enums.swift in Sources */,
 				6324D30A1CE72F8D001934A5 /* AppDelegate.swift in Sources */,
@@ -1348,6 +1471,16 @@
 			isa = PBXTargetDependency;
 			target = 6324D2CE1CE71B19001934A5 /* FirstStage */;
 			targetProxy = 6324D2F21CE71B1A001934A5 /* PBXContainerItemProxy */;
+		};
+		6387FDCF1CEDB1840054DE44 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "AudioKit iOS Dynamic";
+			targetProxy = 6387FDCE1CEDB1840054DE44 /* PBXContainerItemProxy */;
+		};
+		6387FDD11CEDB1890054DE44 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "AudioKit iOS Dynamic";
+			targetProxy = 6387FDD01CEDB1890054DE44 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1414,6 +1547,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
+				PROVISIONING_PROFILE = "12e192e0-54ea-473a-82e9-9698b782b864";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -1466,21 +1600,24 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: David Reich (JRZ683P359)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: David Reich (JRZ683P359)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SeeScoreLib/AppStore-Release",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/AudioKit/AudioKit/Platforms/iOS",
 				);
 				INFOPLIST_FILE = FirstStage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.musikyoshi.echodsr;
+				PRODUCT_BUNDLE_IDENTIFIER = com.musikyoshi.FirstStageDSR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b54529df-4bba-49d0-a6f4-14509af02ecb";
+				PROVISIONING_PROFILE = "12e192e0-54ea-473a-82e9-9698b782b864";
 				SWIFT_OBJC_BRIDGING_HEADER = "FirstStage/FirstStage-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "AudioKit/AudioKit/**";
 			};
 			name = Debug;
 		};
@@ -1490,20 +1627,22 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Stellar Software Pty Ltd (A2SGEM86LX)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Stellar Software Pty Ltd (A2SGEM86LX)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SeeScoreLib/AppStore-Release",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/AudioKit/AudioKit/Platforms/iOS",
 				);
 				INFOPLIST_FILE = FirstStage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.musikyoshi.echodsr;
+				PRODUCT_BUNDLE_IDENTIFIER = com.musikyoshi.FirstStageDSR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b54529df-4bba-49d0-a6f4-14509af02ecb";
 				SWIFT_OBJC_BRIDGING_HEADER = "FirstStage/FirstStage-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "AudioKit/AudioKit/**";
 			};
 			name = Release;
 		};
@@ -1563,14 +1702,17 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/SeeScoreLib/Universal",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/AudioKit/AudioKit/Platforms/iOS",
 				);
 				INFOPLIST_FILE = FirstStage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.musikyoshi.echodsr;
+				PRODUCT_BUNDLE_IDENTIFIER = com.musikyoshi.FirstStageDSR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "12e192e0-54ea-473a-82e9-9698b782b864";
 				SWIFT_OBJC_BRIDGING_HEADER = "FirstStage/FirstStage-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "AudioKit/AudioKit/**";
 			};
 			name = Debug;
 		};
@@ -1584,14 +1726,16 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/SeeScoreLib/Universal",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/AudioKit/AudioKit/Platforms/iOS",
 				);
 				INFOPLIST_FILE = FirstStage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.musikyoshi.echodsr;
+				PRODUCT_BUNDLE_IDENTIFIER = com.musikyoshi.FirstStageDSR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "FirstStage/FirstStage-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "AudioKit/AudioKit/**";
 			};
 			name = Release;
 		};
