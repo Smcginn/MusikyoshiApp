@@ -1,6 +1,0 @@
-framework module SeeScoreLib {
-  umbrella header "SeeScoreLib.h"
-
-  export *
-  module * { export * }
-}
