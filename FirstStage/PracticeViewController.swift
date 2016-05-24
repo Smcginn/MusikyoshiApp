@@ -20,7 +20,9 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     var selectedRhythmId = ""
     var selectedRhythmName = ""
     
-    let noteIds = [53,55,57,58,60,62,63,65,67,69,70]
+//    let noteIds = [53,55,57,58,60,62,63,65,67,69,70]
+    // noteIds must be >= LongToneViewController.kFirstLongTone24Note = 54 && <= LongToneViewController.kLastLongTone24Note = 77
+    let noteIds = [55,57,58,60,62,63,65,67,69,70,72]
     var actionNotes = [Note]()
     var selectedNote : Note?
     
@@ -29,14 +31,11 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     @IBOutlet weak var playTuneBtn: UIButton!
     
     override func viewDidLoad() {
-        if actionNotes.count == 0
-        {
+        if actionNotes.count == 0 {
             for nId in noteIds {
                 actionNotes.append(NoteService.getNote(nId)!)
             }
-        }
-        else
-        {
+        } else {
             print("did load test")
         }
         
@@ -73,31 +72,32 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
                 destination.exerciseName = selectedTuneId
                 destination.isTune = true
             }
-        }
-        else if segue.identifier == rhythmSegueIdentifier {
+        } else if segue.identifier == rhythmSegueIdentifier {
             if let destination = segue.destinationViewController as? TuneExerciseViewController {
                 destination.exerciseName = selectedRhythmId
                 destination.isTune = false
             }
         }
-//        else if segue.identifier == longToneSegueIdentifier {
-//            if let destination = segue.destinationViewController as? LongToneViewController {
-//                if let sn = selectedNote
-//                {
-////TO DO -- is -2 correct??
-////                    let an = NoteService.getNote(sn.orderId-2)
-//                    let an = NoteService.getNote(sn.orderId)
-//                    print("sn: \(sn.orderId) - 2?? ==>")
-//                    print("an == \(an?.orderId)")
-//                    destination.targetNote = an
-//                }
-//                else
-//                {
-//                    destination.targetNote = NoteService.getNote(47)
-//                }
-//                
-//            }
-//        }
+        else if segue.identifier == longToneSegueIdentifier {
+            if let destination = segue.destinationViewController as? LongToneViewController {
+                if let sn = selectedNote
+                {
+//TO DO -- is -2 correct??
+//                    let an = NoteService.getNote(sn.orderId-2)
+                    let an = NoteService.getNote(sn.orderId)
+                    print("sn: \(sn.orderId) - 2?? ==>")
+                    print("an == \(an?.orderId)")
+                    destination.targetNote = an
+                    destination.targetNoteID = sn.orderId
+                }
+                else
+                {
+                    destination.targetNote = NoteService.getNote(destination.kC4)
+                    destination.targetNoteID = destination.kC4
+                }
+                
+            }
+        }
     }
     
     @IBAction func changeLongToneNoteTap(sender: AnyObject) {
@@ -110,10 +110,8 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         picker.delegate = self
         picker.dataSource = self
         
-        func handler(act: UIAlertAction)
-        {
-            if let sn = selectedNote
-            {
+        func handler(act: UIAlertAction) {
+            if let sn = selectedNote {
                 playLongNoteBtn.setTitle("Play \(sn.fullName)", forState: .Normal)
             }
         }
@@ -134,8 +132,7 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         picker.delegate = self
         picker.dataSource = self
         
-        func handler(act: UIAlertAction)
-        {
+        func handler(act: UIAlertAction) {
             playRhythmBtn.setTitle("Play \(selectedRhythmName)", forState: .Normal)
         }
         
@@ -155,8 +152,7 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         picker.delegate = self
         picker.dataSource = self
         
-        func handler(act: UIAlertAction)
-        {
+        func handler(act: UIAlertAction) {
             playTuneBtn.setTitle("Play \(selectedTuneName)", forState: .Normal)
         }
         
@@ -170,18 +166,14 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     //MARK: - Picker Delegate and Data Source
     //*****************************************************************
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int
-    {
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
-        if optionIndex == 1
-        {
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if optionIndex == 1 {
             return actionNotes.count
-        }
-        else
-        {
+        } else {
             return tuneIds.count
         }
     }
@@ -189,21 +181,15 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
         let lbl : UILabel
         
-        if let label = view as? UILabel
-        {
+        if let label = view as? UILabel {
             lbl = label
-        }
-        else
-        {
+        } else {
             lbl = UILabel()
         }
         
-        if optionIndex == 1
-        {
+        if optionIndex == 1 {
             lbl.text = actionNotes[row].fullName
-        }
-        else
-        {
+        } else {
             lbl.text = tuneNames[row]
         }
         lbl.backgroundColor = UIColor.clearColor()
@@ -214,17 +200,12 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
-        if optionIndex == 1
-        {
+        if optionIndex == 1 {
             selectedNote = actionNotes[row]
-        }
-        else if optionIndex == 2
-        {
+        } else if optionIndex == 2 {
             selectedRhythmId = tuneIds[row]
             selectedRhythmName = tuneNames[row]
-        }
-        else
-        {
+        } else {
             selectedTuneId = tuneIds[row]
             selectedTuneName = tuneNames[row]
         }

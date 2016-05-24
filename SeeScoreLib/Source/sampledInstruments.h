@@ -14,6 +14,6 @@ extern const sscore_sy_sampledinstrumentinfo kSampledInstrumentsInfo[];
 extern const int kNumSampledInstruments;
 extern const sscore_sy_sampledinstrumentinfo *pianoSampleInfo;
 extern const sscore_sy_sampledinstrumentinfo *trumpetSampleInfo;
-
+extern const sscore_sy_sampledinstrumentinfo *trumpetMinus2SampleInfo;
 
 #endif /* sampledInstruments_h */

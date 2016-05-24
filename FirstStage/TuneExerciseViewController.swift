@@ -23,7 +23,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     let mxmlService = MusicXMLService()
     let amplitudeThreshold = NSUserDefaults.standardUserDefaults().doubleForKey(Constants.Settings.AmplitudeThreshold)
     let timingThreshold = NSUserDefaults.standardUserDefaults().doubleForKey(Constants.Settings.TimingThreshold)
-    let tempoBPM = NSUserDefaults.standardUserDefaults().integerForKey(Constants.Settings.BPS)
+    let tempoBPM = NSUserDefaults.standardUserDefaults().integerForKey(Constants.Settings.BPM)
     let transpositionOffset = NSUserDefaults.standardUserDefaults().integerForKey(Constants.Settings.Transposition)
     let frequencyThreshold = NSUserDefaults.standardUserDefaults().floatForKey(Constants.Settings.FrequencyThreshold)
     let showNoteMarkers = NSUserDefaults.standardUserDefaults().boolForKey(Constants.Settings.ShowNoteMarkers)
@@ -58,6 +58,8 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     var targetPitch = Float(0.0)
     var lowPitchThreshold = Float(0.0)
     var highPitchThreshold = Float(0.0)
+    let minPitch = NoteService.getLowestFrequency()
+    let maxPitch = NoteService.getHighestFrequency()
     var insideNote = false
     var insideRest = false
     var foundSound = false
@@ -120,8 +122,6 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         //        let scoreWidth = Double(view.frame.width)
         print("scoreWidth = \(scoreWidth)")
         
-        ssScrollView.xmlScoreWidth = scoreWidth
-        ssScrollView.xmlScoreWidth = 0
         if let filePath = NSBundle.mainBundle().pathForResource(scoreFile, ofType: "xml") {
             ssScrollView.abortBackgroundProcessing({self.loadTheFile(filePath, scoreWidth: scoreWidth)})
         } else {
@@ -156,6 +156,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
             showingSinglePart = false;
             layOptions.hidePartNames = true
             layOptions.hideBarNumbers = true
+            ssScrollView.optimalSingleSystem = true
             //            sysssScrollView.frame.size.width = CGFloat(scoreWidth * 2.28)
             //            ssScrollView.setupScore(score, openParts: showingParts, mag: kDefaultMagnification, opt: layOptions)
             ssScrollView.setupScore(score, openParts: showingParts, mag: kDefaultMagnification, opt: layOptions, completion: getPlayData)
@@ -420,10 +421,12 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         guard insideNote || insideRest else { return }
 
         let inThreshold = NSDate().timeIntervalSinceDate(startTime) < thresholdEndTime
-        print("amplitude= \(AudioKitManager.sharedInstance.amplitude())")
 //        let hasSound = AudioKitManager.sharedInstance.amplitude() > amplitudeThreshold
         let amplitude = AudioKitManager.sharedInstance.amplitude()
-        let hasSound = amplitude > 0.1
+        let frequency = AudioKitManager.sharedInstance.frequency()
+        print("amplitude / freq = \(amplitude) / \(frequency)")
+
+        let hasSound = amplitude > 0.01 && (minPitch...maxPitch ~= frequency)
 
         var result = NoteAnalysis.NoteResult.NoResult
         
@@ -467,13 +470,11 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                     result = NoteAnalysis.NoteResult.NoResult
                 }
 
-                var frequency = Float(0.0)
                 var freqMatch = false
                 var freqLow = false
                 var freqHigh = false
                 
                 if isTune {
-                    frequency = AudioKitManager.sharedInstance.frequency()
                     if frequency < lowPitchThreshold {
                         freqLow = true
                     } else if frequency > highPitchThreshold {
@@ -483,7 +484,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                     }
                 }
 
-                print("freq ... \(freqLow) \(freqHigh) \(freqMatch)")
+                print("freq ... low \(freqLow) high \(freqHigh) match \(freqMatch)")
                 if inThreshold {
                     if freqLow {
                         guard !pitchLow else { return }
@@ -810,7 +811,8 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                         pitchMatchedLate = false
                         pitchLowLate = false
                         pitchHighLate = false
-                        if let freq = NoteService.getNote(Int(note.note.midiPitch) + transpositionOffset)?.frequency {
+//                        if let freq = NoteService.getNote(Int(note.note.midiPitch) + transpositionOffset)?.frequency {
+                        if let freq = NoteService.getNote(Int(note.note.midiPitch))?.frequency {
                             targetPitch = freq
                             lowPitchThreshold = freq / frequencyThresholdPercent
                             highPitchThreshold = freq * frequencyThresholdPercent
@@ -843,6 +845,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                         pitchMatchedLate = false
                         pitchLowLate = false
                         pitchHighLate = false
+                        //do we need this?  We don't care about frequency for rests
                         if let freq = NoteService.getNote(Int(note.note.midiPitch) + transpositionOffset)?.frequency {
                             targetPitch = freq
                             lowPitchThreshold = freq / frequencyThresholdPercent

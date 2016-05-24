@@ -32,7 +32,7 @@ static const float kMaxMagnification = 2.5;
 static const float kMagnificationReductionScreenWidthThreshold = 768;
 static const float kMagnificationProportionToScreenWidth = 0.8F;// this is 0 for constant magnification at different screen widths, 1.0 for magnification proportional to screen width/768.
 
-static const BOOL kOptimalSingleSystem = YES;
+//static const BOOL kOptimalSingleSystem = YES;
 
 @interface SSScrollView ()
 {
@@ -130,7 +130,7 @@ static const BOOL kOptimalSingleSystem = YES;
 	colouringsForSystems = NSMutableDictionary.dictionary;
 	layOptions = [[SSLayoutOptions alloc] init]; // default layout options
 	singlePartDisplay = false;
-    _xmlScoreWidth = 0.0;
+    _optimalSingleSystem = false;
 }
 
 -(bool)displayingSinglePart
@@ -601,10 +601,8 @@ static float limit(float val, float mini, float maxi)
 					assert(systemlist.count == 0);
 					if (self.abortingBackground == 0)
 					{
-                        if (kOptimalSingleSystem) {
+                        if (_optimalSingleSystem) {
                             __block int numNewSystems = 0;
-                            if (_xmlScoreWidth > 1)
-                                frame.size.width = _xmlScoreWidth;
                             do {
                                 numNewSystems = 0;
                                 UIGraphicsBeginImageContextWithOptions(CGSizeMake(10,10), YES/*opaque*/, 0.0/* scale*/);
@@ -633,7 +631,7 @@ static float limit(float val, float mini, float maxi)
                             } while (numNewSystems > 1);
 
                             self.frame = frame;
-                            NSLog(@"one system: xmlScoreWidth = %f - width=%f", _xmlScoreWidth, frame.size.width);
+                            NSLog(@"one system: xmlScoreWidth = width=%f", frame.size.width);
                         }
 
                         UIGraphicsBeginImageContextWithOptions(CGSizeMake(10,10), YES/*opaque*/, 0.0/* scale*/);

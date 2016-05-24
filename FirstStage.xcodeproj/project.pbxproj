@@ -63,6 +63,12 @@
 		6379EE7E1CE95CDF00188A70 /* NoteAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6379EE7C1CE95CDF00188A70 /* NoteAnalysis.swift */; };
 		6379EE911CE9C8ED00188A70 /* AudioKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6379EE901CE9C8ED00188A70 /* AudioKitManager.swift */; };
 		6379EE921CE9C8ED00188A70 /* AudioKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6379EE901CE9C8ED00188A70 /* AudioKitManager.swift */; };
+		638129501CF05BF800A40C8E /* LongToneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6381294F1CF05BF800A40C8E /* LongToneViewController.swift */; };
+		638129511CF05BF800A40C8E /* LongToneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6381294F1CF05BF800A40C8E /* LongToneViewController.swift */; };
+		638129581CF05C7900A40C8E /* Balloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638129561CF05C7900A40C8E /* Balloon.swift */; };
+		638129591CF05C7900A40C8E /* Balloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638129561CF05C7900A40C8E /* Balloon.swift */; };
+		6381295A1CF05C7900A40C8E /* SparkLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638129571CF05C7900A40C8E /* SparkLine.swift */; };
+		6381295B1CF05C7900A40C8E /* SparkLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638129571CF05C7900A40C8E /* SparkLine.swift */; };
 		6387FDD21CEDB1A60054DE44 /* libAudioKit iOS Dynamic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6387FDC91CEDB15B0054DE44 /* libAudioKit iOS Dynamic.a */; };
 		6387FDD31CEDB1AE0054DE44 /* libAudioKit iOS Dynamic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6387FDC91CEDB15B0054DE44 /* libAudioKit iOS Dynamic.a */; };
 		6387FDDC1CEDB3510054DE44 /* CsoundLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6387FDDA1CEDB3510054DE44 /* CsoundLib.framework */; };
@@ -75,6 +81,8 @@
 		6387FDE51CEDB41E0054DE44 /* libsndfile.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6387FDDB1CEDB3510054DE44 /* libsndfile.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6387FDE81CEDB5710054DE44 /* AudioKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6387FDE71CEDB5710054DE44 /* AudioKit.swift */; };
 		6387FDE91CEDB5710054DE44 /* AudioKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6387FDE71CEDB5710054DE44 /* AudioKit.swift */; };
+		63EB90171CF1C4EB00F09B05 /* AVAudioSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EB90161CF1C4EB00F09B05 /* AVAudioSessionManager.swift */; };
+		63EB90181CF1C4EC00F09B05 /* AVAudioSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EB90161CF1C4EB00F09B05 /* AVAudioSessionManager.swift */; };
 		63F9C8071CE74826000F4470 /* Piano.mf.23.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7B11CE74825000F4470 /* Piano.mf.23.m4a */; };
 		63F9C8081CE74826000F4470 /* Piano.mf.23.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7B11CE74825000F4470 /* Piano.mf.23.m4a */; };
 		63F9C8091CE74826000F4470 /* Piano.mf.24.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7B21CE74825000F4470 /* Piano.mf.24.m4a */; };
@@ -454,10 +462,14 @@
 		633C2AE31CE86CF4001C5C16 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		6379EE7C1CE95CDF00188A70 /* NoteAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteAnalysis.swift; sourceTree = "<group>"; };
 		6379EE901CE9C8ED00188A70 /* AudioKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioKitManager.swift; sourceTree = "<group>"; };
+		6381294F1CF05BF800A40C8E /* LongToneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LongToneViewController.swift; sourceTree = "<group>"; };
+		638129561CF05C7900A40C8E /* Balloon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Balloon.swift; sourceTree = "<group>"; };
+		638129571CF05C7900A40C8E /* SparkLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SparkLine.swift; sourceTree = "<group>"; };
 		6387FDBF1CEDB15B0054DE44 /* AudioKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AudioKit.xcodeproj; path = AudioKit/AudioKit.xcodeproj; sourceTree = "<group>"; };
 		6387FDDA1CEDB3510054DE44 /* CsoundLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CsoundLib.framework; path = AudioKit/AudioKit/Platforms/iOS/CsoundLib.framework; sourceTree = "<group>"; };
 		6387FDDB1CEDB3510054DE44 /* libsndfile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libsndfile.framework; path = AudioKit/AudioKit/Platforms/iOS/libsndfile.framework; sourceTree = "<group>"; };
 		6387FDE71CEDB5710054DE44 /* AudioKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AudioKit.swift; path = AudioKit/AudioKit/Platforms/Swift/AudioKit.swift; sourceTree = SOURCE_ROOT; };
+		63EB90161CF1C4EB00F09B05 /* AVAudioSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAudioSessionManager.swift; sourceTree = "<group>"; };
 		63F9C7B11CE74825000F4470 /* Piano.mf.23.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.23.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.23.m4a"; sourceTree = SOURCE_ROOT; };
 		63F9C7B21CE74825000F4470 /* Piano.mf.24.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.24.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.24.m4a"; sourceTree = SOURCE_ROOT; };
 		63F9C7B31CE74825000F4470 /* Piano.mf.25.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.25.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.25.m4a"; sourceTree = SOURCE_ROOT; };
@@ -657,6 +669,7 @@
 				6324D2DE1CE71B1A001934A5 /* LaunchScreen.storyboard */,
 				6324D2E11CE71B1A001934A5 /* Info.plist */,
 				6324D2D91CE71B1A001934A5 /* FirstStage.xcdatamodeld */,
+				638129551CF05C6100A40C8E /* Views */,
 				633C2AD81CE80D80001C5C16 /* View Controllers */,
 			);
 			path = FirstStage;
@@ -717,6 +730,7 @@
 			isa = PBXGroup;
 			children = (
 				6379EE901CE9C8ED00188A70 /* AudioKitManager.swift */,
+				63EB90161CF1C4EB00F09B05 /* AVAudioSessionManager.swift */,
 				633C2AE01CE86915001C5C16 /* Constants.swift */,
 				6324D3691CE73ED9001934A5 /* Enums.swift */,
 				6324D36A1CE73ED9001934A5 /* Exercise.swift */,
@@ -734,6 +748,7 @@
 		633C2AD81CE80D80001C5C16 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				6381294F1CF05BF800A40C8E /* LongToneViewController.swift */,
 				633C2AD91CE80DA5001C5C16 /* PracticeViewController.swift */,
 				633C2AE31CE86CF4001C5C16 /* SettingsViewController.swift */,
 				6324D3031CE72E5D001934A5 /* TuneExerciseViewController.swift */,
@@ -747,6 +762,15 @@
 				633C2ADC1CE813E7001C5C16 /* XML Tunes */,
 			);
 			name = Data;
+			sourceTree = "<group>";
+		};
+		638129551CF05C6100A40C8E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				638129561CF05C7900A40C8E /* Balloon.swift */,
+				638129571CF05C7900A40C8E /* SparkLine.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		6387FDC01CEDB15B0054DE44 /* Products */ = {
@@ -1395,16 +1419,20 @@
 				633C2ADB1CE80DA5001C5C16 /* PracticeViewController.swift in Sources */,
 				6324D3631CE73C47001934A5 /* First Stage_key.m in Sources */,
 				633C2AE51CE86CF4001C5C16 /* SettingsViewController.swift in Sources */,
+				638129511CF05BF800A40C8E /* LongToneViewController.swift in Sources */,
+				638129591CF05C7900A40C8E /* Balloon.swift in Sources */,
 				6324D2DB1CE71B1A001934A5 /* FirstStage.xcdatamodeld in Sources */,
 				6324D37E1CE73F22001934A5 /* MusicXMLService.swift in Sources */,
 				6324D3791CE73ED9001934A5 /* Note.swift in Sources */,
 				6379EE921CE9C8ED00188A70 /* AudioKitManager.swift in Sources */,
 				6324D3611CE73C47001934A5 /* SSSystemView.m in Sources */,
 				6324D37B1CE73ED9001934A5 /* NoteOffset.swift in Sources */,
+				63EB90181CF1C4EC00F09B05 /* AVAudioSessionManager.swift in Sources */,
 				6324D3041CE72E5D001934A5 /* TuneExerciseViewController.swift in Sources */,
 				6324D3651CE73C47001934A5 /* SSPlayLoopGraphics.m in Sources */,
 				6324D35F1CE73C47001934A5 /* SSScrollView.m in Sources */,
 				6324D3751CE73ED9001934A5 /* Exercise.swift in Sources */,
+				6381295B1CF05C7900A40C8E /* SparkLine.swift in Sources */,
 				6379EE7E1CE95CDF00188A70 /* NoteAnalysis.swift in Sources */,
 				6387FDE91CEDB5710054DE44 /* AudioKit.swift in Sources */,
 				6324D35D1CE73C47001934A5 /* sampledInstruments.m in Sources */,
@@ -1440,16 +1468,20 @@
 				633C2ADA1CE80DA5001C5C16 /* PracticeViewController.swift in Sources */,
 				6324D3621CE73C47001934A5 /* First Stage_key.m in Sources */,
 				633C2AE41CE86CF4001C5C16 /* SettingsViewController.swift in Sources */,
+				638129501CF05BF800A40C8E /* LongToneViewController.swift in Sources */,
+				638129581CF05C7900A40C8E /* Balloon.swift in Sources */,
 				6324D3071CE72F8D001934A5 /* FirstStage.xcdatamodeld in Sources */,
 				6324D37D1CE73F22001934A5 /* MusicXMLService.swift in Sources */,
 				6324D3781CE73ED9001934A5 /* Note.swift in Sources */,
 				6379EE911CE9C8ED00188A70 /* AudioKitManager.swift in Sources */,
 				6324D3601CE73C47001934A5 /* SSSystemView.m in Sources */,
 				6324D37A1CE73ED9001934A5 /* NoteOffset.swift in Sources */,
+				63EB90171CF1C4EB00F09B05 /* AVAudioSessionManager.swift in Sources */,
 				6324D3091CE72F8D001934A5 /* TuneExerciseViewController.swift in Sources */,
 				6324D3641CE73C47001934A5 /* SSPlayLoopGraphics.m in Sources */,
 				6324D35E1CE73C47001934A5 /* SSScrollView.m in Sources */,
 				6324D3741CE73ED9001934A5 /* Exercise.swift in Sources */,
+				6381295A1CF05C7900A40C8E /* SparkLine.swift in Sources */,
 				6379EE7D1CE95CDF00188A70 /* NoteAnalysis.swift in Sources */,
 				6387FDE81CEDB5710054DE44 /* AudioKit.swift in Sources */,
 				6324D35C1CE73C47001934A5 /* sampledInstruments.m in Sources */,

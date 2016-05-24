@@ -460,10 +460,10 @@ typedef id<SSEditLayerProtocol> (^ss_create_editlayer_t)(CGRect frame, float sys
 //  Added by David S Reich on 14/05/2016.
 //  Modification Copyright © 2016 Musikyoshi. All rights reserved.
 /*!
- * @property xmlScoreWidth
- * @abstract the xmlScoreWidth
+ * @property optimalSingleSystem
+ * @abstract optimalSingleSystem - true for making one very wide single system
  */
-@property (nonatomic) double xmlScoreWidth;
+@property (nonatomic) bool optimalSingleSystem;
 
 @end
 

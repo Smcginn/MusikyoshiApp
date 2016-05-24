@@ -32,12 +32,12 @@ class SettingsViewController: UIViewController
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        bpmStepper.value = NSUserDefaults.standardUserDefaults().doubleForKey(Constants.Settings.BPS)
+        bpmStepper.value = NSUserDefaults.standardUserDefaults().doubleForKey(Constants.Settings.BPM)
         bpmLabel.text = String(Int(bpmStepper.value))
     }
     
     override func viewWillDisappear(animated: Bool) {
-        NSUserDefaults.standardUserDefaults().setDouble(bpmStepper.value, forKey: Constants.Settings.BPS)
+        NSUserDefaults.standardUserDefaults().setDouble(bpmStepper.value, forKey: Constants.Settings.BPM)
         NSUserDefaults.standardUserDefaults().setBool(showNoteMarkersSwitch.on, forKey: Constants.Settings.ShowNoteMarkers)
         
         super.viewWillDisappear(animated)

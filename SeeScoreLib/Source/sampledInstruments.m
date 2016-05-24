@@ -16,10 +16,12 @@ const sscore_sy_sampledinstrumentinfo kSampledInstrumentsInfo[] = {
     //{"Cello",	"cello",	"m4a",		36,		48,			1.0,	150,		600,		480,		"cello,\'cello,violoncello,violoncelle", 0, sscore_sy_instrumentfamily_bowedstring, 0,0, {0}},
     //{"Flute",	"Flute.nonvib.mf", "m4a",	59, 38,			1.0,	80,			200,		20,			"flute,flauto", 0, sscore_sy_instrumentfamily_woodwind, 0,0,  {0}},
     //{"Guitar", "guitar",	"m4a",		48,		24,			1.0,	4,			200,		10,			"guitar,guitare,gitarre,chitarra", 0, sscore_sy_instrumentfamily_pluckedstring, 0,0, {0}}
-    {"Trumpet", "Trumpet.novib.mf",	"m4a",		52,		35,			1.0,	4,			20,		10,			"trumpet", 0, sscore_sy_instrumentfamily_brass, 0,0, {0}}
+    {"Trumpet", "Trumpet.novib.mf",	"m4a",		52,		35,			1.0,	4,			20,		10,			"trumpet", 0, sscore_sy_instrumentfamily_brass, 0,0, {0}},
+    {"Trumpet", "Trumpet.novib.mf",	"m4a",		52,		35,			1.0,	4,			20,		10,			"trumpet", -2, sscore_sy_instrumentfamily_brass, 0,0, {0}}
 //    {"Trumpet", "Trumpet.novib.mf",	"m4a",		52,		35,			1.0,	4,			200,		10,			"trumpet", 0, sscore_sy_instrumentfamily_brass, 0,0, {0}}
 };
 const int kNumSampledInstruments = sizeof(kSampledInstrumentsInfo)/sizeof(*kSampledInstrumentsInfo);
 const sscore_sy_sampledinstrumentinfo *pianoSampleInfo = &kSampledInstrumentsInfo[0];
 const sscore_sy_sampledinstrumentinfo *trumpetSampleInfo = &kSampledInstrumentsInfo[1];
+const sscore_sy_sampledinstrumentinfo *trumpetMinus2SampleInfo = &kSampledInstrumentsInfo[2];
 

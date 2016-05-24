@@ -123,6 +123,8 @@ struct NoteService {
         }
     }
     
+    //TODO: this doesn't work for #s
+    //figure out a way to fix it
     static func getYPos(orderId: Int) -> Double{
         
         switch orderId
@@ -173,13 +175,39 @@ struct NoteService {
                 return -30
             case 75: //E♭5
                 return -30
+            case 76: //E5
+                return -35
+            case 77: //F5
+                return -40
+            case 78: //Gb5
+                return -45
+            case 79: //G5
+                return -45
+            case 80: //Ab5
+                return -50
+            case 81: //A5
+                return -50
             default:
                 print(String(format: "missing getYPos %d", orderId))
                 return -50
         }
     }
+
+    static func getLowestFrequency() -> Float {
+        if let n = notes.first {
+            return n.frequency
+        }
+        return 0
+    }
     
-    static func initNotes(){
+    static func getHighestFrequency() -> Float {
+        if let n = notes.last {
+            return n.frequency
+        }
+        return 0
+    }
+    
+    static func initNotes() {
         //♯
         //♭
 

@@ -21,7 +21,7 @@ struct Constants
     
     struct Settings
     {
-        static let BPS = "bps"
+        static let BPM = "bpm"
         static let FrequencyThreshold = "frequencyThreshold"
         static let AmplitudeThreshold = "amplitudeThreshold"
         static let TimingThreshold = "timingThreshold"

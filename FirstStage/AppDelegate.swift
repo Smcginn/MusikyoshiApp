@@ -9,6 +9,15 @@
 import UIKit
 import CoreData
 
+func delay(delay:Double, closure:()->()){
+    dispatch_after(
+        dispatch_time(
+            DISPATCH_TIME_NOW,
+            Int64(delay * Double(NSEC_PER_SEC))
+        ),
+        dispatch_get_main_queue(), closure)
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -19,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         //initialize Settings
         NSUserDefaults.standardUserDefaults().registerDefaults([
-            Constants.Settings.BPS: 60.0,
+            Constants.Settings.BPM: 60.0,
             Constants.Settings.AmplitudeThreshold: Float(0.1),
             Constants.Settings.TimingThreshold: 0.2,
             Constants.Settings.FrequencyThreshold: 0.03,
