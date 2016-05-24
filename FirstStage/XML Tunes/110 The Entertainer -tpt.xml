@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 3.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise version="3.0">
-  <movement-title>The Entertainer</movement-title>
+  <movement-title>110. The Entertainer</movement-title>
   <identification>
     <rights>©</rights>
     <encoding>
       <software>Finale 2012 for Mac</software>
       <software>Dolet Light for Finale 2012</software>
-      <encoding-date>2016-04-13</encoding-date>
+      <encoding-date>2016-04-17</encoding-date>
       <supports attribute="new-system" element="print" type="yes" value="yes"/>
       <supports attribute="new-page" element="print" type="yes" value="yes"/>
     </encoding>
@@ -56,7 +56,7 @@
   </defaults>
   <credit page="1">
     <credit-type>title</credit-type>
-    <credit-words default-x="632" default-y="1475" font-size="24" justify="center" valign="top">The Entertainer</credit-words>
+    <credit-words default-x="632" default-y="1475" font-size="24" justify="center" valign="top">110. The Entertainer</credit-words>
   </credit>
   <credit page="1">
     <credit-type>rights</credit-type>
@@ -67,7 +67,7 @@
   </credit>
   <credit page="1">
     <credit-type>subtitle</credit-type>
-    <credit-words default-x="632" default-y="1411" font-size="18" justify="center" valign="top">Scott Joplin</credit-words>
+    <credit-words default-x="632" default-y="1411" font-size="18" justify="center" valign="top">Scott Joplin, adapted</credit-words>
   </credit>
   <part-list>
     <score-part id="P1">
