@@ -42,8 +42,6 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
 
     var score: SSScore?
     var partIndex: Int32 = 0
-//    var showingSinglePartIndex: Int32 = 0
-//    var	showingParts = [NSNumber]()
     var layOptions = SSLayoutOptions()  // set of options for layout
     var playData: SSPData?
     var synth: SSSynth?
@@ -66,21 +64,9 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     @IBOutlet weak var ssScrollView: SSScrollView!
     @IBOutlet var sparkLineTapRecognizer: UITapGestureRecognizer!
     
-//    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask
-//    {
-//        return UIInterfaceOrientationMask.Landscape
-//    }
-//    
-//    override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation
-//    {
-//        return UIInterfaceOrientation.LandscapeLeft
-//    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        AudioKitManager.sharedInstance.setup()
-
         absoluteTargetNote = NoteService.getNote(targetNoteID + transpositionOffset)
         targetNote = NoteService.getNote(targetNoteID)
         if targetNote != nil {
@@ -108,7 +94,6 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
         } else {
             print("Couldn't make path??? for ", scoreFile)
             return
-            //            throw NSError(domain: NSCocoaErrorDomain, code: NSFileNoSuchFileError, userInfo: [ NSFilePathErrorKey : fileName ])
         }
     }
     
@@ -193,7 +178,6 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
                     synth = synth0
 
                     instrumentId = (synth?.addSampledInstrument(trumpetMinus2SampleInfo))!
-//                    instrumentId = (synth?.addSampledInstrument(trumpetSampleInfo))!
                 }
             }
             
@@ -203,7 +187,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
             }
 
             // start playing if not playing
-            if setupAudioSession() {
+            if AVAudioSessionManager.sharedInstance.setupAudioSession() {
                 print("setupAudioSession == true")
                 playData?.clearLoop()
                 
@@ -211,10 +195,6 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
                 
                 var err = synth?.setup(playData)
                 if err == sscore_NoError {
-//                    let startTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * NSEC_PER_SEC))
-//                    err = synth?.startAt(startTime, bar: cursorBarIndex, countIn: false)
-//                    let delayInSeconds = UInt64(2)
-//                    let startTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delayInSeconds * NSEC_PER_SEC))
                     let startTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0))
                     err = synth?.startAt(startTime, bar: cursorBarIndex, countIn: false)
                 }
@@ -331,9 +311,6 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     }
     
     func startExercise(){
-//        analyzer.start()
-//        microphone.start()
-        AudioKitManager.sharedInstance.setup()
         AudioKitManager.sharedInstance.start()
         timer = NSTimer.scheduledTimerWithTimeInterval(pitchSampleRate, target: self, selector: #selector(LongToneViewController.updateTracking), userInfo: nil, repeats: true)
     }
@@ -341,8 +318,6 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     func stopExercise(){
         resetSparkLine()
         
-//        analyzer.stop()
-//        microphone.stop()
         AudioKitManager.sharedInstance.stop()
         timer.invalidate()
         
@@ -374,20 +349,14 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     
     func updateTracking()
     {
-//        if analyzer.trackedAmplitude.value > 0.1
-//        if AudioKitManager.sharedInstance.frequencyTracker.amplitude > 1.0
-//        if AudioKitManager.sharedInstance.amplitude() > amplitudeThreshold
-        print("amplitude= \(AudioKitManager.sharedInstance.amplitude())")
-//        if AudioKitManager.sharedInstance.amplitude() > 1.0
-        if AudioKitManager.sharedInstance.amplitude() > 0.01
-        {
-//            let noteHit = NoteService.getNote(analyzer.trackedFrequency.value)
-//            let noteHit = NoteService.getNote(Float(AudioKitManager.sharedInstance.frequencyTracker.frequency))
-            let freq = AudioKitManager.sharedInstance.frequency()
-            print("freq= \(freq)")
+        let amplitude = AudioKitManager.sharedInstance.amplitude()
+        let frequency = AudioKitManager.sharedInstance.frequency()
+//        print("amplitude / freq = \(amplitude) / \(frequency)")
 
-            if minPitch...maxPitch ~= freq {
-                if lowPitchThreshold...highPitchThreshold ~= freq {
+        if amplitude > 0.01
+        {
+            if minPitch...maxPitch ~= frequency {
+                if lowPitchThreshold...highPitchThreshold ~= frequency {
                     //inside threshold
                     hasNoteStarted = true
                     currentTime += pitchSampleRate
@@ -402,7 +371,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
                 } else {
                     //outside threshold
                     if hasNoteStarted {
-                        if let noteHit = NoteService.getNote(freq) {
+                        if let noteHit = NoteService.getNote(frequency) {
                             print(String(format: "note hit: %@ not equal to %@", noteHit.fullName, (targetNote?.fullName)!))
                         } else {
                             print(String(format: "note hit: 'nil' not equal to %@", (targetNote?.fullName)!))
@@ -411,7 +380,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
                     }
                 }
 
-                if let noteHit = NoteService.getNote(freq) {
+                if let noteHit = NoteService.getNote(frequency) {
                     if sparkLineCount < sparkLine.bounds.width {
                         sparkLineCount++
                     } else {
@@ -428,8 +397,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
                 }
             } else {
                 //stop extremely out-of-range
-                print("no sound tracked")
-                stopExercise()
+                print("sound out-of-range")
                 return
             }
         } else if hasNoteStarted {
@@ -479,148 +447,5 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
         return tBPM
     }
     //@end
-    
-    //MARK: Audio Session Route Change Notification
-    
-    func handleRouteChange(notification: NSNotification) {
-        let reasonValue = notification.userInfo?[AVAudioSessionRouteChangeReasonKey]?.unsignedIntegerValue
-        //AVAudioSessionRouteDescription *routeDescription = [notification.userInfo valueForKey:AVAudioSessionRouteChangePreviousRouteKey];
         
-        if reasonValue == AVAudioSessionRouteChangeReason.OldDeviceUnavailable.rawValue {
-            if synth != nil && synth!.isPlaying {
-                synth?.reset()
-            }
-        }
-        print("Audio route change: \(reasonValue)")
-    }
-    
-    func handleInterruption(n: NSNotification) {
-        print("Audio interruption")
-        guard let why =
-            n.userInfo?[AVAudioSessionInterruptionTypeKey] as? UInt
-            else {return}
-        guard let type = AVAudioSessionInterruptionType(rawValue: why)
-            else {return}
-        if type == .Began {
-            print("interruption began:\n\(n.userInfo!)")
-        } else {
-            print("interruption ended:\n\(n.userInfo!)")
-            guard let opt = n.userInfo![AVAudioSessionInterruptionOptionKey] as? UInt else {return}
-            let opts = AVAudioSessionInterruptionOptions(rawValue: opt)
-            if opts.contains(.ShouldResume) {
-                print("should resume")
-            } else {
-                print("not should resume")
-            }
-        }
-    }
-    
-    func setupAudioSession() -> Bool {
-        // Configure the audio session
-        let sessionInstance = AVAudioSession.sharedInstance()
-        
-        //set inactive before making changes
-        do {
-            try sessionInstance.setActive(false)
-        } catch let error as NSError {
-            print(error.localizedDescription)
-        } catch let error {
-            print(error)
-        }
-        
-        AudioKitManager.sharedInstance.setup()
-
-        do {
-            //            try sessionInstance.setCategory(AVAudioSessionCategoryPlayback)
-            //            try sessionInstance.setCategory(AVAudioSessionCategoryAmbient)
-            //            try sessionInstance.setCategory(AVAudioSessionCategoryPlayAndRecord)
-            try sessionInstance.setCategory(AVAudioSessionCategoryPlayAndRecord, withOptions:AVAudioSessionCategoryOptions.DefaultToSpeaker)
-        } catch let error as NSError {
-            print(error.localizedDescription)
-            guard error.code == 0 else { return false }
-        } catch let error {
-            print(error)
-            return false
-        }
-        
-        do {
-            try sessionInstance.setMode(AVAudioSessionModeMeasurement)
-        } catch let error as NSError {
-            print(error.localizedDescription)
-            guard error.code == 0 else { return false }
-        } catch let error {
-            print(error)
-            return false
-        }
-        
-        let bufferDuration = NSTimeInterval.init(floatLiteral: 0.005)
-        //        let bufferDuration = NSTimeInterval.init(floatLiteral: 0.5)
-        do {
-            try sessionInstance.setPreferredIOBufferDuration(bufferDuration)
-        } catch let error as NSError {
-            print(error.localizedDescription)
-            guard error.code == 0 else { return false }
-        } catch let error {
-            print(error)
-            return false
-        }
-        
-        let hwSampleRate = 44100.0;
-        do {
-            try sessionInstance.setPreferredSampleRate(hwSampleRate)
-        } catch let error as NSError {
-            print(error.localizedDescription)
-            guard error.code == 0 else { return false }
-        } catch let error {
-            print(error)
-            return false
-        }
-        
-        // add interruption handler
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(handleInterruption), name: AVAudioSessionInterruptionNotification, object: sessionInstance)
-        
-        // we don't do anything special in the route change notification
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(handleRouteChange), name: AVAudioSessionRouteChangeNotification, object: sessionInstance)
-        
-        // activate the audio session
-        do {
-            try sessionInstance.setActive(true)
-        } catch let error as NSError {
-            print(error.localizedDescription)
-            guard error.code == 0 else { return false }
-        } catch let error {
-            print(error)
-            return false
-        }
-        
-        return true
-    }
-    
-    func clearAudioSession() {
-        let sessionInstance = AVAudioSession.sharedInstance()
-        NSNotificationCenter.defaultCenter().removeObserver(self)
-        do {
-            try sessionInstance.setActive(false)
-        } catch let error as NSError {
-            print(error.localizedDescription)
-        } catch let error {
-            print(error)
-        }
-    }
-    
-//    class EndHandler: SSEventHandler {
-//        let svc: LongToneViewController
-//        
-//        init(vc: LongToneViewController) {
-//            svc = vc
-//        }
-//        
-//        @objc func event(index: Int32, countIn isCountIn: Bool) {
-////            svc.countOffLabel.hidden = true
-////            svc.cursorBarIndex = 0
-////            svc.stopPlaying()
-////            svc.showScore()
-//        }
-//    }
-    
 }

@@ -15,7 +15,7 @@ class AVAudioSessionManager: NSObject {
     
     static let sharedInstance = AVAudioSessionManager()
     
-    func setupAudioSession(setupAudioKit: Bool) -> Bool {
+    func setupAudioSession() -> Bool {
         //don't setup twice
         guard !isSetup else { return true }
         isSetup = true
@@ -31,15 +31,10 @@ class AVAudioSessionManager: NSObject {
         } catch let error {
             print(error)
         }
-        
-        if setupAudioKit {
-            AudioKitManager.sharedInstance.setup()
-        }
+
+        AudioKitManager.sharedInstance.setup()
         
         do {
-            //            try sessionInstance.setCategory(AVAudioSessionCategoryPlayback)
-            //            try sessionInstance.setCategory(AVAudioSessionCategoryAmbient)
-            //            try sessionInstance.setCategory(AVAudioSessionCategoryPlayAndRecord)
             try sessionInstance.setCategory(AVAudioSessionCategoryPlayAndRecord, withOptions:AVAudioSessionCategoryOptions.DefaultToSpeaker)
         } catch let error as NSError {
             print(error.localizedDescription)
@@ -60,7 +55,6 @@ class AVAudioSessionManager: NSObject {
         }
         
         let bufferDuration = NSTimeInterval.init(floatLiteral: 0.005)
-        //        let bufferDuration = NSTimeInterval.init(floatLiteral: 0.5)
         do {
             try sessionInstance.setPreferredIOBufferDuration(bufferDuration)
         } catch let error as NSError {
@@ -88,6 +82,9 @@ class AVAudioSessionManager: NSObject {
         // we don't do anything special in the route change notification
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(handleRouteChange), name: AVAudioSessionRouteChangeNotification, object: sessionInstance)
         
+        // we don't do anything special in the media server reset notification
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(handleMediaServerReset), name: AVAudioSessionMediaServicesWereResetNotification, object: sessionInstance)
+        
         // activate the audio session
         do {
             try sessionInstance.setActive(true)
@@ -102,24 +99,6 @@ class AVAudioSessionManager: NSObject {
         return true
     }
 
-//    func start() {
-//        //don't start twice
-//        guard !isStarted else { return }
-//        isStarted = true
-//        
-//        analyzer.start()
-//        microphone.start()
-//    }
-//    
-//    func stop() {
-//        //don't stop twice
-//        guard isStarted else { return }
-//        isStarted = false
-//        
-//        analyzer.stop()
-//        microphone.stop()
-//    }
-
     //MARK: Audio Session Route Change Notification
     
     func handleRouteChange(notification: NSNotification) {
@@ -128,36 +107,41 @@ class AVAudioSessionManager: NSObject {
         
         if reasonValue == AVAudioSessionRouteChangeReason.OldDeviceUnavailable.rawValue {
             //do we need to do something here?
-//            if synth != nil && synth!.isPlaying {
-//                synth?.reset()
-//            }
         }
         print("Audio route change: \(reasonValue)")
     }
     
     func handleInterruption(n: NSNotification) {
         print("Audio interruption")
-        guard let why =
-            n.userInfo?[AVAudioSessionInterruptionTypeKey] as? UInt
-            else {return}
-        guard let type = AVAudioSessionInterruptionType(rawValue: why)
-            else {return}
+        guard let why = n.userInfo?[AVAudioSessionInterruptionTypeKey] as? UInt else { return }
+        guard let type = AVAudioSessionInterruptionType(rawValue: why) else { return }
+
         if type == .Began {
             print("interruption began:\n\(n.userInfo!)")
-        } else {
+            AudioKitManager.sharedInstance.stop()
+        } else if type == .Ended {
             print("interruption ended:\n\(n.userInfo!)")
-            guard let opt = n.userInfo![AVAudioSessionInterruptionOptionKey] as? UInt else {return}
-            let opts = AVAudioSessionInterruptionOptions(rawValue: opt)
-            if opts.contains(.ShouldResume) {
-                print("should resume")
-            } else {
-                print("not should resume")
+
+            // activate the audio session (again)
+            do {
+                let sessionInstance = AVAudioSession.sharedInstance()
+                try sessionInstance.setActive(true)
+            } catch let error as NSError {
+                print(error.localizedDescription)
+                guard error.code == 0 else { return }
+            } catch let error {
+                print(error)
+                return
             }
+
+            AudioKitManager.sharedInstance.start()
         }
     }
     
     
     func clearAudioSession() {
+        AudioKitManager.sharedInstance.stop()
+
         let sessionInstance = AVAudioSession.sharedInstance()
         NSNotificationCenter.defaultCenter().removeObserver(self)
         do {
@@ -167,5 +151,9 @@ class AVAudioSessionManager: NSObject {
         } catch let error {
             print(error)
         }
+    }
+
+    deinit {
+        clearAudioSession()
     }
 }

@@ -60,6 +60,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     var highPitchThreshold = Float(0.0)
     let minPitch = NoteService.getLowestFrequency()
     let maxPitch = NoteService.getHighestFrequency()
+    var soundSampleRate = 0.01
     var insideNote = false
     var insideRest = false
     var foundSound = false
@@ -157,7 +158,6 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
             layOptions.hidePartNames = true
             layOptions.hideBarNumbers = true
             ssScrollView.optimalSingleSystem = true
-            //            sysssScrollView.frame.size.width = CGFloat(scoreWidth * 2.28)
             //            ssScrollView.setupScore(score, openParts: showingParts, mag: kDefaultMagnification, opt: layOptions)
             ssScrollView.setupScore(score, openParts: showingParts, mag: kDefaultMagnification, opt: layOptions, completion: getPlayData)
         }
@@ -238,13 +238,8 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                 return
             }
             
-//            if !showNoteMarkers {
-//                //do this before setupAudionSession
-//                AudioKitManager.sharedInstance.setup(true)
-//            }
-
             // start playing if not playing
-            if setupAudioSession() {
+            if AVAudioSessionManager.sharedInstance.setupAudioSession() {
                 print("setupAudioSession == true")
                 playData?.clearLoop()
                 
@@ -298,7 +293,6 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         {
             synth?.reset()
             countOffLabel.hidden = true;
-            clearAudioSession()
         }
         
         if playingAnimation {
@@ -379,12 +373,9 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
 
         startTime = NSDate()
 
-//        analyzePerformance()    ??need to initialize??
-        
         AudioKitManager.sharedInstance.start()
         print("starting analysis timer")
-        analysisTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(TuneExerciseViewController.analyzePerformance), userInfo: nil, repeats: true)
-//        analysisTimer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(TuneExerciseViewController.analyzePerformance), userInfo: nil, repeats: true)
+        analysisTimer = NSTimer.scheduledTimerWithTimeInterval(soundSampleRate, target: self, selector: #selector(TuneExerciseViewController.analyzePerformance), userInfo: nil, repeats: true)
     }
     
     func stopAnalysisTimer() {
@@ -421,12 +412,12 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         guard insideNote || insideRest else { return }
 
         let inThreshold = NSDate().timeIntervalSinceDate(startTime) < thresholdEndTime
-//        let hasSound = AudioKitManager.sharedInstance.amplitude() > amplitudeThreshold
         let amplitude = AudioKitManager.sharedInstance.amplitude()
         let frequency = AudioKitManager.sharedInstance.frequency()
         print("amplitude / freq = \(amplitude) / \(frequency)")
 
-        let hasSound = amplitude > 0.01 && (minPitch...maxPitch ~= frequency)
+//        let hasSound = amplitude > 0.01 && (minPitch...maxPitch ~= frequency)
+        let hasSound = amplitude > 0.1 && (minPitch...maxPitch ~= frequency)
 
         var result = NoteAnalysis.NoteResult.NoResult
         
@@ -811,6 +802,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                         pitchMatchedLate = false
                         pitchLowLate = false
                         pitchHighLate = false
+                        //midiPitch from SeeScore has already had the -2 offset applied from the XML file
 //                        if let freq = NoteService.getNote(Int(note.note.midiPitch) + transpositionOffset)?.frequency {
                         if let freq = NoteService.getNote(Int(note.note.midiPitch))?.frequency {
                             targetPitch = freq
@@ -885,137 +877,6 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         }
     }
 
-    
-    //MARK: Audio Session Route Change Notification
-    
-    func handleRouteChange(notification: NSNotification) {
-        let reasonValue = notification.userInfo?[AVAudioSessionRouteChangeReasonKey]?.unsignedIntegerValue
-        //AVAudioSessionRouteDescription *routeDescription = [notification.userInfo valueForKey:AVAudioSessionRouteChangePreviousRouteKey];
-        
-        if reasonValue == AVAudioSessionRouteChangeReason.OldDeviceUnavailable.rawValue {
-            if synth != nil && synth!.isPlaying {
-                synth?.reset()
-            }
-        }
-        print("Audio route change: \(reasonValue)")
-    }
-    
-    func handleInterruption(n: NSNotification) {
-        print("Audio interruption")
-        guard let why =
-            n.userInfo?[AVAudioSessionInterruptionTypeKey] as? UInt
-            else {return}
-        guard let type = AVAudioSessionInterruptionType(rawValue: why)
-            else {return}
-        if type == .Began {
-            print("interruption began:\n\(n.userInfo!)")
-        } else {
-            print("interruption ended:\n\(n.userInfo!)")
-            guard let opt = n.userInfo![AVAudioSessionInterruptionOptionKey] as? UInt else {return}
-            let opts = AVAudioSessionInterruptionOptions(rawValue: opt)
-            if opts.contains(.ShouldResume) {
-                print("should resume")
-            } else {
-                print("not should resume")
-            }
-        }
-    }
-    
-    func setupAudioSession() -> Bool {
-        // Configure the audio session
-        let sessionInstance = AVAudioSession.sharedInstance()
-
-        //set inactive before making changes
-        do {
-            try sessionInstance.setActive(false)
-        } catch let error as NSError {
-            print(error.localizedDescription)
-        } catch let error {
-            print(error)
-        }
-
-        if !showNoteMarkers {
-            AudioKitManager.sharedInstance.setup()
-        }
-
-        do {
-//            try sessionInstance.setCategory(AVAudioSessionCategoryPlayback)
-//            try sessionInstance.setCategory(AVAudioSessionCategoryAmbient)
-//            try sessionInstance.setCategory(AVAudioSessionCategoryPlayAndRecord)
-            try sessionInstance.setCategory(AVAudioSessionCategoryPlayAndRecord, withOptions:AVAudioSessionCategoryOptions.DefaultToSpeaker)
-        } catch let error as NSError {
-            print(error.localizedDescription)
-            guard error.code == 0 else { return false }
-        } catch let error {
-            print(error)
-            return false
-        }
-        
-        do {
-            try sessionInstance.setMode(AVAudioSessionModeMeasurement)
-        } catch let error as NSError {
-            print(error.localizedDescription)
-            guard error.code == 0 else { return false }
-        } catch let error {
-            print(error)
-            return false
-        }
-
-        let bufferDuration = NSTimeInterval.init(floatLiteral: 0.005)
-//        let bufferDuration = NSTimeInterval.init(floatLiteral: 0.5)
-        do {
-            try sessionInstance.setPreferredIOBufferDuration(bufferDuration)
-        } catch let error as NSError {
-            print(error.localizedDescription)
-            guard error.code == 0 else { return false }
-        } catch let error {
-            print(error)
-            return false
-        }
-        
-        let hwSampleRate = 44100.0;
-        do {
-            try sessionInstance.setPreferredSampleRate(hwSampleRate)
-        } catch let error as NSError {
-            print(error.localizedDescription)
-            guard error.code == 0 else { return false }
-        } catch let error {
-            print(error)
-            return false
-        }
-        
-        // add interruption handler
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(handleInterruption), name: AVAudioSessionInterruptionNotification, object: sessionInstance)
-        
-        // we don't do anything special in the route change notification
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(handleRouteChange), name: AVAudioSessionRouteChangeNotification, object: sessionInstance)
-        
-        // activate the audio session
-        do {
-            try sessionInstance.setActive(true)
-        } catch let error as NSError {
-            print(error.localizedDescription)
-            guard error.code == 0 else { return false }
-        } catch let error {
-            print(error)
-            return false
-        }
-        
-        return true
-    }
-    
-    func clearAudioSession() {
-        let sessionInstance = AVAudioSession.sharedInstance()
-        NSNotificationCenter.defaultCenter().removeObserver(self)
-        do {
-            try sessionInstance.setActive(false)
-        } catch let error as NSError {
-            print(error.localizedDescription)
-        } catch let error {
-            print(error)
-        }
-    }
-    
     class BeatHandler: SSEventHandler {
         let svc: TuneExerciseViewController
         

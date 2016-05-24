@@ -3,7 +3,8 @@
 //  FirstStage
 //
 //  Created by Adam Kinney on 12/17/15.
-//  Copyright © 2015 ADKINN, LLC. All rights reserved.
+//  Changed by David S Reich - 2016.
+//  Copyright © 2015 Musikyoshi. All rights reserved.
 //
 import UIKit
 

@@ -1029,6 +1029,11 @@
 					6324D2CE1CE71B19001934A5 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = A2SGEM86LX;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+						};
 					};
 					6324D2E51CE71B1A001934A5 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -1037,6 +1042,13 @@
 					6324D2F01CE71B1A001934A5 = {
 						CreatedOnToolsVersion = 7.3.1;
 						TestTargetID = 6324D2CE1CE71B19001934A5;
+					};
+					6324D3051CE72F8D001934A5 = {
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};

@@ -38,8 +38,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         //initialize data
+        AVAudioSessionManager.sharedInstance.setupAudioSession()
         NoteService.initNotes()
-        
+
         return true
     }
 
