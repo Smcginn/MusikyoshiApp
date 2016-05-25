@@ -16,6 +16,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     @IBOutlet weak var countOffLabel: UILabel!
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var gateView: UIView!
+    @IBOutlet weak var metronomeView: VisualMetronomeView!
 
     var exerciseName = ""
     var isTune = false
@@ -285,6 +286,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     }
     
     func stopPlaying () {
+        metronomeView.setBeat(-1)
         stopAnalysisTimer()
 
         gateView.hidden = true
@@ -309,7 +311,14 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     //maybe also collect breath marks?
     func getPlayData() {
         guard score != nil else { return }
-        
+
+        dispatch_async(dispatch_get_main_queue(),{
+            if let numBeats = self.score?.actualBeatsForBar(1) {
+                self.metronomeView.numBeats = Int(numBeats.numbeats)
+                self.metronomeView.rebuildMetronome()
+            }
+        });
+
         playData = SSPData.createPlayDataFromScore(score, tempo: self)
         guard playData != nil else { return }
         
@@ -892,6 +901,8 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                     svc.startAnalysisTimer()
                 }
             }
+
+            svc.metronomeView.setBeat(Int(index))
         }
     }
     

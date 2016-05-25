@@ -81,6 +81,10 @@
 		6387FDE51CEDB41E0054DE44 /* libsndfile.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6387FDDB1CEDB3510054DE44 /* libsndfile.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6387FDE81CEDB5710054DE44 /* AudioKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6387FDE71CEDB5710054DE44 /* AudioKit.swift */; };
 		6387FDE91CEDB5710054DE44 /* AudioKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6387FDE71CEDB5710054DE44 /* AudioKit.swift */; };
+		639A2E451CF5AB09004F7B1A /* DotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639A2E441CF5AB09004F7B1A /* DotView.swift */; };
+		639A2E461CF5AB09004F7B1A /* DotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639A2E441CF5AB09004F7B1A /* DotView.swift */; };
+		639A2E541CF5E6CA004F7B1A /* VisualMetronomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639A2E531CF5E6CA004F7B1A /* VisualMetronomeView.swift */; };
+		639A2E551CF5E6CA004F7B1A /* VisualMetronomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639A2E531CF5E6CA004F7B1A /* VisualMetronomeView.swift */; };
 		63EB90171CF1C4EB00F09B05 /* AVAudioSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EB90161CF1C4EB00F09B05 /* AVAudioSessionManager.swift */; };
 		63EB90181CF1C4EC00F09B05 /* AVAudioSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EB90161CF1C4EB00F09B05 /* AVAudioSessionManager.swift */; };
 		63F9C8071CE74826000F4470 /* Piano.mf.23.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7B11CE74825000F4470 /* Piano.mf.23.m4a */; };
@@ -469,6 +473,8 @@
 		6387FDDA1CEDB3510054DE44 /* CsoundLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CsoundLib.framework; path = AudioKit/AudioKit/Platforms/iOS/CsoundLib.framework; sourceTree = "<group>"; };
 		6387FDDB1CEDB3510054DE44 /* libsndfile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libsndfile.framework; path = AudioKit/AudioKit/Platforms/iOS/libsndfile.framework; sourceTree = "<group>"; };
 		6387FDE71CEDB5710054DE44 /* AudioKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AudioKit.swift; path = AudioKit/AudioKit/Platforms/Swift/AudioKit.swift; sourceTree = SOURCE_ROOT; };
+		639A2E441CF5AB09004F7B1A /* DotView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotView.swift; sourceTree = "<group>"; };
+		639A2E531CF5E6CA004F7B1A /* VisualMetronomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualMetronomeView.swift; sourceTree = "<group>"; };
 		63EB90161CF1C4EB00F09B05 /* AVAudioSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAudioSessionManager.swift; sourceTree = "<group>"; };
 		63F9C7B11CE74825000F4470 /* Piano.mf.23.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.23.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.23.m4a"; sourceTree = SOURCE_ROOT; };
 		63F9C7B21CE74825000F4470 /* Piano.mf.24.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.24.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.24.m4a"; sourceTree = SOURCE_ROOT; };
@@ -768,7 +774,9 @@
 			isa = PBXGroup;
 			children = (
 				638129561CF05C7900A40C8E /* Balloon.swift */,
+				639A2E441CF5AB09004F7B1A /* DotView.swift */,
 				638129571CF05C7900A40C8E /* SparkLine.swift */,
+				639A2E531CF5E6CA004F7B1A /* VisualMetronomeView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1436,11 +1444,13 @@
 				6324D2DB1CE71B1A001934A5 /* FirstStage.xcdatamodeld in Sources */,
 				6324D37E1CE73F22001934A5 /* MusicXMLService.swift in Sources */,
 				6324D3791CE73ED9001934A5 /* Note.swift in Sources */,
+				639A2E461CF5AB09004F7B1A /* DotView.swift in Sources */,
 				6379EE921CE9C8ED00188A70 /* AudioKitManager.swift in Sources */,
 				6324D3611CE73C47001934A5 /* SSSystemView.m in Sources */,
 				6324D37B1CE73ED9001934A5 /* NoteOffset.swift in Sources */,
 				63EB90181CF1C4EC00F09B05 /* AVAudioSessionManager.swift in Sources */,
 				6324D3041CE72E5D001934A5 /* TuneExerciseViewController.swift in Sources */,
+				639A2E551CF5E6CA004F7B1A /* VisualMetronomeView.swift in Sources */,
 				6324D3651CE73C47001934A5 /* SSPlayLoopGraphics.m in Sources */,
 				6324D35F1CE73C47001934A5 /* SSScrollView.m in Sources */,
 				6324D3751CE73ED9001934A5 /* Exercise.swift in Sources */,
@@ -1485,11 +1495,13 @@
 				6324D3071CE72F8D001934A5 /* FirstStage.xcdatamodeld in Sources */,
 				6324D37D1CE73F22001934A5 /* MusicXMLService.swift in Sources */,
 				6324D3781CE73ED9001934A5 /* Note.swift in Sources */,
+				639A2E451CF5AB09004F7B1A /* DotView.swift in Sources */,
 				6379EE911CE9C8ED00188A70 /* AudioKitManager.swift in Sources */,
 				6324D3601CE73C47001934A5 /* SSSystemView.m in Sources */,
 				6324D37A1CE73ED9001934A5 /* NoteOffset.swift in Sources */,
 				63EB90171CF1C4EB00F09B05 /* AVAudioSessionManager.swift in Sources */,
 				6324D3091CE72F8D001934A5 /* TuneExerciseViewController.swift in Sources */,
+				639A2E541CF5E6CA004F7B1A /* VisualMetronomeView.swift in Sources */,
 				6324D3641CE73C47001934A5 /* SSPlayLoopGraphics.m in Sources */,
 				6324D35E1CE73C47001934A5 /* SSScrollView.m in Sources */,
 				6324D3741CE73ED9001934A5 /* Exercise.swift in Sources */,
