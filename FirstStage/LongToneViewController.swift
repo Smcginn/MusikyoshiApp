@@ -39,6 +39,8 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     let maxPitch = NoteService.getHighestFrequency()
     var pitchSampleRate = 0.01
     var balloonUpdateRate = 0.01
+    var longToneEndTime = 0.0
+    var startTime = NSDate()
 
     var score: SSScore?
     var partIndex: Int32 = 0
@@ -312,6 +314,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     
     func startExercise(){
         AudioKitManager.sharedInstance.start()
+        longToneEndTime = NSDate().timeIntervalSinceDate(startTime) + 30.0
         timer = NSTimer.scheduledTimerWithTimeInterval(pitchSampleRate, target: self, selector: #selector(LongToneViewController.updateTracking), userInfo: nil, repeats: true)
     }
     
@@ -349,12 +352,16 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     
     func updateTracking()
     {
+        if NSDate().timeIntervalSinceDate(startTime) > longToneEndTime {
+            // we're done!
+            stopExercise()
+        }
+
         let amplitude = AudioKitManager.sharedInstance.amplitude()
         let frequency = AudioKitManager.sharedInstance.frequency()
 //        print("amplitude / freq = \(amplitude) / \(frequency)")
 
-        if amplitude > 0.01
-        {
+        if amplitude > 0.01 {
             if minPitch...maxPitch ~= frequency {
                 if lowPitchThreshold...highPitchThreshold ~= frequency {
                     //inside threshold
