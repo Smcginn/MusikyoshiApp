@@ -40,6 +40,8 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     var metronomeInstrumentId: UInt32 = 0
     var cursorBarIndex = Int32(0)
     let kDefaultMagnification: Float = 1.5
+    var metronomeOn = false
+    var beatsPerBar = 0
 
     var tickPlayer: AVAudioPlayer?
     
@@ -122,13 +124,9 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     func loadFile(scoreFile: String) {
         playButton.setTitle("Start Playing", forState: UIControlState.Normal)
         playingAnimation = false
-        
-        let scoreWidth = getScoreLength(scoreFile)
-        //        let scoreWidth = Double(view.frame.width)
-        print("scoreWidth = \(scoreWidth)")
-        
+
         if let filePath = NSBundle.mainBundle().pathForResource(scoreFile, ofType: "xml") {
-            ssScrollView.abortBackgroundProcessing({self.loadTheFile(filePath, scoreWidth: scoreWidth)})
+            ssScrollView.abortBackgroundProcessing({self.loadTheFile(filePath)})
         } else {
             print("Couldn't make path??? for ", scoreFile)
             return
@@ -137,7 +135,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         
     }
     
-    func loadTheFile(filePath: String, scoreWidth: Double) {
+    func loadTheFile(filePath: String) {
         ssScrollView.clearAll()
         score = nil
         showingParts.removeAll()
@@ -186,26 +184,6 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         }
     }
     
-    func getScoreLength(scoreFile: String) -> Double {
-        var width = 0.0
-        
-        do {
-            let exercise = try mxmlService.loadExercise(scoreFile + ".xml")
-            for bar in exercise.measures {
-                width += bar.width
-            }
-        } catch let error as NSError {
-            print(error.localizedDescription)
-            return 0.0
-        } catch let error {
-            print(error)
-            return 0.0
-        }
-        
-        return width
-    }
-    
-    
     func playScore() {
         if isTune {
             infoLabel.text = "Play the notes"
@@ -216,7 +194,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         ssScrollView.scrollEnabled = false
         playingAnimation = false
         countOffLabel.hidden = true;
-//        metronomeOn = true
+        metronomeOn = true
 
         noteResultValues.removeAll()
         
@@ -319,7 +297,9 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
 
         dispatch_async(dispatch_get_main_queue(),{
             if let numBeats = self.score?.actualBeatsForBar(1) {
-                self.metronomeView.numBeats = Int(numBeats.numbeats)
+                self.beatsPerBar = Int(numBeats.numbeats)
+//                self.metronomeView.numBeats = Int(numBeats.numbeats)
+                self.metronomeView.numBeats = self.beatsPerBar
                 self.metronomeView.rebuildMetronome()
             }
         });
@@ -430,8 +410,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         let frequency = AudioKitManager.sharedInstance.frequency()
         print("amplitude / freq = \(amplitude) / \(frequency)")
 
-//        let hasSound = amplitude > 0.01 && (minPitch...maxPitch ~= frequency)
-        let hasSound = amplitude > 0.1 && (minPitch...maxPitch ~= frequency)
+        let hasSound = amplitude > 0.01 && (minPitch...maxPitch ~= frequency)
 
         var result = NoteAnalysis.NoteResult.NoResult
         
@@ -479,14 +458,12 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                 var freqLow = false
                 var freqHigh = false
                 
-                if isTune {
-                    if frequency < lowPitchThreshold {
-                        freqLow = true
-                    } else if frequency > highPitchThreshold {
-                        freqHigh = true
-                    } else {
-                        freqMatch = true
-                    }
+                if frequency < lowPitchThreshold {
+                    freqLow = true
+                } else if frequency > highPitchThreshold {
+                    freqHigh = true
+                } else {
+                    freqMatch = true
                 }
 
                 print("freq ... low \(freqLow) high \(freqHigh) match \(freqMatch)")
@@ -716,16 +693,21 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     }
     
     func metronomeEnabled() -> Bool {
-        return false
+        return metronomeOn
     }
     
     func metronomeInstrument() -> UInt32 {
-        return 0
+        if !metronomeOn {
+            return 0
+        }
+        return metronomeInstrumentId
     }
     
     func metronomeVolume() -> Float {
-        return 0
-//        return 1.5
+        if !metronomeOn {
+            return 0
+        }
+        return 1.5
 //        return 1.0
 //        return 0.50
     }
@@ -907,7 +889,11 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                     svc.startAnalysisTimer()
                 }
 
-                svc.playTickSound()
+                if index >= Int32(svc.beatsPerBar - 1) {
+                    svc.metronomeOn = false
+                    svc.synth?.changedControls()
+                }
+//                svc.playTickSound()
             }
 
             svc.metronomeView.setBeat(Int(index))
@@ -930,7 +916,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     }
 
     //MARK: - Sounds
-    
+    //TODO - get rid of this if we can keep using SeeScore metronome.
     func setupSounds() {
         let ticksound = "marmstk1"
         let ticktype = "wav"
