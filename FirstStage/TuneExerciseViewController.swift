@@ -41,8 +41,6 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     var cursorBarIndex = Int32(0)
     let kDefaultMagnification: Float = 1.5
 
-    var metronomeOn = false
-    var beatsPerMeasure = 0
     var tickPlayer: AVAudioPlayer?
     
     // 3 metronome ticks are currently supported (tickpitch = 0, 1 or 2):
@@ -321,8 +319,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
 
         dispatch_async(dispatch_get_main_queue(),{
             if let numBeats = self.score?.actualBeatsForBar(1) {
-                self.beatsPerMeasure = Int(numBeats.numbeats)
-                self.metronomeView.numBeats = self.beatsPerMeasure
+                self.metronomeView.numBeats = Int(numBeats.numbeats)
                 self.metronomeView.rebuildMetronome()
             }
         });
@@ -719,18 +716,16 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     }
     
     func metronomeEnabled() -> Bool {
-        return metronomeOn
+        return false
     }
     
     func metronomeInstrument() -> UInt32 {
-        return metronomeInstrumentId
+        return 0
     }
     
     func metronomeVolume() -> Float {
-        if !metronomeOn {
-            return 0
-        }
-        return 1.5
+        return 0
+//        return 1.5
 //        return 1.0
 //        return 0.50
     }
@@ -910,11 +905,6 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                 svc.countOffLabel.text = "\(index + 1)"
                 if !svc.showNoteMarkers {
                     svc.startAnalysisTimer()
-                }
-
-                if index >= Int32(svc.beatsPerMeasure - 1) {
-                    //stop after last countoff
-                    svc.metronomeOn = false
                 }
 
                 svc.playTickSound()
