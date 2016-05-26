@@ -59,6 +59,8 @@
 		633C2AE21CE86915001C5C16 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633C2AE01CE86915001C5C16 /* Constants.swift */; };
 		633C2AE41CE86CF4001C5C16 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633C2AE31CE86CF4001C5C16 /* SettingsViewController.swift */; };
 		633C2AE51CE86CF4001C5C16 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633C2AE31CE86CF4001C5C16 /* SettingsViewController.swift */; };
+		6355ECF71CF68EB70037945F /* marmstk1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6355ECF61CF68EB60037945F /* marmstk1.wav */; };
+		6355ECF81CF68EB70037945F /* marmstk1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6355ECF61CF68EB60037945F /* marmstk1.wav */; };
 		6379EE7D1CE95CDF00188A70 /* NoteAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6379EE7C1CE95CDF00188A70 /* NoteAnalysis.swift */; };
 		6379EE7E1CE95CDF00188A70 /* NoteAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6379EE7C1CE95CDF00188A70 /* NoteAnalysis.swift */; };
 		6379EE911CE9C8ED00188A70 /* AudioKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6379EE901CE9C8ED00188A70 /* AudioKitManager.swift */; };
@@ -464,6 +466,7 @@
 		633C2ADC1CE813E7001C5C16 /* XML Tunes */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "XML Tunes"; sourceTree = "<group>"; };
 		633C2AE01CE86915001C5C16 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		633C2AE31CE86CF4001C5C16 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		6355ECF61CF68EB60037945F /* marmstk1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = marmstk1.wav; sourceTree = "<group>"; };
 		6379EE7C1CE95CDF00188A70 /* NoteAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteAnalysis.swift; sourceTree = "<group>"; };
 		6379EE901CE9C8ED00188A70 /* AudioKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioKitManager.swift; sourceTree = "<group>"; };
 		6381294F1CF05BF800A40C8E /* LongToneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LongToneViewController.swift; sourceTree = "<group>"; };
@@ -796,6 +799,7 @@
 			isa = PBXGroup;
 			children = (
 				6387FDE71CEDB5710054DE44 /* AudioKit.swift */,
+				6355ECF61CF68EB60037945F /* marmstk1.wav */,
 				6324D31E1CE73574001934A5 /* FirstStage-Bridging-Header.h */,
 			);
 			name = "Supporting Files";
@@ -1207,6 +1211,7 @@
 				63F9C8641CE74826000F4470 /* Piano.mf.69.m4a in Resources */,
 				63F9C8E31CE74841000F4470 /* Trumpet.novib.mf.58.m4a in Resources */,
 				63F9C85C1CE74826000F4470 /* Piano.mf.65.m4a in Resources */,
+				6355ECF81CF68EB70037945F /* marmstk1.wav in Resources */,
 				63F9C8F31CE74841000F4470 /* Trumpet.novib.mf.66.m4a in Resources */,
 				63F9C8AC1CE74826000F4470 /* Piano.mf.105.m4a in Resources */,
 				63F9C8F91CE74841000F4470 /* Trumpet.novib.mf.69.m4a in Resources */,
@@ -1353,6 +1358,7 @@
 				63F9C8631CE74826000F4470 /* Piano.mf.69.m4a in Resources */,
 				63F9C8E21CE74841000F4470 /* Trumpet.novib.mf.58.m4a in Resources */,
 				63F9C85B1CE74826000F4470 /* Piano.mf.65.m4a in Resources */,
+				6355ECF71CF68EB70037945F /* marmstk1.wav in Resources */,
 				63F9C8F21CE74841000F4470 /* Trumpet.novib.mf.66.m4a in Resources */,
 				63F9C8AB1CE74826000F4470 /* Piano.mf.105.m4a in Resources */,
 				63F9C8F81CE74841000F4470 /* Trumpet.novib.mf.69.m4a in Resources */,

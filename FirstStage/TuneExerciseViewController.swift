@@ -40,6 +40,10 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     var metronomeInstrumentId: UInt32 = 0
     var cursorBarIndex = Int32(0)
     let kDefaultMagnification: Float = 1.5
+
+    var metronomeOn = false
+    var beatsPerMeasure = 0
+    var tickPlayer: AVAudioPlayer?
     
     // 3 metronome ticks are currently supported (tickpitch = 0, 1 or 2):
     //    static const sscore_sy_synthesizedinstrumentinfo kTick1Info = {"Tick1", 0, 1.0};
@@ -96,6 +100,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         countOffLabel.text = ""
 
         frequencyThresholdPercent = 1.0 + frequencyThreshold
+        setupSounds()
     }
 
     override func viewWillDisappear(animated: Bool) {
@@ -213,6 +218,8 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         ssScrollView.scrollEnabled = false
         playingAnimation = false
         countOffLabel.hidden = true;
+//        metronomeOn = true
+
         noteResultValues.removeAll()
         
         guard score != nil else { return }
@@ -314,7 +321,8 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
 
         dispatch_async(dispatch_get_main_queue(),{
             if let numBeats = self.score?.actualBeatsForBar(1) {
-                self.metronomeView.numBeats = Int(numBeats.numbeats)
+                self.beatsPerMeasure = Int(numBeats.numbeats)
+                self.metronomeView.numBeats = self.beatsPerMeasure
                 self.metronomeView.rebuildMetronome()
             }
         });
@@ -711,7 +719,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     }
     
     func metronomeEnabled() -> Bool {
-        return true
+        return metronomeOn
     }
     
     func metronomeInstrument() -> UInt32 {
@@ -719,6 +727,9 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     }
     
     func metronomeVolume() -> Float {
+        if !metronomeOn {
+            return 0
+        }
         return 1.5
 //        return 1.0
 //        return 0.50
@@ -900,6 +911,13 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                 if !svc.showNoteMarkers {
                     svc.startAnalysisTimer()
                 }
+
+                if index >= Int32(svc.beatsPerMeasure - 1) {
+                    //stop after last countoff
+                    svc.metronomeOn = false
+                }
+
+                svc.playTickSound()
             }
 
             svc.metronomeView.setBeat(Int(index))
@@ -918,6 +936,30 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
             svc.cursorBarIndex = 0
             svc.stopPlaying()
             svc.showScore()
+        }
+    }
+
+    //MARK: - Sounds
+    
+    func setupSounds() {
+        let ticksound = "marmstk1"
+        let ticktype = "wav"
+        
+        if let soundPath = NSBundle.mainBundle().pathForResource(ticksound, ofType: ticktype) {
+            let soundUrl = NSURL(fileURLWithPath: soundPath)
+            
+            do {
+                tickPlayer = try AVAudioPlayer(contentsOfURL: soundUrl)
+                tickPlayer?.prepareToPlay()
+            } catch {
+                print("No sound found by URL:\(soundUrl)")
+            }
+        }
+    }
+    
+    func playTickSound() {
+        if let tp = tickPlayer {
+            tp.play()
         }
     }
 
