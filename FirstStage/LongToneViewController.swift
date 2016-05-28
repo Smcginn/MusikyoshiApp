@@ -41,6 +41,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     var highFarPitchThreshold = Float(0.0)
     let minPitch = NoteService.getLowestFrequency()
     let maxPitch = NoteService.getHighestFrequency()
+    var firstTime = true
     var pitchSampleRate = 0.01
     var balloonUpdateRate = 0.01
     var longToneEndTime = 0.0
@@ -63,6 +64,8 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     let nearDownArrowImage = UIImage(CGImage: (UIImage(named: "NearArrow")?.CGImage)!, scale: CGFloat(1.0), orientation: UIImageOrientation.DownMirrored)
     let farDownArrowImage = UIImage(CGImage: (UIImage(named: "FarArrow")?.CGImage)!, scale: CGFloat(1.0), orientation: UIImageOrientation.DownMirrored)
     var arrowImageView : UIImageView!
+    var smileImage = UIImage(named: "GreenSmile")
+    var smileImageView : UIImageView!
     
     @IBOutlet weak var instructionLbl: UILabel!
     @IBOutlet weak var timerLbl: UILabel!
@@ -92,6 +95,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
 
         frequencyThresholdPercent = 1.0 + frequencyThreshold
         farFrequencyThresholdPercent = frequencyThresholdPercent + (frequencyThreshold * 1.5)
+        firstTime = true
         setupImageViews()
     }
     
@@ -100,6 +104,9 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     }
     
     func loadFile(scoreFile: String) {
+        playBtn.hidden = false
+        playBtn.enabled = true
+        playBtn.setTitle("Start Playing", forState: .Normal)
 //        playButton.setTitle("Start Playing", forState: UIControlState.Normal)
 //        playingAnimation = false
         
@@ -116,6 +123,16 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
         arrowImageView = UIImageView(image: nearUpArrowImage)
         arrowImageView.hidden = true
         ssScrollView.addSubview(arrowImageView)
+//        arrowImageView.clipsToBounds = false
+//        ssScrollView.clipsToBounds = false
+
+        smileImageView = UIImageView(image: smileImage)
+        smileImageView.hidden = true
+        ssScrollView.addSubview(smileImageView)
+        
+        let imageX = (ssScrollView.frame.width - smileImageView.frame.width) / 2
+        let imageY = ssScrollView.frame.height * 0.05
+        smileImageView.frame = CGRectMake(imageX, imageY, smileImageView.frame.width, smileImageView.frame.height)
     }
 
     func setArrowAndPrompt(isNear: Bool, isUp: Bool) {
@@ -125,22 +142,27 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
         guideTextView.text = ""
         var imageX = CGFloat(0)
         var imageY = CGFloat(0)
-        imageX = 120
+//        imageX = 120
+        imageX = ssScrollView.frame.width * 0.7
         switch (isNear, isUp) {
         case (true, true):
-            imageY = 100
+//            imageY = 100
+            imageY = ssScrollView.frame.height * 0.56
             arrowImageView.image = nearUpArrowImage
             guideTextView.text = "Almost There!\nFaster Air!\nCurve lips in Slightly"
         case (true, false):
-            imageY = 40
+//            imageY = 40
+            imageY = ssScrollView.frame.height * 0.22
             arrowImageView.image = nearDownArrowImage
             guideTextView.text = "Might be pinching, relax lips\nSay \"Ohh\"\nPull out tuning slide 1/2 inch"
         case (false, true):
-            imageY = 120
+//            imageY = 120
+            imageY = ssScrollView.frame.height * 0.67
             arrowImageView.image = farUpArrowImage
             guideTextView.text = "Firm lip setting\nUse more air\nCheck Fingering"
         case (false, false):
-            imageY = 20
+//            imageY = 20
+            imageY = ssScrollView.frame.height * 0.11
             arrowImageView.image = farDownArrowImage
             guideTextView.text = "Curve lips out - think \"mm\"\nOpen throat - Say \"Oh\"\nMight be on a G or Upper C\nCheck Fingering"
         }
@@ -271,6 +293,16 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     }
     
     @IBAction func playBtnTap(sender: UIButton) {
+        //TODO - add extra states to ExerciseState to better cycle through Long Tone, instead of checking button title
+
+        if playBtn.currentTitle == "Try Again" {
+            tryAgainTap(sender)
+            return
+        } else if playBtn.currentTitle == "Next Exercise" {
+            //TODO: goto Next Exercise
+            navigationController?.popViewControllerAnimated(true)
+            return
+        }
         
         if exerciseState == ExerciseState.NotStarted {
             startCountdown()
@@ -282,7 +314,9 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     @IBAction func tryAgainTap(sender: UIButton) {
         
         UIView.animateWithDuration(0.1, animations: {
-            self.feedbackPnl.alpha = 0
+//            self.feedbackPnl.alpha = 0
+            self.feedbackLbl.text = ""
+            self.smileImageView.hidden = true
         })
         
         startCountdown()
@@ -307,6 +341,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     func startCountdown()
     {
         timer.invalidate()
+        feedbackLbl.hidden = true
         
         hasNoteStarted = false
         isExerciseSuccess = false
@@ -333,7 +368,8 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
         }
 
         playBtn.enabled = false
-        playBtn.setTitle("Get Ready", forState: .Normal)
+        playBtn.setTitle("", forState: .Normal)
+//        playBtn.setTitle("Get Ready", forState: .Normal)
         countdownLbl.text = "3"
         countdownLbl.transform = CGAffineTransformMakeScale(0.5, 0.5)
         
@@ -345,7 +381,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
         })
         
         delay(1.0){
-            self.playBtn.setTitle("Set", forState: .Normal)
+//            self.playBtn.setTitle("Set", forState: .Normal)
             
             self.countdownLbl.alpha = 0
             self.countdownLbl.transform = CGAffineTransformMakeScale(0.5, 0.5)
@@ -357,7 +393,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
             })
             
             delay(1.0){
-                self.playBtn.setTitle("Go!", forState: .Normal)
+//                self.playBtn.setTitle("Go!", forState: .Normal)
                 
                 self.countdownLbl.alpha = 0
                 self.countdownLbl.transform = CGAffineTransformMakeScale(0.5, 0.5)
@@ -391,7 +427,8 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
         if isExerciseSuccess
         {
             balloon.fillColor = UIColor.greenColor().CGColor
-            feedbackLbl.text = "Congratulations!"
+            feedbackLbl.text = "You did it!"
+            smileImageView.hidden = false
         }
         else
         {
@@ -399,19 +436,33 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
             feedbackLbl.text = "Almost..."
         }
         
+        feedbackLbl.hidden = false
+
+        if firstTime {
+            playBtn.hidden = false
+            playBtn.enabled = true
+            playBtn.setTitle("Try Again", forState: .Normal)
+            firstTime = false
+        } else {
+            playBtn.hidden = false
+            playBtn.enabled = true
+            playBtn.setTitle("Next Exercise", forState: .Normal)
+        }
+ 
         exerciseState = ExerciseState.Completed
         
-        delay(0.5){
-            self.feedbackPnl.center.y += 40
-            self.feedbackPnl.transform = CGAffineTransformMakeScale(0.5, 0.5)
-            UIView.animateWithDuration(0.3, animations: {
-                self.feedbackPnl.center.y -= 40
-                self.feedbackPnl.transform = CGAffineTransformMakeScale(1, 1)
-                self.feedbackPnl.alpha = 1
-            })
-            
-            self.exerciseState = ExerciseState.FeedbackProvided
-        }
+//        delay(0.5){
+//            self.feedbackPnl.center.y += 40
+//            self.feedbackPnl.transform = CGAffineTransformMakeScale(0.5, 0.5)
+//            UIView.animateWithDuration(0.3, animations: {
+//                self.feedbackPnl.center.y -= 40
+//                self.feedbackPnl.transform = CGAffineTransformMakeScale(1, 1)
+//                self.feedbackPnl.alpha = 1
+//            })
+//            
+//            self.exerciseState = ExerciseState.FeedbackProvided
+//        }
+        self.exerciseState = ExerciseState.FeedbackProvided
     }
     
     func updateTracking()
@@ -439,6 +490,9 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
                     } else {
                         timerLbl.text = String(format: "%.2f/%.2f", currentTime, targetTime)
                         balloon.radius += 0.3
+                        playBtn.hidden = false
+                        playBtn.enabled = false
+                        playBtn.setTitle("Keep it up!", forState: .Normal)
                     }
                 } else if hasNoteStarted {
                     //outside threshold

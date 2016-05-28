@@ -426,6 +426,23 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kuy-XL-5Rn" userLabel="Guide panel">
+                                        <rect key="frame" x="0.0" y="402" width="200" height="134"/>
+                                        <subviews>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" editable="NO" text="Curve lips out - think &quot;mm&quot; Open throat - Say &quot;Oh&quot; Might be on a G or Upper C Check Fingering" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mv6-ua-pJK">
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="134"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="Mv6-ua-pJK" firstAttribute="height" secondItem="Kuy-XL-5Rn" secondAttribute="height" id="0Rg-zn-SLy"/>
+                                            <constraint firstItem="Mv6-ua-pJK" firstAttribute="centerX" secondItem="Kuy-XL-5Rn" secondAttribute="centerX" id="Oru-k8-H0S"/>
+                                            <constraint firstItem="Mv6-ua-pJK" firstAttribute="centerY" secondItem="Kuy-XL-5Rn" secondAttribute="centerY" id="hCg-eG-WMF"/>
+                                            <constraint firstItem="Mv6-ua-pJK" firstAttribute="width" secondItem="Kuy-XL-5Rn" secondAttribute="width" id="unY-Wi-m17"/>
+                                        </constraints>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HW3-S8-AdL" userLabel="Note View">
                                         <rect key="frame" x="8" y="48" width="184" height="332"/>
                                         <subviews>
@@ -471,23 +488,6 @@
                                             <constraint firstItem="yVn-Ix-Nrl" firstAttribute="width" secondItem="4f6-qK-973" secondAttribute="width" id="o1A-7L-Kn2"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kuy-XL-5Rn" userLabel="Guide panel">
-                                        <rect key="frame" x="0.0" y="402" width="200" height="134"/>
-                                        <subviews>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" editable="NO" text="Curve lips out - think &quot;mm&quot; Open throat - Say &quot;Oh&quot; Might be on a G or Upper C Check Fingering" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mv6-ua-pJK">
-                                                <rect key="frame" x="0.0" y="0.0" width="200" height="134"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                            </textView>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="Mv6-ua-pJK" firstAttribute="height" secondItem="Kuy-XL-5Rn" secondAttribute="height" id="0Rg-zn-SLy"/>
-                                            <constraint firstItem="Mv6-ua-pJK" firstAttribute="centerX" secondItem="Kuy-XL-5Rn" secondAttribute="centerX" id="Oru-k8-H0S"/>
-                                            <constraint firstItem="Mv6-ua-pJK" firstAttribute="centerY" secondItem="Kuy-XL-5Rn" secondAttribute="centerY" id="hCg-eG-WMF"/>
-                                            <constraint firstItem="Mv6-ua-pJK" firstAttribute="width" secondItem="Kuy-XL-5Rn" secondAttribute="width" id="unY-Wi-m17"/>
-                                        </constraints>
-                                    </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="HW3-S8-AdL" firstAttribute="height" secondItem="meM-r2-8OW" secondAttribute="height" multiplier="0.62" id="2d9-hS-5Bi"/>
@@ -521,19 +521,19 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="b8Q-J4-mZj">
-                                        <rect key="frame" x="0.0" y="0.0" width="400" height="94"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="400" height="62"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Congratulations!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LGT-uh-Yjn">
-                                                <rect key="frame" x="0.0" y="0.0" width="400" height="64"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="400" height="32"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="64" id="Pyn-RU-Zxl"/>
+                                                    <constraint firstAttribute="height" constant="32" id="Pyn-RU-Zxl"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c7G-G5-3s8">
-                                                <rect key="frame" x="0.0" y="64" width="400" height="30"/>
+                                                <rect key="frame" x="0.0" y="32" width="400" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="zLi-O2-m6J"/>
                                                 </constraints>
