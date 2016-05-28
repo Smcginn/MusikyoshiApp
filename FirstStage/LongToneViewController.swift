@@ -95,13 +95,16 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
             instructionLbl.text = "Play a long \(targetNote!.friendlyName) note and fill up the balloon until it turns green!"
         }
 
-        let secondChar = noteName[noteName.startIndex.successor()]
-        
-        if secondChar == "♭" {
-            loadFile("XML Tunes/Long_Tone_25G3G5_flat")
-        } else {
-            loadFile("XML Tunes/Long_Tone_25G3G5")
+        var notesFileName = "XML Tunes/Long_Tone_25G3G5"
+        if noteName.characters.count > 1 {
+            let secondChar = noteName[noteName.startIndex.successor()]
+            
+            if secondChar == "♭" {
+                notesFileName = "XML Tunes/Long_Tone_25G3G5_flat"
+            }
         }
+
+        loadFile(notesFileName)
 
         frequencyThresholdPercent = 1.0 + frequencyThreshold
         farFrequencyThresholdPercent = frequencyThresholdPercent + (frequencyThreshold * 1.5)
