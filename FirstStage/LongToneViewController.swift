@@ -16,6 +16,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     var currentTime = 0.0
     var targetNote : Note?
     var absoluteTargetNote: Note?
+    var showFarText = true
 
     var targetTime = 3.0
     var targetNoteID = 0
@@ -32,9 +33,12 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     let transpositionOffset = NSUserDefaults.standardUserDefaults().integerForKey(Constants.Settings.Transposition)
     let frequencyThreshold = NSUserDefaults.standardUserDefaults().floatForKey(Constants.Settings.FrequencyThreshold)
     var frequencyThresholdPercent = Float(0.0)
+    var farFrequencyThresholdPercent = Float(0.0)
     var targetPitch = Float(0.0)
     var lowPitchThreshold = Float(0.0)
     var highPitchThreshold = Float(0.0)
+    var lowFarPitchThreshold = Float(0.0)
+    var highFarPitchThreshold = Float(0.0)
     let minPitch = NoteService.getLowestFrequency()
     let maxPitch = NoteService.getHighestFrequency()
     var pitchSampleRate = 0.01
@@ -49,11 +53,16 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     var synth: SSSynth?
     var instrumentId = UInt32(0)
     var cursorBarIndex = Int32(0)
-    let kDefaultMagnification: Float = 2.85
+    let kDefaultMagnification : Float = 2.85
 
     var hasNoteStarted = false
     var isExerciseSuccess = false
     var sparkLineCount : CGFloat = 0
+    let nearUpArrowImage = UIImage(named: "NearArrow")
+    let farUpArrowImage = UIImage(named: "FarArrow")
+    let nearDownArrowImage = UIImage(CGImage: (UIImage(named: "NearArrow")?.CGImage)!, scale: CGFloat(1.0), orientation: UIImageOrientation.DownMirrored)
+    let farDownArrowImage = UIImage(CGImage: (UIImage(named: "FarArrow")?.CGImage)!, scale: CGFloat(1.0), orientation: UIImageOrientation.DownMirrored)
+    var arrowImageView : UIImageView!
     
     @IBOutlet weak var instructionLbl: UILabel!
     @IBOutlet weak var timerLbl: UILabel!
@@ -64,6 +73,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     @IBOutlet weak var sparkLine: SparkLine!
     @IBOutlet weak var countdownLbl: UILabel!
     @IBOutlet weak var ssScrollView: SSScrollView!
+    @IBOutlet weak var guideTextView: UITextView!
     @IBOutlet var sparkLineTapRecognizer: UITapGestureRecognizer!
     
     override func viewDidLoad() {
@@ -81,6 +91,8 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
         loadFile("XML Tunes/Long_Tone_25G3G5")
 
         frequencyThresholdPercent = 1.0 + frequencyThreshold
+        farFrequencyThresholdPercent = frequencyThresholdPercent + (frequencyThreshold * 1.5)
+        setupImageViews()
     }
     
     @IBAction func sparkLineTapped(sender: UITapGestureRecognizer) {
@@ -98,7 +110,58 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
             return
         }
     }
-    
+
+    func setupImageViews() {
+        //start with near, up - located below
+        arrowImageView = UIImageView(image: nearUpArrowImage)
+        arrowImageView.hidden = true
+        ssScrollView.addSubview(arrowImageView)
+    }
+
+    func setArrowAndPrompt(isNear: Bool, isUp: Bool) {
+        //near or far, up or down
+        arrowImageView.hidden = false
+        guideTextView.hidden = false
+        guideTextView.text = ""
+        var imageX = CGFloat(0)
+        var imageY = CGFloat(0)
+        switch (isNear, isUp) {
+        case (true, true):
+            imageX = 150
+            imageY = 100
+            arrowImageView.image = nearUpArrowImage
+            guideTextView.text = "Almost There!\nFaster Air!\nCurve lips in Slightly"
+        case (true, false):
+            imageX = 150
+            imageY = 40
+            arrowImageView.image = nearDownArrowImage
+            guideTextView.text = "Might be pinching, relax lips\nSay \"Ohh\"\nPull out tuning slide 1/2 inch"
+        case (false, true):
+            imageX = 150
+            imageY = 120
+            arrowImageView.image = farUpArrowImage
+            guideTextView.text = "Firm lip setting\nUse more air\nCheck Fingering"
+        case (false, false):
+            imageX = 150
+            imageY = 20
+            arrowImageView.image = farDownArrowImage
+            guideTextView.text = "Curve lips out - think \"mm\"\nOpen throat - Say \"Oh\"\nMight be on a G or Upper C\nCheck Fingering"
+        }
+
+        //if far and no far text
+        if !isNear && !showFarText {
+            guideTextView.hidden = true
+            guideTextView.text = ""
+        }
+        arrowImageView.frame = CGRectMake(imageX, imageY, arrowImageView.frame.width, arrowImageView.frame.height)
+    }
+
+    func clearArrowAndPrompt() {
+        arrowImageView.hidden = true
+        guideTextView.hidden = true
+        guideTextView.text = ""
+    }
+
     func loadTheFile(filePath: String) {
         ssScrollView.clearAll()
         score = nil
@@ -262,10 +325,14 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
             targetPitch = freq
             lowPitchThreshold = freq / frequencyThresholdPercent
             highPitchThreshold = freq * frequencyThresholdPercent
+            lowFarPitchThreshold = freq / farFrequencyThresholdPercent
+            highFarPitchThreshold = freq * farFrequencyThresholdPercent
         } else {
             targetPitch = Float(0.0)
             lowPitchThreshold = Float(0.0)
             highPitchThreshold = Float(0.0)
+            lowFarPitchThreshold = Float(0.0)
+            highFarPitchThreshold = Float(0.0)
         }
 
         playBtn.enabled = false
@@ -365,6 +432,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
             if minPitch...maxPitch ~= frequency {
                 if lowPitchThreshold...highPitchThreshold ~= frequency {
                     //inside threshold
+                    clearArrowAndPrompt()
                     hasNoteStarted = true
                     currentTime += pitchSampleRate
                     if currentTime >= targetTime {
@@ -375,33 +443,35 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
                         timerLbl.text = String(format: "%.2f/%.2f", currentTime, targetTime)
                         balloon.radius += 0.3
                     }
-                } else {
+                } else if hasNoteStarted {
                     //outside threshold
-                    if hasNoteStarted {
-                        if let noteHit = NoteService.getNote(frequency) {
-                            print(String(format: "note hit: %@ not equal to %@", noteHit.fullName, (targetNote?.fullName)!))
-                        } else {
-                            print(String(format: "note hit: 'nil' not equal to %@", (targetNote?.fullName)!))
-                        }
-                        stopExercise()
-                    }
-                }
-
-                if let noteHit = NoteService.getNote(frequency) {
-                    if sparkLineCount < sparkLine.bounds.width {
-                        sparkLineCount++
+                    if let noteHit = NoteService.getNote(frequency) {
+                        print(String(format: "note hit: %@ not equal to %@", noteHit.fullName, (targetNote?.fullName)!))
                     } else {
-                        resetSparkLine()
+                        print(String(format: "note hit: 'nil' not equal to %@", (targetNote?.fullName)!))
                     }
-
-                    //TODO: color green if hasNoteStarted==true, else red
-                    //TODO: the above requires adding a color input to sparkLine
-                    //TODO: make this continuous based upon freq
-                    let yPos = CGFloat(NoteService.getYPos(noteHit.orderId!) + Constants.MusicLine.yOffset)
-                    
-                    sparkLine.addValue(hasNoteStarted, newValue: CGPointMake(sparkLineCount, yPos))
-                    //print(String(format: "note hit: %@ x: \(trackingCount) y: \(yPos)", (noteHit?.fullName)!))
+                    stopExercise()
+                } else if lowFarPitchThreshold...highFarPitchThreshold ~= frequency {
+                    setArrowAndPrompt(true, isUp: frequency > targetPitch)
+                } else {
+                    setArrowAndPrompt(false, isUp: frequency > targetPitch)
                 }
+
+//                if let noteHit = NoteService.getNote(frequency) {
+//                    if sparkLineCount < sparkLine.bounds.width {
+//                        sparkLineCount++
+//                    } else {
+//                        resetSparkLine()
+//                    }
+//
+//                    //TODO: color green if hasNoteStarted==true, else red
+//                    //TODO: the above requires adding a color input to sparkLine
+//                    //TODO: make this continuous based upon freq
+//                    let yPos = CGFloat(NoteService.getYPos(noteHit.orderId!) + Constants.MusicLine.yOffset)
+//                    
+//                    sparkLine.addValue(hasNoteStarted, newValue: CGPointMake(sparkLineCount, yPos))
+//                    //print(String(format: "note hit: %@ x: \(trackingCount) y: \(yPos)", (noteHit?.fullName)!))
+//                }
             } else {
                 //stop extremely out-of-range
                 print("sound out-of-range")
@@ -411,6 +481,8 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
             print("no sound tracked")
             stopExercise()
             return
+        } else {
+            clearArrowAndPrompt()
         }
     }
     

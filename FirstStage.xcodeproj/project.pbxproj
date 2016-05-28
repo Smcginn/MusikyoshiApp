@@ -59,6 +59,12 @@
 		633C2AE21CE86915001C5C16 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633C2AE01CE86915001C5C16 /* Constants.swift */; };
 		633C2AE41CE86CF4001C5C16 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633C2AE31CE86CF4001C5C16 /* SettingsViewController.swift */; };
 		633C2AE51CE86CF4001C5C16 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633C2AE31CE86CF4001C5C16 /* SettingsViewController.swift */; };
+		633CA1D31CF73D0C00061F3D /* GreenSmile.png in Resources */ = {isa = PBXBuildFile; fileRef = 633CA1D01CF73D0C00061F3D /* GreenSmile.png */; };
+		633CA1D41CF73D0C00061F3D /* FarArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 633CA1D11CF73D0C00061F3D /* FarArrow.png */; };
+		633CA1D51CF73D0C00061F3D /* NearArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 633CA1D21CF73D0C00061F3D /* NearArrow.png */; };
+		633CA1D91CF73D1100061F3D /* GreenSmile.png in Resources */ = {isa = PBXBuildFile; fileRef = 633CA1D01CF73D0C00061F3D /* GreenSmile.png */; };
+		633CA1DA1CF73D1600061F3D /* FarArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 633CA1D11CF73D0C00061F3D /* FarArrow.png */; };
+		633CA1DB1CF73D1A00061F3D /* NearArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 633CA1D21CF73D0C00061F3D /* NearArrow.png */; };
 		6355ECF71CF68EB70037945F /* marmstk1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6355ECF61CF68EB60037945F /* marmstk1.wav */; };
 		6355ECF81CF68EB70037945F /* marmstk1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6355ECF61CF68EB60037945F /* marmstk1.wav */; };
 		6379EE7D1CE95CDF00188A70 /* NoteAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6379EE7C1CE95CDF00188A70 /* NoteAnalysis.swift */; };
@@ -466,6 +472,9 @@
 		633C2ADC1CE813E7001C5C16 /* XML Tunes */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "XML Tunes"; sourceTree = "<group>"; };
 		633C2AE01CE86915001C5C16 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		633C2AE31CE86CF4001C5C16 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		633CA1D01CF73D0C00061F3D /* GreenSmile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GreenSmile.png; path = Images/GreenSmile.png; sourceTree = "<group>"; };
+		633CA1D11CF73D0C00061F3D /* FarArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FarArrow.png; path = Images/FarArrow.png; sourceTree = "<group>"; };
+		633CA1D21CF73D0C00061F3D /* NearArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NearArrow.png; path = Images/NearArrow.png; sourceTree = "<group>"; };
 		6355ECF61CF68EB60037945F /* marmstk1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = marmstk1.wav; sourceTree = "<group>"; };
 		6379EE7C1CE95CDF00188A70 /* NoteAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteAnalysis.swift; sourceTree = "<group>"; };
 		6379EE901CE9C8ED00188A70 /* AudioKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioKitManager.swift; sourceTree = "<group>"; };
@@ -798,6 +807,9 @@
 		6387FDE61CEDB5110054DE44 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				633CA1D01CF73D0C00061F3D /* GreenSmile.png */,
+				633CA1D11CF73D0C00061F3D /* FarArrow.png */,
+				633CA1D21CF73D0C00061F3D /* NearArrow.png */,
 				6387FDE71CEDB5710054DE44 /* AudioKit.swift */,
 				6355ECF61CF68EB60037945F /* marmstk1.wav */,
 				6324D31E1CE73574001934A5 /* FirstStage-Bridging-Header.h */,
@@ -1139,6 +1151,7 @@
 				63F9C82C1CE74826000F4470 /* Piano.mf.41.m4a in Resources */,
 				63F9C90B1CE74841000F4470 /* Trumpet.novib.mf.78.m4a in Resources */,
 				63F9C8E51CE74841000F4470 /* Trumpet.novib.mf.59.m4a in Resources */,
+				633CA1D51CF73D0C00061F3D /* NearArrow.png in Resources */,
 				63F9C83C1CE74826000F4470 /* Piano.mf.49.m4a in Resources */,
 				63F9C9171CE74841000F4470 /* Trumpet.novib.mf.84.m4a in Resources */,
 				63F9C8FF1CE74841000F4470 /* Trumpet.novib.mf.72.m4a in Resources */,
@@ -1164,6 +1177,7 @@
 				63F9C8401CE74826000F4470 /* Piano.mf.51.m4a in Resources */,
 				63F9C8A81CE74826000F4470 /* Piano.mf.103.m4a in Resources */,
 				63F9C8A41CE74826000F4470 /* Piano.mf.101.m4a in Resources */,
+				633CA1D41CF73D0C00061F3D /* FarArrow.png in Resources */,
 				63F9C86E1CE74826000F4470 /* Piano.mf.74.m4a in Resources */,
 				63F9C8921CE74826000F4470 /* Piano.mf.92.m4a in Resources */,
 				63F9C8161CE74826000F4470 /* Piano.mf.30.m4a in Resources */,
@@ -1193,6 +1207,7 @@
 				63F9C8FB1CE74841000F4470 /* Trumpet.novib.mf.70.m4a in Resources */,
 				63F9C87C1CE74826000F4470 /* Piano.mf.81.m4a in Resources */,
 				63F9C8821CE74826000F4470 /* Piano.mf.84.m4a in Resources */,
+				633CA1D31CF73D0C00061F3D /* GreenSmile.png in Resources */,
 				63F9C8421CE74826000F4470 /* Piano.mf.52.m4a in Resources */,
 				63F9C8081CE74826000F4470 /* Piano.mf.23.m4a in Resources */,
 				63F9C8961CE74826000F4470 /* Piano.mf.94.m4a in Resources */,
@@ -1286,6 +1301,7 @@
 				63F9C82B1CE74826000F4470 /* Piano.mf.41.m4a in Resources */,
 				63F9C90A1CE74841000F4470 /* Trumpet.novib.mf.78.m4a in Resources */,
 				63F9C8E41CE74841000F4470 /* Trumpet.novib.mf.59.m4a in Resources */,
+				633CA1DB1CF73D1A00061F3D /* NearArrow.png in Resources */,
 				63F9C83B1CE74826000F4470 /* Piano.mf.49.m4a in Resources */,
 				63F9C9161CE74841000F4470 /* Trumpet.novib.mf.84.m4a in Resources */,
 				63F9C8FE1CE74841000F4470 /* Trumpet.novib.mf.72.m4a in Resources */,
@@ -1311,6 +1327,7 @@
 				63F9C83F1CE74826000F4470 /* Piano.mf.51.m4a in Resources */,
 				63F9C8A71CE74826000F4470 /* Piano.mf.103.m4a in Resources */,
 				63F9C8A31CE74826000F4470 /* Piano.mf.101.m4a in Resources */,
+				633CA1DA1CF73D1600061F3D /* FarArrow.png in Resources */,
 				63F9C86D1CE74826000F4470 /* Piano.mf.74.m4a in Resources */,
 				63F9C8911CE74826000F4470 /* Piano.mf.92.m4a in Resources */,
 				63F9C8151CE74826000F4470 /* Piano.mf.30.m4a in Resources */,
@@ -1340,6 +1357,7 @@
 				63F9C8FA1CE74841000F4470 /* Trumpet.novib.mf.70.m4a in Resources */,
 				63F9C87B1CE74826000F4470 /* Piano.mf.81.m4a in Resources */,
 				63F9C8811CE74826000F4470 /* Piano.mf.84.m4a in Resources */,
+				633CA1D91CF73D1100061F3D /* GreenSmile.png in Resources */,
 				63F9C8411CE74826000F4470 /* Piano.mf.52.m4a in Resources */,
 				63F9C8071CE74826000F4470 /* Piano.mf.23.m4a in Resources */,
 				63F9C8951CE74826000F4470 /* Piano.mf.94.m4a in Resources */,
