@@ -125,24 +125,21 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
         guideTextView.text = ""
         var imageX = CGFloat(0)
         var imageY = CGFloat(0)
+        imageX = 120
         switch (isNear, isUp) {
         case (true, true):
-            imageX = 150
             imageY = 100
             arrowImageView.image = nearUpArrowImage
             guideTextView.text = "Almost There!\nFaster Air!\nCurve lips in Slightly"
         case (true, false):
-            imageX = 150
             imageY = 40
             arrowImageView.image = nearDownArrowImage
             guideTextView.text = "Might be pinching, relax lips\nSay \"Ohh\"\nPull out tuning slide 1/2 inch"
         case (false, true):
-            imageX = 150
             imageY = 120
             arrowImageView.image = farUpArrowImage
             guideTextView.text = "Firm lip setting\nUse more air\nCheck Fingering"
         case (false, false):
-            imageX = 150
             imageY = 20
             arrowImageView.image = farDownArrowImage
             guideTextView.text = "Curve lips out - think \"mm\"\nOpen throat - Say \"Oh\"\nMight be on a G or Upper C\nCheck Fingering"
@@ -452,9 +449,9 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
                     }
                     stopExercise()
                 } else if lowFarPitchThreshold...highFarPitchThreshold ~= frequency {
-                    setArrowAndPrompt(true, isUp: frequency > targetPitch)
+                    setArrowAndPrompt(true, isUp: frequency < targetPitch)
                 } else {
-                    setArrowAndPrompt(false, isUp: frequency > targetPitch)
+                    setArrowAndPrompt(false, isUp: frequency < targetPitch)
                 }
 
 //                if let noteHit = NoteService.getNote(frequency) {
