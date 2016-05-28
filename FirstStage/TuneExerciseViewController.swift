@@ -117,8 +117,14 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     
     @IBAction func playButtonTapped(sender: UIButton) {
         if playButton.currentTitle == "Start Playing" {
-            playButton.setTitle("Stop", forState: UIControlState.Normal)
+//            playButton.setTitle("Stop", forState: UIControlState.Normal)
+            playButton.setTitle("Listening ...", forState: UIControlState.Normal)
+            playButton.enabled = false
             playScore()
+        } else if playButton.currentTitle == "Next Exercise" {
+            //TODO: goto Next Exercise
+            navigationController?.popViewControllerAnimated(true)
+            return
         } else {
             stopPlaying()
         }
@@ -126,6 +132,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
 
     func loadFile(scoreFile: String) {
         playButton.setTitle("Start Playing", forState: UIControlState.Normal)
+        playButton.enabled = true
         playingAnimation = false
 
         if let filePath = NSBundle.mainBundle().pathForResource(scoreFile, ofType: "xml") {
@@ -290,7 +297,9 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
             ssScrollView.layer.removeAnimationForKey("move")
         }
 
-        playButton.setTitle("Start Playing", forState: UIControlState.Normal)
+//        playButton.setTitle("Start Playing", forState: UIControlState.Normal)
+        playButton.setTitle("Next Exercise", forState: UIControlState.Normal)
+        playButton.enabled = true
         ssScrollView.hideCursor()
         ssScrollView.scrollEnabled = true
     }
