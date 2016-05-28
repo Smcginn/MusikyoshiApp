@@ -65,7 +65,6 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     var highPitchThreshold = Float(0.0)
     let minPitch = NoteService.getLowestFrequency()
     let maxPitch = NoteService.getHighestFrequency()
-    var currentNotes = [AnyObject]()
     var soundSampleRate = 0.01
     var insideNote = false
     var insideRest = false
@@ -80,6 +79,9 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     var pitchHighLate = false
     var noteResultValues: [NoteAnalysis.NoteResult: Int] = [:]
     var analysisStarted = false
+    //used for colored notes
+    let kUseColoredNotes = false
+    var currentNotes = [AnyObject]()
 
     
     override func viewDidLoad() {
@@ -427,8 +429,10 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                 guard !foundSound else { return }
                 foundSound = true
                 result = NoteAnalysis.NoteResult.NoteRhythmMatch
-                if !isTune {
-                    colorTheNote(currentNotes, theColor: UIColor.greenColor())
+                if kUseColoredNotes {
+                    if !isTune {
+                        colorTheNote(currentNotes, theColor: UIColor.greenColor())
+                    }
                 }
             } else if !hasSound && !inThreshold {
                 //if we already missed the threshold don't count it twice
@@ -487,7 +491,9 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                         pitchMatched = true
                         result = NoteAnalysis.NoteResult.PitchMatch
 
-                        colorTheNote(currentNotes, theColor: UIColor.greenColor())
+                        if kUseColoredNotes {
+                            colorTheNote(currentNotes, theColor: UIColor.greenColor())
+                        }
                     }
                 } else {
                     if freqLow {
@@ -678,14 +684,17 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
 //        }
     }
 
+    //used for colored notes
     func colorTheNote(theNote: [AnyObject], theColor: UIColor) {
-        // convert array of SSPDPartNote to array of SSPDNote
-        var notes = [SSPDNote]()
-        for note in theNote as! [SSPDPartNote] {
-            notes.append(note.note)
-        }
+        if kUseColoredNotes {
+            // convert array of SSPDPartNote to array of SSPDNote
+            var notes = [SSPDNote]()
+            for note in theNote as! [SSPDPartNote] {
+                notes.append(note.note)
+            }
 
-        ssScrollView.colourPDNotes(notes, colour: theColor)
+            ssScrollView.colourPDNotes(notes, colour: theColor)
+        }
     }
 
     //MARK: SSSyControls protocol
@@ -769,7 +778,10 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         }
 
         if !showNoteMarkers {
-            currentNotes = notes
+            if kUseColoredNotes {
+                currentNotes = notes
+            }
+
             setNoteThresholdState(notes)
         } else {
             moveNoteCursor(notes)
