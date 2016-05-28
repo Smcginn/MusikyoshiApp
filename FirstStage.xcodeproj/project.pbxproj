@@ -65,6 +65,10 @@
 		633CA1D91CF73D1100061F3D /* GreenSmile.png in Resources */ = {isa = PBXBuildFile; fileRef = 633CA1D01CF73D0C00061F3D /* GreenSmile.png */; };
 		633CA1DA1CF73D1600061F3D /* FarArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 633CA1D11CF73D0C00061F3D /* FarArrow.png */; };
 		633CA1DB1CF73D1A00061F3D /* NearArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 633CA1D21CF73D0C00061F3D /* NearArrow.png */; };
+		633D1B6D1CF94BEC00B5C4FD /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633D1B6C1CF94BEC00B5C4FD /* FeedbackView.swift */; };
+		633D1B711CF94BF000B5C4FD /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633D1B6C1CF94BEC00B5C4FD /* FeedbackView.swift */; };
+		633D1B731CF94CEB00B5C4FD /* FeedbackImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 633D1B721CF94CEB00B5C4FD /* FeedbackImage.png */; };
+		633D1B741CF9588700B5C4FD /* FeedbackImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 633D1B721CF94CEB00B5C4FD /* FeedbackImage.png */; };
 		6355ECF71CF68EB70037945F /* marmstk1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6355ECF61CF68EB60037945F /* marmstk1.wav */; };
 		6355ECF81CF68EB70037945F /* marmstk1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6355ECF61CF68EB60037945F /* marmstk1.wav */; };
 		6379EE7D1CE95CDF00188A70 /* NoteAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6379EE7C1CE95CDF00188A70 /* NoteAnalysis.swift */; };
@@ -475,6 +479,8 @@
 		633CA1D01CF73D0C00061F3D /* GreenSmile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GreenSmile.png; path = Images/GreenSmile.png; sourceTree = "<group>"; };
 		633CA1D11CF73D0C00061F3D /* FarArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FarArrow.png; path = Images/FarArrow.png; sourceTree = "<group>"; };
 		633CA1D21CF73D0C00061F3D /* NearArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NearArrow.png; path = Images/NearArrow.png; sourceTree = "<group>"; };
+		633D1B6C1CF94BEC00B5C4FD /* FeedbackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
+		633D1B721CF94CEB00B5C4FD /* FeedbackImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FeedbackImage.png; path = Images/FeedbackImage.png; sourceTree = "<group>"; };
 		6355ECF61CF68EB60037945F /* marmstk1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = marmstk1.wav; sourceTree = "<group>"; };
 		6379EE7C1CE95CDF00188A70 /* NoteAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteAnalysis.swift; sourceTree = "<group>"; };
 		6379EE901CE9C8ED00188A70 /* AudioKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioKitManager.swift; sourceTree = "<group>"; };
@@ -789,6 +795,7 @@
 				639A2E441CF5AB09004F7B1A /* DotView.swift */,
 				638129571CF05C7900A40C8E /* SparkLine.swift */,
 				639A2E531CF5E6CA004F7B1A /* VisualMetronomeView.swift */,
+				633D1B6C1CF94BEC00B5C4FD /* FeedbackView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -807,11 +814,12 @@
 		6387FDE61CEDB5110054DE44 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				633CA1D01CF73D0C00061F3D /* GreenSmile.png */,
-				633CA1D11CF73D0C00061F3D /* FarArrow.png */,
-				633CA1D21CF73D0C00061F3D /* NearArrow.png */,
 				6387FDE71CEDB5710054DE44 /* AudioKit.swift */,
+				633CA1D11CF73D0C00061F3D /* FarArrow.png */,
+				633D1B721CF94CEB00B5C4FD /* FeedbackImage.png */,
+				633CA1D01CF73D0C00061F3D /* GreenSmile.png */,
 				6355ECF61CF68EB60037945F /* marmstk1.wav */,
+				633CA1D21CF73D0C00061F3D /* NearArrow.png */,
 				6324D31E1CE73574001934A5 /* FirstStage-Bridging-Header.h */,
 			);
 			name = "Supporting Files";
@@ -1193,6 +1201,7 @@
 				63F9C8EB1CE74841000F4470 /* Trumpet.novib.mf.62.m4a in Resources */,
 				63F9C8601CE74826000F4470 /* Piano.mf.67.m4a in Resources */,
 				63F9C8D91CE74841000F4470 /* Trumpet.novib.mf.53.m4a in Resources */,
+				633D1B731CF94CEB00B5C4FD /* FeedbackImage.png in Resources */,
 				63F9C89E1CE74826000F4470 /* Piano.mf.98.m4a in Resources */,
 				63F9C8F71CE74841000F4470 /* Trumpet.novib.mf.68.m4a in Resources */,
 				63F9C8741CE74826000F4470 /* Piano.mf.77.m4a in Resources */,
@@ -1343,6 +1352,7 @@
 				63F9C8EA1CE74841000F4470 /* Trumpet.novib.mf.62.m4a in Resources */,
 				63F9C85F1CE74826000F4470 /* Piano.mf.67.m4a in Resources */,
 				63F9C8D81CE74841000F4470 /* Trumpet.novib.mf.53.m4a in Resources */,
+				633D1B741CF9588700B5C4FD /* FeedbackImage.png in Resources */,
 				63F9C89D1CE74826000F4470 /* Piano.mf.98.m4a in Resources */,
 				63F9C8F61CE74841000F4470 /* Trumpet.novib.mf.68.m4a in Resources */,
 				63F9C8731CE74826000F4470 /* Piano.mf.77.m4a in Resources */,
@@ -1458,6 +1468,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6324D3771CE73ED9001934A5 /* Measure.swift in Sources */,
+				633D1B6D1CF94BEC00B5C4FD /* FeedbackView.swift in Sources */,
 				6324D36F1CE73ED9001934A5 /* MusicFont.swift in Sources */,
 				6324D3711CE73ED9001934A5 /* NoteService.swift in Sources */,
 				633C2ADB1CE80DA5001C5C16 /* PracticeViewController.swift in Sources */,
@@ -1509,6 +1520,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6324D3761CE73ED9001934A5 /* Measure.swift in Sources */,
+				633D1B711CF94BF000B5C4FD /* FeedbackView.swift in Sources */,
 				6324D36E1CE73ED9001934A5 /* MusicFont.swift in Sources */,
 				6324D3701CE73ED9001934A5 /* NoteService.swift in Sources */,
 				633C2ADA1CE80DA5001C5C16 /* PracticeViewController.swift in Sources */,

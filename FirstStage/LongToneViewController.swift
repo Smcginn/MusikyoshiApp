@@ -66,6 +66,8 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     var arrowImageView : UIImageView!
     var smileImage = UIImage(named: "GreenSmile")
     var smileImageView : UIImageView!
+
+    let feedbackView = FeedbackView()
     
     @IBOutlet weak var instructionLbl: UILabel!
     @IBOutlet weak var timerLbl: UILabel!
@@ -73,6 +75,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     @IBOutlet weak var balloon: Balloon!
     @IBOutlet weak var feedbackLbl: UILabel!
     @IBOutlet weak var feedbackPnl: UIStackView!
+    @IBOutlet weak var visualizationPanel: UIView!
     @IBOutlet weak var sparkLine: SparkLine!
     @IBOutlet weak var countdownLbl: UILabel!
     @IBOutlet weak var ssScrollView: SSScrollView!
@@ -450,7 +453,13 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
         }
  
         exerciseState = ExerciseState.Completed
-        
+
+        if isExerciseSuccess {
+            feedbackView.setupFeedbackView(self)
+            let feedbackRect = visualizationPanel.frame
+            feedbackView.contentMode = .ScaleAspectFill
+            feedbackView.showFeedback(feedbackRect)
+        }
 //        delay(0.5){
 //            self.feedbackPnl.center.y += 40
 //            self.feedbackPnl.transform = CGAffineTransformMakeScale(0.5, 0.5)

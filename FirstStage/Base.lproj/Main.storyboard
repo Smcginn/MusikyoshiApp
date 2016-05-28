@@ -592,6 +592,7 @@
                         <outlet property="sparkLineTapRecognizer" destination="8WD-cO-8tH" id="pB7-U2-NnR"/>
                         <outlet property="ssScrollView" destination="yVn-Ix-Nrl" id="HvG-vV-pmq"/>
                         <outlet property="timerLbl" destination="SrS-ir-Wxp" id="P9a-mX-6nI"/>
+                        <outlet property="visualizationPanel" destination="xJS-YX-KAF" id="0Vb-uz-XoF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z3x-1D-4y3" userLabel="First Responder" sceneMemberID="firstResponder"/>
