@@ -18,6 +18,8 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     @IBOutlet weak var gateView: UIView!
     @IBOutlet weak var metronomeView: VisualMetronomeView!
 
+    let feedbackView = FeedbackView()
+
     var exerciseName = ""
     var isTune = false
     
@@ -302,6 +304,12 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         playButton.enabled = true
         ssScrollView.hideCursor()
         ssScrollView.scrollEnabled = true
+
+        feedbackView.setupFeedbackView(self)
+        var feedbackRect = self.view.frame
+        feedbackRect.origin.y = feedbackRect.origin.y + 20
+        feedbackView.contentMode = .ScaleAspectFit
+        feedbackView.showFeedback(feedbackRect)
     }
     
     //build arrays for CAKeyframeAnimation of UIScrollView (base class of SSScrollView)
