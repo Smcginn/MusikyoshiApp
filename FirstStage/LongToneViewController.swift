@@ -17,6 +17,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     var targetNote : Note?
     var absoluteTargetNote: Note?
     var showFarText = true
+    var noteName = ""
 
     var targetTime = 3.0
     var targetNoteID = 0
@@ -94,7 +95,13 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
             instructionLbl.text = "Play a long \(targetNote!.friendlyName) note and fill up the balloon until it turns green!"
         }
 
-        loadFile("XML Tunes/Long_Tone_25G3G5")
+        let secondChar = noteName[noteName.startIndex.successor()]
+        
+        if secondChar == "♭" {
+            loadFile("XML Tunes/Long_Tone_25G3G5_flat")
+        } else {
+            loadFile("XML Tunes/Long_Tone_25G3G5")
+        }
 
         frequencyThresholdPercent = 1.0 + frequencyThreshold
         farFrequencyThresholdPercent = frequencyThresholdPercent + (frequencyThreshold * 1.5)

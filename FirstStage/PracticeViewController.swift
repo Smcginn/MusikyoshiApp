@@ -89,6 +89,7 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
                     print("an == \(an?.orderId)")
                     destination.targetNote = an
                     destination.targetNoteID = sn.orderId
+                    destination.noteName = (selectedNote?.fullName)!
                 }
                 else
                 {
