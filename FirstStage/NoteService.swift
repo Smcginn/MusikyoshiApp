@@ -8,11 +8,24 @@
 //
 
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
 
 struct NoteService {
-    private static var notes = [Note]()
+    fileprivate static var notes = [Note]()
 
-    static func getNote(step: String, octave: Int) -> Note? {
+    static func getNote(_ step: String, octave: Int) -> Note? {
         let comparisionSet = notes.filter{ n in n.name == step && n.octave == octave }
         if comparisionSet.count == 1
         {
@@ -24,11 +37,11 @@ struct NoteService {
         }
     }
 
-    static func getNote(frequency: Double) -> Note? {
-        return NoteService.getNote(Float(frequency))
+    static func getNote(_ frequency: Float) -> Note? {
+        return NoteService.getNote(Double(frequency))
     }
 
-    static func getNote(frequency: Float) -> Note? {
+    static func getNote(_ frequency: Double) -> Note? {
         var orderId : Int = -1
         
         for n in notes{
@@ -41,7 +54,7 @@ struct NoteService {
         
         if(orderId > -1)
         {
-            let comparisionSet = notes.filter{ n in n.orderId == orderId || n.orderId == orderId-1 }.sort({ $0.orderId < $1.orderId })
+            let comparisionSet = notes.filter{ n in n.orderId == orderId || n.orderId == orderId-1 }.sorted(by: { $0.orderId < $1.orderId })
             if comparisionSet.count > 1
             {
 //                for n in comparisionSet
@@ -80,7 +93,7 @@ struct NoteService {
         }
     }
     
-    static func getNote(orderId: Int) -> Note? {
+    static func getNote(_ orderId: Int) -> Note? {
         if(orderId > -1)
         {
             let comparisionSet = notes.filter{ n in n.orderId == orderId}
@@ -99,7 +112,7 @@ struct NoteService {
         }
     }
     
-    static func getNoteOffset(orderId: Int) -> NoteOffset? {
+    static func getNoteOffset(_ orderId: Int) -> NoteOffset? {
         switch orderId
         {
             case 53: //F3
@@ -125,7 +138,7 @@ struct NoteService {
     
     //TODO: this doesn't work for #s
     //figure out a way to fix it
-    static func getYPos(orderId: Int) -> Double{
+    static func getYPos(_ orderId: Int) -> Double{
         
         switch orderId
         {
@@ -193,14 +206,14 @@ struct NoteService {
         }
     }
 
-    static func getLowestFrequency() -> Float {
+    static func getLowestFrequency() -> Double {
         if let n = notes.first {
             return n.frequency
         }
         return 0
     }
     
-    static func getHighestFrequency() -> Float {
+    static func getHighestFrequency() -> Double {
         if let n = notes.last {
             return n.frequency
         }

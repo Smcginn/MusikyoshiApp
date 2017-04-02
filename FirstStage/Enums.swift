@@ -10,15 +10,15 @@
 import UIKit
 
 enum ExerciseState {
-    case NotStarted
-    case InProgress
-    case Completed
-    case FeedbackProvided
+    case notStarted
+    case inProgress
+    case completed
+    case feedbackProvided
 }
 
 enum NoteLength {
-    case Half
-    case Quarter
-    case Whole
+    case half
+    case quarter
+    case whole
 //    case Eighth
 }

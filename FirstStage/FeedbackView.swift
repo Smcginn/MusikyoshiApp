@@ -15,23 +15,23 @@ class FeedbackView: UIImageView, UIGestureRecognizerDelegate {
     var parentViewController: UIViewController?
     var setupAlready = false
 
-    func setupFeedbackView(parent: UIViewController) {
+    func setupFeedbackView(_ parent: UIViewController) {
         guard !setupAlready else { return }
 
         setupAlready = true
         parentViewController = parent
         containingView = parent.view
 
-        feedbackViewTapRecognizer.enabled = false
+        feedbackViewTapRecognizer.isEnabled = false
         feedbackViewTapRecognizer.addTarget(self, action: #selector(FeedbackView.feedbackViewTapped(_:)))
         feedbackViewTapRecognizer.numberOfTapsRequired = 1
         addGestureRecognizer(feedbackViewTapRecognizer)
 
-        contentMode = .ScaleAspectFit
+        contentMode = .scaleAspectFit
         clipsToBounds = true
-        hidden = true
-        userInteractionEnabled = true
-        backgroundColor = UIColor.clearColor()
+        isHidden = true
+        isUserInteractionEnabled = true
+        backgroundColor = UIColor.clear
 
         self.frame = containingView.bounds
         containingView.addSubview(self)
@@ -39,15 +39,15 @@ class FeedbackView: UIImageView, UIGestureRecognizerDelegate {
         image = UIImage(named: "FeedbackImage")
     }
 
-    func showFeedback(containingFrame: CGRect) {
+    func showFeedback(_ containingFrame: CGRect) {
         self.frame = containingFrame
-        feedbackViewTapRecognizer.enabled = true
-        hidden = false
+        feedbackViewTapRecognizer.isEnabled = true
+        isHidden = false
     }
 
-    func feedbackViewTapped(sender: UITapGestureRecognizer) {
-        hidden = true
-        feedbackViewTapRecognizer.enabled = false
+    func feedbackViewTapped(_ sender: UITapGestureRecognizer) {
+        isHidden = true
+        feedbackViewTapRecognizer.isEnabled = false
     }
     
     

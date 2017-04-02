@@ -27,5 +27,6 @@ struct Constants
         static let TimingThreshold = "timingThreshold"
         static let Transposition = "transposition"
         static let ShowNoteMarkers = "shownotemarkers"
+        static let ShowAnalysis = "showanalysis"
     }
 }

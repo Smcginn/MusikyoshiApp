@@ -11,22 +11,22 @@ import Foundation
 class NoteAnalysis {
 
     enum NoteResult {
-        case NoteRhythmMatch
-        case NoteRhythmMiss
-        case NoteRhythmLate
-        case NoteRhythmLateRepeat
-        case RestMatch
-        case RestMiss
-        case RestLateMiss
-        case RestLateMissRepeat
-        case NoResult
+        case noteRhythmMatch
+        case noteRhythmMiss
+        case noteRhythmLate
+        case noteRhythmLateRepeat
+        case restMatch
+        case restMiss
+        case restLateMiss
+        case restLateMissRepeat
+        case noResult
     
-        case PitchMatch
-        case PitchLow
-        case PitchHigh
-        case PitchMatchLate
-        case PitchLowLate
-        case PitchHighLate
+        case pitchMatch
+        case pitchLow
+        case pitchHigh
+        case pitchMatchLate
+        case pitchLowLate
+        case pitchHighLate
     }
 
     var noteResultValues = [NoteResult: Int]()

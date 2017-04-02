@@ -11,7 +11,7 @@ import UIKit
 
 class Note
 {
-    var frequency: Float!
+    var frequency: Double!
     var name: String!
     var octave: Int!
     var orderId: Int!
@@ -19,7 +19,7 @@ class Note
     
     var xPos = 0.0
     var isRest = false
-    var length : NoteLength = .Whole
+    var length : NoteLength = .whole
     
     var friendlyName : String{
         get{
@@ -41,7 +41,7 @@ class Note
         
     }
     
-    init(_ frequency: Float, _ name: String, _ octave: Int, _ orderId: Int) {
+    init(_ frequency: Double, _ name: String, _ octave: Int, _ orderId: Int) {
         self.frequency = frequency
         self.name = name
         self.octave = octave
@@ -49,7 +49,7 @@ class Note
         self.flatName = ""
     }
     
-    init(_ frequency: Float, _ name: String, _ octave: Int, _ orderId: Int, _ flatName: String) {
+    init(_ frequency: Double, _ name: String, _ octave: Int, _ orderId: Int, _ flatName: String) {
         self.frequency = frequency
         self.name = name
         self.octave = octave

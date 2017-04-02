@@ -1,8 +1,9 @@
 //
 //  SSScrollView
-//  SeeScore for iOS
+//  SeeScoreiOS Sample App
 //
-// No warranty is made as to the suitability of this for any purpose
+//  You are free to copy and modify this code as you wish
+//  No warranty is made as to the suitability of this for any purpose
 //
 // This is the main scrollable view which displays a MusicXML file
 
@@ -12,10 +13,8 @@
 #import "SSUpdateScrollProtocol.h"
 #import <SeeScoreLib/SeeScoreLib.h>
 #import "SSViewInterface.h"
-#import "SSEditLayerProtocol.h"
 
 @class SSComponent;
-@class SSEditLayer;
 
 /*!
  * @typedef handler_t
@@ -62,11 +61,12 @@ typedef NS_ENUM(NSInteger, CursorType_e) {cursor_line, cursor_rect};
 //enum ScrollType_e {scroll_off, scroll_system, scroll_bar};
 typedef NS_ENUM(NSInteger, ScrollType_e) {scroll_off, scroll_system, scroll_bar};
 
+
 /*!
  * @interface SSScrollView
  * @abstract A scrollable view to display a MusicXML score as a vertical sequence of rectangular system views
  */
-@interface SSScrollView : UIScrollView <SSBarControlProtocol, SSViewInterface, ScoreChangeHandler> {
+@interface SSScrollView : UIScrollView <SSBarControlProtocol, ScoreChangeHandler> {
 
 	IBOutlet UIView *containedView;
 }
@@ -132,16 +132,28 @@ typedef NS_ENUM(NSInteger, ScrollType_e) {scroll_off, scroll_system, scroll_bar}
 @property (readonly) int cursorBarIndex;
 
 /*!
- * @property editLayer
- * @abstract the edit layer, nil if not in edit mode
- */
-@property (readonly) id<SSEditLayerProtocol> editLayer;
-
-/*!
  * @property bottom
  * @abstract return y-coord of bottom of bottom system
  */
 @property (readonly) float bottom;
+
+/*!
+ * @property isDisplayingStart
+ * @abstract true if the first system is (fully) displayed on the screen
+ */
+@property (readonly)  bool isDisplayingStart;
+
+/*!
+ * @property isDisplayingEnd
+ * @abstract true if the last system is (fully) displayed on the screen
+ */
+@property (readonly)  bool isDisplayingEnd;
+
+/*!
+ * @property isDisplayingStart
+ * @abstract true if the entire score is currently visible on the screen (not scrollable in this case)
+ */
+@property (readonly)  bool isDisplayingWhole;
 
 
 /*!
@@ -180,28 +192,6 @@ typedef NS_ENUM(NSInteger, ScrollType_e) {scroll_off, scroll_system, scroll_bar}
 	   completion:(handler_t)completionHandler;
 
 /*!
- @method setSinglePartDisplay: startBarIndex: mag: completion:
- @abstract set single part display mode
- @param partIndex the single part to display
- @param startBarIndex the left hand bar
- @param mag the magnification
- @param completionHandler called on completion of layout
- */
--(void)setSinglePartDisplay:(int)partIndex
-				startBarIndex:(int)startBarIndex
-						  mag:(float)mag
-				   completion:(handler_t)completionHandler;
-
-/*!
- @method clearSinglePartDisplay:completion:
- @abstract clear single part display mode
- @param mag the magnification
- @param completionHandler called on completion of layout
- */
--(void)clearSinglePartDisplay:(float)mag
-				completion:(handler_t)completionHandler;
-
-/*!
  * @method displayParts
  * @abstract set which parts to display
  * @param parts array indexed by part. Array element is boolean NSNumber. True to display part, false to hide it
@@ -221,56 +211,41 @@ typedef NS_ENUM(NSInteger, ScrollType_e) {scroll_off, scroll_system, scroll_bar}
  */
 -(void)abortBackgroundProcessing:(handler_t)completionHandler;
 
-typedef id<SSEditLayerProtocol> (^ss_create_editlayer_t)(CGRect frame, float systemBottom);
-
 /*!
- * @method setEditMode:
- * @abstract set edit mode and add editlayer
+ * @method clearDisplay
+ * @abstract clear displayed systems but retain score
  */
--(bool)setEditMode:(int)partIndex
-	 startBarIndex:(int)startBarIndex
-			   mag:(float)mag
-   createEditLayer:(ss_create_editlayer_t)createEditLayer
-		completion:(handler_t)completionHandler;
+-(void)clearDisplay;
 
 /*!
- * @function clearEditMode
- * @abstract unset edit mode and remove edit layer
- */
--(void)clearEditMode;
-
-/*!
- * @function clearAll
+ * @method clearAll
  * @abstract clear everything - need to call setupScore after calling this
  */
 -(void)clearAll;
 
 /*!
- @function relayoutWithCompletion
+ @method relayoutWithCompletion
  @abstract clear and relayout systems
  */
 -(void)relayout;
 
 /*!
- @function relayoutWithCompletion
+ @method relayoutWithCompletion
  @abstract clear and relayout systems
  @param completionHandler called on completion of layout
  */
 -(void)relayoutWithCompletion:(handler_t)completionHandler;
 
-// return YES if the first system in the score is currently (fully) displayed
--(BOOL)isDisplayingStart;
-
-// return YES if the last system in the score is currently (fully) displayed
--(BOOL)isDisplayingEnd;
-
-// return true if the entire score is currently visible on the screen (not scrollable in this case)
--(BOOL)isDisplayingWhole;
-
-// return the bar index at the specified point
+/*!
+ @method barIndexForPos:
+ @return the bar index at the given point in the score
+ */
 -(int)barIndexForPos:(CGPoint)pos;
 
-// return the part index at the specified point
+/*!
+ @method partIndexForPos:
+ @return the part index at the given point in the score
+ */
 -(int)partIndexForPos:(CGPoint)pos;
 
 /*!
@@ -311,8 +286,7 @@ typedef id<SSEditLayerProtocol> (^ss_create_editlayer_t)(CGRect frame, float sys
 // * @enum CursorType_e
 // * @abstract define the type of cursor, vertical line or rectangle around the bar
 // */
-////enum CursorType_e {cursor_line, cursor_rect};
-//typedef NS_ENUM(NSInteger, CursorType_e) {cursor_line, cursor_rect};
+//enum CursorType_e {cursor_line, cursor_rect};
 //
 ///*!
 // * @enum ScrollType_e
@@ -321,8 +295,7 @@ typedef id<SSEditLayerProtocol> (^ss_create_editlayer_t)(CGRect frame, float sys
 // * scroll_bar (smoother than scroll-system) is set to minimise the scroll distance between adjacent bars in
 // * different systems
 // */
-////enum ScrollType_e {scroll_off, scroll_system, scroll_bar};
-//typedef NS_ENUM(NSInteger, ScrollType_e) {scroll_off, scroll_system, scroll_bar};
+//enum ScrollType_e {scroll_off, scroll_system, scroll_bar};
 
 /*!
  * @method setCursorAtBar
@@ -351,6 +324,13 @@ typedef id<SSEditLayerProtocol> (^ss_create_editlayer_t)(CGRect frame, float sys
  * @abstract hide the cursor
  */
 -(void)hideCursor;
+
+/*!
+ * @method setCursorColour:
+ * @abstract set the cursor outline colour
+ * @param colour the new colour
+ */
+-(void)setCursorColour:(UIColor*)colour;
 
 /*!
  * @method scroll
@@ -441,29 +421,28 @@ typedef id<SSEditLayerProtocol> (^ss_create_editlayer_t)(CGRect frame, float sys
 
 /*!
  * @method componentsAt:
- * @abstract
+ * @return an array of components within maxDistance of point p
  */
 -(NSArray<SSComponent*> *)componentsAt:(CGPoint)p maxDistance:(float)maxDistance;
-
-/*!
- * @method tap:
- * @abstract
- */
--(void)tap:(CGPoint)p;
-
-/*!
- * @method pan:
- * @abstract
- */
--(void)pan:(UIGestureRecognizer*)gr;
 
 //  Added by David S Reich on 14/05/2016.
 //  Modification Copyright © 2016 Musikyoshi. All rights reserved.
 /*!
  * @property optimalSingleSystem
  * @abstract optimalSingleSystem - true for making one very wide single system
+ * Set this before calling setupScore
+ * Should NOT be set at the same time as optimalXMLxLayoutMagnification
  */
 @property (nonatomic) bool optimalSingleSystem;
 
-@end
+//  Added by David S Reich on 04/03/2017.
+//  Modification Copyright © 2017 Musikyoshi. All rights reserved.
+/*!
+ * @property optimalXMLxLayoutMagnification
+ * @abstract optimalXMLxLayoutMagnification - true for setting the magnification when useXMLxLayout is true
+ * Set this before calling setupScore
+ * Should NOT be set at the same time as optimalSingleSystem
+ */
+@property (nonatomic) bool optimalXMLxLayoutMagnification;
 
+@end

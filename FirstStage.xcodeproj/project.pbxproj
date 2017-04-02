@@ -25,8 +25,6 @@
 		6324D3171CE73234001934A5 /* SeeScoreLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6324D3151CE73234001934A5 /* SeeScoreLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6324D31A1CE7327F001934A5 /* SeeScoreLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6324D3191CE7327F001934A5 /* SeeScoreLib.framework */; };
 		6324D31B1CE7327F001934A5 /* SeeScoreLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6324D3191CE7327F001934A5 /* SeeScoreLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6324D35C1CE73C47001934A5 /* sampledInstruments.m in Sources */ = {isa = PBXBuildFile; fileRef = 6324D34F1CE73C47001934A5 /* sampledInstruments.m */; };
-		6324D35D1CE73C47001934A5 /* sampledInstruments.m in Sources */ = {isa = PBXBuildFile; fileRef = 6324D34F1CE73C47001934A5 /* sampledInstruments.m */; };
 		6324D35E1CE73C47001934A5 /* SSScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6324D3501CE73C47001934A5 /* SSScrollView.m */; };
 		6324D35F1CE73C47001934A5 /* SSScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6324D3501CE73C47001934A5 /* SSScrollView.m */; };
 		6324D3601CE73C47001934A5 /* SSSystemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6324D3511CE73C47001934A5 /* SSSystemView.m */; };
@@ -69,6 +67,7 @@
 		633D1B711CF94BF000B5C4FD /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633D1B6C1CF94BEC00B5C4FD /* FeedbackView.swift */; };
 		633D1B731CF94CEB00B5C4FD /* FeedbackImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 633D1B721CF94CEB00B5C4FD /* FeedbackImage.png */; };
 		633D1B741CF9588700B5C4FD /* FeedbackImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 633D1B721CF94CEB00B5C4FD /* FeedbackImage.png */; };
+		634658381E90BE4F00C162CF /* synth-samples in Resources */ = {isa = PBXBuildFile; fileRef = 634658371E90BE4F00C162CF /* synth-samples */; };
 		6355ECF71CF68EB70037945F /* marmstk1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6355ECF61CF68EB60037945F /* marmstk1.wav */; };
 		6355ECF81CF68EB70037945F /* marmstk1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6355ECF61CF68EB60037945F /* marmstk1.wav */; };
 		6379EE7D1CE95CDF00188A70 /* NoteAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6379EE7C1CE95CDF00188A70 /* NoteAnalysis.swift */; };
@@ -81,266 +80,20 @@
 		638129591CF05C7900A40C8E /* Balloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638129561CF05C7900A40C8E /* Balloon.swift */; };
 		6381295A1CF05C7900A40C8E /* SparkLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638129571CF05C7900A40C8E /* SparkLine.swift */; };
 		6381295B1CF05C7900A40C8E /* SparkLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638129571CF05C7900A40C8E /* SparkLine.swift */; };
-		6387FDD21CEDB1A60054DE44 /* libAudioKit iOS Dynamic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6387FDC91CEDB15B0054DE44 /* libAudioKit iOS Dynamic.a */; };
-		6387FDD31CEDB1AE0054DE44 /* libAudioKit iOS Dynamic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6387FDC91CEDB15B0054DE44 /* libAudioKit iOS Dynamic.a */; };
-		6387FDDC1CEDB3510054DE44 /* CsoundLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6387FDDA1CEDB3510054DE44 /* CsoundLib.framework */; };
-		6387FDDD1CEDB3510054DE44 /* CsoundLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6387FDDA1CEDB3510054DE44 /* CsoundLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6387FDDE1CEDB3510054DE44 /* libsndfile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6387FDDB1CEDB3510054DE44 /* libsndfile.framework */; };
-		6387FDDF1CEDB3510054DE44 /* libsndfile.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6387FDDB1CEDB3510054DE44 /* libsndfile.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6387FDE01CEDB3E10054DE44 /* CsoundLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6387FDDA1CEDB3510054DE44 /* CsoundLib.framework */; };
-		6387FDE31CEDB41E0054DE44 /* CsoundLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6387FDDA1CEDB3510054DE44 /* CsoundLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6387FDE41CEDB41E0054DE44 /* libsndfile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6387FDDB1CEDB3510054DE44 /* libsndfile.framework */; };
-		6387FDE51CEDB41E0054DE44 /* libsndfile.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6387FDDB1CEDB3510054DE44 /* libsndfile.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6387FDE81CEDB5710054DE44 /* AudioKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6387FDE71CEDB5710054DE44 /* AudioKit.swift */; };
-		6387FDE91CEDB5710054DE44 /* AudioKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6387FDE71CEDB5710054DE44 /* AudioKit.swift */; };
 		639A2E451CF5AB09004F7B1A /* DotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639A2E441CF5AB09004F7B1A /* DotView.swift */; };
 		639A2E461CF5AB09004F7B1A /* DotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639A2E441CF5AB09004F7B1A /* DotView.swift */; };
 		639A2E541CF5E6CA004F7B1A /* VisualMetronomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639A2E531CF5E6CA004F7B1A /* VisualMetronomeView.swift */; };
 		639A2E551CF5E6CA004F7B1A /* VisualMetronomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639A2E531CF5E6CA004F7B1A /* VisualMetronomeView.swift */; };
+		63B427591E5016AB000E35AA /* Intonation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B427581E5016AB000E35AA /* Intonation.swift */; };
+		63B4275A1E505573000E35AA /* Intonation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B427581E5016AB000E35AA /* Intonation.swift */; };
+		63B4275C1E5057BB000E35AA /* SSSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B4275B1E5057BB000E35AA /* SSSettingsViewController.swift */; };
+		63B4275D1E5057C2000E35AA /* SSSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B4275B1E5057BB000E35AA /* SSSettingsViewController.swift */; };
+		63C03ABA1E2A0B11009F4033 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63C03AB91E2A0B11009F4033 /* AudioKit.framework */; };
+		63C03ABB1E2A0B11009F4033 /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 63C03AB91E2A0B11009F4033 /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		63C03ABF1E2A0C43009F4033 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63C03AB91E2A0B11009F4033 /* AudioKit.framework */; };
 		63EB90171CF1C4EB00F09B05 /* AVAudioSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EB90161CF1C4EB00F09B05 /* AVAudioSessionManager.swift */; };
 		63EB90181CF1C4EC00F09B05 /* AVAudioSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EB90161CF1C4EB00F09B05 /* AVAudioSessionManager.swift */; };
-		63F9C8071CE74826000F4470 /* Piano.mf.23.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7B11CE74825000F4470 /* Piano.mf.23.m4a */; };
-		63F9C8081CE74826000F4470 /* Piano.mf.23.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7B11CE74825000F4470 /* Piano.mf.23.m4a */; };
-		63F9C8091CE74826000F4470 /* Piano.mf.24.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7B21CE74825000F4470 /* Piano.mf.24.m4a */; };
-		63F9C80A1CE74826000F4470 /* Piano.mf.24.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7B21CE74825000F4470 /* Piano.mf.24.m4a */; };
-		63F9C80B1CE74826000F4470 /* Piano.mf.25.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7B31CE74825000F4470 /* Piano.mf.25.m4a */; };
-		63F9C80C1CE74826000F4470 /* Piano.mf.25.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7B31CE74825000F4470 /* Piano.mf.25.m4a */; };
-		63F9C80D1CE74826000F4470 /* Piano.mf.26.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7B41CE74825000F4470 /* Piano.mf.26.m4a */; };
-		63F9C80E1CE74826000F4470 /* Piano.mf.26.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7B41CE74825000F4470 /* Piano.mf.26.m4a */; };
-		63F9C80F1CE74826000F4470 /* Piano.mf.27.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7B51CE74825000F4470 /* Piano.mf.27.m4a */; };
-		63F9C8101CE74826000F4470 /* Piano.mf.27.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7B51CE74825000F4470 /* Piano.mf.27.m4a */; };
-		63F9C8111CE74826000F4470 /* Piano.mf.28.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7B61CE74825000F4470 /* Piano.mf.28.m4a */; };
-		63F9C8121CE74826000F4470 /* Piano.mf.28.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7B61CE74825000F4470 /* Piano.mf.28.m4a */; };
-		63F9C8131CE74826000F4470 /* Piano.mf.29.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7B71CE74825000F4470 /* Piano.mf.29.m4a */; };
-		63F9C8141CE74826000F4470 /* Piano.mf.29.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7B71CE74825000F4470 /* Piano.mf.29.m4a */; };
-		63F9C8151CE74826000F4470 /* Piano.mf.30.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7B81CE74825000F4470 /* Piano.mf.30.m4a */; };
-		63F9C8161CE74826000F4470 /* Piano.mf.30.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7B81CE74825000F4470 /* Piano.mf.30.m4a */; };
-		63F9C8171CE74826000F4470 /* Piano.mf.31.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7B91CE74825000F4470 /* Piano.mf.31.m4a */; };
-		63F9C8181CE74826000F4470 /* Piano.mf.31.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7B91CE74825000F4470 /* Piano.mf.31.m4a */; };
-		63F9C8191CE74826000F4470 /* Piano.mf.32.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7BA1CE74825000F4470 /* Piano.mf.32.m4a */; };
-		63F9C81A1CE74826000F4470 /* Piano.mf.32.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7BA1CE74825000F4470 /* Piano.mf.32.m4a */; };
-		63F9C81B1CE74826000F4470 /* Piano.mf.33.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7BB1CE74825000F4470 /* Piano.mf.33.m4a */; };
-		63F9C81C1CE74826000F4470 /* Piano.mf.33.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7BB1CE74825000F4470 /* Piano.mf.33.m4a */; };
-		63F9C81D1CE74826000F4470 /* Piano.mf.34.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7BC1CE74825000F4470 /* Piano.mf.34.m4a */; };
-		63F9C81E1CE74826000F4470 /* Piano.mf.34.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7BC1CE74825000F4470 /* Piano.mf.34.m4a */; };
-		63F9C81F1CE74826000F4470 /* Piano.mf.35.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7BD1CE74825000F4470 /* Piano.mf.35.m4a */; };
-		63F9C8201CE74826000F4470 /* Piano.mf.35.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7BD1CE74825000F4470 /* Piano.mf.35.m4a */; };
-		63F9C8211CE74826000F4470 /* Piano.mf.36.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7BE1CE74825000F4470 /* Piano.mf.36.m4a */; };
-		63F9C8221CE74826000F4470 /* Piano.mf.36.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7BE1CE74825000F4470 /* Piano.mf.36.m4a */; };
-		63F9C8231CE74826000F4470 /* Piano.mf.37.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7BF1CE74825000F4470 /* Piano.mf.37.m4a */; };
-		63F9C8241CE74826000F4470 /* Piano.mf.37.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7BF1CE74825000F4470 /* Piano.mf.37.m4a */; };
-		63F9C8251CE74826000F4470 /* Piano.mf.38.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7C01CE74825000F4470 /* Piano.mf.38.m4a */; };
-		63F9C8261CE74826000F4470 /* Piano.mf.38.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7C01CE74825000F4470 /* Piano.mf.38.m4a */; };
-		63F9C8271CE74826000F4470 /* Piano.mf.39.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7C11CE74825000F4470 /* Piano.mf.39.m4a */; };
-		63F9C8281CE74826000F4470 /* Piano.mf.39.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7C11CE74825000F4470 /* Piano.mf.39.m4a */; };
-		63F9C8291CE74826000F4470 /* Piano.mf.40.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7C21CE74825000F4470 /* Piano.mf.40.m4a */; };
-		63F9C82A1CE74826000F4470 /* Piano.mf.40.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7C21CE74825000F4470 /* Piano.mf.40.m4a */; };
-		63F9C82B1CE74826000F4470 /* Piano.mf.41.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7C31CE74825000F4470 /* Piano.mf.41.m4a */; };
-		63F9C82C1CE74826000F4470 /* Piano.mf.41.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7C31CE74825000F4470 /* Piano.mf.41.m4a */; };
-		63F9C82D1CE74826000F4470 /* Piano.mf.42.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7C41CE74825000F4470 /* Piano.mf.42.m4a */; };
-		63F9C82E1CE74826000F4470 /* Piano.mf.42.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7C41CE74825000F4470 /* Piano.mf.42.m4a */; };
-		63F9C82F1CE74826000F4470 /* Piano.mf.43.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7C51CE74825000F4470 /* Piano.mf.43.m4a */; };
-		63F9C8301CE74826000F4470 /* Piano.mf.43.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7C51CE74825000F4470 /* Piano.mf.43.m4a */; };
-		63F9C8311CE74826000F4470 /* Piano.mf.44.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7C61CE74825000F4470 /* Piano.mf.44.m4a */; };
-		63F9C8321CE74826000F4470 /* Piano.mf.44.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7C61CE74825000F4470 /* Piano.mf.44.m4a */; };
-		63F9C8331CE74826000F4470 /* Piano.mf.45.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7C71CE74825000F4470 /* Piano.mf.45.m4a */; };
-		63F9C8341CE74826000F4470 /* Piano.mf.45.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7C71CE74825000F4470 /* Piano.mf.45.m4a */; };
-		63F9C8351CE74826000F4470 /* Piano.mf.46.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7C81CE74825000F4470 /* Piano.mf.46.m4a */; };
-		63F9C8361CE74826000F4470 /* Piano.mf.46.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7C81CE74825000F4470 /* Piano.mf.46.m4a */; };
-		63F9C8371CE74826000F4470 /* Piano.mf.47.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7C91CE74825000F4470 /* Piano.mf.47.m4a */; };
-		63F9C8381CE74826000F4470 /* Piano.mf.47.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7C91CE74825000F4470 /* Piano.mf.47.m4a */; };
-		63F9C8391CE74826000F4470 /* Piano.mf.48.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7CA1CE74825000F4470 /* Piano.mf.48.m4a */; };
-		63F9C83A1CE74826000F4470 /* Piano.mf.48.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7CA1CE74825000F4470 /* Piano.mf.48.m4a */; };
-		63F9C83B1CE74826000F4470 /* Piano.mf.49.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7CB1CE74825000F4470 /* Piano.mf.49.m4a */; };
-		63F9C83C1CE74826000F4470 /* Piano.mf.49.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7CB1CE74825000F4470 /* Piano.mf.49.m4a */; };
-		63F9C83D1CE74826000F4470 /* Piano.mf.50.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7CC1CE74825000F4470 /* Piano.mf.50.m4a */; };
-		63F9C83E1CE74826000F4470 /* Piano.mf.50.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7CC1CE74825000F4470 /* Piano.mf.50.m4a */; };
-		63F9C83F1CE74826000F4470 /* Piano.mf.51.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7CD1CE74825000F4470 /* Piano.mf.51.m4a */; };
-		63F9C8401CE74826000F4470 /* Piano.mf.51.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7CD1CE74825000F4470 /* Piano.mf.51.m4a */; };
-		63F9C8411CE74826000F4470 /* Piano.mf.52.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7CE1CE74825000F4470 /* Piano.mf.52.m4a */; };
-		63F9C8421CE74826000F4470 /* Piano.mf.52.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7CE1CE74825000F4470 /* Piano.mf.52.m4a */; };
-		63F9C8431CE74826000F4470 /* Piano.mf.53.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7CF1CE74825000F4470 /* Piano.mf.53.m4a */; };
-		63F9C8441CE74826000F4470 /* Piano.mf.53.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7CF1CE74825000F4470 /* Piano.mf.53.m4a */; };
-		63F9C8451CE74826000F4470 /* Piano.mf.54.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7D01CE74825000F4470 /* Piano.mf.54.m4a */; };
-		63F9C8461CE74826000F4470 /* Piano.mf.54.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7D01CE74825000F4470 /* Piano.mf.54.m4a */; };
-		63F9C8471CE74826000F4470 /* Piano.mf.55.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7D11CE74825000F4470 /* Piano.mf.55.m4a */; };
-		63F9C8481CE74826000F4470 /* Piano.mf.55.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7D11CE74825000F4470 /* Piano.mf.55.m4a */; };
-		63F9C8491CE74826000F4470 /* Piano.mf.56.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7D21CE74825000F4470 /* Piano.mf.56.m4a */; };
-		63F9C84A1CE74826000F4470 /* Piano.mf.56.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7D21CE74825000F4470 /* Piano.mf.56.m4a */; };
-		63F9C84B1CE74826000F4470 /* Piano.mf.57.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7D31CE74825000F4470 /* Piano.mf.57.m4a */; };
-		63F9C84C1CE74826000F4470 /* Piano.mf.57.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7D31CE74825000F4470 /* Piano.mf.57.m4a */; };
-		63F9C84D1CE74826000F4470 /* Piano.mf.58.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7D41CE74825000F4470 /* Piano.mf.58.m4a */; };
-		63F9C84E1CE74826000F4470 /* Piano.mf.58.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7D41CE74825000F4470 /* Piano.mf.58.m4a */; };
-		63F9C84F1CE74826000F4470 /* Piano.mf.59.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7D51CE74825000F4470 /* Piano.mf.59.m4a */; };
-		63F9C8501CE74826000F4470 /* Piano.mf.59.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7D51CE74825000F4470 /* Piano.mf.59.m4a */; };
-		63F9C8511CE74826000F4470 /* Piano.mf.60.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7D61CE74825000F4470 /* Piano.mf.60.m4a */; };
-		63F9C8521CE74826000F4470 /* Piano.mf.60.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7D61CE74825000F4470 /* Piano.mf.60.m4a */; };
-		63F9C8531CE74826000F4470 /* Piano.mf.61.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7D71CE74825000F4470 /* Piano.mf.61.m4a */; };
-		63F9C8541CE74826000F4470 /* Piano.mf.61.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7D71CE74825000F4470 /* Piano.mf.61.m4a */; };
-		63F9C8551CE74826000F4470 /* Piano.mf.62.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7D81CE74825000F4470 /* Piano.mf.62.m4a */; };
-		63F9C8561CE74826000F4470 /* Piano.mf.62.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7D81CE74825000F4470 /* Piano.mf.62.m4a */; };
-		63F9C8571CE74826000F4470 /* Piano.mf.63.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7D91CE74825000F4470 /* Piano.mf.63.m4a */; };
-		63F9C8581CE74826000F4470 /* Piano.mf.63.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7D91CE74825000F4470 /* Piano.mf.63.m4a */; };
-		63F9C8591CE74826000F4470 /* Piano.mf.64.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7DA1CE74825000F4470 /* Piano.mf.64.m4a */; };
-		63F9C85A1CE74826000F4470 /* Piano.mf.64.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7DA1CE74825000F4470 /* Piano.mf.64.m4a */; };
-		63F9C85B1CE74826000F4470 /* Piano.mf.65.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7DB1CE74825000F4470 /* Piano.mf.65.m4a */; };
-		63F9C85C1CE74826000F4470 /* Piano.mf.65.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7DB1CE74825000F4470 /* Piano.mf.65.m4a */; };
-		63F9C85D1CE74826000F4470 /* Piano.mf.66.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7DC1CE74825000F4470 /* Piano.mf.66.m4a */; };
-		63F9C85E1CE74826000F4470 /* Piano.mf.66.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7DC1CE74825000F4470 /* Piano.mf.66.m4a */; };
-		63F9C85F1CE74826000F4470 /* Piano.mf.67.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7DD1CE74825000F4470 /* Piano.mf.67.m4a */; };
-		63F9C8601CE74826000F4470 /* Piano.mf.67.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7DD1CE74825000F4470 /* Piano.mf.67.m4a */; };
-		63F9C8611CE74826000F4470 /* Piano.mf.68.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7DE1CE74825000F4470 /* Piano.mf.68.m4a */; };
-		63F9C8621CE74826000F4470 /* Piano.mf.68.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7DE1CE74825000F4470 /* Piano.mf.68.m4a */; };
-		63F9C8631CE74826000F4470 /* Piano.mf.69.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7DF1CE74825000F4470 /* Piano.mf.69.m4a */; };
-		63F9C8641CE74826000F4470 /* Piano.mf.69.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7DF1CE74825000F4470 /* Piano.mf.69.m4a */; };
-		63F9C8651CE74826000F4470 /* Piano.mf.70.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7E01CE74825000F4470 /* Piano.mf.70.m4a */; };
-		63F9C8661CE74826000F4470 /* Piano.mf.70.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7E01CE74825000F4470 /* Piano.mf.70.m4a */; };
-		63F9C8671CE74826000F4470 /* Piano.mf.71.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7E11CE74825000F4470 /* Piano.mf.71.m4a */; };
-		63F9C8681CE74826000F4470 /* Piano.mf.71.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7E11CE74825000F4470 /* Piano.mf.71.m4a */; };
-		63F9C8691CE74826000F4470 /* Piano.mf.72.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7E21CE74825000F4470 /* Piano.mf.72.m4a */; };
-		63F9C86A1CE74826000F4470 /* Piano.mf.72.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7E21CE74825000F4470 /* Piano.mf.72.m4a */; };
-		63F9C86B1CE74826000F4470 /* Piano.mf.73.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7E31CE74825000F4470 /* Piano.mf.73.m4a */; };
-		63F9C86C1CE74826000F4470 /* Piano.mf.73.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7E31CE74825000F4470 /* Piano.mf.73.m4a */; };
-		63F9C86D1CE74826000F4470 /* Piano.mf.74.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7E41CE74825000F4470 /* Piano.mf.74.m4a */; };
-		63F9C86E1CE74826000F4470 /* Piano.mf.74.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7E41CE74825000F4470 /* Piano.mf.74.m4a */; };
-		63F9C86F1CE74826000F4470 /* Piano.mf.75.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7E51CE74825000F4470 /* Piano.mf.75.m4a */; };
-		63F9C8701CE74826000F4470 /* Piano.mf.75.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7E51CE74825000F4470 /* Piano.mf.75.m4a */; };
-		63F9C8711CE74826000F4470 /* Piano.mf.76.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7E61CE74825000F4470 /* Piano.mf.76.m4a */; };
-		63F9C8721CE74826000F4470 /* Piano.mf.76.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7E61CE74825000F4470 /* Piano.mf.76.m4a */; };
-		63F9C8731CE74826000F4470 /* Piano.mf.77.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7E71CE74825000F4470 /* Piano.mf.77.m4a */; };
-		63F9C8741CE74826000F4470 /* Piano.mf.77.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7E71CE74825000F4470 /* Piano.mf.77.m4a */; };
-		63F9C8751CE74826000F4470 /* Piano.mf.78.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7E81CE74825000F4470 /* Piano.mf.78.m4a */; };
-		63F9C8761CE74826000F4470 /* Piano.mf.78.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7E81CE74825000F4470 /* Piano.mf.78.m4a */; };
-		63F9C8771CE74826000F4470 /* Piano.mf.79.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7E91CE74825000F4470 /* Piano.mf.79.m4a */; };
-		63F9C8781CE74826000F4470 /* Piano.mf.79.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7E91CE74825000F4470 /* Piano.mf.79.m4a */; };
-		63F9C8791CE74826000F4470 /* Piano.mf.80.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7EA1CE74825000F4470 /* Piano.mf.80.m4a */; };
-		63F9C87A1CE74826000F4470 /* Piano.mf.80.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7EA1CE74825000F4470 /* Piano.mf.80.m4a */; };
-		63F9C87B1CE74826000F4470 /* Piano.mf.81.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7EB1CE74825000F4470 /* Piano.mf.81.m4a */; };
-		63F9C87C1CE74826000F4470 /* Piano.mf.81.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7EB1CE74825000F4470 /* Piano.mf.81.m4a */; };
-		63F9C87D1CE74826000F4470 /* Piano.mf.82.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7EC1CE74825000F4470 /* Piano.mf.82.m4a */; };
-		63F9C87E1CE74826000F4470 /* Piano.mf.82.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7EC1CE74825000F4470 /* Piano.mf.82.m4a */; };
-		63F9C87F1CE74826000F4470 /* Piano.mf.83.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7ED1CE74825000F4470 /* Piano.mf.83.m4a */; };
-		63F9C8801CE74826000F4470 /* Piano.mf.83.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7ED1CE74825000F4470 /* Piano.mf.83.m4a */; };
-		63F9C8811CE74826000F4470 /* Piano.mf.84.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7EE1CE74825000F4470 /* Piano.mf.84.m4a */; };
-		63F9C8821CE74826000F4470 /* Piano.mf.84.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7EE1CE74825000F4470 /* Piano.mf.84.m4a */; };
-		63F9C8831CE74826000F4470 /* Piano.mf.85.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7EF1CE74825000F4470 /* Piano.mf.85.m4a */; };
-		63F9C8841CE74826000F4470 /* Piano.mf.85.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7EF1CE74825000F4470 /* Piano.mf.85.m4a */; };
-		63F9C8851CE74826000F4470 /* Piano.mf.86.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7F01CE74825000F4470 /* Piano.mf.86.m4a */; };
-		63F9C8861CE74826000F4470 /* Piano.mf.86.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7F01CE74825000F4470 /* Piano.mf.86.m4a */; };
-		63F9C8871CE74826000F4470 /* Piano.mf.87.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7F11CE74825000F4470 /* Piano.mf.87.m4a */; };
-		63F9C8881CE74826000F4470 /* Piano.mf.87.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7F11CE74825000F4470 /* Piano.mf.87.m4a */; };
-		63F9C8891CE74826000F4470 /* Piano.mf.88.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7F21CE74826000F4470 /* Piano.mf.88.m4a */; };
-		63F9C88A1CE74826000F4470 /* Piano.mf.88.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7F21CE74826000F4470 /* Piano.mf.88.m4a */; };
-		63F9C88B1CE74826000F4470 /* Piano.mf.89.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7F31CE74826000F4470 /* Piano.mf.89.m4a */; };
-		63F9C88C1CE74826000F4470 /* Piano.mf.89.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7F31CE74826000F4470 /* Piano.mf.89.m4a */; };
-		63F9C88D1CE74826000F4470 /* Piano.mf.90.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7F41CE74826000F4470 /* Piano.mf.90.m4a */; };
-		63F9C88E1CE74826000F4470 /* Piano.mf.90.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7F41CE74826000F4470 /* Piano.mf.90.m4a */; };
-		63F9C88F1CE74826000F4470 /* Piano.mf.91.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7F51CE74826000F4470 /* Piano.mf.91.m4a */; };
-		63F9C8901CE74826000F4470 /* Piano.mf.91.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7F51CE74826000F4470 /* Piano.mf.91.m4a */; };
-		63F9C8911CE74826000F4470 /* Piano.mf.92.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7F61CE74826000F4470 /* Piano.mf.92.m4a */; };
-		63F9C8921CE74826000F4470 /* Piano.mf.92.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7F61CE74826000F4470 /* Piano.mf.92.m4a */; };
-		63F9C8931CE74826000F4470 /* Piano.mf.93.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7F71CE74826000F4470 /* Piano.mf.93.m4a */; };
-		63F9C8941CE74826000F4470 /* Piano.mf.93.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7F71CE74826000F4470 /* Piano.mf.93.m4a */; };
-		63F9C8951CE74826000F4470 /* Piano.mf.94.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7F81CE74826000F4470 /* Piano.mf.94.m4a */; };
-		63F9C8961CE74826000F4470 /* Piano.mf.94.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7F81CE74826000F4470 /* Piano.mf.94.m4a */; };
-		63F9C8971CE74826000F4470 /* Piano.mf.95.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7F91CE74826000F4470 /* Piano.mf.95.m4a */; };
-		63F9C8981CE74826000F4470 /* Piano.mf.95.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7F91CE74826000F4470 /* Piano.mf.95.m4a */; };
-		63F9C8991CE74826000F4470 /* Piano.mf.96.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7FA1CE74826000F4470 /* Piano.mf.96.m4a */; };
-		63F9C89A1CE74826000F4470 /* Piano.mf.96.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7FA1CE74826000F4470 /* Piano.mf.96.m4a */; };
-		63F9C89B1CE74826000F4470 /* Piano.mf.97.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7FB1CE74826000F4470 /* Piano.mf.97.m4a */; };
-		63F9C89C1CE74826000F4470 /* Piano.mf.97.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7FB1CE74826000F4470 /* Piano.mf.97.m4a */; };
-		63F9C89D1CE74826000F4470 /* Piano.mf.98.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7FC1CE74826000F4470 /* Piano.mf.98.m4a */; };
-		63F9C89E1CE74826000F4470 /* Piano.mf.98.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7FC1CE74826000F4470 /* Piano.mf.98.m4a */; };
-		63F9C89F1CE74826000F4470 /* Piano.mf.99.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7FD1CE74826000F4470 /* Piano.mf.99.m4a */; };
-		63F9C8A01CE74826000F4470 /* Piano.mf.99.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7FD1CE74826000F4470 /* Piano.mf.99.m4a */; };
-		63F9C8A11CE74826000F4470 /* Piano.mf.100.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7FE1CE74826000F4470 /* Piano.mf.100.m4a */; };
-		63F9C8A21CE74826000F4470 /* Piano.mf.100.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7FE1CE74826000F4470 /* Piano.mf.100.m4a */; };
-		63F9C8A31CE74826000F4470 /* Piano.mf.101.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7FF1CE74826000F4470 /* Piano.mf.101.m4a */; };
-		63F9C8A41CE74826000F4470 /* Piano.mf.101.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C7FF1CE74826000F4470 /* Piano.mf.101.m4a */; };
-		63F9C8A51CE74826000F4470 /* Piano.mf.102.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8001CE74826000F4470 /* Piano.mf.102.m4a */; };
-		63F9C8A61CE74826000F4470 /* Piano.mf.102.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8001CE74826000F4470 /* Piano.mf.102.m4a */; };
-		63F9C8A71CE74826000F4470 /* Piano.mf.103.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8011CE74826000F4470 /* Piano.mf.103.m4a */; };
-		63F9C8A81CE74826000F4470 /* Piano.mf.103.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8011CE74826000F4470 /* Piano.mf.103.m4a */; };
-		63F9C8A91CE74826000F4470 /* Piano.mf.104.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8021CE74826000F4470 /* Piano.mf.104.m4a */; };
-		63F9C8AA1CE74826000F4470 /* Piano.mf.104.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8021CE74826000F4470 /* Piano.mf.104.m4a */; };
-		63F9C8AB1CE74826000F4470 /* Piano.mf.105.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8031CE74826000F4470 /* Piano.mf.105.m4a */; };
-		63F9C8AC1CE74826000F4470 /* Piano.mf.105.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8031CE74826000F4470 /* Piano.mf.105.m4a */; };
-		63F9C8AD1CE74826000F4470 /* Piano.mf.106.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8041CE74826000F4470 /* Piano.mf.106.m4a */; };
-		63F9C8AE1CE74826000F4470 /* Piano.mf.106.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8041CE74826000F4470 /* Piano.mf.106.m4a */; };
-		63F9C8AF1CE74826000F4470 /* Piano.mf.107.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8051CE74826000F4470 /* Piano.mf.107.m4a */; };
-		63F9C8B01CE74826000F4470 /* Piano.mf.107.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8051CE74826000F4470 /* Piano.mf.107.m4a */; };
-		63F9C8B11CE74826000F4470 /* Piano.mf.108.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8061CE74826000F4470 /* Piano.mf.108.m4a */; };
-		63F9C8B21CE74826000F4470 /* Piano.mf.108.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8061CE74826000F4470 /* Piano.mf.108.m4a */; };
-		63F9C8D61CE74841000F4470 /* Trumpet.novib.mf.52.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8B31CE74841000F4470 /* Trumpet.novib.mf.52.m4a */; };
-		63F9C8D71CE74841000F4470 /* Trumpet.novib.mf.52.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8B31CE74841000F4470 /* Trumpet.novib.mf.52.m4a */; };
-		63F9C8D81CE74841000F4470 /* Trumpet.novib.mf.53.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8B41CE74841000F4470 /* Trumpet.novib.mf.53.m4a */; };
-		63F9C8D91CE74841000F4470 /* Trumpet.novib.mf.53.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8B41CE74841000F4470 /* Trumpet.novib.mf.53.m4a */; };
-		63F9C8DA1CE74841000F4470 /* Trumpet.novib.mf.54.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8B51CE74841000F4470 /* Trumpet.novib.mf.54.m4a */; };
-		63F9C8DB1CE74841000F4470 /* Trumpet.novib.mf.54.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8B51CE74841000F4470 /* Trumpet.novib.mf.54.m4a */; };
-		63F9C8DC1CE74841000F4470 /* Trumpet.novib.mf.55.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8B61CE74841000F4470 /* Trumpet.novib.mf.55.m4a */; };
-		63F9C8DD1CE74841000F4470 /* Trumpet.novib.mf.55.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8B61CE74841000F4470 /* Trumpet.novib.mf.55.m4a */; };
-		63F9C8DE1CE74841000F4470 /* Trumpet.novib.mf.56.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8B71CE74841000F4470 /* Trumpet.novib.mf.56.m4a */; };
-		63F9C8DF1CE74841000F4470 /* Trumpet.novib.mf.56.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8B71CE74841000F4470 /* Trumpet.novib.mf.56.m4a */; };
-		63F9C8E01CE74841000F4470 /* Trumpet.novib.mf.57.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8B81CE74841000F4470 /* Trumpet.novib.mf.57.m4a */; };
-		63F9C8E11CE74841000F4470 /* Trumpet.novib.mf.57.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8B81CE74841000F4470 /* Trumpet.novib.mf.57.m4a */; };
-		63F9C8E21CE74841000F4470 /* Trumpet.novib.mf.58.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8B91CE74841000F4470 /* Trumpet.novib.mf.58.m4a */; };
-		63F9C8E31CE74841000F4470 /* Trumpet.novib.mf.58.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8B91CE74841000F4470 /* Trumpet.novib.mf.58.m4a */; };
-		63F9C8E41CE74841000F4470 /* Trumpet.novib.mf.59.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8BA1CE74841000F4470 /* Trumpet.novib.mf.59.m4a */; };
-		63F9C8E51CE74841000F4470 /* Trumpet.novib.mf.59.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8BA1CE74841000F4470 /* Trumpet.novib.mf.59.m4a */; };
-		63F9C8E61CE74841000F4470 /* Trumpet.novib.mf.60.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8BB1CE74841000F4470 /* Trumpet.novib.mf.60.m4a */; };
-		63F9C8E71CE74841000F4470 /* Trumpet.novib.mf.60.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8BB1CE74841000F4470 /* Trumpet.novib.mf.60.m4a */; };
-		63F9C8E81CE74841000F4470 /* Trumpet.novib.mf.61.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8BC1CE74841000F4470 /* Trumpet.novib.mf.61.m4a */; };
-		63F9C8E91CE74841000F4470 /* Trumpet.novib.mf.61.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8BC1CE74841000F4470 /* Trumpet.novib.mf.61.m4a */; };
-		63F9C8EA1CE74841000F4470 /* Trumpet.novib.mf.62.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8BD1CE74841000F4470 /* Trumpet.novib.mf.62.m4a */; };
-		63F9C8EB1CE74841000F4470 /* Trumpet.novib.mf.62.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8BD1CE74841000F4470 /* Trumpet.novib.mf.62.m4a */; };
-		63F9C8EC1CE74841000F4470 /* Trumpet.novib.mf.63.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8BE1CE74841000F4470 /* Trumpet.novib.mf.63.m4a */; };
-		63F9C8ED1CE74841000F4470 /* Trumpet.novib.mf.63.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8BE1CE74841000F4470 /* Trumpet.novib.mf.63.m4a */; };
-		63F9C8EE1CE74841000F4470 /* Trumpet.novib.mf.64.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8BF1CE74841000F4470 /* Trumpet.novib.mf.64.m4a */; };
-		63F9C8EF1CE74841000F4470 /* Trumpet.novib.mf.64.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8BF1CE74841000F4470 /* Trumpet.novib.mf.64.m4a */; };
-		63F9C8F01CE74841000F4470 /* Trumpet.novib.mf.65.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8C01CE74841000F4470 /* Trumpet.novib.mf.65.m4a */; };
-		63F9C8F11CE74841000F4470 /* Trumpet.novib.mf.65.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8C01CE74841000F4470 /* Trumpet.novib.mf.65.m4a */; };
-		63F9C8F21CE74841000F4470 /* Trumpet.novib.mf.66.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8C11CE74841000F4470 /* Trumpet.novib.mf.66.m4a */; };
-		63F9C8F31CE74841000F4470 /* Trumpet.novib.mf.66.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8C11CE74841000F4470 /* Trumpet.novib.mf.66.m4a */; };
-		63F9C8F41CE74841000F4470 /* Trumpet.novib.mf.67.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8C21CE74841000F4470 /* Trumpet.novib.mf.67.m4a */; };
-		63F9C8F51CE74841000F4470 /* Trumpet.novib.mf.67.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8C21CE74841000F4470 /* Trumpet.novib.mf.67.m4a */; };
-		63F9C8F61CE74841000F4470 /* Trumpet.novib.mf.68.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8C31CE74841000F4470 /* Trumpet.novib.mf.68.m4a */; };
-		63F9C8F71CE74841000F4470 /* Trumpet.novib.mf.68.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8C31CE74841000F4470 /* Trumpet.novib.mf.68.m4a */; };
-		63F9C8F81CE74841000F4470 /* Trumpet.novib.mf.69.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8C41CE74841000F4470 /* Trumpet.novib.mf.69.m4a */; };
-		63F9C8F91CE74841000F4470 /* Trumpet.novib.mf.69.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8C41CE74841000F4470 /* Trumpet.novib.mf.69.m4a */; };
-		63F9C8FA1CE74841000F4470 /* Trumpet.novib.mf.70.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8C51CE74841000F4470 /* Trumpet.novib.mf.70.m4a */; };
-		63F9C8FB1CE74841000F4470 /* Trumpet.novib.mf.70.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8C51CE74841000F4470 /* Trumpet.novib.mf.70.m4a */; };
-		63F9C8FC1CE74841000F4470 /* Trumpet.novib.mf.71.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8C61CE74841000F4470 /* Trumpet.novib.mf.71.m4a */; };
-		63F9C8FD1CE74841000F4470 /* Trumpet.novib.mf.71.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8C61CE74841000F4470 /* Trumpet.novib.mf.71.m4a */; };
-		63F9C8FE1CE74841000F4470 /* Trumpet.novib.mf.72.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8C71CE74841000F4470 /* Trumpet.novib.mf.72.m4a */; };
-		63F9C8FF1CE74841000F4470 /* Trumpet.novib.mf.72.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8C71CE74841000F4470 /* Trumpet.novib.mf.72.m4a */; };
-		63F9C9001CE74841000F4470 /* Trumpet.novib.mf.73.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8C81CE74841000F4470 /* Trumpet.novib.mf.73.m4a */; };
-		63F9C9011CE74841000F4470 /* Trumpet.novib.mf.73.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8C81CE74841000F4470 /* Trumpet.novib.mf.73.m4a */; };
-		63F9C9021CE74841000F4470 /* Trumpet.novib.mf.74.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8C91CE74841000F4470 /* Trumpet.novib.mf.74.m4a */; };
-		63F9C9031CE74841000F4470 /* Trumpet.novib.mf.74.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8C91CE74841000F4470 /* Trumpet.novib.mf.74.m4a */; };
-		63F9C9041CE74841000F4470 /* Trumpet.novib.mf.75.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8CA1CE74841000F4470 /* Trumpet.novib.mf.75.m4a */; };
-		63F9C9051CE74841000F4470 /* Trumpet.novib.mf.75.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8CA1CE74841000F4470 /* Trumpet.novib.mf.75.m4a */; };
-		63F9C9061CE74841000F4470 /* Trumpet.novib.mf.76.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8CB1CE74841000F4470 /* Trumpet.novib.mf.76.m4a */; };
-		63F9C9071CE74841000F4470 /* Trumpet.novib.mf.76.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8CB1CE74841000F4470 /* Trumpet.novib.mf.76.m4a */; };
-		63F9C9081CE74841000F4470 /* Trumpet.novib.mf.77.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8CC1CE74841000F4470 /* Trumpet.novib.mf.77.m4a */; };
-		63F9C9091CE74841000F4470 /* Trumpet.novib.mf.77.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8CC1CE74841000F4470 /* Trumpet.novib.mf.77.m4a */; };
-		63F9C90A1CE74841000F4470 /* Trumpet.novib.mf.78.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8CD1CE74841000F4470 /* Trumpet.novib.mf.78.m4a */; };
-		63F9C90B1CE74841000F4470 /* Trumpet.novib.mf.78.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8CD1CE74841000F4470 /* Trumpet.novib.mf.78.m4a */; };
-		63F9C90C1CE74841000F4470 /* Trumpet.novib.mf.79.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8CE1CE74841000F4470 /* Trumpet.novib.mf.79.m4a */; };
-		63F9C90D1CE74841000F4470 /* Trumpet.novib.mf.79.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8CE1CE74841000F4470 /* Trumpet.novib.mf.79.m4a */; };
-		63F9C90E1CE74841000F4470 /* Trumpet.novib.mf.80.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8CF1CE74841000F4470 /* Trumpet.novib.mf.80.m4a */; };
-		63F9C90F1CE74841000F4470 /* Trumpet.novib.mf.80.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8CF1CE74841000F4470 /* Trumpet.novib.mf.80.m4a */; };
-		63F9C9101CE74841000F4470 /* Trumpet.novib.mf.81.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8D01CE74841000F4470 /* Trumpet.novib.mf.81.m4a */; };
-		63F9C9111CE74841000F4470 /* Trumpet.novib.mf.81.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8D01CE74841000F4470 /* Trumpet.novib.mf.81.m4a */; };
-		63F9C9121CE74841000F4470 /* Trumpet.novib.mf.82.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8D11CE74841000F4470 /* Trumpet.novib.mf.82.m4a */; };
-		63F9C9131CE74841000F4470 /* Trumpet.novib.mf.82.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8D11CE74841000F4470 /* Trumpet.novib.mf.82.m4a */; };
-		63F9C9141CE74841000F4470 /* Trumpet.novib.mf.83.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8D21CE74841000F4470 /* Trumpet.novib.mf.83.m4a */; };
-		63F9C9151CE74841000F4470 /* Trumpet.novib.mf.83.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8D21CE74841000F4470 /* Trumpet.novib.mf.83.m4a */; };
-		63F9C9161CE74841000F4470 /* Trumpet.novib.mf.84.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8D31CE74841000F4470 /* Trumpet.novib.mf.84.m4a */; };
-		63F9C9171CE74841000F4470 /* Trumpet.novib.mf.84.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8D31CE74841000F4470 /* Trumpet.novib.mf.84.m4a */; };
-		63F9C9181CE74841000F4470 /* Trumpet.novib.mf.85.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8D41CE74841000F4470 /* Trumpet.novib.mf.85.m4a */; };
-		63F9C9191CE74841000F4470 /* Trumpet.novib.mf.85.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8D41CE74841000F4470 /* Trumpet.novib.mf.85.m4a */; };
-		63F9C91A1CE74841000F4470 /* Trumpet.novib.mf.86.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8D51CE74841000F4470 /* Trumpet.novib.mf.86.m4a */; };
-		63F9C91B1CE74841000F4470 /* Trumpet.novib.mf.86.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 63F9C8D51CE74841000F4470 /* Trumpet.novib.mf.86.m4a */; };
+		63EE547D1E62A2F000F5E21D /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 63C03AB91E2A0B11009F4033 /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -358,48 +111,6 @@
 			remoteGlobalIDString = 6324D2CE1CE71B19001934A5;
 			remoteInfo = FirstStage;
 		};
-		6387FDC61CEDB15B0054DE44 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6387FDBF1CEDB15B0054DE44 /* AudioKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = EA8E93D81AD3C5240057E979;
-			remoteInfo = "AudioKit iOS Static";
-		};
-		6387FDC81CEDB15B0054DE44 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6387FDBF1CEDB15B0054DE44 /* AudioKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = EAA0F5941AE71C8F007CD7C9;
-			remoteInfo = "AudioKit iOS Dynamic";
-		};
-		6387FDCA1CEDB15B0054DE44 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6387FDBF1CEDB15B0054DE44 /* AudioKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = EA8E96591AD3C6FC0057E979;
-			remoteInfo = "AudioKit OS X";
-		};
-		6387FDCC1CEDB15B0054DE44 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6387FDBF1CEDB15B0054DE44 /* AudioKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = EA93645D1BD865230005B849;
-			remoteInfo = "AudioKit tvOS";
-		};
-		6387FDCE1CEDB1840054DE44 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6387FDBF1CEDB15B0054DE44 /* AudioKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = EAA0F4DE1AE71C8F007CD7C9;
-			remoteInfo = "AudioKit iOS Dynamic";
-		};
-		6387FDD01CEDB1890054DE44 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6387FDBF1CEDB15B0054DE44 /* AudioKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = EAA0F4DE1AE71C8F007CD7C9;
-			remoteInfo = "AudioKit iOS Dynamic";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -409,9 +120,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6387FDDD1CEDB3510054DE44 /* CsoundLib.framework in Embed Frameworks */,
+				63C03ABB1E2A0B11009F4033 /* AudioKit.framework in Embed Frameworks */,
 				6324D3171CE73234001934A5 /* SeeScoreLib.framework in Embed Frameworks */,
-				6387FDDF1CEDB3510054DE44 /* libsndfile.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -422,9 +132,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6387FDE31CEDB41E0054DE44 /* CsoundLib.framework in Embed Frameworks */,
+				63EE547D1E62A2F000F5E21D /* AudioKit.framework in Embed Frameworks */,
 				6324D31B1CE7327F001934A5 /* SeeScoreLib.framework in Embed Frameworks */,
-				6387FDE51CEDB41E0054DE44 /* libsndfile.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -458,12 +167,10 @@
 		6324D3531CE73C47001934A5 /* First Stage_key.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "First Stage_key.m"; path = "SeeScoreLib/Source/First Stage_key.m"; sourceTree = SOURCE_ROOT; };
 		6324D3541CE73C47001934A5 /* SSBarControlProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSBarControlProtocol.h; path = SeeScoreLib/Source/SSBarControlProtocol.h; sourceTree = SOURCE_ROOT; };
 		6324D3551CE73C47001934A5 /* sscore_key.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sscore_key.h; path = SeeScoreLib/Source/sscore_key.h; sourceTree = SOURCE_ROOT; };
-		6324D3561CE73C47001934A5 /* SSEditLayerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSEditLayerProtocol.h; path = SeeScoreLib/Source/SSEditLayerProtocol.h; sourceTree = SOURCE_ROOT; };
 		6324D3571CE73C47001934A5 /* SSPlayLoopGraphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSPlayLoopGraphics.h; path = SeeScoreLib/Source/SSPlayLoopGraphics.h; sourceTree = SOURCE_ROOT; };
 		6324D3581CE73C47001934A5 /* SSPlayLoopGraphics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSPlayLoopGraphics.m; path = SeeScoreLib/Source/SSPlayLoopGraphics.m; sourceTree = SOURCE_ROOT; };
 		6324D3591CE73C47001934A5 /* SSSystemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSSystemView.h; path = SeeScoreLib/Source/SSSystemView.h; sourceTree = SOURCE_ROOT; };
 		6324D35A1CE73C47001934A5 /* SSUpdateScrollProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSUpdateScrollProtocol.h; path = SeeScoreLib/Source/SSUpdateScrollProtocol.h; sourceTree = SOURCE_ROOT; };
-		6324D35B1CE73C47001934A5 /* SSViewInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSViewInterface.h; path = SeeScoreLib/Source/SSViewInterface.h; sourceTree = SOURCE_ROOT; };
 		6324D3671CE73ED9001934A5 /* MusicFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicFont.swift; sourceTree = "<group>"; };
 		6324D3681CE73ED9001934A5 /* NoteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteService.swift; sourceTree = "<group>"; };
 		6324D3691CE73ED9001934A5 /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
@@ -481,140 +188,20 @@
 		633CA1D21CF73D0C00061F3D /* NearArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NearArrow.png; path = Images/NearArrow.png; sourceTree = "<group>"; };
 		633D1B6C1CF94BEC00B5C4FD /* FeedbackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
 		633D1B721CF94CEB00B5C4FD /* FeedbackImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FeedbackImage.png; path = Images/FeedbackImage.png; sourceTree = "<group>"; };
+		634658371E90BE4F00C162CF /* synth-samples */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "synth-samples"; sourceTree = "<group>"; };
 		6355ECF61CF68EB60037945F /* marmstk1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = marmstk1.wav; sourceTree = "<group>"; };
+		636462131E74EB9100DB435C /* SSViewInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSViewInterface.h; sourceTree = "<group>"; };
 		6379EE7C1CE95CDF00188A70 /* NoteAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteAnalysis.swift; sourceTree = "<group>"; };
 		6379EE901CE9C8ED00188A70 /* AudioKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioKitManager.swift; sourceTree = "<group>"; };
 		6381294F1CF05BF800A40C8E /* LongToneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LongToneViewController.swift; sourceTree = "<group>"; };
 		638129561CF05C7900A40C8E /* Balloon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Balloon.swift; sourceTree = "<group>"; };
 		638129571CF05C7900A40C8E /* SparkLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SparkLine.swift; sourceTree = "<group>"; };
-		6387FDBF1CEDB15B0054DE44 /* AudioKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AudioKit.xcodeproj; path = AudioKit/AudioKit.xcodeproj; sourceTree = "<group>"; };
-		6387FDDA1CEDB3510054DE44 /* CsoundLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CsoundLib.framework; path = AudioKit/AudioKit/Platforms/iOS/CsoundLib.framework; sourceTree = "<group>"; };
-		6387FDDB1CEDB3510054DE44 /* libsndfile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libsndfile.framework; path = AudioKit/AudioKit/Platforms/iOS/libsndfile.framework; sourceTree = "<group>"; };
-		6387FDE71CEDB5710054DE44 /* AudioKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AudioKit.swift; path = AudioKit/AudioKit/Platforms/Swift/AudioKit.swift; sourceTree = SOURCE_ROOT; };
 		639A2E441CF5AB09004F7B1A /* DotView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotView.swift; sourceTree = "<group>"; };
 		639A2E531CF5E6CA004F7B1A /* VisualMetronomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualMetronomeView.swift; sourceTree = "<group>"; };
+		63B427581E5016AB000E35AA /* Intonation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Intonation.swift; sourceTree = "<group>"; };
+		63B4275B1E5057BB000E35AA /* SSSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSSettingsViewController.swift; sourceTree = "<group>"; };
+		63C03AB91E2A0B11009F4033 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AudioKit.framework; sourceTree = "<group>"; };
 		63EB90161CF1C4EB00F09B05 /* AVAudioSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAudioSessionManager.swift; sourceTree = "<group>"; };
-		63F9C7B11CE74825000F4470 /* Piano.mf.23.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.23.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.23.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7B21CE74825000F4470 /* Piano.mf.24.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.24.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.24.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7B31CE74825000F4470 /* Piano.mf.25.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.25.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.25.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7B41CE74825000F4470 /* Piano.mf.26.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.26.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.26.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7B51CE74825000F4470 /* Piano.mf.27.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.27.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.27.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7B61CE74825000F4470 /* Piano.mf.28.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.28.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.28.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7B71CE74825000F4470 /* Piano.mf.29.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.29.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.29.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7B81CE74825000F4470 /* Piano.mf.30.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.30.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.30.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7B91CE74825000F4470 /* Piano.mf.31.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.31.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.31.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7BA1CE74825000F4470 /* Piano.mf.32.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.32.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.32.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7BB1CE74825000F4470 /* Piano.mf.33.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.33.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.33.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7BC1CE74825000F4470 /* Piano.mf.34.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.34.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.34.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7BD1CE74825000F4470 /* Piano.mf.35.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.35.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.35.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7BE1CE74825000F4470 /* Piano.mf.36.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.36.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.36.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7BF1CE74825000F4470 /* Piano.mf.37.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.37.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.37.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7C01CE74825000F4470 /* Piano.mf.38.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.38.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.38.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7C11CE74825000F4470 /* Piano.mf.39.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.39.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.39.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7C21CE74825000F4470 /* Piano.mf.40.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.40.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.40.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7C31CE74825000F4470 /* Piano.mf.41.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.41.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.41.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7C41CE74825000F4470 /* Piano.mf.42.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.42.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.42.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7C51CE74825000F4470 /* Piano.mf.43.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.43.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.43.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7C61CE74825000F4470 /* Piano.mf.44.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.44.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.44.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7C71CE74825000F4470 /* Piano.mf.45.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.45.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.45.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7C81CE74825000F4470 /* Piano.mf.46.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.46.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.46.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7C91CE74825000F4470 /* Piano.mf.47.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.47.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.47.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7CA1CE74825000F4470 /* Piano.mf.48.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.48.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.48.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7CB1CE74825000F4470 /* Piano.mf.49.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.49.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.49.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7CC1CE74825000F4470 /* Piano.mf.50.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.50.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.50.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7CD1CE74825000F4470 /* Piano.mf.51.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.51.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.51.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7CE1CE74825000F4470 /* Piano.mf.52.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.52.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.52.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7CF1CE74825000F4470 /* Piano.mf.53.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.53.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.53.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7D01CE74825000F4470 /* Piano.mf.54.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.54.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.54.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7D11CE74825000F4470 /* Piano.mf.55.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.55.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.55.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7D21CE74825000F4470 /* Piano.mf.56.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.56.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.56.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7D31CE74825000F4470 /* Piano.mf.57.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.57.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.57.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7D41CE74825000F4470 /* Piano.mf.58.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.58.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.58.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7D51CE74825000F4470 /* Piano.mf.59.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.59.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.59.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7D61CE74825000F4470 /* Piano.mf.60.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.60.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.60.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7D71CE74825000F4470 /* Piano.mf.61.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.61.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.61.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7D81CE74825000F4470 /* Piano.mf.62.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.62.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.62.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7D91CE74825000F4470 /* Piano.mf.63.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.63.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.63.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7DA1CE74825000F4470 /* Piano.mf.64.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.64.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.64.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7DB1CE74825000F4470 /* Piano.mf.65.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.65.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.65.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7DC1CE74825000F4470 /* Piano.mf.66.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.66.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.66.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7DD1CE74825000F4470 /* Piano.mf.67.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.67.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.67.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7DE1CE74825000F4470 /* Piano.mf.68.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.68.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.68.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7DF1CE74825000F4470 /* Piano.mf.69.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.69.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.69.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7E01CE74825000F4470 /* Piano.mf.70.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.70.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.70.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7E11CE74825000F4470 /* Piano.mf.71.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.71.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.71.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7E21CE74825000F4470 /* Piano.mf.72.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.72.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.72.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7E31CE74825000F4470 /* Piano.mf.73.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.73.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.73.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7E41CE74825000F4470 /* Piano.mf.74.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.74.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.74.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7E51CE74825000F4470 /* Piano.mf.75.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.75.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.75.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7E61CE74825000F4470 /* Piano.mf.76.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.76.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.76.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7E71CE74825000F4470 /* Piano.mf.77.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.77.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.77.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7E81CE74825000F4470 /* Piano.mf.78.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.78.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.78.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7E91CE74825000F4470 /* Piano.mf.79.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.79.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.79.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7EA1CE74825000F4470 /* Piano.mf.80.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.80.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.80.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7EB1CE74825000F4470 /* Piano.mf.81.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.81.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.81.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7EC1CE74825000F4470 /* Piano.mf.82.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.82.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.82.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7ED1CE74825000F4470 /* Piano.mf.83.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.83.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.83.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7EE1CE74825000F4470 /* Piano.mf.84.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.84.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.84.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7EF1CE74825000F4470 /* Piano.mf.85.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.85.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.85.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7F01CE74825000F4470 /* Piano.mf.86.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.86.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.86.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7F11CE74825000F4470 /* Piano.mf.87.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.87.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.87.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7F21CE74826000F4470 /* Piano.mf.88.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.88.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.88.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7F31CE74826000F4470 /* Piano.mf.89.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.89.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.89.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7F41CE74826000F4470 /* Piano.mf.90.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.90.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.90.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7F51CE74826000F4470 /* Piano.mf.91.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.91.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.91.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7F61CE74826000F4470 /* Piano.mf.92.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.92.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.92.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7F71CE74826000F4470 /* Piano.mf.93.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.93.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.93.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7F81CE74826000F4470 /* Piano.mf.94.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.94.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.94.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7F91CE74826000F4470 /* Piano.mf.95.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.95.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.95.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7FA1CE74826000F4470 /* Piano.mf.96.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.96.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.96.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7FB1CE74826000F4470 /* Piano.mf.97.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.97.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.97.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7FC1CE74826000F4470 /* Piano.mf.98.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.98.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.98.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7FD1CE74826000F4470 /* Piano.mf.99.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.99.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.99.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7FE1CE74826000F4470 /* Piano.mf.100.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.100.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.100.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C7FF1CE74826000F4470 /* Piano.mf.101.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.101.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.101.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8001CE74826000F4470 /* Piano.mf.102.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.102.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.102.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8011CE74826000F4470 /* Piano.mf.103.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.103.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.103.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8021CE74826000F4470 /* Piano.mf.104.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.104.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.104.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8031CE74826000F4470 /* Piano.mf.105.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.105.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.105.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8041CE74826000F4470 /* Piano.mf.106.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.106.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.106.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8051CE74826000F4470 /* Piano.mf.107.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.107.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.107.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8061CE74826000F4470 /* Piano.mf.108.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.mf.108.m4a; path = "SeeScoreLib/synth-samples/piano-samples/Piano.mf.108.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8B31CE74841000F4470 /* Trumpet.novib.mf.52.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.52.m4a; path = "SeeScoreLib/synth-samples/trumpet-samples/Trumpet.novib.mf.52.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8B41CE74841000F4470 /* Trumpet.novib.mf.53.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.53.m4a; path = "SeeScoreLib/synth-samples/trumpet-samples/Trumpet.novib.mf.53.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8B51CE74841000F4470 /* Trumpet.novib.mf.54.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.54.m4a; path = "SeeScoreLib/synth-samples/trumpet-samples/Trumpet.novib.mf.54.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8B61CE74841000F4470 /* Trumpet.novib.mf.55.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.55.m4a; path = "SeeScoreLib/synth-samples/trumpet-samples/Trumpet.novib.mf.55.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8B71CE74841000F4470 /* Trumpet.novib.mf.56.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.56.m4a; path = "SeeScoreLib/synth-samples/trumpet-samples/Trumpet.novib.mf.56.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8B81CE74841000F4470 /* Trumpet.novib.mf.57.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.57.m4a; path = "SeeScoreLib/synth-samples/trumpet-samples/Trumpet.novib.mf.57.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8B91CE74841000F4470 /* Trumpet.novib.mf.58.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.58.m4a; path = "SeeScoreLib/synth-samples/trumpet-samples/Trumpet.novib.mf.58.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8BA1CE74841000F4470 /* Trumpet.novib.mf.59.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.59.m4a; path = "SeeScoreLib/synth-samples/trumpet-samples/Trumpet.novib.mf.59.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8BB1CE74841000F4470 /* Trumpet.novib.mf.60.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.60.m4a; path = "SeeScoreLib/synth-samples/trumpet-samples/Trumpet.novib.mf.60.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8BC1CE74841000F4470 /* Trumpet.novib.mf.61.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.61.m4a; path = "SeeScoreLib/synth-samples/trumpet-samples/Trumpet.novib.mf.61.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8BD1CE74841000F4470 /* Trumpet.novib.mf.62.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.62.m4a; path = "SeeScoreLib/synth-samples/trumpet-samples/Trumpet.novib.mf.62.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8BE1CE74841000F4470 /* Trumpet.novib.mf.63.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.63.m4a; path = "SeeScoreLib/synth-samples/trumpet-samples/Trumpet.novib.mf.63.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8BF1CE74841000F4470 /* Trumpet.novib.mf.64.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.64.m4a; path = "SeeScoreLib/synth-samples/trumpet-samples/Trumpet.novib.mf.64.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8C01CE74841000F4470 /* Trumpet.novib.mf.65.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.65.m4a; path = "SeeScoreLib/synth-samples/trumpet-samples/Trumpet.novib.mf.65.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8C11CE74841000F4470 /* Trumpet.novib.mf.66.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.66.m4a; path = "SeeScoreLib/synth-samples/trumpet-samples/Trumpet.novib.mf.66.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8C21CE74841000F4470 /* Trumpet.novib.mf.67.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.67.m4a; path = "SeeScoreLib/synth-samples/trumpet-samples/Trumpet.novib.mf.67.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8C31CE74841000F4470 /* Trumpet.novib.mf.68.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.68.m4a; path = "SeeScoreLib/synth-samples/trumpet-samples/Trumpet.novib.mf.68.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8C41CE74841000F4470 /* Trumpet.novib.mf.69.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.69.m4a; path = "SeeScoreLib/synth-samples/trumpet-samples/Trumpet.novib.mf.69.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8C51CE74841000F4470 /* Trumpet.novib.mf.70.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.70.m4a; path = "SeeScoreLib/synth-samples/trumpet-samples/Trumpet.novib.mf.70.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8C61CE74841000F4470 /* Trumpet.novib.mf.71.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.71.m4a; path = "SeeScoreLib/synth-samples/trumpet-samples/Trumpet.novib.mf.71.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8C71CE74841000F4470 /* Trumpet.novib.mf.72.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.72.m4a; path = "SeeScoreLib/synth-samples/trumpet-samples/Trumpet.novib.mf.72.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8C81CE74841000F4470 /* Trumpet.novib.mf.73.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.73.m4a; path = "SeeScoreLib/synth-samples/trumpet-samples/Trumpet.novib.mf.73.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8C91CE74841000F4470 /* Trumpet.novib.mf.74.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.74.m4a; path = "SeeScoreLib/synth-samples/trumpet-samples/Trumpet.novib.mf.74.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8CA1CE74841000F4470 /* Trumpet.novib.mf.75.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.75.m4a; path = "SeeScoreLib/synth-samples/trumpet-samples/Trumpet.novib.mf.75.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8CB1CE74841000F4470 /* Trumpet.novib.mf.76.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.76.m4a; path = "SeeScoreLib/synth-samples/trumpet-samples/Trumpet.novib.mf.76.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8CC1CE74841000F4470 /* Trumpet.novib.mf.77.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.77.m4a; path = "SeeScoreLib/synth-samples/trumpet-samples/Trumpet.novib.mf.77.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8CD1CE74841000F4470 /* Trumpet.novib.mf.78.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.78.m4a; path = "SeeScoreLib/synth-samples/trumpet-samples/Trumpet.novib.mf.78.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8CE1CE74841000F4470 /* Trumpet.novib.mf.79.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.79.m4a; path = "SeeScoreLib/synth-samples/trumpet-samples/Trumpet.novib.mf.79.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8CF1CE74841000F4470 /* Trumpet.novib.mf.80.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.80.m4a; path = "SeeScoreLib/synth-samples/trumpet-samples/Trumpet.novib.mf.80.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8D01CE74841000F4470 /* Trumpet.novib.mf.81.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.81.m4a; path = "SeeScoreLib/synth-samples/trumpet-samples/Trumpet.novib.mf.81.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8D11CE74841000F4470 /* Trumpet.novib.mf.82.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.82.m4a; path = "SeeScoreLib/synth-samples/trumpet-samples/Trumpet.novib.mf.82.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8D21CE74841000F4470 /* Trumpet.novib.mf.83.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.83.m4a; path = "SeeScoreLib/synth-samples/trumpet-samples/Trumpet.novib.mf.83.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8D31CE74841000F4470 /* Trumpet.novib.mf.84.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.84.m4a; path = "SeeScoreLib/synth-samples/trumpet-samples/Trumpet.novib.mf.84.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8D41CE74841000F4470 /* Trumpet.novib.mf.85.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.85.m4a; path = "SeeScoreLib/synth-samples/trumpet-samples/Trumpet.novib.mf.85.m4a"; sourceTree = SOURCE_ROOT; };
-		63F9C8D51CE74841000F4470 /* Trumpet.novib.mf.86.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.86.m4a; path = "SeeScoreLib/synth-samples/trumpet-samples/Trumpet.novib.mf.86.m4a"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -622,9 +209,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6387FDE01CEDB3E10054DE44 /* CsoundLib.framework in Frameworks */,
-				6387FDE41CEDB41E0054DE44 /* libsndfile.framework in Frameworks */,
-				6387FDD21CEDB1A60054DE44 /* libAudioKit iOS Dynamic.a in Frameworks */,
+				63C03ABF1E2A0C43009F4033 /* AudioKit.framework in Frameworks */,
 				6324D31A1CE7327F001934A5 /* SeeScoreLib.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -647,9 +232,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6387FDDE1CEDB3510054DE44 /* libsndfile.framework in Frameworks */,
-				6387FDDC1CEDB3510054DE44 /* CsoundLib.framework in Frameworks */,
-				6387FDD31CEDB1AE0054DE44 /* libAudioKit iOS Dynamic.a in Frameworks */,
+				63C03ABA1E2A0B11009F4033 /* AudioKit.framework in Frameworks */,
 				6324D3161CE73234001934A5 /* SeeScoreLib.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -665,7 +248,6 @@
 				6324D2E91CE71B1A001934A5 /* FirstStageTests */,
 				6324D2F41CE71B1A001934A5 /* FirstStageUITests */,
 				6324D2D01CE71B19001934A5 /* Products */,
-				6387FDBF1CEDB15B0054DE44 /* AudioKit.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -720,8 +302,7 @@
 		6324D31D1CE7329A001934A5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6387FDDA1CEDB3510054DE44 /* CsoundLib.framework */,
-				6387FDDB1CEDB3510054DE44 /* libsndfile.framework */,
+				63C03AB91E2A0B11009F4033 /* AudioKit.framework */,
 				6324D3191CE7327F001934A5 /* SeeScoreLib.framework */,
 				6324D3151CE73234001934A5 /* SeeScoreLib.framework */,
 			);
@@ -731,13 +312,15 @@
 		6324D3341CE7358C001934A5 /* SeeScore */ = {
 			isa = PBXGroup;
 			children = (
-				63F9C7AE1CE747D5000F4470 /* synth-samples */,
+				634658371E90BE4F00C162CF /* synth-samples */,
+				636462141E74EB9700DB435C /* Edit */,
+				63B4275B1E5057BB000E35AA /* SSSettingsViewController.swift */,
+				63B427581E5016AB000E35AA /* Intonation.swift */,
 				6324D3531CE73C47001934A5 /* First Stage_key.m */,
 				6324D34F1CE73C47001934A5 /* sampledInstruments.m */,
 				6324D34E1CE73C46001934A5 /* sampledInstruments.h */,
 				6324D3541CE73C47001934A5 /* SSBarControlProtocol.h */,
 				6324D3551CE73C47001934A5 /* sscore_key.h */,
-				6324D3561CE73C47001934A5 /* SSEditLayerProtocol.h */,
 				6324D3581CE73C47001934A5 /* SSPlayLoopGraphics.m */,
 				6324D3571CE73C47001934A5 /* SSPlayLoopGraphics.h */,
 				6324D3501CE73C47001934A5 /* SSScrollView.m */,
@@ -745,7 +328,6 @@
 				6324D3511CE73C47001934A5 /* SSSystemView.m */,
 				6324D3591CE73C47001934A5 /* SSSystemView.h */,
 				6324D35A1CE73C47001934A5 /* SSUpdateScrollProtocol.h */,
-				6324D35B1CE73C47001934A5 /* SSViewInterface.h */,
 			);
 			name = SeeScore;
 			sourceTree = "<group>";
@@ -788,6 +370,14 @@
 			name = Data;
 			sourceTree = "<group>";
 		};
+		636462141E74EB9700DB435C /* Edit */ = {
+			isa = PBXGroup;
+			children = (
+				636462131E74EB9100DB435C /* SSViewInterface.h */,
+			);
+			name = Edit;
+			sourceTree = "<group>";
+		};
 		638129551CF05C6100A40C8E /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -800,21 +390,9 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
-		6387FDC01CEDB15B0054DE44 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				6387FDC71CEDB15B0054DE44 /* libAudioKit iOS Static.a */,
-				6387FDC91CEDB15B0054DE44 /* libAudioKit iOS Dynamic.a */,
-				6387FDCB1CEDB15B0054DE44 /* libAudioKit OS X.a */,
-				6387FDCD1CEDB15B0054DE44 /* libAudioKit tvOS.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		6387FDE61CEDB5110054DE44 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				6387FDE71CEDB5710054DE44 /* AudioKit.swift */,
 				633CA1D11CF73D0C00061F3D /* FarArrow.png */,
 				633D1B721CF94CEB00B5C4FD /* FeedbackImage.png */,
 				633CA1D01CF73D0C00061F3D /* GreenSmile.png */,
@@ -823,150 +401,6 @@
 				6324D31E1CE73574001934A5 /* FirstStage-Bridging-Header.h */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		63F9C7AE1CE747D5000F4470 /* synth-samples */ = {
-			isa = PBXGroup;
-			children = (
-				63F9C7AF1CE747E0000F4470 /* piano-samples */,
-				63F9C7B01CE747EA000F4470 /* trumpet-samples */,
-			);
-			name = "synth-samples";
-			sourceTree = "<group>";
-		};
-		63F9C7AF1CE747E0000F4470 /* piano-samples */ = {
-			isa = PBXGroup;
-			children = (
-				63F9C7B11CE74825000F4470 /* Piano.mf.23.m4a */,
-				63F9C7B21CE74825000F4470 /* Piano.mf.24.m4a */,
-				63F9C7B31CE74825000F4470 /* Piano.mf.25.m4a */,
-				63F9C7B41CE74825000F4470 /* Piano.mf.26.m4a */,
-				63F9C7B51CE74825000F4470 /* Piano.mf.27.m4a */,
-				63F9C7B61CE74825000F4470 /* Piano.mf.28.m4a */,
-				63F9C7B71CE74825000F4470 /* Piano.mf.29.m4a */,
-				63F9C7B81CE74825000F4470 /* Piano.mf.30.m4a */,
-				63F9C7B91CE74825000F4470 /* Piano.mf.31.m4a */,
-				63F9C7BA1CE74825000F4470 /* Piano.mf.32.m4a */,
-				63F9C7BB1CE74825000F4470 /* Piano.mf.33.m4a */,
-				63F9C7BC1CE74825000F4470 /* Piano.mf.34.m4a */,
-				63F9C7BD1CE74825000F4470 /* Piano.mf.35.m4a */,
-				63F9C7BE1CE74825000F4470 /* Piano.mf.36.m4a */,
-				63F9C7BF1CE74825000F4470 /* Piano.mf.37.m4a */,
-				63F9C7C01CE74825000F4470 /* Piano.mf.38.m4a */,
-				63F9C7C11CE74825000F4470 /* Piano.mf.39.m4a */,
-				63F9C7C21CE74825000F4470 /* Piano.mf.40.m4a */,
-				63F9C7C31CE74825000F4470 /* Piano.mf.41.m4a */,
-				63F9C7C41CE74825000F4470 /* Piano.mf.42.m4a */,
-				63F9C7C51CE74825000F4470 /* Piano.mf.43.m4a */,
-				63F9C7C61CE74825000F4470 /* Piano.mf.44.m4a */,
-				63F9C7C71CE74825000F4470 /* Piano.mf.45.m4a */,
-				63F9C7C81CE74825000F4470 /* Piano.mf.46.m4a */,
-				63F9C7C91CE74825000F4470 /* Piano.mf.47.m4a */,
-				63F9C7CA1CE74825000F4470 /* Piano.mf.48.m4a */,
-				63F9C7CB1CE74825000F4470 /* Piano.mf.49.m4a */,
-				63F9C7CC1CE74825000F4470 /* Piano.mf.50.m4a */,
-				63F9C7CD1CE74825000F4470 /* Piano.mf.51.m4a */,
-				63F9C7CE1CE74825000F4470 /* Piano.mf.52.m4a */,
-				63F9C7CF1CE74825000F4470 /* Piano.mf.53.m4a */,
-				63F9C7D01CE74825000F4470 /* Piano.mf.54.m4a */,
-				63F9C7D11CE74825000F4470 /* Piano.mf.55.m4a */,
-				63F9C7D21CE74825000F4470 /* Piano.mf.56.m4a */,
-				63F9C7D31CE74825000F4470 /* Piano.mf.57.m4a */,
-				63F9C7D41CE74825000F4470 /* Piano.mf.58.m4a */,
-				63F9C7D51CE74825000F4470 /* Piano.mf.59.m4a */,
-				63F9C7D61CE74825000F4470 /* Piano.mf.60.m4a */,
-				63F9C7D71CE74825000F4470 /* Piano.mf.61.m4a */,
-				63F9C7D81CE74825000F4470 /* Piano.mf.62.m4a */,
-				63F9C7D91CE74825000F4470 /* Piano.mf.63.m4a */,
-				63F9C7DA1CE74825000F4470 /* Piano.mf.64.m4a */,
-				63F9C7DB1CE74825000F4470 /* Piano.mf.65.m4a */,
-				63F9C7DC1CE74825000F4470 /* Piano.mf.66.m4a */,
-				63F9C7DD1CE74825000F4470 /* Piano.mf.67.m4a */,
-				63F9C7DE1CE74825000F4470 /* Piano.mf.68.m4a */,
-				63F9C7DF1CE74825000F4470 /* Piano.mf.69.m4a */,
-				63F9C7E01CE74825000F4470 /* Piano.mf.70.m4a */,
-				63F9C7E11CE74825000F4470 /* Piano.mf.71.m4a */,
-				63F9C7E21CE74825000F4470 /* Piano.mf.72.m4a */,
-				63F9C7E31CE74825000F4470 /* Piano.mf.73.m4a */,
-				63F9C7E41CE74825000F4470 /* Piano.mf.74.m4a */,
-				63F9C7E51CE74825000F4470 /* Piano.mf.75.m4a */,
-				63F9C7E61CE74825000F4470 /* Piano.mf.76.m4a */,
-				63F9C7E71CE74825000F4470 /* Piano.mf.77.m4a */,
-				63F9C7E81CE74825000F4470 /* Piano.mf.78.m4a */,
-				63F9C7E91CE74825000F4470 /* Piano.mf.79.m4a */,
-				63F9C7EA1CE74825000F4470 /* Piano.mf.80.m4a */,
-				63F9C7EB1CE74825000F4470 /* Piano.mf.81.m4a */,
-				63F9C7EC1CE74825000F4470 /* Piano.mf.82.m4a */,
-				63F9C7ED1CE74825000F4470 /* Piano.mf.83.m4a */,
-				63F9C7EE1CE74825000F4470 /* Piano.mf.84.m4a */,
-				63F9C7EF1CE74825000F4470 /* Piano.mf.85.m4a */,
-				63F9C7F01CE74825000F4470 /* Piano.mf.86.m4a */,
-				63F9C7F11CE74825000F4470 /* Piano.mf.87.m4a */,
-				63F9C7F21CE74826000F4470 /* Piano.mf.88.m4a */,
-				63F9C7F31CE74826000F4470 /* Piano.mf.89.m4a */,
-				63F9C7F41CE74826000F4470 /* Piano.mf.90.m4a */,
-				63F9C7F51CE74826000F4470 /* Piano.mf.91.m4a */,
-				63F9C7F61CE74826000F4470 /* Piano.mf.92.m4a */,
-				63F9C7F71CE74826000F4470 /* Piano.mf.93.m4a */,
-				63F9C7F81CE74826000F4470 /* Piano.mf.94.m4a */,
-				63F9C7F91CE74826000F4470 /* Piano.mf.95.m4a */,
-				63F9C7FA1CE74826000F4470 /* Piano.mf.96.m4a */,
-				63F9C7FB1CE74826000F4470 /* Piano.mf.97.m4a */,
-				63F9C7FC1CE74826000F4470 /* Piano.mf.98.m4a */,
-				63F9C7FD1CE74826000F4470 /* Piano.mf.99.m4a */,
-				63F9C7FE1CE74826000F4470 /* Piano.mf.100.m4a */,
-				63F9C7FF1CE74826000F4470 /* Piano.mf.101.m4a */,
-				63F9C8001CE74826000F4470 /* Piano.mf.102.m4a */,
-				63F9C8011CE74826000F4470 /* Piano.mf.103.m4a */,
-				63F9C8021CE74826000F4470 /* Piano.mf.104.m4a */,
-				63F9C8031CE74826000F4470 /* Piano.mf.105.m4a */,
-				63F9C8041CE74826000F4470 /* Piano.mf.106.m4a */,
-				63F9C8051CE74826000F4470 /* Piano.mf.107.m4a */,
-				63F9C8061CE74826000F4470 /* Piano.mf.108.m4a */,
-			);
-			name = "piano-samples";
-			sourceTree = "<group>";
-		};
-		63F9C7B01CE747EA000F4470 /* trumpet-samples */ = {
-			isa = PBXGroup;
-			children = (
-				63F9C8B31CE74841000F4470 /* Trumpet.novib.mf.52.m4a */,
-				63F9C8B41CE74841000F4470 /* Trumpet.novib.mf.53.m4a */,
-				63F9C8B51CE74841000F4470 /* Trumpet.novib.mf.54.m4a */,
-				63F9C8B61CE74841000F4470 /* Trumpet.novib.mf.55.m4a */,
-				63F9C8B71CE74841000F4470 /* Trumpet.novib.mf.56.m4a */,
-				63F9C8B81CE74841000F4470 /* Trumpet.novib.mf.57.m4a */,
-				63F9C8B91CE74841000F4470 /* Trumpet.novib.mf.58.m4a */,
-				63F9C8BA1CE74841000F4470 /* Trumpet.novib.mf.59.m4a */,
-				63F9C8BB1CE74841000F4470 /* Trumpet.novib.mf.60.m4a */,
-				63F9C8BC1CE74841000F4470 /* Trumpet.novib.mf.61.m4a */,
-				63F9C8BD1CE74841000F4470 /* Trumpet.novib.mf.62.m4a */,
-				63F9C8BE1CE74841000F4470 /* Trumpet.novib.mf.63.m4a */,
-				63F9C8BF1CE74841000F4470 /* Trumpet.novib.mf.64.m4a */,
-				63F9C8C01CE74841000F4470 /* Trumpet.novib.mf.65.m4a */,
-				63F9C8C11CE74841000F4470 /* Trumpet.novib.mf.66.m4a */,
-				63F9C8C21CE74841000F4470 /* Trumpet.novib.mf.67.m4a */,
-				63F9C8C31CE74841000F4470 /* Trumpet.novib.mf.68.m4a */,
-				63F9C8C41CE74841000F4470 /* Trumpet.novib.mf.69.m4a */,
-				63F9C8C51CE74841000F4470 /* Trumpet.novib.mf.70.m4a */,
-				63F9C8C61CE74841000F4470 /* Trumpet.novib.mf.71.m4a */,
-				63F9C8C71CE74841000F4470 /* Trumpet.novib.mf.72.m4a */,
-				63F9C8C81CE74841000F4470 /* Trumpet.novib.mf.73.m4a */,
-				63F9C8C91CE74841000F4470 /* Trumpet.novib.mf.74.m4a */,
-				63F9C8CA1CE74841000F4470 /* Trumpet.novib.mf.75.m4a */,
-				63F9C8CB1CE74841000F4470 /* Trumpet.novib.mf.76.m4a */,
-				63F9C8CC1CE74841000F4470 /* Trumpet.novib.mf.77.m4a */,
-				63F9C8CD1CE74841000F4470 /* Trumpet.novib.mf.78.m4a */,
-				63F9C8CE1CE74841000F4470 /* Trumpet.novib.mf.79.m4a */,
-				63F9C8CF1CE74841000F4470 /* Trumpet.novib.mf.80.m4a */,
-				63F9C8D01CE74841000F4470 /* Trumpet.novib.mf.81.m4a */,
-				63F9C8D11CE74841000F4470 /* Trumpet.novib.mf.82.m4a */,
-				63F9C8D21CE74841000F4470 /* Trumpet.novib.mf.83.m4a */,
-				63F9C8D31CE74841000F4470 /* Trumpet.novib.mf.84.m4a */,
-				63F9C8D41CE74841000F4470 /* Trumpet.novib.mf.85.m4a */,
-				63F9C8D51CE74841000F4470 /* Trumpet.novib.mf.86.m4a */,
-			);
-			name = "trumpet-samples";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -985,7 +419,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				6387FDD11CEDB1890054DE44 /* PBXTargetDependency */,
 			);
 			name = FirstStage;
 			productName = FirstStage;
@@ -1041,7 +474,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				6387FDCF1CEDB1840054DE44 /* PBXTargetDependency */,
 			);
 			name = "FirstStage-debug";
 			productName = FirstStage;
@@ -1055,12 +487,14 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = Musikyoshi;
 				TargetAttributes = {
 					6324D2CE1CE71B19001934A5 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = A2SGEM86LX;
+						LastSwiftMigration = 0820;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -1069,13 +503,16 @@
 					};
 					6324D2E51CE71B1A001934A5 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0820;
 						TestTargetID = 6324D2CE1CE71B19001934A5;
 					};
 					6324D2F01CE71B1A001934A5 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0820;
 						TestTargetID = 6324D2CE1CE71B19001934A5;
 					};
 					6324D3051CE72F8D001934A5 = {
+						LastSwiftMigration = 0820;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -1095,12 +532,6 @@
 			mainGroup = 6324D2C61CE71B19001934A5;
 			productRefGroup = 6324D2D01CE71B19001934A5 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 6387FDC01CEDB15B0054DE44 /* Products */;
-					ProjectRef = 6387FDBF1CEDB15B0054DE44 /* AudioKit.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				6324D3051CE72F8D001934A5 /* FirstStage-debug */,
@@ -1111,172 +542,21 @@
 		};
 /* End PBXProject section */
 
-/* Begin PBXReferenceProxy section */
-		6387FDC71CEDB15B0054DE44 /* libAudioKit iOS Static.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libAudioKit iOS Static.a";
-			remoteRef = 6387FDC61CEDB15B0054DE44 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		6387FDC91CEDB15B0054DE44 /* libAudioKit iOS Dynamic.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libAudioKit iOS Dynamic.a";
-			remoteRef = 6387FDC81CEDB15B0054DE44 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		6387FDCB1CEDB15B0054DE44 /* libAudioKit OS X.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libAudioKit OS X.a";
-			remoteRef = 6387FDCA1CEDB15B0054DE44 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		6387FDCD1CEDB15B0054DE44 /* libAudioKit tvOS.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libAudioKit tvOS.a";
-			remoteRef = 6387FDCC1CEDB15B0054DE44 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
-
 /* Begin PBXResourcesBuildPhase section */
 		6324D2CD1CE71B19001934A5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63F9C8141CE74826000F4470 /* Piano.mf.29.m4a in Resources */,
-				63F9C80C1CE74826000F4470 /* Piano.mf.25.m4a in Resources */,
-				63F9C8E11CE74841000F4470 /* Trumpet.novib.mf.57.m4a in Resources */,
-				63F9C8341CE74826000F4470 /* Piano.mf.45.m4a in Resources */,
-				63F9C8441CE74826000F4470 /* Piano.mf.53.m4a in Resources */,
-				63F9C8461CE74826000F4470 /* Piano.mf.54.m4a in Resources */,
-				63F9C81A1CE74826000F4470 /* Piano.mf.32.m4a in Resources */,
-				63F9C8B21CE74826000F4470 /* Piano.mf.108.m4a in Resources */,
-				63F9C82A1CE74826000F4470 /* Piano.mf.40.m4a in Resources */,
-				63F9C82C1CE74826000F4470 /* Piano.mf.41.m4a in Resources */,
-				63F9C90B1CE74841000F4470 /* Trumpet.novib.mf.78.m4a in Resources */,
-				63F9C8E51CE74841000F4470 /* Trumpet.novib.mf.59.m4a in Resources */,
 				633CA1D51CF73D0C00061F3D /* NearArrow.png in Resources */,
-				63F9C83C1CE74826000F4470 /* Piano.mf.49.m4a in Resources */,
-				63F9C9171CE74841000F4470 /* Trumpet.novib.mf.84.m4a in Resources */,
-				63F9C8FF1CE74841000F4470 /* Trumpet.novib.mf.72.m4a in Resources */,
-				63F9C8361CE74826000F4470 /* Piano.mf.46.m4a in Resources */,
-				63F9C81E1CE74826000F4470 /* Piano.mf.34.m4a in Resources */,
-				63F9C8761CE74826000F4470 /* Piano.mf.78.m4a in Resources */,
-				63F9C80E1CE74826000F4470 /* Piano.mf.26.m4a in Resources */,
-				63F9C9091CE74841000F4470 /* Trumpet.novib.mf.77.m4a in Resources */,
-				63F9C9191CE74841000F4470 /* Trumpet.novib.mf.85.m4a in Resources */,
-				63F9C8A21CE74826000F4470 /* Piano.mf.100.m4a in Resources */,
-				63F9C8721CE74826000F4470 /* Piano.mf.76.m4a in Resources */,
-				63F9C8DB1CE74841000F4470 /* Trumpet.novib.mf.54.m4a in Resources */,
-				63F9C8541CE74826000F4470 /* Piano.mf.61.m4a in Resources */,
-				63F9C89C1CE74826000F4470 /* Piano.mf.97.m4a in Resources */,
-				63F9C8EF1CE74841000F4470 /* Trumpet.novib.mf.64.m4a in Resources */,
-				63F9C89A1CE74826000F4470 /* Piano.mf.96.m4a in Resources */,
-				63F9C8901CE74826000F4470 /* Piano.mf.91.m4a in Resources */,
-				63F9C80A1CE74826000F4470 /* Piano.mf.24.m4a in Resources */,
-				63F9C8801CE74826000F4470 /* Piano.mf.83.m4a in Resources */,
-				63F9C9131CE74841000F4470 /* Trumpet.novib.mf.82.m4a in Resources */,
-				63F9C8E71CE74841000F4470 /* Trumpet.novib.mf.60.m4a in Resources */,
-				63F9C8D71CE74841000F4470 /* Trumpet.novib.mf.52.m4a in Resources */,
-				63F9C8401CE74826000F4470 /* Piano.mf.51.m4a in Resources */,
-				63F9C8A81CE74826000F4470 /* Piano.mf.103.m4a in Resources */,
-				63F9C8A41CE74826000F4470 /* Piano.mf.101.m4a in Resources */,
 				633CA1D41CF73D0C00061F3D /* FarArrow.png in Resources */,
-				63F9C86E1CE74826000F4470 /* Piano.mf.74.m4a in Resources */,
-				63F9C8921CE74826000F4470 /* Piano.mf.92.m4a in Resources */,
-				63F9C8161CE74826000F4470 /* Piano.mf.30.m4a in Resources */,
-				63F9C8DF1CE74841000F4470 /* Trumpet.novib.mf.56.m4a in Resources */,
-				63F9C84E1CE74826000F4470 /* Piano.mf.58.m4a in Resources */,
-				63F9C8481CE74826000F4470 /* Piano.mf.55.m4a in Resources */,
-				63F9C88E1CE74826000F4470 /* Piano.mf.90.m4a in Resources */,
-				63F9C8B01CE74826000F4470 /* Piano.mf.107.m4a in Resources */,
-				63F9C8F51CE74841000F4470 /* Trumpet.novib.mf.67.m4a in Resources */,
-				63F9C8861CE74826000F4470 /* Piano.mf.86.m4a in Resources */,
-				63F9C9071CE74841000F4470 /* Trumpet.novib.mf.76.m4a in Resources */,
-				63F9C90D1CE74841000F4470 /* Trumpet.novib.mf.79.m4a in Resources */,
-				63F9C8EB1CE74841000F4470 /* Trumpet.novib.mf.62.m4a in Resources */,
-				63F9C8601CE74826000F4470 /* Piano.mf.67.m4a in Resources */,
-				63F9C8D91CE74841000F4470 /* Trumpet.novib.mf.53.m4a in Resources */,
 				633D1B731CF94CEB00B5C4FD /* FeedbackImage.png in Resources */,
-				63F9C89E1CE74826000F4470 /* Piano.mf.98.m4a in Resources */,
-				63F9C8F71CE74841000F4470 /* Trumpet.novib.mf.68.m4a in Resources */,
-				63F9C8741CE74826000F4470 /* Piano.mf.77.m4a in Resources */,
 				6324D2E01CE71B1A001934A5 /* LaunchScreen.storyboard in Resources */,
 				6324D2DD1CE71B1A001934A5 /* Assets.xcassets in Resources */,
-				63F9C8501CE74826000F4470 /* Piano.mf.59.m4a in Resources */,
-				63F9C8A61CE74826000F4470 /* Piano.mf.102.m4a in Resources */,
-				63F9C8981CE74826000F4470 /* Piano.mf.95.m4a in Resources */,
-				63F9C9051CE74841000F4470 /* Trumpet.novib.mf.75.m4a in Resources */,
-				63F9C88C1CE74826000F4470 /* Piano.mf.89.m4a in Resources */,
-				63F9C8ED1CE74841000F4470 /* Trumpet.novib.mf.63.m4a in Resources */,
-				63F9C8FB1CE74841000F4470 /* Trumpet.novib.mf.70.m4a in Resources */,
-				63F9C87C1CE74826000F4470 /* Piano.mf.81.m4a in Resources */,
-				63F9C8821CE74826000F4470 /* Piano.mf.84.m4a in Resources */,
 				633CA1D31CF73D0C00061F3D /* GreenSmile.png in Resources */,
-				63F9C8421CE74826000F4470 /* Piano.mf.52.m4a in Resources */,
-				63F9C8081CE74826000F4470 /* Piano.mf.23.m4a in Resources */,
-				63F9C8961CE74826000F4470 /* Piano.mf.94.m4a in Resources */,
-				63F9C8301CE74826000F4470 /* Piano.mf.43.m4a in Resources */,
-				63F9C81C1CE74826000F4470 /* Piano.mf.33.m4a in Resources */,
-				63F9C8621CE74826000F4470 /* Piano.mf.68.m4a in Resources */,
-				63F9C8661CE74826000F4470 /* Piano.mf.70.m4a in Resources */,
-				63F9C8121CE74826000F4470 /* Piano.mf.28.m4a in Resources */,
-				63F9C8581CE74826000F4470 /* Piano.mf.63.m4a in Resources */,
-				63F9C8261CE74826000F4470 /* Piano.mf.38.m4a in Resources */,
-				63F9C88A1CE74826000F4470 /* Piano.mf.88.m4a in Resources */,
-				63F9C8281CE74826000F4470 /* Piano.mf.39.m4a in Resources */,
-				63F9C90F1CE74841000F4470 /* Trumpet.novib.mf.80.m4a in Resources */,
-				63F9C8181CE74826000F4470 /* Piano.mf.31.m4a in Resources */,
-				63F9C86C1CE74826000F4470 /* Piano.mf.73.m4a in Resources */,
-				63F9C8641CE74826000F4470 /* Piano.mf.69.m4a in Resources */,
-				63F9C8E31CE74841000F4470 /* Trumpet.novib.mf.58.m4a in Resources */,
-				63F9C85C1CE74826000F4470 /* Piano.mf.65.m4a in Resources */,
 				6355ECF81CF68EB70037945F /* marmstk1.wav in Resources */,
-				63F9C8F31CE74841000F4470 /* Trumpet.novib.mf.66.m4a in Resources */,
-				63F9C8AC1CE74826000F4470 /* Piano.mf.105.m4a in Resources */,
-				63F9C8F91CE74841000F4470 /* Trumpet.novib.mf.69.m4a in Resources */,
-				63F9C8221CE74826000F4470 /* Piano.mf.36.m4a in Resources */,
-				63F9C87E1CE74826000F4470 /* Piano.mf.82.m4a in Resources */,
-				63F9C83E1CE74826000F4470 /* Piano.mf.50.m4a in Resources */,
-				63F9C8201CE74826000F4470 /* Piano.mf.35.m4a in Resources */,
-				63F9C8241CE74826000F4470 /* Piano.mf.37.m4a in Resources */,
-				63F9C8841CE74826000F4470 /* Piano.mf.85.m4a in Resources */,
-				63F9C91B1CE74841000F4470 /* Trumpet.novib.mf.86.m4a in Resources */,
-				63F9C8E91CE74841000F4470 /* Trumpet.novib.mf.61.m4a in Resources */,
-				63F9C8701CE74826000F4470 /* Piano.mf.75.m4a in Resources */,
+				634658381E90BE4F00C162CF /* synth-samples in Resources */,
 				633C2ADE1CE813E7001C5C16 /* XML Tunes in Resources */,
-				63F9C8781CE74826000F4470 /* Piano.mf.79.m4a in Resources */,
-				63F9C9011CE74841000F4470 /* Trumpet.novib.mf.73.m4a in Resources */,
-				63F9C84A1CE74826000F4470 /* Piano.mf.56.m4a in Resources */,
-				63F9C84C1CE74826000F4470 /* Piano.mf.57.m4a in Resources */,
-				63F9C86A1CE74826000F4470 /* Piano.mf.72.m4a in Resources */,
-				63F9C8F11CE74841000F4470 /* Trumpet.novib.mf.65.m4a in Resources */,
-				63F9C8681CE74826000F4470 /* Piano.mf.71.m4a in Resources */,
-				63F9C8DD1CE74841000F4470 /* Trumpet.novib.mf.55.m4a in Resources */,
-				63F9C9031CE74841000F4470 /* Trumpet.novib.mf.74.m4a in Resources */,
-				63F9C8941CE74826000F4470 /* Piano.mf.93.m4a in Resources */,
-				63F9C8AA1CE74826000F4470 /* Piano.mf.104.m4a in Resources */,
-				63F9C8881CE74826000F4470 /* Piano.mf.87.m4a in Resources */,
-				63F9C8321CE74826000F4470 /* Piano.mf.44.m4a in Resources */,
-				63F9C8521CE74826000F4470 /* Piano.mf.60.m4a in Resources */,
-				63F9C8381CE74826000F4470 /* Piano.mf.47.m4a in Resources */,
-				63F9C8A01CE74826000F4470 /* Piano.mf.99.m4a in Resources */,
-				63F9C8101CE74826000F4470 /* Piano.mf.27.m4a in Resources */,
-				63F9C8AE1CE74826000F4470 /* Piano.mf.106.m4a in Resources */,
-				63F9C87A1CE74826000F4470 /* Piano.mf.80.m4a in Resources */,
-				63F9C8561CE74826000F4470 /* Piano.mf.62.m4a in Resources */,
-				63F9C9111CE74841000F4470 /* Trumpet.novib.mf.81.m4a in Resources */,
-				63F9C82E1CE74826000F4470 /* Piano.mf.42.m4a in Resources */,
-				63F9C8FD1CE74841000F4470 /* Trumpet.novib.mf.71.m4a in Resources */,
-				63F9C85A1CE74826000F4470 /* Piano.mf.64.m4a in Resources */,
 				6324D2D81CE71B19001934A5 /* Main.storyboard in Resources */,
-				63F9C85E1CE74826000F4470 /* Piano.mf.66.m4a in Resources */,
-				63F9C83A1CE74826000F4470 /* Piano.mf.48.m4a in Resources */,
-				63F9C9151CE74841000F4470 /* Trumpet.novib.mf.83.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1298,136 +578,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63F9C8131CE74826000F4470 /* Piano.mf.29.m4a in Resources */,
-				63F9C80B1CE74826000F4470 /* Piano.mf.25.m4a in Resources */,
-				63F9C8E01CE74841000F4470 /* Trumpet.novib.mf.57.m4a in Resources */,
-				63F9C8331CE74826000F4470 /* Piano.mf.45.m4a in Resources */,
-				63F9C8431CE74826000F4470 /* Piano.mf.53.m4a in Resources */,
-				63F9C8451CE74826000F4470 /* Piano.mf.54.m4a in Resources */,
-				63F9C8191CE74826000F4470 /* Piano.mf.32.m4a in Resources */,
-				63F9C8B11CE74826000F4470 /* Piano.mf.108.m4a in Resources */,
-				63F9C8291CE74826000F4470 /* Piano.mf.40.m4a in Resources */,
-				63F9C82B1CE74826000F4470 /* Piano.mf.41.m4a in Resources */,
-				63F9C90A1CE74841000F4470 /* Trumpet.novib.mf.78.m4a in Resources */,
-				63F9C8E41CE74841000F4470 /* Trumpet.novib.mf.59.m4a in Resources */,
 				633CA1DB1CF73D1A00061F3D /* NearArrow.png in Resources */,
-				63F9C83B1CE74826000F4470 /* Piano.mf.49.m4a in Resources */,
-				63F9C9161CE74841000F4470 /* Trumpet.novib.mf.84.m4a in Resources */,
-				63F9C8FE1CE74841000F4470 /* Trumpet.novib.mf.72.m4a in Resources */,
-				63F9C8351CE74826000F4470 /* Piano.mf.46.m4a in Resources */,
-				63F9C81D1CE74826000F4470 /* Piano.mf.34.m4a in Resources */,
-				63F9C8751CE74826000F4470 /* Piano.mf.78.m4a in Resources */,
-				63F9C80D1CE74826000F4470 /* Piano.mf.26.m4a in Resources */,
-				63F9C9081CE74841000F4470 /* Trumpet.novib.mf.77.m4a in Resources */,
-				63F9C9181CE74841000F4470 /* Trumpet.novib.mf.85.m4a in Resources */,
-				63F9C8A11CE74826000F4470 /* Piano.mf.100.m4a in Resources */,
-				63F9C8711CE74826000F4470 /* Piano.mf.76.m4a in Resources */,
-				63F9C8DA1CE74841000F4470 /* Trumpet.novib.mf.54.m4a in Resources */,
-				63F9C8531CE74826000F4470 /* Piano.mf.61.m4a in Resources */,
-				63F9C89B1CE74826000F4470 /* Piano.mf.97.m4a in Resources */,
-				63F9C8EE1CE74841000F4470 /* Trumpet.novib.mf.64.m4a in Resources */,
-				63F9C8991CE74826000F4470 /* Piano.mf.96.m4a in Resources */,
-				63F9C88F1CE74826000F4470 /* Piano.mf.91.m4a in Resources */,
-				63F9C8091CE74826000F4470 /* Piano.mf.24.m4a in Resources */,
-				63F9C87F1CE74826000F4470 /* Piano.mf.83.m4a in Resources */,
-				63F9C9121CE74841000F4470 /* Trumpet.novib.mf.82.m4a in Resources */,
-				63F9C8E61CE74841000F4470 /* Trumpet.novib.mf.60.m4a in Resources */,
-				63F9C8D61CE74841000F4470 /* Trumpet.novib.mf.52.m4a in Resources */,
-				63F9C83F1CE74826000F4470 /* Piano.mf.51.m4a in Resources */,
-				63F9C8A71CE74826000F4470 /* Piano.mf.103.m4a in Resources */,
-				63F9C8A31CE74826000F4470 /* Piano.mf.101.m4a in Resources */,
 				633CA1DA1CF73D1600061F3D /* FarArrow.png in Resources */,
-				63F9C86D1CE74826000F4470 /* Piano.mf.74.m4a in Resources */,
-				63F9C8911CE74826000F4470 /* Piano.mf.92.m4a in Resources */,
-				63F9C8151CE74826000F4470 /* Piano.mf.30.m4a in Resources */,
-				63F9C8DE1CE74841000F4470 /* Trumpet.novib.mf.56.m4a in Resources */,
-				63F9C84D1CE74826000F4470 /* Piano.mf.58.m4a in Resources */,
-				63F9C8471CE74826000F4470 /* Piano.mf.55.m4a in Resources */,
-				63F9C88D1CE74826000F4470 /* Piano.mf.90.m4a in Resources */,
-				63F9C8AF1CE74826000F4470 /* Piano.mf.107.m4a in Resources */,
-				63F9C8F41CE74841000F4470 /* Trumpet.novib.mf.67.m4a in Resources */,
-				63F9C8851CE74826000F4470 /* Piano.mf.86.m4a in Resources */,
-				63F9C9061CE74841000F4470 /* Trumpet.novib.mf.76.m4a in Resources */,
-				63F9C90C1CE74841000F4470 /* Trumpet.novib.mf.79.m4a in Resources */,
-				63F9C8EA1CE74841000F4470 /* Trumpet.novib.mf.62.m4a in Resources */,
-				63F9C85F1CE74826000F4470 /* Piano.mf.67.m4a in Resources */,
-				63F9C8D81CE74841000F4470 /* Trumpet.novib.mf.53.m4a in Resources */,
 				633D1B741CF9588700B5C4FD /* FeedbackImage.png in Resources */,
-				63F9C89D1CE74826000F4470 /* Piano.mf.98.m4a in Resources */,
-				63F9C8F61CE74841000F4470 /* Trumpet.novib.mf.68.m4a in Resources */,
-				63F9C8731CE74826000F4470 /* Piano.mf.77.m4a in Resources */,
 				6324D30D1CE72F8D001934A5 /* LaunchScreen.storyboard in Resources */,
 				6324D30E1CE72F8D001934A5 /* Assets.xcassets in Resources */,
-				63F9C84F1CE74826000F4470 /* Piano.mf.59.m4a in Resources */,
-				63F9C8A51CE74826000F4470 /* Piano.mf.102.m4a in Resources */,
-				63F9C8971CE74826000F4470 /* Piano.mf.95.m4a in Resources */,
-				63F9C9041CE74841000F4470 /* Trumpet.novib.mf.75.m4a in Resources */,
-				63F9C88B1CE74826000F4470 /* Piano.mf.89.m4a in Resources */,
-				63F9C8EC1CE74841000F4470 /* Trumpet.novib.mf.63.m4a in Resources */,
-				63F9C8FA1CE74841000F4470 /* Trumpet.novib.mf.70.m4a in Resources */,
-				63F9C87B1CE74826000F4470 /* Piano.mf.81.m4a in Resources */,
-				63F9C8811CE74826000F4470 /* Piano.mf.84.m4a in Resources */,
 				633CA1D91CF73D1100061F3D /* GreenSmile.png in Resources */,
-				63F9C8411CE74826000F4470 /* Piano.mf.52.m4a in Resources */,
-				63F9C8071CE74826000F4470 /* Piano.mf.23.m4a in Resources */,
-				63F9C8951CE74826000F4470 /* Piano.mf.94.m4a in Resources */,
-				63F9C82F1CE74826000F4470 /* Piano.mf.43.m4a in Resources */,
-				63F9C81B1CE74826000F4470 /* Piano.mf.33.m4a in Resources */,
-				63F9C8611CE74826000F4470 /* Piano.mf.68.m4a in Resources */,
-				63F9C8651CE74826000F4470 /* Piano.mf.70.m4a in Resources */,
-				63F9C8111CE74826000F4470 /* Piano.mf.28.m4a in Resources */,
-				63F9C8571CE74826000F4470 /* Piano.mf.63.m4a in Resources */,
-				63F9C8251CE74826000F4470 /* Piano.mf.38.m4a in Resources */,
-				63F9C8891CE74826000F4470 /* Piano.mf.88.m4a in Resources */,
-				63F9C8271CE74826000F4470 /* Piano.mf.39.m4a in Resources */,
-				63F9C90E1CE74841000F4470 /* Trumpet.novib.mf.80.m4a in Resources */,
-				63F9C8171CE74826000F4470 /* Piano.mf.31.m4a in Resources */,
-				63F9C86B1CE74826000F4470 /* Piano.mf.73.m4a in Resources */,
-				63F9C8631CE74826000F4470 /* Piano.mf.69.m4a in Resources */,
-				63F9C8E21CE74841000F4470 /* Trumpet.novib.mf.58.m4a in Resources */,
-				63F9C85B1CE74826000F4470 /* Piano.mf.65.m4a in Resources */,
 				6355ECF71CF68EB70037945F /* marmstk1.wav in Resources */,
-				63F9C8F21CE74841000F4470 /* Trumpet.novib.mf.66.m4a in Resources */,
-				63F9C8AB1CE74826000F4470 /* Piano.mf.105.m4a in Resources */,
-				63F9C8F81CE74841000F4470 /* Trumpet.novib.mf.69.m4a in Resources */,
-				63F9C8211CE74826000F4470 /* Piano.mf.36.m4a in Resources */,
-				63F9C87D1CE74826000F4470 /* Piano.mf.82.m4a in Resources */,
-				63F9C83D1CE74826000F4470 /* Piano.mf.50.m4a in Resources */,
-				63F9C81F1CE74826000F4470 /* Piano.mf.35.m4a in Resources */,
-				63F9C8231CE74826000F4470 /* Piano.mf.37.m4a in Resources */,
-				63F9C8831CE74826000F4470 /* Piano.mf.85.m4a in Resources */,
-				63F9C91A1CE74841000F4470 /* Trumpet.novib.mf.86.m4a in Resources */,
-				63F9C8E81CE74841000F4470 /* Trumpet.novib.mf.61.m4a in Resources */,
-				63F9C86F1CE74826000F4470 /* Piano.mf.75.m4a in Resources */,
 				633C2ADD1CE813E7001C5C16 /* XML Tunes in Resources */,
-				63F9C8771CE74826000F4470 /* Piano.mf.79.m4a in Resources */,
-				63F9C9001CE74841000F4470 /* Trumpet.novib.mf.73.m4a in Resources */,
-				63F9C8491CE74826000F4470 /* Piano.mf.56.m4a in Resources */,
-				63F9C84B1CE74826000F4470 /* Piano.mf.57.m4a in Resources */,
-				63F9C8691CE74826000F4470 /* Piano.mf.72.m4a in Resources */,
-				63F9C8F01CE74841000F4470 /* Trumpet.novib.mf.65.m4a in Resources */,
-				63F9C8671CE74826000F4470 /* Piano.mf.71.m4a in Resources */,
-				63F9C8DC1CE74841000F4470 /* Trumpet.novib.mf.55.m4a in Resources */,
-				63F9C9021CE74841000F4470 /* Trumpet.novib.mf.74.m4a in Resources */,
-				63F9C8931CE74826000F4470 /* Piano.mf.93.m4a in Resources */,
-				63F9C8A91CE74826000F4470 /* Piano.mf.104.m4a in Resources */,
-				63F9C8871CE74826000F4470 /* Piano.mf.87.m4a in Resources */,
-				63F9C8311CE74826000F4470 /* Piano.mf.44.m4a in Resources */,
-				63F9C8511CE74826000F4470 /* Piano.mf.60.m4a in Resources */,
-				63F9C8371CE74826000F4470 /* Piano.mf.47.m4a in Resources */,
-				63F9C89F1CE74826000F4470 /* Piano.mf.99.m4a in Resources */,
-				63F9C80F1CE74826000F4470 /* Piano.mf.27.m4a in Resources */,
-				63F9C8AD1CE74826000F4470 /* Piano.mf.106.m4a in Resources */,
-				63F9C8791CE74826000F4470 /* Piano.mf.80.m4a in Resources */,
-				63F9C8551CE74826000F4470 /* Piano.mf.62.m4a in Resources */,
-				63F9C9101CE74841000F4470 /* Trumpet.novib.mf.81.m4a in Resources */,
-				63F9C82D1CE74826000F4470 /* Piano.mf.42.m4a in Resources */,
-				63F9C8FC1CE74841000F4470 /* Trumpet.novib.mf.71.m4a in Resources */,
-				63F9C8591CE74826000F4470 /* Piano.mf.64.m4a in Resources */,
 				6324D30F1CE72F8D001934A5 /* Main.storyboard in Resources */,
-				63F9C85D1CE74826000F4470 /* Piano.mf.66.m4a in Resources */,
-				63F9C8391CE74826000F4470 /* Piano.mf.48.m4a in Resources */,
-				63F9C9141CE74841000F4470 /* Trumpet.novib.mf.83.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1445,7 +604,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"AudioKit/AudioKit//Platforms/iOS/run-script.sh\"";
+			shellScript = "\"$BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH/AudioKit.framework/fix-framework.sh\"";
 		};
 		6379EE881CE9C63B00188A70 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1458,7 +617,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"AudioKit/AudioKit//Platforms/iOS/run-script.sh\"";
+			shellScript = "\"$BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH/AudioKit.framework/fix-framework.sh\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1482,17 +641,17 @@
 				639A2E461CF5AB09004F7B1A /* DotView.swift in Sources */,
 				6379EE921CE9C8ED00188A70 /* AudioKitManager.swift in Sources */,
 				6324D3611CE73C47001934A5 /* SSSystemView.m in Sources */,
+				63B427591E5016AB000E35AA /* Intonation.swift in Sources */,
 				6324D37B1CE73ED9001934A5 /* NoteOffset.swift in Sources */,
 				63EB90181CF1C4EC00F09B05 /* AVAudioSessionManager.swift in Sources */,
 				6324D3041CE72E5D001934A5 /* TuneExerciseViewController.swift in Sources */,
+				63B4275C1E5057BB000E35AA /* SSSettingsViewController.swift in Sources */,
 				639A2E551CF5E6CA004F7B1A /* VisualMetronomeView.swift in Sources */,
 				6324D3651CE73C47001934A5 /* SSPlayLoopGraphics.m in Sources */,
 				6324D35F1CE73C47001934A5 /* SSScrollView.m in Sources */,
 				6324D3751CE73ED9001934A5 /* Exercise.swift in Sources */,
 				6381295B1CF05C7900A40C8E /* SparkLine.swift in Sources */,
 				6379EE7E1CE95CDF00188A70 /* NoteAnalysis.swift in Sources */,
-				6387FDE91CEDB5710054DE44 /* AudioKit.swift in Sources */,
-				6324D35D1CE73C47001934A5 /* sampledInstruments.m in Sources */,
 				6324D3731CE73ED9001934A5 /* Enums.swift in Sources */,
 				6324D2D31CE71B19001934A5 /* AppDelegate.swift in Sources */,
 				633C2AE21CE86915001C5C16 /* Constants.swift in Sources */,
@@ -1533,18 +692,18 @@
 				6324D3781CE73ED9001934A5 /* Note.swift in Sources */,
 				639A2E451CF5AB09004F7B1A /* DotView.swift in Sources */,
 				6379EE911CE9C8ED00188A70 /* AudioKitManager.swift in Sources */,
+				63B4275A1E505573000E35AA /* Intonation.swift in Sources */,
 				6324D3601CE73C47001934A5 /* SSSystemView.m in Sources */,
 				6324D37A1CE73ED9001934A5 /* NoteOffset.swift in Sources */,
 				63EB90171CF1C4EB00F09B05 /* AVAudioSessionManager.swift in Sources */,
 				6324D3091CE72F8D001934A5 /* TuneExerciseViewController.swift in Sources */,
+				63B4275D1E5057C2000E35AA /* SSSettingsViewController.swift in Sources */,
 				639A2E541CF5E6CA004F7B1A /* VisualMetronomeView.swift in Sources */,
 				6324D3641CE73C47001934A5 /* SSPlayLoopGraphics.m in Sources */,
 				6324D35E1CE73C47001934A5 /* SSScrollView.m in Sources */,
 				6324D3741CE73ED9001934A5 /* Exercise.swift in Sources */,
 				6381295A1CF05C7900A40C8E /* SparkLine.swift in Sources */,
 				6379EE7D1CE95CDF00188A70 /* NoteAnalysis.swift in Sources */,
-				6387FDE81CEDB5710054DE44 /* AudioKit.swift in Sources */,
-				6324D35C1CE73C47001934A5 /* sampledInstruments.m in Sources */,
 				6324D3721CE73ED9001934A5 /* Enums.swift in Sources */,
 				6324D30A1CE72F8D001934A5 /* AppDelegate.swift in Sources */,
 				633C2AE11CE86915001C5C16 /* Constants.swift in Sources */,
@@ -1563,16 +722,6 @@
 			isa = PBXTargetDependency;
 			target = 6324D2CE1CE71B19001934A5 /* FirstStage */;
 			targetProxy = 6324D2F21CE71B1A001934A5 /* PBXContainerItemProxy */;
-		};
-		6387FDCF1CEDB1840054DE44 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "AudioKit iOS Dynamic";
-			targetProxy = 6387FDCE1CEDB1840054DE44 /* PBXContainerItemProxy */;
-		};
-		6387FDD11CEDB1890054DE44 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "AudioKit iOS Dynamic";
-			targetProxy = 6387FDD01CEDB1890054DE44 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1610,12 +759,14 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: David Reich (JRZ683P359)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: David Reich (JRZ683P359)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_BITCODE = NO;
@@ -1639,7 +790,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
-				PROVISIONING_PROFILE = "12e192e0-54ea-473a-82e9-9698b782b864";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -1659,12 +810,14 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Stellar Software Pty Ltd (A2SGEM86LX)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Stellar Software Pty Ltd (A2SGEM86LX)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
@@ -1682,6 +835,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1691,23 +845,25 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: David Reich (JRZ683P359)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: David Reich (JRZ683P359)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SeeScoreLib/AppStore-Release",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/AudioKit/AudioKit/Platforms/iOS",
 				);
 				INFOPLIST_FILE = FirstStage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.musikyoshi.FirstStageDSR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "12e192e0-54ea-473a-82e9-9698b782b864";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FirstStage/FirstStage-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "AudioKit/AudioKit/**";
 			};
@@ -1718,21 +874,24 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Stellar Software Pty Ltd (A2SGEM86LX)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Stellar Software Pty Ltd (A2SGEM86LX)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SeeScoreLib/AppStore-Release",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/AudioKit/AudioKit/Platforms/iOS",
 				);
 				INFOPLIST_FILE = FirstStage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.musikyoshi.FirstStageDSR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FirstStage/FirstStage-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "AudioKit/AudioKit/**";
 			};
@@ -1746,6 +905,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.musikyoshi.FirstStageTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FirstStage.app/FirstStage";
 			};
 			name = Debug;
@@ -1758,6 +918,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.musikyoshi.FirstStageTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FirstStage.app/FirstStage";
 			};
 			name = Release;
@@ -1769,6 +930,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.musikyoshi.FirstStageUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = FirstStage;
 			};
 			name = Debug;
@@ -1780,6 +942,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.musikyoshi.FirstStageUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = FirstStage;
 			};
 			name = Release;
@@ -1803,6 +966,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "12e192e0-54ea-473a-82e9-9698b782b864";
 				SWIFT_OBJC_BRIDGING_HEADER = "FirstStage/FirstStage-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "AudioKit/AudioKit/**";
 			};
@@ -1826,6 +990,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.musikyoshi.FirstStageDSR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "FirstStage/FirstStage-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "AudioKit/AudioKit/**";
 			};

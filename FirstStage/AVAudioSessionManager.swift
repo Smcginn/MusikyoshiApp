@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import AudioKit
 
 class AVAudioSessionManager: NSObject {
 
     var isSetup = false
     var isStarted = false
-    
+
     static let sharedInstance = AVAudioSessionManager()
     
     func setupAudioSession() -> Bool {
@@ -33,9 +34,9 @@ class AVAudioSessionManager: NSObject {
         }
 
         AudioKitManager.sharedInstance.setup()
-        
+
         do {
-            try sessionInstance.setCategory(AVAudioSessionCategoryPlayAndRecord, withOptions:AVAudioSessionCategoryOptions.DefaultToSpeaker)
+            try sessionInstance.setCategory(AVAudioSessionCategoryPlayAndRecord, with:AVAudioSessionCategoryOptions.defaultToSpeaker)
         } catch let error as NSError {
             print(error.localizedDescription)
             guard error.code == 0 else { return false }
@@ -54,7 +55,7 @@ class AVAudioSessionManager: NSObject {
             return false
         }
         
-        let bufferDuration = NSTimeInterval.init(floatLiteral: 0.005)
+        let bufferDuration = TimeInterval.init(floatLiteral: 0.005)
         do {
             try sessionInstance.setPreferredIOBufferDuration(bufferDuration)
         } catch let error as NSError {
@@ -77,10 +78,10 @@ class AVAudioSessionManager: NSObject {
         }
         
         // add interruption handler
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(handleInterruption), name: AVAudioSessionInterruptionNotification, object: sessionInstance)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleInterruption), name: NSNotification.Name.AVAudioSessionInterruption, object: sessionInstance)
         
         // we don't do anything special in the route change notification
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(handleRouteChange), name: AVAudioSessionRouteChangeNotification, object: sessionInstance)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleRouteChange), name: NSNotification.Name.AVAudioSessionRouteChange, object: sessionInstance)
         
         // we don't do anything special in the media server reset notification
 //        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(handleMediaServerReset), name: AVAudioSessionMediaServicesWereResetNotification, object: sessionInstance)
@@ -101,25 +102,25 @@ class AVAudioSessionManager: NSObject {
 
     //MARK: Audio Session Route Change Notification
     
-    func handleRouteChange(notification: NSNotification) {
-        let reasonValue = notification.userInfo?[AVAudioSessionRouteChangeReasonKey]?.unsignedIntegerValue
+    func handleRouteChange(_ notification: Notification) {
+        let reasonValue = (notification.userInfo?[AVAudioSessionRouteChangeReasonKey] as AnyObject).uintValue
         //AVAudioSessionRouteDescription *routeDescription = [notification.userInfo valueForKey:AVAudioSessionRouteChangePreviousRouteKey];
         
-        if reasonValue == AVAudioSessionRouteChangeReason.OldDeviceUnavailable.rawValue {
+        if reasonValue == AVAudioSessionRouteChangeReason.oldDeviceUnavailable.rawValue {
             //do we need to do something here?
         }
         print("Audio route change: \(reasonValue)")
     }
     
-    func handleInterruption(n: NSNotification) {
+    func handleInterruption(_ n: Notification) {
         print("Audio interruption")
         guard let why = n.userInfo?[AVAudioSessionInterruptionTypeKey] as? UInt else { return }
         guard let type = AVAudioSessionInterruptionType(rawValue: why) else { return }
 
-        if type == .Began {
+        if type == .began {
             print("interruption began:\n\(n.userInfo!)")
             AudioKitManager.sharedInstance.stop()
-        } else if type == .Ended {
+        } else if type == .ended {
             print("interruption ended:\n\(n.userInfo!)")
 
             // activate the audio session (again)
@@ -143,7 +144,7 @@ class AVAudioSessionManager: NSObject {
         AudioKitManager.sharedInstance.stop()
 
         let sessionInstance = AVAudioSession.sharedInstance()
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
         do {
             try sessionInstance.setActive(false)
         } catch let error as NSError {
