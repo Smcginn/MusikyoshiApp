@@ -6,259 +6,295 @@
 	<dict>
 		<key>Headers/AKAmplitudeEnvelopeAudioUnit.h</key>
 		<data>
-		3QztA3Ew3ErdG7joyzkWL3eBc7U=
+		WYbLKFl76UM3vNGVEMSXt1gj1zI=
 		</data>
 		<key>Headers/AKAmplitudeTrackerAudioUnit.h</key>
 		<data>
-		fa8Gutj8cAuPR7Nyehxai1UZbFw=
+		sKA2oUgDL7Wz+y8MZu4nuGb+HOc=
 		</data>
-		<key>Headers/AKAudioUnitType.h</key>
+		<key>Headers/AKAudioUnit.h</key>
 		<data>
-		1o8wX30VAa4KE1orbNJr+5Xk2uw=
+		v9wMkgl8Eckna0PqfdIWz+4TmYo=
 		</data>
 		<key>Headers/AKAutoWahAudioUnit.h</key>
 		<data>
-		cH4rY+l4wtEJUGnutbyqrm9pMNQ=
+		+KaVV8x/NLxxJTQgNKApw4YJBsM=
 		</data>
 		<key>Headers/AKBalancerAudioUnit.h</key>
 		<data>
-		DHG21o1I7bPrjwhidwfgiVc8Kt0=
+		Mm0wZkNUgdrwAiJ5H6mUp5KYqUk=
 		</data>
 		<key>Headers/AKBandPassButterworthFilterAudioUnit.h</key>
 		<data>
-		bfQVgChxXtfVsceyQKCEr/hjxXk=
+		f1WaJTzbzH57C99kFMEfyJd7zOc=
 		</data>
 		<key>Headers/AKBandRejectButterworthFilterAudioUnit.h</key>
 		<data>
-		evGdFaaSxItZyA86sWvEFj2Dy/4=
+		pOFD7IJqLF09v9HUelOaLo6VmpA=
 		</data>
 		<key>Headers/AKBitCrusherAudioUnit.h</key>
 		<data>
-		PFXv+sHzL98qhfyexYkd2WrOejs=
+		+tW1/skFKAk10DApeZq7rOcNSIM=
 		</data>
 		<key>Headers/AKBoosterAudioUnit.h</key>
 		<data>
-		I5uZs13aSx5y1/uN5VBAY1J36g4=
+		f1j7DN+ajYCDoGOFnlk0GkbeLH4=
+		</data>
+		<key>Headers/AKBrownianNoiseAudioUnit.h</key>
+		<data>
+		xGxsiOMLsR28GBPj8IqSVF6riy0=
 		</data>
 		<key>Headers/AKChowningReverbAudioUnit.h</key>
 		<data>
-		rToTL5rbDrCoTcno/xvaOAuAl1Q=
+		EUiMujl+Mcbds/F33BGP02sDaLg=
 		</data>
 		<key>Headers/AKClarinetAudioUnit.h</key>
 		<data>
-		KcOuBngNdw8jRJ+MizfEmL4eG1s=
+		IOqwdc3RbVzVR1cqOiOBF6pSFao=
 		</data>
 		<key>Headers/AKClipperAudioUnit.h</key>
 		<data>
-		SRdPzSzA6C9bOzIpqAXOtnLhG8M=
+		yGb4jGFkJZ9/xAeUgiIXkmJUK3M=
 		</data>
 		<key>Headers/AKCombFilterReverbAudioUnit.h</key>
 		<data>
-		Q3iuIPTSAjzUSxZO3WB6aleWbUw=
+		V5hZgosYAZxem2gkHIaWtjFhhj8=
 		</data>
 		<key>Headers/AKConvolutionAudioUnit.h</key>
 		<data>
-		mLQMqO+4py2e9BmuOi7Z94Zuv/o=
+		0JUZ5tg47L6jVJ9Pl/lo44eDNsw=
 		</data>
 		<key>Headers/AKCostelloReverbAudioUnit.h</key>
 		<data>
-		fEiVvR9XRqieT0BBcAFRxGPZBnw=
+		z4T0dhXHjpDaLC7YSfTQf5LepKc=
 		</data>
 		<key>Headers/AKDCBlockAudioUnit.h</key>
 		<data>
-		bvsqwa3pYTJgwD74S5TOQoV4BwM=
+		+0YFTGQh/t56LfNYvl8FHqRbVCM=
 		</data>
 		<key>Headers/AKDripAudioUnit.h</key>
 		<data>
-		W7ifqwqi6lCIicX8WeJp/npE/7Q=
+		oMGic8EVMC/FPmC+zSNivvHVcfI=
+		</data>
+		<key>Headers/AKDynamicRangeCompressorAudioUnit.h</key>
+		<data>
+		Bn+36OnxlPo1dJkZ0iF6tT7P2Tk=
 		</data>
 		<key>Headers/AKEqualizerFilterAudioUnit.h</key>
 		<data>
-		l+w6GosjFfv1CobEYdNcIcEX6Lw=
+		LAK4NZ7BlVD19FTudv0Or7W40zo=
 		</data>
 		<key>Headers/AKFMOscillatorAudioUnit.h</key>
 		<data>
-		3ayIH8npC5H1AkD9gfPKGbjCpv4=
+		Kl3IE35+n3bVc6rPh7gpk5XrE6o=
 		</data>
 		<key>Headers/AKFMOscillatorBankAudioUnit.h</key>
 		<data>
-		xYINDQx/b5p/Qs+NReWwWaXVOVY=
+		VP7rkd0tRK5Om8uABjjjWm8+mM8=
 		</data>
 		<key>Headers/AKFlatFrequencyResponseReverbAudioUnit.h</key>
 		<data>
-		Ap1Bfne/oOjkjsDKgpN9ru917GA=
+		5ChGakgKyFde5/ZT1qiTbTpOwCM=
 		</data>
 		<key>Headers/AKFluteAudioUnit.h</key>
 		<data>
-		kL2MRjp24skBwUCTMVhzITlxrXM=
+		cGwYGU6v5rrXDIb3d5RDey+8vv8=
 		</data>
 		<key>Headers/AKFormantFilterAudioUnit.h</key>
 		<data>
-		nHMgyEuOkay5E8BNAnhz6v6abKk=
+		NAncEMOjPbSyk92aMuw8Y+bqt5o=
 		</data>
 		<key>Headers/AKFrequencyTrackerAudioUnit.h</key>
 		<data>
-		48toMs41vZ4sN4lCnyOlKHPqWFc=
+		80unL1LT+OGJQdM+OKLp4tgqRLI=
 		</data>
 		<key>Headers/AKHighPassButterworthFilterAudioUnit.h</key>
 		<data>
-		j8zCBXTgzqX89KCzeS8iBRjb41Q=
+		k7l1uE4c3IhdcD4S8mpeZeJfBsc=
 		</data>
 		<key>Headers/AKHighShelfParametricEqualizerFilterAudioUnit.h</key>
 		<data>
-		9QZJOgGkHR32X0oO9hswHTlwJxs=
+		1CZW7G24WmhTpE5gucxgBMgvoow=
 		</data>
 		<key>Headers/AKKorgLowPassFilterAudioUnit.h</key>
 		<data>
-		QNB38rx/m+q65Q5Ero5EfdEFBoU=
+		tCBv3wdTH62mM39nRzx8LMk6pXQ=
 		</data>
 		<key>Headers/AKLowPassButterworthFilterAudioUnit.h</key>
 		<data>
-		tVi27qtihcCBKWf/o1u84qOTv7c=
+		3XnL7wrVyC7IoyPiIfjsPdEtMzY=
 		</data>
 		<key>Headers/AKLowShelfParametricEqualizerFilterAudioUnit.h</key>
 		<data>
-		+XHjkCb2jWz5tEVRv4cVl9/uGbE=
+		yQi+ZIDYK7T8pg9IN9jhOngj69Y=
 		</data>
 		<key>Headers/AKMandolinAudioUnit.h</key>
 		<data>
-		Cxn3P/KlZpXClO7A6JLLsQxAU68=
+		8EknGVr8XwNEpEujKemtSJ/MtTY=
 		</data>
 		<key>Headers/AKMetalBarAudioUnit.h</key>
 		<data>
-		y+jRQQcr/SfIXr3fsUgkU+9k8q8=
+		ft4r5UJyIns++bcy3rBplIlqVLg=
 		</data>
 		<key>Headers/AKModalResonanceFilterAudioUnit.h</key>
 		<data>
-		531bgyvZUJW5QsIp/b6bofSTt8E=
+		E/AeNioBUZ71g3bMhjaG797imbg=
 		</data>
 		<key>Headers/AKMoogLadderAudioUnit.h</key>
 		<data>
-		EvYmDEo+BIN01Udm2IJbmbQnOmc=
+		7ZSaFoaRKMVt6dHWvws/NDbCaGg=
 		</data>
 		<key>Headers/AKMorphingOscillatorAudioUnit.h</key>
 		<data>
-		yZGQkYJEMlsBH9uqeiDN3M9W6y0=
+		j+1OP36xpHJeYs42cICZgMKh1tE=
 		</data>
 		<key>Headers/AKMorphingOscillatorBankAudioUnit.h</key>
 		<data>
-		s2rTgLXvi69BXu3z5Nj88KtLIZo=
+		73lILD9yuwCQsqI7FdpvpiswDsE=
 		</data>
 		<key>Headers/AKOfflineRenderer.h</key>
 		<data>
-		dyTAxG6p5bKt+w3ZYvFmBXwk/1o=
+		ryAo1QhPk/3Yhgfs5eU3Tf5zuyI=
 		</data>
 		<key>Headers/AKOperationEffectAudioUnit.h</key>
 		<data>
-		/LjuFh0FCaZpU8UspsjN04qIoo8=
+		rhryjwubn2imzXh2epgFiM6HBxQ=
 		</data>
 		<key>Headers/AKOperationGeneratorAudioUnit.h</key>
 		<data>
-		y+Ej18XO3dUg5Pny4GswjQlmUp0=
+		6YGXriclx3wYFHq4H7dTcQVUuU4=
 		</data>
 		<key>Headers/AKOscillatorAudioUnit.h</key>
 		<data>
-		QtoVPwF60l1Ej0ixAEzhMVcKbQY=
+		m4qn/YS9cWr6A9/zveM+fn+Wrvo=
 		</data>
 		<key>Headers/AKOscillatorBankAudioUnit.h</key>
 		<data>
-		PdWaJL/N6eLX529hglxzuhmAjzg=
+		N5xAK365MM8L7fdNuqXS4bJ/Hng=
 		</data>
 		<key>Headers/AKPWMOscillatorAudioUnit.h</key>
 		<data>
-		bZyvUV7o9jeI5MoXd+zfknmCVTs=
+		N5TSqZ4qqM42uthY/g7SC2nq+RY=
 		</data>
 		<key>Headers/AKPWMOscillatorBankAudioUnit.h</key>
 		<data>
-		O2cSn2Z4ujpcF9cKY1LKTuSPjkg=
+		dour2aAi6fmZit2n1SOWayne83o=
 		</data>
 		<key>Headers/AKPannerAudioUnit.h</key>
 		<data>
-		Iq/D4Wyqk1mnJEURIddqoxwVBrM=
+		eZPINNuOFZN048EJ1D7sDkseYJU=
 		</data>
 		<key>Headers/AKPeakingParametricEqualizerFilterAudioUnit.h</key>
 		<data>
-		XH1lRDuU+ddUibNiBvvSILGQhQ0=
+		J8MER1mWq5Sg7LdawShH8vzRN1A=
 		</data>
 		<key>Headers/AKPhaseDistortionOscillatorAudioUnit.h</key>
 		<data>
-		zW5qogmeKo+8nLBIDVLADBRdfm0=
+		v9DjVTFQMsbUnPdrjjuy9L+gzjc=
 		</data>
 		<key>Headers/AKPhaseDistortionOscillatorBankAudioUnit.h</key>
 		<data>
-		x/CwIwz0zJzOAusenaslSeqYQqM=
+		J6Gz8lDsYeYVk0SWd6bNXeU212o=
 		</data>
 		<key>Headers/AKPhaseLockedVocoderAudioUnit.h</key>
 		<data>
-		ztjZ8ecgmE5y2WieU9mcQUKRMFA=
+		ZnzXifUPD2V/plonp6ekR/m7OCQ=
+		</data>
+		<key>Headers/AKPhaserAudioUnit.h</key>
+		<data>
+		qKwp9T6N2y5a23LlR95BpRwyLs0=
 		</data>
 		<key>Headers/AKPinkNoiseAudioUnit.h</key>
 		<data>
-		T2WFDM/5Il2flS6Ozumllt/Yssg=
+		+YRzTmGVJCsREmh6RuXgfdA1pyc=
 		</data>
 		<key>Headers/AKPitchShifterAudioUnit.h</key>
 		<data>
-		E/ssj745I4rwTVdFAsB9rc7qK/w=
+		J6TqP9mpIpz/zeW+JvBI1FSwVnc=
 		</data>
 		<key>Headers/AKPluckedStringAudioUnit.h</key>
 		<data>
-		TRPAT+Spu9MscnJVyKhjFc6EbB8=
+		AZpPhybbgsarJJaUO4ptZqnSv2Y=
 		</data>
 		<key>Headers/AKResonantFilterAudioUnit.h</key>
 		<data>
-		K8NQOGzbXFN7JJ8RlcPcmTbucCw=
+		TkajpErQ495yMLSt9BsaxAivnNo=
+		</data>
+		<key>Headers/AKRhodesPianoAudioUnit.h</key>
+		<data>
+		Bx13ly0D0n1ZcvR3IyfJsm/+Ma0=
 		</data>
 		<key>Headers/AKRolandTB303FilterAudioUnit.h</key>
 		<data>
-		8bXLQEhUb3aVbzig8FDrP2hVjyU=
+		GYnx7bejfYs5FonpnplJqjbLgiE=
+		</data>
+		<key>Headers/AKShakerAudioUnit.h</key>
+		<data>
+		9yVaT72R8ls+7CXIf9Y2pYW+SM0=
+		</data>
+		<key>Headers/AKSporthStack.h</key>
+		<data>
+		FLaSvQ9rA0IuAFx77z1FdgHUpoA=
+		</data>
+		<key>Headers/AKStereoFieldLimiterAudioUnit.h</key>
+		<data>
+		Q6UHNjnBXpj6r5+IRBdkUZydtHU=
 		</data>
 		<key>Headers/AKStringResonatorAudioUnit.h</key>
 		<data>
-		oyGDckU4TU8B3OKp+Hpr5Urj39Q=
+		dwk0JE6SSTWStRzVBIuVmh1QSQs=
 		</data>
 		<key>Headers/AKTanhDistortionAudioUnit.h</key>
 		<data>
-		JAzjOJhZq0ECeZky9LG+J6nMNiE=
+		aXwVFQUyzIdFjEe9uKSBjfalkjE=
 		</data>
 		<key>Headers/AKTesterAudioUnit.h</key>
 		<data>
-		JUj9xvqPtxiOMOEJBOHvD+7rMZ4=
+		Q6hqGsmJY5nKAauTQvv3WRFFXFA=
 		</data>
 		<key>Headers/AKThreePoleLowpassFilterAudioUnit.h</key>
 		<data>
-		BO/EqOvvxvfyCrCGq3mkjeSt/QI=
+		QfAHYJIsxrMmzC1pbUTxqAfqkyc=
 		</data>
 		<key>Headers/AKToneComplementFilterAudioUnit.h</key>
 		<data>
-		uDGy8mRE2VFYSKdxgVIezAWoV4c=
+		Ai9IltX2KA8Ueny+cTfbkRBBtLE=
 		</data>
 		<key>Headers/AKToneFilterAudioUnit.h</key>
 		<data>
-		rhqfeirw5l/Nvja2Z8cIf8b6LWs=
+		AU39I/KFDiXTRIglYfktd8qgBwk=
 		</data>
 		<key>Headers/AKTremoloAudioUnit.h</key>
 		<data>
-		L918shY6Hwd5GJcpvMETBCtukn4=
+		nn3/l9AoSv1QrG+6RXxTjEeKS+Q=
+		</data>
+		<key>Headers/AKTubularBellsAudioUnit.h</key>
+		<data>
+		1qI8U87onUBUol1OLzsuQYHIRQA=
 		</data>
 		<key>Headers/AKVariableDelayAudioUnit.h</key>
 		<data>
-		IwdW+ZcdWdxrGOqgF7OAJ9LILPw=
+		k81W2GDHz9Ig5NZBOBpXu08JmoQ=
 		</data>
 		<key>Headers/AKWhiteNoiseAudioUnit.h</key>
 		<data>
-		+jipWdvkOY66AOGXmjNjhpcn/cQ=
+		8MQiwFkeyj8gk4yIG7aUOZ9UiOs=
+		</data>
+		<key>Headers/AKZitaReverbAudioUnit.h</key>
+		<data>
+		9hECurYsWLDsfi1Jrw/gnSz9oHQ=
 		</data>
 		<key>Headers/AudioKit-Swift.h</key>
 		<data>
-		PuNhVhGufMsAKcdROnjfWQOTPMU=
+		vti9u1mYG0WAjwupfOdwMFkQjsI=
 		</data>
 		<key>Headers/AudioKit.h</key>
 		<data>
-		G42gqokKeTVGkYlvJ+HMQNS/Dws=
+		VexIrqSYHBNUMJPf8ULrxAvYOz8=
 		</data>
 		<key>Headers/EZAudio.h</key>
 		<data>
-		idIJXsDbgRVkpKet3AwQ6q6AKQ8=
+		Cf2/KDzPhJSnSsJkXS/E8yn1+/0=
 		</data>
 		<key>Headers/EZAudioDevice.h</key>
 		<data>
@@ -276,6 +312,10 @@
 		<data>
 		mSdaZuWukZ4bGbrReLs3hEEJMlg=
 		</data>
+		<key>Headers/EZAudioFileMarker.h</key>
+		<data>
+		3vNL3q46AEMmhGIZm/69AL+xBoc=
+		</data>
 		<key>Headers/EZAudioFloatConverter.h</key>
 		<data>
 		eOf6vdp1RbhIKIQdIVTsj70QVzQ=
@@ -290,7 +330,7 @@
 		</data>
 		<key>Headers/EZAudioPlot.h</key>
 		<data>
-		M+HcMktfjMDq7Htz4qesQqsidcY=
+		EgxXRO6W6Rdy1h7Oe5vlbPLaMmA=
 		</data>
 		<key>Headers/EZAudioPlotGL.h</key>
 		<data>
@@ -322,27 +362,31 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		+stUWel/cvm192AllAZ3Fn5riKY=
+		zLeV6ro1k9NP8h7EPnft7odFPeY=
 		</data>
 		<key>Modules/AudioKit.swiftmodule/i386.swiftdoc</key>
 		<data>
-		nhmS0yKR6qPrj99qHcl7PCzAPIo=
+		V93sXuXzM8nCdV4O/KO5FYGNnbQ=
 		</data>
 		<key>Modules/AudioKit.swiftmodule/i386.swiftmodule</key>
 		<data>
-		5cn+o6UJrsJpPpYB5Xv1ppJAhF8=
+		RTvEEaeLggOLJvGUrUvlgMIU+nY=
 		</data>
 		<key>Modules/AudioKit.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		J9/8UjawRGZE0K+XsLaIJUZEnRU=
+		ER6hrXEtfpw5oscpKW1G6WGrWkY=
 		</data>
 		<key>Modules/AudioKit.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		W3apa7/MBhvJmtyV6nVXyNlIewA=
+		Vc+HzO85CNibisl+y2AiURj4UHA=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
 		n7Rz2LWnypTOYaS1apXP9tXJamw=
+		</data>
+		<key>fwavblnk.raw</key>
+		<data>
+		JcCPES+cNIptrHLMD6Kz1a0JpoA=
 		</data>
 		<key>mand1.raw</key>
 		<data>
@@ -396,6 +440,10 @@
 		<data>
 		RQr3gunbOJeQBKG/eoL1TbeaRCs=
 		</data>
+		<key>sinewave.raw</key>
+		<data>
+		J5483Mof0V8cSRwu/sidYCH8bJA=
+		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
@@ -403,704 +451,803 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			3QztA3Ew3ErdG7joyzkWL3eBc7U=
+			WYbLKFl76UM3vNGVEMSXt1gj1zI=
 			</data>
 			<key>hash2</key>
 			<data>
-			cqf9q+NOhoax0TzXb4NZlBNIdmaikxF0vz5VQ3A1a3Y=
+			PH9PeJmL3xMO0rjKcFjZ5L+T1CAZT/oYDgfCCg7+808=
 			</data>
 		</dict>
 		<key>Headers/AKAmplitudeTrackerAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			fa8Gutj8cAuPR7Nyehxai1UZbFw=
+			sKA2oUgDL7Wz+y8MZu4nuGb+HOc=
 			</data>
 			<key>hash2</key>
 			<data>
-			drl1WIaKe2r5tpbEH9vZpVZqss0dnI8tkpR2ob7nVl0=
+			rV+fCH/sNmciUkNctmCJ/J2M4IC/+jP82Cvr16W7yuI=
 			</data>
 		</dict>
-		<key>Headers/AKAudioUnitType.h</key>
+		<key>Headers/AKAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			1o8wX30VAa4KE1orbNJr+5Xk2uw=
+			v9wMkgl8Eckna0PqfdIWz+4TmYo=
 			</data>
 			<key>hash2</key>
 			<data>
-			cLhUaXIitHZdh6u/QPMBRnI8w0q0PzTAcOHPz7I5cEw=
+			XGIP9qvoCIopXpgcAS25pO/P9Elmzb4xPtFEfjO8zTc=
 			</data>
 		</dict>
 		<key>Headers/AKAutoWahAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			cH4rY+l4wtEJUGnutbyqrm9pMNQ=
+			+KaVV8x/NLxxJTQgNKApw4YJBsM=
 			</data>
 			<key>hash2</key>
 			<data>
-			AucwXQ65wXkG28wa25vHe+Gn4S9Ig5XwkGJZAhuDviQ=
+			THBmYlBluEMCO3RbxB2ZhcfLMkrhg7v+S4T1RD3jn3g=
 			</data>
 		</dict>
 		<key>Headers/AKBalancerAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			DHG21o1I7bPrjwhidwfgiVc8Kt0=
+			Mm0wZkNUgdrwAiJ5H6mUp5KYqUk=
 			</data>
 			<key>hash2</key>
 			<data>
-			FObpAx/LYYU0e3ibjEPuouTI+dgQbYO0iVUsJX9+V6U=
+			9xI0E/tcLl45oCW6NihuaVsJNVaqktd9DgCCE9Arnmk=
 			</data>
 		</dict>
 		<key>Headers/AKBandPassButterworthFilterAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			bfQVgChxXtfVsceyQKCEr/hjxXk=
+			f1WaJTzbzH57C99kFMEfyJd7zOc=
 			</data>
 			<key>hash2</key>
 			<data>
-			U0N21XKqJqgWwsoG7lkwug5yXWpf1sljRTJZGW3+ztE=
+			7tCwtM0nUp4KVGkg0IS0uvlByiH/l/Goot/0HnqxLMY=
 			</data>
 		</dict>
 		<key>Headers/AKBandRejectButterworthFilterAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			evGdFaaSxItZyA86sWvEFj2Dy/4=
+			pOFD7IJqLF09v9HUelOaLo6VmpA=
 			</data>
 			<key>hash2</key>
 			<data>
-			WhA6seBn9CqEUTud7015xmqH0hffXVPyLsEhcl1urSk=
+			PH9lgpMcpSU17u8C5S2y+fY6vzSmUr0Xbj84qTB95ac=
 			</data>
 		</dict>
 		<key>Headers/AKBitCrusherAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			PFXv+sHzL98qhfyexYkd2WrOejs=
+			+tW1/skFKAk10DApeZq7rOcNSIM=
 			</data>
 			<key>hash2</key>
 			<data>
-			nycGniaQKiKXshstvWiBNQjX9r794xf6dQRUiaYmDxU=
+			uDi6rhM00cYr/Rgk+PdVX/XoL1RgjKOYUG92rEgv2q4=
 			</data>
 		</dict>
 		<key>Headers/AKBoosterAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			I5uZs13aSx5y1/uN5VBAY1J36g4=
+			f1j7DN+ajYCDoGOFnlk0GkbeLH4=
 			</data>
 			<key>hash2</key>
 			<data>
-			6y6H5S5J4cMjNB9f/xQmQw+FUKQykfpT9KCasLPiyv8=
+			hUCxG1R5k5PzGfOmtg2W1ry+5ZrJyoAXpSMBCMRwCi8=
+			</data>
+		</dict>
+		<key>Headers/AKBrownianNoiseAudioUnit.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			xGxsiOMLsR28GBPj8IqSVF6riy0=
+			</data>
+			<key>hash2</key>
+			<data>
+			6ailUpi3qzxMLk5VROUEZjcnsioSCh4eEWwPOJzN5jw=
 			</data>
 		</dict>
 		<key>Headers/AKChowningReverbAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			rToTL5rbDrCoTcno/xvaOAuAl1Q=
+			EUiMujl+Mcbds/F33BGP02sDaLg=
 			</data>
 			<key>hash2</key>
 			<data>
-			meTby5fzusRkRIqD2+uYJcCPxZgzypkkeOa5Lz1x2eQ=
+			Lemytd8VEdYbu8BxYvrysWv9eEiZ4FEEmus8wgPQ1BI=
 			</data>
 		</dict>
 		<key>Headers/AKClarinetAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			KcOuBngNdw8jRJ+MizfEmL4eG1s=
+			IOqwdc3RbVzVR1cqOiOBF6pSFao=
 			</data>
 			<key>hash2</key>
 			<data>
-			TdSELobdY2ZLOMg+tAO/HqBFgvNXw7mQm0vAMxRhPxc=
+			Nk3k+pfWp/mLnO/DOmLgGjROyEJKombIIUaArCODm7E=
 			</data>
 		</dict>
 		<key>Headers/AKClipperAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			SRdPzSzA6C9bOzIpqAXOtnLhG8M=
+			yGb4jGFkJZ9/xAeUgiIXkmJUK3M=
 			</data>
 			<key>hash2</key>
 			<data>
-			HhiXMUJ1mW7/iW8lc6rECIunSBZPBH3/bJRGI/RnZqc=
+			1AzIgnsCZiy7LLL4lC+Q9Jk5UASOxab0YG5+1NKqX+Q=
 			</data>
 		</dict>
 		<key>Headers/AKCombFilterReverbAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Q3iuIPTSAjzUSxZO3WB6aleWbUw=
+			V5hZgosYAZxem2gkHIaWtjFhhj8=
 			</data>
 			<key>hash2</key>
 			<data>
-			DF4xxQeC7IvBrjV9QiXO4KUDQf0r+ma29dV80EH8/bQ=
+			RWkuRfQeRfc1eHk7zF4g29ZjAY9CkZxFKhHqrOByAN0=
 			</data>
 		</dict>
 		<key>Headers/AKConvolutionAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			mLQMqO+4py2e9BmuOi7Z94Zuv/o=
+			0JUZ5tg47L6jVJ9Pl/lo44eDNsw=
 			</data>
 			<key>hash2</key>
 			<data>
-			HwXPAYMiIY4zz47XSgwmJpEvrCBWHlc+1TuDPdRvfv0=
+			T5uX3f3tK5b9EjIe1AWQmmJoCdQgBGA32dNVKB/cftU=
 			</data>
 		</dict>
 		<key>Headers/AKCostelloReverbAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			fEiVvR9XRqieT0BBcAFRxGPZBnw=
+			z4T0dhXHjpDaLC7YSfTQf5LepKc=
 			</data>
 			<key>hash2</key>
 			<data>
-			mkEEJshbBnBXjH1tH2oljs3NPcSI2IYGEUeQvGYmBEw=
+			bMQ0owVrWwLoJurkdhbhLKcdzDvv0ebregPWer+nxoU=
 			</data>
 		</dict>
 		<key>Headers/AKDCBlockAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			bvsqwa3pYTJgwD74S5TOQoV4BwM=
+			+0YFTGQh/t56LfNYvl8FHqRbVCM=
 			</data>
 			<key>hash2</key>
 			<data>
-			r3KpLdYxYhUQkha0QVjh05QDX1zKrlFdHdU6/K/os0g=
+			sn6Sdy554s9eB+CaFWvZtNG/fq4QelQYoQ9kikBaO7k=
 			</data>
 		</dict>
 		<key>Headers/AKDripAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			W7ifqwqi6lCIicX8WeJp/npE/7Q=
+			oMGic8EVMC/FPmC+zSNivvHVcfI=
 			</data>
 			<key>hash2</key>
 			<data>
-			eiiEGP6HSi2hbg6ZgyO2rI7b5JSN658SkpjPsHCeDi4=
+			wXoD6QdC2+L+j1n/lTBMKYpSH3ny6Z+JbKIXxgR4eDI=
+			</data>
+		</dict>
+		<key>Headers/AKDynamicRangeCompressorAudioUnit.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Bn+36OnxlPo1dJkZ0iF6tT7P2Tk=
+			</data>
+			<key>hash2</key>
+			<data>
+			Qogao0jpjuW7GPpA/6GOIg9U3PNUHZ2LK727/WjKd1g=
 			</data>
 		</dict>
 		<key>Headers/AKEqualizerFilterAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			l+w6GosjFfv1CobEYdNcIcEX6Lw=
+			LAK4NZ7BlVD19FTudv0Or7W40zo=
 			</data>
 			<key>hash2</key>
 			<data>
-			SMWyyaXMYXAc+C+epUCIbaKshyWFO4nxRZlAHkC1gtY=
+			8CzcR+kPxKjnm+DcQxlOIax1w4yYFWN6AZkU//al0l8=
 			</data>
 		</dict>
 		<key>Headers/AKFMOscillatorAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			3ayIH8npC5H1AkD9gfPKGbjCpv4=
+			Kl3IE35+n3bVc6rPh7gpk5XrE6o=
 			</data>
 			<key>hash2</key>
 			<data>
-			vhvqy7EsyeEkME3BHp2cbWPOZZtetw+19LABRnr3ReI=
+			IJd1Vn7f3bJmHQxxpiJg8Usy20xR2Zf+IGMQPvktpio=
 			</data>
 		</dict>
 		<key>Headers/AKFMOscillatorBankAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			xYINDQx/b5p/Qs+NReWwWaXVOVY=
+			VP7rkd0tRK5Om8uABjjjWm8+mM8=
 			</data>
 			<key>hash2</key>
 			<data>
-			2wHb6/I0XAP0MtyYK9S8dcH/4/OUVhvHb4Fh2e6kJxk=
+			JfYcw+8KM5thFDjmFPXtv2OEmMdRJ06UtwsYqisocQo=
 			</data>
 		</dict>
 		<key>Headers/AKFlatFrequencyResponseReverbAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Ap1Bfne/oOjkjsDKgpN9ru917GA=
+			5ChGakgKyFde5/ZT1qiTbTpOwCM=
 			</data>
 			<key>hash2</key>
 			<data>
-			yYmYQpXtqW+dkkmnZ9iaY2rUFWWhunRt3CMQtNAgr8c=
+			URBvqQ4beOjmVlH+A7SXc0im3vnAuvVOku21LRG+740=
 			</data>
 		</dict>
 		<key>Headers/AKFluteAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			kL2MRjp24skBwUCTMVhzITlxrXM=
+			cGwYGU6v5rrXDIb3d5RDey+8vv8=
 			</data>
 			<key>hash2</key>
 			<data>
-			1AqsNE9G/ZiT/4VXEQyFr3qduUkGvnbAbUc2rw8HUoM=
+			ORIhK+9rR8Bdd/26otIF7kmVdLYT8q2aK237JmHBNOY=
 			</data>
 		</dict>
 		<key>Headers/AKFormantFilterAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			nHMgyEuOkay5E8BNAnhz6v6abKk=
+			NAncEMOjPbSyk92aMuw8Y+bqt5o=
 			</data>
 			<key>hash2</key>
 			<data>
-			CcMrabnHdL8ukY0iADVooBvXvSeW+XBvhJo3fReH9ew=
+			2+7R5KOCfeowdZAPfye+YA6RDvAJO+Ja7z0jrJxNM7k=
 			</data>
 		</dict>
 		<key>Headers/AKFrequencyTrackerAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			48toMs41vZ4sN4lCnyOlKHPqWFc=
+			80unL1LT+OGJQdM+OKLp4tgqRLI=
 			</data>
 			<key>hash2</key>
 			<data>
-			gWm4Cs3r+/xqZXTKuW9hMvsnR4c3cQ5Cuh3pGJ++nv4=
+			Aqn2ogtr5oy5ntJTEh4rAd0i9ycDPpJ2WQA4CQU7SBY=
 			</data>
 		</dict>
 		<key>Headers/AKHighPassButterworthFilterAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			j8zCBXTgzqX89KCzeS8iBRjb41Q=
+			k7l1uE4c3IhdcD4S8mpeZeJfBsc=
 			</data>
 			<key>hash2</key>
 			<data>
-			PY8uArshlqjgLLjb66Gampf5LIoV4b1s5pA9gGhOOQE=
+			dm4v+GL3UpCfLDq8BtxSlk4FOxxRZD9HiehpwSneH9s=
 			</data>
 		</dict>
 		<key>Headers/AKHighShelfParametricEqualizerFilterAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			9QZJOgGkHR32X0oO9hswHTlwJxs=
+			1CZW7G24WmhTpE5gucxgBMgvoow=
 			</data>
 			<key>hash2</key>
 			<data>
-			qiiDQJxtAp8XoP8G6nD68OXKU/GI+MB1UpwpkDyHIlE=
+			MD4e1y3gRN3BtyBZAoFtXdrPH+exjdh77idsWFL8Mss=
 			</data>
 		</dict>
 		<key>Headers/AKKorgLowPassFilterAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			QNB38rx/m+q65Q5Ero5EfdEFBoU=
+			tCBv3wdTH62mM39nRzx8LMk6pXQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			3KbvwMxuvHC3s0TgaSl16MHxXvR6BiCgpE6Pp1EnsFk=
+			bJcli8Be0zeekYf4IaRncckTQFlwULbLGJ7cI+nuXOs=
 			</data>
 		</dict>
 		<key>Headers/AKLowPassButterworthFilterAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			tVi27qtihcCBKWf/o1u84qOTv7c=
+			3XnL7wrVyC7IoyPiIfjsPdEtMzY=
 			</data>
 			<key>hash2</key>
 			<data>
-			/wxAsAPVzI5013jPpLRc+xlu3RIfnKQ6nqIe60hl/c8=
+			njp5tWTfTrCwrzG2EB+lMhY1F1FLBMOrIvTJvos0FPY=
 			</data>
 		</dict>
 		<key>Headers/AKLowShelfParametricEqualizerFilterAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			+XHjkCb2jWz5tEVRv4cVl9/uGbE=
+			yQi+ZIDYK7T8pg9IN9jhOngj69Y=
 			</data>
 			<key>hash2</key>
 			<data>
-			zX14faOlYxzwbfajWtv0C4RdIuBgTuurxR0WX0EhrSM=
+			mqOtvLIZhyZXqKCrkZ55PeZzZms2fJ/Cwty2XpcfFQY=
 			</data>
 		</dict>
 		<key>Headers/AKMandolinAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Cxn3P/KlZpXClO7A6JLLsQxAU68=
+			8EknGVr8XwNEpEujKemtSJ/MtTY=
 			</data>
 			<key>hash2</key>
 			<data>
-			k9Ri6Z2uJ1bQJWiCb9Q0lbpH0TBoLd/evhxDxan4FI4=
+			YlKrLz6FR/AWtxkyN7+y3ZMQ/CTUx6brxtVVqYYF7Dk=
 			</data>
 		</dict>
 		<key>Headers/AKMetalBarAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			y+jRQQcr/SfIXr3fsUgkU+9k8q8=
+			ft4r5UJyIns++bcy3rBplIlqVLg=
 			</data>
 			<key>hash2</key>
 			<data>
-			Wt/JcqctdNFUYR+E7IPX53SZhHBcv++SwYsBSpL2GDI=
+			depSqlNHU87nAmhodg5p9KqhnsiwMFojGwSAvveSx/0=
 			</data>
 		</dict>
 		<key>Headers/AKModalResonanceFilterAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			531bgyvZUJW5QsIp/b6bofSTt8E=
+			E/AeNioBUZ71g3bMhjaG797imbg=
 			</data>
 			<key>hash2</key>
 			<data>
-			3wNmDESGHw67KNz8WyhVZxlJTNCtsWBeaNJosduVjLw=
+			Nkb7KE8UM2ciDyqEsAhkJsAfc3DXaWmVwqWIG133zlI=
 			</data>
 		</dict>
 		<key>Headers/AKMoogLadderAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			EvYmDEo+BIN01Udm2IJbmbQnOmc=
+			7ZSaFoaRKMVt6dHWvws/NDbCaGg=
 			</data>
 			<key>hash2</key>
 			<data>
-			joK/4+n25PahOQrSTCmhlLou1GJT6vr4fBsfz02HkII=
+			kW2VRE2qzRkAMMH0D8l2865FXOZVfP6WzoSQ8ic58mQ=
 			</data>
 		</dict>
 		<key>Headers/AKMorphingOscillatorAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			yZGQkYJEMlsBH9uqeiDN3M9W6y0=
+			j+1OP36xpHJeYs42cICZgMKh1tE=
 			</data>
 			<key>hash2</key>
 			<data>
-			EiPDCUIY6hJXtAiB07paHGCfIFPmQ5G9dMBB/Dn1QaE=
+			51BqjiZoQRYXFzSfhotcoG+pGk1v93fxMhoM25NQVFs=
 			</data>
 		</dict>
 		<key>Headers/AKMorphingOscillatorBankAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			s2rTgLXvi69BXu3z5Nj88KtLIZo=
+			73lILD9yuwCQsqI7FdpvpiswDsE=
 			</data>
 			<key>hash2</key>
 			<data>
-			X9Hd28OsNo5atKzKU8J6z89SUIsaUz7Km720uJeQ6YQ=
+			bq1LQVPbpK1iD08TRnxS13q7kx0F62yzHkEib4cg1TI=
 			</data>
 		</dict>
 		<key>Headers/AKOfflineRenderer.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			dyTAxG6p5bKt+w3ZYvFmBXwk/1o=
+			ryAo1QhPk/3Yhgfs5eU3Tf5zuyI=
 			</data>
 			<key>hash2</key>
 			<data>
-			qNGh9jARcewhARG3HewgVajlqjKQOlpaML3MD3G1uSE=
+			CBVeIFvIaUk1GWWcjbzA2THXYB9VPZxLCTwWruxD/P8=
 			</data>
 		</dict>
 		<key>Headers/AKOperationEffectAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			/LjuFh0FCaZpU8UspsjN04qIoo8=
+			rhryjwubn2imzXh2epgFiM6HBxQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			YhUxyiy/a9oZI/L4hNA8+aDQaixIMe2PUljkZ4dU9vY=
+			D8jf0zVDuZ5d0AT+KlypU7tc/sLtZc7nzeI7FRvUKD0=
 			</data>
 		</dict>
 		<key>Headers/AKOperationGeneratorAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			y+Ej18XO3dUg5Pny4GswjQlmUp0=
+			6YGXriclx3wYFHq4H7dTcQVUuU4=
 			</data>
 			<key>hash2</key>
 			<data>
-			cB+OcvfevAIn9oSoGMu43t3v/GiriTzAwp5A4sK5SUc=
+			K9w8eVhgD8sMTrDwAan4WbdeqnsHZjkFjL574PEwuSU=
 			</data>
 		</dict>
 		<key>Headers/AKOscillatorAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			QtoVPwF60l1Ej0ixAEzhMVcKbQY=
+			m4qn/YS9cWr6A9/zveM+fn+Wrvo=
 			</data>
 			<key>hash2</key>
 			<data>
-			2iGYowVzgVdyvN0YOfBFt25nbdPDYrRzmndeuwdXfGg=
+			00YbkrxH16HJRNRK24MJR68y+4kTf/+6BJ0xqChHVwA=
 			</data>
 		</dict>
 		<key>Headers/AKOscillatorBankAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			PdWaJL/N6eLX529hglxzuhmAjzg=
+			N5xAK365MM8L7fdNuqXS4bJ/Hng=
 			</data>
 			<key>hash2</key>
 			<data>
-			mffyiWvBiXa1McNPRgy4wSQC/VMI8Gxbib1MQ3sdeAI=
+			UlrHosXW48E1YvtxBEk4+ZJpXDrswkjhSbtT2jjQbVU=
 			</data>
 		</dict>
 		<key>Headers/AKPWMOscillatorAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			bZyvUV7o9jeI5MoXd+zfknmCVTs=
+			N5TSqZ4qqM42uthY/g7SC2nq+RY=
 			</data>
 			<key>hash2</key>
 			<data>
-			LAXcnEBUKx86H64YymjqQMdyDptLiyGEEvPEcmtZ2Gc=
+			DDgDwRmN1RCkajXoBY90me1cDjJ4d/YCt8114LsS4ns=
 			</data>
 		</dict>
 		<key>Headers/AKPWMOscillatorBankAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			O2cSn2Z4ujpcF9cKY1LKTuSPjkg=
+			dour2aAi6fmZit2n1SOWayne83o=
 			</data>
 			<key>hash2</key>
 			<data>
-			ZrkOk+DuxXdLQWNhOXJN2LVwlh5ur4VgQSltC+T5XGg=
+			8HvvHaLoZcRPvS2gHU+38pbODuy6KeBBKF87CWRYSK8=
 			</data>
 		</dict>
 		<key>Headers/AKPannerAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Iq/D4Wyqk1mnJEURIddqoxwVBrM=
+			eZPINNuOFZN048EJ1D7sDkseYJU=
 			</data>
 			<key>hash2</key>
 			<data>
-			DUq9jtjTVRiCkpRj4Kh2DkzfTNPStbr4YESmqt0NS/U=
+			+3gwEgRQdVa2NZq4uhTC/hkTQx9MVv1abVWBIa9qShY=
 			</data>
 		</dict>
 		<key>Headers/AKPeakingParametricEqualizerFilterAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			XH1lRDuU+ddUibNiBvvSILGQhQ0=
+			J8MER1mWq5Sg7LdawShH8vzRN1A=
 			</data>
 			<key>hash2</key>
 			<data>
-			4QKMpu+mFmbRnSYURlcn+cscGeU75tfYqvPXHfkDa0c=
+			O5y06ntv2BmwupQA2Fj920bn8r+3WAfGxDRZqccRAu0=
 			</data>
 		</dict>
 		<key>Headers/AKPhaseDistortionOscillatorAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			zW5qogmeKo+8nLBIDVLADBRdfm0=
+			v9DjVTFQMsbUnPdrjjuy9L+gzjc=
 			</data>
 			<key>hash2</key>
 			<data>
-			2mOct6IdKPI/dvJn+h3ERNOSpnxyGL4/JXq+GnaQHh4=
+			DOoq0E1c/j1DnfClymO3EpCGjdwuje3wCAPka4bImTk=
 			</data>
 		</dict>
 		<key>Headers/AKPhaseDistortionOscillatorBankAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			x/CwIwz0zJzOAusenaslSeqYQqM=
+			J6Gz8lDsYeYVk0SWd6bNXeU212o=
 			</data>
 			<key>hash2</key>
 			<data>
-			XMXaXGQ85HL0dGdWKCYaGfJe5vy9mqiESp98MZ+BWAo=
+			4KOcWX6qb33zdvC0Tjfi5JOlJIEvqBYxNMjonN4MJyQ=
 			</data>
 		</dict>
 		<key>Headers/AKPhaseLockedVocoderAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ztjZ8ecgmE5y2WieU9mcQUKRMFA=
+			ZnzXifUPD2V/plonp6ekR/m7OCQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			KOYxmfeaLvlWYYuFCI7mItHRN8fsNWDcIPvKB1CngqU=
+			yaXV4Pnv56Esf/lQs2DZrDKKDpLYQkvn5PiDIIstu3A=
+			</data>
+		</dict>
+		<key>Headers/AKPhaserAudioUnit.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			qKwp9T6N2y5a23LlR95BpRwyLs0=
+			</data>
+			<key>hash2</key>
+			<data>
+			tuwQJK7qhJhLLFcbsm6A9XbgK7rCxTv7UqLQ1sMoYbU=
 			</data>
 		</dict>
 		<key>Headers/AKPinkNoiseAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			T2WFDM/5Il2flS6Ozumllt/Yssg=
+			+YRzTmGVJCsREmh6RuXgfdA1pyc=
 			</data>
 			<key>hash2</key>
 			<data>
-			DUbP1thrXbJAF5vWf8s/Tw0CXF0pAfY7PE9VpTAuP5I=
+			1hkJFoIe5BPX/5K9TYYSfp8iDeN1rLE+CSpCyznaSss=
 			</data>
 		</dict>
 		<key>Headers/AKPitchShifterAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			E/ssj745I4rwTVdFAsB9rc7qK/w=
+			J6TqP9mpIpz/zeW+JvBI1FSwVnc=
 			</data>
 			<key>hash2</key>
 			<data>
-			z+Fdv8XR+eaVyY4dzoNqWkcOOfaFYBOfgiQ45siZwEc=
+			ugKMst7ThKQF95afTBku/3AMJSgSLTX/fF46IMWH36o=
 			</data>
 		</dict>
 		<key>Headers/AKPluckedStringAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			TRPAT+Spu9MscnJVyKhjFc6EbB8=
+			AZpPhybbgsarJJaUO4ptZqnSv2Y=
 			</data>
 			<key>hash2</key>
 			<data>
-			LDn2DkGAMk/Krc1m1cMPfZL6Awzv5E3Js8+YliFf9QU=
+			WB6ET1XmF6h0Ud0Eg0LqLksb862/z3GDfsWxg/wHZgI=
 			</data>
 		</dict>
 		<key>Headers/AKResonantFilterAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			K8NQOGzbXFN7JJ8RlcPcmTbucCw=
+			TkajpErQ495yMLSt9BsaxAivnNo=
 			</data>
 			<key>hash2</key>
 			<data>
-			IUF3LeD6rduSJxVFo5aNDOjlpdeq1YKjwA76q7OYjG8=
+			7AEfmY/AXW++dadBFPk3ZA8Ji7rmpjBiys4gQTrrDUM=
+			</data>
+		</dict>
+		<key>Headers/AKRhodesPianoAudioUnit.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Bx13ly0D0n1ZcvR3IyfJsm/+Ma0=
+			</data>
+			<key>hash2</key>
+			<data>
+			UzNwwuZVuaH5Os8jbSizQyyOmzSdGiF7PKesmWExfFw=
 			</data>
 		</dict>
 		<key>Headers/AKRolandTB303FilterAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			8bXLQEhUb3aVbzig8FDrP2hVjyU=
+			GYnx7bejfYs5FonpnplJqjbLgiE=
 			</data>
 			<key>hash2</key>
 			<data>
-			Bv69+wwTJ9TXk5t2np7TTtv12VJJmBgjv47U0/w68hQ=
+			diO74QTeRz2pob1oAzQzM+XTKlKRVOI58jEZ0TAGq/o=
+			</data>
+		</dict>
+		<key>Headers/AKShakerAudioUnit.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			9yVaT72R8ls+7CXIf9Y2pYW+SM0=
+			</data>
+			<key>hash2</key>
+			<data>
+			4ijDGDNwvom8aFTqxgqMxE7vn4ctMnsKZ8C7mugnu/o=
+			</data>
+		</dict>
+		<key>Headers/AKSporthStack.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			FLaSvQ9rA0IuAFx77z1FdgHUpoA=
+			</data>
+			<key>hash2</key>
+			<data>
+			2ArIbgPTZVtLKK9lzdC5tu9KIpfWz5XthqE9D3y4Vx4=
+			</data>
+		</dict>
+		<key>Headers/AKStereoFieldLimiterAudioUnit.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Q6UHNjnBXpj6r5+IRBdkUZydtHU=
+			</data>
+			<key>hash2</key>
+			<data>
+			+aodAaJcMyNSCP4ibp9PlD7mexlO66Uqwm/9+VrffOI=
 			</data>
 		</dict>
 		<key>Headers/AKStringResonatorAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			oyGDckU4TU8B3OKp+Hpr5Urj39Q=
+			dwk0JE6SSTWStRzVBIuVmh1QSQs=
 			</data>
 			<key>hash2</key>
 			<data>
-			QTEPb58hOAHAyWAXE2y6xGItJLAb+f7eBqO7fY8Dc+k=
+			/Kwy2M5mXaX0fuduiDtnAszliUILFGU4CLXhOvnzGHs=
 			</data>
 		</dict>
 		<key>Headers/AKTanhDistortionAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			JAzjOJhZq0ECeZky9LG+J6nMNiE=
+			aXwVFQUyzIdFjEe9uKSBjfalkjE=
 			</data>
 			<key>hash2</key>
 			<data>
-			JEj2b7g/38RMyy+sk80TnFa8cFistV894w0D2fF2AzI=
+			6rwmeK400nKpVERHpdGdIke74m8eZ1CdSdvCgnuCeG4=
 			</data>
 		</dict>
 		<key>Headers/AKTesterAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			JUj9xvqPtxiOMOEJBOHvD+7rMZ4=
+			Q6hqGsmJY5nKAauTQvv3WRFFXFA=
 			</data>
 			<key>hash2</key>
 			<data>
-			4k4keVO3dZelsgTA8HsrMww31BBouz3iLM3Ddvvnlw8=
+			kmXDuotpqM0VbqOew1DbuSkEOmKBTia8pWGPmbWc9jI=
 			</data>
 		</dict>
 		<key>Headers/AKThreePoleLowpassFilterAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			BO/EqOvvxvfyCrCGq3mkjeSt/QI=
+			QfAHYJIsxrMmzC1pbUTxqAfqkyc=
 			</data>
 			<key>hash2</key>
 			<data>
-			Lt33cAyBZiLkrPWanGcRFXJLtNLIuMR+rrRarZuiokA=
+			XdIli3CKZrYRqNLqrudVYB7/GqAUGyHoEMw3GLI6A1A=
 			</data>
 		</dict>
 		<key>Headers/AKToneComplementFilterAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			uDGy8mRE2VFYSKdxgVIezAWoV4c=
+			Ai9IltX2KA8Ueny+cTfbkRBBtLE=
 			</data>
 			<key>hash2</key>
 			<data>
-			wwq6fGV597o7Hn4yx7S6PaU6/MlLxGWehv2Wr7q4FSg=
+			HcyWpll33eUr03xK1vboLGsJ2Nvt4N9RW6xZmtfas7U=
 			</data>
 		</dict>
 		<key>Headers/AKToneFilterAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			rhqfeirw5l/Nvja2Z8cIf8b6LWs=
+			AU39I/KFDiXTRIglYfktd8qgBwk=
 			</data>
 			<key>hash2</key>
 			<data>
-			2TD7xY2pyWdMMHDyG71kpBwouERsZYgoZzUCkcUCK5U=
+			LCS8qDuY3aU1kAhnEGVcMK/EpY6J4/4a8lCgzmb6Ffk=
 			</data>
 		</dict>
 		<key>Headers/AKTremoloAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			L918shY6Hwd5GJcpvMETBCtukn4=
+			nn3/l9AoSv1QrG+6RXxTjEeKS+Q=
 			</data>
 			<key>hash2</key>
 			<data>
-			69P9rYH+JOBXUZ3BuTP1X8vZVKkyGGTkOXXxQTtV7PM=
+			fzvfiwUkfq+GA2UI6ZQ9yGoEZYMuQDt4Pd44hDRIrdw=
+			</data>
+		</dict>
+		<key>Headers/AKTubularBellsAudioUnit.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			1qI8U87onUBUol1OLzsuQYHIRQA=
+			</data>
+			<key>hash2</key>
+			<data>
+			A+mCSTs1ziMHO5MQosDBnE8c8mltL9UAVP22h5axr6I=
 			</data>
 		</dict>
 		<key>Headers/AKVariableDelayAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			IwdW+ZcdWdxrGOqgF7OAJ9LILPw=
+			k81W2GDHz9Ig5NZBOBpXu08JmoQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			8qYw8MOZzi6pOMUWaWkxbSx0wxGzTh8Bp2Y9M0sT1YM=
+			5Agh/jf3iX6bL2dL66Ne7Re6yV79f6pOrbY9TMJmlA0=
 			</data>
 		</dict>
 		<key>Headers/AKWhiteNoiseAudioUnit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			+jipWdvkOY66AOGXmjNjhpcn/cQ=
+			8MQiwFkeyj8gk4yIG7aUOZ9UiOs=
 			</data>
 			<key>hash2</key>
 			<data>
-			7vY3Ee/VMTR2Dtm+3oW+iv14YWeU7XqdxLdC4ShBlXc=
+			l0VRacp8Zpz+261pUWYjY/7QV5Ae7Fmw7hl69VVRy00=
+			</data>
+		</dict>
+		<key>Headers/AKZitaReverbAudioUnit.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			9hECurYsWLDsfi1Jrw/gnSz9oHQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			PHv5pCSZYAuj+4OpyiL006uzGX+3FJ+A7+POehTIzAY=
 			</data>
 		</dict>
 		<key>Headers/AudioKit-Swift.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			PuNhVhGufMsAKcdROnjfWQOTPMU=
+			vti9u1mYG0WAjwupfOdwMFkQjsI=
 			</data>
 			<key>hash2</key>
 			<data>
-			t3ju2F0qC+45u+ei5URfHpDxeWphWo8+qk3XvFjgwGI=
+			jI2fWlJzyjK6og6XRC8nxEKe746ioJmWkhb2z2TPQHA=
 			</data>
 		</dict>
 		<key>Headers/AudioKit.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			G42gqokKeTVGkYlvJ+HMQNS/Dws=
+			VexIrqSYHBNUMJPf8ULrxAvYOz8=
 			</data>
 			<key>hash2</key>
 			<data>
-			hWTXDCnJ2kSURY6Xuz7jqj4z7FtZgK9PuYKph8Efuag=
+			01BBSoyg50lOqgrzJ737g2KJGrIkpxtRDYvcfeClDzQ=
 			</data>
 		</dict>
 		<key>Headers/EZAudio.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			idIJXsDbgRVkpKet3AwQ6q6AKQ8=
+			Cf2/KDzPhJSnSsJkXS/E8yn1+/0=
 			</data>
 			<key>hash2</key>
 			<data>
-			7lNqSGsHPPBNf/qLInHXmN5izbeH6N1JBPFs2/ABr4c=
+			scUWaVfh3WQRDm3HxxakpiVLtTRzjC/id7K3o2RgQAQ=
 			</data>
 		</dict>
 		<key>Headers/EZAudioDevice.h</key>
@@ -1147,6 +1294,17 @@
 			Qzz4nVvhO5MfUkjURQ45tQcK59k8FqV7ho7/ArwL52U=
 			</data>
 		</dict>
+		<key>Headers/EZAudioFileMarker.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			3vNL3q46AEMmhGIZm/69AL+xBoc=
+			</data>
+			<key>hash2</key>
+			<data>
+			v8xue7oCakit99hDfnzKB13xvufaEOBrbQxLslzyrMo=
+			</data>
+		</dict>
 		<key>Headers/EZAudioFloatConverter.h</key>
 		<dict>
 			<key>hash</key>
@@ -1184,11 +1342,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			M+HcMktfjMDq7Htz4qesQqsidcY=
+			EgxXRO6W6Rdy1h7Oe5vlbPLaMmA=
 			</data>
 			<key>hash2</key>
 			<data>
-			Vw9coPrOnXp0Ok7Rhez5eqTzFO9f4PnoKvWpZ7FUi6k=
+			og8o2x4gQNllZ6sCVgoWvZF+Z3SU318OhblXkBvoKTw=
 			</data>
 		</dict>
 		<key>Headers/EZAudioPlotGL.h</key>
@@ -1272,44 +1430,44 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			nhmS0yKR6qPrj99qHcl7PCzAPIo=
+			V93sXuXzM8nCdV4O/KO5FYGNnbQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			hDf2KsaL/xvXmPzzcAVuDIqZMXJHvuztU+8WtZ/DKfA=
+			+sb0NKUcwF0AwcHkglTk3mMxtrm6HO0a1xZSKq6G6/g=
 			</data>
 		</dict>
 		<key>Modules/AudioKit.swiftmodule/i386.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			5cn+o6UJrsJpPpYB5Xv1ppJAhF8=
+			RTvEEaeLggOLJvGUrUvlgMIU+nY=
 			</data>
 			<key>hash2</key>
 			<data>
-			L+7ZyVXUfXhwDl9sXMNEh2cQ55vvDqnNA/onQOdHt70=
+			MKtGLU0iOERcrwBXJnKb3sy/E+Z3Z/Qlr6pyvPNLsqQ=
 			</data>
 		</dict>
 		<key>Modules/AudioKit.swiftmodule/x86_64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			J9/8UjawRGZE0K+XsLaIJUZEnRU=
+			ER6hrXEtfpw5oscpKW1G6WGrWkY=
 			</data>
 			<key>hash2</key>
 			<data>
-			GD1FJd1GdQVP3RU5NETl/I5tmIRSdvF+8/q89GRDc/0=
+			lTGlv7OlqLVDwhqdkLVHMX9yKyu3kmCHf9ZcS9QIQwg=
 			</data>
 		</dict>
 		<key>Modules/AudioKit.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			W3apa7/MBhvJmtyV6nVXyNlIewA=
+			Vc+HzO85CNibisl+y2AiURj4UHA=
 			</data>
 			<key>hash2</key>
 			<data>
-			psf9JtO5b8QknCZ5BiUh2l159yeDB/g9bBz7suE41t0=
+			B1MsxtT8zfXF4b2lKDjsEcBsK8PeLczXJhJ/ThnMuQ8=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -1321,6 +1479,17 @@
 			<key>hash2</key>
 			<data>
 			aXDD4CxLiAKlbHXmWqM/NY7oyIhU5/mYvocbbN2o1dQ=
+			</data>
+		</dict>
+		<key>fwavblnk.raw</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			JcCPES+cNIptrHLMD6Kz1a0JpoA=
+			</data>
+			<key>hash2</key>
+			<data>
+			YTEmhC7arJPem3z4zkkZQ0KqoUHk/i2bEqO1Qk+OU5s=
 			</data>
 		</dict>
 		<key>mand1.raw</key>
@@ -1464,6 +1633,17 @@
 			<key>hash2</key>
 			<data>
 			pIqpFWrDPjm7YnkBcntCStVMziikKoBpM+AL0eZHFbo=
+			</data>
+		</dict>
+		<key>sinewave.raw</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			J5483Mof0V8cSRwu/sidYCH8bJA=
+			</data>
+			<key>hash2</key>
+			<data>
+			S6httCMhSjeOOPqS31E+JNLhQ8bX2GXJNFFx7QPScpo=
 			</data>
 		</dict>
 	</dict>
