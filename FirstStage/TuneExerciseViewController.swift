@@ -13,6 +13,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
 
     @IBOutlet weak var ssScrollView: SSScrollView!
     @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var playForMeButton: UIButton!
     @IBOutlet weak var countOffLabel: UILabel!
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var gateView: UIView!
@@ -91,13 +92,13 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     var exerciseName = ""
     var isTune = false
     
-    let mxmlService = MusicXMLService()
+//    let mxmlService = MusicXMLService()
     let amplitudeThreshold = UserDefaults.standard.double(forKey: Constants.Settings.AmplitudeThreshold)
     let timingThreshold = UserDefaults.standard.double(forKey: Constants.Settings.TimingThreshold)
     let tempoBPM = UserDefaults.standard.integer(forKey: Constants.Settings.BPM)
     let transpositionOffset = UserDefaults.standard.integer(forKey: Constants.Settings.Transposition)
     let frequencyThreshold = UserDefaults.standard.double(forKey: Constants.Settings.FrequencyThreshold)
-    let showNoteMarkers = true// UserDefaults.standard.bool(forKey: Constants.Settings.ShowNoteMarkers)
+    let showNoteMarkers = UserDefaults.standard.bool(forKey: Constants.Settings.ShowNoteMarkers)
     
     var score: SSScore?
     var showingSinglePart = false // is set when a single part is being displayed
@@ -117,15 +118,17 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     private var sampledInstrumentIds = [UInt]()
     private var synthesizedInstrumentIds = [UInt]()
     private var metronomeInstrumentIds = [UInt]()
-    private static let  kMaxInstruments = 10
+    private static let kMaxInstruments = 10
 
     var cursorBarIndex = Int32(0)
     let kDefaultMagnification: Float = 1.5
     var metronomeOn = false
     var beatsPerBar = 0
 
-    var tickPlayer: AVAudioPlayer?
-    
+    var playingSynth = false    //if !playingSynth then must be analysing
+
+//    var tickPlayer: AVAudioPlayer?
+
 //    // 3 metronome ticks are currently supported (tickpitch = 0, 1 or 2):
 //    //    static const sscore_sy_synthesizedinstrumentinfo kTick1Info = {"Tick1", 0, 1.0};
 //    var kTick1Info = sscore_sy_synthesizedinstrumentinfo(instrument_name: ("Tick1" as NSString).utf8String, tickpitch: Int32(0), volume: Float(1.0), voice: sscore_sy_tick1, dummy: (0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0))
@@ -164,8 +167,6 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     let kUseColoredNotes = false
     var currentNotes = [AnyObject]()
 
-//    var tempSynthStart = TempSynthStart()
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -198,10 +199,11 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     }
     
     @IBAction func playButtonTapped(_ sender: UIButton) {
+        playForMeButton.isEnabled = false
         if playButton.currentTitle == "Start Playing" {
 //            playButton.setTitle("Stop", forState: UIControlState.Normal)
             playButton.setTitle("Listening ...", for: UIControlState())
-            playButton.isEnabled = false
+//            playButton.isEnabled = false
             playScore()
         } else if playButton.currentTitle == "Next Exercise" {
             //TODO: goto Next Exercise
@@ -212,9 +214,16 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         }
     }
 
+    @IBAction func playForMeButtonTapped(_ sender: UIButton) {
+        playingSynth = true
+        playForMeButton.isEnabled = false
+        playButton.setTitle("Playing ...", for: UIControlState())
+        playScore()
+    }
+
     func loadFile(_ scoreFile: String) {
         playButton.setTitle("Start Playing", for: UIControlState())
-        playButton.isEnabled = true
+//        playButton.isEnabled = true
         playingAnimation = false
 
         if let filePath = Bundle.main.path(forResource: scoreFile, ofType: "xml") {
@@ -290,11 +299,19 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     }
     
     func playScore() {
+        if playingSynth {
+            if isTune {
+                infoLabel.text = "Listen - and play the notes"
+            } else {
+                infoLabel.text = "Listen - and clap at the beginning of each note and count the beats"
+            }
+        } else
         if isTune {
             infoLabel.text = "Play the notes"
         } else {
             infoLabel.text = "Clap at the beginning of each note and count the beats"
         }
+
         ssScrollView.contentOffset = CGPoint.zero
         ssScrollView.isScrollEnabled = false
         playingAnimation = false
@@ -368,10 +385,10 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                 // setup bar change notification to set threshold - or move cursor
                 var cursorAnimationTime_ms = Int32(timingThreshold * 1000)
                 
-                if showNoteMarkers {
-                    let cursorAnimationTime = CATransaction.animationDuration()
-                    cursorAnimationTime_ms = Int32(cursorAnimationTime * 1000)
-                }
+//                if showNoteMarkers {
+//                    let cursorAnimationTime = CATransaction.animationDuration()
+//                    cursorAnimationTime_ms = Int32(cursorAnimationTime * 1000)
+//                }
 
                 synth?.setNoteHandler(self, delay: -cursorAnimationTime_ms)
 
@@ -399,7 +416,8 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         }
     }
     
-    func stopPlaying () {
+    func stopPlaying() {
+        playingSynth = false
         metronomeView.setBeat(-1)
         stopAnalysisTimer()
 
@@ -418,7 +436,8 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
 
         playButton.setTitle("Start Playing", for: UIControlState())
 //        playButton.setTitle("Next Exercise", for: UIControlState())
-        playButton.isEnabled = true
+//        playButton.isEnabled = true
+        playForMeButton.isEnabled = true
         ssScrollView.hideCursor()
         ssScrollView.isScrollEnabled = true
 
@@ -839,7 +858,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     }
     
     func partInstrument(_ partIndex: Int32) -> UInt32 {
-        guard showNoteMarkers else
+        guard playingSynth else
         {
             return 0
         }
@@ -858,15 +877,15 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     
     func instrumentForPart(partIndex : Int) -> UInt
     {
-        if sampledInstrumentIds.isEmpty {
-            return 0
-        }
+        guard !sampledInstrumentIds.isEmpty else { return 0 }
+
+        var index = 0
         if sampledInstrumentIds.count > 1 {
-            let iid = sampledInstrumentIds[1] // use second
-            return iid
+            index = UserDefaults.standard.bool(forKey: Constants.Settings.PlayTrumpet) ? 1 : 0
         }
-        let iid = sampledInstrumentIds[0] // default is first in list (piano) if no name match
-        return iid
+
+        return sampledInstrumentIds[index]
+
 //        if let iid = instrumentToPart_cache[partIndex]
 //        {
 //            return iid
@@ -912,7 +931,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     }
 
     func partVolume(_ partIndex: Int32) -> Float {
-        if showNoteMarkers {
+        if playingSynth {
             return 1.0
         } else {
             return 0.0
@@ -992,13 +1011,15 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
             playingAnimation = true
         }
 
-        if !showNoteMarkers {
-            if kUseColoredNotes {
-                currentNotes = notes
-            }
-
+        if !playingSynth {
             setNoteThresholdState(notes as NSArray)
-        } else {
+        }
+
+        if kUseColoredNotes {
+            currentNotes = notes
+        }
+
+        if showNoteMarkers {
             moveNoteCursor(notes as NSArray)
         }
     }
@@ -1131,7 +1152,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
             svc.countOffLabel.isHidden = !isCountIn;
             if isCountIn {
                 svc.countOffLabel.text = "\(index + 1)"
-                if !svc.showNoteMarkers {
+                if !svc.playingSynth {
                     svc.startAnalysisTimer()
                 }
 
@@ -1157,7 +1178,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
             svc.countOffLabel.isHidden = true
             svc.cursorBarIndex = 0
             svc.stopPlaying()
-            if UserDefaults.standard.bool(forKey: Constants.Settings.ShowAnalysis) {
+            if UserDefaults.standard.bool(forKey: Constants.Settings.ShowAnalysis) && !svc.playingSynth {
                 svc.showScore()
             }
         }

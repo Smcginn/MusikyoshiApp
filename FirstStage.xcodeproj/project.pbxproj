@@ -33,22 +33,8 @@
 		6324D3631CE73C47001934A5 /* First Stage_key.m in Sources */ = {isa = PBXBuildFile; fileRef = 6324D3531CE73C47001934A5 /* First Stage_key.m */; };
 		6324D3641CE73C47001934A5 /* SSPlayLoopGraphics.m in Sources */ = {isa = PBXBuildFile; fileRef = 6324D3581CE73C47001934A5 /* SSPlayLoopGraphics.m */; };
 		6324D3651CE73C47001934A5 /* SSPlayLoopGraphics.m in Sources */ = {isa = PBXBuildFile; fileRef = 6324D3581CE73C47001934A5 /* SSPlayLoopGraphics.m */; };
-		6324D36E1CE73ED9001934A5 /* MusicFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324D3671CE73ED9001934A5 /* MusicFont.swift */; };
-		6324D36F1CE73ED9001934A5 /* MusicFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324D3671CE73ED9001934A5 /* MusicFont.swift */; };
-		6324D3701CE73ED9001934A5 /* NoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324D3681CE73ED9001934A5 /* NoteService.swift */; };
-		6324D3711CE73ED9001934A5 /* NoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324D3681CE73ED9001934A5 /* NoteService.swift */; };
 		6324D3721CE73ED9001934A5 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324D3691CE73ED9001934A5 /* Enums.swift */; };
 		6324D3731CE73ED9001934A5 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324D3691CE73ED9001934A5 /* Enums.swift */; };
-		6324D3741CE73ED9001934A5 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324D36A1CE73ED9001934A5 /* Exercise.swift */; };
-		6324D3751CE73ED9001934A5 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324D36A1CE73ED9001934A5 /* Exercise.swift */; };
-		6324D3761CE73ED9001934A5 /* Measure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324D36B1CE73ED9001934A5 /* Measure.swift */; };
-		6324D3771CE73ED9001934A5 /* Measure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324D36B1CE73ED9001934A5 /* Measure.swift */; };
-		6324D3781CE73ED9001934A5 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324D36C1CE73ED9001934A5 /* Note.swift */; };
-		6324D3791CE73ED9001934A5 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324D36C1CE73ED9001934A5 /* Note.swift */; };
-		6324D37A1CE73ED9001934A5 /* NoteOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324D36D1CE73ED9001934A5 /* NoteOffset.swift */; };
-		6324D37B1CE73ED9001934A5 /* NoteOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324D36D1CE73ED9001934A5 /* NoteOffset.swift */; };
-		6324D37D1CE73F22001934A5 /* MusicXMLService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324D37C1CE73F22001934A5 /* MusicXMLService.swift */; };
-		6324D37E1CE73F22001934A5 /* MusicXMLService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324D37C1CE73F22001934A5 /* MusicXMLService.swift */; };
 		6336B1901EA32AF000A78D02 /* Trumpet.novib.mf.52.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 634658E81E90C6A000C162CF /* Trumpet.novib.mf.52.m4a */; };
 		6336B1911EA32AF000A78D02 /* Trumpet.novib.mf.53.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 634658E91E90C6A000C162CF /* Trumpet.novib.mf.53.m4a */; };
 		6336B1921EA32AF000A78D02 /* Trumpet.novib.mf.54.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 634658EA1E90C6A000C162CF /* Trumpet.novib.mf.54.m4a */; };
@@ -315,8 +301,6 @@
 		6379EE7E1CE95CDF00188A70 /* NoteAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6379EE7C1CE95CDF00188A70 /* NoteAnalysis.swift */; };
 		6379EE911CE9C8ED00188A70 /* AudioKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6379EE901CE9C8ED00188A70 /* AudioKitManager.swift */; };
 		6379EE921CE9C8ED00188A70 /* AudioKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6379EE901CE9C8ED00188A70 /* AudioKitManager.swift */; };
-		638129501CF05BF800A40C8E /* LongToneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6381294F1CF05BF800A40C8E /* LongToneViewController.swift */; };
-		638129511CF05BF800A40C8E /* LongToneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6381294F1CF05BF800A40C8E /* LongToneViewController.swift */; };
 		638129581CF05C7900A40C8E /* Balloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638129561CF05C7900A40C8E /* Balloon.swift */; };
 		638129591CF05C7900A40C8E /* Balloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638129561CF05C7900A40C8E /* Balloon.swift */; };
 		6381295A1CF05C7900A40C8E /* SparkLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638129571CF05C7900A40C8E /* SparkLine.swift */; };
@@ -332,6 +316,16 @@
 		63C03ABA1E2A0B11009F4033 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63C03AB91E2A0B11009F4033 /* AudioKit.framework */; };
 		63C03ABB1E2A0B11009F4033 /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 63C03AB91E2A0B11009F4033 /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		63C03ABF1E2A0C43009F4033 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63C03AB91E2A0B11009F4033 /* AudioKit.framework */; };
+		63D5E8831EA37BCC007AE8D4 /* NoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324D3681CE73ED9001934A5 /* NoteService.swift */; };
+		63D5E8841EA37BCD007AE8D4 /* NoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324D3681CE73ED9001934A5 /* NoteService.swift */; };
+		63D5E8851EA37BDA007AE8D4 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324D36C1CE73ED9001934A5 /* Note.swift */; };
+		63D5E8861EA37BDA007AE8D4 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324D36C1CE73ED9001934A5 /* Note.swift */; };
+		63D5E8871EA37BEA007AE8D4 /* NoteOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324D36D1CE73ED9001934A5 /* NoteOffset.swift */; };
+		63D5E8881EA37BEA007AE8D4 /* NoteOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324D36D1CE73ED9001934A5 /* NoteOffset.swift */; };
+		63D5E8891EA37BF6007AE8D4 /* MusicFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324D3671CE73ED9001934A5 /* MusicFont.swift */; };
+		63D5E88A1EA37BF7007AE8D4 /* MusicFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324D3671CE73ED9001934A5 /* MusicFont.swift */; };
+		63D5E88B1EA37C1B007AE8D4 /* LongToneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6381294F1CF05BF800A40C8E /* LongToneViewController.swift */; };
+		63D5E88C1EA37C1B007AE8D4 /* LongToneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6381294F1CF05BF800A40C8E /* LongToneViewController.swift */; };
 		63EB90171CF1C4EB00F09B05 /* AVAudioSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EB90161CF1C4EB00F09B05 /* AVAudioSessionManager.swift */; };
 		63EB90181CF1C4EC00F09B05 /* AVAudioSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EB90161CF1C4EB00F09B05 /* AVAudioSessionManager.swift */; };
 		63EE547D1E62A2F000F5E21D /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 63C03AB91E2A0B11009F4033 /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -1374,35 +1368,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6324D3771CE73ED9001934A5 /* Measure.swift in Sources */,
 				633D1B6D1CF94BEC00B5C4FD /* FeedbackView.swift in Sources */,
-				6324D36F1CE73ED9001934A5 /* MusicFont.swift in Sources */,
-				6324D3711CE73ED9001934A5 /* NoteService.swift in Sources */,
 				633C2ADB1CE80DA5001C5C16 /* PracticeViewController.swift in Sources */,
 				6324D3631CE73C47001934A5 /* First Stage_key.m in Sources */,
 				633C2AE51CE86CF4001C5C16 /* SettingsViewController.swift in Sources */,
-				638129511CF05BF800A40C8E /* LongToneViewController.swift in Sources */,
 				638129591CF05C7900A40C8E /* Balloon.swift in Sources */,
 				6324D2DB1CE71B1A001934A5 /* FirstStage.xcdatamodeld in Sources */,
-				6324D37E1CE73F22001934A5 /* MusicXMLService.swift in Sources */,
-				6324D3791CE73ED9001934A5 /* Note.swift in Sources */,
 				639A2E461CF5AB09004F7B1A /* DotView.swift in Sources */,
 				6379EE921CE9C8ED00188A70 /* AudioKitManager.swift in Sources */,
 				6324D3611CE73C47001934A5 /* SSSystemView.m in Sources */,
 				63B427591E5016AB000E35AA /* Intonation.swift in Sources */,
-				6324D37B1CE73ED9001934A5 /* NoteOffset.swift in Sources */,
 				63EB90181CF1C4EC00F09B05 /* AVAudioSessionManager.swift in Sources */,
+				63D5E8861EA37BDA007AE8D4 /* Note.swift in Sources */,
+				63D5E8831EA37BCC007AE8D4 /* NoteService.swift in Sources */,
 				6324D3041CE72E5D001934A5 /* TuneExerciseViewController.swift in Sources */,
 				63B4275C1E5057BB000E35AA /* SSSettingsViewController.swift in Sources */,
 				639A2E551CF5E6CA004F7B1A /* VisualMetronomeView.swift in Sources */,
 				6324D3651CE73C47001934A5 /* SSPlayLoopGraphics.m in Sources */,
 				6324D35F1CE73C47001934A5 /* SSScrollView.m in Sources */,
-				6324D3751CE73ED9001934A5 /* Exercise.swift in Sources */,
 				6381295B1CF05C7900A40C8E /* SparkLine.swift in Sources */,
 				6379EE7E1CE95CDF00188A70 /* NoteAnalysis.swift in Sources */,
 				6324D3731CE73ED9001934A5 /* Enums.swift in Sources */,
+				63D5E88A1EA37BF7007AE8D4 /* MusicFont.swift in Sources */,
 				6324D2D31CE71B19001934A5 /* AppDelegate.swift in Sources */,
 				633C2AE21CE86915001C5C16 /* Constants.swift in Sources */,
+				63D5E8871EA37BEA007AE8D4 /* NoteOffset.swift in Sources */,
+				63D5E88B1EA37C1B007AE8D4 /* LongToneViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1426,35 +1417,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6324D3761CE73ED9001934A5 /* Measure.swift in Sources */,
 				633D1B711CF94BF000B5C4FD /* FeedbackView.swift in Sources */,
-				6324D36E1CE73ED9001934A5 /* MusicFont.swift in Sources */,
-				6324D3701CE73ED9001934A5 /* NoteService.swift in Sources */,
 				633C2ADA1CE80DA5001C5C16 /* PracticeViewController.swift in Sources */,
 				6324D3621CE73C47001934A5 /* First Stage_key.m in Sources */,
 				633C2AE41CE86CF4001C5C16 /* SettingsViewController.swift in Sources */,
-				638129501CF05BF800A40C8E /* LongToneViewController.swift in Sources */,
 				638129581CF05C7900A40C8E /* Balloon.swift in Sources */,
 				6324D3071CE72F8D001934A5 /* FirstStage.xcdatamodeld in Sources */,
-				6324D37D1CE73F22001934A5 /* MusicXMLService.swift in Sources */,
-				6324D3781CE73ED9001934A5 /* Note.swift in Sources */,
 				639A2E451CF5AB09004F7B1A /* DotView.swift in Sources */,
 				6379EE911CE9C8ED00188A70 /* AudioKitManager.swift in Sources */,
 				63B4275A1E505573000E35AA /* Intonation.swift in Sources */,
 				6324D3601CE73C47001934A5 /* SSSystemView.m in Sources */,
-				6324D37A1CE73ED9001934A5 /* NoteOffset.swift in Sources */,
 				63EB90171CF1C4EB00F09B05 /* AVAudioSessionManager.swift in Sources */,
+				63D5E8851EA37BDA007AE8D4 /* Note.swift in Sources */,
+				63D5E8841EA37BCD007AE8D4 /* NoteService.swift in Sources */,
 				6324D3091CE72F8D001934A5 /* TuneExerciseViewController.swift in Sources */,
 				63B4275D1E5057C2000E35AA /* SSSettingsViewController.swift in Sources */,
 				639A2E541CF5E6CA004F7B1A /* VisualMetronomeView.swift in Sources */,
 				6324D3641CE73C47001934A5 /* SSPlayLoopGraphics.m in Sources */,
 				6324D35E1CE73C47001934A5 /* SSScrollView.m in Sources */,
-				6324D3741CE73ED9001934A5 /* Exercise.swift in Sources */,
 				6381295A1CF05C7900A40C8E /* SparkLine.swift in Sources */,
 				6379EE7D1CE95CDF00188A70 /* NoteAnalysis.swift in Sources */,
 				6324D3721CE73ED9001934A5 /* Enums.swift in Sources */,
+				63D5E8891EA37BF6007AE8D4 /* MusicFont.swift in Sources */,
 				6324D30A1CE72F8D001934A5 /* AppDelegate.swift in Sources */,
 				633C2AE11CE86915001C5C16 /* Constants.swift in Sources */,
+				63D5E8881EA37BEA007AE8D4 /* NoteOffset.swift in Sources */,
+				63D5E88C1EA37C1B007AE8D4 /* LongToneViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

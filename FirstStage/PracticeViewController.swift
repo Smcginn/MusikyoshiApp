@@ -150,8 +150,11 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         ac.view.addSubview(picker)
         
         self.present(ac, animated: true, completion: nil)
+
+        let defaultRowIndex = tuneNames.index(of: selectedRhythmName) ?? 0
+        picker.selectRow(defaultRowIndex, inComponent: 0, animated: true)
     }
-    
+
     @IBAction func changeTuneTap(_ sender: AnyObject) {
         optionIndex = 3
         
@@ -170,6 +173,9 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         ac.view.addSubview(picker)
         
         self.present(ac, animated: true, completion: nil)
+
+        let defaultRowIndex = tuneNames.index(of: selectedTuneName) ?? 0
+        picker.selectRow(defaultRowIndex, inComponent: 0, animated: true)
     }
     
     //*****************************************************************

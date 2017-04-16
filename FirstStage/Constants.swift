@@ -28,5 +28,6 @@ struct Constants
         static let Transposition = "transposition"
         static let ShowNoteMarkers = "shownotemarkers"
         static let ShowAnalysis = "showanalysis"
+        static let PlayTrumpet = "playtrumpet"
     }
 }

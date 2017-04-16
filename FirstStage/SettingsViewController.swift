@@ -14,34 +14,44 @@ class SettingsViewController: UIViewController
     
     @IBOutlet weak var bpmLabel: UILabel!
     @IBOutlet weak var bpmStepper: UIStepper!
-    @IBOutlet weak var showNoteMarkersLabel: UILabel!
-    @IBOutlet weak var showNoteMarkersSwitch: UISwitch!
-    @IBOutlet weak var showAnalysisSwitch: UISwitch!
-    @IBOutlet weak var showAnalysisLabel: UILabel!
+    @IBOutlet weak var showMarkersControl: UISegmentedControl!
+    @IBOutlet weak var showAnalysisControl: UISegmentedControl!
+    @IBOutlet weak var synthInstrumentControl: UISegmentedControl!
 
     @IBAction func bpmStepperChanged(_ sender: UIStepper) {
         bpmLabel.text = String(Int(bpmStepper.value))
     }
+
+    @IBAction func showAnalysisControlChanged(_ sender: UISegmentedControl) {
+    }
     
-    @IBAction func showNoteMarkerSwitchChanged(_ sender: UISwitch) {
-        if showNoteMarkersSwitch.isOn {
-            showNoteMarkersLabel.text = "Markers - No Input"
-        } else {
-            showNoteMarkersLabel.text = "Input - No Markers"
-        }
+    @IBAction func synthInstrumentControlChanged(_ sender: UISegmentedControl) {
     }
 
-    @IBAction func showAnalysisSwitchChanged(_ sender: UISwitch) {
-        updateAnalysisSwitch()
+    @IBAction func showMarkersControlChanged(_ sender: UISegmentedControl) {
     }
 
-    func updateAnalysisSwitch() {
-        if showAnalysisSwitch.isOn {
-            showAnalysisLabel.text = "Show"
-        } else {
-            showAnalysisLabel.text = "Don't show"
-        }
-    }
+//    @IBAction func showNoteMarkerSwitchChanged(_ sender: UISwitch) {
+//        if showNoteMarkersSwitch.isOn {
+//            showNoteMarkersLabel.text = "Markers"
+//        } else {
+//            showNoteMarkersLabel.text = "No Markers"
+//        }
+//    }
+//
+//    @IBAction func showAnalysisSwitchChanged(_ sender: UISwitch) {
+//        updateAnalysisSwitch()
+//    }
+//
+//    @IBAction func pianoTrumpetSwitchChanged(_ sender: UISwitch) {
+//    }
+//    func updateAnalysisSwitch() {
+//        if showAnalysisSwitch.isOn {
+//            showAnalysisLabel.text = "Show"
+//        } else {
+//            showAnalysisLabel.text = "Don't show"
+//        }
+//    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -49,16 +59,17 @@ class SettingsViewController: UIViewController
         bpmStepper.value = UserDefaults.standard.double(forKey: Constants.Settings.BPM)
         bpmLabel.text = String(Int(bpmStepper.value))
 
-        showAnalysisSwitch.isOn = UserDefaults.standard.bool(forKey: Constants.Settings.ShowAnalysis)
-        updateAnalysisSwitch()
+        showAnalysisControl.selectedSegmentIndex = UserDefaults.standard.bool(forKey: Constants.Settings.ShowAnalysis) ? 1 : 0
+        showMarkersControl.selectedSegmentIndex = UserDefaults.standard.bool(forKey: Constants.Settings.ShowNoteMarkers) ? 1 : 0
+        synthInstrumentControl.selectedSegmentIndex = UserDefaults.standard.bool(forKey: Constants.Settings.PlayTrumpet) ? 0 : 1
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         UserDefaults.standard.set(bpmStepper.value, forKey: Constants.Settings.BPM)
-//        UserDefaults.standard.set(showNoteMarkersSwitch.isOn, forKey: Constants.Settings.ShowNoteMarkers)
-        UserDefaults.standard.set(false, forKey: Constants.Settings.ShowNoteMarkers)
-
-        UserDefaults.standard.set(showAnalysisSwitch.isOn, forKey: Constants.Settings.ShowAnalysis)
+        UserDefaults.standard.set(showMarkersControl.selectedSegmentIndex == 1, forKey: Constants.Settings.ShowNoteMarkers)
+//        UserDefaults.standard.set(false, forKey: Constants.Settings.ShowNoteMarkers)
+        UserDefaults.standard.set(showAnalysisControl.selectedSegmentIndex == 1, forKey: Constants.Settings.ShowAnalysis)
+        UserDefaults.standard.set(synthInstrumentControl.selectedSegmentIndex != 1, forKey: Constants.Settings.PlayTrumpet)
 
         super.viewWillDisappear(animated)
     }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7XQ-ag-kLz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7XQ-ag-kLz">
     <device id="retina4_0" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -54,10 +54,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2dU-oO-IYi">
-                                <rect key="frame" x="240" y="270" width="88" height="30"/>
-                                <state key="normal" title="Start Playing"/>
+                                <rect key="frame" x="218.5" y="270" width="131" height="30"/>
+                                <state key="normal" title="Start Playing Along"/>
                                 <connections>
                                     <action selector="playButtonTapped:" destination="RFs-C5-TzE" eventType="touchUpInside" id="gb7-C2-fMO"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aPu-Nj-TB7">
+                                <rect key="frame" x="20" y="270" width="106" height="30"/>
+                                <state key="normal" title="Play this for me"/>
+                                <connections>
+                                    <action selector="playForMeButtonTapped:" destination="RFs-C5-TzE" eventType="touchUpInside" id="490-XS-L5g"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fVI-2z-pNq" customClass="VisualMetronomeView" customModule="FirstStage" customModuleProvider="target">
@@ -67,6 +74,7 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="aPu-Nj-TB7" firstAttribute="leading" secondItem="2kB-BL-om5" secondAttribute="leading" constant="20" id="09r-rP-sc7"/>
                             <constraint firstItem="Edi-Oo-gxi" firstAttribute="width" secondItem="2kB-BL-om5" secondAttribute="width" id="1PY-Kq-nTN"/>
                             <constraint firstItem="hOC-AT-tf6" firstAttribute="width" secondItem="2kB-BL-om5" secondAttribute="width" multiplier="0.3" id="4Pg-ew-NID"/>
                             <constraint firstItem="2dU-oO-IYi" firstAttribute="bottom" secondItem="mb9-K2-A65" secondAttribute="top" constant="-20" id="Ama-uD-WSJ"/>
@@ -82,6 +90,7 @@
                             <constraint firstItem="Edi-Oo-gxi" firstAttribute="centerX" secondItem="2kB-BL-om5" secondAttribute="centerX" id="hn4-dP-4nJ"/>
                             <constraint firstItem="fVI-2z-pNq" firstAttribute="height" secondItem="2kB-BL-om5" secondAttribute="height" multiplier="0.1" id="j2z-gc-Kyf"/>
                             <constraint firstItem="4eH-FN-aso" firstAttribute="centerX" secondItem="2kB-BL-om5" secondAttribute="centerX" id="jub-Bo-THZ"/>
+                            <constraint firstItem="aPu-Nj-TB7" firstAttribute="centerY" secondItem="2dU-oO-IYi" secondAttribute="centerY" id="nnd-H5-eOc"/>
                             <constraint firstItem="fVI-2z-pNq" firstAttribute="centerX" secondItem="2kB-BL-om5" secondAttribute="centerX" id="oaL-rr-gl2"/>
                             <constraint firstItem="Edi-Oo-gxi" firstAttribute="top" secondItem="4eH-FN-aso" secondAttribute="bottom" constant="4" id="rIa-Z8-nqi"/>
                             <constraint firstItem="4lG-Uj-c1R" firstAttribute="leading" secondItem="Edi-Oo-gxi" secondAttribute="leading" constant="70" id="vLM-6h-owt"/>
@@ -95,6 +104,7 @@
                         <outlet property="infoLabel" destination="4eH-FN-aso" id="7JK-qL-hr7"/>
                         <outlet property="metronomeView" destination="fVI-2z-pNq" id="orz-SX-rQH"/>
                         <outlet property="playButton" destination="2dU-oO-IYi" id="Hzx-lF-4o9"/>
+                        <outlet property="playForMeButton" destination="aPu-Nj-TB7" id="oax-8N-dEZ"/>
                         <outlet property="ssScrollView" destination="Edi-Oo-gxi" id="CgI-8q-LDE"/>
                     </connections>
                 </viewController>
@@ -134,7 +144,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.90055565130000004" green="0.93926366169999997" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.90196078431372551" green="0.94117647058823528" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="RT8-yG-2ex" firstAttribute="leading" secondItem="Pgw-zV-4oX" secondAttribute="trailing" constant="8" id="Dlx-7E-z8S"/>
                                     <constraint firstItem="RT8-yG-2ex" firstAttribute="top" secondItem="CLD-az-kyB" secondAttribute="top" constant="8" id="Umt-IE-pT9"/>
@@ -215,7 +225,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="pd7-e9-Z7M">
-                                <rect key="frame" x="26" y="90" width="177" height="254"/>
+                                <rect key="frame" x="26" y="90" width="177" height="253.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="deU-uX-iGh">
                                         <rect key="frame" x="0.0" y="0.0" width="41" height="30"/>
@@ -344,7 +354,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="LlN-k2-4Ec">
-                                <rect key="frame" x="20" y="118" width="478" height="152.5"/>
+                                <rect key="frame" x="20" y="74" width="478" height="201"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Beats Per Second" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ksX-H4-Cy3">
                                         <rect key="frame" x="0.0" y="0.0" width="478" height="20.5"/>
@@ -369,58 +379,96 @@
                                             </stepper>
                                         </subviews>
                                     </stackView>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Markers / Input" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ONa-xL-E1e">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Markers During Play?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ONa-xL-E1e">
                                         <rect key="frame" x="0.0" y="49.5" width="478" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="rmy-fz-zyw">
-                                        <rect key="frame" x="0.0" y="70" width="478" height="31"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CKp-L2-hI7">
+                                        <rect key="frame" x="0.0" y="70" width="478" height="30"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Input - No Markers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B36-WA-kha">
-                                                <rect key="frame" x="0.0" y="0.0" width="227" height="31"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ZKc-uH-Np9">
-                                                <rect key="frame" x="251" y="0.0" width="229" height="31"/>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="NDX-uD-o8I">
+                                                <rect key="frame" x="95.5" y="0.5" width="287" height="29"/>
+                                                <segments>
+                                                    <segment title="Hide"/>
+                                                    <segment title="Show"/>
+                                                </segments>
                                                 <connections>
-                                                    <action selector="showNoteMarkerSwitchChanged:" destination="mkC-dS-MpY" eventType="valueChanged" id="BtK-sl-ytF"/>
+                                                    <action selector="showMarkersControlChanged:" destination="mkC-dS-MpY" eventType="valueChanged" id="Fa8-KE-Uii"/>
                                                 </connections>
-                                            </switch>
+                                            </segmentedControl>
                                         </subviews>
-                                    </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show/hide analysis" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Mr-78-Zwg">
-                                        <rect key="frame" x="0.0" y="101" width="478" height="20.5"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="7FS-aw-BI6"/>
+                                            <constraint firstItem="NDX-uD-o8I" firstAttribute="centerY" secondItem="CKp-L2-hI7" secondAttribute="centerY" id="Udg-kc-Rq2"/>
+                                            <constraint firstItem="NDX-uD-o8I" firstAttribute="width" secondItem="CKp-L2-hI7" secondAttribute="width" multiplier="0.6" id="Zap-2r-nrZ"/>
+                                            <constraint firstItem="NDX-uD-o8I" firstAttribute="centerX" secondItem="CKp-L2-hI7" secondAttribute="centerX" id="zOO-eD-sHW"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Analysis?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Mr-78-Zwg">
+                                        <rect key="frame" x="0.0" y="100" width="478" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="n0q-sV-Ih7">
-                                        <rect key="frame" x="0.0" y="121.5" width="478" height="31"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jgA-YC-1gz">
+                                        <rect key="frame" x="0.0" y="120.5" width="478" height="30"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't show" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TZF-XW-dFL">
-                                                <rect key="frame" x="0.0" y="0.0" width="227" height="31"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="lOY-Rj-Dam">
-                                                <rect key="frame" x="251" y="0.0" width="229" height="31"/>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="H1x-Cz-Yfn">
+                                                <rect key="frame" x="95" y="0.5" width="287" height="29"/>
+                                                <segments>
+                                                    <segment title="Hide"/>
+                                                    <segment title="Show"/>
+                                                </segments>
                                                 <connections>
-                                                    <action selector="showAnalysisSwitchChanged:" destination="mkC-dS-MpY" eventType="valueChanged" id="Pt0-EK-cDM"/>
+                                                    <action selector="showAnalysisControlChanged:" destination="mkC-dS-MpY" eventType="valueChanged" id="O5K-gG-UTg"/>
                                                 </connections>
-                                            </switch>
+                                            </segmentedControl>
                                         </subviews>
-                                    </stackView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="H1x-Cz-Yfn" firstAttribute="width" secondItem="jgA-YC-1gz" secondAttribute="width" multiplier="0.6" id="1X8-5z-Xbn"/>
+                                            <constraint firstItem="H1x-Cz-Yfn" firstAttribute="centerY" secondItem="jgA-YC-1gz" secondAttribute="centerY" id="3mA-Sj-iPk"/>
+                                            <constraint firstAttribute="height" constant="30" id="M7h-wf-Oet"/>
+                                            <constraint firstItem="H1x-Cz-Yfn" firstAttribute="centerX" secondItem="jgA-YC-1gz" secondAttribute="centerX" id="iMX-q9-KyJ"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Synth Instrument" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bpz-fR-3e4">
+                                        <rect key="frame" x="0.0" y="150.5" width="478" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tkd-hN-2GP">
+                                        <rect key="frame" x="0.0" y="171" width="478" height="30"/>
+                                        <subviews>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="OXq-RY-aJF">
+                                                <rect key="frame" x="95.5" y="0.5" width="287" height="29"/>
+                                                <segments>
+                                                    <segment title="Trumpet"/>
+                                                    <segment title="Piano"/>
+                                                </segments>
+                                                <connections>
+                                                    <action selector="synthInstrumentControlChanged:" destination="mkC-dS-MpY" eventType="valueChanged" id="LST-qm-2Hc"/>
+                                                </connections>
+                                            </segmentedControl>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="b2g-Pa-yfp"/>
+                                            <constraint firstItem="OXq-RY-aJF" firstAttribute="centerY" secondItem="tkd-hN-2GP" secondAttribute="centerY" id="cKl-0K-ogh"/>
+                                            <constraint firstItem="OXq-RY-aJF" firstAttribute="width" secondItem="tkd-hN-2GP" secondAttribute="width" multiplier="0.6" id="hUS-qh-G1c"/>
+                                            <constraint firstItem="OXq-RY-aJF" firstAttribute="centerX" secondItem="tkd-hN-2GP" secondAttribute="centerX" id="thT-2y-LUB"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="LlN-k2-4Ec" firstAttribute="top" secondItem="4pB-uO-ajl" secondAttribute="bottom" constant="54" id="BJ8-4F-Xib"/>
+                            <constraint firstItem="LlN-k2-4Ec" firstAttribute="top" secondItem="4pB-uO-ajl" secondAttribute="bottom" constant="10" id="BJ8-4F-Xib"/>
                             <constraint firstAttribute="trailingMargin" secondItem="LlN-k2-4Ec" secondAttribute="trailing" constant="50" id="K9w-d3-te3"/>
                             <constraint firstAttribute="leadingMargin" secondItem="LlN-k2-4Ec" secondAttribute="leading" id="X7U-G5-8oc"/>
                         </constraints>
@@ -431,10 +479,9 @@
                     <connections>
                         <outlet property="bpmLabel" destination="fPW-Vo-jNM" id="WMR-iB-qFt"/>
                         <outlet property="bpmStepper" destination="zkn-qW-uP3" id="FFW-sX-sav"/>
-                        <outlet property="showAnalysisLabel" destination="TZF-XW-dFL" id="zJ6-LN-TEO"/>
-                        <outlet property="showAnalysisSwitch" destination="lOY-Rj-Dam" id="pAH-rw-d6c"/>
-                        <outlet property="showNoteMarkersLabel" destination="B36-WA-kha" id="Ngz-r2-i3k"/>
-                        <outlet property="showNoteMarkersSwitch" destination="ZKc-uH-Np9" id="1Uv-Ug-P7v"/>
+                        <outlet property="showAnalysisControl" destination="H1x-Cz-Yfn" id="XRH-51-fsX"/>
+                        <outlet property="showMarkersControl" destination="NDX-uD-o8I" id="Em5-Vr-fWD"/>
+                        <outlet property="synthInstrumentControl" destination="OXq-RY-aJF" id="zd5-xA-FDa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EtB-cQ-0GO" userLabel="First Responder" sceneMemberID="firstResponder"/>

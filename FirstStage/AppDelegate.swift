@@ -29,7 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Constants.Settings.TimingThreshold: 0.2,
             Constants.Settings.FrequencyThreshold: Double(0.03),
             Constants.Settings.Transposition: -2,
-            Constants.Settings.ShowNoteMarkers: false
+            Constants.Settings.ShowNoteMarkers: false,
+            Constants.Settings.ShowAnalysis: false,
+            Constants.Settings.PlayTrumpet: true
             ])
         
         
