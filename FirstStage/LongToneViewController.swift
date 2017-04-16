@@ -91,7 +91,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
         absoluteTargetNote = NoteService.getNote(targetNoteID + transpositionOffset)
         targetNote = NoteService.getNote(targetNoteID)
         if targetNote != nil {
-            print("targetNote: \(targetNote)")
+            print("targetNote: \(String(describing: targetNote))")
 
             navigationItem.title = "Long Tone - \(targetNote!.fullName)"
             instructionLbl.text = "Play a long \(targetNote!.friendlyName) note and fill up the balloon until it turns green!"
@@ -302,7 +302,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
                 if err == sscore_UnlicensedFunctionError {
                     print("synth license expired!")
                 } else if err != sscore_NoError {
-                    print("synth failed to start: \(err)")
+                    print("synth failed to start: \(String(describing: err))")
                 }
             }
         }

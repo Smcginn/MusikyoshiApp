@@ -109,7 +109,7 @@ class AVAudioSessionManager: NSObject {
         if reasonValue == AVAudioSessionRouteChangeReason.oldDeviceUnavailable.rawValue {
             //do we need to do something here?
         }
-        print("Audio route change: \(reasonValue)")
+        print("Audio route change: \(String(describing: reasonValue))")
     }
     
     func handleInterruption(_ n: Notification) {

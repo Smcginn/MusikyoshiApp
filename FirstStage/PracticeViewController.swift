@@ -93,7 +93,7 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
 //                    let an = NoteService.getNote(sn.orderId-2)
                     let an = NoteService.getNote(sn.orderId)
                     print("sn: \(sn.orderId) - 2?? ==>")
-                    print("an == \(an?.orderId)")
+                    print("an == \(String(describing: an?.orderId))")
                     destination.targetNote = an
                     destination.targetNoteID = sn.orderId
                     destination.noteName = (selectedNote?.fullName)!
