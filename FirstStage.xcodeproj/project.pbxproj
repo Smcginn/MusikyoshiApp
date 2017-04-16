@@ -1707,7 +1707,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/SeeScoreLib/Universal",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/AudioKit/AudioKit/Platforms/iOS",
 				);
 				INFOPLIST_FILE = FirstStage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1735,7 +1734,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/SeeScoreLib/Universal",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/AudioKit/AudioKit/Platforms/iOS",
 				);
 				INFOPLIST_FILE = FirstStage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
