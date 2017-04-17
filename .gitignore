@@ -1,0 +1,26 @@
+# xcode noise
+build/
+*.pyc
+*~.nib/
+*.pbxuser
+*.perspective
+*.perspectivev3
+*.xcuserstate
+*.xccheckout
+project.xcworkspace/
+xcuserdata/
+
+# Place to put output file from scripts once you're done with them
+scripts/junk
+
+# old skool
+.svn
+
+# osx noise
+.DS_Store
+profile
+
+xcodebuild
+
+AudioKit.framework.dSYM
+SeeScoreLib.framework
