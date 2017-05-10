@@ -13,10 +13,10 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     var optionIndex = 0
     
-//    var tuneIds = ["Note_test", "ex1", "ex2", "ex3", "ex4", "ex5"]
-//    var tuneNames = ["Test", "Exercise 1", "Exercise 2", "Exercise 3", "Exercise 4", "Exercise 5"]
-    let tuneIds = ["Trepak", "Test", "Trepak", "Test", "Trepak", "Test"]
-    let tuneNames = ["Trepak", "Test", "Trepak", "Test", "Trepak", "Test"]
+    var tuneIds = ["Note_test", "ex1", "ex2", "ex3", "ex4", "ex5"]
+    var tuneNames = ["Test", "Exercise 1", "Exercise 2", "Exercise 3", "Exercise 4", "Exercise 5"]
+//    let tuneIds = ["110 The Entertainer -tpt", "119 Korobeiniki Trumpet", "100 Take Me Out to the Ball Game Trumpet", "109 Trepak - Trumpet", "Test Score", "Trepak", "Test", "Trepak", "Test"]
+//    let tuneNames = ["110 The Entertainer -tpt", "119 Korobeiniki Trumpet", "100 Take Me Out to the Ball Game Trumpet", "109 Trepak - Trumpet", "Test Score", "Trepak", "Test", "Trepak", "Test"]
     var selectedTuneId = ""
     var selectedTuneName = ""
     var selectedRhythmId = ""
@@ -41,16 +41,16 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             print("did load test")
         }
         
-//        if let fnames = getBundleFilesList("xml") {
-////            print("files:\(fnames)")
-//            tuneIds.removeAll()
-//            tuneNames.removeAll()
-//            for n in fnames {
-//                let shortN = String(n.characters.dropLast(4))
-//                tuneIds.append(shortN)
-//                tuneNames.append(shortN)
-//            }
-//        }
+        if let fnames = getBundleFilesList("xml") {
+//            print("files:\(fnames)")
+            tuneIds.removeAll()
+            tuneNames.removeAll()
+            for n in fnames {
+                let shortN = String(n.characters.dropLast(4))
+                tuneIds.append(shortN)
+                tuneNames.append(shortN)
+            }
+        }
 
         selectedTuneId = tuneIds.first!
         selectedRhythmId = tuneIds.first!
@@ -227,6 +227,15 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             selectedTuneId = tuneIds[row]
             selectedTuneName = tuneNames[row]
         }
+
+//        ////////////
+//        let xmlPath = Bundle.main.path(forResource: "XML Tunes/" + tuneIds[row], ofType: "xml")
+//        if xmlPath == nil {
+//            return
+//        }
+////        guard let xmlPath = Bundle.main.path(forResource: tuneIds[row], ofType: "xml") else { return }
+//        MusicXMLModifier.modifyXMLToData(musicXMLUrl: URL(fileURLWithPath: xmlPath!), smallestWidth: 21.0, signatureWidth: 55.0)
+//        ////////////
     }
 
     //for development - list all xml files

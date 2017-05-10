@@ -29,5 +29,7 @@ struct Constants
         static let ShowNoteMarkers = "shownotemarkers"
         static let ShowAnalysis = "showanalysis"
         static let PlayTrumpet = "playtrumpet"
+        static let SmallestNoteWidth = "smallestnotewidth"
+        static let SignatureWidth = "signaturewidth"
     }
 }

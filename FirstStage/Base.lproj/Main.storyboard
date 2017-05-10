@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7XQ-ag-kLz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7XQ-ag-kLz">
     <device id="retina4_0" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -354,25 +354,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="LlN-k2-4Ec">
-                                <rect key="frame" x="20" y="74" width="478" height="201"/>
+                                <rect key="frame" x="20" y="74" width="284" height="201"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Beats Per Second" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ksX-H4-Cy3">
-                                        <rect key="frame" x="0.0" y="0.0" width="478" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="284" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="ao0-Na-AtF">
-                                        <rect key="frame" x="0.0" y="20.5" width="478" height="29"/>
+                                        <rect key="frame" x="0.0" y="20.5" width="284" height="29"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="120" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fPW-Vo-jNM">
-                                                <rect key="frame" x="0.0" y="0.0" width="231.5" height="29"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="134.5" height="29"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="30" minimumValue="30" maximumValue="140" translatesAutoresizingMaskIntoConstraints="NO" id="zkn-qW-uP3">
-                                                <rect key="frame" x="246.5" y="0.0" width="94" height="29"/>
+                                                <rect key="frame" x="149.5" y="0.0" width="94" height="29"/>
                                                 <connections>
                                                     <action selector="bpmStepperChanged:" destination="mkC-dS-MpY" eventType="valueChanged" id="h4e-3D-HEU"/>
                                                 </connections>
@@ -380,16 +380,16 @@
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Markers During Play?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ONa-xL-E1e">
-                                        <rect key="frame" x="0.0" y="49.5" width="478" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="49.5" width="284" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CKp-L2-hI7">
-                                        <rect key="frame" x="0.0" y="70" width="478" height="30"/>
+                                        <rect key="frame" x="0.0" y="70" width="284" height="30"/>
                                         <subviews>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="NDX-uD-o8I">
-                                                <rect key="frame" x="95.5" y="0.5" width="287" height="29"/>
+                                                <rect key="frame" x="56" y="0.5" width="171" height="29"/>
                                                 <segments>
                                                     <segment title="Hide"/>
                                                     <segment title="Show"/>
@@ -408,16 +408,16 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Analysis?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Mr-78-Zwg">
-                                        <rect key="frame" x="0.0" y="100" width="478" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="100" width="284" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jgA-YC-1gz">
-                                        <rect key="frame" x="0.0" y="120.5" width="478" height="30"/>
+                                        <rect key="frame" x="0.0" y="120.5" width="284" height="30"/>
                                         <subviews>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="H1x-Cz-Yfn">
-                                                <rect key="frame" x="95" y="0.5" width="287" height="29"/>
+                                                <rect key="frame" x="56.5" y="0.5" width="171" height="29"/>
                                                 <segments>
                                                     <segment title="Hide"/>
                                                     <segment title="Show"/>
@@ -436,16 +436,16 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Synth Instrument" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bpz-fR-3e4">
-                                        <rect key="frame" x="0.0" y="150.5" width="478" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="150.5" width="284" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tkd-hN-2GP">
-                                        <rect key="frame" x="0.0" y="171" width="478" height="30"/>
+                                        <rect key="frame" x="0.0" y="171" width="284" height="30"/>
                                         <subviews>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="OXq-RY-aJF">
-                                                <rect key="frame" x="95.5" y="0.5" width="287" height="29"/>
+                                                <rect key="frame" x="56" y="0.5" width="171" height="29"/>
                                                 <segments>
                                                     <segment title="Trumpet"/>
                                                     <segment title="Piano"/>
@@ -469,7 +469,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="LlN-k2-4Ec" firstAttribute="top" secondItem="4pB-uO-ajl" secondAttribute="bottom" constant="10" id="BJ8-4F-Xib"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="LlN-k2-4Ec" secondAttribute="trailing" constant="50" id="K9w-d3-te3"/>
+                            <constraint firstItem="LlN-k2-4Ec" firstAttribute="width" secondItem="xWO-1g-Oxe" secondAttribute="width" multiplier="0.5" id="F48-3k-xwB"/>
                             <constraint firstAttribute="leadingMargin" secondItem="LlN-k2-4Ec" secondAttribute="leading" id="X7U-G5-8oc"/>
                         </constraints>
                     </view>

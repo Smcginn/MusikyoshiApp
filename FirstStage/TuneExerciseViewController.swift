@@ -251,8 +251,17 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         print("loadOptions: \(String(describing: loadOptions))")
 //        print("errP: \(errP)")
 
+
+        ////////////
+        guard let xmlData = MusicXMLModifier.modifyXMLToData(musicXMLUrl: URL(fileURLWithPath: filePath), smallestWidth: 21.0, signatureWidth: 55.0) else {
+            print("Cannot get modified xmlData from \(filePath)!")
+            return
+        }
+        ////////////
+
 //        if let score0 = SSScore(xmlFile: filePath, options: loadOptions, error: errP) {
-        if let score0 = SSScore(xmlFile: filePath, options: loadOptions, error: &err) {
+//        if let score0 = SSScore(xmlFile: filePath, options: loadOptions, error: &err) {
+        if let score0 = SSScore(xmlData: xmlData, options: loadOptions, error: &err) {
             score = score0
             //				titleLabel.text = [filePath lastPathComponent];
             let numParts = score!.numParts
@@ -732,6 +741,11 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
 //    }
 
     func showScore() {
+        if noteResultValues.count == 0 {
+            infoLabel.text = ""
+            return
+        }
+
         var scoreString = "You got"
 
         if isTune {
