@@ -305,10 +305,6 @@
 		638129591CF05C7900A40C8E /* Balloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638129561CF05C7900A40C8E /* Balloon.swift */; };
 		6381295A1CF05C7900A40C8E /* SparkLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638129571CF05C7900A40C8E /* SparkLine.swift */; };
 		6381295B1CF05C7900A40C8E /* SparkLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638129571CF05C7900A40C8E /* SparkLine.swift */; };
-		6391DA941EC0114200F777B7 /* AEXML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6391DA931EC0114200F777B7 /* AEXML.framework */; };
-		6391DA951EC0114200F777B7 /* AEXML.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6391DA931EC0114200F777B7 /* AEXML.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6391DA9A1EC0117500F777B7 /* AEXML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6391DA931EC0114200F777B7 /* AEXML.framework */; };
-		6391DA9B1EC0117500F777B7 /* AEXML.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6391DA931EC0114200F777B7 /* AEXML.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		639A2E451CF5AB09004F7B1A /* DotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639A2E441CF5AB09004F7B1A /* DotView.swift */; };
 		639A2E461CF5AB09004F7B1A /* DotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639A2E441CF5AB09004F7B1A /* DotView.swift */; };
 		639A2E541CF5E6CA004F7B1A /* VisualMetronomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639A2E531CF5E6CA004F7B1A /* VisualMetronomeView.swift */; };
@@ -317,7 +313,6 @@
 		63B4275A1E505573000E35AA /* Intonation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B427581E5016AB000E35AA /* Intonation.swift */; };
 		63B4275C1E5057BB000E35AA /* SSSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B4275B1E5057BB000E35AA /* SSSettingsViewController.swift */; };
 		63B4275D1E5057C2000E35AA /* SSSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B4275B1E5057BB000E35AA /* SSSettingsViewController.swift */; };
-		63BF9E071EBFFF07002BB5C1 /* MusicXMLModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BF9E061EBFFF07002BB5C1 /* MusicXMLModifier.swift */; };
 		63C03ABA1E2A0B11009F4033 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63C03AB91E2A0B11009F4033 /* AudioKit.framework */; };
 		63C03ABB1E2A0B11009F4033 /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 63C03AB91E2A0B11009F4033 /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		63C03ABF1E2A0C43009F4033 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63C03AB91E2A0B11009F4033 /* AudioKit.framework */; };
@@ -334,7 +329,6 @@
 		63EB90171CF1C4EB00F09B05 /* AVAudioSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EB90161CF1C4EB00F09B05 /* AVAudioSessionManager.swift */; };
 		63EB90181CF1C4EC00F09B05 /* AVAudioSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EB90161CF1C4EB00F09B05 /* AVAudioSessionManager.swift */; };
 		63EE547D1E62A2F000F5E21D /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 63C03AB91E2A0B11009F4033 /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		63F3A0841EC0CB6C00BA0321 /* MusicXMLModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BF9E061EBFFF07002BB5C1 /* MusicXMLModifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -362,7 +356,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				63C03ABB1E2A0B11009F4033 /* AudioKit.framework in Embed Frameworks */,
-				6391DA9B1EC0117500F777B7 /* AEXML.framework in Embed Frameworks */,
 				6324D3171CE73234001934A5 /* SeeScoreLib.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -375,7 +368,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				63EE547D1E62A2F000F5E21D /* AudioKit.framework in Embed Frameworks */,
-				6391DA951EC0114200F777B7 /* AEXML.framework in Embed Frameworks */,
 				6324D31B1CE7327F001934A5 /* SeeScoreLib.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -559,7 +551,6 @@
 		6381294F1CF05BF800A40C8E /* LongToneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LongToneViewController.swift; sourceTree = "<group>"; };
 		638129561CF05C7900A40C8E /* Balloon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Balloon.swift; sourceTree = "<group>"; };
 		638129571CF05C7900A40C8E /* SparkLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SparkLine.swift; sourceTree = "<group>"; };
-		6391DA931EC0114200F777B7 /* AEXML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AEXML.framework; sourceTree = "<group>"; };
 		639A2E441CF5AB09004F7B1A /* DotView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotView.swift; sourceTree = "<group>"; };
 		639A2E531CF5E6CA004F7B1A /* VisualMetronomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualMetronomeView.swift; sourceTree = "<group>"; };
 		63B427581E5016AB000E35AA /* Intonation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Intonation.swift; sourceTree = "<group>"; };
@@ -575,7 +566,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				63C03ABF1E2A0C43009F4033 /* AudioKit.framework in Frameworks */,
-				6391DA941EC0114200F777B7 /* AEXML.framework in Frameworks */,
 				6324D31A1CE7327F001934A5 /* SeeScoreLib.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -599,7 +589,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				63C03ABA1E2A0B11009F4033 /* AudioKit.framework in Frameworks */,
-				6391DA9A1EC0117500F777B7 /* AEXML.framework in Frameworks */,
 				6324D3161CE73234001934A5 /* SeeScoreLib.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -670,7 +659,6 @@
 		6324D31D1CE7329A001934A5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6391DA931EC0114200F777B7 /* AEXML.framework */,
 				63C03AB91E2A0B11009F4033 /* AudioKit.framework */,
 				6324D3191CE7327F001934A5 /* SeeScoreLib.framework */,
 				6324D3151CE73234001934A5 /* SeeScoreLib.framework */,
@@ -1391,7 +1379,6 @@
 				639A2E461CF5AB09004F7B1A /* DotView.swift in Sources */,
 				6379EE921CE9C8ED00188A70 /* AudioKitManager.swift in Sources */,
 				6324D3611CE73C47001934A5 /* SSSystemView.m in Sources */,
-				63BF9E071EBFFF07002BB5C1 /* MusicXMLModifier.swift in Sources */,
 				63B427591E5016AB000E35AA /* Intonation.swift in Sources */,
 				63EB90181CF1C4EC00F09B05 /* AVAudioSessionManager.swift in Sources */,
 				63D5E8861EA37BDA007AE8D4 /* Note.swift in Sources */,
@@ -1441,7 +1428,6 @@
 				639A2E451CF5AB09004F7B1A /* DotView.swift in Sources */,
 				6379EE911CE9C8ED00188A70 /* AudioKitManager.swift in Sources */,
 				63B4275A1E505573000E35AA /* Intonation.swift in Sources */,
-				63F3A0841EC0CB6C00BA0321 /* MusicXMLModifier.swift in Sources */,
 				6324D3601CE73C47001934A5 /* SSSystemView.m in Sources */,
 				63EB90171CF1C4EB00F09B05 /* AVAudioSessionManager.swift in Sources */,
 				63D5E8851EA37BDA007AE8D4 /* Note.swift in Sources */,
@@ -1599,7 +1585,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = A2SGEM86LX;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1628,7 +1614,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = A2SGEM86LX;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
