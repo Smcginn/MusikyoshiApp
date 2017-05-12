@@ -353,7 +353,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="LlN-k2-4Ec">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="LlN-k2-4Ec" userLabel="Left Stack View">
                                 <rect key="frame" x="20" y="74" width="284" height="201"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Beats Per Second" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ksX-H4-Cy3">
@@ -465,11 +465,88 @@
                                     </view>
                                 </subviews>
                             </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="eBh-oy-cpv" userLabel="Right Stack View">
+                                <rect key="frame" x="264" y="74" width="284" height="148.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score Magnification" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VgO-bJ-S1b">
+                                        <rect key="frame" x="0.0" y="0.0" width="284" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="xZM-cs-zdT">
+                                        <rect key="frame" x="0.0" y="20.5" width="284" height="29"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EOr-dc-3bn">
+                                                <rect key="frame" x="0.0" y="0.0" width="134.5" height="29"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1.3999999999999999" minimumValue="0.5" maximumValue="4" stepValue="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="QU1-bU-I48">
+                                                <rect key="frame" x="149.5" y="0.0" width="94" height="29"/>
+                                                <connections>
+                                                    <action selector="magnificationStepperChanged:" destination="mkC-dS-MpY" eventType="valueChanged" id="J2i-fg-38Q"/>
+                                                </connections>
+                                            </stepper>
+                                        </subviews>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Smallest Note Width" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J3U-6P-oOw">
+                                        <rect key="frame" x="0.0" y="49.5" width="284" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="odY-wE-9cM">
+                                        <rect key="frame" x="0.0" y="70" width="284" height="29"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YeT-OL-7FA">
+                                                <rect key="frame" x="0.0" y="0.0" width="134.5" height="29"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="30" minimumValue="10" maximumValue="40" translatesAutoresizingMaskIntoConstraints="NO" id="uQl-66-JwA">
+                                                <rect key="frame" x="149.5" y="0.0" width="94" height="29"/>
+                                                <connections>
+                                                    <action selector="noteWidthStepperChanged:" destination="mkC-dS-MpY" eventType="valueChanged" id="MnQ-Jr-VcM"/>
+                                                </connections>
+                                            </stepper>
+                                        </subviews>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Signature Width" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="no6-cK-uOI">
+                                        <rect key="frame" x="0.0" y="99" width="284" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="W2r-wL-J8R">
+                                        <rect key="frame" x="0.0" y="119.5" width="284" height="29"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="60" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0a1-15-ChO">
+                                                <rect key="frame" x="0.0" y="0.0" width="134.5" height="29"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="60" minimumValue="20" maximumValue="90" translatesAutoresizingMaskIntoConstraints="NO" id="tac-0u-w82">
+                                                <rect key="frame" x="149.5" y="0.0" width="94" height="29"/>
+                                                <connections>
+                                                    <action selector="signatureWidthStepperChanged:" destination="mkC-dS-MpY" eventType="valueChanged" id="IMk-1m-ph2"/>
+                                                </connections>
+                                            </stepper>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="LlN-k2-4Ec" firstAttribute="top" secondItem="4pB-uO-ajl" secondAttribute="bottom" constant="10" id="BJ8-4F-Xib"/>
                             <constraint firstItem="LlN-k2-4Ec" firstAttribute="width" secondItem="xWO-1g-Oxe" secondAttribute="width" multiplier="0.5" id="F48-3k-xwB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="eBh-oy-cpv" secondAttribute="trailing" id="L59-oN-zYa"/>
+                            <constraint firstItem="eBh-oy-cpv" firstAttribute="width" secondItem="LlN-k2-4Ec" secondAttribute="width" id="Mqe-38-2KU"/>
+                            <constraint firstItem="eBh-oy-cpv" firstAttribute="top" secondItem="LlN-k2-4Ec" secondAttribute="top" id="NfZ-XG-fsb"/>
                             <constraint firstAttribute="leadingMargin" secondItem="LlN-k2-4Ec" secondAttribute="leading" id="X7U-G5-8oc"/>
                         </constraints>
                     </view>
@@ -479,8 +556,14 @@
                     <connections>
                         <outlet property="bpmLabel" destination="fPW-Vo-jNM" id="WMR-iB-qFt"/>
                         <outlet property="bpmStepper" destination="zkn-qW-uP3" id="FFW-sX-sav"/>
+                        <outlet property="magnificationLabel" destination="EOr-dc-3bn" id="aYy-yM-vEa"/>
+                        <outlet property="magnificationStepper" destination="QU1-bU-I48" id="bNK-pA-E2V"/>
+                        <outlet property="noteWidthLabel" destination="YeT-OL-7FA" id="zVY-0E-xYu"/>
+                        <outlet property="noteWidthStepper" destination="uQl-66-JwA" id="ZEj-Yp-9HA"/>
                         <outlet property="showAnalysisControl" destination="H1x-Cz-Yfn" id="XRH-51-fsX"/>
                         <outlet property="showMarkersControl" destination="NDX-uD-o8I" id="Em5-Vr-fWD"/>
+                        <outlet property="signatureWidthLabel" destination="0a1-15-ChO" id="F9T-lp-FvP"/>
+                        <outlet property="signatureWidthStepper" destination="tac-0u-w82" id="n9r-1X-j27"/>
                         <outlet property="synthInstrumentControl" destination="OXq-RY-aJF" id="zd5-xA-FDa"/>
                     </connections>
                 </viewController>

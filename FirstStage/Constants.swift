@@ -31,5 +31,6 @@ struct Constants
         static let PlayTrumpet = "playtrumpet"
         static let SmallestNoteWidth = "smallestnotewidth"
         static let SignatureWidth = "signaturewidth"
+        static let ScoreMagnification = "scoremagnification"
     }
 }

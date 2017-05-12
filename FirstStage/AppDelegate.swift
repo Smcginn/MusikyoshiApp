@@ -31,7 +31,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Constants.Settings.Transposition: -2,
             Constants.Settings.ShowNoteMarkers: false,
             Constants.Settings.ShowAnalysis: false,
-            Constants.Settings.PlayTrumpet: true
+            Constants.Settings.PlayTrumpet: true,
+            Constants.Settings.SmallestNoteWidth: Double(30.0),
+            Constants.Settings.SignatureWidth: Double(60.0),
+            Constants.Settings.ScoreMagnification: Float(1.4)
             ])
         
         
