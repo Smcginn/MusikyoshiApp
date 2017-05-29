@@ -38,7 +38,7 @@ class SettingsViewController: UIViewController
     }
 
     @IBAction func magnificationStepperChanged(_ sender: UIStepper) {
-        magnificationLabel.text = String(magnificationStepper.value)
+        magnificationLabel.text = String(magnificationStepper.value / 10)
     }
 
     @IBAction func noteWidthStepperChanged(_ sender: UIStepper) {
@@ -81,8 +81,8 @@ class SettingsViewController: UIViewController
         showMarkersControl.selectedSegmentIndex = UserDefaults.standard.bool(forKey: Constants.Settings.ShowNoteMarkers) ? 1 : 0
         synthInstrumentControl.selectedSegmentIndex = UserDefaults.standard.bool(forKey: Constants.Settings.PlayTrumpet) ? 0 : 1
 
-        magnificationStepper.value = UserDefaults.standard.double(forKey: Constants.Settings.ScoreMagnification)
-        magnificationLabel.text = String(magnificationStepper.value)
+        magnificationStepper.value = Double(UserDefaults.standard.integer(forKey: Constants.Settings.ScoreMagnification))
+        magnificationLabel.text = String(magnificationStepper.value / 10)
 
         noteWidthStepper.value = UserDefaults.standard.double(forKey: Constants.Settings.SmallestNoteWidth)
         noteWidthLabel.text = String(Int(noteWidthStepper.value))

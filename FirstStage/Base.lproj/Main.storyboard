@@ -183,11 +183,7 @@
                                 <segue destination="mkC-dS-MpY" kind="show" id="kLU-j8-1JT"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="z8j-rv-toI">
-                            <connections>
-                                <action selector="shareBtnTap:" destination="6iE-Ke-IL6" id="732-4c-2k7"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="z8j-rv-toI"/>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5ro-iP-5WA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -483,7 +479,7 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1.3999999999999999" minimumValue="0.5" maximumValue="4" stepValue="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="QU1-bU-I48">
+                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="14" minimumValue="5" maximumValue="50" translatesAutoresizingMaskIntoConstraints="NO" id="QU1-bU-I48">
                                                 <rect key="frame" x="149.5" y="0.0" width="94" height="29"/>
                                                 <connections>
                                                     <action selector="magnificationStepperChanged:" destination="mkC-dS-MpY" eventType="valueChanged" id="J2i-fg-38Q"/>

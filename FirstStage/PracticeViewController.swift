@@ -57,6 +57,8 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
 
         selectedRhythmName = tuneNames.first!
         selectedTuneName = tuneNames.first!
+        playRhythmBtn.setTitle("Play \(selectedRhythmName)", for: UIControlState())
+        playTuneBtn.setTitle("Play \(selectedTuneName)", for: UIControlState())
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -136,21 +138,24 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     @IBAction func changeRhythmTuneTap(_ sender: AnyObject) {
         optionIndex = 2
-        
-        let ac = UIAlertController(title: "Choose a tune for Rhythm", message: "\n\n\n\n\n\n\n\n", preferredStyle: .actionSheet)
-        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
+
+        let vc = UIViewController()
+        vc.preferredContentSize = CGSize(width: 300, height: 160)
         let picker = UIPickerView(frame: CGRect(x: 0, y: 0, width: 300, height: 160))
         picker.delegate = self
         picker.dataSource = self
-        
+        vc.view.addSubview(picker)
+
+        let ac = UIAlertController(title: "Choose a tune for Rhythm", message: "", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+
         func handler(_ act: UIAlertAction) {
             playRhythmBtn.setTitle("Play \(selectedRhythmName)", for: UIControlState())
         }
-        
+
+        ac.setValue(vc, forKey: "contentViewController")
         ac.addAction(UIAlertAction(title: "Save", style: .default, handler: handler))
-        ac.view.addSubview(picker)
-        
+
         self.present(ac, animated: true, completion: nil)
 
         let defaultRowIndex = tuneNames.index(of: selectedRhythmName) ?? 0
@@ -159,21 +164,24 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
 
     @IBAction func changeTuneTap(_ sender: AnyObject) {
         optionIndex = 3
-        
-        let ac = UIAlertController(title: "Choose a Tune", message: "\n\n\n\n\n\n\n\n", preferredStyle: .actionSheet)
-        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
+
+        let vc = UIViewController()
+        vc.preferredContentSize = CGSize(width: 300, height: 160)
         let picker = UIPickerView(frame: CGRect(x: 0, y: 0, width: 300, height: 160))
         picker.delegate = self
         picker.dataSource = self
+        vc.view.addSubview(picker)
+
+        let ac = UIAlertController(title: "Choose a Tune", message: "", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         func handler(_ act: UIAlertAction) {
             playTuneBtn.setTitle("Play \(selectedTuneName)", for: UIControlState())
         }
         
+        ac.setValue(vc, forKey: "contentViewController")
         ac.addAction(UIAlertAction(title: "Save", style: .default, handler: handler))
-        ac.view.addSubview(picker)
-        
+
         self.present(ac, animated: true, completion: nil)
 
         let defaultRowIndex = tuneNames.index(of: selectedTuneName) ?? 0
@@ -227,15 +235,6 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             selectedTuneId = tuneIds[row]
             selectedTuneName = tuneNames[row]
         }
-
-//        ////////////
-//        let xmlPath = Bundle.main.path(forResource: "XML Tunes/" + tuneIds[row], ofType: "xml")
-//        if xmlPath == nil {
-//            return
-//        }
-////        guard let xmlPath = Bundle.main.path(forResource: tuneIds[row], ofType: "xml") else { return }
-//        MusicXMLModifier.modifyXMLToData(musicXMLUrl: URL(fileURLWithPath: xmlPath!), smallestWidth: 21.0, signatureWidth: 55.0)
-//        ////////////
     }
 
     //for development - list all xml files

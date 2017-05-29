@@ -122,7 +122,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
 
     var cursorBarIndex = Int32(0)
 //    let kDefaultMagnification: Float = 1.5
-    let kDefaultMagnification: Float = UserDefaults.standard.float(forKey: Constants.Settings.ScoreMagnification)
+    let kDefaultMagnification: Float = UserDefaults.standard.float(forKey: Constants.Settings.ScoreMagnification) / 10.0
     var metronomeOn = false
     var beatsPerBar = 0
 
@@ -254,11 +254,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
 
 
         ////////////
-//        guard let xmlData = MusicXMLModifier.modifyXMLToData(musicXMLUrl: URL(fileURLWithPath: filePath), smallestWidth: UserDefaults.standard.double(forKey: Constants.Settings.SmallestNoteWidth), signatureWidth: UserDefaults.standard.double(forKey: Constants.Settings.SignatureWidth)) else {
-//            print("Cannot get modified xmlData from \(filePath)!")
-//            return
-//        }
-        guard let xmlData: Data = nil else {
+        guard let xmlData = MusicXMLModifier.modifyXMLToData(musicXMLUrl: URL(fileURLWithPath: filePath), smallestWidth: UserDefaults.standard.double(forKey: Constants.Settings.SmallestNoteWidth), signatureWidth: UserDefaults.standard.double(forKey: Constants.Settings.SignatureWidth)) else {
             print("Cannot get modified xmlData from \(filePath)!")
             return
         }

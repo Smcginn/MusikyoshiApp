@@ -32,9 +32,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Constants.Settings.ShowNoteMarkers: false,
             Constants.Settings.ShowAnalysis: false,
             Constants.Settings.PlayTrumpet: true,
-            Constants.Settings.SmallestNoteWidth: Double(30.0),
-            Constants.Settings.SignatureWidth: Double(60.0),
-            Constants.Settings.ScoreMagnification: Float(1.4)
+            Constants.Settings.SmallestNoteWidth: Int(30),
+            Constants.Settings.SignatureWidth: Int(60),
+            Constants.Settings.ScoreMagnification: Int(14)
             ])
         
         

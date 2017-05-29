@@ -16,6 +16,8 @@ class MusicXMLModifier {
     static let basicNoteDuration = 1
     static let sixteenthNoteDuration = basicNoteDuration
     static var sixteenthNoteWidth = Double(0)
+    static var sixteenthsPerBeat = 0
+    static var beats = 0
 
     class func modifyXMLToData(musicXMLUrl: URL, smallestWidth: Double, signatureWidth: Double) -> Data? {
 
@@ -29,11 +31,10 @@ class MusicXMLModifier {
             return nil
         }
 
-        print("doc1:\n\(document.xml)\n")
+//        print("doc1:\n\(document.xml)\n")
 
         //find shortest duration note
         var firstBar = true
-        var beats = 0
         var beatType = 0    //as in notation 2,4,8, or 16
         var shortestNoteDuration = 32    //in 16th notes
 
@@ -54,6 +55,8 @@ class MusicXMLModifier {
                     print("OH NO - no beats, no beat-type!!!")
                     return nil
                 }
+
+                sixteenthsPerBeat = 16 / beatType
             }
 
             for note in measure["note"].all! {
@@ -78,9 +81,8 @@ class MusicXMLModifier {
          smallestNotesPerBeat = sixteenthsPerBeat / shortestNoteDuration
         */
 
-        let sixteenthsPerBeat = 16 / beatType
-        let smallNotesPerBeat = sixteenthsPerBeat / shortestNoteDuration
-        let basicMeasureWidth = Double(smallNotesPerBeat * beats) * smallestWidth
+        let smallNotesPerBeat = Double(sixteenthsPerBeat) / Double(shortestNoteDuration)    //can be a fraction ... so make it Double
+        let basicMeasureWidth = smallNotesPerBeat * Double(beats) * smallestWidth
 
         sixteenthNoteWidth = smallestWidth / Double(shortestNoteDuration)
 
@@ -103,6 +105,20 @@ class MusicXMLModifier {
             for note in measure["note"].all! {
                 note.attributes["default-x"] = "\(noteX)"
                 noteX += getNoteWidth(note: note, dotted: true)
+
+                //try to deal with whole rests!
+                if note["type"].value == nil {
+                    let rest = note["rest"]
+                    if rest.error == nil {
+                        //       <rest measure="yes"/>
+                        if rest.attributes["measure"] != nil {
+                            if rest.attributes["measure"] == "yes" {
+                                rest.attributes["measure"] = "no"
+                                note["type"].value = "whole"
+                            }
+                        }                        
+                    }
+                }
             }
 
             //reset first note (and measure width) in measure position
@@ -110,13 +126,16 @@ class MusicXMLModifier {
             noteX = smallestWidth / 2
         }
 
-        print("doc2:\n\(document.xml)\n")
+//        print("doc2:\n\(document.xml)\n")
         return document.xml.data(using: .utf8)
     }
 
     //note duration in 16th note equivalents
     private class func getNoteDuration(note: AEXMLElement, dotted: Bool) -> Int {
         var thisNoteDuration = 0
+        // could maybe use note["duration"] here instead of type + dotted or <rest measure="yes">
+        // but we don't know if the units of "duration" are always the same
+
         if let noteValue = note["type"].value {
             switch noteValue {
             case "whole":
@@ -132,15 +151,29 @@ class MusicXMLModifier {
             default:
                 thisNoteDuration = 1 * sixteenthNoteDuration
             }
-        }
 
-        if dotted {
-            let dot = note["dot"]
-            if dot.error == nil {
-                thisNoteDuration = (thisNoteDuration * 3) / 2
+            if dotted {
+                let dot = note["dot"]
+                if dot.error == nil {
+                    thisNoteDuration = (thisNoteDuration * 3) / 2
+                }
+            }
+        } else {
+            let rest = note["rest"]
+            if rest.error == nil {
+                //       <rest measure="yes"/>
+                if rest.attributes["measure"] != nil {
+                    if rest.attributes["measure"] == "yes" {
+                        thisNoteDuration = sixteenthsPerBeat * beats
+                    }
+                }
+
             }
         }
 
+        if thisNoteDuration == 0 {
+            print("Oh NO - note has no duration!!")
+        }
         return thisNoteDuration
     }
 

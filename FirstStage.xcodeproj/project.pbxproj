@@ -297,6 +297,10 @@
 		6346592D1E90C6A000C162CF /* Trumpet.novib.mf.86.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6346590A1E90C6A000C162CF /* Trumpet.novib.mf.86.m4a */; };
 		6355ECF71CF68EB70037945F /* marmstk1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6355ECF61CF68EB60037945F /* marmstk1.wav */; };
 		6355ECF81CF68EB70037945F /* marmstk1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6355ECF61CF68EB60037945F /* marmstk1.wav */; };
+		635A60A61EC6B8050099154A /* MusicXMLModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BF9E061EBFFF07002BB5C1 /* MusicXMLModifier.swift */; };
+		635A60A71EC6B8060099154A /* MusicXMLModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BF9E061EBFFF07002BB5C1 /* MusicXMLModifier.swift */; };
+		635A60A81EC6BADD0099154A /* AEXML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 635A60991EC6B7BA0099154A /* AEXML.framework */; };
+		635A60A91EC6BADD0099154A /* AEXML.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 635A60991EC6B7BA0099154A /* AEXML.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6379EE7D1CE95CDF00188A70 /* NoteAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6379EE7C1CE95CDF00188A70 /* NoteAnalysis.swift */; };
 		6379EE7E1CE95CDF00188A70 /* NoteAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6379EE7C1CE95CDF00188A70 /* NoteAnalysis.swift */; };
 		6379EE911CE9C8ED00188A70 /* AudioKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6379EE901CE9C8ED00188A70 /* AudioKitManager.swift */; };
@@ -305,6 +309,8 @@
 		638129591CF05C7900A40C8E /* Balloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638129561CF05C7900A40C8E /* Balloon.swift */; };
 		6381295A1CF05C7900A40C8E /* SparkLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638129571CF05C7900A40C8E /* SparkLine.swift */; };
 		6381295B1CF05C7900A40C8E /* SparkLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638129571CF05C7900A40C8E /* SparkLine.swift */; };
+		638FECC21EC70A1100976340 /* AEXML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 635A60991EC6B7BA0099154A /* AEXML.framework */; };
+		638FECC31EC70A1100976340 /* AEXML.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 635A60991EC6B7BA0099154A /* AEXML.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		639A2E451CF5AB09004F7B1A /* DotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639A2E441CF5AB09004F7B1A /* DotView.swift */; };
 		639A2E461CF5AB09004F7B1A /* DotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639A2E441CF5AB09004F7B1A /* DotView.swift */; };
 		639A2E541CF5E6CA004F7B1A /* VisualMetronomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639A2E531CF5E6CA004F7B1A /* VisualMetronomeView.swift */; };
@@ -346,6 +352,69 @@
 			remoteGlobalIDString = 6324D2CE1CE71B19001934A5;
 			remoteInfo = FirstStage;
 		};
+		635A60981EC6B7BA0099154A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 635A608E1EC6B7B90099154A /* AEXML.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8B4A92791BDD47210011F36F;
+			remoteInfo = "AEXML iOS";
+		};
+		635A609A1EC6B7BA0099154A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 635A608E1EC6B7B90099154A /* AEXML.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8B4A92DF1BDD5D330011F36F;
+			remoteInfo = "AEXML watchOS";
+		};
+		635A609C1EC6B7BA0099154A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 635A608E1EC6B7B90099154A /* AEXML.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8B4A92991BDD4CEF0011F36F;
+			remoteInfo = "AEXML iOS Tests";
+		};
+		635A609E1EC6B7BA0099154A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 635A608E1EC6B7B90099154A /* AEXML.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8B4A92BE1BDD5B300011F36F;
+			remoteInfo = "AEXML tvOS";
+		};
+		635A60A01EC6B7BA0099154A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 635A608E1EC6B7B90099154A /* AEXML.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8B4A92CC1BDD5BB20011F36F;
+			remoteInfo = "AEXML tvOS Tests";
+		};
+		635A60A21EC6B7BA0099154A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 635A608E1EC6B7B90099154A /* AEXML.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8B4A928A1BDD49390011F36F;
+			remoteInfo = "AEXML OSX";
+		};
+		635A60A41EC6B7BA0099154A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 635A608E1EC6B7B90099154A /* AEXML.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8B4A92AB1BDD54F50011F36F;
+			remoteInfo = "AEXML OSX Tests";
+		};
+		635A60AA1EC6BADD0099154A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 635A608E1EC6B7B90099154A /* AEXML.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8B4A92781BDD47210011F36F;
+			remoteInfo = "AEXML iOS";
+		};
+		638FECC41EC70A1100976340 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 635A608E1EC6B7B90099154A /* AEXML.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8B4A92781BDD47210011F36F;
+			remoteInfo = "AEXML iOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -356,6 +425,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				63C03ABB1E2A0B11009F4033 /* AudioKit.framework in Embed Frameworks */,
+				635A60A91EC6BADD0099154A /* AEXML.framework in Embed Frameworks */,
 				6324D3171CE73234001934A5 /* SeeScoreLib.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -368,6 +438,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				63EE547D1E62A2F000F5E21D /* AudioKit.framework in Embed Frameworks */,
+				638FECC31EC70A1100976340 /* AEXML.framework in Embed Frameworks */,
 				6324D31B1CE7327F001934A5 /* SeeScoreLib.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -545,6 +616,7 @@
 		634659091E90C6A000C162CF /* Trumpet.novib.mf.85.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.85.m4a; path = "synth-samples/trumpet-samples/Trumpet.novib.mf.85.m4a"; sourceTree = "<group>"; };
 		6346590A1E90C6A000C162CF /* Trumpet.novib.mf.86.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Trumpet.novib.mf.86.m4a; path = "synth-samples/trumpet-samples/Trumpet.novib.mf.86.m4a"; sourceTree = "<group>"; };
 		6355ECF61CF68EB60037945F /* marmstk1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = marmstk1.wav; sourceTree = "<group>"; };
+		635A608E1EC6B7B90099154A /* AEXML.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AEXML.xcodeproj; path = AEXML/AEXML.xcodeproj; sourceTree = "<group>"; };
 		636462131E74EB9100DB435C /* SSViewInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSViewInterface.h; sourceTree = "<group>"; };
 		6379EE7C1CE95CDF00188A70 /* NoteAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteAnalysis.swift; sourceTree = "<group>"; };
 		6379EE901CE9C8ED00188A70 /* AudioKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioKitManager.swift; sourceTree = "<group>"; };
@@ -566,6 +638,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63C03ABF1E2A0C43009F4033 /* AudioKit.framework in Frameworks */,
+				638FECC21EC70A1100976340 /* AEXML.framework in Frameworks */,
 				6324D31A1CE7327F001934A5 /* SeeScoreLib.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -589,6 +662,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63C03ABA1E2A0B11009F4033 /* AudioKit.framework in Frameworks */,
+				635A60A81EC6BADD0099154A /* AEXML.framework in Frameworks */,
 				6324D3161CE73234001934A5 /* SeeScoreLib.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -604,6 +678,7 @@
 				6324D2E91CE71B1A001934A5 /* FirstStageTests */,
 				6324D2F41CE71B1A001934A5 /* FirstStageUITests */,
 				6324D2D01CE71B19001934A5 /* Products */,
+				635A608E1EC6B7B90099154A /* AEXML.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -871,6 +946,20 @@
 			name = "trumpet-samples";
 			sourceTree = "<group>";
 		};
+		635A608F1EC6B7B90099154A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				635A60991EC6B7BA0099154A /* AEXML.framework */,
+				635A609B1EC6B7BA0099154A /* AEXML.framework */,
+				635A609D1EC6B7BA0099154A /* AEXML iOS Tests.xctest */,
+				635A609F1EC6B7BA0099154A /* AEXML.framework */,
+				635A60A11EC6B7BA0099154A /* AEXML tvOS Tests.xctest */,
+				635A60A31EC6B7BA0099154A /* AEXML.framework */,
+				635A60A51EC6B7BA0099154A /* AEXML OSX Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		636462141E74EB9700DB435C /* Edit */ = {
 			isa = PBXGroup;
 			children = (
@@ -920,6 +1009,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				638FECC51EC70A1100976340 /* PBXTargetDependency */,
 			);
 			name = FirstStage;
 			productName = FirstStage;
@@ -975,6 +1065,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				635A60AB1EC6BADD0099154A /* PBXTargetDependency */,
 			);
 			name = "FirstStage-debug";
 			productName = FirstStage;
@@ -1035,6 +1126,12 @@
 			mainGroup = 6324D2C61CE71B19001934A5;
 			productRefGroup = 6324D2D01CE71B19001934A5 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 635A608F1EC6B7B90099154A /* Products */;
+					ProjectRef = 635A608E1EC6B7B90099154A /* AEXML.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				6324D3051CE72F8D001934A5 /* FirstStage-debug */,
@@ -1044,6 +1141,58 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		635A60991EC6B7BA0099154A /* AEXML.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AEXML.framework;
+			remoteRef = 635A60981EC6B7BA0099154A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		635A609B1EC6B7BA0099154A /* AEXML.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AEXML.framework;
+			remoteRef = 635A609A1EC6B7BA0099154A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		635A609D1EC6B7BA0099154A /* AEXML iOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "AEXML iOS Tests.xctest";
+			remoteRef = 635A609C1EC6B7BA0099154A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		635A609F1EC6B7BA0099154A /* AEXML.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AEXML.framework;
+			remoteRef = 635A609E1EC6B7BA0099154A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		635A60A11EC6B7BA0099154A /* AEXML tvOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "AEXML tvOS Tests.xctest";
+			remoteRef = 635A60A01EC6B7BA0099154A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		635A60A31EC6B7BA0099154A /* AEXML.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AEXML.framework;
+			remoteRef = 635A60A21EC6B7BA0099154A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		635A60A51EC6B7BA0099154A /* AEXML OSX Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "AEXML OSX Tests.xctest";
+			remoteRef = 635A60A41EC6B7BA0099154A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		6324D2CD1CE71B19001934A5 /* Resources */ = {
@@ -1379,6 +1528,7 @@
 				639A2E461CF5AB09004F7B1A /* DotView.swift in Sources */,
 				6379EE921CE9C8ED00188A70 /* AudioKitManager.swift in Sources */,
 				6324D3611CE73C47001934A5 /* SSSystemView.m in Sources */,
+				635A60A61EC6B8050099154A /* MusicXMLModifier.swift in Sources */,
 				63B427591E5016AB000E35AA /* Intonation.swift in Sources */,
 				63EB90181CF1C4EC00F09B05 /* AVAudioSessionManager.swift in Sources */,
 				63D5E8861EA37BDA007AE8D4 /* Note.swift in Sources */,
@@ -1428,6 +1578,7 @@
 				639A2E451CF5AB09004F7B1A /* DotView.swift in Sources */,
 				6379EE911CE9C8ED00188A70 /* AudioKitManager.swift in Sources */,
 				63B4275A1E505573000E35AA /* Intonation.swift in Sources */,
+				635A60A71EC6B8060099154A /* MusicXMLModifier.swift in Sources */,
 				6324D3601CE73C47001934A5 /* SSSystemView.m in Sources */,
 				63EB90171CF1C4EB00F09B05 /* AVAudioSessionManager.swift in Sources */,
 				63D5E8851EA37BDA007AE8D4 /* Note.swift in Sources */,
@@ -1460,6 +1611,16 @@
 			isa = PBXTargetDependency;
 			target = 6324D2CE1CE71B19001934A5 /* FirstStage */;
 			targetProxy = 6324D2F21CE71B1A001934A5 /* PBXContainerItemProxy */;
+		};
+		635A60AB1EC6BADD0099154A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "AEXML iOS";
+			targetProxy = 635A60AA1EC6BADD0099154A /* PBXContainerItemProxy */;
+		};
+		638FECC51EC70A1100976340 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "AEXML iOS";
+			targetProxy = 638FECC41EC70A1100976340 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1581,6 +1742,7 @@
 		6324D2FB1CE71B1A001934A5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -1610,6 +1772,7 @@
 		6324D2FC1CE71B1A001934A5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -1688,6 +1851,7 @@
 		6324D3111CE72F8D001934A5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: David Reich (JRZ683P359)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1715,6 +1879,7 @@
 		6324D3121CE72F8D001934A5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Stellar Software Pty Ltd (A2SGEM86LX)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

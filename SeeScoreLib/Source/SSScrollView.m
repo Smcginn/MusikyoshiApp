@@ -468,8 +468,7 @@ static float limit(float val, float mini, float maxi)
                                                                             if (self.abortingBackground == 0)
                                                                             {
                                                                                 systemMagnification = sys.magnification;
-//                                                                                widthIsTruncated = sys.isTruncatedWidth;
-                                                                       NSLog(@"sys.magnification = %f, %i", sys.magnification, widthIsTruncated);
+//                                                                       NSLog(@"sys.magnification = %f, %i", sys.magnification, widthIsTruncated);
                                                                                 return true;
                                                                             }
                                                                             else
@@ -478,12 +477,12 @@ static float limit(float val, float mini, float maxi)
                                 if (err != sscore_NoError)
                                     break;
                                 if ((systemMagnification < self.magnification) || widthIsTruncated) {
-                                    NSLog(@"systemMagnification:%f - width=%f", systemMagnification, frame.size.width);
+//                                    NSLog(@"systemMagnification:%f - width=%f", systemMagnification, frame.size.width);
                                     frame.size.width += 100;
                                 }
                             } while ((systemMagnification < self.magnification) || widthIsTruncated);
                             
-                            NSLog(@"+++systemMagnification:%f - width=%f", systemMagnification, frame.size.width);
+//                            NSLog(@"+++systemMagnification:%f - width=%f", systemMagnification, frame.size.width);
                             self.frame = frame;
 
                         }
