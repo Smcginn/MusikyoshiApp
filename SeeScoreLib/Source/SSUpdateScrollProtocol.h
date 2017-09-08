@@ -1,10 +1,9 @@
 //
 //  SSUpdateScrollProtocol.h
-//  SeeScoreIOSSample
+//  SeeScoreiOS Sample App
 //
-//  Created by James Sutton on 23/01/2013.
-//
-// No warranty is made as to the suitability of this for any purpose
+//  You are free to copy and modify this code as you wish
+//  No warranty is made as to the suitability of this for any purpose
 //
 
 #import <Foundation/Foundation.h>

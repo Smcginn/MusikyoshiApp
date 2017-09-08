@@ -12,8 +12,8 @@ class VisualMetronomeView: UIView {
 
     var numBeats = 4
     var dots = [DotView]()
-    let beatColor = UIColor.blackColor()
-    let regularColor = UIColor.grayColor()
+    let beatColor = UIColor.black
+    let regularColor = UIColor.gray
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,7 +36,7 @@ class VisualMetronomeView: UIView {
         let dotCenterY = CGFloat(ceil(frame.height / 2))
 
         for i in 0 ..< numBeats {
-            let frame = CGRectMake(0, 0, dotSize, dotSize)
+            let frame = CGRect(x: 0, y: 0, width: dotSize, height: dotSize)
             let dot = DotView(frame: frame, backColor: regularColor)
             dots.append(dot)
             let center = CGPoint(x: firstDotCenterX + CGFloat(i) * dotCenters, y: dotCenterY)
@@ -45,9 +45,9 @@ class VisualMetronomeView: UIView {
         }
     }
 
-    func setBeat(dotIndex: Int) {
+    func setBeat(_ dotIndex: Int) {
         for i in 0 ..< numBeats {
-            dots[i].layer.backgroundColor = (i == dotIndex) ? beatColor.CGColor : regularColor.CGColor
+            dots[i].layer.backgroundColor = (i == dotIndex) ? beatColor.cgColor : regularColor.cgColor
         }
     }
 

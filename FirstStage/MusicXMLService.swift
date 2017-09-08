@@ -9,8 +9,8 @@
 
 import UIKit
 
-class MusicXMLService : NSObject, NSXMLParserDelegate {
-    var xmlParser: NSXMLParser!
+class MusicXMLService : NSObject, XMLParserDelegate {
+    var xmlParser: XMLParser!
     
     var currentExercise = Exercise()
     var currentParsedElement = String()
@@ -18,22 +18,22 @@ class MusicXMLService : NSObject, NSXMLParserDelegate {
     var currentOctave = Int()
     var weAreInsideAnItem = false
 
-    func loadExercise(fileName: String) throws -> Exercise {
+    func loadExercise(_ fileName: String) throws -> Exercise {
         
-        guard let path = NSBundle.mainBundle().pathForResource(fileName, ofType: nil) else {
+        guard let path = Bundle.main.path(forResource: fileName, ofType: nil) else {
             throw NSError(domain: NSCocoaErrorDomain, code: NSFileNoSuchFileError, userInfo: [ NSFilePathErrorKey : fileName ])
         }
         
         currentExercise = Exercise()
         
-        self.xmlParser = NSXMLParser(contentsOfURL: NSURL(fileURLWithPath: path))
+        self.xmlParser = XMLParser(contentsOf: URL(fileURLWithPath: path))
         self.xmlParser.delegate = self
         self.xmlParser.parse()
         
         return currentExercise
     }
     
-    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String])
+    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String])
     {
         currentParsedElement = elementName
         
@@ -72,7 +72,7 @@ class MusicXMLService : NSObject, NSXMLParserDelegate {
         }
     }
     
-    func parser(parser: NSXMLParser, foundCharacters string: String) {
+    func parser(_ parser: XMLParser, foundCharacters string: String) {
         switch currentParsedElement {
             case "movement-title":
                 currentExercise.title = string
@@ -88,10 +88,10 @@ class MusicXMLService : NSObject, NSXMLParserDelegate {
                     switch string
                     {
                         case "half":
-                            n.length = .Half
+                            n.length = .half
                             break
                         case "quarter":
-                            n.length = .Quarter
+                            n.length = .quarter
                             break
 //                        case "eighth":
 //                            n.length = .Eighth
@@ -106,7 +106,7 @@ class MusicXMLService : NSObject, NSXMLParserDelegate {
         }
     }
     
-    func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         
         if elementName == "pitch"
         {
@@ -126,7 +126,7 @@ class MusicXMLService : NSObject, NSXMLParserDelegate {
         currentParsedElement = ""
     }
     
-    func parserDidEndDocument(parser: NSXMLParser){
+    func parserDidEndDocument(_ parser: XMLParser){
 
     }
 }

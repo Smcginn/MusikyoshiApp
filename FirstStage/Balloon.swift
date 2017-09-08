@@ -11,10 +11,10 @@ import UIKit
 
 class Balloon: UIView {
     
-    private var circle : CAShapeLayer?
-    private let length : CGFloat = 128
+    fileprivate var circle : CAShapeLayer?
+    fileprivate let length : CGFloat = 128
     
-    var fillColor = UIColor.blueColor().CGColor {
+    var fillColor = UIColor.blue.cgColor {
         didSet{
             if circle != nil
             {
@@ -27,7 +27,7 @@ class Balloon: UIView {
         didSet{
             if circle != nil
             {
-                circle?.path = UIBezierPath(roundedRect: CGRect(x: length-radius, y: length-radius, width: 2.0 * radius, height: 2.0 * radius)  , cornerRadius: radius).CGPath
+                circle?.path = UIBezierPath(roundedRect: CGRect(x: length-radius, y: length-radius, width: 2.0 * radius, height: 2.0 * radius)  , cornerRadius: radius).cgPath
             }
         }
     }
@@ -36,7 +36,7 @@ class Balloon: UIView {
         circle = CAShapeLayer()
         let c = circle!
         c.fillColor = fillColor
-        c.path = UIBezierPath(roundedRect: CGRect(x: length-radius, y: length-radius, width: 2.0 * radius, height: 2.0 * radius)  , cornerRadius: radius).CGPath
+        c.path = UIBezierPath(roundedRect: CGRect(x: length-radius, y: length-radius, width: 2.0 * radius, height: 2.0 * radius)  , cornerRadius: radius).cgPath
         
         layer.addSublayer(c)
     }

@@ -1,8 +1,9 @@
 //
 //  SSScrollView
-//  SeeScore for iOS
+//  SeeScoreiOS Sample App
 //
-// No warranty is made as to the suitability of this for any purpose
+//  You are free to copy and modify this code as you wish
+//  No warranty is made as to the suitability of this for any purpose
 //
 
 //#define DrawOutline // define this to draw a green outline around the SSScrollView for debug
@@ -10,13 +11,11 @@
 #import "SSScrollView.h"
 #import "SSSystemView.h"
 #import <QuartzCore/QuartzCore.h>
-#include <dispatch/dispatch.h>
 #import "SSPlayLoopGraphics.h"
-#import "SSEditLayerProtocol.h"
 
-static const float kMarginX = 0;//10; // L/R margins
-static const float kEditUpperMargin = 20; // extra space above system when editing
-static const float kEditLowerMargin = 20; // extra space below system when editing
+#include <dispatch/dispatch.h>
+
+static const CGSize kMargin = {0,0}; // L/R margins
 
 static const float kWindowPlayingCentreFractionFromTop = 0.333; // autoscroll centres the current playing system around here
 
@@ -31,8 +30,6 @@ static const float kMaxMagnification = 2.5;
 // control automatic reduction of score magnification with smaller screen
 static const float kMagnificationReductionScreenWidthThreshold = 768;
 static const float kMagnificationProportionToScreenWidth = 0.8F;// this is 0 for constant magnification at different screen widths, 1.0 for magnification proportional to screen width/768.
-
-//static const BOOL kOptimalSingleSystem = YES;
 
 @interface SSScrollView ()
 {
@@ -49,7 +46,10 @@ static const float kMagnificationProportionToScreenWidth = 0.8F;// this is 0 for
 	int cursorBarIndex;
 	BOOL showingCursor;
 	
-	NSArray<NSValue*> *systemRects; // CGRect frame of each system
+    enum CursorType_e cursorType;
+    float cursor_xpos;
+
+    NSArray<NSValue*> *systemRects; // CGRect frame of each system
 		
 	dispatch_queue_t background_layout_queue;
 	dispatch_queue_t background_draw_queue;
@@ -71,17 +71,11 @@ static const float kMagnificationProportionToScreenWidth = 0.8F;// this is 0 for
 	
 	NSMutableDictionary *colouringsForSystems;
 
-	bool singlePartDisplay;
-	int startBarToDisplay;
-	int partToDisplay;
-	
 	handler_t layoutCompletionHandler;
 	
 	SSPlayLoopGraphics *playLoopGraphics;
-
-	bool editMode;
-	sscore_changehandler_id handlerId; // handler registered with SSScore is automatically notified of changes to the score when editing
-	CGRect ensureVisibleRect; // rectangle (of edit text field) which must remain visible when the keyboard appears
+	
+	sscore_changeHandler_id handlerId; // handler registered with SSScore is automatically notified of changes to the score when editing
 }
 
 @property (atomic) int abortingBackground; // set when background layout/draw is aborting
@@ -93,15 +87,6 @@ static const float kMagnificationProportionToScreenWidth = 0.8F;// this is 0 for
 -(SSScore *)score
 {
 	return score;
-}
-
--(float) systemUpperMargin
-{
-	return editMode ? kEditUpperMargin : 0;
-}
--(float) systemLowerMargin
-{
-	return editMode ? kEditLowerMargin : 0;
 }
 
 -(void)initAll
@@ -124,62 +109,12 @@ static const float kMagnificationProportionToScreenWidth = 0.8F;// this is 0 for
 	background_layout_queue = dispatch_queue_create("uk.co.dolphin-com.seescore.background_layout", NULL);
 	background_draw_queue = dispatch_queue_create("uk.co.dolphin-com.seescore.scroller_background_draw", NULL);
 	pinchRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinch)];
-	pendingAddSystems = [NSMutableSet set];
 	[self addGestureRecognizer:pinchRecognizer];
 	isPinchEnabled = true;
 	colouringsForSystems = NSMutableDictionary.dictionary;
+    pendingAddSystems = [NSMutableSet set];
 	layOptions = [[SSLayoutOptions alloc] init]; // default layout options
-	singlePartDisplay = false;
-    _optimalSingleSystem = false;
-}
-
--(bool)displayingSinglePart
-{
-	return singlePartDisplay;
-}
-
--(void)setSinglePartDisplay:(int)partIndex
-			  startBarIndex:(int)startBarIndex
-						mag:(float)mag
-				 completion:(handler_t)completionHandler
-{
-	[self clearPlayLoopGraphics];
-	singlePartDisplay = true;
-	startBarToDisplay = startBarIndex;
-	partToDisplay = partIndex;
-	_magnification = mag;
-	layOptions = [[SSLayoutOptions alloc] init]; // default layout options
-	layOptions.ignoreXMLPositions = true; // ensure when editing that we ignore xml default-x/default-y for now to avoid collisions
-	layOptions.editMode = true;
-	dispatch_async( dispatch_get_main_queue(), ^{
-		if (!layoutProcessing) // ensure against re-entrancy
-			dispatch_async( background_layout_queue, ^{
-				dispatch_sync( dispatch_get_main_queue(), ^{ // ensure background queue is empty before calling for new layout
-					if (!layoutProcessing) // ensure against re-entrancy
-						[self relayoutWithCompletion:completionHandler];
-				});
-			});
-	});
-}
-
--(void)clearSinglePartDisplay:(float)mag
-				completion:(handler_t)completionHandler
-{
-	[self clearPlayLoopGraphics];
-	singlePartDisplay = false;
-	startBarToDisplay = 0;
-	partToDisplay = 0;
-	_magnification = mag;
-	layOptions = [[SSLayoutOptions alloc] init]; // default layout options
-	dispatch_async( dispatch_get_main_queue(), ^{
-		if (!layoutProcessing) // ensure against re-entrancy
-			dispatch_async( background_layout_queue, ^{
-				dispatch_sync( dispatch_get_main_queue(), ^{ // ensure background queue is empty before calling for new layout
-					if (!layoutProcessing) // ensure against re-entrancy
-						[self relayoutWithCompletion:completionHandler];
-				});
-			});
-	});
+    [self resetBarRectCursor];
 }
 
 -(void)setBackgroundColor:(UIColor *)backgroundColor
@@ -211,8 +146,7 @@ static const float kMagnificationProportionToScreenWidth = 0.8F;// this is 0 for
 	if (score)
 	{
 		[systemlist removeAllObjects];
-		if (score)
-			sscore_edit_removechangehandler(score.rawscore, handlerId);
+		[score removeChangeHandler:handlerId];
 		handlerId = 0;
 		score = nil;
 	}
@@ -255,62 +189,6 @@ static const float kMagnificationProportionToScreenWidth = 0.8F;// this is 0 for
 	return bottom;
 }
 
--(void)setEditLayer:(id<SSEditLayerProtocol>)editlayer
-{
-	_editLayer = editlayer;
-}
-
--(bool)setEditMode:(int)partIndex
-	 startBarIndex:(int)startBarIndex
-			   mag:(float)mag
-   createEditLayer:(ss_create_editlayer_t)createEditLayer
-		completion:(handler_t)completionHandler
-{
-	if (self.numPartsDisplaying == 1) // exactly one part displaying
-	{
-		[self disablePinch]; // cannot zoom while editing
-		__weak SSScrollView *weakSelf = self; // to silence compiler warnings
-		__block dispatch_queue_t block_background_layout_queue = background_layout_queue;
-		__block dispatch_queue_t block_background_draw_queue = background_draw_queue;
-		__block UIView *block_containedView = containedView;
-		[self setSinglePartDisplay:self.firstPartDisplaying startBarIndex:startBarIndex mag:mag completion:^{
-			editMode = true;
-			
-			// we add the edit layer, but wait for the background queues to empty
-			dispatch_async(dispatch_get_main_queue(), ^{
-				dispatch_async(block_background_layout_queue, ^{
-					dispatch_sync(block_background_draw_queue, ^{
-						dispatch_async(dispatch_get_main_queue(), ^{
-							if (weakSelf)
-							{
-								CGRect bounds = weakSelf.bounds;
-								id<SSEditLayerProtocol> editLayer = createEditLayer(bounds, weakSelf.bottom + kEditLowerMargin);
-								[weakSelf setEditLayer:editLayer];
-								[block_containedView addSubview:editLayer.view];
-								completionHandler();
-							}
-
-						});
-					});
-				});
-			});
-		 }];
-		return true;
-	}
-	else
-		return false;
-}
-
--(void)clearEditMode
-{
-	editMode = false;
-	if (_editLayer)
-		[_editLayer.view removeFromSuperview];
-	_editLayer = nil;
-	[self clearSinglePartDisplay:1.0F completion:^{}];
-	[self enablePinch]; // reenable zoom
-}
-
 -(bool)displayingCursor
 {
 	return showingCursor;
@@ -327,33 +205,31 @@ static const float kMagnificationProportionToScreenWidth = 0.8F;// this is 0 for
 	return sysView ? sysView.drawScale : 1;
 }
 
--(void)clearAll
+-(void)clearDisplay
 {
-	editMode = false;
-	if (_editLayer)
-		[_editLayer.view removeFromSuperview];
-	_editLayer = nil;
 	[self clearPlayLoopGraphics];
 	_magnification = 1.0;
 	lastStartBarDisplayed = -1;
 	lastNumBarsDisplayed = -1;
 	[self removeAllSystems];
 	[systemlist removeAllObjects];
-	if (score)
-		sscore_edit_removechangehandler(score.rawscore, handlerId);
-	handlerId = 0;
-	score = nil;
 	if (self.updateDelegate)
 		[self.updateDelegate cleared];
 }
 
+-(void)clearAll
+{
+	[self clearDisplay];
+	if (score)
+		[score removeChangeHandler:handlerId];
+	handlerId = 0;
+	score = nil;
+}
+
 -(void)relayoutWithCompletion:(handler_t)completionHandler
 {
-	if (!editMode)
-	{
-		lastStartBarDisplayed = -1;
-		lastNumBarsDisplayed = -1;
-	}
+	lastStartBarDisplayed = -1;
+	lastNumBarsDisplayed = -1;
 	[self removeAllSystems];
 	[self setupScore:score openParts:displayingParts mag:self.magnification opt:layOptions completion:completionHandler];
 }
@@ -393,7 +269,7 @@ static float limit(float val, float mini, float maxi)
 	if (score && systemlist.count > 0 && ![self isProcessing])
 	{
 		_magnification = limit(mag, kMinMagnification, kMaxMagnification);
-		[self displayParts:displayingParts opt:layOptions];
+		[self setupScore:score openParts:displayingParts mag:self.magnification opt:layOptions];
 	}
 }
 
@@ -506,8 +382,7 @@ static float limit(float val, float mini, float maxi)
 	float maxSystemHeight = fmax(self.frame.size.height, 640.F); // don't allow any system higher than the screen else we run out of memory (but prevent 0 size)
 	SSSystem *system = [systemlist objectAtIndex:sysIndex];
 	// limit height of system
-	float systemHeight = (editMode ? 1.2 * system.bounds.height : system.bounds.height) * zoom; // increase height of editing system so more space
-	systemHeight = min(systemHeight, maxSystemHeight);
+	float systemHeight = min(system.bounds.height * zoom, maxSystemHeight);
 	assert(systemHeight > 0);
 	return systemHeight;
 }
@@ -516,17 +391,16 @@ static float limit(float val, float mini, float maxi)
 {
 	NSMutableArray *mutSysRects = [[NSMutableArray alloc] init];
 	assert(systemlist);
-	float ypos = 0;
+	float ypos = kMargin.height;
 	CGSize frameSize = self.frame.size;
 	assert(frameSize.width > 0);
 	int index = 0;
 	for (SSSystem *system in systemlist)
 	{
 		float systemHeight = [self systemHeight:index zoom:1]; // zoom is only needed for actual zooming
-		ypos += self.systemUpperMargin; // add margin above system when in edit mode
-		CGRect rect = CGRectMake(kMarginX, ypos, frameSize.width - 2*kMarginX, systemHeight);
+		CGRect rect = CGRectMake(kMargin.width, ypos, frameSize.width, systemHeight);
 		[mutSysRects addObject:[NSValue valueWithCGRect:rect]];
-		ypos += systemHeight + self.systemUpperMargin + self.systemLowerMargin + system.defaultSpacing; // add margin above and below system in edit mode
+		ypos += systemHeight + system.defaultSpacing;
 		++index;
 	}
 	return mutSysRects;
@@ -549,9 +423,10 @@ static float limit(float val, float mini, float maxi)
 			  opt:(SSLayoutOptions *)options
 	   completion:(handler_t)completionHandler
 {
-    if (score)
-		sscore_edit_removechangehandler(score.rawscore, handlerId);
+	if (score)
+		[score removeChangeHandler:handlerId];
 	handlerId = 0;
+    [self disablePinch];
 	assert(sc);
 	assert(parts.count > 0);
 	// abort any existing layout/draw...
@@ -559,6 +434,7 @@ static float limit(float val, float mini, float maxi)
 		assert(!layoutProcessing);
 		[self clearAll];
 		displayingParts = parts;
+		layOptions = options;
 		score = sc;
 		handlerId = [score addChangeHandler:self];
 
@@ -569,46 +445,56 @@ static float limit(float val, float mini, float maxi)
 		magnificationScalingForWidth = [self magnificationScaling:frame.size.width];
 		if (self.abortingBackground == 0)
 		{
-			if (singlePartDisplay) // single part/system layout is quick so we can do it on foreground thread
-			{
-                assert(!layoutProcessing);
-				layoutProcessing = true;
-				assert(systemlist.count == 0);
-				UIGraphicsBeginImageContextWithOptions(CGSizeMake(10,10), YES/*opaque*/, 0.0/* scale*/);
-				CGContextRef ctx = UIGraphicsGetCurrentContext();
-				SSSystem* system = [score layout1SystemWithContext:ctx
-														  startbar:startBarToDisplay
-														   maxBars:0
-															 width:frame.size.width - 2 * kMarginX
-														 maxheight:0
-															  part:partToDisplay
-													 magnification:self.magnification// use auto-magnification for single bar display
-														   options:options];
-				UIGraphicsEndImageContext();
-				[self addSystemToList:system];
-				[self setNeedsLayout];
-				if (self.scrollDelegate)
-					[self.scrollDelegate update]; // update the barcontrol to show more bars loaded
-				layoutProcessing = false;
-				completionHandler();
-			}
-			else // full layout
-			{
-                assert(!layoutProcessing);
+				assert(!layoutProcessing);
 				layoutProcessing = true;
 				assert(systemlist.count == 0);
 				dispatch_async(background_layout_queue, ^{
 					assert(systemlist.count == 0);
 					if (self.abortingBackground == 0)
 					{
+                        if (_optimalXMLxLayoutMagnification) {
+                            __block float systemMagnification = 0;
+                            __block bool widthIsTruncated = NO;//YES;
+                            do {
+                                UIGraphicsBeginImageContextWithOptions(CGSizeMake(10,10), YES/*opaque*/, 0.0/* scale*/);
+                                CGContextRef ctx = UIGraphicsGetCurrentContext();
+                                enum sscore_error err = [score layoutWithContext:ctx
+                                                                           width:frame.size.width - (2 * kMargin.width) maxheight:frame.size.height
+                                                                           parts:parts magnification:self.magnification * magnificationScalingForWidth
+                                                                         options:options
+                                                                        callback:^bool (SSSystem *sys){
+                                                                            // callback is called for each new laid out system
+                                                                            // return false if abort required
+                                                                            if (self.abortingBackground == 0)
+                                                                            {
+                                                                                systemMagnification = sys.magnification;
+//                                                                       NSLog(@"sys.magnification = %f, %i", sys.magnification, widthIsTruncated);
+                                                                                return true;
+                                                                            }
+                                                                            else
+                                                                                return false;}];
+                                UIGraphicsEndImageContext();
+                                if (err != sscore_NoError)
+                                    break;
+                                if ((systemMagnification < self.magnification) || widthIsTruncated) {
+//                                    NSLog(@"systemMagnification:%f - width=%f", systemMagnification, frame.size.width);
+                                    frame.size.width += 100;
+                                }
+                            } while ((systemMagnification < self.magnification) || widthIsTruncated);
+                            
+//                            NSLog(@"+++systemMagnification:%f - width=%f", systemMagnification, frame.size.width);
+                            self.frame = frame;
+
+                        }
+                        else
                         if (_optimalSingleSystem) {
                             __block int numNewSystems = 0;
                             do {
                                 numNewSystems = 0;
-                                UIGraphicsBeginImageContextWithOptions(CGSizeMake(10,10), YES/*opaque*/, 0.0/* scale*/);
-                                CGContextRef ctx = UIGraphicsGetCurrentContext();
-                                enum sscore_error err = [score layoutWithContext:ctx
-                                                            width:frame.size.width - 2 * kMarginX maxheight:frame.size.height
+						UIGraphicsBeginImageContextWithOptions(CGSizeMake(10,10), YES/*opaque*/, 0.0/* scale*/);
+						CGContextRef ctx = UIGraphicsGetCurrentContext();
+						enum sscore_error err = [score layoutWithContext:ctx
+                                                            width:frame.size.width - (2 * kMargin.width) maxheight:frame.size.height
                                                             parts:parts magnification:self.magnification * magnificationScalingForWidth
                                                             options:options
                                                             callback:^bool (SSSystem *sys){
@@ -628,6 +514,7 @@ static float limit(float val, float mini, float maxi)
                                     NSLog(@"numNewSystems:%d - width=%f", numNewSystems, frame.size.width);
                                     frame.size.width += 100;
                                 }
+                                NSLog(@"SSScrollView.magnification = %f", self.magnification);
                             } while (numNewSystems > 1);
 
                             self.frame = frame;
@@ -637,7 +524,7 @@ static float limit(float val, float mini, float maxi)
                         UIGraphicsBeginImageContextWithOptions(CGSizeMake(10,10), YES/*opaque*/, 0.0/* scale*/);
 						CGContextRef ctx = UIGraphicsGetCurrentContext();
 						enum sscore_error err = [score layoutWithContext:ctx
-																   width:frame.size.width - 2 * kMarginX maxheight:frame.size.height
+																   width:frame.size.width - 2 * kMargin.width maxheight:frame.size.height
 																   parts:parts magnification:self.magnification * magnificationScalingForWidth
 																 options:options
 																callback:^bool (SSSystem *sys){
@@ -681,19 +568,24 @@ static float limit(float val, float mini, float maxi)
 						}
 						assert(err == sscore_NoError);
 					}
+                    NSLog(@"SSScrollView.magnification = %f", self.magnification);
+                    SSSystem *topSystem = [self systemAtIndex:0];
+                    NSLog(@"topSystem.magnification = %f, %i", topSystem.magnification, topSystem.isTruncatedWidth);
+
 					layoutProcessing = false;
-					completionHandler();
-				});
-			}
+                    dispatch_sync(dispatch_get_main_queue(), ^{
+
+                        if (options.useXMLxLayout)
+                            [self disablePinch];
+                        else
+                            [self enablePinch];
+                        
+                        if (completionHandler)
+                            completionHandler();
+                    });
+                });
 		}
 	}];
-}
-
--(void)displayParts:(NSArray<NSNumber*>*)openParts opt:(SSLayoutOptions *)options
-{
-	layOptions = options;
-	assert(layOptions != nil);
-	[self setupScore:score openParts:openParts mag:self.magnification opt:options];
 }
 
 -(void)displayParts:(NSArray<NSNumber*>*)openParts
@@ -703,7 +595,11 @@ static float limit(float val, float mini, float maxi)
 
 -(void)setLayoutOptions:(SSLayoutOptions*)layoutOptions
 {
-	[self setupScore:score openParts:displayingParts mag:self.magnification opt:layoutOptions completion:^{}];
+	[self disablePinch];
+	[self setupScore:score openParts:displayingParts mag:self.magnification opt:layoutOptions completion:^{
+		if (!layoutOptions.useXMLxLayout)
+			[self enablePinch];
+	}];
 }
 
 static float min(float a, float b)
@@ -716,8 +612,15 @@ static float min(float a, float b)
 	return layoutProcessing;
 }
 
+-(void)resetBarRectCursor
+{
+    cursorType = cursor_rect;
+    cursor_xpos = 0;
+}
+
 -(void)removeAllSystems
 {
+    [self resetBarRectCursor];
 	[colouringsForSystems removeAllObjects];
 	systemRects = [NSArray array]; // clear
 	[reusableViews removeAllObjects];
@@ -794,8 +697,7 @@ static float min(float a, float b)
 		assert(sysIndex >= 0 && sysIndex < systemRects.count);
 		CGRect sysFrame = [[systemRects objectAtIndex:sysIndex] CGRectValue];
 		assert(sysFrame.size.height > 0 && sysFrame.size.width > 0);
-		[sysView setSystem:system score:score];
-		[sysView setFrame:sysFrame];
+		[sysView setSystem:system score:score topLeft:sysFrame.origin margin:CGSizeZero];
 		// restore any preserved colouring
 		NSNumber *sysIndexKey = [NSNumber numberWithInt:sysIndex];
 		SSColourRender *storedColourRenderForSystem = [colouringsForSystems objectForKey:sysIndexKey];
@@ -840,7 +742,7 @@ static float min(float a, float b)
 
 -(CGSize)systemsSize
 {
-	CGSize sz = CGSizeMake(0,0);
+	CGSize sz = CGSizeZero;
 	for (SSSystem *sys in systemlist)
 	{
 		sz.height += sys.bounds.height + sys.defaultSpacing;
@@ -855,6 +757,7 @@ static float min(float a, float b)
 	[super layoutSubviews];
 	if (self.abortingBackground == 0 && score && systemlist.count > 0) // this is called on every scroll movement
 	{
+        [self resetBarRectCursor];
 		// adjust height of content to include all systems
 		self.contentSize = [self systemsSize];
 		CGRect containedFrame = containedView.frame;
@@ -862,7 +765,7 @@ static float min(float a, float b)
 		containedFrame.size = self.contentSize;
 		containedView.frame = containedFrame;
 
-		if (editMode || systemlist.count != systemRects.count) // don't normally need to recalc the system rects unless in edit mode
+		if (systemlist.count != systemRects.count) // don't normally need to recalc the system rects unless in edit mode
 			systemRects = [self getSystemRects];
 		
 		NSSet* placedSystemIndexSet = [self systemIndexSet]; // set of index of placed systems
@@ -909,6 +812,10 @@ static float min(float a, float b)
 		{
 			[self.updateDelegate newLayout];
 		}
+        if (showingCursor)
+        {
+            [self displayCursor];
+        }
 	}
 }
 
@@ -956,12 +863,14 @@ static float min(float a, float b)
 {
 	if (sysIndex >= 0 && sysIndex < [systemRects count])
 	{
-		CGRect rect = [[systemRects objectAtIndex:sysIndex] CGRectValue];
 		SSSystemView *sysView = [self systemViewForIndex:sysIndex];
 		if (sysView)
-			return CGPointMake(rect.origin.x, rect.origin.y + sysView.upperMargin);
+			return sysView.topLeft;
 		else // we may not have a SystemView placed here
+		{
+			CGRect rect = [[systemRects objectAtIndex:sysIndex] CGRectValue];
 			return CGPointMake(rect.origin.x, rect.origin.y);
+		}
 	}
 	return CGPointMake(0,0);
 }
@@ -1012,7 +921,6 @@ static float min(float a, float b)
 			rval.staffLocation = sscore_system_staffloc_undefined;
 		}
 		rval.posInSystem = [self convertPoint:pos toView:sysView];
-		rval.posInSystem.y -= sysView.upperMargin; // upper margin correction (edit mode)
 	}
 	else
 	{
@@ -1036,7 +944,7 @@ static float min(float a, float b)
 	if (systemIndex >= 0 && systemIndex < systemRects.count)
 	{
 		CGRect rect = [[systemRects objectAtIndex:systemIndex] CGRectValue];
-		rect.origin = [self topLeftAtSystemIndex:systemIndex]; // offset to allow for upper margin (in edit mode)
+		rect.origin = [self topLeftAtSystemIndex:systemIndex]; // offset to allow for margin
 		return rect;
 	}
 	else
@@ -1079,12 +987,12 @@ static float min(float a, float b)
 	return rval > 0 ? rval : systemRects.count > 0 ? 1 : 0; // don't return 0 unless there really are no systems at all to display
 }
 
--(BOOL)isDisplayingStart
+-(bool)isDisplayingStart
 {
 	return self.contentOffset.y <= 10;
 }
 
--(BOOL)isDisplayingEnd
+-(bool)isDisplayingEnd
 {
 	if (systemlist.count > 0)
 	{
@@ -1099,7 +1007,7 @@ static float min(float a, float b)
 		return YES;
 }
 
--(BOOL)isDisplayingWhole
+-(bool)isDisplayingWhole
 {
 	return [self isDisplayingStart] && [self isDisplayingEnd];
 }
@@ -1274,54 +1182,61 @@ static float min(float a, float b)
 	return [CATransaction animationDuration];
 }
 
--(void)setCursor:(int)barIndex
-			xpos:(float)xpos
-			type:(enum CursorType_e)type
-		  scroll:(enum ScrollType_e)scroll
+-(void)displayCursor
 {
-	assert(barIndex >= 0 && barIndex < score.numBars);
-	if (score && systemlist.count > 0)
-	{
-		cursorBarIndex = barIndex;
-		showingCursor = true;
-		int sysIndex = [self systemContainingBarIndex:barIndex].index;
-		// show cursor in correct system and hide it in all others
-		for (UIView *v in [containedView subviews])
-		{
-			if ([v isKindOfClass:[SSSystemView class]])
-			{
-				SSSystemView *sysView = (SSSystemView*)v;
-				if (sysView.systemIndex == sysIndex)
-				{
-					if (xpos == 0)
-					{
-						[sysView showCursorAtBar:barIndex pre:type==cursor_line];
-					}
-					else
-					{
-						[sysView showCursorAtXpos:xpos barIndex:barIndex];
-					}
-				}
-				else
-				{
-					[sysView hideCursor];
-				}
-			}
-		}
-		// scroll to cursor
-		if (scroll != scroll_off
-			&& self.contentSize.height > self.frame.size.height) // don't scroll if content height is less than screen height
-		{
-			if (scroll == scroll_system)
-			{
-				[self scrollToBar:barIndex];
-			}
-			else if (scroll == scroll_bar)
-			{
-				[self scrollToBarContinuous:barIndex];
-			}
-		}
-	}
+    int sysIndex = [self systemContainingBarIndex:cursorBarIndex].index;
+    // show cursor in correct system and hide it in all others
+    for (UIView *v in [containedView subviews])
+    {
+        if ([v isKindOfClass:[SSSystemView class]])
+        {
+            SSSystemView *sysView = (SSSystemView*)v;
+            if (sysView.systemIndex == sysIndex)
+            {
+                if (cursor_xpos == 0)
+                {
+                    [sysView showCursorAtBar:cursorBarIndex pre:cursorType==cursor_line];
+                }
+                else
+                {
+                    [sysView showCursorAtXpos:cursor_xpos barIndex:cursorBarIndex];
+                }
+            }
+            else
+            {
+                [sysView hideCursor];
+            }
+        }
+    }
+}
+
+-(void)setCursor:(int)barIndex
+            xpos:(float)xpos
+            type:(enum CursorType_e)type
+          scroll:(enum ScrollType_e)scroll
+{
+    assert(barIndex >= 0 && barIndex < score.numBars);
+    if (score && systemlist.count > 0)
+    {
+        cursorBarIndex = barIndex;
+        showingCursor = true;
+        cursorType = type;
+        cursor_xpos = xpos;
+        // scroll to system first so that the system is displayed and we can show the cursor
+        if (scroll != scroll_off
+            && self.contentSize.height > self.frame.size.height) // don't scroll if content height is less than screen height
+        {
+            if (scroll == scroll_system)
+            {
+                [self scrollToBar:barIndex];
+            }
+            else if (scroll == scroll_bar)
+            {
+                [self scrollToBarContinuous:barIndex];
+            }
+        }
+        [self displayCursor];
+    }
 }
 
 -(void)setCursorAtBar:(int)barIndex
@@ -1385,21 +1300,26 @@ static float min(float a, float b)
 -(void)colourComponents:(NSArray*)components colour:(UIColor *)colour elementTypes:(unsigned)elementTypes
 {
 	[colouringsForSystems removeAllObjects]; // clear all colourings in invisible systems
+    for (SSComponent *comp in components)
+    {
+        SSSystem *system = [self systemContainingBarIndex:comp.barIndex];
+        NSNumber *key = [NSNumber numberWithInt:system.index];
+        SSColouredItem *item = [[SSColouredItem alloc] initWithItem:comp.item_h colour:colour.CGColor render:elementTypes];
+        NSMutableArray<SSColouredItem*> *newColouredItems = NSMutableArray.array;
+        SSColourRender *colourRender = [colouringsForSystems objectForKey:key];
+        if (colourRender && colourRender.colouredItems.count > 0)
+            [newColouredItems addObjectsFromArray:colourRender.colouredItems];
+        [newColouredItems addObject:item];
+        SSColourRender *newColourRender = [[SSColourRender alloc] initWithItems:newColouredItems];
+        [colouringsForSystems setObject:newColourRender forKey:key];
+    }
 	for (UIView *v in [containedView subviews])
 	{
 		if ([v isKindOfClass:[SSSystemView class]])
 		{
 			SSSystemView *sysView = (SSSystemView*)v;
-			NSMutableArray *colouredItems = NSMutableArray.array;
-			for (SSComponent *comp in components)
-			{
-				if ([sysView.system includesBar:comp.barIndex])
-				{
-					SSColouredItem *item = [[SSColouredItem alloc] initWithItem:comp.item_h colour:colour.CGColor render:elementTypes];
-					[colouredItems addObject:item];
-				}
-			}
-			SSColourRender *colourRender = [[SSColourRender alloc] initWithItems:colouredItems];
+            NSNumber *key = [NSNumber numberWithInt:sysView.systemIndex];
+            SSColourRender *colourRender = [colouringsForSystems objectForKey:key];
 			[sysView setColourRender:colourRender];
 		}
 	}
@@ -1616,8 +1536,8 @@ static float min(float a, float b)
 	[self clearPlayLoopGraphics];
 	SSSystem *leftSystem = [self systemContainingBarIndex:leftLoopBarIndex];
 	SSSystem *rightSystem = [self systemContainingBarIndex:rightLoopBarIndex];
-	CGPoint leftSystemTopLeft = [self systemRect:leftSystem.index].origin;
-	CGPoint rightSystemTopLeft = [self systemRect:rightSystem.index].origin;
+	CGPoint leftSystemTopLeft = [self topLeftAtSystemIndex:leftSystem.index];
+	CGPoint rightSystemTopLeft = [self topLeftAtSystemIndex:rightSystem.index];
 	playLoopGraphics = [[SSPlayLoopGraphics alloc] initWithNumParts:score.numParts
 														 leftSystem:leftSystem leftSystemTopLeft:(CGPoint)leftSystemTopLeft leftBarIndex:leftLoopBarIndex
 														rightSystem:rightSystem rightSystemTopLeft:(CGPoint)rightSystemTopLeft rightBarIndex:rightLoopBarIndex
@@ -1638,33 +1558,6 @@ static float min(float a, float b)
 	}
 }
 
--(void)warnShowingKeyboardRect:(CGRect) kbRect
-{ // we adjust the scroll insets when the keyboard appears to prevent things getting lost under it
-	CGRect scrollViewFrame = self.frame;
-	UIEdgeInsets contentInsets  = UIEdgeInsetsMake(0.0, 0.0, kbRect.origin.y - scrollViewFrame.origin.y - scrollViewFrame.size.height + 10.F/*clearance from kb*/, 0.0F);
-	self.contentInset = contentInsets;
-	self.scrollIndicatorInsets = contentInsets;
-	if (scrollViewFrame.origin.y + ensureVisibleRect.origin.y + ensureVisibleRect.size.height > kbRect.origin.y)
-	{
-		float bottomy = scrollViewFrame.origin.y + ensureVisibleRect.origin.y + ensureVisibleRect.size.height - kbRect.origin.y + 10;
-		self.contentOffset = CGPointMake(0, bottomy);
-	}
-}
-
--(void) warnHidingKeyboard
-{ // remove scroll adjustment when keyboard disappears
-	UIEdgeInsets contentInsets  = UIEdgeInsetsZero;
-	self.contentInset = contentInsets;
-	self.scrollIndicatorInsets = contentInsets;
-	if (_editLayer)
-		[_editLayer abortTextInput]; // remove any temporary text field in the edit layer
-}
-
--(void)ensureVisible:(CGRect)rect
-{
-	ensureVisibleRect = rect;
-}
-
 -(NSArray<SSComponent*> *)componentsAt:(CGPoint)p maxDistance:(float)maxDistance
 {
 	SSSystemPoint sysPt = [self systemAtPos:p];
@@ -1682,20 +1575,6 @@ static float min(float a, float b)
 	return NSArray.array;
 }
 
--(void)tap:(CGPoint)p
-{
-	if (editMode && _editLayer) // taps are handled in edit mode
-	{
-		[_editLayer tap:p];
-	}
-}
-
--(void)pan:(UIGestureRecognizer*)gr
-{
-	if (editMode && _editLayer)
-		[_editLayer pan:gr];
-}
-
 #ifdef DrawOutline
 - (void)drawRect:(CGRect)rect
 {
@@ -1703,6 +1582,11 @@ static float min(float a, float b)
 	CGContextRef ctx = UIGraphicsGetCurrentContext();
 	CGContextSetStrokeColorWithColor (ctx, UIColor.greenColor.CGColor);
 	CGContextStrokeRect(ctx, rect);
+	for (NSValue *val in systemRects)
+	{
+		CGContextSetStrokeColorWithColor (ctx, UIColor.blueColor.CGColor);
+		CGContextStrokeRect(ctx, CGRectInset(val.CGRectValue, 1,1));
+	}
 }
 #endif
 
@@ -1776,12 +1660,23 @@ static float min(float a, float b)
 }
 //@end
 
+-(void)setCursorColour:(UIColor*)colour
+{
+	for (UIView *v in [containedView subviews])
+	{
+		if ([v isKindOfClass:[SSSystemView class]]) // ignore SSEditLayer
+		{
+			SSSystemView *sysView = (SSSystemView*)v;
+			[sysView setCursorColour:colour];
+		}
+	}
+}
+
 // Handle efficient redisplay after edit
 
 //@protocol ScoreChangeHandler
 -(void)change:(sscore_state_container *)prevstate newstate:(sscore_state_container *)newstate reason:(int)reason
 {
-	[self.editLayer clear]; // remove selection (EditCursor)
 	NSMutableArray<SSSystemView *> *changedViews = NSMutableArray.array;
 	for (UIView *v in [containedView subviews])
 	{
@@ -1792,7 +1687,7 @@ static float min(float a, float b)
 			for (int i = 0 ; i < br.numbars; ++i)
 			{
 				int barIndex = br.startbarindex + i;
-				if (sscore_edit_barchanged(barIndex, prevstate, newstate))
+				if (sscore_edit_barChanged(barIndex, prevstate, newstate))
 				{
 					[changedViews addObject:sysView];
 					break;
@@ -1808,11 +1703,6 @@ static float min(float a, float b)
 	}
 	else if (changedViews.count == 1) // only 1 system changed (probably 1 bar) - just update that
 	{
-		SSSystemView *changedView = changedViews.firstObject;
-		UIGraphicsBeginImageContextWithOptions(CGSizeMake(10,10), YES/*opaque*/, 0.0/* scale*/);
-		CGContextRef ctx = UIGraphicsGetCurrentContext();
-		[changedView updateLayout:ctx newState:newstate];
-		UIGraphicsEndImageContext();
 		dispatch_async(dispatch_get_main_queue(), ^{
 			[self setNeedsLayout];
 		});

@@ -14,7 +14,7 @@ class SparkLine: UIView {
     
     var values: [CGPoint] {
         didSet {
-            setNeedsDisplayInRect(self.frame)
+            setNeedsDisplay(self.frame)
         }
     }
     
@@ -32,8 +32,8 @@ class SparkLine: UIView {
         super.init(coder:aDecoder)
     }
     
-    override func drawRect(dirtyRect: CGRect) {
-        super.drawRect(dirtyRect)
+    override func draw(_ dirtyRect: CGRect) {
+        super.draw(dirtyRect)
         
         // Check for at least two values
         if (self.values.count < 2) {
@@ -45,30 +45,30 @@ class SparkLine: UIView {
         sparkline.lineWidth = self.lineWidth!
         
         // Add data points to path
-        for var i = 0; i < self.values.count; i++ {
+        for i in 0 ..< self.values.count {
             if i == 0 { // starting point
-                sparkline.moveToPoint(values[i])
+                sparkline.move(to: values[i])
             } else {
-                sparkline.addLineToPoint(values[i])
+                sparkline.addLine(to: values[i])
             }
         }
         
         // Draw sparkline
-        UIColor.blueColor().setStroke()
+        UIColor.blue.setStroke()
         sparkline.stroke()
     }
     
-    func addValue(goodPoint: Bool, newValue:CGPoint) {
+    func addValue(_ goodPoint: Bool, newValue:CGPoint) {
         self.values.append(newValue)
     }
     
-    func addValues(goodPoints: Bool, values:[CGPoint]) {
+    func addValues(_ goodPoints: Bool, values:[CGPoint]) {
         for value in values {
             self.addValue(goodPoints, newValue: value)
         }
     }
     
-    func addValues(goodPoints: Bool, values:CGPoint...) {
+    func addValues(_ goodPoints: Bool, values:CGPoint...) {
         self.addValues(goodPoints, values: values)
     }
 }

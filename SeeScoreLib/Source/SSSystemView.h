@@ -1,14 +1,16 @@
 //
 //  SSSystemView.h
-//  SeeScore for iOS
+//  SeeScoreiOS Sample App
 //
-// No warranty is made as to the suitability of this for any purpose
+//  You are free to copy and modify this code as you wish
+//  No warranty is made as to the suitability of this for any purpose
 //
 // This is used by SSScrollView and manages and draws a single system of music using the SeeScoreLib framework
 //
 
 #import <UIKit/UIKit.h>
 #include <SeeScoreLib/SeeScoreLib.h>
+#import "SSViewInterface.h"
 
 @class SSScore;
 @class SSSystem;
@@ -18,19 +20,13 @@
  * @interface SSSystemView
  * @abstract used by SSScrollView, manages and draws a single system of music using the SeeScoreLib framework
  */
-@interface SSSystemView : UIView
+@interface SSSystemView : UIView <SSViewInterface, ScoreChangeHandler>
 
 /*!
  * @property height
  * @abstract the height of the system within the UIView in CGContext units
  */
 @property (nonatomic,readonly) float systemHeight;
-
-/*!
- * @property upperMargin
- * @abstract the empty margin above the system to the top of the UIView in CGContext units
- */
-@property (nonatomic,readonly) float upperMargin;
 
 /*!
  * @property colourRender
@@ -57,6 +53,12 @@
 @property (nonatomic, readonly) float drawScale;
 
 /*!
+ @property topLeft
+ @abstract the top left of the SSSystem in superView coords
+ */
+@property (nonatomic, readonly) CGPoint topLeft;
+
+/*!
  * @method initWithBackgroundColour
  * @abstract initialise defining a background colour
  * @param bgcol the background colour
@@ -69,9 +71,13 @@
  * @abstract setup with the system
  * @param system the system
  * @param score the score
+ * @param tl the top left of the system UIView in the superview
+ * @param margin the extra width and height left, right and above, below
  */
 -(void)setSystem:(SSSystem*)system
-		   score:(SSScore*)score;
+		   score:(SSScore*)score
+		 topLeft:(CGPoint)tl
+		  margin:(CGSize)margin;
 
 /*!
  * @method clear
@@ -113,6 +119,13 @@
  * @abstract hide the cursor
  */
 -(void)hideCursor;
+
+/*!
+ * @method setCursorColour:
+ * @abstract set the cursor outline colour
+ * @param colour the new colour
+ */
+-(void)setCursorColour:(UIColor*)colour;
 
 /*!
  * @method zoomUpdate

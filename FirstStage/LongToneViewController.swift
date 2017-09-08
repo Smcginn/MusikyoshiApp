@@ -11,12 +11,13 @@ import UIKit
 
 class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     
-    var exerciseState = ExerciseState.NotStarted
-    var timer = NSTimer()
+    var exerciseState = ExerciseState.notStarted
+    var timer = Timer()
     var currentTime = 0.0
     var targetNote : Note?
     var absoluteTargetNote: Note?
     var showFarText = true
+    var noteName = ""
 
     var targetTime = 3.0
     var targetNoteID = 0
@@ -28,24 +29,24 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     */
 
 
-    let amplitudeThreshold = NSUserDefaults.standardUserDefaults().doubleForKey(Constants.Settings.AmplitudeThreshold)
+    let amplitudeThreshold = UserDefaults.standard.double(forKey: Constants.Settings.AmplitudeThreshold)
     let tempoBPM = 60
-    let transpositionOffset = NSUserDefaults.standardUserDefaults().integerForKey(Constants.Settings.Transposition)
-    let frequencyThreshold = NSUserDefaults.standardUserDefaults().floatForKey(Constants.Settings.FrequencyThreshold)
-    var frequencyThresholdPercent = Float(0.0)
-    var farFrequencyThresholdPercent = Float(0.0)
-    var targetPitch = Float(0.0)
-    var lowPitchThreshold = Float(0.0)
-    var highPitchThreshold = Float(0.0)
-    var lowFarPitchThreshold = Float(0.0)
-    var highFarPitchThreshold = Float(0.0)
-    let minPitch = NoteService.getLowestFrequency()
-    let maxPitch = NoteService.getHighestFrequency()
+    let transpositionOffset = UserDefaults.standard.integer(forKey: Constants.Settings.Transposition)
+    let frequencyThreshold = UserDefaults.standard.double(forKey: Constants.Settings.FrequencyThreshold)
+    var frequencyThresholdPercent = Double(0.0)
+    var farFrequencyThresholdPercent = Double(0.0)
+    var targetPitch = Double(0.0)
+    var lowPitchThreshold = Double(0.0)
+    var highPitchThreshold = Double(0.0)
+    var lowFarPitchThreshold = Double(0.0)
+    var highFarPitchThreshold = Double(0.0)
+    let minPitch = Double(NoteService.getLowestFrequency())
+    let maxPitch = Double(NoteService.getHighestFrequency())
     var firstTime = true
     var pitchSampleRate = 0.01
     var balloonUpdateRate = 0.01
     var longToneEndTime = 0.0
-    var startTime = NSDate()
+    var startTime = Date()
 
     var score: SSScore?
     var partIndex: Int32 = 0
@@ -61,11 +62,13 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     var sparkLineCount : CGFloat = 0
     let nearUpArrowImage = UIImage(named: "NearArrow")
     let farUpArrowImage = UIImage(named: "FarArrow")
-    let nearDownArrowImage = UIImage(CGImage: (UIImage(named: "NearArrow")?.CGImage)!, scale: CGFloat(1.0), orientation: UIImageOrientation.DownMirrored)
-    let farDownArrowImage = UIImage(CGImage: (UIImage(named: "FarArrow")?.CGImage)!, scale: CGFloat(1.0), orientation: UIImageOrientation.DownMirrored)
+    let nearDownArrowImage = UIImage(cgImage: (UIImage(named: "NearArrow")?.cgImage)!, scale: CGFloat(1.0), orientation: UIImageOrientation.downMirrored)
+    let farDownArrowImage = UIImage(cgImage: (UIImage(named: "FarArrow")?.cgImage)!, scale: CGFloat(1.0), orientation: UIImageOrientation.downMirrored)
     var arrowImageView : UIImageView!
     var smileImage = UIImage(named: "GreenSmile")
     var smileImageView : UIImageView!
+
+    let feedbackView = FeedbackView()
     
     @IBOutlet weak var instructionLbl: UILabel!
     @IBOutlet weak var timerLbl: UILabel!
@@ -73,6 +76,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     @IBOutlet weak var balloon: Balloon!
     @IBOutlet weak var feedbackLbl: UILabel!
     @IBOutlet weak var feedbackPnl: UIStackView!
+    @IBOutlet weak var visualizationPanel: UIView!
     @IBOutlet weak var sparkLine: SparkLine!
     @IBOutlet weak var countdownLbl: UILabel!
     @IBOutlet weak var ssScrollView: SSScrollView!
@@ -82,16 +86,27 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        AudioKitManager.sharedInstance.setup()
+
         absoluteTargetNote = NoteService.getNote(targetNoteID + transpositionOffset)
         targetNote = NoteService.getNote(targetNoteID)
         if targetNote != nil {
-            print("targetNote: \(targetNote)")
+            print("targetNote: \(String(describing: targetNote))")
 
             navigationItem.title = "Long Tone - \(targetNote!.fullName)"
             instructionLbl.text = "Play a long \(targetNote!.friendlyName) note and fill up the balloon until it turns green!"
         }
 
-        loadFile("XML Tunes/Long_Tone_25G3G5")
+        var notesFileName = "XML Tunes/Long_Tone_25G3G5"
+        if noteName.characters.count > 1 {
+            let secondChar = noteName[noteName.characters.index(after: noteName.startIndex)]
+            
+            if secondChar == "♭" {
+                notesFileName = "XML Tunes/Long_Tone_25G3G5_flat"
+            }
+        }
+
+        loadFile(notesFileName)
 
         frequencyThresholdPercent = 1.0 + frequencyThreshold
         farFrequencyThresholdPercent = frequencyThresholdPercent + (frequencyThreshold * 1.5)
@@ -99,18 +114,18 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
         setupImageViews()
     }
     
-    @IBAction func sparkLineTapped(sender: UITapGestureRecognizer) {
+    @IBAction func sparkLineTapped(_ sender: UITapGestureRecognizer) {
         playScore()
     }
     
-    func loadFile(scoreFile: String) {
-        playBtn.hidden = false
-        playBtn.enabled = true
-        playBtn.setTitle("Start Playing", forState: .Normal)
+    func loadFile(_ scoreFile: String) {
+        playBtn.isHidden = false
+        playBtn.isEnabled = true
+        playBtn.setTitle("Start Playing", for: UIControlState())
 //        playButton.setTitle("Start Playing", forState: UIControlState.Normal)
 //        playingAnimation = false
         
-        if let filePath = NSBundle.mainBundle().pathForResource(scoreFile, ofType: "xml") {
+        if let filePath = Bundle.main.path(forResource: scoreFile, ofType: "xml") {
             ssScrollView.abortBackgroundProcessing({self.loadTheFile(filePath)})
         } else {
             print("Couldn't make path??? for ", scoreFile)
@@ -121,24 +136,24 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     func setupImageViews() {
         //start with near, up - located below
         arrowImageView = UIImageView(image: nearUpArrowImage)
-        arrowImageView.hidden = true
+        arrowImageView.isHidden = true
         ssScrollView.addSubview(arrowImageView)
 //        arrowImageView.clipsToBounds = false
 //        ssScrollView.clipsToBounds = false
 
         smileImageView = UIImageView(image: smileImage)
-        smileImageView.hidden = true
+        smileImageView.isHidden = true
         ssScrollView.addSubview(smileImageView)
         
         let imageX = (ssScrollView.frame.width - smileImageView.frame.width) / 2
         let imageY = ssScrollView.frame.height * 0.05
-        smileImageView.frame = CGRectMake(imageX, imageY, smileImageView.frame.width, smileImageView.frame.height)
+        smileImageView.frame = CGRect(x: imageX, y: imageY, width: smileImageView.frame.width, height: smileImageView.frame.height)
     }
 
-    func setArrowAndPrompt(isNear: Bool, isUp: Bool) {
+    func setArrowAndPrompt(_ isNear: Bool, isUp: Bool) {
         //near or far, up or down
-        arrowImageView.hidden = false
-        guideTextView.hidden = false
+        arrowImageView.isHidden = false
+        guideTextView.isHidden = false
         guideTextView.text = ""
         var imageX = CGFloat(0)
         var imageY = CGFloat(0)
@@ -169,89 +184,89 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
 
         //if far and no far text
         if !isNear && !showFarText {
-            guideTextView.hidden = true
+            guideTextView.isHidden = true
             guideTextView.text = ""
         }
-        arrowImageView.frame = CGRectMake(imageX, imageY, arrowImageView.frame.width, arrowImageView.frame.height)
+        arrowImageView.frame = CGRect(x: imageX, y: imageY, width: arrowImageView.frame.width, height: arrowImageView.frame.height)
     }
 
     func clearArrowAndPrompt() {
-        arrowImageView.hidden = true
-        guideTextView.hidden = true
+        arrowImageView.isHidden = true
+        guideTextView.isHidden = true
         guideTextView.text = ""
     }
 
-    func loadTheFile(filePath: String) {
-        ssScrollView.clearAll()
-        score = nil
-        cursorBarIndex = 0
-        let loadOptions = SSLoadOptions(key: sscore_libkey)
-        loadOptions.checkxml = true
-        let errP = UnsafeMutablePointer<sscore_loaderror>.alloc(1)
-        
-        print("filePath: \(filePath)")
-        print("loadOptions: \(loadOptions)")
-        print("errP: \(errP)")
-        
-        if let score0 = SSScore(XMLFile: filePath, options: loadOptions, error: errP) {
-            score = score0
-
-            //figure out which part#
-            partIndex = Int32(kC4 - kFirstLongTone25Note)   //default to C4
-            let partNumber = Int32(targetNoteID - kFirstLongTone25Note)
-            if 0..<score!.numParts ~= partNumber {
-                partIndex = partNumber
-            }
-
-            var	showingParts = [NSNumber]()
-            showingParts.removeAll()
-            let numParts = Int(score!.numParts)
-            for i in 0..<numParts {
-                showingParts.append(NSNumber(bool: (Int32(i) == partNumber))) // display the selected part
-            }
-            
-            layOptions.hidePartNames = true
-            layOptions.hideBarNumbers = true
-            ssScrollView.optimalSingleSystem = true
-            //            sysssScrollView.frame.size.width = CGFloat(scoreWidth * 2.28)
-            //            ssScrollView.setupScore(score, openParts: showingParts, mag: kDefaultMagnification, opt: layOptions)
-            ssScrollView.optimalSingleSystem = false
-            ssScrollView.setupScore(score, openParts: showingParts, mag: kDefaultMagnification, opt: layOptions, completion: getPlayData)
-//            ssScrollView.setupScore(score, openParts: showingParts, mag: kDefaultMagnification, opt: layOptions)
-        }
-        else
-        {
-            var err: sscore_loaderror
-            err = errP.memory
-            switch err.err {
-            case sscore_OutOfMemoryError:
-                print("out of memory")
-            case sscore_XMLValidationError:
-                print("XML validation error line:%d col:%d %s", err.line, err.col, err.text);
-            case sscore_NoBarsInFileError:
-                print("No bars in file error")
-            case sscore_NoPartsError:
-                print("NoParts Error")
-            case sscore_UnknownError:
-                print("Unknown error")
-            default:
-                print("Other error")
-            }
-        }
+    func loadTheFile(_ filePath: String) {
+//        ssScrollView.clearAll()
+//        score = nil
+//        cursorBarIndex = 0
+//        let loadOptions = SSLoadOptions(key: sscore_libkey)
+//        loadOptions?.checkxml = true
+//        let errP = UnsafeMutablePointer<sscore_loaderror>.allocate(capacity: 1)
+//        
+//        print("filePath: \(filePath)")
+//        print("loadOptions: \(loadOptions)")
+//        print("errP: \(errP)")
+//        
+//        if let score0 = SSScore(xmlFile: filePath, options: loadOptions, error: errP) {
+//            score = score0
+//
+//            //figure out which part#
+//            partIndex = Int32(kC4 - kFirstLongTone25Note)   //default to C4
+//            let partNumber = Int32(targetNoteID - kFirstLongTone25Note)
+//            if 0..<score!.numParts ~= partNumber {
+//                partIndex = partNumber
+//            }
+//
+//            var	showingParts = [NSNumber]()
+//            showingParts.removeAll()
+//            let numParts = Int(score!.numParts)
+//            for i in 0..<numParts {
+//                showingParts.append(NSNumber(value: (Int32(i) == partNumber) as Bool)) // display the selected part
+//            }
+//            
+//            layOptions.hidePartNames = true
+//            layOptions.hideBarNumbers = true
+//            //            ssScrollView.optimalSingleSystem = true
+//            //            sysssScrollView.frame.size.width = CGFloat(scoreWidth * 2.28)
+//            //            ssScrollView.setupScore(score, openParts: showingParts, mag: kDefaultMagnification, opt: layOptions)
+//            ssScrollView.optimalSingleSystem = false
+//            ssScrollView.setupScore(score, openParts: showingParts, mag: kDefaultMagnification, opt: layOptions, completion: getPlayData)
+////            ssScrollView.setupScore(score, openParts: showingParts, mag: kDefaultMagnification, opt: layOptions)
+//        }
+//        else
+//        {
+//            var err: sscore_loaderror
+//            err = errP.pointee
+//            switch err.err {
+//            case sscore_OutOfMemoryError:
+//                print("out of memory")
+//            case sscore_XMLValidationError:
+//                print("XML validation error line:%d col:%d %s", err.line, err.col, err.text);
+//            case sscore_NoBarsInFileError:
+//                print("No bars in file error")
+//            case sscore_NoPartsError:
+//                print("NoParts Error")
+//            case sscore_UnknownError:
+//                print("Unknown error")
+//            default:
+//                print("Other error")
+//            }
+//        }
     }
 
     func getPlayData() {
         guard score != nil else { return }
         
-        playData = SSPData.createPlayDataFromScore(score, tempo: self)
+        playData = SSPData.createPlay(from: score, tempo: self)
     }
     
     func playScore() {
-        ssScrollView.contentOffset = CGPointZero
-        ssScrollView.scrollEnabled = false
+        ssScrollView.contentOffset = CGPoint.zero
+        ssScrollView.isScrollEnabled = false
 
         guard score != nil else { return }
-        playData = SSPData.createPlayDataFromScore(score, tempo: self)
+        playData = SSPData.createPlay(from: score, tempo: self)
         guard playData != nil else { return }
         
         if synth != nil && (synth?.isPlaying)! {
@@ -261,7 +276,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
                 if let synth0 = SSSynth.createSynth(self, score: score) {
                     synth = synth0
 
-                    instrumentId = (synth?.addSampledInstrument(trumpetMinus2SampleInfo))!
+//                    instrumentId = (synth?.addSampledInstrument(trumpetMinus2SampleInfo))!
                 }
             }
             
@@ -279,20 +294,21 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
                 
                 var err = synth?.setup(playData)
                 if err == sscore_NoError {
-                    let startTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0))
-                    err = synth?.startAt(startTime, bar: cursorBarIndex, countIn: false)
+                    let startTime = UInt64(0)
+//                    let startTime = DispatchTime.now() //+ Double(Int64(0)) / Double(NSEC_PER_SEC)
+                    err = synth?.start(at: startTime, bar: cursorBarIndex, countIn: false)
                 }
                 
                 if err == sscore_UnlicensedFunctionError {
                     print("synth license expired!")
                 } else if err != sscore_NoError {
-                    print("synth failed to start: \(err)")
+                    print("synth failed to start: \(String(describing: err))")
                 }
             }
         }
     }
     
-    @IBAction func playBtnTap(sender: UIButton) {
+    @IBAction func playBtnTap(_ sender: UIButton) {
         //TODO - add extra states to ExerciseState to better cycle through Long Tone, instead of checking button title
 
         if playBtn.currentTitle == "Try Again" {
@@ -300,23 +316,23 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
             return
         } else if playBtn.currentTitle == "Next Exercise" {
             //TODO: goto Next Exercise
-            navigationController?.popViewControllerAnimated(true)
+            _ = navigationController?.popViewController(animated: true)
             return
         }
         
-        if exerciseState == ExerciseState.NotStarted {
+        if exerciseState == ExerciseState.notStarted {
             startCountdown()
-        } else if exerciseState == ExerciseState.FeedbackProvided {
+        } else if exerciseState == ExerciseState.feedbackProvided {
             //TODO: go to next exercise
         }
     }
     
-    @IBAction func tryAgainTap(sender: UIButton) {
+    @IBAction func tryAgainTap(_ sender: UIButton) {
         
-        UIView.animateWithDuration(0.1, animations: {
+        UIView.animate(withDuration: 0.1, animations: {
 //            self.feedbackPnl.alpha = 0
             self.feedbackLbl.text = ""
-            self.smileImageView.hidden = true
+            self.smileImageView.isHidden = true
         })
         
         startCountdown()
@@ -341,7 +357,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     func startCountdown()
     {
         timer.invalidate()
-        feedbackLbl.hidden = true
+        feedbackLbl.isHidden = true
         
         hasNoteStarted = false
         isExerciseSuccess = false
@@ -350,7 +366,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
         timerLbl.text = String(format: "%.2f/%.2f", currentTime, targetTime)
         
         balloon.alpha = 0
-        balloon.fillColor = UIColor.blueColor().CGColor
+        balloon.fillColor = UIColor.blue.cgColor
         balloon.radius = 10
 
         if let freq = absoluteTargetNote?.frequency {
@@ -360,48 +376,48 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
             lowFarPitchThreshold = freq / farFrequencyThresholdPercent
             highFarPitchThreshold = freq * farFrequencyThresholdPercent
         } else {
-            targetPitch = Float(0.0)
-            lowPitchThreshold = Float(0.0)
-            highPitchThreshold = Float(0.0)
-            lowFarPitchThreshold = Float(0.0)
-            highFarPitchThreshold = Float(0.0)
+            targetPitch = Double(0.0)
+            lowPitchThreshold = Double(0.0)
+            highPitchThreshold = Double(0.0)
+            lowFarPitchThreshold = Double(0.0)
+            highFarPitchThreshold = Double(0.0)
         }
 
-        playBtn.enabled = false
-        playBtn.setTitle("", forState: .Normal)
+        playBtn.isEnabled = false
+        playBtn.setTitle("", for: UIControlState())
 //        playBtn.setTitle("Get Ready", forState: .Normal)
         countdownLbl.text = "3"
-        countdownLbl.transform = CGAffineTransformMakeScale(0.5, 0.5)
+        countdownLbl.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
         
-        exerciseState = ExerciseState.InProgress
+        exerciseState = ExerciseState.inProgress
         
-        UIView.animateWithDuration(1.0, animations: {
+        UIView.animate(withDuration: 1.0, animations: {
             self.countdownLbl.alpha = 1
-            self.countdownLbl.transform = CGAffineTransformMakeScale(1, 1)
+            self.countdownLbl.transform = CGAffineTransform(scaleX: 1, y: 1)
         })
         
         delay(1.0){
 //            self.playBtn.setTitle("Set", forState: .Normal)
             
             self.countdownLbl.alpha = 0
-            self.countdownLbl.transform = CGAffineTransformMakeScale(0.5, 0.5)
+            self.countdownLbl.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
             self.countdownLbl.text = "2"
             
-            UIView.animateWithDuration(1.0, animations: {
+            UIView.animate(withDuration: 1.0, animations: {
                 self.countdownLbl.alpha = 1
-                self.countdownLbl.transform = CGAffineTransformMakeScale(1, 1)
+                self.countdownLbl.transform = CGAffineTransform(scaleX: 1, y: 1)
             })
             
             delay(1.0){
 //                self.playBtn.setTitle("Go!", forState: .Normal)
                 
                 self.countdownLbl.alpha = 0
-                self.countdownLbl.transform = CGAffineTransformMakeScale(0.5, 0.5)
+                self.countdownLbl.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
                 self.countdownLbl.text = "1"
                 
-                UIView.animateWithDuration(1.0, animations: {
+                UIView.animate(withDuration: 1.0, animations: {
                     self.countdownLbl.alpha = 1
-                    self.countdownLbl.transform = CGAffineTransformMakeScale(1, 1)
+                    self.countdownLbl.transform = CGAffineTransform(scaleX: 1, y: 1)
                 })
                 delay(1.0){
                     self.countdownLbl.alpha = 0
@@ -414,8 +430,8 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     
     func startExercise(){
         AudioKitManager.sharedInstance.start()
-        longToneEndTime = NSDate().timeIntervalSinceDate(startTime) + 30.0
-        timer = NSTimer.scheduledTimerWithTimeInterval(pitchSampleRate, target: self, selector: #selector(LongToneViewController.updateTracking), userInfo: nil, repeats: true)
+        longToneEndTime = Date().timeIntervalSince(startTime) + 30.0
+        timer = Timer.scheduledTimer(timeInterval: pitchSampleRate, target: self, selector: #selector(LongToneViewController.updateTracking), userInfo: nil, repeats: true)
     }
     
     func stopExercise(){
@@ -426,31 +442,37 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
         
         if isExerciseSuccess
         {
-            balloon.fillColor = UIColor.greenColor().CGColor
+            balloon.fillColor = UIColor.green.cgColor
             feedbackLbl.text = "You did it!"
-            smileImageView.hidden = false
+            smileImageView.isHidden = false
         }
         else
         {
-            timer = NSTimer.scheduledTimerWithTimeInterval(balloonUpdateRate, target: self, selector: #selector(LongToneViewController.deflateBalloon), userInfo: nil, repeats: true)
+            timer = Timer.scheduledTimer(timeInterval: balloonUpdateRate, target: self, selector: #selector(LongToneViewController.deflateBalloon), userInfo: nil, repeats: true)
             feedbackLbl.text = "Almost..."
         }
         
-        feedbackLbl.hidden = false
+        feedbackLbl.isHidden = false
 
         if firstTime {
-            playBtn.hidden = false
-            playBtn.enabled = true
-            playBtn.setTitle("Try Again", forState: .Normal)
+            playBtn.isHidden = false
+            playBtn.isEnabled = true
+            playBtn.setTitle("Try Again", for: UIControlState())
             firstTime = false
         } else {
-            playBtn.hidden = false
-            playBtn.enabled = true
-            playBtn.setTitle("Next Exercise", forState: .Normal)
+            playBtn.isHidden = false
+            playBtn.isEnabled = true
+            playBtn.setTitle("Next Exercise", for: UIControlState())
         }
  
-        exerciseState = ExerciseState.Completed
-        
+        exerciseState = ExerciseState.completed
+
+        if isExerciseSuccess {
+            feedbackView.setupFeedbackView(self)
+            let feedbackRect = visualizationPanel.frame
+            feedbackView.contentMode = .scaleAspectFill
+            feedbackView.showFeedback(feedbackRect)
+        }
 //        delay(0.5){
 //            self.feedbackPnl.center.y += 40
 //            self.feedbackPnl.transform = CGAffineTransformMakeScale(0.5, 0.5)
@@ -462,18 +484,21 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
 //            
 //            self.exerciseState = ExerciseState.FeedbackProvided
 //        }
-        self.exerciseState = ExerciseState.FeedbackProvided
+        self.exerciseState = ExerciseState.feedbackProvided
     }
     
     func updateTracking()
     {
-        if NSDate().timeIntervalSinceDate(startTime) > longToneEndTime {
+        if Date().timeIntervalSince(startTime) > longToneEndTime {
             // we're done!
             stopExercise()
         }
 
-        let amplitude = AudioKitManager.sharedInstance.amplitude()
-        let frequency = AudioKitManager.sharedInstance.frequency()
+//        let amplitude = AudioKitManager.sharedInstance.amplitude()
+//        let frequency = AudioKitManager.sharedInstance.frequency()
+        let amplitude = AudioKitManager.sharedInstance.frequencyTracker.amplitude
+        let frequency = AudioKitManager.sharedInstance.frequencyTracker.frequency
+
 //        print("amplitude / freq = \(amplitude) / \(frequency)")
 
         if amplitude > 0.01 {
@@ -490,9 +515,9 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
                     } else {
                         timerLbl.text = String(format: "%.2f/%.2f", currentTime, targetTime)
                         balloon.radius += 0.3
-                        playBtn.hidden = false
-                        playBtn.enabled = false
-                        playBtn.setTitle("Keep it up!", forState: .Normal)
+                        playBtn.isHidden = false
+                        playBtn.isEnabled = false
+                        playBtn.setTitle("Keep it up!", for: UIControlState())
                     }
                 } else if hasNoteStarted {
                     //outside threshold
@@ -538,15 +563,15 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     }
     
     //MARK: SSSyControls protocol
-    func partEnabled(partIndex: Int32) -> Bool {
+    func partEnabled(_ partIndex: Int32) -> Bool {
         return partIndex == self.partIndex
     }
     
-    func partInstrument(partIndex: Int32) -> UInt32 {
+    func partInstrument(_ partIndex: Int32) -> UInt32 {
         return instrumentId
     }
     
-    func partVolume(partIndex: Int32) -> Float {
+    func partVolume(_ partIndex: Int32) -> Float {
         return 1.0
     }
     

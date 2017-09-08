@@ -78,21 +78,16 @@ static const float kBarlineBackgroundMargin = 5;
 	const float midBarLine = barlineRect.origin.x + barlineRect.size.width/2;
 	UIBezierPath *path = UIBezierPath.bezierPath;
 	CGRect rThick =
-	{	systemLeft + midBarLine - thick/2, // thick barline straddles existing barline
-		systemTop + barlineRect.origin.y,
-		thick,
-		barlineRect.size.height };
+	{	{systemLeft + midBarLine - thick/2, // thick barline straddles existing barline
+		systemTop + barlineRect.origin.y},
+		{thick, barlineRect.size.height} };
 	[path appendPath:[UIBezierPath bezierPathWithRect:rThick]];
-	float thinLeft = (loc == sscore_bl_left)	? rThick.origin.x + thick + barlineGap
-	: rThick.origin.x - barlineGap - thin;
+	float thinLeft = (loc == sscore_bl_left) ? rThick.origin.x + thick + barlineGap : rThick.origin.x - barlineGap - thin;
 	CGRect rThin =
-	{	thinLeft,
-		rThick.origin.y,
-		thin,
-		barlineRect.size.height };
+	{	{thinLeft, rThick.origin.y},
+		{thin, barlineRect.size.height} };
 	[path appendPath:[UIBezierPath bezierPathWithRect:rThin]];
-	float dotLeft = (loc == sscore_bl_left)	? thinLeft + thin + dotGap
-	: thinLeft - dotGap - 2*dotRadius;
+	float dotLeft = (loc == sscore_bl_left)	? thinLeft + thin + dotGap : thinLeft - dotGap - 2*dotRadius;
 	// add 2 dots
 	for (SSStaff *staff in staffLayout.staves)
 	{

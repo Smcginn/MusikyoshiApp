@@ -19,9 +19,9 @@ class DotView: UIImageView {
         
         
         layer.cornerRadius = frame.height / 2   //h and w should be ==
-        layer.backgroundColor = backColor.CGColor
+        layer.backgroundColor = backColor.cgColor
         
-        userInteractionEnabled = false
+        isUserInteractionEnabled = false
     }
     
     /*
