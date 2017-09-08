@@ -21,8 +21,6 @@
 		6324D30D1CE72F8D001934A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6324D2DE1CE71B1A001934A5 /* LaunchScreen.storyboard */; };
 		6324D30E1CE72F8D001934A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6324D2DC1CE71B1A001934A5 /* Assets.xcassets */; };
 		6324D30F1CE72F8D001934A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6324D2D61CE71B19001934A5 /* Main.storyboard */; };
-		6324D3161CE73234001934A5 /* SeeScoreLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6324D3151CE73234001934A5 /* SeeScoreLib.framework */; };
-		6324D3171CE73234001934A5 /* SeeScoreLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6324D3151CE73234001934A5 /* SeeScoreLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6324D31A1CE7327F001934A5 /* SeeScoreLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6324D3191CE7327F001934A5 /* SeeScoreLib.framework */; };
 		6324D31B1CE7327F001934A5 /* SeeScoreLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6324D3191CE7327F001934A5 /* SeeScoreLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6324D35E1CE73C47001934A5 /* SSScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6324D3501CE73C47001934A5 /* SSScrollView.m */; };
@@ -335,6 +333,8 @@
 		63EB90171CF1C4EB00F09B05 /* AVAudioSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EB90161CF1C4EB00F09B05 /* AVAudioSessionManager.swift */; };
 		63EB90181CF1C4EC00F09B05 /* AVAudioSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EB90161CF1C4EB00F09B05 /* AVAudioSessionManager.swift */; };
 		63EE547D1E62A2F000F5E21D /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 63C03AB91E2A0B11009F4033 /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BDF308FA1F630AF500F0A819 /* SeeScoreLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6324D3151CE73234001934A5 /* SeeScoreLib.framework */; };
+		BDF308FB1F630AF500F0A819 /* SeeScoreLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6324D3151CE73234001934A5 /* SeeScoreLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -426,7 +426,7 @@
 			files = (
 				63C03ABB1E2A0B11009F4033 /* AudioKit.framework in Embed Frameworks */,
 				635A60A91EC6BADD0099154A /* AEXML.framework in Embed Frameworks */,
-				6324D3171CE73234001934A5 /* SeeScoreLib.framework in Embed Frameworks */,
+				BDF308FB1F630AF500F0A819 /* SeeScoreLib.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -663,7 +663,7 @@
 			files = (
 				63C03ABA1E2A0B11009F4033 /* AudioKit.framework in Frameworks */,
 				635A60A81EC6BADD0099154A /* AEXML.framework in Frameworks */,
-				6324D3161CE73234001934A5 /* SeeScoreLib.framework in Frameworks */,
+				BDF308FA1F630AF500F0A819 /* SeeScoreLib.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1084,8 +1084,8 @@
 				TargetAttributes = {
 					6324D2CE1CE71B19001934A5 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = A2SGEM86LX;
-						LastSwiftMigration = 0820;
+						DevelopmentTeam = Q94UUT4TBF;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -1104,7 +1104,7 @@
 						TestTargetID = 6324D2CE1CE71B19001934A5;
 					};
 					6324D3051CE72F8D001934A5 = {
-						DevelopmentTeam = A2SGEM86LX;
+						DevelopmentTeam = Q94UUT4TBF;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -1747,7 +1747,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = A2SGEM86LX;
+				DEVELOPMENT_TEAM = Q94UUT4TBF;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1777,7 +1777,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = A2SGEM86LX;
+				DEVELOPMENT_TEAM = Q94UUT4TBF;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1855,7 +1855,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: David Reich (JRZ683P359)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = A2SGEM86LX;
+				DEVELOPMENT_TEAM = Q94UUT4TBF;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1883,7 +1883,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Stellar Software Pty Ltd (A2SGEM86LX)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = A2SGEM86LX;
+				DEVELOPMENT_TEAM = Q94UUT4TBF;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

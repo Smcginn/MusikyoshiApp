@@ -278,8 +278,8 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                 layOptions.ignoreXMLPositions = false
                 layOptions.useXMLxLayout = true
                 ssScrollView.optimalXMLxLayoutMagnification = true
-            } else {
-                ssScrollView.optimalSingleSystem = true
+//            } else {
+//                ssScrollView.optimalSingleSystem = true
             }
             //            ssScrollView.setupScore(score, openParts: showingParts, mag: kDefaultMagnification, opt: layOptions)
             ssScrollView.setupScore(score, openParts: showingParts, mag: kDefaultMagnification, opt: layOptions, completion: getPlayData)
@@ -393,7 +393,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                     displayNotes(playData!)
                 #endif
                 // setup bar change notification to set threshold - or move cursor
-                var cursorAnimationTime_ms = Int32(timingThreshold * 1000)
+                let cursorAnimationTime_ms = Int32(timingThreshold * 1000)
                 
 //                if showNoteMarkers {
 //                    let cursorAnimationTime = CATransaction.animationDuration()
