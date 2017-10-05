@@ -160,8 +160,6 @@
 		633C2ADE1CE813E7001C5C16 /* XML Tunes in Resources */ = {isa = PBXBuildFile; fileRef = 633C2ADC1CE813E7001C5C16 /* XML Tunes */; };
 		633C2AE11CE86915001C5C16 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633C2AE01CE86915001C5C16 /* Constants.swift */; };
 		633C2AE21CE86915001C5C16 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633C2AE01CE86915001C5C16 /* Constants.swift */; };
-		633C2AE41CE86CF4001C5C16 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633C2AE31CE86CF4001C5C16 /* SettingsViewController.swift */; };
-		633C2AE51CE86CF4001C5C16 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633C2AE31CE86CF4001C5C16 /* SettingsViewController.swift */; };
 		633CA1D31CF73D0C00061F3D /* GreenSmile.png in Resources */ = {isa = PBXBuildFile; fileRef = 633CA1D01CF73D0C00061F3D /* GreenSmile.png */; };
 		633CA1D41CF73D0C00061F3D /* FarArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 633CA1D11CF73D0C00061F3D /* FarArrow.png */; };
 		633CA1D51CF73D0C00061F3D /* NearArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 633CA1D21CF73D0C00061F3D /* NearArrow.png */; };
@@ -335,6 +333,8 @@
 		63EE547D1E62A2F000F5E21D /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 63C03AB91E2A0B11009F4033 /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BD7C17471F860E3B002AF462 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7C17461F860E3B002AF462 /* HomeViewController.swift */; };
 		BD7C174E1F86148A002AF462 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7C17461F860E3B002AF462 /* HomeViewController.swift */; };
+		BD7C17501F861755002AF462 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7C174F1F861755002AF462 /* SettingsTableViewController.swift */; };
+		BD7C17511F861759002AF462 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7C174F1F861755002AF462 /* SettingsTableViewController.swift */; };
 		BDF308FA1F630AF500F0A819 /* SeeScoreLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6324D3151CE73234001934A5 /* SeeScoreLib.framework */; };
 		BDF308FB1F630AF500F0A819 /* SeeScoreLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6324D3151CE73234001934A5 /* SeeScoreLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -490,7 +490,6 @@
 		633C2AD91CE80DA5001C5C16 /* PracticeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PracticeViewController.swift; sourceTree = "<group>"; };
 		633C2ADC1CE813E7001C5C16 /* XML Tunes */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "XML Tunes"; sourceTree = "<group>"; };
 		633C2AE01CE86915001C5C16 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		633C2AE31CE86CF4001C5C16 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		633CA1D01CF73D0C00061F3D /* GreenSmile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GreenSmile.png; path = Images/GreenSmile.png; sourceTree = "<group>"; };
 		633CA1D11CF73D0C00061F3D /* FarArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FarArrow.png; path = Images/FarArrow.png; sourceTree = "<group>"; };
 		633CA1D21CF73D0C00061F3D /* NearArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NearArrow.png; path = Images/NearArrow.png; sourceTree = "<group>"; };
@@ -633,6 +632,7 @@
 		63C03AB91E2A0B11009F4033 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AudioKit.framework; sourceTree = "<group>"; };
 		63EB90161CF1C4EB00F09B05 /* AVAudioSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAudioSessionManager.swift; sourceTree = "<group>"; };
 		BD7C17461F860E3B002AF462 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		BD7C174F1F861755002AF462 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -791,9 +791,9 @@
 			children = (
 				6381294F1CF05BF800A40C8E /* LongToneViewController.swift */,
 				633C2AD91CE80DA5001C5C16 /* PracticeViewController.swift */,
-				633C2AE31CE86CF4001C5C16 /* SettingsViewController.swift */,
 				6324D3031CE72E5D001934A5 /* TuneExerciseViewController.swift */,
 				BD7C17461F860E3B002AF462 /* HomeViewController.swift */,
+				BD7C174F1F861755002AF462 /* SettingsTableViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -1526,7 +1526,6 @@
 				633D1B6D1CF94BEC00B5C4FD /* FeedbackView.swift in Sources */,
 				633C2ADB1CE80DA5001C5C16 /* PracticeViewController.swift in Sources */,
 				6324D3631CE73C47001934A5 /* First Stage_key.m in Sources */,
-				633C2AE51CE86CF4001C5C16 /* SettingsViewController.swift in Sources */,
 				638129591CF05C7900A40C8E /* Balloon.swift in Sources */,
 				6324D2DB1CE71B1A001934A5 /* FirstStage.xcdatamodeld in Sources */,
 				639A2E461CF5AB09004F7B1A /* DotView.swift in Sources */,
@@ -1535,6 +1534,7 @@
 				635A60A61EC6B8050099154A /* MusicXMLModifier.swift in Sources */,
 				63B427591E5016AB000E35AA /* Intonation.swift in Sources */,
 				63EB90181CF1C4EC00F09B05 /* AVAudioSessionManager.swift in Sources */,
+				BD7C17501F861755002AF462 /* SettingsTableViewController.swift in Sources */,
 				63D5E8861EA37BDA007AE8D4 /* Note.swift in Sources */,
 				63D5E8831EA37BCC007AE8D4 /* NoteService.swift in Sources */,
 				6324D3041CE72E5D001934A5 /* TuneExerciseViewController.swift in Sources */,
@@ -1577,7 +1577,6 @@
 				633D1B711CF94BF000B5C4FD /* FeedbackView.swift in Sources */,
 				633C2ADA1CE80DA5001C5C16 /* PracticeViewController.swift in Sources */,
 				6324D3621CE73C47001934A5 /* First Stage_key.m in Sources */,
-				633C2AE41CE86CF4001C5C16 /* SettingsViewController.swift in Sources */,
 				638129581CF05C7900A40C8E /* Balloon.swift in Sources */,
 				6324D3071CE72F8D001934A5 /* FirstStage.xcdatamodeld in Sources */,
 				639A2E451CF5AB09004F7B1A /* DotView.swift in Sources */,
@@ -1586,6 +1585,7 @@
 				635A60A71EC6B8060099154A /* MusicXMLModifier.swift in Sources */,
 				6324D3601CE73C47001934A5 /* SSSystemView.m in Sources */,
 				63EB90171CF1C4EB00F09B05 /* AVAudioSessionManager.swift in Sources */,
+				BD7C17511F861759002AF462 /* SettingsTableViewController.swift in Sources */,
 				63D5E8851EA37BDA007AE8D4 /* Note.swift in Sources */,
 				63D5E8841EA37BCD007AE8D4 /* NoteService.swift in Sources */,
 				6324D3091CE72F8D001934A5 /* TuneExerciseViewController.swift in Sources */,
