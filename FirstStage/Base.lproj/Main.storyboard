@@ -155,15 +155,11 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jE4-qC-R85">
-                                <rect key="frame" x="213.5" y="229" width="141" height="30"/>
-                                <state key="normal" title="Start a New Practice"/>
+                                <rect key="frame" x="234.5" y="229" width="99" height="30"/>
+                                <state key="normal" title="Start a Lesson"/>
                                 <connections>
                                     <segue destination="BeF-9b-eZF" kind="show" id="MkJ-Oc-ZVm"/>
                                 </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRO-AP-lD6">
-                                <rect key="frame" x="229.5" y="279" width="109" height="30"/>
-                                <state key="normal" title="Start a Lesson 1"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -171,10 +167,8 @@
                             <constraint firstItem="CLD-az-kyB" firstAttribute="trailing" secondItem="5p2-vT-b29" secondAttribute="trailingMargin" id="1Ir-RU-QXM"/>
                             <constraint firstItem="CLD-az-kyB" firstAttribute="leading" secondItem="5p2-vT-b29" secondAttribute="leadingMargin" id="7f4-QM-ACO"/>
                             <constraint firstItem="CLD-az-kyB" firstAttribute="top" secondItem="BXm-im-uHx" secondAttribute="bottom" constant="8" id="8Tu-wD-2Hp"/>
-                            <constraint firstItem="fRO-AP-lD6" firstAttribute="top" secondItem="jE4-qC-R85" secondAttribute="bottom" constant="20" id="Bd6-e6-i9t"/>
                             <constraint firstItem="jE4-qC-R85" firstAttribute="top" secondItem="CLD-az-kyB" secondAttribute="bottom" constant="64" id="gBc-qY-s6f"/>
                             <constraint firstItem="jE4-qC-R85" firstAttribute="centerX" secondItem="5p2-vT-b29" secondAttribute="centerX" id="jfg-z1-A1V"/>
-                            <constraint firstItem="fRO-AP-lD6" firstAttribute="centerX" secondItem="jE4-qC-R85" secondAttribute="centerX" id="xfJ-j0-Ji1"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="GJl-XI-tt0">
