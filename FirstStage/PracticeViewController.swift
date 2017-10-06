@@ -63,6 +63,12 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
 
     override func viewWillAppear(_ animated: Bool) {
         self.title = "Practice"
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight, andRotateTo: UIInterfaceOrientation.landscapeRight)
+    }
+    
+    override func viewWillDisappear(_ animated : Bool) {
+        super.viewWillDisappear(animated)
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
     }
     
     let tuneSegueIdentifier = "ShowTuneSegue"

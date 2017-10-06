@@ -13,8 +13,9 @@ import UIKit
 class SettingsTableViewController: UITableViewController
 {
     
-    @IBOutlet weak var bpmLabel: UILabel!
-    @IBOutlet weak var bpmStepper: UIStepper!
+    @IBOutlet weak var bpmTextField: UITextField! {
+        didSet { bpmTextField?.addDoneCancelToolbar() }
+    }
     @IBOutlet weak var showMarkersControl: UISwitch!
     @IBOutlet weak var showAnalysisControl: UISwitch!
     @IBOutlet weak var synthInstrumentControl: UISegmentedControl!
@@ -24,10 +25,6 @@ class SettingsTableViewController: UITableViewController
     @IBOutlet weak var noteWidthStepper: UIStepper!
     @IBOutlet weak var signatureWidthLabel: UILabel!
     @IBOutlet weak var signatureWidthStepper: UIStepper!
-    
-    @IBAction func bpmStepperChanged(_ sender: UIStepper) {
-        bpmLabel.text = String(Int(bpmStepper.value))
-    }
     
     @IBAction func showAnalysisControlChanged(_ sender: UISwitch) {
     }
@@ -75,8 +72,7 @@ class SettingsTableViewController: UITableViewController
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        bpmStepper.value = UserDefaults.standard.double(forKey: Constants.Settings.BPM)
-        bpmLabel.text = String(Int(bpmStepper.value))
+        bpmTextField.text = Constants.Settings.BPM
 
         showAnalysisControl.isSelected = UserDefaults.standard.bool(forKey: Constants.Settings.ShowAnalysis) ? true : false
         showMarkersControl.isSelected = UserDefaults.standard.bool(forKey: Constants.Settings.ShowNoteMarkers) ? true : false
@@ -93,7 +89,6 @@ class SettingsTableViewController: UITableViewController
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        UserDefaults.standard.set(bpmStepper.value, forKey: Constants.Settings.BPM)
         UserDefaults.standard.set(showMarkersControl.isSelected == true, forKey: Constants.Settings.ShowNoteMarkers)
         UserDefaults.standard.set(showAnalysisControl.isSelected == true, forKey: Constants.Settings.ShowAnalysis)
         UserDefaults.standard.set(synthInstrumentControl.selectedSegmentIndex != 1, forKey: Constants.Settings.PlayTrumpet)
@@ -103,4 +98,26 @@ class SettingsTableViewController: UITableViewController
         
         super.viewWillDisappear(animated)
     }
+}
+
+extension UITextField {
+    func addDoneCancelToolbar(onDone: (target: Any, action: Selector)? = nil, onCancel: (target: Any, action: Selector)? = nil) {
+        let onCancel = onCancel ?? (target: self, action: #selector(cancelButtonTapped))
+        let onDone = onDone ?? (target: self, action: #selector(doneButtonTapped))
+        
+        let toolbar: UIToolbar = UIToolbar()
+        toolbar.barStyle = .default
+        toolbar.items = [
+            UIBarButtonItem(title: "Cancel", style: .plain, target: onCancel.target, action: onCancel.action),
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
+            UIBarButtonItem(title: "Done", style: .done, target: onDone.target, action: onDone.action)
+        ]
+        toolbar.sizeToFit()
+        
+        self.inputAccessoryView = toolbar
+    }
+    
+    // Default actions:
+    func doneButtonTapped() { self.resignFirstResponder() }
+    func cancelButtonTapped() { self.resignFirstResponder() }
 }

@@ -114,6 +114,15 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
         setupImageViews()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight, andRotateTo: UIInterfaceOrientation.landscapeRight)
+    }
+    
+    override func viewWillDisappear(_ animated : Bool) {
+        super.viewWillDisappear(animated)
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
+    }
+    
     @IBAction func sparkLineTapped(_ sender: UITapGestureRecognizer) {
         playScore()
     }

@@ -189,9 +189,15 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         frequencyThresholdPercent = 1.0 + frequencyThreshold
 //        setupSounds()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight, andRotateTo: UIInterfaceOrientation.landscapeRight)
+    }
 
     override func viewWillDisappear(_ animated: Bool) {
         stopPlaying()
+        super.viewWillDisappear(animated)
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
     }
     
     override func didReceiveMemoryWarning() {
