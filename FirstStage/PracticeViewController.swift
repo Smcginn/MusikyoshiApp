@@ -63,7 +63,7 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
 
     override func viewWillAppear(_ animated: Bool) {
         self.title = "Practice"
-        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight, andRotateTo: UIInterfaceOrientation.landscapeRight)
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight)
     }
     
     override func viewWillDisappear(_ animated : Bool) {

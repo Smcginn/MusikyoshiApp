@@ -115,7 +115,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight, andRotateTo: UIInterfaceOrientation.landscapeRight)
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight)
     }
     
     override func viewWillDisappear(_ animated : Bool) {
