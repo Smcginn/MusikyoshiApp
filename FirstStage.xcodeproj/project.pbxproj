@@ -333,6 +333,8 @@
 		BD8B79061F95BF75005B31CB /* PracticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8B79041F95BF75005B31CB /* PracticeViewController.swift */; };
 		BD8B790E1F95BFB4005B31CB /* LessonOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8B790D1F95BFB4005B31CB /* LessonOverviewViewController.swift */; };
 		BD8B790F1F95BFB4005B31CB /* LessonOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8B790D1F95BFB4005B31CB /* LessonOverviewViewController.swift */; };
+		BD8B79111F95C11B005B31CB /* UserAtributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8B79101F95C11B005B31CB /* UserAtributes.swift */; };
+		BD8B79121F95C11B005B31CB /* UserAtributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8B79101F95C11B005B31CB /* UserAtributes.swift */; };
 		BDF308FA1F630AF500F0A819 /* SeeScoreLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6324D3151CE73234001934A5 /* SeeScoreLib.framework */; };
 		BDF308FB1F630AF500F0A819 /* SeeScoreLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6324D3151CE73234001934A5 /* SeeScoreLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C90339351FB126AA005A9C7D /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C931B0EF1FB120B4003376F9 /* AudioKit.framework */; };
@@ -634,6 +636,7 @@
 		C90339361FB131D3005A9C7D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C90339381FB13239005A9C7D /* Changelog.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Changelog.md; sourceTree = "<group>"; };
 		C931B0EF1FB120B4003376F9 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioKit.framework; path = Carthage/Build/iOS/AudioKit.framework; sourceTree = "<group>"; };
+		BD8B79101F95C11B005B31CB /* UserAtributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAtributes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -785,6 +788,7 @@
 				6324D36D1CE73ED9001934A5 /* NoteOffset.swift */,
 				6324D3681CE73ED9001934A5 /* NoteService.swift */,
 				63BF9E061EBFFF07002BB5C1 /* MusicXMLModifier.swift */,
+				BD8B79101F95C11B005B31CB /* UserAtributes.swift */,
 			);
 			name = Brain;
 			sourceTree = "<group>";
@@ -1599,6 +1603,7 @@
 				6324D3651CE73C47001934A5 /* SSPlayLoopGraphics.m in Sources */,
 				6324D35F1CE73C47001934A5 /* SSScrollView.m in Sources */,
 				BD7C17471F860E3B002AF462 /* HomeViewController.swift in Sources */,
+				BD8B79121F95C11B005B31CB /* UserAtributes.swift in Sources */,
 				6381295B1CF05C7900A40C8E /* SparkLine.swift in Sources */,
 				6379EE7E1CE95CDF00188A70 /* NoteAnalysis.swift in Sources */,
 				6324D3731CE73ED9001934A5 /* Enums.swift in Sources */,
@@ -1651,6 +1656,7 @@
 				6324D3641CE73C47001934A5 /* SSPlayLoopGraphics.m in Sources */,
 				6324D35E1CE73C47001934A5 /* SSScrollView.m in Sources */,
 				BD7C174E1F86148A002AF462 /* HomeViewController.swift in Sources */,
+				BD8B79111F95C11B005B31CB /* UserAtributes.swift in Sources */,
 				6381295A1CF05C7900A40C8E /* SparkLine.swift in Sources */,
 				6379EE7D1CE95CDF00188A70 /* NoteAnalysis.swift in Sources */,
 				6324D3721CE73ED9001934A5 /* Enums.swift in Sources */,
