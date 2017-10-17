@@ -1,15 +1,16 @@
 //
-//  PracticeViewController.swift
+//  LessonMenuViewController.swift
 //  FirstFive
 //
 //  Created by Adam Kinney on 11/27/15.
 //  Changed by David S Reich - 2016.
+//  Changed by John Cook - 2017.
 //  Copyright © 2015 Musikyoshi. All rights reserved.
 //
 
 import UIKit
 
-class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class LessonMenuViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     var optionIndex = 0
     
@@ -62,7 +63,7 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        self.title = "Practice"
+        self.title = "Lesson" // + profile.currentLessonNumber
         AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight)
     }
     
