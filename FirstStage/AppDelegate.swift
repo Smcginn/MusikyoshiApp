@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     var orientationLock = UIInterfaceOrientationMask.portrait
-    
+        
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
         return self.orientationLock
     }
@@ -59,8 +59,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //initialize data
         _ = AVAudioSessionManager.sharedInstance.setupAudioSession()
         NoteService.initNotes()
+        
+        let entityName = String(describing: UserAttributes.self)
+        let request = NSFetchRequest<UserAttributes>(entityName: entityName)
+        let objects = (try? managedObjectContext.fetch(request) as? [UserAttributes])
+        if let results = objects {
+            if results!.count < 1 {
+                initializeUserAttributes()
+            }
+        }
 
         return true
+    }
+    
+    func initializeUserAttributes() {
+        let entity = NSEntityDescription.entity(forEntityName: "UserAttributes", in: managedObjectContext)!
+        let userAttributes = NSManagedObject(entity: entity, insertInto: managedObjectContext)
+        userAttributes.setValue(1, forKey: "currentLessonNumber")
+        do {
+            try managedObjectContext.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

@@ -8,8 +8,12 @@
 //  Copyright © 2015 Musikyoshi. All rights reserved.
 //
 import UIKit
+import CoreData
 
 class LessonOverviewViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    let managedContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
+    var userAttributes: UserAttributes?
     
     var optionIndex = 0
     
@@ -62,7 +66,8 @@ class LessonOverviewViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.title = "Lesson 1" // + profile.currentLessonNumber
+        fetch()
+        self.title = "Lesson " + "\(userAttributes!.getCurrentLessonNumber())"
         AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight)
     }
     
@@ -255,6 +260,15 @@ class LessonOverviewViewController: UIViewController, UIPickerViewDelegate, UIPi
         }
         
         return nil
+    }
+    
+    func fetch() {
+        let entityName = String(describing: UserAttributes.self)
+        let request = NSFetchRequest<UserAttributes>(entityName: entityName)
+        if let fetchResults = (try? managedContext.fetch(request) as? [UserAttributes]) {
+            userAttributes = fetchResults?.first!
+        }
+        
     }
     
 }
