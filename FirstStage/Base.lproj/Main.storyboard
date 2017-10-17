@@ -110,7 +110,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lBo-xE-883" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3397" y="793"/>
+            <point key="canvasLocation" x="4113" y="789"/>
         </scene>
         <!--Home-->
         <scene sceneID="m9M-pR-XIt">
@@ -158,7 +158,7 @@
                                 <rect key="frame" x="234.5" y="229" width="99" height="30"/>
                                 <state key="normal" title="Start a Lesson"/>
                                 <connections>
-                                    <segue destination="BeF-9b-eZF" kind="show" id="MkJ-Oc-ZVm"/>
+                                    <segue destination="Rfs-ce-a3h" kind="show" id="6gT-PZ-tWX"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -209,7 +209,7 @@
             </objects>
             <point key="canvasLocation" x="1326" y="793"/>
         </scene>
-        <!--Lesson-->
+        <!--Lesson 1-->
         <scene sceneID="xqv-Sv-Y5a">
             <objects>
                 <viewController id="BeF-9b-eZF" customClass="LessonMenuViewController" customModule="FirstStage" customModuleProvider="target" sceneMemberID="viewController">
@@ -323,7 +323,7 @@
                             <constraint firstItem="pd7-e9-Z7M" firstAttribute="top" secondItem="idO-9l-42Q" secondAttribute="bottom" constant="26" id="o0v-hl-jjr"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Lesson" id="Rje-b9-HLI"/>
+                    <navigationItem key="navigationItem" title="Lesson 1" id="Rje-b9-HLI"/>
                     <connections>
                         <outlet property="playLongNoteBtn" destination="hYh-VK-qvw" id="lkq-jQ-2Yi"/>
                         <outlet property="playRhythmBtn" destination="A3H-HL-Qy3" id="5Zs-xP-QS3"/>
@@ -332,7 +332,36 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZUV-Fh-GrU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2707" y="793"/>
+            <point key="canvasLocation" x="3411" y="788"/>
+        </scene>
+        <!--Lesson Menu-->
+        <scene sceneID="T0x-XP-eac">
+            <objects>
+                <viewController id="Rfs-ce-a3h" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eGv-1O-Qe7"/>
+                        <viewControllerLayoutGuide type="bottom" id="4ag-sZ-3IA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hBM-2H-OnR">
+                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4EL-UQ-QcG">
+                                <rect key="frame" x="26" y="111" width="60" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Lesson 1"/>
+                                <connections>
+                                    <segue destination="BeF-9b-eZF" kind="show" id="fQY-nf-07E"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Lesson Menu" id="tzv-TQ-bG5"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6oE-nH-V3a" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2710" y="789"/>
         </scene>
         <!--Long Tone-->
         <scene sceneID="Vqe-FU-GXQ">
