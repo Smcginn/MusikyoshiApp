@@ -212,7 +212,7 @@
         <!--Lesson 1-->
         <scene sceneID="xqv-Sv-Y5a">
             <objects>
-                <viewController id="BeF-9b-eZF" customClass="LessonMenuViewController" customModule="FirstStage" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BeF-9b-eZF" customClass="LessonOverviewViewController" customModule="FirstStage" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="idO-9l-42Q"/>
                         <viewControllerLayoutGuide type="bottom" id="fbF-iz-Azj"/>
