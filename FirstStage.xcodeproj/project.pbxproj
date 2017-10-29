@@ -339,6 +339,10 @@
 		BD8B790F1F95BFB4005B31CB /* LessonOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8B790D1F95BFB4005B31CB /* LessonOverviewViewController.swift */; };
 		BD8B79111F95C11B005B31CB /* UserAtributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8B79101F95C11B005B31CB /* UserAtributes.swift */; };
 		BD8B79121F95C11B005B31CB /* UserAtributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8B79101F95C11B005B31CB /* UserAtributes.swift */; };
+		BDF0FB141FA5978E0047B218 /* longtones in Resources */ = {isa = PBXBuildFile; fileRef = BDF0FB131FA5978E0047B218 /* longtones */; };
+		BDF0FB151FA5978E0047B218 /* longtones in Resources */ = {isa = PBXBuildFile; fileRef = BDF0FB131FA5978E0047B218 /* longtones */; };
+		BDF0FB291FA598050047B218 /* monkeytones-master in Resources */ = {isa = PBXBuildFile; fileRef = BDF0FB281FA598050047B218 /* monkeytones-master */; };
+		BDF0FB2A1FA598050047B218 /* monkeytones-master in Resources */ = {isa = PBXBuildFile; fileRef = BDF0FB281FA598050047B218 /* monkeytones-master */; };
 		BDF308FA1F630AF500F0A819 /* SeeScoreLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6324D3151CE73234001934A5 /* SeeScoreLib.framework */; };
 		BDF308FB1F630AF500F0A819 /* SeeScoreLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6324D3151CE73234001934A5 /* SeeScoreLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -639,6 +643,8 @@
 		BD8B79041F95BF75005B31CB /* PracticeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PracticeViewController.swift; sourceTree = "<group>"; };
 		BD8B790D1F95BFB4005B31CB /* LessonOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LessonOverviewViewController.swift; sourceTree = "<group>"; };
 		BD8B79101F95C11B005B31CB /* UserAtributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAtributes.swift; sourceTree = "<group>"; };
+		BDF0FB131FA5978E0047B218 /* longtones */ = {isa = PBXFileReference; lastKnownFileType = folder; name = longtones; path = "../../../Downloads/monkeytones-master/longtones"; sourceTree = "<group>"; };
+		BDF0FB281FA598050047B218 /* monkeytones-master */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "monkeytones-master"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -687,7 +693,9 @@
 				6324D2E91CE71B1A001934A5 /* FirstStageTests */,
 				6324D2F41CE71B1A001934A5 /* FirstStageUITests */,
 				6324D2D01CE71B19001934A5 /* Products */,
+				BDF0FB281FA598050047B218 /* monkeytones-master */,
 				635A608E1EC6B7B90099154A /* AEXML.xcodeproj */,
+				BDF0FB131FA5978E0047B218 /* longtones */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1212,6 +1220,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				634659141E90C6A000C162CF /* Trumpet.novib.mf.61.m4a in Resources */,
+				BDF0FB151FA5978E0047B218 /* longtones in Resources */,
 				634658C11E90C68E00C162CF /* Piano.mf.70.m4a in Resources */,
 				634658AA1E90C68E00C162CF /* Piano.mf.47.m4a in Resources */,
 				634658B11E90C68E00C162CF /* Piano.mf.54.m4a in Resources */,
@@ -1329,6 +1338,7 @@
 				634658961E90C68E00C162CF /* Piano.mf.27.m4a in Resources */,
 				634658DD1E90C68E00C162CF /* Piano.mf.98.m4a in Resources */,
 				6324D2D81CE71B19001934A5 /* Main.storyboard in Resources */,
+				BDF0FB2A1FA598050047B218 /* monkeytones-master in Resources */,
 				634658BC1E90C68E00C162CF /* Piano.mf.65.m4a in Resources */,
 				634658C91E90C68E00C162CF /* Piano.mf.78.m4a in Resources */,
 				634658E61E90C68E00C162CF /* Piano.mf.107.m4a in Resources */,
@@ -1363,6 +1373,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6336B1D41EA32B0200A78D02 /* Piano.mf.56.m4a in Resources */,
+				BDF0FB141FA5978E0047B218 /* longtones in Resources */,
 				6336B1CB1EA32B0200A78D02 /* Piano.mf.47.m4a in Resources */,
 				6336B1BA1EA32B0200A78D02 /* Piano.mf.30.m4a in Resources */,
 				6336B1961EA32AF000A78D02 /* Trumpet.novib.mf.58.m4a in Resources */,
@@ -1480,6 +1491,7 @@
 				6336B1A61EA32AF000A78D02 /* Trumpet.novib.mf.74.m4a in Resources */,
 				6336B1DE1EA32B0200A78D02 /* Piano.mf.66.m4a in Resources */,
 				6336B1D91EA32B0200A78D02 /* Piano.mf.61.m4a in Resources */,
+				BDF0FB291FA598050047B218 /* monkeytones-master in Resources */,
 				6336B1AB1EA32AF000A78D02 /* Trumpet.novib.mf.79.m4a in Resources */,
 				6336B1A81EA32AF000A78D02 /* Trumpet.novib.mf.76.m4a in Resources */,
 				6336B1FF1EA32B0200A78D02 /* Piano.mf.99.m4a in Resources */,
