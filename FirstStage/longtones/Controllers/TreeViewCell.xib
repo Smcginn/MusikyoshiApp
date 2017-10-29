@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina3_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="n0d-NR-EE2" customClass="TreeViewCell" customModule="Monkey_Tones" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="53"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="n0d-NR-EE2" id="x1e-dW-fEU">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1th" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qhw-zz-TOd">
+                        <rect key="frame" x="0.0" y="0.0" width="30" height="52.5"/>
+                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                        <color key="textColor" red="0.36078431370000003" green="0.094117647060000004" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="jHf-ci-tF1">
+                        <rect key="frame" x="30" y="0.0" width="339" height="52.5"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OjV-rv-5mt">
+                                <rect key="frame" x="0.0" y="0.0" width="48.5" height="52.5"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen fruit-apple G-v2.png" translatesAutoresizingMaskIntoConstraints="NO" id="cgP-Mq-wVK">
+                                        <rect key="frame" x="6" y="6" width="36.5" height="36.5"/>
+                                    </imageView>
+                                    <stackView opaque="NO" tag="2" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="9c8-Uk-sVI">
+                                        <rect key="frame" x="7" y="43" width="34" height="10"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen fruit-star W.png" translatesAutoresizingMaskIntoConstraints="NO" id="3nC-bX-YJ1">
+                                                <rect key="frame" x="0.0" y="0.0" width="8.5" height="10"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen fruit-star W.png" translatesAutoresizingMaskIntoConstraints="NO" id="gIq-K4-usb">
+                                                <rect key="frame" x="8.5" y="0.0" width="8.5" height="10"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen fruit-star W.png" translatesAutoresizingMaskIntoConstraints="NO" id="9zv-pC-0q8">
+                                                <rect key="frame" x="17" y="0.0" width="8.5" height="10"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen fruit-star W.png" translatesAutoresizingMaskIntoConstraints="NO" id="1qj-W1-EEE">
+                                                <rect key="frame" x="25.5" y="0.0" width="8.5" height="10"/>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="34" id="dW7-JE-Giu"/>
+                                            <constraint firstAttribute="height" constant="10" id="rXl-fs-VRV"/>
+                                        </constraints>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W1c-PR-QFr" customClass="UITintButton" customModule="Monkey_Tones" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="48.5" height="52.5"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="selectedColor">
+                                                <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.4002300941780822" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="cgP-Mq-wVK" firstAttribute="top" secondItem="OjV-rv-5mt" secondAttribute="top" constant="6" id="Aqf-vo-tF6"/>
+                                    <constraint firstAttribute="trailing" secondItem="cgP-Mq-wVK" secondAttribute="trailing" constant="6" id="Rns-1J-Mga"/>
+                                    <constraint firstAttribute="bottom" secondItem="9c8-Uk-sVI" secondAttribute="bottom" id="SP8-Eo-7zL"/>
+                                    <constraint firstItem="9c8-Uk-sVI" firstAttribute="centerX" secondItem="OjV-rv-5mt" secondAttribute="centerX" id="Wcg-tb-yhv"/>
+                                    <constraint firstItem="W1c-PR-QFr" firstAttribute="top" secondItem="OjV-rv-5mt" secondAttribute="top" id="bDY-r4-3ME"/>
+                                    <constraint firstAttribute="trailing" secondItem="W1c-PR-QFr" secondAttribute="trailing" id="ftV-rh-NKg"/>
+                                    <constraint firstAttribute="bottom" secondItem="cgP-Mq-wVK" secondAttribute="bottom" constant="10" id="ggg-Un-Kev"/>
+                                    <constraint firstItem="cgP-Mq-wVK" firstAttribute="leading" secondItem="OjV-rv-5mt" secondAttribute="leading" constant="6" id="m0Q-Fg-003"/>
+                                    <constraint firstAttribute="bottom" secondItem="W1c-PR-QFr" secondAttribute="bottom" id="mrz-Ik-7D7"/>
+                                    <constraint firstItem="W1c-PR-QFr" firstAttribute="leading" secondItem="OjV-rv-5mt" secondAttribute="leading" id="sB8-fe-G1J"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Hi-g9-8aA">
+                                <rect key="frame" x="48.5" y="0.0" width="48.5" height="52.5"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen fruit-orange G-v2.png" translatesAutoresizingMaskIntoConstraints="NO" id="cZ0-ne-L9O">
+                                        <rect key="frame" x="6" y="6" width="36.5" height="36.5"/>
+                                    </imageView>
+                                    <stackView opaque="NO" tag="2" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="adR-uj-spS">
+                                        <rect key="frame" x="7" y="43" width="34" height="10"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen fruit-star W.png" translatesAutoresizingMaskIntoConstraints="NO" id="fuq-8f-T4a">
+                                                <rect key="frame" x="0.0" y="0.0" width="8.5" height="10"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen fruit-star W.png" translatesAutoresizingMaskIntoConstraints="NO" id="Th3-Yw-E8a">
+                                                <rect key="frame" x="8.5" y="0.0" width="8.5" height="10"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen fruit-star W.png" translatesAutoresizingMaskIntoConstraints="NO" id="crz-Pd-DsZ">
+                                                <rect key="frame" x="17" y="0.0" width="8.5" height="10"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen fruit-star W.png" translatesAutoresizingMaskIntoConstraints="NO" id="xhM-mV-EZs">
+                                                <rect key="frame" x="25.5" y="0.0" width="8.5" height="10"/>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="34" id="1fL-09-sLs"/>
+                                            <constraint firstAttribute="height" constant="10" id="Esa-eF-ZSv"/>
+                                        </constraints>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AsX-Ga-KBE" customClass="UITintButton" customModule="Monkey_Tones" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="48.5" height="52.5"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="selectedColor">
+                                                <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.4002300942" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="cZ0-ne-L9O" firstAttribute="top" secondItem="1Hi-g9-8aA" secondAttribute="top" constant="6" id="C6e-dV-9LO"/>
+                                    <constraint firstItem="AsX-Ga-KBE" firstAttribute="leading" secondItem="1Hi-g9-8aA" secondAttribute="leading" id="HBQ-Mc-IgW"/>
+                                    <constraint firstAttribute="bottom" secondItem="cZ0-ne-L9O" secondAttribute="bottom" constant="10" id="Jh6-oP-BV9"/>
+                                    <constraint firstAttribute="trailing" secondItem="cZ0-ne-L9O" secondAttribute="trailing" constant="6" id="LTr-Qd-d6k"/>
+                                    <constraint firstAttribute="trailing" secondItem="AsX-Ga-KBE" secondAttribute="trailing" id="Vfn-VD-Yt1"/>
+                                    <constraint firstItem="AsX-Ga-KBE" firstAttribute="top" secondItem="1Hi-g9-8aA" secondAttribute="top" id="loo-QG-uSY"/>
+                                    <constraint firstItem="adR-uj-spS" firstAttribute="centerX" secondItem="1Hi-g9-8aA" secondAttribute="centerX" id="oND-3U-fx6"/>
+                                    <constraint firstAttribute="bottom" secondItem="adR-uj-spS" secondAttribute="bottom" id="wi4-kq-hAY"/>
+                                    <constraint firstAttribute="bottom" secondItem="AsX-Ga-KBE" secondAttribute="bottom" id="xnH-PC-sRz"/>
+                                    <constraint firstItem="cZ0-ne-L9O" firstAttribute="leading" secondItem="1Hi-g9-8aA" secondAttribute="leading" constant="6" id="yMg-kb-ODV"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5YP-ue-Hqu">
+                                <rect key="frame" x="97" y="0.0" width="48.5" height="52.5"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen fruit-pineapple G-v2.png" translatesAutoresizingMaskIntoConstraints="NO" id="sm9-6G-VXJ">
+                                        <rect key="frame" x="6" y="0.0" width="36.5" height="42.5"/>
+                                    </imageView>
+                                    <stackView opaque="NO" tag="2" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="mMt-G5-dLs">
+                                        <rect key="frame" x="6.5" y="43" width="34" height="10"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen fruit-star W.png" translatesAutoresizingMaskIntoConstraints="NO" id="3dB-Kk-Ucr">
+                                                <rect key="frame" x="0.0" y="0.0" width="8.5" height="10"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen fruit-star W.png" translatesAutoresizingMaskIntoConstraints="NO" id="Gux-I5-eEw">
+                                                <rect key="frame" x="8.5" y="0.0" width="8.5" height="10"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen fruit-star W.png" translatesAutoresizingMaskIntoConstraints="NO" id="qn3-7U-I9S">
+                                                <rect key="frame" x="17" y="0.0" width="8.5" height="10"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen fruit-star W.png" translatesAutoresizingMaskIntoConstraints="NO" id="vIG-f3-lCF">
+                                                <rect key="frame" x="25.5" y="0.0" width="8.5" height="10"/>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="10" id="BWE-Br-IEz"/>
+                                            <constraint firstAttribute="width" constant="34" id="W8W-Zp-tnn"/>
+                                        </constraints>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ciB-gB-cZW" customClass="UITintButton" customModule="Monkey_Tones" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="48.5" height="52.5"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="selectedColor">
+                                                <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.4002300942" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="sm9-6G-VXJ" firstAttribute="top" secondItem="5YP-ue-Hqu" secondAttribute="top" id="73D-Uy-Ddv"/>
+                                    <constraint firstItem="ciB-gB-cZW" firstAttribute="leading" secondItem="5YP-ue-Hqu" secondAttribute="leading" id="AI6-wl-3lB"/>
+                                    <constraint firstItem="sm9-6G-VXJ" firstAttribute="leading" secondItem="5YP-ue-Hqu" secondAttribute="leading" constant="6" id="YTx-zB-ddO"/>
+                                    <constraint firstItem="ciB-gB-cZW" firstAttribute="top" secondItem="5YP-ue-Hqu" secondAttribute="top" id="a8N-IT-xOB"/>
+                                    <constraint firstAttribute="bottom" secondItem="ciB-gB-cZW" secondAttribute="bottom" id="aav-gy-roS"/>
+                                    <constraint firstAttribute="trailing" secondItem="sm9-6G-VXJ" secondAttribute="trailing" constant="6" id="fjP-KW-Pit"/>
+                                    <constraint firstAttribute="bottom" secondItem="sm9-6G-VXJ" secondAttribute="bottom" constant="10" id="kdX-vd-lv4"/>
+                                    <constraint firstAttribute="bottom" secondItem="mMt-G5-dLs" secondAttribute="bottom" id="ozA-0S-WHx"/>
+                                    <constraint firstItem="mMt-G5-dLs" firstAttribute="centerX" secondItem="5YP-ue-Hqu" secondAttribute="centerX" id="uCH-ig-zTs"/>
+                                    <constraint firstAttribute="trailing" secondItem="ciB-gB-cZW" secondAttribute="trailing" id="vGc-kb-sEm"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WfX-lc-Dl5">
+                                <rect key="frame" x="145.5" y="0.0" width="48" height="52.5"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen fruit-banana G-v2.png" translatesAutoresizingMaskIntoConstraints="NO" id="uds-9F-fu4">
+                                        <rect key="frame" x="6" y="0.0" width="36" height="42.5"/>
+                                    </imageView>
+                                    <stackView opaque="NO" tag="2" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="sTa-Xs-hTh">
+                                        <rect key="frame" x="7" y="43" width="34" height="10"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen fruit-star W.png" translatesAutoresizingMaskIntoConstraints="NO" id="yMD-Bo-zn3">
+                                                <rect key="frame" x="0.0" y="0.0" width="8.5" height="10"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen fruit-star W.png" translatesAutoresizingMaskIntoConstraints="NO" id="cEA-i8-jKh">
+                                                <rect key="frame" x="8.5" y="0.0" width="8.5" height="10"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen fruit-star W.png" translatesAutoresizingMaskIntoConstraints="NO" id="nmr-UI-jem">
+                                                <rect key="frame" x="17" y="0.0" width="8.5" height="10"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen fruit-star W.png" translatesAutoresizingMaskIntoConstraints="NO" id="uyw-DM-T8j">
+                                                <rect key="frame" x="25.5" y="0.0" width="8.5" height="10"/>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="10" id="f9E-qV-aAg"/>
+                                            <constraint firstAttribute="width" constant="34" id="nK3-Oq-izH"/>
+                                        </constraints>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kg4-yh-6wQ" customClass="UITintButton" customModule="Monkey_Tones" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="48" height="52.5"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="selectedColor">
+                                                <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.4002300942" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="kg4-yh-6wQ" secondAttribute="bottom" id="2kq-FM-EBE"/>
+                                    <constraint firstAttribute="trailing" secondItem="uds-9F-fu4" secondAttribute="trailing" constant="6" id="IL2-Nh-U8G"/>
+                                    <constraint firstItem="kg4-yh-6wQ" firstAttribute="top" secondItem="WfX-lc-Dl5" secondAttribute="top" id="Nco-Zu-OZk"/>
+                                    <constraint firstAttribute="bottom" secondItem="uds-9F-fu4" secondAttribute="bottom" constant="10" id="PJs-EZ-JcN"/>
+                                    <constraint firstItem="kg4-yh-6wQ" firstAttribute="leading" secondItem="WfX-lc-Dl5" secondAttribute="leading" id="RCA-FJ-8bm"/>
+                                    <constraint firstAttribute="trailing" secondItem="kg4-yh-6wQ" secondAttribute="trailing" id="VIn-d1-P23"/>
+                                    <constraint firstItem="sTa-Xs-hTh" firstAttribute="centerX" secondItem="WfX-lc-Dl5" secondAttribute="centerX" id="icQ-k8-K5S"/>
+                                    <constraint firstAttribute="bottom" secondItem="sTa-Xs-hTh" secondAttribute="bottom" id="jkG-PB-wCY"/>
+                                    <constraint firstItem="uds-9F-fu4" firstAttribute="top" secondItem="WfX-lc-Dl5" secondAttribute="top" id="u2s-AF-p29"/>
+                                    <constraint firstItem="uds-9F-fu4" firstAttribute="leading" secondItem="WfX-lc-Dl5" secondAttribute="leading" constant="6" id="uvp-ue-XwS"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0iA-r5-r94">
+                                <rect key="frame" x="193.5" y="0.0" width="48.5" height="52.5"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen fruit-watermelon G-v2.png" translatesAutoresizingMaskIntoConstraints="NO" id="irs-Ll-seu">
+                                        <rect key="frame" x="6" y="0.0" width="36.5" height="42.5"/>
+                                    </imageView>
+                                    <stackView opaque="NO" tag="2" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="8lD-FY-2sv">
+                                        <rect key="frame" x="7.5" y="43" width="34" height="10"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen fruit-star W.png" translatesAutoresizingMaskIntoConstraints="NO" id="uyE-Gb-Czz">
+                                                <rect key="frame" x="0.0" y="0.0" width="8.5" height="10"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen fruit-star W.png" translatesAutoresizingMaskIntoConstraints="NO" id="B8f-Qr-Zz8">
+                                                <rect key="frame" x="8.5" y="0.0" width="8.5" height="10"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen fruit-star W.png" translatesAutoresizingMaskIntoConstraints="NO" id="NIA-Fk-60H">
+                                                <rect key="frame" x="17" y="0.0" width="8.5" height="10"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen fruit-star W.png" translatesAutoresizingMaskIntoConstraints="NO" id="4SI-YS-1SA">
+                                                <rect key="frame" x="25.5" y="0.0" width="8.5" height="10"/>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="10" id="fVI-TD-DlS"/>
+                                            <constraint firstAttribute="width" constant="34" id="jBN-wd-aUB"/>
+                                        </constraints>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GvU-ea-xjM" customClass="UITintButton" customModule="Monkey_Tones" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="48.5" height="52.5"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="selectedColor">
+                                                <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.4002300942" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="irs-Ll-seu" firstAttribute="leading" secondItem="0iA-r5-r94" secondAttribute="leading" constant="6" id="13h-CL-cf3"/>
+                                    <constraint firstAttribute="trailing" secondItem="irs-Ll-seu" secondAttribute="trailing" constant="6" id="9QK-TV-HS8"/>
+                                    <constraint firstAttribute="bottom" secondItem="8lD-FY-2sv" secondAttribute="bottom" id="EHc-ax-FXm"/>
+                                    <constraint firstAttribute="bottom" secondItem="irs-Ll-seu" secondAttribute="bottom" constant="10" id="SXn-52-LOK"/>
+                                    <constraint firstItem="GvU-ea-xjM" firstAttribute="top" secondItem="0iA-r5-r94" secondAttribute="top" id="Swc-U3-amj"/>
+                                    <constraint firstItem="GvU-ea-xjM" firstAttribute="leading" secondItem="0iA-r5-r94" secondAttribute="leading" id="UAY-QI-ouU"/>
+                                    <constraint firstAttribute="bottom" secondItem="GvU-ea-xjM" secondAttribute="bottom" id="XPX-N7-IHP"/>
+                                    <constraint firstAttribute="trailing" secondItem="GvU-ea-xjM" secondAttribute="trailing" id="dFl-Xl-aCu"/>
+                                    <constraint firstItem="irs-Ll-seu" firstAttribute="top" secondItem="0iA-r5-r94" secondAttribute="top" id="noa-tt-xaZ"/>
+                                    <constraint firstItem="8lD-FY-2sv" firstAttribute="centerX" secondItem="0iA-r5-r94" secondAttribute="centerX" id="ubM-yk-DId"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fSm-g7-YzG">
+                                <rect key="frame" x="242" y="0.0" width="48.5" height="52.5"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen fruit-strawberry G-v2.png" translatesAutoresizingMaskIntoConstraints="NO" id="tef-my-68y">
+                                        <rect key="frame" x="6" y="6" width="36.5" height="36.5"/>
+                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="X6t-uo-gbb">
+                                        <rect key="frame" x="7.5" y="43" width="34" height="10"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen fruit-star W.png" translatesAutoresizingMaskIntoConstraints="NO" id="kgY-Bg-Z7n">
+                                                <rect key="frame" x="0.0" y="0.0" width="8.5" height="10"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen fruit-star W.png" translatesAutoresizingMaskIntoConstraints="NO" id="PVm-Vg-Mvk">
+                                                <rect key="frame" x="8.5" y="0.0" width="8.5" height="10"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen fruit-star W.png" translatesAutoresizingMaskIntoConstraints="NO" id="cxJ-kW-uhr">
+                                                <rect key="frame" x="17" y="0.0" width="8.5" height="10"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen fruit-star W.png" translatesAutoresizingMaskIntoConstraints="NO" id="fmD-gC-w6R">
+                                                <rect key="frame" x="25.5" y="0.0" width="8.5" height="10"/>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="34" id="M1z-Ei-T57"/>
+                                            <constraint firstAttribute="height" constant="10" id="VWv-yI-S7D"/>
+                                        </constraints>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gkx-lh-ito" customClass="UITintButton" customModule="Monkey_Tones" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="48.5" height="52.5"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="selectedColor">
+                                                <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.4002300942" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="X6t-uo-gbb" firstAttribute="centerX" secondItem="fSm-g7-YzG" secondAttribute="centerX" id="09K-W3-1AU"/>
+                                    <constraint firstItem="tef-my-68y" firstAttribute="top" secondItem="fSm-g7-YzG" secondAttribute="top" constant="6" id="1HM-Md-BEj"/>
+                                    <constraint firstItem="Gkx-lh-ito" firstAttribute="top" secondItem="fSm-g7-YzG" secondAttribute="top" id="FVU-6E-5Wn"/>
+                                    <constraint firstAttribute="trailing" secondItem="tef-my-68y" secondAttribute="trailing" constant="6" id="Td2-so-2S4"/>
+                                    <constraint firstItem="Gkx-lh-ito" firstAttribute="leading" secondItem="fSm-g7-YzG" secondAttribute="leading" id="USp-7T-GRT"/>
+                                    <constraint firstAttribute="bottom" secondItem="X6t-uo-gbb" secondAttribute="bottom" id="nTe-IV-gfa"/>
+                                    <constraint firstAttribute="bottom" secondItem="Gkx-lh-ito" secondAttribute="bottom" id="tjd-rs-I15"/>
+                                    <constraint firstItem="tef-my-68y" firstAttribute="leading" secondItem="fSm-g7-YzG" secondAttribute="leading" constant="6" id="uSm-q8-sCh"/>
+                                    <constraint firstAttribute="trailing" secondItem="Gkx-lh-ito" secondAttribute="trailing" id="uns-l8-pvr"/>
+                                    <constraint firstAttribute="bottom" secondItem="tef-my-68y" secondAttribute="bottom" constant="10" id="ybA-gz-qAt"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sxh-Kf-gdm">
+                                <rect key="frame" x="290.5" y="0.0" width="48.5" height="52.5"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen fruit-pear G-v2.png" translatesAutoresizingMaskIntoConstraints="NO" id="DER-kt-Z5T">
+                                        <rect key="frame" x="6" y="0.0" width="36.5" height="42.5"/>
+                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="o2t-8f-JWc">
+                                        <rect key="frame" x="7.5" y="43" width="34" height="10"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen fruit-star W.png" translatesAutoresizingMaskIntoConstraints="NO" id="LME-GY-slN">
+                                                <rect key="frame" x="0.0" y="0.0" width="8.5" height="10"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen fruit-star W.png" translatesAutoresizingMaskIntoConstraints="NO" id="197-me-HKO">
+                                                <rect key="frame" x="8.5" y="0.0" width="8.5" height="10"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen fruit-star W.png" translatesAutoresizingMaskIntoConstraints="NO" id="iKD-7L-fb2">
+                                                <rect key="frame" x="17" y="0.0" width="8.5" height="10"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen fruit-star W.png" translatesAutoresizingMaskIntoConstraints="NO" id="S1i-cI-2Zn">
+                                                <rect key="frame" x="25.5" y="0.0" width="8.5" height="10"/>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="10" id="jT5-WE-9fJ"/>
+                                            <constraint firstAttribute="width" constant="34" id="k7E-Gg-nEY"/>
+                                        </constraints>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3mL-ei-Ok3" customClass="UITintButton" customModule="Monkey_Tones" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="48.5" height="52.5"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="selectedColor">
+                                                <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.4002300942" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="DER-kt-Z5T" secondAttribute="trailing" constant="6" id="4Ul-O5-s6k"/>
+                                    <constraint firstItem="3mL-ei-Ok3" firstAttribute="leading" secondItem="sxh-Kf-gdm" secondAttribute="leading" id="9W0-ak-J7v"/>
+                                    <constraint firstItem="DER-kt-Z5T" firstAttribute="top" secondItem="sxh-Kf-gdm" secondAttribute="top" id="L9u-61-14b"/>
+                                    <constraint firstItem="DER-kt-Z5T" firstAttribute="leading" secondItem="sxh-Kf-gdm" secondAttribute="leading" constant="6" id="Sd7-Yt-KX3"/>
+                                    <constraint firstItem="3mL-ei-Ok3" firstAttribute="top" secondItem="sxh-Kf-gdm" secondAttribute="top" id="Tfu-PK-3qj"/>
+                                    <constraint firstAttribute="bottom" secondItem="3mL-ei-Ok3" secondAttribute="bottom" id="huL-hu-4Pu"/>
+                                    <constraint firstAttribute="bottom" secondItem="DER-kt-Z5T" secondAttribute="bottom" constant="10" id="mZJ-G3-Fbu"/>
+                                    <constraint firstItem="o2t-8f-JWc" firstAttribute="centerX" secondItem="sxh-Kf-gdm" secondAttribute="centerX" id="ph2-sP-rwS"/>
+                                    <constraint firstAttribute="bottom" secondItem="o2t-8f-JWc" secondAttribute="bottom" id="qzO-yJ-aNB"/>
+                                    <constraint firstAttribute="trailing" secondItem="3mL-ei-Ok3" secondAttribute="trailing" id="rh5-Sd-0sG"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="jHf-ci-tF1" secondAttribute="bottom" id="0aS-4I-wbI"/>
+                    <constraint firstAttribute="bottom" secondItem="Qhw-zz-TOd" secondAttribute="bottom" id="KaO-5P-8qc"/>
+                    <constraint firstAttribute="trailing" secondItem="jHf-ci-tF1" secondAttribute="trailing" constant="6" id="UFZ-Zk-vmD"/>
+                    <constraint firstItem="Qhw-zz-TOd" firstAttribute="leading" secondItem="x1e-dW-fEU" secondAttribute="leading" id="a15-N6-kd4"/>
+                    <constraint firstItem="Qhw-zz-TOd" firstAttribute="top" secondItem="x1e-dW-fEU" secondAttribute="top" id="a6X-TQ-FPs"/>
+                    <constraint firstItem="jHf-ci-tF1" firstAttribute="leading" secondItem="x1e-dW-fEU" secondAttribute="leading" constant="30" id="btV-BK-ooj"/>
+                    <constraint firstItem="jHf-ci-tF1" firstAttribute="top" secondItem="x1e-dW-fEU" secondAttribute="top" id="cXH-f6-Msg"/>
+                    <constraint firstItem="jHf-ci-tF1" firstAttribute="leading" secondItem="Qhw-zz-TOd" secondAttribute="trailing" id="s0S-EL-xaE"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="label" destination="Qhw-zz-TOd" id="mKm-QB-TwG"/>
+                <outletCollection property="buttons" destination="W1c-PR-QFr" collectionClass="NSMutableArray" id="8S7-p6-dVz"/>
+                <outletCollection property="buttons" destination="AsX-Ga-KBE" collectionClass="NSMutableArray" id="ZMs-Ye-dTC"/>
+                <outletCollection property="buttons" destination="ciB-gB-cZW" collectionClass="NSMutableArray" id="1gr-X1-Kyr"/>
+                <outletCollection property="buttons" destination="kg4-yh-6wQ" collectionClass="NSMutableArray" id="E0u-h9-g97"/>
+                <outletCollection property="buttons" destination="GvU-ea-xjM" collectionClass="NSMutableArray" id="PbH-aj-RsW"/>
+                <outletCollection property="buttons" destination="Gkx-lh-ito" collectionClass="NSMutableArray" id="GdQ-h9-vQY"/>
+                <outletCollection property="buttons" destination="3mL-ei-Ok3" collectionClass="NSMutableArray" id="5Qe-9V-4IT"/>
+                <outletCollection property="starContainers" destination="9c8-Uk-sVI" id="0Ei-oa-T44"/>
+                <outletCollection property="starContainers" destination="adR-uj-spS" id="Gfw-qQ-u1n"/>
+                <outletCollection property="starContainers" destination="mMt-G5-dLs" id="ZXQ-s2-XNe"/>
+                <outletCollection property="starContainers" destination="sTa-Xs-hTh" id="vug-Cz-v8g"/>
+                <outletCollection property="starContainers" destination="8lD-FY-2sv" id="ID0-Aw-PzX"/>
+                <outletCollection property="starContainers" destination="X6t-uo-gbb" id="beN-GK-zew"/>
+                <outletCollection property="starContainers" destination="o2t-8f-JWc" id="n5Z-7A-Yd3"/>
+            </connections>
+            <point key="canvasLocation" x="-28" y="86"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Screen fruit-apple G-v2.png" width="60" height="76"/>
+        <image name="Screen fruit-banana G-v2.png" width="58" height="99"/>
+        <image name="Screen fruit-orange G-v2.png" width="62" height="62"/>
+        <image name="Screen fruit-pear G-v2.png" width="57" height="107"/>
+        <image name="Screen fruit-pineapple G-v2.png" width="49" height="107"/>
+        <image name="Screen fruit-star W.png" width="17" height="16"/>
+        <image name="Screen fruit-strawberry G-v2.png" width="62" height="64"/>
+        <image name="Screen fruit-watermelon G-v2.png" width="70" height="98"/>
+    </resources>
+</document>

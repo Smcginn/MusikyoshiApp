@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Firebase
 
 func delay(_ delay:Double, closure:@escaping ()->()){
     DispatchQueue.main.asyncAfter(
@@ -39,6 +40,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        GCHelper.sharedInstance.authenticateLocalUser()
+        
+        NotificationsService.configurate()
+        FirebaseApp.configure()
+        
         // Override point for customization after application launch.
         //initialize Settings
         UserDefaults.standard.register(defaults: [

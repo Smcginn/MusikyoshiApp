@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		035BDC589100E33C4BC3F710 /* Pods_FirstStageUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC5330569B6DCF6CEBC9ABE /* Pods_FirstStageUITests.framework */; };
+		3967F5C922740531B9060213 /* Pods_FirstStage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A869E40C87F03056975723C0 /* Pods_FirstStage.framework */; };
 		6324D2D31CE71B19001934A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324D2D21CE71B19001934A5 /* AppDelegate.swift */; };
 		6324D2D81CE71B19001934A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6324D2D61CE71B19001934A5 /* Main.storyboard */; };
 		6324D2DB1CE71B1A001934A5 /* FirstStage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6324D2D91CE71B1A001934A5 /* FirstStage.xcdatamodeld */; };
@@ -339,12 +341,106 @@
 		BD8B790F1F95BFB4005B31CB /* LessonOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8B790D1F95BFB4005B31CB /* LessonOverviewViewController.swift */; };
 		BD8B79111F95C11B005B31CB /* UserAtributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8B79101F95C11B005B31CB /* UserAtributes.swift */; };
 		BD8B79121F95C11B005B31CB /* UserAtributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8B79101F95C11B005B31CB /* UserAtributes.swift */; };
-		BDF0FB141FA5978E0047B218 /* longtones in Resources */ = {isa = PBXBuildFile; fileRef = BDF0FB131FA5978E0047B218 /* longtones */; };
-		BDF0FB151FA5978E0047B218 /* longtones in Resources */ = {isa = PBXBuildFile; fileRef = BDF0FB131FA5978E0047B218 /* longtones */; };
-		BDF0FB291FA598050047B218 /* monkeytones-master in Resources */ = {isa = PBXBuildFile; fileRef = BDF0FB281FA598050047B218 /* monkeytones-master */; };
-		BDF0FB2A1FA598050047B218 /* monkeytones-master in Resources */ = {isa = PBXBuildFile; fileRef = BDF0FB281FA598050047B218 /* monkeytones-master */; };
+		BDF0FB2C1FA5999D0047B218 /* MonkeyTonesLongToneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB2B1FA5999D0047B218 /* MonkeyTonesLongToneViewController.swift */; };
+		BDF0FB2D1FA5999D0047B218 /* MonkeyTonesLongToneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB2B1FA5999D0047B218 /* MonkeyTonesLongToneViewController.swift */; };
+		BDF0FB3D1FA59BD00047B218 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF0FB351FA59B2F0047B218 /* FirebaseAnalytics.framework */; };
+		BDF0FB3E1FA59BE90047B218 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF0FB351FA59B2F0047B218 /* FirebaseAnalytics.framework */; };
+		BDF0FB3F1FA59BE90047B218 /* FirebaseAnalytics.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BDF0FB351FA59B2F0047B218 /* FirebaseAnalytics.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BDF0FB441FA59D210047B218 /* Controllers in Resources */ = {isa = PBXBuildFile; fileRef = BDF0FB431FA59D210047B218 /* Controllers */; };
+		BDF0FB451FA59D210047B218 /* Controllers in Resources */ = {isa = PBXBuildFile; fileRef = BDF0FB431FA59D210047B218 /* Controllers */; };
+		BDF0FB481FA59D460047B218 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB461FA59D460047B218 /* MainViewController.swift */; };
+		BDF0FB491FA59D460047B218 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB461FA59D460047B218 /* MainViewController.swift */; };
+		BDF0FB4A1FA59D460047B218 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDF0FB471FA59D460047B218 /* MainViewController.xib */; };
+		BDF0FB4B1FA59D460047B218 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDF0FB471FA59D460047B218 /* MainViewController.xib */; };
+		BDF0FB4E1FA59DA90047B218 /* ExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB4C1FA59DA90047B218 /* ExerciseViewController.swift */; };
+		BDF0FB4F1FA59DA90047B218 /* ExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB4C1FA59DA90047B218 /* ExerciseViewController.swift */; };
+		BDF0FB501FA59DA90047B218 /* ExerciseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDF0FB4D1FA59DA90047B218 /* ExerciseViewController.xib */; };
+		BDF0FB511FA59DA90047B218 /* ExerciseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDF0FB4D1FA59DA90047B218 /* ExerciseViewController.xib */; };
+		BDF0FB571FA5A01B0047B218 /* Difficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB561FA5A01B0047B218 /* Difficulty.swift */; };
+		BDF0FB581FA5A01B0047B218 /* Difficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB561FA5A01B0047B218 /* Difficulty.swift */; };
+		BDF0FB5A1FA5A0730047B218 /* UIOutlineLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB591FA5A0730047B218 /* UIOutlineLabel.swift */; };
+		BDF0FB5B1FA5A0730047B218 /* UIOutlineLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB591FA5A0730047B218 /* UIOutlineLabel.swift */; };
+		BDF0FB5D1FA5A08F0047B218 /* MusicLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB5C1FA5A08F0047B218 /* MusicLine.swift */; };
+		BDF0FB5E1FA5A08F0047B218 /* MusicLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB5C1FA5A08F0047B218 /* MusicLine.swift */; };
+		BDF0FB6A1FA5A0C90047B218 /* BasicScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB601FA5A0C90047B218 /* BasicScene.swift */; };
+		BDF0FB6B1FA5A0C90047B218 /* BasicScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB601FA5A0C90047B218 /* BasicScene.swift */; };
+		BDF0FB6C1FA5A0C90047B218 /* TreeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB611FA5A0C90047B218 /* TreeScene.swift */; };
+		BDF0FB6D1FA5A0C90047B218 /* TreeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB611FA5A0C90047B218 /* TreeScene.swift */; };
+		BDF0FB6E1FA5A0C90047B218 /* TreeScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BDF0FB621FA5A0C90047B218 /* TreeScene.sks */; };
+		BDF0FB6F1FA5A0C90047B218 /* TreeScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BDF0FB621FA5A0C90047B218 /* TreeScene.sks */; };
+		BDF0FB701FA5A0C90047B218 /* MonkeyScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB631FA5A0C90047B218 /* MonkeyScene.swift */; };
+		BDF0FB711FA5A0C90047B218 /* MonkeyScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB631FA5A0C90047B218 /* MonkeyScene.swift */; };
+		BDF0FB721FA5A0C90047B218 /* CarnivalScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB641FA5A0C90047B218 /* CarnivalScene.swift */; };
+		BDF0FB731FA5A0C90047B218 /* CarnivalScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB641FA5A0C90047B218 /* CarnivalScene.swift */; };
+		BDF0FB741FA5A0C90047B218 /* LakeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB651FA5A0C90047B218 /* LakeScene.swift */; };
+		BDF0FB751FA5A0C90047B218 /* LakeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB651FA5A0C90047B218 /* LakeScene.swift */; };
+		BDF0FB761FA5A0C90047B218 /* BuildingsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB661FA5A0C90047B218 /* BuildingsScene.swift */; };
+		BDF0FB771FA5A0C90047B218 /* BuildingsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB661FA5A0C90047B218 /* BuildingsScene.swift */; };
+		BDF0FB781FA5A0C90047B218 /* SkiingScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB671FA5A0C90047B218 /* SkiingScene.swift */; };
+		BDF0FB791FA5A0C90047B218 /* SkiingScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB671FA5A0C90047B218 /* SkiingScene.swift */; };
+		BDF0FB7A1FA5A0C90047B218 /* PlaneScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB681FA5A0C90047B218 /* PlaneScene.swift */; };
+		BDF0FB7B1FA5A0C90047B218 /* PlaneScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB681FA5A0C90047B218 /* PlaneScene.swift */; };
+		BDF0FB7C1FA5A0C90047B218 /* CaveScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB691FA5A0C90047B218 /* CaveScene.swift */; };
+		BDF0FB7D1FA5A0C90047B218 /* CaveScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB691FA5A0C90047B218 /* CaveScene.swift */; };
+		BDF0FB801FA5A18A0047B218 /* UIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB7F1FA5A18A0047B218 /* UIService.swift */; };
+		BDF0FB811FA5A18A0047B218 /* UIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB7F1FA5A18A0047B218 /* UIService.swift */; };
+		BDF0FB831FA5A1A60047B218 /* InstrumentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB821FA5A1A60047B218 /* InstrumentService.swift */; };
+		BDF0FB841FA5A1A60047B218 /* InstrumentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB821FA5A1A60047B218 /* InstrumentService.swift */; };
+		BDF0FB861FA5A1AD0047B218 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB851FA5A1AD0047B218 /* DataService.swift */; };
+		BDF0FB871FA5A1AD0047B218 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB851FA5A1AD0047B218 /* DataService.swift */; };
+		BDF0FB891FA5A2030047B218 /* Instrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB881FA5A2030047B218 /* Instrument.swift */; };
+		BDF0FB8A1FA5A2030047B218 /* Instrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB881FA5A2030047B218 /* Instrument.swift */; };
+		BDF0FB8C1FA5A22B0047B218 /* Measure.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB8B1FA5A22B0047B218 /* Measure.swift */; };
+		BDF0FB8D1FA5A22B0047B218 /* Measure.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB8B1FA5A22B0047B218 /* Measure.swift */; };
+		BDF0FB8F1FA5A2480047B218 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB8E1FA5A2480047B218 /* Exercise.swift */; };
+		BDF0FB901FA5A2480047B218 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB8E1FA5A2480047B218 /* Exercise.swift */; };
+		BDF0FB921FA5A2DE0047B218 /* GCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB911FA5A2DE0047B218 /* GCHelper.swift */; };
+		BDF0FB931FA5A2DE0047B218 /* GCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB911FA5A2DE0047B218 /* GCHelper.swift */; };
+		BDF0FB961FA5A3180047B218 /* InstrumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB941FA5A3180047B218 /* InstrumentViewController.swift */; };
+		BDF0FB971FA5A3180047B218 /* InstrumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB941FA5A3180047B218 /* InstrumentViewController.swift */; };
+		BDF0FB981FA5A3180047B218 /* InstrumentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDF0FB951FA5A3180047B218 /* InstrumentViewController.xib */; };
+		BDF0FB991FA5A3180047B218 /* InstrumentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDF0FB951FA5A3180047B218 /* InstrumentViewController.xib */; };
+		BDF0FB9B1FA5A3F10047B218 /* DifficultyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB9A1FA5A3F10047B218 /* DifficultyService.swift */; };
+		BDF0FB9C1FA5A3F10047B218 /* DifficultyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB9A1FA5A3F10047B218 /* DifficultyService.swift */; };
+		BDF0FB9F1FA5A4310047B218 /* TreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB9D1FA5A4310047B218 /* TreeViewController.swift */; };
+		BDF0FBA01FA5A4310047B218 /* TreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FB9D1FA5A4310047B218 /* TreeViewController.swift */; };
+		BDF0FBA11FA5A4310047B218 /* TreeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDF0FB9E1FA5A4310047B218 /* TreeViewController.xib */; };
+		BDF0FBA21FA5A4310047B218 /* TreeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDF0FB9E1FA5A4310047B218 /* TreeViewController.xib */; };
+		BDF0FBA71FA5A4670047B218 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FBA31FA5A4670047B218 /* NoteViewController.swift */; };
+		BDF0FBA81FA5A4670047B218 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FBA31FA5A4670047B218 /* NoteViewController.swift */; };
+		BDF0FBA91FA5A4670047B218 /* NoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDF0FBA41FA5A4670047B218 /* NoteViewController.xib */; };
+		BDF0FBAA1FA5A4670047B218 /* NoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDF0FBA41FA5A4670047B218 /* NoteViewController.xib */; };
+		BDF0FBAB1FA5A4670047B218 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FBA51FA5A4670047B218 /* SettingsViewController.swift */; };
+		BDF0FBAC1FA5A4670047B218 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FBA51FA5A4670047B218 /* SettingsViewController.swift */; };
+		BDF0FBAD1FA5A4670047B218 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDF0FBA61FA5A4670047B218 /* SettingsViewController.xib */; };
+		BDF0FBAE1FA5A4670047B218 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDF0FBA61FA5A4670047B218 /* SettingsViewController.xib */; };
+		BDF0FBB11FA5A4860047B218 /* DifficultyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FBAF1FA5A4860047B218 /* DifficultyViewController.swift */; };
+		BDF0FBB21FA5A4860047B218 /* DifficultyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FBAF1FA5A4860047B218 /* DifficultyViewController.swift */; };
+		BDF0FBB31FA5A4860047B218 /* DifficultyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDF0FBB01FA5A4860047B218 /* DifficultyViewController.xib */; };
+		BDF0FBB41FA5A4860047B218 /* DifficultyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDF0FBB01FA5A4860047B218 /* DifficultyViewController.xib */; };
+		BDF0FBB71FA5A4B80047B218 /* PRExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FBB51FA5A4B80047B218 /* PRExerciseViewController.swift */; };
+		BDF0FBB81FA5A4B80047B218 /* PRExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FBB51FA5A4B80047B218 /* PRExerciseViewController.swift */; };
+		BDF0FBB91FA5A4B80047B218 /* PRExerciseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDF0FBB61FA5A4B80047B218 /* PRExerciseViewController.xib */; };
+		BDF0FBBA1FA5A4B80047B218 /* PRExerciseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDF0FBB61FA5A4B80047B218 /* PRExerciseViewController.xib */; };
+		BDF0FBBD1FA5A50A0047B218 /* TutorialScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FBBC1FA5A50A0047B218 /* TutorialScreen.swift */; };
+		BDF0FBBE1FA5A50A0047B218 /* TutorialScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FBBC1FA5A50A0047B218 /* TutorialScreen.swift */; };
+		BDF0FBC11FA5A52B0047B218 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FBBF1FA5A52B0047B218 /* ProfileViewController.swift */; };
+		BDF0FBC21FA5A52B0047B218 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FBBF1FA5A52B0047B218 /* ProfileViewController.swift */; };
+		BDF0FBC31FA5A52B0047B218 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDF0FBC01FA5A52B0047B218 /* ProfileViewController.xib */; };
+		BDF0FBC41FA5A52B0047B218 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDF0FBC01FA5A52B0047B218 /* ProfileViewController.xib */; };
+		BDF0FBCB1FA5AA630047B218 /* UIImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FBCA1FA5AA630047B218 /* UIImageButton.swift */; };
+		BDF0FBD31FA5AA8C0047B218 /* UITintButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FBD21FA5AA8C0047B218 /* UITintButton.swift */; };
+		BDF0FBD51FA5AAC40047B218 /* TreeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FBD41FA5AAC40047B218 /* TreeViewCell.swift */; };
+		BDF0FBDA1FA5AC7E0047B218 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FBD71FA5AC7E0047B218 /* UIButton.swift */; };
+		BDF0FBDB1FA5AC7E0047B218 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FBD81FA5AC7E0047B218 /* UIColor.swift */; };
+		BDF0FBDC1FA5AC7E0047B218 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FBD91FA5AC7E0047B218 /* UILabel.swift */; };
+		BDF0FBDE1FA5AE740047B218 /* NotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FBDD1FA5AE740047B218 /* NotificationsService.swift */; };
+		BDF0FBE01FA5B2A70047B218 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF0FBDF1FA5B2A70047B218 /* FirebaseService.swift */; };
+		BDF0FBE91FA5B7610047B218 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF0FBE81FA5B7610047B218 /* GameKit.framework */; };
 		BDF308FA1F630AF500F0A819 /* SeeScoreLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6324D3151CE73234001934A5 /* SeeScoreLib.framework */; };
 		BDF308FB1F630AF500F0A819 /* SeeScoreLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6324D3151CE73234001934A5 /* SeeScoreLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FD185C34F161EAA0709A87AB /* Pods_FirstStageTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EB0E568C279A5BA62871C0 /* Pods_FirstStageTests.framework */; };
+		FDD1AB0617D7EA845EFB633B /* Pods_FirstStage_debug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4075A5D88FDE9E67DBEDC30 /* Pods_FirstStage_debug.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -447,6 +543,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				BDF0FB3F1FA59BE90047B218 /* FirebaseAnalytics.framework in Embed Frameworks */,
 				63EE547D1E62A2F000F5E21D /* AudioKit.framework in Embed Frameworks */,
 				638FECC31EC70A1100976340 /* AEXML.framework in Embed Frameworks */,
 				6324D31B1CE7327F001934A5 /* SeeScoreLib.framework in Embed Frameworks */,
@@ -457,6 +554,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		151AB807FDF2985B182553FF /* Pods-FirstStageTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstStageTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirstStageTests/Pods-FirstStageTests.debug.xcconfig"; sourceTree = "<group>"; };
+		36416BF4DADA8B1A57987C2A /* Pods-FirstStage-debug.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstStage-debug.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirstStage-debug/Pods-FirstStage-debug.debug.xcconfig"; sourceTree = "<group>"; };
+		365B782948CF9BA77784E4C7 /* Pods-FirstStageUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstStageUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirstStageUITests/Pods-FirstStageUITests.release.xcconfig"; sourceTree = "<group>"; };
+		3FC5330569B6DCF6CEBC9ABE /* Pods_FirstStageUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirstStageUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		498AF266D063C15E5A588B5F /* Pods-FirstStageTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstStageTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirstStageTests/Pods-FirstStageTests.release.xcconfig"; sourceTree = "<group>"; };
+		5341CCD4F2A892CEAAB2857F /* Pods-FirstStage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstStage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirstStage/Pods-FirstStage.debug.xcconfig"; sourceTree = "<group>"; };
 		6324D2CF1CE71B19001934A5 /* FirstStage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirstStage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6324D2D21CE71B19001934A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6324D2D71CE71B19001934A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -638,13 +741,74 @@
 		63BF9E061EBFFF07002BB5C1 /* MusicXMLModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicXMLModifier.swift; sourceTree = "<group>"; };
 		63C03AB91E2A0B11009F4033 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AudioKit.framework; sourceTree = "<group>"; };
 		63EB90161CF1C4EB00F09B05 /* AVAudioSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAudioSessionManager.swift; sourceTree = "<group>"; };
+		65AEC1BB7F5C0814BCE7C4CC /* Pods-FirstStage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstStage.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirstStage/Pods-FirstStage.release.xcconfig"; sourceTree = "<group>"; };
+		7A2F5E8944B7466446304CB4 /* Pods-FirstStage-debug.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstStage-debug.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirstStage-debug/Pods-FirstStage-debug.release.xcconfig"; sourceTree = "<group>"; };
+		93B41DE61229FB4977A4D8CE /* Pods-FirstStageUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstStageUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirstStageUITests/Pods-FirstStageUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		A1EB0E568C279A5BA62871C0 /* Pods_FirstStageTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirstStageTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A869E40C87F03056975723C0 /* Pods_FirstStage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirstStage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD7C17461F860E3B002AF462 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		BD7C174F1F861755002AF462 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		BD8B79041F95BF75005B31CB /* PracticeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PracticeViewController.swift; sourceTree = "<group>"; };
 		BD8B790D1F95BFB4005B31CB /* LessonOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LessonOverviewViewController.swift; sourceTree = "<group>"; };
 		BD8B79101F95C11B005B31CB /* UserAtributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAtributes.swift; sourceTree = "<group>"; };
-		BDF0FB131FA5978E0047B218 /* longtones */ = {isa = PBXFileReference; lastKnownFileType = folder; name = longtones; path = "../../../Downloads/monkeytones-master/longtones"; sourceTree = "<group>"; };
-		BDF0FB281FA598050047B218 /* monkeytones-master */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "monkeytones-master"; sourceTree = "<group>"; };
+		BDF0FB2B1FA5999D0047B218 /* MonkeyTonesLongToneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonkeyTonesLongToneViewController.swift; sourceTree = "<group>"; };
+		BDF0FB311FA59ABA0047B218 /* Firebase */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Firebase; path = Pods/Firebase; sourceTree = "<group>"; };
+		BDF0FB331FA59AF90047B218 /* Firebase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Firebase.h; path = Pods/Firebase/Core/Sources/Firebase.h; sourceTree = "<group>"; };
+		BDF0FB351FA59B2F0047B218 /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAnalytics.framework; path = Pods/FirebaseAnalytics/Frameworks/frameworks/FirebaseAnalytics.framework; sourceTree = "<group>"; };
+		BDF0FB371FA59B3D0047B218 /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCore.framework; path = Pods/FirebaseCore/Frameworks/frameworks/FirebaseCore.framework; sourceTree = "<group>"; };
+		BDF0FB391FA59B700047B218 /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseInstanceID.framework; path = Pods/FirebaseInstanceID/Frameworks/frameworks/FirebaseInstanceID.framework; sourceTree = "<group>"; };
+		BDF0FB3B1FA59B7E0047B218 /* FirebaseDatabase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseDatabase.framework; path = Pods/FirebaseDatabase/Frameworks/FirebaseDatabase.framework; sourceTree = "<group>"; };
+		BDF0FB431FA59D210047B218 /* Controllers */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Controllers; sourceTree = "<group>"; };
+		BDF0FB461FA59D460047B218 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = Controllers/MainViewController.swift; sourceTree = "<group>"; };
+		BDF0FB471FA59D460047B218 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainViewController.xib; path = Controllers/MainViewController.xib; sourceTree = "<group>"; };
+		BDF0FB4C1FA59DA90047B218 /* ExerciseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExerciseViewController.swift; path = Controllers/ExerciseViewController.swift; sourceTree = "<group>"; };
+		BDF0FB4D1FA59DA90047B218 /* ExerciseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ExerciseViewController.xib; path = Controllers/ExerciseViewController.xib; sourceTree = "<group>"; };
+		BDF0FB561FA5A01B0047B218 /* Difficulty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Difficulty.swift; sourceTree = "<group>"; };
+		BDF0FB591FA5A0730047B218 /* UIOutlineLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIOutlineLabel.swift; sourceTree = "<group>"; };
+		BDF0FB5C1FA5A08F0047B218 /* MusicLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicLine.swift; sourceTree = "<group>"; };
+		BDF0FB601FA5A0C90047B218 /* BasicScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicScene.swift; sourceTree = "<group>"; };
+		BDF0FB611FA5A0C90047B218 /* TreeScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeScene.swift; sourceTree = "<group>"; };
+		BDF0FB621FA5A0C90047B218 /* TreeScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TreeScene.sks; sourceTree = "<group>"; };
+		BDF0FB631FA5A0C90047B218 /* MonkeyScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonkeyScene.swift; sourceTree = "<group>"; };
+		BDF0FB641FA5A0C90047B218 /* CarnivalScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarnivalScene.swift; sourceTree = "<group>"; };
+		BDF0FB651FA5A0C90047B218 /* LakeScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LakeScene.swift; sourceTree = "<group>"; };
+		BDF0FB661FA5A0C90047B218 /* BuildingsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildingsScene.swift; sourceTree = "<group>"; };
+		BDF0FB671FA5A0C90047B218 /* SkiingScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkiingScene.swift; sourceTree = "<group>"; };
+		BDF0FB681FA5A0C90047B218 /* PlaneScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaneScene.swift; sourceTree = "<group>"; };
+		BDF0FB691FA5A0C90047B218 /* CaveScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaveScene.swift; sourceTree = "<group>"; };
+		BDF0FB7F1FA5A18A0047B218 /* UIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIService.swift; sourceTree = "<group>"; };
+		BDF0FB821FA5A1A60047B218 /* InstrumentService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstrumentService.swift; sourceTree = "<group>"; };
+		BDF0FB851FA5A1AD0047B218 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		BDF0FB881FA5A2030047B218 /* Instrument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instrument.swift; sourceTree = "<group>"; };
+		BDF0FB8B1FA5A22B0047B218 /* Measure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Measure.swift; sourceTree = "<group>"; };
+		BDF0FB8E1FA5A2480047B218 /* Exercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
+		BDF0FB911FA5A2DE0047B218 /* GCHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCHelper.swift; sourceTree = "<group>"; };
+		BDF0FB941FA5A3180047B218 /* InstrumentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InstrumentViewController.swift; path = Controllers/InstrumentViewController.swift; sourceTree = "<group>"; };
+		BDF0FB951FA5A3180047B218 /* InstrumentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InstrumentViewController.xib; path = Controllers/InstrumentViewController.xib; sourceTree = "<group>"; };
+		BDF0FB9A1FA5A3F10047B218 /* DifficultyService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DifficultyService.swift; sourceTree = "<group>"; };
+		BDF0FB9D1FA5A4310047B218 /* TreeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TreeViewController.swift; path = Controllers/TreeViewController.swift; sourceTree = "<group>"; };
+		BDF0FB9E1FA5A4310047B218 /* TreeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TreeViewController.xib; path = Controllers/TreeViewController.xib; sourceTree = "<group>"; };
+		BDF0FBA31FA5A4670047B218 /* NoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NoteViewController.swift; path = Controllers/NoteViewController.swift; sourceTree = "<group>"; };
+		BDF0FBA41FA5A4670047B218 /* NoteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NoteViewController.xib; path = Controllers/NoteViewController.xib; sourceTree = "<group>"; };
+		BDF0FBA51FA5A4670047B218 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = Controllers/SettingsViewController.swift; sourceTree = "<group>"; };
+		BDF0FBA61FA5A4670047B218 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsViewController.xib; path = Controllers/SettingsViewController.xib; sourceTree = "<group>"; };
+		BDF0FBAF1FA5A4860047B218 /* DifficultyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DifficultyViewController.swift; path = Controllers/DifficultyViewController.swift; sourceTree = "<group>"; };
+		BDF0FBB01FA5A4860047B218 /* DifficultyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DifficultyViewController.xib; path = Controllers/DifficultyViewController.xib; sourceTree = "<group>"; };
+		BDF0FBB51FA5A4B80047B218 /* PRExerciseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PRExerciseViewController.swift; path = Controllers/PRExerciseViewController.swift; sourceTree = "<group>"; };
+		BDF0FBB61FA5A4B80047B218 /* PRExerciseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PRExerciseViewController.xib; path = Controllers/PRExerciseViewController.xib; sourceTree = "<group>"; };
+		BDF0FBBC1FA5A50A0047B218 /* TutorialScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TutorialScreen.swift; path = Controllers/Modals/TutorialScreen.swift; sourceTree = "<group>"; };
+		BDF0FBBF1FA5A52B0047B218 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		BDF0FBC01FA5A52B0047B218 /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
+		BDF0FBCA1FA5AA630047B218 /* UIImageButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImageButton.swift; path = longtones/UIImageButton.swift; sourceTree = "<group>"; };
+		BDF0FBD21FA5AA8C0047B218 /* UITintButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UITintButton.swift; path = longtones/UITintButton.swift; sourceTree = "<group>"; };
+		BDF0FBD41FA5AAC40047B218 /* TreeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TreeViewCell.swift; path = Controllers/TreeViewCell.swift; sourceTree = "<group>"; };
+		BDF0FBD71FA5AC7E0047B218 /* UIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIButton.swift; path = longtones/Extensions/UIButton.swift; sourceTree = "<group>"; };
+		BDF0FBD81FA5AC7E0047B218 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColor.swift; path = longtones/Extensions/UIColor.swift; sourceTree = "<group>"; };
+		BDF0FBD91FA5AC7E0047B218 /* UILabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UILabel.swift; path = longtones/Extensions/UILabel.swift; sourceTree = "<group>"; };
+		BDF0FBDD1FA5AE740047B218 /* NotificationsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationsService.swift; path = longtones/NotificationsService.swift; sourceTree = "<group>"; };
+		BDF0FBDF1FA5B2A70047B218 /* FirebaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FirebaseService.swift; path = longtones/FirebaseService.swift; sourceTree = "<group>"; };
+		BDF0FBE81FA5B7610047B218 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		E4075A5D88FDE9E67DBEDC30 /* Pods_FirstStage_debug.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirstStage_debug.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -652,9 +816,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDF0FB3D1FA59BD00047B218 /* FirebaseAnalytics.framework in Frameworks */,
 				63C03ABF1E2A0C43009F4033 /* AudioKit.framework in Frameworks */,
 				638FECC21EC70A1100976340 /* AEXML.framework in Frameworks */,
 				6324D31A1CE7327F001934A5 /* SeeScoreLib.framework in Frameworks */,
+				BDF0FB3E1FA59BE90047B218 /* FirebaseAnalytics.framework in Frameworks */,
+				3967F5C922740531B9060213 /* Pods_FirstStage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -662,6 +829,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD185C34F161EAA0709A87AB /* Pods_FirstStageTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -669,6 +837,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				035BDC589100E33C4BC3F710 /* Pods_FirstStageUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -676,9 +845,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDF0FBE91FA5B7610047B218 /* GameKit.framework in Frameworks */,
 				63C03ABA1E2A0B11009F4033 /* AudioKit.framework in Frameworks */,
 				635A60A81EC6BADD0099154A /* AEXML.framework in Frameworks */,
 				BDF308FA1F630AF500F0A819 /* SeeScoreLib.framework in Frameworks */,
+				FDD1AB0617D7EA845EFB633B /* Pods_FirstStage_debug.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -693,9 +864,8 @@
 				6324D2E91CE71B1A001934A5 /* FirstStageTests */,
 				6324D2F41CE71B1A001934A5 /* FirstStageUITests */,
 				6324D2D01CE71B19001934A5 /* Products */,
-				BDF0FB281FA598050047B218 /* monkeytones-master */,
 				635A608E1EC6B7B90099154A /* AEXML.xcodeproj */,
-				BDF0FB131FA5978E0047B218 /* longtones */,
+				A9FF3640E6B580EA83616CA1 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -713,6 +883,8 @@
 		6324D2D11CE71B19001934A5 /* FirstStage */ = {
 			isa = PBXGroup;
 			children = (
+				BDF0FBD61FA5AC670047B218 /* Extensions */,
+				BDF0FB5F1FA5A0BC0047B218 /* Scenes */,
 				6324D3661CE73ECB001934A5 /* Brain */,
 				633C2ADF1CE81402001C5C16 /* Data */,
 				6324D3341CE7358C001934A5 /* SeeScore */,
@@ -751,9 +923,20 @@
 		6324D31D1CE7329A001934A5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BDF0FBE81FA5B7610047B218 /* GameKit.framework */,
+				BDF0FB3B1FA59B7E0047B218 /* FirebaseDatabase.framework */,
+				BDF0FB391FA59B700047B218 /* FirebaseInstanceID.framework */,
+				BDF0FB371FA59B3D0047B218 /* FirebaseCore.framework */,
+				BDF0FB351FA59B2F0047B218 /* FirebaseAnalytics.framework */,
+				BDF0FB331FA59AF90047B218 /* Firebase.h */,
+				BDF0FB311FA59ABA0047B218 /* Firebase */,
 				63C03AB91E2A0B11009F4033 /* AudioKit.framework */,
 				6324D3191CE7327F001934A5 /* SeeScoreLib.framework */,
 				6324D3151CE73234001934A5 /* SeeScoreLib.framework */,
+				A869E40C87F03056975723C0 /* Pods_FirstStage.framework */,
+				E4075A5D88FDE9E67DBEDC30 /* Pods_FirstStage_debug.framework */,
+				A1EB0E568C279A5BA62871C0 /* Pods_FirstStageTests.framework */,
+				3FC5330569B6DCF6CEBC9ABE /* Pods_FirstStageUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -783,6 +966,17 @@
 		6324D3661CE73ECB001934A5 /* Brain */ = {
 			isa = PBXGroup;
 			children = (
+				BDF0FBDF1FA5B2A70047B218 /* FirebaseService.swift */,
+				BDF0FBDD1FA5AE740047B218 /* NotificationsService.swift */,
+				BDF0FB9A1FA5A3F10047B218 /* DifficultyService.swift */,
+				BDF0FB911FA5A2DE0047B218 /* GCHelper.swift */,
+				BDF0FB8E1FA5A2480047B218 /* Exercise.swift */,
+				BDF0FB8B1FA5A22B0047B218 /* Measure.swift */,
+				BDF0FB881FA5A2030047B218 /* Instrument.swift */,
+				BDF0FB851FA5A1AD0047B218 /* DataService.swift */,
+				BDF0FB821FA5A1A60047B218 /* InstrumentService.swift */,
+				BDF0FB7F1FA5A18A0047B218 /* UIService.swift */,
+				BDF0FB561FA5A01B0047B218 /* Difficulty.swift */,
 				6379EE901CE9C8ED00188A70 /* AudioKitManager.swift */,
 				63EB90161CF1C4EB00F09B05 /* AVAudioSessionManager.swift */,
 				633C2AE01CE86915001C5C16 /* Constants.swift */,
@@ -804,12 +998,32 @@
 		633C2AD81CE80D80001C5C16 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				BDF0FBBB1FA5A4FC0047B218 /* Modals */,
+				BDF0FB431FA59D210047B218 /* Controllers */,
 				6381294F1CF05BF800A40C8E /* LongToneViewController.swift */,
 				6324D3031CE72E5D001934A5 /* TuneExerciseViewController.swift */,
 				BD7C17461F860E3B002AF462 /* HomeViewController.swift */,
 				BD7C174F1F861755002AF462 /* SettingsTableViewController.swift */,
 				BD8B79041F95BF75005B31CB /* PracticeViewController.swift */,
 				BD8B790D1F95BFB4005B31CB /* LessonOverviewViewController.swift */,
+				BDF0FB2B1FA5999D0047B218 /* MonkeyTonesLongToneViewController.swift */,
+				BDF0FB461FA59D460047B218 /* MainViewController.swift */,
+				BDF0FB471FA59D460047B218 /* MainViewController.xib */,
+				BDF0FB4C1FA59DA90047B218 /* ExerciseViewController.swift */,
+				BDF0FB4D1FA59DA90047B218 /* ExerciseViewController.xib */,
+				BDF0FB941FA5A3180047B218 /* InstrumentViewController.swift */,
+				BDF0FB951FA5A3180047B218 /* InstrumentViewController.xib */,
+				BDF0FB9D1FA5A4310047B218 /* TreeViewController.swift */,
+				BDF0FB9E1FA5A4310047B218 /* TreeViewController.xib */,
+				BDF0FBD41FA5AAC40047B218 /* TreeViewCell.swift */,
+				BDF0FBA31FA5A4670047B218 /* NoteViewController.swift */,
+				BDF0FBA41FA5A4670047B218 /* NoteViewController.xib */,
+				BDF0FBA51FA5A4670047B218 /* SettingsViewController.swift */,
+				BDF0FBA61FA5A4670047B218 /* SettingsViewController.xib */,
+				BDF0FBAF1FA5A4860047B218 /* DifficultyViewController.swift */,
+				BDF0FBB01FA5A4860047B218 /* DifficultyViewController.xib */,
+				BDF0FBB51FA5A4B80047B218 /* PRExerciseViewController.swift */,
+				BDF0FBB61FA5A4B80047B218 /* PRExerciseViewController.xib */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -991,6 +1205,10 @@
 		638129551CF05C6100A40C8E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BDF0FBD21FA5AA8C0047B218 /* UITintButton.swift */,
+				BDF0FBCA1FA5AA630047B218 /* UIImageButton.swift */,
+				BDF0FB591FA5A0730047B218 /* UIOutlineLabel.swift */,
+				BDF0FB5C1FA5A08F0047B218 /* MusicLine.swift */,
 				638129561CF05C7900A40C8E /* Balloon.swift */,
 				639A2E441CF5AB09004F7B1A /* DotView.swift */,
 				638129571CF05C7900A40C8E /* SparkLine.swift */,
@@ -1013,6 +1231,58 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		A9FF3640E6B580EA83616CA1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5341CCD4F2A892CEAAB2857F /* Pods-FirstStage.debug.xcconfig */,
+				65AEC1BB7F5C0814BCE7C4CC /* Pods-FirstStage.release.xcconfig */,
+				36416BF4DADA8B1A57987C2A /* Pods-FirstStage-debug.debug.xcconfig */,
+				7A2F5E8944B7466446304CB4 /* Pods-FirstStage-debug.release.xcconfig */,
+				151AB807FDF2985B182553FF /* Pods-FirstStageTests.debug.xcconfig */,
+				498AF266D063C15E5A588B5F /* Pods-FirstStageTests.release.xcconfig */,
+				93B41DE61229FB4977A4D8CE /* Pods-FirstStageUITests.debug.xcconfig */,
+				365B782948CF9BA77784E4C7 /* Pods-FirstStageUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		BDF0FB5F1FA5A0BC0047B218 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				BDF0FB601FA5A0C90047B218 /* BasicScene.swift */,
+				BDF0FB611FA5A0C90047B218 /* TreeScene.swift */,
+				BDF0FB621FA5A0C90047B218 /* TreeScene.sks */,
+				BDF0FB631FA5A0C90047B218 /* MonkeyScene.swift */,
+				BDF0FB641FA5A0C90047B218 /* CarnivalScene.swift */,
+				BDF0FB651FA5A0C90047B218 /* LakeScene.swift */,
+				BDF0FB661FA5A0C90047B218 /* BuildingsScene.swift */,
+				BDF0FB671FA5A0C90047B218 /* SkiingScene.swift */,
+				BDF0FB681FA5A0C90047B218 /* PlaneScene.swift */,
+				BDF0FB691FA5A0C90047B218 /* CaveScene.swift */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
+		BDF0FBBB1FA5A4FC0047B218 /* Modals */ = {
+			isa = PBXGroup;
+			children = (
+				BDF0FBBF1FA5A52B0047B218 /* ProfileViewController.swift */,
+				BDF0FBC01FA5A52B0047B218 /* ProfileViewController.xib */,
+				BDF0FBBC1FA5A50A0047B218 /* TutorialScreen.swift */,
+			);
+			name = Modals;
+			sourceTree = "<group>";
+		};
+		BDF0FBD61FA5AC670047B218 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BDF0FBD71FA5AC7E0047B218 /* UIButton.swift */,
+				BDF0FBD81FA5AC7E0047B218 /* UIColor.swift */,
+				BDF0FBD91FA5AC7E0047B218 /* UILabel.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1020,11 +1290,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6324D2FA1CE71B1A001934A5 /* Build configuration list for PBXNativeTarget "FirstStage" */;
 			buildPhases = (
+				FCD01F07F03E6AFAB6C84107 /* [CP] Check Pods Manifest.lock */,
 				6324D2CB1CE71B19001934A5 /* Sources */,
 				6324D2CC1CE71B19001934A5 /* Frameworks */,
 				6324D2CD1CE71B19001934A5 /* Resources */,
 				6324D31C1CE7327F001934A5 /* Embed Frameworks */,
 				6379EE871CE9C5FD00188A70 /* ShellScript */,
+				C4763012EFA6107832CC7BD5 /* [CP] Embed Pods Frameworks */,
+				1B7AA2B5D0A7E9F4D6AFD7CA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1040,9 +1313,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6324D2FD1CE71B1A001934A5 /* Build configuration list for PBXNativeTarget "FirstStageTests" */;
 			buildPhases = (
+				A0D8FE25112578548456C46A /* [CP] Check Pods Manifest.lock */,
 				6324D2E21CE71B1A001934A5 /* Sources */,
 				6324D2E31CE71B1A001934A5 /* Frameworks */,
 				6324D2E41CE71B1A001934A5 /* Resources */,
+				0B5388427D895C7598A35D84 /* [CP] Embed Pods Frameworks */,
+				57A3028E2F281FA3578DC1FF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1058,9 +1334,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6324D3001CE71B1A001934A5 /* Build configuration list for PBXNativeTarget "FirstStageUITests" */;
 			buildPhases = (
+				B86620A31AB38774D2649B69 /* [CP] Check Pods Manifest.lock */,
 				6324D2ED1CE71B1A001934A5 /* Sources */,
 				6324D2EE1CE71B1A001934A5 /* Frameworks */,
 				6324D2EF1CE71B1A001934A5 /* Resources */,
+				5D0C38B559489B461EE12913 /* [CP] Embed Pods Frameworks */,
+				16EFF7535E1C2414362B3180 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1076,11 +1355,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6324D3101CE72F8D001934A5 /* Build configuration list for PBXNativeTarget "FirstStage-debug" */;
 			buildPhases = (
+				DCF98B622493C259B0C68A72 /* [CP] Check Pods Manifest.lock */,
 				6324D3061CE72F8D001934A5 /* Sources */,
 				6324D30B1CE72F8D001934A5 /* Frameworks */,
 				6324D30C1CE72F8D001934A5 /* Resources */,
 				6324D3181CE73234001934A5 /* Embed Frameworks */,
 				6379EE881CE9C63B00188A70 /* ShellScript */,
+				CAA8F6E6503F5AC7A8BC3D59 /* [CP] Embed Pods Frameworks */,
+				74F0F173ED61216703B99433 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1220,7 +1502,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				634659141E90C6A000C162CF /* Trumpet.novib.mf.61.m4a in Resources */,
-				BDF0FB151FA5978E0047B218 /* longtones in Resources */,
 				634658C11E90C68E00C162CF /* Piano.mf.70.m4a in Resources */,
 				634658AA1E90C68E00C162CF /* Piano.mf.47.m4a in Resources */,
 				634658B11E90C68E00C162CF /* Piano.mf.54.m4a in Resources */,
@@ -1233,8 +1514,11 @@
 				634658E31E90C68E00C162CF /* Piano.mf.104.m4a in Resources */,
 				6346590D1E90C6A000C162CF /* Trumpet.novib.mf.54.m4a in Resources */,
 				634658D61E90C68E00C162CF /* Piano.mf.91.m4a in Resources */,
+				BDF0FBAE1FA5A4670047B218 /* SettingsViewController.xib in Resources */,
+				BDF0FBBA1FA5A4B80047B218 /* PRExerciseViewController.xib in Resources */,
 				634658B61E90C68E00C162CF /* Piano.mf.59.m4a in Resources */,
 				634659211E90C6A000C162CF /* Trumpet.novib.mf.74.m4a in Resources */,
+				BDF0FBAA1FA5A4670047B218 /* NoteViewController.xib in Resources */,
 				6346592D1E90C6A000C162CF /* Trumpet.novib.mf.86.m4a in Resources */,
 				6346590C1E90C6A000C162CF /* Trumpet.novib.mf.53.m4a in Resources */,
 				634658D11E90C68E00C162CF /* Piano.mf.86.m4a in Resources */,
@@ -1266,6 +1550,7 @@
 				634658D51E90C68E00C162CF /* Piano.mf.90.m4a in Resources */,
 				634658A71E90C68E00C162CF /* Piano.mf.44.m4a in Resources */,
 				634658B21E90C68E00C162CF /* Piano.mf.55.m4a in Resources */,
+				BDF0FB6F1FA5A0C90047B218 /* TreeScene.sks in Resources */,
 				634658991E90C68E00C162CF /* Piano.mf.30.m4a in Resources */,
 				634658DC1E90C68E00C162CF /* Piano.mf.97.m4a in Resources */,
 				6324D2E01CE71B1A001934A5 /* LaunchScreen.storyboard in Resources */,
@@ -1287,6 +1572,7 @@
 				634658CB1E90C68E00C162CF /* Piano.mf.80.m4a in Resources */,
 				634658AD1E90C68E00C162CF /* Piano.mf.50.m4a in Resources */,
 				6324D2DD1CE71B1A001934A5 /* Assets.xcassets in Resources */,
+				BDF0FB451FA59D210047B218 /* Controllers in Resources */,
 				634658DF1E90C68E00C162CF /* Piano.mf.100.m4a in Resources */,
 				634659171E90C6A000C162CF /* Trumpet.novib.mf.64.m4a in Resources */,
 				634659281E90C6A000C162CF /* Trumpet.novib.mf.81.m4a in Resources */,
@@ -1309,6 +1595,7 @@
 				634659221E90C6A000C162CF /* Trumpet.novib.mf.75.m4a in Resources */,
 				634658C31E90C68E00C162CF /* Piano.mf.72.m4a in Resources */,
 				634659121E90C6A000C162CF /* Trumpet.novib.mf.59.m4a in Resources */,
+				BDF0FB991FA5A3180047B218 /* InstrumentViewController.xib in Resources */,
 				634658B91E90C68E00C162CF /* Piano.mf.62.m4a in Resources */,
 				634659111E90C6A000C162CF /* Trumpet.novib.mf.58.m4a in Resources */,
 				6346591E1E90C6A000C162CF /* Trumpet.novib.mf.71.m4a in Resources */,
@@ -1318,6 +1605,7 @@
 				634658A01E90C68E00C162CF /* Piano.mf.37.m4a in Resources */,
 				634658D71E90C68E00C162CF /* Piano.mf.92.m4a in Resources */,
 				634658BE1E90C68E00C162CF /* Piano.mf.67.m4a in Resources */,
+				BDF0FB511FA59DA90047B218 /* ExerciseViewController.xib in Resources */,
 				6346589E1E90C68E00C162CF /* Piano.mf.35.m4a in Resources */,
 				6346591C1E90C6A000C162CF /* Trumpet.novib.mf.69.m4a in Resources */,
 				634658C01E90C68E00C162CF /* Piano.mf.69.m4a in Resources */,
@@ -1331,6 +1619,7 @@
 				634658C41E90C68E00C162CF /* Piano.mf.73.m4a in Resources */,
 				6346589A1E90C68E00C162CF /* Piano.mf.31.m4a in Resources */,
 				634658E21E90C68E00C162CF /* Piano.mf.103.m4a in Resources */,
+				BDF0FB4B1FA59D460047B218 /* MainViewController.xib in Resources */,
 				634658E51E90C68E00C162CF /* Piano.mf.106.m4a in Resources */,
 				634658CF1E90C68E00C162CF /* Piano.mf.84.m4a in Resources */,
 				634658C51E90C68E00C162CF /* Piano.mf.74.m4a in Resources */,
@@ -1338,10 +1627,10 @@
 				634658961E90C68E00C162CF /* Piano.mf.27.m4a in Resources */,
 				634658DD1E90C68E00C162CF /* Piano.mf.98.m4a in Resources */,
 				6324D2D81CE71B19001934A5 /* Main.storyboard in Resources */,
-				BDF0FB2A1FA598050047B218 /* monkeytones-master in Resources */,
 				634658BC1E90C68E00C162CF /* Piano.mf.65.m4a in Resources */,
 				634658C91E90C68E00C162CF /* Piano.mf.78.m4a in Resources */,
 				634658E61E90C68E00C162CF /* Piano.mf.107.m4a in Resources */,
+				BDF0FBC41FA5A52B0047B218 /* ProfileViewController.xib in Resources */,
 				6346589F1E90C68E00C162CF /* Piano.mf.36.m4a in Resources */,
 				6346591F1E90C6A000C162CF /* Trumpet.novib.mf.72.m4a in Resources */,
 				634659161E90C6A000C162CF /* Trumpet.novib.mf.63.m4a in Resources */,
@@ -1350,6 +1639,8 @@
 				634658A51E90C68E00C162CF /* Piano.mf.42.m4a in Resources */,
 				6346591A1E90C6A000C162CF /* Trumpet.novib.mf.67.m4a in Resources */,
 				6346589C1E90C68E00C162CF /* Piano.mf.33.m4a in Resources */,
+				BDF0FBA21FA5A4310047B218 /* TreeViewController.xib in Resources */,
+				BDF0FBB41FA5A4860047B218 /* DifficultyViewController.xib in Resources */,
 				634658E11E90C68E00C162CF /* Piano.mf.102.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1373,7 +1664,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6336B1D41EA32B0200A78D02 /* Piano.mf.56.m4a in Resources */,
-				BDF0FB141FA5978E0047B218 /* longtones in Resources */,
 				6336B1CB1EA32B0200A78D02 /* Piano.mf.47.m4a in Resources */,
 				6336B1BA1EA32B0200A78D02 /* Piano.mf.30.m4a in Resources */,
 				6336B1961EA32AF000A78D02 /* Trumpet.novib.mf.58.m4a in Resources */,
@@ -1386,8 +1676,11 @@
 				6336B1D21EA32B0200A78D02 /* Piano.mf.54.m4a in Resources */,
 				6336B1BD1EA32B0200A78D02 /* Piano.mf.33.m4a in Resources */,
 				6336B1DA1EA32B0200A78D02 /* Piano.mf.62.m4a in Resources */,
+				BDF0FBAD1FA5A4670047B218 /* SettingsViewController.xib in Resources */,
+				BDF0FBB91FA5A4B80047B218 /* PRExerciseViewController.xib in Resources */,
 				6336B1CC1EA32B0200A78D02 /* Piano.mf.48.m4a in Resources */,
 				6336B1B91EA32B0200A78D02 /* Piano.mf.29.m4a in Resources */,
+				BDF0FBA91FA5A4670047B218 /* NoteViewController.xib in Resources */,
 				6336B1C91EA32B0200A78D02 /* Piano.mf.45.m4a in Resources */,
 				6336B2001EA32B0200A78D02 /* Piano.mf.100.m4a in Resources */,
 				6336B1BF1EA32B0200A78D02 /* Piano.mf.35.m4a in Resources */,
@@ -1419,6 +1712,7 @@
 				6336B1BE1EA32B0200A78D02 /* Piano.mf.34.m4a in Resources */,
 				6336B1971EA32AF000A78D02 /* Trumpet.novib.mf.59.m4a in Resources */,
 				6336B1E01EA32B0200A78D02 /* Piano.mf.68.m4a in Resources */,
+				BDF0FB6E1FA5A0C90047B218 /* TreeScene.sks in Resources */,
 				6336B1CA1EA32B0200A78D02 /* Piano.mf.46.m4a in Resources */,
 				6336B1EF1EA32B0200A78D02 /* Piano.mf.83.m4a in Resources */,
 				6336B1EE1EA32B0200A78D02 /* Piano.mf.82.m4a in Resources */,
@@ -1440,6 +1734,7 @@
 				6336B1DC1EA32B0200A78D02 /* Piano.mf.64.m4a in Resources */,
 				6336B1E21EA32B0200A78D02 /* Piano.mf.70.m4a in Resources */,
 				6336B19C1EA32AF000A78D02 /* Trumpet.novib.mf.64.m4a in Resources */,
+				BDF0FB441FA59D210047B218 /* Controllers in Resources */,
 				6336B1F41EA32B0200A78D02 /* Piano.mf.88.m4a in Resources */,
 				6336B1A31EA32AF000A78D02 /* Trumpet.novib.mf.71.m4a in Resources */,
 				6336B19E1EA32AF000A78D02 /* Trumpet.novib.mf.66.m4a in Resources */,
@@ -1462,6 +1757,7 @@
 				6336B1C31EA32B0200A78D02 /* Piano.mf.39.m4a in Resources */,
 				6336B1B81EA32B0200A78D02 /* Piano.mf.28.m4a in Resources */,
 				6336B1E11EA32B0200A78D02 /* Piano.mf.69.m4a in Resources */,
+				BDF0FB981FA5A3180047B218 /* InstrumentViewController.xib in Resources */,
 				6355ECF71CF68EB70037945F /* marmstk1.wav in Resources */,
 				6336B1FA1EA32B0200A78D02 /* Piano.mf.94.m4a in Resources */,
 				6336B1CD1EA32B0200A78D02 /* Piano.mf.49.m4a in Resources */,
@@ -1471,6 +1767,7 @@
 				6336B1981EA32AF000A78D02 /* Trumpet.novib.mf.60.m4a in Resources */,
 				633C2ADD1CE813E7001C5C16 /* XML Tunes in Resources */,
 				6336B1A51EA32AF000A78D02 /* Trumpet.novib.mf.73.m4a in Resources */,
+				BDF0FB501FA59DA90047B218 /* ExerciseViewController.xib in Resources */,
 				6336B1AE1EA32AF000A78D02 /* Trumpet.novib.mf.82.m4a in Resources */,
 				6336B1D11EA32B0200A78D02 /* Piano.mf.53.m4a in Resources */,
 				6336B1DB1EA32B0200A78D02 /* Piano.mf.63.m4a in Resources */,
@@ -1484,6 +1781,7 @@
 				6336B1FE1EA32B0200A78D02 /* Piano.mf.98.m4a in Resources */,
 				6336B1EB1EA32B0200A78D02 /* Piano.mf.79.m4a in Resources */,
 				6336B1AA1EA32AF000A78D02 /* Trumpet.novib.mf.78.m4a in Resources */,
+				BDF0FB4A1FA59D460047B218 /* MainViewController.xib in Resources */,
 				6336B1F51EA32B0200A78D02 /* Piano.mf.89.m4a in Resources */,
 				6324D30F1CE72F8D001934A5 /* Main.storyboard in Resources */,
 				6336B1A21EA32AF000A78D02 /* Trumpet.novib.mf.70.m4a in Resources */,
@@ -1491,10 +1789,10 @@
 				6336B1A61EA32AF000A78D02 /* Trumpet.novib.mf.74.m4a in Resources */,
 				6336B1DE1EA32B0200A78D02 /* Piano.mf.66.m4a in Resources */,
 				6336B1D91EA32B0200A78D02 /* Piano.mf.61.m4a in Resources */,
-				BDF0FB291FA598050047B218 /* monkeytones-master in Resources */,
 				6336B1AB1EA32AF000A78D02 /* Trumpet.novib.mf.79.m4a in Resources */,
 				6336B1A81EA32AF000A78D02 /* Trumpet.novib.mf.76.m4a in Resources */,
 				6336B1FF1EA32B0200A78D02 /* Piano.mf.99.m4a in Resources */,
+				BDF0FBC31FA5A52B0047B218 /* ProfileViewController.xib in Resources */,
 				6336B2081EA32B0200A78D02 /* Piano.mf.108.m4a in Resources */,
 				6336B1EA1EA32B0200A78D02 /* Piano.mf.78.m4a in Resources */,
 				6336B1B61EA32B0200A78D02 /* Piano.mf.26.m4a in Resources */,
@@ -1503,6 +1801,8 @@
 				6336B19A1EA32AF000A78D02 /* Trumpet.novib.mf.62.m4a in Resources */,
 				6336B2061EA32B0200A78D02 /* Piano.mf.106.m4a in Resources */,
 				6336B1F61EA32B0200A78D02 /* Piano.mf.90.m4a in Resources */,
+				BDF0FBA11FA5A4310047B218 /* TreeViewController.xib in Resources */,
+				BDF0FBB31FA5A4860047B218 /* DifficultyViewController.xib in Resources */,
 				6336B1AD1EA32AF000A78D02 /* Trumpet.novib.mf.81.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1510,6 +1810,81 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0B5388427D895C7598A35D84 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirstStageTests/Pods-FirstStageTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		16EFF7535E1C2414362B3180 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirstStageUITests/Pods-FirstStageUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1B7AA2B5D0A7E9F4D6AFD7CA /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirstStage/Pods-FirstStage-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		57A3028E2F281FA3578DC1FF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirstStageTests/Pods-FirstStageTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5D0C38B559489B461EE12913 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirstStageUITests/Pods-FirstStageUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		6379EE871CE9C5FD00188A70 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1536,6 +1911,132 @@
 			shellPath = /bin/sh;
 			shellScript = "\"$BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH/AudioKit.framework/fix-framework.sh\"";
 		};
+		74F0F173ED61216703B99433 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirstStage-debug/Pods-FirstStage-debug-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A0D8FE25112578548456C46A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FirstStageTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B86620A31AB38774D2649B69 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FirstStageUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C4763012EFA6107832CC7BD5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-FirstStage/Pods-FirstStage-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftValidator/SwiftValidator.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftValidator.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirstStage/Pods-FirstStage-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CAA8F6E6503F5AC7A8BC3D59 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirstStage-debug/Pods-FirstStage-debug-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DCF98B622493C259B0C68A72 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FirstStage-debug-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FCD01F07F03E6AFAB6C84107 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FirstStage-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1543,32 +2044,71 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDF0FBA81FA5A4670047B218 /* NoteViewController.swift in Sources */,
+				BDF0FB6D1FA5A0C90047B218 /* TreeScene.swift in Sources */,
 				633D1B6D1CF94BEC00B5C4FD /* FeedbackView.swift in Sources */,
+				BDF0FBCB1FA5AA630047B218 /* UIImageButton.swift in Sources */,
 				BD8B790F1F95BFB4005B31CB /* LessonOverviewViewController.swift in Sources */,
 				6324D3631CE73C47001934A5 /* First Stage_key.m in Sources */,
+				BDF0FBAC1FA5A4670047B218 /* SettingsViewController.swift in Sources */,
+				BDF0FBDB1FA5AC7E0047B218 /* UIColor.swift in Sources */,
+				BDF0FB9C1FA5A3F10047B218 /* DifficultyService.swift in Sources */,
+				BDF0FB841FA5A1A60047B218 /* InstrumentService.swift in Sources */,
+				BDF0FBE01FA5B2A70047B218 /* FirebaseService.swift in Sources */,
+				BDF0FB731FA5A0C90047B218 /* CarnivalScene.swift in Sources */,
 				638129591CF05C7900A40C8E /* Balloon.swift in Sources */,
 				6324D2DB1CE71B1A001934A5 /* FirstStage.xcdatamodeld in Sources */,
+				BDF0FB7D1FA5A0C90047B218 /* CaveScene.swift in Sources */,
 				639A2E461CF5AB09004F7B1A /* DotView.swift in Sources */,
+				BDF0FB711FA5A0C90047B218 /* MonkeyScene.swift in Sources */,
+				BDF0FBDE1FA5AE740047B218 /* NotificationsService.swift in Sources */,
+				BDF0FB5B1FA5A0730047B218 /* UIOutlineLabel.swift in Sources */,
 				6379EE921CE9C8ED00188A70 /* AudioKitManager.swift in Sources */,
 				6324D3611CE73C47001934A5 /* SSSystemView.m in Sources */,
 				635A60A61EC6B8050099154A /* MusicXMLModifier.swift in Sources */,
 				63B427591E5016AB000E35AA /* Intonation.swift in Sources */,
 				63EB90181CF1C4EC00F09B05 /* AVAudioSessionManager.swift in Sources */,
 				BD7C17501F861755002AF462 /* SettingsTableViewController.swift in Sources */,
+				BDF0FBC21FA5A52B0047B218 /* ProfileViewController.swift in Sources */,
 				63D5E8861EA37BDA007AE8D4 /* Note.swift in Sources */,
+				BDF0FBD51FA5AAC40047B218 /* TreeViewCell.swift in Sources */,
+				BDF0FB4F1FA59DA90047B218 /* ExerciseViewController.swift in Sources */,
+				BDF0FB901FA5A2480047B218 /* Exercise.swift in Sources */,
+				BDF0FB581FA5A01B0047B218 /* Difficulty.swift in Sources */,
 				63D5E8831EA37BCC007AE8D4 /* NoteService.swift in Sources */,
+				BDF0FB811FA5A18A0047B218 /* UIService.swift in Sources */,
+				BDF0FB751FA5A0C90047B218 /* LakeScene.swift in Sources */,
+				BDF0FB2D1FA5999D0047B218 /* MonkeyTonesLongToneViewController.swift in Sources */,
+				BDF0FBB21FA5A4860047B218 /* DifficultyViewController.swift in Sources */,
+				BDF0FB6B1FA5A0C90047B218 /* BasicScene.swift in Sources */,
 				6324D3041CE72E5D001934A5 /* TuneExerciseViewController.swift in Sources */,
 				63B4275C1E5057BB000E35AA /* SSSettingsViewController.swift in Sources */,
 				639A2E551CF5E6CA004F7B1A /* VisualMetronomeView.swift in Sources */,
 				6324D3651CE73C47001934A5 /* SSPlayLoopGraphics.m in Sources */,
+				BDF0FBD31FA5AA8C0047B218 /* UITintButton.swift in Sources */,
+				BDF0FBA01FA5A4310047B218 /* TreeViewController.swift in Sources */,
+				BDF0FBDA1FA5AC7E0047B218 /* UIButton.swift in Sources */,
+				BDF0FB971FA5A3180047B218 /* InstrumentViewController.swift in Sources */,
+				BDF0FBDC1FA5AC7E0047B218 /* UILabel.swift in Sources */,
 				6324D35F1CE73C47001934A5 /* SSScrollView.m in Sources */,
 				BD7C17471F860E3B002AF462 /* HomeViewController.swift in Sources */,
+				BDF0FB8D1FA5A22B0047B218 /* Measure.swift in Sources */,
+				BDF0FB7B1FA5A0C90047B218 /* PlaneScene.swift in Sources */,
 				BD8B79121F95C11B005B31CB /* UserAtributes.swift in Sources */,
+				BDF0FB771FA5A0C90047B218 /* BuildingsScene.swift in Sources */,
 				6381295B1CF05C7900A40C8E /* SparkLine.swift in Sources */,
+				BDF0FBB81FA5A4B80047B218 /* PRExerciseViewController.swift in Sources */,
+				BDF0FB491FA59D460047B218 /* MainViewController.swift in Sources */,
+				BDF0FB5E1FA5A08F0047B218 /* MusicLine.swift in Sources */,
 				6379EE7E1CE95CDF00188A70 /* NoteAnalysis.swift in Sources */,
+				BDF0FB8A1FA5A2030047B218 /* Instrument.swift in Sources */,
+				BDF0FB871FA5A1AD0047B218 /* DataService.swift in Sources */,
 				6324D3731CE73ED9001934A5 /* Enums.swift in Sources */,
+				BDF0FBBE1FA5A50A0047B218 /* TutorialScreen.swift in Sources */,
 				63D5E88A1EA37BF7007AE8D4 /* MusicFont.swift in Sources */,
 				6324D2D31CE71B19001934A5 /* AppDelegate.swift in Sources */,
+				BDF0FB791FA5A0C90047B218 /* SkiingScene.swift in Sources */,
+				BDF0FB931FA5A2DE0047B218 /* GCHelper.swift in Sources */,
 				633C2AE21CE86915001C5C16 /* Constants.swift in Sources */,
 				63D5E8871EA37BEA007AE8D4 /* NoteOffset.swift in Sources */,
 				63D5E88B1EA37C1B007AE8D4 /* LongToneViewController.swift in Sources */,
@@ -1596,32 +2136,63 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDF0FBA71FA5A4670047B218 /* NoteViewController.swift in Sources */,
+				BDF0FB6C1FA5A0C90047B218 /* TreeScene.swift in Sources */,
 				633D1B711CF94BF000B5C4FD /* FeedbackView.swift in Sources */,
 				BD8B790E1F95BFB4005B31CB /* LessonOverviewViewController.swift in Sources */,
 				6324D3621CE73C47001934A5 /* First Stage_key.m in Sources */,
+				BDF0FBAB1FA5A4670047B218 /* SettingsViewController.swift in Sources */,
+				BDF0FB9B1FA5A3F10047B218 /* DifficultyService.swift in Sources */,
+				BDF0FB831FA5A1A60047B218 /* InstrumentService.swift in Sources */,
+				BDF0FB721FA5A0C90047B218 /* CarnivalScene.swift in Sources */,
 				638129581CF05C7900A40C8E /* Balloon.swift in Sources */,
 				6324D3071CE72F8D001934A5 /* FirstStage.xcdatamodeld in Sources */,
+				BDF0FB7C1FA5A0C90047B218 /* CaveScene.swift in Sources */,
 				639A2E451CF5AB09004F7B1A /* DotView.swift in Sources */,
+				BDF0FB701FA5A0C90047B218 /* MonkeyScene.swift in Sources */,
+				BDF0FB5A1FA5A0730047B218 /* UIOutlineLabel.swift in Sources */,
 				6379EE911CE9C8ED00188A70 /* AudioKitManager.swift in Sources */,
 				63B4275A1E505573000E35AA /* Intonation.swift in Sources */,
 				635A60A71EC6B8060099154A /* MusicXMLModifier.swift in Sources */,
 				6324D3601CE73C47001934A5 /* SSSystemView.m in Sources */,
 				63EB90171CF1C4EB00F09B05 /* AVAudioSessionManager.swift in Sources */,
 				BD7C17511F861759002AF462 /* SettingsTableViewController.swift in Sources */,
+				BDF0FBC11FA5A52B0047B218 /* ProfileViewController.swift in Sources */,
 				63D5E8851EA37BDA007AE8D4 /* Note.swift in Sources */,
+				BDF0FB4E1FA59DA90047B218 /* ExerciseViewController.swift in Sources */,
+				BDF0FB8F1FA5A2480047B218 /* Exercise.swift in Sources */,
+				BDF0FB571FA5A01B0047B218 /* Difficulty.swift in Sources */,
 				63D5E8841EA37BCD007AE8D4 /* NoteService.swift in Sources */,
+				BDF0FB801FA5A18A0047B218 /* UIService.swift in Sources */,
+				BDF0FB741FA5A0C90047B218 /* LakeScene.swift in Sources */,
+				BDF0FB2C1FA5999D0047B218 /* MonkeyTonesLongToneViewController.swift in Sources */,
+				BDF0FBB11FA5A4860047B218 /* DifficultyViewController.swift in Sources */,
+				BDF0FB6A1FA5A0C90047B218 /* BasicScene.swift in Sources */,
 				6324D3091CE72F8D001934A5 /* TuneExerciseViewController.swift in Sources */,
 				63B4275D1E5057C2000E35AA /* SSSettingsViewController.swift in Sources */,
 				639A2E541CF5E6CA004F7B1A /* VisualMetronomeView.swift in Sources */,
 				6324D3641CE73C47001934A5 /* SSPlayLoopGraphics.m in Sources */,
+				BDF0FB9F1FA5A4310047B218 /* TreeViewController.swift in Sources */,
+				BDF0FB961FA5A3180047B218 /* InstrumentViewController.swift in Sources */,
 				6324D35E1CE73C47001934A5 /* SSScrollView.m in Sources */,
 				BD7C174E1F86148A002AF462 /* HomeViewController.swift in Sources */,
+				BDF0FB8C1FA5A22B0047B218 /* Measure.swift in Sources */,
+				BDF0FB7A1FA5A0C90047B218 /* PlaneScene.swift in Sources */,
 				BD8B79111F95C11B005B31CB /* UserAtributes.swift in Sources */,
+				BDF0FB761FA5A0C90047B218 /* BuildingsScene.swift in Sources */,
 				6381295A1CF05C7900A40C8E /* SparkLine.swift in Sources */,
+				BDF0FBB71FA5A4B80047B218 /* PRExerciseViewController.swift in Sources */,
+				BDF0FB481FA59D460047B218 /* MainViewController.swift in Sources */,
+				BDF0FB5D1FA5A08F0047B218 /* MusicLine.swift in Sources */,
 				6379EE7D1CE95CDF00188A70 /* NoteAnalysis.swift in Sources */,
+				BDF0FB891FA5A2030047B218 /* Instrument.swift in Sources */,
+				BDF0FB861FA5A1AD0047B218 /* DataService.swift in Sources */,
 				6324D3721CE73ED9001934A5 /* Enums.swift in Sources */,
+				BDF0FBBD1FA5A50A0047B218 /* TutorialScreen.swift in Sources */,
 				63D5E8891EA37BF6007AE8D4 /* MusicFont.swift in Sources */,
 				6324D30A1CE72F8D001934A5 /* AppDelegate.swift in Sources */,
+				BDF0FB781FA5A0C90047B218 /* SkiingScene.swift in Sources */,
+				BDF0FB921FA5A2DE0047B218 /* GCHelper.swift in Sources */,
 				633C2AE11CE86915001C5C16 /* Constants.swift in Sources */,
 				63D5E8881EA37BEA007AE8D4 /* NoteOffset.swift in Sources */,
 				63D5E88C1EA37C1B007AE8D4 /* LongToneViewController.swift in Sources */,
@@ -1771,6 +2342,7 @@
 		};
 		6324D2FB1CE71B1A001934A5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5341CCD4F2A892CEAAB2857F /* Pods-FirstStage.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1783,6 +2355,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/SeeScoreLib/AppStore-Release",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Pods/FirebaseAnalytics/Frameworks/frameworks",
+					"$(PROJECT_DIR)/Pods/FirebaseCore/Frameworks/frameworks",
+					"$(PROJECT_DIR)/Pods/FirebaseInstanceID/Frameworks/frameworks",
+					"$(PROJECT_DIR)/Pods/FirebaseDatabase/Frameworks",
 				);
 				INFOPLIST_FILE = FirstStage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1801,6 +2377,7 @@
 		};
 		6324D2FC1CE71B1A001934A5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 65AEC1BB7F5C0814BCE7C4CC /* Pods-FirstStage.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1813,6 +2390,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/SeeScoreLib/AppStore-Release",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Pods/FirebaseAnalytics/Frameworks/frameworks",
+					"$(PROJECT_DIR)/Pods/FirebaseCore/Frameworks/frameworks",
+					"$(PROJECT_DIR)/Pods/FirebaseInstanceID/Frameworks/frameworks",
+					"$(PROJECT_DIR)/Pods/FirebaseDatabase/Frameworks",
 				);
 				INFOPLIST_FILE = FirstStage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1830,6 +2411,7 @@
 		};
 		6324D2FE1CE71B1A001934A5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 151AB807FDF2985B182553FF /* Pods-FirstStageTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = FirstStageTests/Info.plist;
@@ -1843,6 +2425,7 @@
 		};
 		6324D2FF1CE71B1A001934A5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 498AF266D063C15E5A588B5F /* Pods-FirstStageTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = FirstStageTests/Info.plist;
@@ -1856,6 +2439,7 @@
 		};
 		6324D3011CE71B1A001934A5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 93B41DE61229FB4977A4D8CE /* Pods-FirstStageUITests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = FirstStageUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1868,6 +2452,7 @@
 		};
 		6324D3021CE71B1A001934A5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 365B782948CF9BA77784E4C7 /* Pods-FirstStageUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = FirstStageUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1880,6 +2465,7 @@
 		};
 		6324D3111CE72F8D001934A5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 36416BF4DADA8B1A57987C2A /* Pods-FirstStage-debug.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1894,7 +2480,6 @@
 				);
 				INFOPLIST_FILE = FirstStage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.musikyoshi.FirstStageDSR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1908,6 +2493,7 @@
 		};
 		6324D3121CE72F8D001934A5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7A2F5E8944B7466446304CB4 /* Pods-FirstStage-debug.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1922,7 +2508,6 @@
 				);
 				INFOPLIST_FILE = FirstStage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.musikyoshi.FirstStageDSR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

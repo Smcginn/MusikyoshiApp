@@ -13,6 +13,7 @@ enum MusicFont : String{
     case AccidentalFlat = "\u{E260}"
     case AccidentalSharp = "\u{E262}"
     case BarlineSingle = "\u{E030}"
+    case BassClef = "𝄢"
     case EighthNoteUp = "\u{E1D7}"
     case EighthNoteDown = "\u{E1D8}"
     case GClef = "\u{E050}"

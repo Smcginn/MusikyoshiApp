@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InstrumentViewController" customModule="Monkey_Tones" customModuleProvider="target">
+            <connections>
+                <outlet property="navBar" destination="NuK-0l-8g9" id="THh-jH-MVm"/>
+                <outlet property="tableView" destination="oKC-FP-SXc" id="LLr-tv-jt8"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home background.png" translatesAutoresizingMaskIntoConstraints="NO" id="juz-LD-YcU">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="668"/>
+                </imageView>
+                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NuK-0l-8g9">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="iD0-RO-PnI"/>
+                    </constraints>
+                    <items>
+                        <navigationItem title="Pick an Instrument" id="GB6-NB-sRz"/>
+                    </items>
+                </navigationBar>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oKC-FP-SXc">
+                    <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="4ca-Fk-A7j"/>
+                        <outlet property="delegate" destination="-1" id="ie5-wb-u5W"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="oKC-FP-SXc" secondAttribute="bottom" id="7Lo-f0-nbu"/>
+                <constraint firstAttribute="trailing" secondItem="juz-LD-YcU" secondAttribute="trailing" id="7Sh-rb-x20"/>
+                <constraint firstItem="oKC-FP-SXc" firstAttribute="top" secondItem="NuK-0l-8g9" secondAttribute="bottom" id="7in-XC-Xfa"/>
+                <constraint firstAttribute="trailing" secondItem="oKC-FP-SXc" secondAttribute="trailing" id="Bkq-Ed-bUa"/>
+                <constraint firstItem="juz-LD-YcU" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="DmX-BW-7Qo"/>
+                <constraint firstItem="juz-LD-YcU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="XJX-3c-XgG"/>
+                <constraint firstItem="NuK-0l-8g9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="aqQ-a4-zml"/>
+                <constraint firstItem="oKC-FP-SXc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="iZl-Rf-OuJ"/>
+                <constraint firstAttribute="bottom" secondItem="juz-LD-YcU" secondAttribute="bottom" constant="-1" id="m1L-Yh-3dl"/>
+                <constraint firstItem="NuK-0l-8g9" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="uvb-WL-hPA"/>
+                <constraint firstAttribute="trailing" secondItem="NuK-0l-8g9" secondAttribute="trailing" id="yuE-SW-pWr"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="home background.png" width="101" height="180"/>
+    </resources>
+</document>
