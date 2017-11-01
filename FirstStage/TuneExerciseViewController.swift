@@ -9,6 +9,10 @@
 import UIKit
 import AVFoundation
 
+// Turn on/off subset of output to debug window
+let DEBUG_PRINT_PLAYALONG__ALL = false
+
+
 class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNoteHandler, SSSynthParameterControls, SSFrequencyConverter {
 
     @IBOutlet weak var ssScrollView: SSScrollView!
@@ -143,6 +147,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
 
     var analysisTimer: Timer?
     var startTime : Date = Date()
+    var thresholdStartTime = 0.0
     var thresholdEndTime = 0.0
     var frequencyThresholdPercent = Double(0.0)
     var targetPitch = Double(0.0)
@@ -512,8 +517,28 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                     firstNote = false
                 }
                 
-                animValues.append(thisNoteXPos - animHorzOffset)
-                animKeyTimes.append(Double(barsDuration_ms + Int(note.start)) / Double(exerciseDuration_ms))
+                let startFromBarBeginning = note.start // start offset within current measure
+                
+                // Exclude the second note of a cross-measure tied note pair, which has a negative
+                // start-from-bar-start time (i.e., previous measure). All data needed for animation
+                // is in the first note of pair - including duration of combined 1st & 2nd notes.
+                if ( startFromBarBeginning >= 0 ) {
+                    animValues.append(thisNoteXPos - animHorzOffset)
+                    animKeyTimes.append(Double(barsDuration_ms + Int(note.start)) / Double(exerciseDuration_ms))
+                }
+                
+                // if this is a note (midiPitch == 0 means a rest) do some output for debugging support
+                if (DEBUG_PRINT_PLAYALONG__ALL && note.midiPitch != 0 )
+                {
+                    let thisBarIndex = bar.index
+                    let noteStartBarIndex = note.startBarIndex
+                    let duration = note.duration
+                    print ("  In getPlayData:  thisNoteXPos = \(thisNoteXPos)")
+                    print ("    noteStartBarIndex = \(noteStartBarIndex),    thisBarIndex = \(thisBarIndex)")
+                    print ("    startFromBarBeginning = \(startFromBarBeginning),    duration = \(duration)")
+                    if noteStartBarIndex != thisBarIndex {
+                        print ("!! curr note didn't start in current bar  !!") }
+                }
             }
             
             barsDuration_ms += Int(bar.duration_ms)
@@ -584,8 +609,11 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
 //        let frequency = AudioKitManager.sharedInstance.frequency()
         let amplitude = AudioKitManager.sharedInstance.frequencyTracker.amplitude
         let frequency = AudioKitManager.sharedInstance.frequencyTracker.frequency
-//        print("amplitude / freq = \(amplitude) / \(frequency)")
+        if (DEBUG_PRINT_PLAYALONG__ALL) {
+            print("  amplitude = \(amplitude),   freq = \(self.frequency)") }
 
+        // FIXME? - I think this ignores and does not process the case where the rhythm is correct
+        // but the note is wrong. Either rename "hasCorrectSound", or create two separate vars
         let hasSound = amplitude > 0.01 && (minPitch...maxPitch ~= frequency)
 
         var result = NoteAnalysis.NoteResult.noResult
@@ -626,10 +654,10 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                 if result != NoteAnalysis.NoteResult.noResult {
                     if let count = noteResultValues[result] {
                         noteResultValues[result] = count + 1
-                        print("result: \(amplitude) - \(result) \(count + 1)")
+                        print("rhythm result: \(amplitude) - \(result) \(count + 1)")
                     } else {
                         noteResultValues[result] = 1
-                        print("result: \(amplitude) - \(result) 1")
+                        print("rhythm result: \(amplitude) - \(result) 1")
                     }
 
                     result = NoteAnalysis.NoteResult.noResult
@@ -647,7 +675,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                     freqMatch = true
                 }
 
-                print("freq ... low \(freqLow) high \(freqHigh) match \(freqMatch)")
+                print("freq ...    low \(freqLow)    high \(freqHigh)    match \(freqMatch)")
                 if inThreshold {
                     if freqLow {
                         guard !pitchLow else { return }
@@ -711,10 +739,10 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         guard result != NoteAnalysis.NoteResult.noResult else { return }
         if let count = noteResultValues[result] {
             noteResultValues[result] = count + 1
-            print("result: \(amplitude) - \(result) \(count + 1)")
+            print("pitch result: \(amplitude) - \(result) \(count + 1)")
         } else {
             noteResultValues[result] = 1
-            print("result: \(amplitude) - \(result) 1")
+            print("pitch result: \(amplitude) - \(result) 1")
         }
     }
     
@@ -1002,6 +1030,10 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     
     //MARK: SSNoteHandler protocol
     func end(_ note: SSPDPartNote!) {
+        if (DEBUG_PRINT_PLAYALONG__ALL) {
+            NSLog ( "In TuneExerciseViewController::end")
+            print ("")    } // blank line w/o timestamp.
+        
         if note.note.midiPitch > 0 {
             insideNote = false
         } else {
@@ -1015,10 +1047,10 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
      * @param notes an array of SSPDPartNote, the set of all notes in all parts which should be starting
      */
     public func start(_ notes: [SSPDPartNote]!) {
-//        startNotes(notes)
-//    }
-//
-//    func startNotes(_ notes: [AnyObject]!) {
+        if (DEBUG_PRINT_PLAYALONG__ALL) {
+            print ("") // blank line w/o timestamp.
+            NSLog ( "In TuneExerciseViewController::start, notes.count = \(notes.count)" ) }
+    
         assert(notes.count > 0)
         if !playingAnimation {
             gateView.frame.origin.x = CGFloat(animHorzOffset - 12.0)
@@ -1064,7 +1096,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     func setNoteThresholdState(_ notes: NSArray) {
         // normally this will not need to iterate over the whole chord, but will exit as soon as it has a valid xpos
         // modified for analysis threshold and state
-
+        
         for note in notes as! [SSPDPartNote] {
             // priority given to notes over rests, but ignore cross-bar tied notes
             if note.note.midiPitch > 0 && note.note.start >= 0 {
@@ -1077,7 +1109,16 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                     missedSound = false
                     lateSound = false
 
+                    thresholdStartTime = Date().timeIntervalSince(startTime) - timingThreshold * 2
                     thresholdEndTime = Date().timeIntervalSince(startTime) + timingThreshold * 2
+                    if (DEBUG_PRINT_PLAYALONG__ALL) { 
+                        print ("")
+                        NSLog ( "  ->>> In setNoteThresholdState, deciding Note Rhythm and Pitch thresholds" )
+                        let currTime = Date().timeIntervalSince(startTime)
+                        print ( "    thresholdStartTime = \(thresholdStartTime)" )
+                        print ( "    currTime           = \(currTime)" )
+                        print ( "    thresholdEndTime   = \(thresholdEndTime)\n" )
+                    }
 
                     if isTune {
                         //do all this here so we don't have to do it everytime analyzePerformance is called.
@@ -1093,6 +1134,12 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                             targetPitch = freq
                             lowPitchThreshold = freq / frequencyThresholdPercent
                             highPitchThreshold = freq * frequencyThresholdPercent
+                            
+                            if (DEBUG_PRINT_PLAYALONG__ALL) {
+                                print ( "    targetPitch        = \(targetPitch)" )
+                                print ( "    lowPitchThreshold  = \(lowPitchThreshold)" )
+                                print ( "    highPitchThreshold = \(highPitchThreshold)\n" )
+                            }
                         }
                     }
                     
@@ -1139,7 +1186,8 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     func moveNoteCursor(_ notes: NSArray) {
         // normally this will not need to iterate over the whole chord, but will exit as soon as it has a valid xpos
         for note in notes as! [SSPDPartNote] {
-            // priority given to notes over rests, but ignore cross-bar tied notes
+            // priority given to notes over rests, but ignore cross-bar tied notes 
+            //   (negative note.start means note started prev measure - unique to 2nd note of cross-bar tie)
             if note.note.midiPitch > 0 && note.note.start >= 0 {
                 let xpos = noteXPos(note.note)
                 // noteXPos returns 0 if the note isn't found in the layout (it might be in a part which is not shown)
