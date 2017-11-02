@@ -12,7 +12,6 @@ import AVFoundation
 // Turn on/off subset of output to debug window
 let DEBUG_PRINT_PLAYALONG__ALL = false
 
-
 class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNoteHandler, SSSynthParameterControls, SSFrequencyConverter {
 
     @IBOutlet weak var ssScrollView: SSScrollView!
@@ -519,16 +518,16 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                 
                 let startFromBarBeginning = note.start // start offset within current measure
                 
-                // Exclude the second note of a cross-measure tied note pair, which has a negative
+                // Exclude the second note of a cross-bar tied note pair, which has a negative
                 // start-from-bar-start time (i.e., previous measure). All data needed for animation
                 // is in the first note of pair - including duration of combined 1st & 2nd notes.
-                if ( startFromBarBeginning >= 0 ) {
+                if startFromBarBeginning >= 0 {
                     animValues.append(thisNoteXPos - animHorzOffset)
                     animKeyTimes.append(Double(barsDuration_ms + Int(note.start)) / Double(exerciseDuration_ms))
                 }
                 
                 // if this is a note (midiPitch == 0 means a rest) do some output for debugging support
-                if (DEBUG_PRINT_PLAYALONG__ALL && note.midiPitch != 0 )
+                if DEBUG_PRINT_PLAYALONG__ALL && note.midiPitch != 0
                 {
                     let thisBarIndex = bar.index
                     let noteStartBarIndex = note.startBarIndex
@@ -609,7 +608,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
 //        let frequency = AudioKitManager.sharedInstance.frequency()
         let amplitude = AudioKitManager.sharedInstance.frequencyTracker.amplitude
         let frequency = AudioKitManager.sharedInstance.frequencyTracker.frequency
-        if (DEBUG_PRINT_PLAYALONG__ALL) {
+        if DEBUG_PRINT_PLAYALONG__ALL {
             print("  amplitude = \(amplitude),   freq = \(self.frequency)") }
 
         // FIXME? - I think this ignores and does not process the case where the rhythm is correct
@@ -1030,7 +1029,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     
     //MARK: SSNoteHandler protocol
     func end(_ note: SSPDPartNote!) {
-        if (DEBUG_PRINT_PLAYALONG__ALL) {
+        if DEBUG_PRINT_PLAYALONG__ALL {
             NSLog ( "In TuneExerciseViewController::end")
             print ("")    } // blank line w/o timestamp.
         
@@ -1047,7 +1046,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
      * @param notes an array of SSPDPartNote, the set of all notes in all parts which should be starting
      */
     public func start(_ notes: [SSPDPartNote]!) {
-        if (DEBUG_PRINT_PLAYALONG__ALL) {
+        if DEBUG_PRINT_PLAYALONG__ALL {
             print ("") // blank line w/o timestamp.
             NSLog ( "In TuneExerciseViewController::start, notes.count = \(notes.count)" ) }
     
@@ -1111,7 +1110,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
 
                     thresholdStartTime = Date().timeIntervalSince(startTime) - timingThreshold * 2
                     thresholdEndTime = Date().timeIntervalSince(startTime) + timingThreshold * 2
-                    if (DEBUG_PRINT_PLAYALONG__ALL) { 
+                    if DEBUG_PRINT_PLAYALONG__ALL {
                         print ("")
                         NSLog ( "  ->>> In setNoteThresholdState, deciding Note Rhythm and Pitch thresholds" )
                         let currTime = Date().timeIntervalSince(startTime)
@@ -1135,7 +1134,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                             lowPitchThreshold = freq / frequencyThresholdPercent
                             highPitchThreshold = freq * frequencyThresholdPercent
                             
-                            if (DEBUG_PRINT_PLAYALONG__ALL) {
+                            if DEBUG_PRINT_PLAYALONG__ALL {
                                 print ( "    targetPitch        = \(targetPitch)" )
                                 print ( "    lowPitchThreshold  = \(lowPitchThreshold)" )
                                 print ( "    highPitchThreshold = \(highPitchThreshold)\n" )
