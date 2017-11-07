@@ -21,6 +21,10 @@ scripts/junk
 profile
 
 xcodebuild
+Carthage/
 
-AudioKit.framework.dSYM
+# Decompressed versions of our bundled frameworks
 SeeScoreLib.framework
+
+# vi temp files
+*~
