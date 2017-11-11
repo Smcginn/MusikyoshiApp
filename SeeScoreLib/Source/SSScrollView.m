@@ -483,8 +483,9 @@ static float limit(float val, float mini, float maxi)
                             } while ((systemMagnification < self.magnification) || widthIsTruncated);
                             
 //                            NSLog(@"+++systemMagnification:%f - width=%f", systemMagnification, frame.size.width);
-                            self.frame = frame;
-
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                self.frame = frame;
+                            });
                         }
                         else
                         if (_optimalSingleSystem) {

@@ -98,8 +98,8 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
         }
 
         var notesFileName = "XML Tunes/Long_Tone_25G3G5"
-        if noteName.characters.count > 1 {
-            let secondChar = noteName[noteName.characters.index(after: noteName.startIndex)]
+        if noteName.count > 1 {
+            let secondChar = noteName[noteName.index(after: noteName.startIndex)]
             
             if secondChar == "♭" {
                 notesFileName = "XML Tunes/Long_Tone_25G3G5_flat"
@@ -112,6 +112,15 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
         farFrequencyThresholdPercent = frequencyThresholdPercent + (frequencyThreshold * 1.5)
         firstTime = true
         setupImageViews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight)
+    }
+    
+    override func viewWillDisappear(_ animated : Bool) {
+        super.viewWillDisappear(animated)
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
     }
     
     @IBAction func sparkLineTapped(_ sender: UITapGestureRecognizer) {

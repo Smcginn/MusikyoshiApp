@@ -1,5 +1,5 @@
 //
-//  PracticeViewController.swift
+//  LessonOverviewViewController.swift
 //  FirstFive
 //
 //  Created by Adam Kinney on 11/27/15.
@@ -9,7 +9,7 @@
 //
 import UIKit
 
-class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class LessonOverviewViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     var optionIndex = 0
     
@@ -62,7 +62,7 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.title = "Practice"
+        self.title = "Lesson 1" // + profile.currentLessonNumber
         AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight)
     }
     
