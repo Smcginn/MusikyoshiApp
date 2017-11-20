@@ -1769,7 +1769,7 @@
 				INFOPLIST_FILE = FirstStage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.musikyoshi.FirstStageDSR;
+				PRODUCT_BUNDLE_IDENTIFIER = com.musikyoshi.FirstStageCook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1799,7 +1799,7 @@
 				INFOPLIST_FILE = FirstStage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.musikyoshi.FirstStageDSR;
+				PRODUCT_BUNDLE_IDENTIFIER = com.musikyoshi.FirstStageCook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
