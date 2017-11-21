@@ -13,6 +13,7 @@
 #import "SSUpdateScrollProtocol.h"
 #import <SeeScoreLib/SeeScoreLib.h>
 #import "SSViewInterface.h"
+#import "FSAnalysisOverlayView.h"
 
 @class SSComponent;
 
@@ -66,7 +67,7 @@ typedef NS_ENUM(NSInteger, ScrollType_e) {scroll_off, scroll_system, scroll_bar}
  * @interface SSScrollView
  * @abstract A scrollable view to display a MusicXML score as a vertical sequence of rectangular system views
  */
-@interface SSScrollView : UIScrollView <SSBarControlProtocol, ScoreChangeHandler> {
+@interface SSScrollView : UIScrollView <SSBarControlProtocol, ScoreChangeHandler, OverlayViewDelegate> {
 
 	IBOutlet UIView *containedView;
 }
@@ -100,6 +101,12 @@ typedef NS_ENUM(NSInteger, ScrollType_e) {scroll_off, scroll_system, scroll_bar}
  * @abstract for SSBarControl update
  */
 @property (nonatomic,assign) id<SSUpdateScrollProtocol> scrollDelegate;
+
+/*!
+ * @property overlayViewDelegate
+ * @abstract for FSAnalysisOverlayView update
+ */
+@property (nonatomic,assign) id<OverlayViewDelegate> overlayViewDelegate;
 
 /*!
  * @property isProcessing
@@ -444,5 +451,20 @@ typedef NS_ENUM(NSInteger, ScrollType_e) {scroll_off, scroll_system, scroll_bar}
  * Should NOT be set at the same time as optimalSingleSystem
  */
 @property (nonatomic) bool optimalXMLxLayoutMagnification;
+
+
+// For displaying student performance results
+-(void) addNotePerformanceResultAtXPos:(CGFloat) iXPos
+                      withRhythmResult:(int) iRhythmResult
+                       withPitchResult:(int) iPitchResult;
+
+-(void) updateNotePerformanceResultAtXPos:(CGFloat) iXPos
+                         withRhythmResult:(int) iRhythmResult
+                          withPitchResult:(int) iPitchResult;
+
+-(void) clearNotePerformanceResultAtXPos:(CGFloat) iXPos;
+
+-(void) clearNotePerformanceResults;
+
 
 @end
