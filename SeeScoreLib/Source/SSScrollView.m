@@ -12,6 +12,7 @@
 #import "SSSystemView.h"
 #import <QuartzCore/QuartzCore.h>
 #import "SSPlayLoopGraphics.h"
+#import "FSAnalysisOverlayView.h"
 
 #include <dispatch/dispatch.h>
 
@@ -33,6 +34,9 @@ static const float kMagnificationProportionToScreenWidth = 0.8F;// this is 0 for
 
 @interface SSScrollView ()
 {
+    
+    FSAnalysisOverlayView  *analysisOverlayView;
+    
 	NSMutableArray *systemlist; // array of SSSystem
 	
 	NSArray<NSNumber*> *displayingParts;
@@ -115,6 +119,8 @@ static const float kMagnificationProportionToScreenWidth = 0.8F;// this is 0 for
     pendingAddSystems = [NSMutableSet set];
 	layOptions = [[SSLayoutOptions alloc] init]; // default layout options
     [self resetBarRectCursor];
+    
+    [self addOverlayView];
 }
 
 -(void)setBackgroundColor:(UIColor *)backgroundColor
@@ -483,8 +489,12 @@ static float limit(float val, float mini, float maxi)
                             } while ((systemMagnification < self.magnification) || widthIsTruncated);
                             
 //                            NSLog(@"+++systemMagnification:%f - width=%f", systemMagnification, frame.size.width);
-                            self.frame = frame;
-
+                            
+                            // temp fix, from Matt's checkin
+                            // was:  self.frame = frame;
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                self.frame = frame;
+                            });
                         }
                         else
                         if (_optimalSingleSystem) {
@@ -673,7 +683,33 @@ static float min(float a, float b)
 {
 	assert(![self existsSysView:sysIndex]);
 	[containedView addSubview:sysView];
+    
+    if (analysisOverlayView != nil)
+    {
+        CGSize sz = self.contentSize;
+        CGRect frame = containedView.frame;
+        frame.size.width = sz.width;
+        [analysisOverlayView setFrame:frame];
+
+        analysisOverlayView.layer.zPosition = 5;
+        
+//        [analysisOverlayView addHitAtXPos: 50.0f
+//                            withRhythmRes: 0
+//                             withPitchRes: 0];
+//        [analysisOverlayView addHitAtXPos: 250.0f
+//                            withRhythmRes: 1
+//                             withPitchRes: 0];
+//        [analysisOverlayView addHitAtXPos: 650.0f
+//                            withRhythmRes: 2
+//                             withPitchRes: 0];
+//        [analysisOverlayView addHitAtXPos: 850.0f
+//                            withRhythmRes: 0
+//                             withPitchRes: 0];
+        
+        [analysisOverlayView redrawMe];
+    }
 }
+
 -(void)removeSystemView:(SSSystemView*)sysView
 {
 	assert([self existsSysView:sysView.systemIndex]);
@@ -754,6 +790,12 @@ static float min(float a, float b)
 
 - (void)layoutSubviews
 {
+    // SCF - delete
+//    NSLog ( @"\n" );
+//    NSLog ( @"\n" );
+//    NSLog ( @" . . . in layoutSubviews, thread = %@", [NSThread currentThread]);
+//    NSLog ( @"\n" );
+//    NSLog ( @"\n" );
 	[super layoutSubviews];
 	if (self.abortingBackground == 0 && score && systemlist.count > 0) // this is called on every scroll movement
 	{
@@ -1578,7 +1620,7 @@ static float min(float a, float b)
 #ifdef DrawOutline
 - (void)drawRect:(CGRect)rect
 {
-	//[super drawRect:rect];
+	[super drawRect:rect];
 	CGContextRef ctx = UIGraphicsGetCurrentContext();
 	CGContextSetStrokeColorWithColor (ctx, UIColor.greenColor.CGColor);
 	CGContextStrokeRect(ctx, rect);
@@ -1587,6 +1629,25 @@ static float min(float a, float b)
 		CGContextSetStrokeColorWithColor (ctx, UIColor.blueColor.CGColor);
 		CGContextStrokeRect(ctx, CGRectInset(val.CGRectValue, 1,1));
 	}
+    
+    CGFloat red[4] = {1.0f, 0.0f, 0.0f, 1.0f};
+    CGContextSetStrokeColor(ctx, red);
+    CGContextBeginPath(ctx);
+    CGContextMoveToPoint(ctx, 100.0f, 20.0f);
+    CGContextAddLineToPoint(ctx, 100.0f, 120.0f);
+    CGContextStrokePath(ctx);
+
+    /*
+    
+    
+    UIBezierPath *line = [UIBezierPath bezierPath];
+    [line moveToPoint:CGPointMake( 400.0f, 20.0f)];
+    [line addLineToPoint:CGPointMake( 400.0f, 20.0f)];
+    [line setLineWidth:5.0]; /// Make it easy to see
+ //   [[self lineColor] set]; /// Make future drawing the color of lineColor.
+    [line stroke];
+ //   CGContextStrokePath(ctx, line);
+     */
 }
 #endif
 
@@ -1709,6 +1770,67 @@ static float min(float a, float b)
 	}
 	// else nothing changed
 }
+
+-(void) addOverlayView
+{
+    if (analysisOverlayView == nil )
+    {
+        CGRect frame = containedView.frame;
+        analysisOverlayView = [[FSAnalysisOverlayView alloc] initWithFrame:frame];
+        [analysisOverlayView setBackgroundColor:[UIColor clearColor]];
+        [containedView addSubview:analysisOverlayView];
+        analysisOverlayView.overlayViewDelegate = self;
+    }
+}
+
+// For displaying student performance results
+-(void) addNotePerformanceResultAtXPos:(CGFloat) iXPos
+                      withRhythmResult:(int) iRhythmResult
+                       withPitchResult:(int) iPitchResult
+{
+    if (analysisOverlayView)
+    {
+        [analysisOverlayView addHitAtXPos: iXPos
+                            withRhythmRes: iRhythmResult
+                             withPitchRes: iPitchResult];
+    }
+}
+
+-(void) updateNotePerformanceResultAtXPos:(CGFloat) iXPos
+                         withRhythmResult:(int) iRhythmResult
+                          withPitchResult:(int) iPitchResult
+{
+    
+}
+
+-(void) clearNotePerformanceResultAtXPos:(CGFloat) iXPos
+{
+    
+}
+
+-(void) clearNotePerformanceResults
+{
+    [analysisOverlayView clearAllHits];
+}
+
+- (void)noteTappedAtXCoord:(int)xCoord
+{
+    if (self.overlayViewDelegate)
+        [self.overlayViewDelegate noteTappedAtXCoord:xCoord];
+}
+
+-(void)touchesBegan: (NSSet*) touches
+          withEvent: (UIEvent*) event
+{
+    UITouch *t = [touches anyObject];
+    CGPoint _downLocation =[t locationInView:self];
+    
+    CGFloat touchX = _downLocation.x;
+    
+    if ( self.overlayViewDelegate )
+        [self.overlayViewDelegate noteTappedAtXCoord:(int)touchX];
+}
+
 //@end
 
 @end
