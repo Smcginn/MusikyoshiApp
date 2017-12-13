@@ -11,30 +11,30 @@
 @protocol OverlayViewDelegate
 
 @required
-- (void)noteTappedAtXCoord:(int)xCoord;
+- (void)noteTappedWithThisID:(int)noteID;
 
 @end
 
 
 @interface FSAnalysisOverlayView : UIView
 
-/*!
- * @property overlayViewDelegate
- * @abstract for FSAnalysisOverlayView update
- */
-@property (nonatomic,assign) id<OverlayViewDelegate> overlayViewDelegate;
+-(void) addNoteAtXPos:(CGFloat) iXPos
+   withWeightedRating:(int) iWeightedRating
+        withRhythmRes:(int) iRhythmResult
+         withPitchRes:(int) iPitchResult
+               noteID:(int) iNoteID
+             isLinked:(bool) isLinked
+        linkedSoundID:(int) iLinkedSoundID;
 
--(void) addHitAtXPos:(CGFloat) iXPos
-       withRhythmRes:(int) iRhythmResult
-        withPitchRes:(int) iPitchResult;
+-(void) addSoundAtXPos:(CGFloat) iXPos
+          withDuration:(int) iDuration
+               soundID:(int) iSoundID
+              isLinked:(bool) isLinked
+          linkedNoteID:(int) iLinkedNoteID;
 
--(void) updateHitAtXPos:(CGFloat) iXPos
-          withRhythmRes:(int) iRhythmResult
-           withPitchRes:(int) iPitchResult;
+-(int) findNoteIDFromXPos: (int) iXpos;
 
--(void) clearHitAtXPos:(CGFloat) iXPos;
-
--(void) clearAllHits;
+-(void) clearPerfNoteAndSoundData;
 
 -(void) redrawMe;
 

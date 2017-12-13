@@ -16,6 +16,9 @@
 
 #include <dispatch/dispatch.h>
 
+// If true. will send msg to overlayViewDelegate to invoke Note accurary popup
+static const bool kNoteAnalysisRespondToTouch = true;
+
 static const CGSize kMargin = {0,0}; // L/R margins
 
 static const float kWindowPlayingCentreFractionFromTop = 0.333; // autoscroll centres the current playing system around here
@@ -692,19 +695,6 @@ static float min(float a, float b)
         [analysisOverlayView setFrame:frame];
 
         analysisOverlayView.layer.zPosition = 5;
-        
-//        [analysisOverlayView addHitAtXPos: 50.0f
-//                            withRhythmRes: 0
-//                             withPitchRes: 0];
-//        [analysisOverlayView addHitAtXPos: 250.0f
-//                            withRhythmRes: 1
-//                             withPitchRes: 0];
-//        [analysisOverlayView addHitAtXPos: 650.0f
-//                            withRhythmRes: 2
-//                             withPitchRes: 0];
-//        [analysisOverlayView addHitAtXPos: 850.0f
-//                            withRhythmRes: 0
-//                             withPitchRes: 0];
         
         [analysisOverlayView redrawMe];
     }
@@ -1779,20 +1769,43 @@ static float min(float a, float b)
         analysisOverlayView = [[FSAnalysisOverlayView alloc] initWithFrame:frame];
         [analysisOverlayView setBackgroundColor:[UIColor clearColor]];
         [containedView addSubview:analysisOverlayView];
-        analysisOverlayView.overlayViewDelegate = self;
     }
 }
 
 // For displaying student performance results
 -(void) addNotePerformanceResultAtXPos:(CGFloat) iXPos
-                      withRhythmResult:(int) iRhythmResult
-                       withPitchResult:(int) iPitchResult
+                    withWeightedRating:(int)  iWeightedRating
+                      withRhythmResult:(int)  iRhythmResult
+                       withPitchResult:(int)  iPitchResult
+                                noteID:(int)  iNoteID
+                              isLinked:(bool) isLinked
+                         linkedSoundID:(int)  iLinkedSoundID
 {
     if (analysisOverlayView)
     {
-        [analysisOverlayView addHitAtXPos: iXPos
-                            withRhythmRes: iRhythmResult
-                             withPitchRes: iPitchResult];
+        [analysisOverlayView addNoteAtXPos: iXPos
+                        withWeightedRating: iWeightedRating
+                             withRhythmRes: iRhythmResult
+                              withPitchRes: iPitchResult
+                                    noteID: iNoteID
+                                  isLinked: isLinked
+                             linkedSoundID: iLinkedSoundID];
+    }
+}
+
+-(void) addSoundPerformanceResultAtXPos:(CGFloat) iXPos
+                           withDuration:(int) iDuration
+                                soundID:(int) iSoundID
+                               isLinked:(bool) isLinked
+                           linkedNoteID:(int) iLinkedNoteID
+{
+    if (analysisOverlayView)
+    {
+        [analysisOverlayView addSoundAtXPos: iXPos
+                               withDuration: iDuration
+                                    soundID: iSoundID
+                                   isLinked: isLinked
+                               linkedNoteID: iLinkedNoteID ];
     }
 }
 
@@ -1800,37 +1813,42 @@ static float min(float a, float b)
                          withRhythmResult:(int) iRhythmResult
                           withPitchResult:(int) iPitchResult
 {
-    
 }
+
+-(CGFloat) getCurrentXOffset
+{
+    CGPoint currOrg = [[self.layer presentationLayer] bounds].origin;
+    CGFloat pXPos = currOrg.x;
+    return pXPos;
+}
+
 
 -(void) clearNotePerformanceResultAtXPos:(CGFloat) iXPos
 {
-    
 }
 
 -(void) clearNotePerformanceResults
 {
-    [analysisOverlayView clearAllHits];
-}
-
-- (void)noteTappedAtXCoord:(int)xCoord
-{
-    if (self.overlayViewDelegate)
-        [self.overlayViewDelegate noteTappedAtXCoord:xCoord];
+    [analysisOverlayView clearPerfNoteAndSoundData];
 }
 
 -(void)touchesBegan: (NSSet*) touches
           withEvent: (UIEvent*) event
 {
+    if ( !kNoteAnalysisRespondToTouch ) {
+        return;
+    }
+    
     UITouch *t = [touches anyObject];
     CGPoint _downLocation =[t locationInView:self];
     
     CGFloat touchX = _downLocation.x;
-    
-    if ( self.overlayViewDelegate )
-        [self.overlayViewDelegate noteTappedAtXCoord:(int)touchX];
+    int noteID = [analysisOverlayView findNoteIDFromXPos: touchX];
+    if ( noteID >= 0 ) // -1 means not found
+    {
+         if ( self.overlayViewDelegate )
+            [self.overlayViewDelegate noteTappedWithThisID: noteID];
+    }
 }
-
-//@end
 
 @end
