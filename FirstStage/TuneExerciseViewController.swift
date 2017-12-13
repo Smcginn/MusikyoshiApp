@@ -10,9 +10,6 @@ import UIKit
 import AVFoundation
 //import StudentPerfomanceData.swift
 
-// Turn on/off subset of output to debug window
-let DEBUG_PRINT_PLAYALONG__ALL = false
-
 class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNoteHandler, SSSynthParameterControls, SSFrequencyConverter, OverlayViewDelegate {
 
 
@@ -174,12 +171,22 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     let kUseColoredNotes = false
     var currentNotes = [AnyObject]()
 
-    // Used by student Note and Sound Performance data and methods - SCF
-    var songStartTime : Date = Date()
-    var songStartTimeOffset : TimeInterval = 0.0
+    // Needed by PerformanceTrackingMgr methods
+    var songStartTm : Date = Date() {
+        didSet {
+            PerformanceTrackingMgr.instance.songStartTime = songStartTm
+        }
+    }
+    var songStartTmOffset : TimeInterval = 0.0 {
+        didSet {
+            PerformanceTrackingMgr.instance.songStartTimeOffset = songStartTmOffset
+        }
+    }
     var shouldSetSongStartTime  = true
-    var currNoteXPos : CGFloat = -1.0
+    var currNoteXPos: CGFloat = -1.0
     var notInCountdown    = false
+    var firstNoteOrRestEventAcknowledged = false // for placing note data on ScrollView
+    var firstNoteOrRestXOffset =  0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -203,6 +210,81 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
 //        setupSounds()
 
         ssScrollView.overlayViewDelegate = self
+
+        ////////////////////////////////////////////////////////////////////////
+        //
+        //  Testing from here to bottom of func. Temp. Will be taken out at some
+        //  point soon, probably to be more formalized and placed elsewhere
+        //
+        guard kMKDebugOpt_PrintPerfAnalysisValues else { return }
+
+        let perfAnalysisMgr: PerformanceAnalysisMgr! = PerformanceAnalysisMgr.instance
+
+        var tolerances = pitchAndRhythmTolerances()
+        tolerances.setWithInverse( rhythmTolerancePercentage: 0.03,
+                                   correctPitchPercentage:    0.03,
+                                   aBitToVeryPercentage:      0.085,
+                                   veryBoundaryPercentage:    0.60 )
+        perfAnalysisMgr.rebuildAllAnalysisTables( tolerances )
+
+        perfAnalysisMgr.trumpetPartialsTable.printAllPartials()
+        print ("===================================================================")
+        print ("\nAll Partials by Note\n")
+        perfAnalysisMgr.trumpetPartialsTable.printAllPartialsByNote()
+        print ("\n")
+
+        ////////////////////////////////////////////////
+        let aNote = NoteService.getNote(Int(NoteIDs.A4))
+        if aNote != nil {
+            print("")
+            print("For \(aNote!.fullName), freq = \(aNote!.frequency)")
+            print("")
+        }
+
+        func printNoteFRInfo(noteFR: tNoteFreqRangeData) {
+            let lo = String(format: "%.3f", noteFR.freqRange.lowerBound)
+            let hi = String(format: "%.3f", noteFR.freqRange.upperBound)
+            print("!! noteWithFreqRange; Name: \(noteFR.noteFullName), ConcName: \(noteFR.concertNoteFullName), ConcPitch: \(noteFR.concertFreq), Range: \(lo)...\(hi)")
+        }
+
+        print("")
+        var noteFR: tNoteFreqRangeData =
+            perfAnalysisMgr.getNoteFreqRangeData(noteID: NoteIDs.F3)
+        printNoteFRInfo(noteFR: noteFR)
+
+        noteFR = perfAnalysisMgr.getNoteFreqRangeData(noteID: NoteIDs.C4)
+        printNoteFRInfo(noteFR: noteFR)
+
+        noteFR = perfAnalysisMgr.getNoteFreqRangeData(noteID: NoteIDs.E4)
+        printNoteFRInfo(noteFR: noteFR)
+
+        noteFR = perfAnalysisMgr.getNoteFreqRangeData(noteID: NoteIDs.C5)
+        printNoteFRInfo(noteFR: noteFR)
+
+        noteFR = perfAnalysisMgr.getNoteFreqRangeData(noteID: NoteIDs.C6)
+        printNoteFRInfo(noteFR: noteFR)
+
+        ////////////////////////////////////////////////
+        print("")
+
+        tolerances.setWithInverse( rhythmTolerancePercentage: 0.03,
+                                   correctPitchPercentage:    0.020,
+                                   aBitToVeryPercentage:      0.035,
+                                   veryBoundaryPercentage:    0.050 )
+        perfAnalysisMgr.rebuildAllAnalysisTables( tolerances)
+
+        noteFR = perfAnalysisMgr.getNoteFreqRangeData(noteID: NoteIDs.F3)
+        printNoteFRInfo(noteFR: noteFR)
+
+        noteFR = perfAnalysisMgr.getNoteFreqRangeData(noteID: NoteIDs.E4)
+        printNoteFRInfo(noteFR: noteFR)
+
+        noteFR = perfAnalysisMgr.getNoteFreqRangeData(noteID: NoteIDs.C5)
+        printNoteFRInfo(noteFR: noteFR)
+
+        noteFR = perfAnalysisMgr.getNoteFreqRangeData(noteID: NoteIDs.C6)
+        printNoteFRInfo(noteFR: noteFR)
+        print("")
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -254,7 +336,6 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
             return
             //            throw NSError(domain: NSCocoaErrorDomain, code: NSFileNoSuchFileError, userInfo: [ NSFilePathErrorKey : fileName ])
         }
-
     }
 
     func loadTheFile(_ filePath: String) {
@@ -351,7 +432,8 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         noteResultValues.removeAll()
 
         notInCountdown = false
-        resetSoundAndNoteTracking()
+        firstNoteOrRestEventAcknowledged = false
+        PerformanceTrackingMgr.instance.resetSoundAndNoteTracking()
         ssScrollView.clearNotePerformanceResults();
 
         guard score != nil else { return }
@@ -417,12 +499,12 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                     displayNotes(playData!)
                 #endif
                 // setup bar change notification to set threshold - or move cursor
-                let cursorAnimationTime_ms = Int32(timingThreshold * 1000)
+                var cursorAnimationTime_ms = Int32(timingThreshold * 1000)
 
-//                if showNoteMarkers {
-//                    let cursorAnimationTime = CATransaction.animationDuration()
-//                    cursorAnimationTime_ms = Int32(cursorAnimationTime * 1000)
-//                }
+                if showNoteMarkers {
+                    let cursorAnimationTime = CATransaction.animationDuration()
+                    cursorAnimationTime_ms = Int32(cursorAnimationTime * 1000)
+                }
 
                 synth?.setNoteHandler(self, delay: -cursorAnimationTime_ms)
 
@@ -483,36 +565,81 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
 //        feedbackView.contentMode = .scaleAspectFit
 //        feedbackView.showFeedback(feedbackRect)
 
-        // From this point to end of func, debugging printing for PerforamnceNotes
-        guard kPrintStudentPerformanceDataDebugOutput else { return }
+        //////////////////////////////////////////////////////////////////////////
+        // From this point to end of func, debugging printing for PerformanceNotes
+        guard kMKDebugOpt_PrintStudentPerformanceDataDebugOutput else { return }
 
         print ("\n\n")
         print ("timingThreshold is: \(timingThreshold)\n")
-        let numPNs = performanceNotes.count
-        for oneExpNote in performanceNotes {
+        for oneExpNote in PerformanceTrackingMgr.instance.performanceNotes {
             if oneExpNote.linkedToSoundID == noSoundIDSet {
-                print ( "Note ID: \(oneExpNote.noteID) is not linked to a sound" )
+                print ( "Note ID: \(oneExpNote.perfNoteID) is not linked to a sound" )
             }
             else {
                 let expectedStart = oneExpNote.expectedStartTime
                 let actualStart   = oneExpNote.actualStartTime
                 let diff          = actualStart - expectedStart
                 let endTime       = oneExpNote.endTime
-                let duration      = oneExpNote.actualDuaration
+                let duration      = oneExpNote.actualDuration
                 let expPitch      = oneExpNote.expectedFrequency
+                let actPitch      = oneExpNote.actualFrequency
+                let expMidiNote   = oneExpNote.expectedMidiNote
+                let actMidiNote   = oneExpNote.actualMidiNote
+                let actMidiNoteD  = oneExpNote.actualMidiNoteD
 
-                print ( "Note ID: \(oneExpNote.noteID) is linked to sound \(oneExpNote.linkedToSoundID)" )
+                let expNote = NoteService.getNote(Int(expMidiNote))
+                let actNote = NoteService.getNote(Int(actMidiNote))
+
+                let expNoteName = expNote != nil ? expNote!.fullName : ""
+                let actNoteName = actNote != nil ? actNote!.fullName : ""
+
+                print ( "Note ID: \(oneExpNote.perfNoteID) is linked to sound \(oneExpNote.linkedToSoundID)" )
                 print ( "  ExpectedStart Time: \(expectedStart)" )
                 print ( "  Actual Start Time:  \(actualStart)" )
                 print ( "  Difference:         \(diff)" )
                 print ( "  End Time:           \(endTime)" )
                 print ( "  Duration:         \(duration)" )
                 print ( "  ExpectedPitch:      \(expPitch)" )
+                print ( "  Actual Pitch:       \(actPitch)" )
+                print ( "  Expected MIDI Note: \(expMidiNote) - \(expNoteName)" )
+                print ( "  Actual MIDI Note:   \(actMidiNote) - \(actNoteName)" )
+                print ( "  Actual MIDI Note D: \(actMidiNoteD)" )
                 let avgPitch      = oneExpNote.averageFrequency()
                 print ( "  AveragePitch:       \(avgPitch)" )
             }
         }
         print ("\n\n")
+
+        PerformanceTrackingMgr.instance.analyzePerfomance()
+
+        for onePerfNote in PerformanceTrackingMgr.instance.performanceNotes {
+            let weightedAsInt32 : Int32 = onePerfNote.weightedRating
+            //            let rhythmRatingAsInt32 : Int32 = onePerfNote.attackRating.rawValue
+            //           let pitchRatingAsInt32 : Int32 = onePerfNote.pitchRating
+            let xPos = CGFloat(onePerfNote.xPos)
+            ssScrollView.addNotePerformanceResult(
+                atXPos: xPos,
+                withWeightedRating: weightedAsInt32,
+                withRhythmResult: 0, //rhythmRatingAsInt32,
+                withPitchResult: 0,  //pitchRatingAsInt32 );
+                noteID:  onePerfNote.perfNoteID,
+                isLinked: onePerfNote.isLinkedToSound,
+                linkedSoundID: onePerfNote.linkedToSoundID )
+        }
+
+        for onePerfSound in PerformanceTrackingMgr.instance.performanceSounds {
+            guard let onePerfSound = onePerfSound else { continue }
+            var dur: Int32 = Int32(onePerfSound.xOffsetEnd - onePerfSound.xOffsetStart)
+            if dur <= 0 {
+                dur = 1
+            }
+            ssScrollView.addSoundPerformanceResult(
+                atXPos:       CGFloat(onePerfSound.xOffsetStart),
+                withDuration: dur,
+                soundID:      onePerfSound.soundID,
+                isLinked:     onePerfSound.isLinkedToNote,
+                linkedNoteID: onePerfSound.linkedToNote )
+        }
     }
 
     //build arrays for CAKeyframeAnimation of UIScrollView (base class of SSScrollView)
@@ -572,19 +699,6 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                     animValues.append(thisNoteXPos - animHorzOffset)
                     animKeyTimes.append(Double(barsDuration_ms + Int(note.start)) / Double(exerciseDuration_ms))
                 }
-
-                // if this is a note (midiPitch == 0 means a rest) do some output for debugging support
-                if DEBUG_PRINT_PLAYALONG__ALL && note.midiPitch != 0
-                {
-                    let thisBarIndex = bar.index
-                    let noteStartBarIndex = note.startBarIndex
-                    let duration = note.duration
-                    print ("  In getPlayData:  thisNoteXPos = \(thisNoteXPos)")
-                    print ("    noteStartBarIndex = \(noteStartBarIndex),    thisBarIndex = \(thisBarIndex)")
-                    print ("    startFromBarBeginning = \(startFromBarBeginning),    duration = \(duration)")
-                    if noteStartBarIndex != thisBarIndex {
-                        print ("!! curr note didn't start in current bar  !!") }
-                }
             }
 
             barsDuration_ms += Int(bar.duration_ms)
@@ -630,7 +744,14 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         AudioKitManager.sharedInstance.stop()
     }
 
+    //////////////////////////////////////////////////////////////////////////////
+    //     TODO: Ultimately want to move this func out to PerformanceTrackingMgr,
+    //        but currently this func uses too many vars local to this VC to make
+    //        this a quick task. Will try again at a later date.
     func trackSounds() {
+        let perfTrkgMgr: PerformanceTrackingMgr! = PerformanceTrackingMgr.instance
+        guard perfTrkgMgr != nil else { return }
+
         // Do one of:
         // 1) If there is a signal and exsiting Sound, update it.
         //   Edge case: playing legato, and changing from one note to another.
@@ -645,12 +766,13 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         let signalDetected : Bool = currAmpltd > kAmplitudeThresholdForIsSound
         let currFreq = AudioKitManager.sharedInstance.frequencyTracker.frequency
         let timeSinceAnalysisStart : TimeInterval = Date().timeIntervalSince(startTime)
-        let timeSinceSongStart = timeSinceAnalysisStart - songStartTimeOffset
+        let timeSinceSongStart =
+            timeSinceAnalysisStart - PerformanceTrackingMgr.instance.songStartTimeOffset
 
-        if signalDetected && currentlyTrackingSound {
+        if signalDetected && PerformanceTrackingMgr.instance.currentlyTrackingSound {
             // Currently tracking a sound; update it
 
-            guard let currSound : StudentSound = currentSound else { return }
+            guard let currSound : PerformanceSound = perfTrkgMgr.currentSound else { return }
 
             if !currSound.initialPitchHasStablized() { // Not enough samples yet
                 currSound.addPitchSample(pitchSample: currFreq) // Just update, no qualifying
@@ -666,57 +788,85 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                     if currSound.isDefinitelyADifferentNote() { // last sample decided it
                         // Stop this sound
 
-                        if kPrintStudentPerformanceDataDebugOutput {
+                        if kMKDebugOpt_PrintStudentPerformanceDataDebugOutput {
                             print ("  Stopping current sound (due to legato split) at \(timeSinceSongStart)")
                         }
+                        perfTrkgMgr.updateCurrentNoteIfLinked()
+
+                        // get the x-coord of the spot where a sound should be
+                        // drawn on the scroll view - for debugging
+                        let currXOffset = Int(ssScrollView.getCurrentXOffset())
+                        if let currSound = perfTrkgMgr.currentSound {
+                            currSound.xOffsetEnd = firstNoteOrRestXOffset + currXOffset
+                        }
+
                         var splitTime: TimeInterval = 0.0
-                        endCurrSoundAsNewPitchDetected( noteOffset: songStartTimeOffset,
-                                                        splitTime: &splitTime )
+                        perfTrkgMgr.endCurrSoundAsNewPitchDetected(
+                            noteOffset: perfTrkgMgr.songStartTimeOffset,
+                            splitTime: &splitTime )
 
                         // Create a new sound.
                         let soundMode : soundType = isTune ? .pitched : .percusive
-                        startTrackingStudentSound(startAt: splitTime, soundMode:soundMode)
+                        perfTrkgMgr.startTrackingPerformanceSound(
+                            startAt: splitTime,
+                            soundMode: soundMode,
+                            noteOffset: perfTrkgMgr.songStartTimeOffset )
 
                         // After creating new sound, need to re-establish currentSound opt.
-                        if let newSound = currentSound {
+                        if let newSound = perfTrkgMgr.currentSound {
+                            newSound.xOffsetStart = firstNoteOrRestXOffset + currXOffset
                             newSound.forceAveragePitch(pitchSample: currFreq)
-                            linkCurrSoundToCurrNote() // see if there's an unclaimed note
-                            if kPrintStudentPerformanceDataDebugOutput {
+                            // see if there's an unclaimed note
+                            perfTrkgMgr.linkCurrSoundToCurrNote()
+                            if kMKDebugOpt_PrintStudentPerformanceDataDebugOutput {
                                 print (" \nCreated new sound \(newSound.soundID) (due to legato split) at \(timeSinceSongStart)")
                             }
                         }
                     }
                 }
-                else { // pitch is same as current sound average, so just update.
+                else { // pitch is same as current sound a verage, so just update.
                     currSound.addPitchSample(pitchSample: currFreq)
                 }
             }
         }
 
-        else if signalDetected && !currentlyTrackingSound && notInCountdown {
+        else if signalDetected && !perfTrkgMgr.currentlyTrackingSound && notInCountdown {
             // New sound detected
 
             let soundMode : soundType = isTune ? .pitched : .percusive
-            startTrackingStudentSound( startAt: timeSinceAnalysisStart, soundMode: soundMode)
-            linkCurrSoundToCurrNote() // see if there's an unclaimed note
+            perfTrkgMgr.startTrackingPerformanceSound(
+                startAt: timeSinceAnalysisStart,
+                soundMode: soundMode,
+                noteOffset: perfTrkgMgr.songStartTimeOffset )
+            perfTrkgMgr.linkCurrSoundToCurrNote() // see if there's an unclaimed note
 
             var soundID: Int32 = 0
-            if let currSound = currentSound {
+            if let currSound = perfTrkgMgr.currentSound {
+                let currXOffset = Int(ssScrollView.getCurrentXOffset())
+                currSound.xOffsetStart = firstNoteOrRestXOffset + currXOffset
                 soundID = currSound.soundID
-                if kPrintStudentPerformanceDataDebugOutput {
+                if kMKDebugOpt_PrintStudentPerformanceDataDebugOutput {
                     print (" \nCreating new sound \(soundID) at \(timeSinceSongStart)")
                 }
             }
         }
 
-        else if !signalDetected && currentlyTrackingSound {
+        else if !signalDetected && perfTrkgMgr.currentlyTrackingSound {
             // Existing sound ended
 
-            if kPrintStudentPerformanceDataDebugOutput {
+            if kMKDebugOpt_PrintStudentPerformanceDataDebugOutput {
                 print ("  Stopping dead sound at \(timeSinceSongStart)")
             }
-            endTrackedSoundAsSignalStopped(soundEndTime: timeSinceAnalysisStart,
-                                           noteOffset: songStartTimeOffset )
+
+            let currXOffset = Int(ssScrollView.getCurrentXOffset())
+            if let currSound = perfTrkgMgr.currentSound {
+                currSound.xOffsetEnd = currXOffset + firstNoteOrRestXOffset
+            }
+
+            perfTrkgMgr.updateCurrentNoteIfLinked()
+            perfTrkgMgr.endTrackedSoundAsSignalStopped(
+                soundEndTime: timeSinceAnalysisStart,
+                noteOffset: perfTrkgMgr.songStartTimeOffset )
         }
     }
 
@@ -750,11 +900,9 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
 //        let frequency = AudioKitManager.sharedInstance.frequency()
         let amplitude = AudioKitManager.sharedInstance.frequencyTracker.amplitude
         let frequency = AudioKitManager.sharedInstance.frequencyTracker.frequency
-//        if DEBUG_PRINT_PLAYALONG__ALL {
-//            print("  amplitude = \(amplitude),   freq = \(self.frequency)") }
 
-        // FIXME? - I think this ignores and does not process the case where the rhythm is correct
-        // but the note is wrong. Either rename "hasCorrectSound", or create two separate vars
+        // Does this ignore and not process the case where the rhythm is correct but the
+        // note is wrong? Either rename "hasCorrectSound", or create two separate vars
         let hasSound = amplitude > 0.01 && (minPitch...maxPitch ~= frequency)
 
         var result = NoteAnalysis.NoteResult.noResult
@@ -877,17 +1025,18 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
             }
         }
 
-        guard result != NoteAnalysis.NoteResult.noResult else { return }
-        if insideNote {
-            if result == NoteAnalysis.NoteResult.noteRhythmMatch ||
-               result == NoteAnalysis.NoteResult.noteRhythmMiss  ||
-               result == NoteAnalysis.NoteResult.noteRhythmLate {
-
-                let resAsInt32 : Int32 = Int32(result.hashValue)
-                ssScrollView.addNotePerformanceResult( atXPos: currNoteXPos,
-                        withRhythmResult: resAsInt32, withPitchResult: 0 );
-            }
-        }
+//        guard result != NoteAnalysis.NoteResult.noResult else { return }
+//        if insideNote {
+//            if result == NoteAnalysis.NoteResult.noteRhythmMatch ||
+//               result == NoteAnalysis.NoteResult.noteRhythmMiss  ||
+//               result == NoteAnalysis.NoteResult.noteRhythmLate {
+//
+//                let resAsInt32 : Int32 = Int32(result.hashValue)
+//                ssScrollView.addNotePerformanceResult( atXPos: currNoteXPos,
+//                        withRhythmResult: resAsInt32, withPitchResult: 0 );
+//            }
+//        }
+//
 
 
 
@@ -1185,10 +1334,6 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
 
     //MARK: SSNoteHandler protocol
     func end(_ note: SSPDPartNote!) {
-        if DEBUG_PRINT_PLAYALONG__ALL {
-            NSLog ( "In TuneExerciseViewController::end")
-            print ("")    } // blank line w/o timestamp.
-
         if note.note.midiPitch > 0 {
             insideNote = false
         } else {
@@ -1196,7 +1341,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         }
 
         currNoteXPos = -1.0
-        currentlyInAScoreNote = false
+        PerformanceTrackingMgr.instance.currentlyInAScoreNote = false
 
     }
 
@@ -1206,11 +1351,6 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
      * @param notes an array of SSPDPartNote, the set of all notes in all parts which should be starting
      */
     public func start(_ notes: [SSPDPartNote]!) {
-//        if DEBUG_PRINT_PLAYALONG__ALL {
-//            print ("") // blank line w/o timestamp.
-//            NSLog ( "In TuneExerciseViewController::start, notes.count = \(notes.count)" )
-    //}
-
         assert(notes.count > 0)
         if !playingAnimation {
             gateView.frame.origin.x = CGFloat(animHorzOffset - 12.0)
@@ -1245,11 +1385,66 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         let comps = system?.components(forItem: note.item_h)
         for comp in comps! {
             if (comp.type == sscore_comp_notehead || comp.type == sscore_comp_rest) {
-                return Float(comp.rect.origin.x + comp.rect.size.width / 2)
+                let result = Float(comp.rect.origin.x + comp.rect.size.width / 2)
+                if !firstNoteOrRestEventAcknowledged {
+                    firstNoteOrRestEventAcknowledged = true
+                    firstNoteOrRestXOffset = Int(Double(result))
+                    firstNoteOrRestXOffset -= 10 //
+                }
+                return result
             }
         }
 
         return 0
+    }
+
+    /////////////////////////////////////////////
+    // Create a new PerformanceNote, add to appropriate container,
+    // link to sound if one exists.
+    //     TODO: Ultimately want to move this func out to PerformanceTrackingMgr,
+    //        but currently this func uses too many vars local to this VC to make
+    //        this a quick task. Will try again at a later date.
+    func createNewPerfNote( nsNote: SSPDNote ) {
+
+        // W let xpos = noteXPos(note.note)
+        let xpos = noteXPos( nsNote )
+        currNoteXPos = CGFloat(xpos)
+
+        PerformanceTrackingMgr.instance.currentlyInAScoreNote = true
+        let newNote : PerformanceNote = PerformanceNote.init()
+
+        // let noteID = newNote.noteID
+        // W let noteDur = note.note.duration
+        let noteDur = nsNote.duration
+
+        let noteDurTimeInterval = musXMLNoteUnitToInterval( noteDur: noteDur,
+                                                            bpm: bpm() )
+// W      let barStartIntvl =
+//            mXMLNoteStartInterval( bpm:bpm(), beatsPerBar: Int32(beatsPerBar),
+//                                   startBarIndex: note.note.startBarIndex,
+//                                   noteStartWithinBar: note.note.start )
+        let barStartIntvl =
+            mXMLNoteStartInterval( bpm: bpm(),
+                                   beatsPerBar: Int32(beatsPerBar),
+                                   startBarIndex: nsNote.startBarIndex,
+                                   noteStartWithinBar: nsNote.start )
+        newNote.expectedStartTime = barStartIntvl
+        newNote.expectedDuration = noteDurTimeInterval
+        newNote.xPos = Int32(xpos)
+
+// W      newNote.expectedMidiNote = NoteID(note.note.midiPitch)
+        newNote.expectedMidiNote = NoteID(nsNote.midiPitch)
+
+        PerformanceTrackingMgr.instance.performanceNotes.append( newNote )
+        PerformanceTrackingMgr.instance.currentPerfNote = newNote
+        PerformanceTrackingMgr.instance.linkCurrSoundToCurrNote()
+
+        if let freq = NoteService.getNote( Int(nsNote.midiPitch) )?.frequency {
+            targetPitch = freq
+//            lowPitchThreshold = freq / frequencyThresholdPercent
+//            highPitchThreshold = freq * frequencyThresholdPercent
+            newNote.expectedFrequency = freq
+        }
     }
 
     //this only makes sense if setNoteHandler() delay is -timingThreshold
@@ -1269,41 +1464,11 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                     missedSound = false
                     lateSound = false
 
-                    /////////////////////////////////////////////
-                    // Create a new PerformanceNote, add to appropriate container,
-                    // link to sound if one exists
-
-                    currNoteXPos = CGFloat(xpos)
-                    currentlyInAScoreNote = true
-                    let newNote : PerformanceNote = PerformanceNote.init()
-                    // let noteID = newNote.noteID
-                    let noteDur = note.note.duration
-                    let noteDurTimeInterval = musXMLNoteUnitToInterval( noteDur: noteDur, bpm:bpm() )
-                    let barStartIntvl =
-                        mXMLNoteStartInterval( bpm:bpm(), beatsPerBar: Int32(beatsPerBar),
-                                               startBarIndex: note.note.startBarIndex,
-                                               noteStartWithinBar: note.note.start )
-                    newNote.expectedStartTime = barStartIntvl
-                    newNote.expectedDuaration = noteDurTimeInterval
-                    newNote.xPos = Int32(xpos)
-                    newNote.expectedMidiPitch = note.note.midiPitch
-
-                    performanceNotes.append(newNote)
-                    currentPerfNote = newNote
-                    linkCurrSoundToCurrNote()
-
-                    ///////////////////////////////////////////////
+                    // For tracking student performance
+                    createNewPerfNote( nsNote: note.note )
 
                     thresholdStartTime = Date().timeIntervalSince(startTime) - timingThreshold * 2
                     thresholdEndTime = Date().timeIntervalSince(startTime) + timingThreshold * 2
-                    if DEBUG_PRINT_PLAYALONG__ALL {
-                        print ("")
-                        NSLog ( "  ->>> In setNoteThresholdState, deciding Note Rhythm and Pitch thresholds" )
-                        let currTime = Date().timeIntervalSince(startTime)
-                        print ( "    thresholdStartTime = \(thresholdStartTime)" )
-                        print ( "    currTime           = \(currTime)" )
-                        print ( "    thresholdEndTime   = \(thresholdEndTime)\n" )
-                    }
 
                     if isTune {
                         //do all this here so we don't have to do it everytime analyzePerformance is called.
@@ -1315,16 +1480,13 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                         pitchHighLate = false
                         //midiPitch from SeeScore has already had the -2 offset applied from the XML file
 //                        if let freq = NoteService.getNote(Int(note.note.midiPitch) + transpositionOffset)?.frequency {
+
+                        let thisNote = NoteService.getNote(Int(note.note.midiPitch))
+
                         if let freq = NoteService.getNote(Int(note.note.midiPitch))?.frequency {
                             targetPitch = freq
                             lowPitchThreshold = freq / frequencyThresholdPercent
                             highPitchThreshold = freq * frequencyThresholdPercent
-                            newNote.expectedFrequency = freq
-                            if DEBUG_PRINT_PLAYALONG__ALL {
-                                print ( "    targetPitch        = \(targetPitch)" )
-                                print ( "    lowPitchThreshold  = \(lowPitchThreshold)" )
-                                print ( "    highPitchThreshold = \(highPitchThreshold)\n" )
-                            }
                         }
                     }
 
@@ -1418,8 +1580,8 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
 //                svc.playTickSound()
             }
             else if svc.shouldSetSongStartTime {
-                svc.songStartTime = Date()
-                svc.songStartTimeOffset = svc.songStartTime.timeIntervalSince(svc.startTime)
+                svc.songStartTm = Date()
+                svc.songStartTmOffset = svc.songStartTm.timeIntervalSince(svc.startTime)
                 svc.shouldSetSongStartTime  = false
             }
 
@@ -1438,10 +1600,10 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
             svc.countOffLabel.isHidden = true
             svc.cursorBarIndex = 0
             svc.stopPlaying()
- //           if UserDefaults.standard.bool(forKey: Constants.Settings.ShowAnalysis) && !svc.playingSynth {
-                svc.showScore()
             svc.shouldSetSongStartTime  = true
-            //}
+            if UserDefaults.standard.bool(forKey: Constants.Settings.ShowAnalysis) && !svc.playingSynth {
+                svc.showScore()
+            }
         }
     }
 
@@ -1479,89 +1641,14 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     }
     */
 
-    func findPerformanceNoteByStartTime(start: TimeInterval) -> PerformanceNote? {
+    //MARK: - OverlayViewDelegate
+    //////////////////////////////////////////////////
+    //   SeeScore view OverlayViewDelegate method
+    //
+    func noteTapped(withThisID: Int32) {
 
-        var returnNote : PerformanceNote? = nil
-
-        // closure for comparing Entry's XPos against an acceptable range?
-
-        let lowBound  = start - timingThreshold
-        let highBound = start + timingThreshold
-
-        let numPNs = performanceNotes.count
-        for onePerformanceNote in performanceNotes {
-            let expStart = onePerformanceNote.expectedStartTime
-            if ( expStart >= lowBound && expStart <= highBound ) {
-                returnNote = onePerformanceNote
-                break;
-            }
-        }
-
-        return returnNote
+        PerformanceTrackingMgr.instance.displayPerfInfoAlert(
+                                                        perfNoteID: withThisID,
+                                                        parentVC: self )
     }
-
-    func findPerfomanceNoteByXPos(xPos: Int32) -> PerformanceNote? {
-
-        var returnNote : PerformanceNote? = nil
-
-        // closure for comparing Entry's XPos against an acceptable range?
-
-        let lowBoundXpos  = xPos - 10
-        let highBoundXpos = xPos + 10
-
-        let numPNs = performanceNotes.count
-        for onePerformanceNote in performanceNotes {
-            let xPos = onePerformanceNote.xPos
-            if ( xPos >= lowBoundXpos && xPos <= highBoundXpos ) {
-                returnNote = onePerformanceNote
-                break;
-            }
-        }
-
-        return returnNote
-    }
-
-    // called when either a new note begins in the score, or new sound is detected
-    func linkCurrSoundToCurrNote() {
-        guard currentlyInAScoreNote && currentlyTrackingSound else { return }
-        guard let currPerfNote : PerformanceNote = currentPerfNote else { return }
-        guard let currSound : StudentSound = currentSound else { return }
-        guard !currSound.isLinkedToNote && !currPerfNote.isLinkedToSound else { return }
-
-        let diff = abs( soundTimeToNoteTime(songStart: currSound.startTime) -
-                        currPerfNote.expectedStartTime  )
-        if (diff <= timingThreshold ) {
-            currPerfNote.linkToSound(soundID: currSound.soundID, sound: currSound)
-            currSound.linkToNote(noteID: currPerfNote.noteID, note: currPerfNote)
-            currPerfNote.actualStartTime = soundTimeToNoteTime(songStart: currSound.startTime)
-        }
-    }
-
-    // For setting start time of note, adjusting for:
-    //      note startTime is relative to songStart;
-    //      sound startTime is relative to analysis Start.
-    func soundTimeToNoteTime( songStart: TimeInterval ) -> TimeInterval {
-        return songStart - songStartTimeOffset
-    }
-
-
-    func updateCurrentNoteIfLinked()
-    {
-        guard let currSound = currentSound else {return}
-        guard let currNote  = currentPerfNote else {return}
-
-        if currNote.linkedToSoundID == currSound.soundID {
-             currNote.endTime = soundTimeToNoteTime(songStart: currSound.endTime)
-        }
-    }
-
-// OverlayViewDelegate
-
-    // func noteTappedAtXCoord(xCoord : Int32) ->() {
-    func noteTapped(atXCoord xCoord: Int32) {
-
-        let possibleNote: PerformanceNote? = findPerfomanceNoteByXPos(xPos: xCoord)
-        guard let foundNote = possibleNote else { return }
-    }
-
 }

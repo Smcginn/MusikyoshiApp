@@ -1,3 +1,10 @@
+
+
+//  DELETE THIS FILE. No longer valid. Anything still relevant was moved to 
+//                    other files in refactoring steps.
+
+
+
 //
 //  StudentPerfomanceData.swift
 //  FirstStage
@@ -25,7 +32,7 @@
 - change performanceSounds to non-optionals ?
  
  */
-
+/*
 import Foundation
 
 // If there is a current active Note from the score (that the student should be
@@ -45,7 +52,6 @@ var performanceNotes = [PerformanceNote]()
 // Container of Sounds as they occured in real time. (may or may not be linked to Note)
 var performanceSounds = [StudentSound?]()
 
-
 //////////////////////////////////////////////////////////////////////////////
 // Some tweakable settings relating to determing beginning and end of a sound
 
@@ -60,10 +66,11 @@ let kDifferentPitchSampleThreshold  = 10
 
 // Save samples into a collection in the sound object? (useful for debugging)
 // If no, a running sum is used to determine average. (Performance improvement)
-let kSavePitchSamples = true
+let kSavePitchSamples = false
 let kNumSamplesToCollect = 300
 
 let kPrintStudentPerformanceDataDebugOutput = true
+let kPrintStudentPerformanceDataDebugSamplesOutput = false
 
 //   Note startTime is relative to songStart;
 //   Sound startTime is relative to analysis Start.
@@ -78,20 +85,17 @@ let noPitchValueSet        =  0.0
 let secsPerMin : TimeInterval = 60.0
 let musicXMLUnitsPerQuarterNote : Int32 = 1000
 
-enum soundType {
-    case percusive  // Claps, etc.
-    case pitched    // Trumpet, etc.
-}
-
-
 // Create a new StudentSound and add it to collection of sounds
 @discardableResult
-func startTrackingStudentSound( startAt: TimeInterval, soundMode: soundType)
+func startTrackingStudentSound( startAt: TimeInterval,
+                                soundMode: soundType,
+                                noteOffset: TimeInterval )
     -> (StudentSound?) {
         
     guard (!currentlyTrackingSound) else { return nil }
     let newSound : StudentSound? = StudentSound.init(start: startAt,
-                                                     mode:soundMode)
+                                                     mode:soundMode,
+                                                     noteOffset: noteOffset)
     guard newSound != nil  else {return nil}
         
     currentSound = newSound
@@ -136,6 +140,21 @@ func endCurrSoundAsNewPitchDetected( noteOffset: TimeInterval,
     currentlyTrackingSound = false
 }
 
+// bitfield
+
+
+let kPitchIssue_SlightyFlat     = 0x0000000000000001
+let kPitchIssue_SlightySharp    = 0x0000000000000001
+let kPitchIssue_VeryFlat        = 0x0000000000000001
+let kPitchIssue_VerySharp       = 0x0000000000000001
+let kPitchIssue_WrongNote       = 0x0000000000000001
+let kPitchIssue_WrongNoteInstrSpecific = 0x0000000000000001
+
+enum InstrumentSpecificError {
+    case none
+    case C4_G3_LipSlur
+}
+
 enum timingRating { // for timingScore
     case notRated
     
@@ -148,16 +167,19 @@ enum timingRating { // for timingScore
     case veryLate
     
     // duration
+    case tooShort
     case veryShort
     case slightlyShort
     case durationGood
     case slightlyLong
     case veryLong
+    case tooLong
 }
 
-enum pitchRating { // for pitchScore
+enum pitchAccuracyRating { // for pitchRating
     case notRated
     case wrongNote
+    case wrongNote_InstSpecificIssue // Lip Slur, etc.
     case veryFlat
     case slightlyFlat
     case pitchVeryGood
@@ -165,6 +187,7 @@ enum pitchRating { // for pitchScore
     case verySharp
 }
 
+/*
 public class PerformanceNote
 {
     var noteID              = noNoteIDSet
@@ -187,21 +210,26 @@ public class PerformanceNote
     var actualStartTime : TimeInterval = noTimeValueSet
     var endTime : TimeInterval = noTimeValueSet {
         didSet{
-            actualDuaration = endTime - actualStartTime;
+            actualDuration = endTime - actualStartTime;
         }
     }
 
     // The expected and actual duration of the played notes
-    var expectedDuaration  : TimeInterval   = noTimeValueSet
-    var actualDuaration  : TimeInterval     = noTimeValueSet
-    
-    var attackRating : timingRating =  .notRated
-    var durationRating : timingRating = .notRated
+    var expectedDuration  : TimeInterval   = noTimeValueSet
+    var actualDuration  : TimeInterval     = noTimeValueSet
     
     var expectedFrequency   = noPitchValueSet
-    var actualFrequency     = noPitchValueSet
-    var expectedMidiPitch: Int32 = 0
-    var actualMidiPitch:   Int32 = 0
+    var actualFrequency     = noPitchValueSet {
+        didSet{
+            guard actualFrequency > 0.0 else
+                {return}
+            actualMidiNoteD = actualFrequency.frequencyToMIDINote()
+            actualMidiNote  = Int32(actualMidiNoteD.rounded());
+        }
+    }
+    var expectedMidiNote: Int32 = 0
+    var actualMidiNote:   Int32 = 0
+    var actualMidiNoteD: Double = 0
 
     func averageFrequency() -> Double {
         var pitchVal = 0.0
@@ -211,8 +239,12 @@ public class PerformanceNote
         return pitchVal
     }
     
+    var attackRating: timingRating =  .notRated
+    var durationRating: timingRating = .notRated
     var pitchVariance = noPitchValueSet
-    var pitchScore : pitchRating = .notRated
+    var pitchRating: pitchAccuracyRating = .notRated
+    var weightedRating: Int32 = 0  // Overall. 0 is the best, 1 next best, etc.
+    var instrumentSpecificError: InstrumentSpecificError = .none
     
     static private var uniqueNoteID : Int32 = noNoteIDSet
     static func getUniqueNoteID() -> Int32 {
@@ -234,15 +266,32 @@ public class PerformanceNote
         }
     }
 }
+*/
 
+/* moved to performanceNote
+// Copied from AudioKeyHelpers - couldn't figure out how to bring into project
+/// Extension to Double to get the frequency from a MIDI Note Number
+extension Double {
+    
+    /// Calculate MIDI Note Number from a frequency in Hz
+    ///
+    /// - parameter aRef: Reference frequency of A Note (Default: 440Hz)
+    ///
+    public func frequencyToMIDINote(_ aRef: Double = 440.0) -> Double {
+        return 69 + 12 * log2(self / aRef)
+    }
+}
+*/
 
+/*
 public class StudentSound
 {
-    init ( start: TimeInterval, mode : soundType )
+    init ( start: TimeInterval, mode : soundType, noteOffset: TimeInterval )
     {
         soundID = StudentSound.getUniqueSoundID()
         startTime = start
         soundMode = mode
+        soundToNoteTimeOffset = noteOffset
         if kSavePitchSamples {
             pitchSamples.reserveCapacity(kNumSamplesToCollect)
         } else {
@@ -271,6 +320,7 @@ public class StudentSound
         }
     }
     var duration = noTimeValueSet
+    var soundToNoteTimeOffset: TimeInterval // difference b/t sound and note times.
     
     var pitch  = noPitchValueSet
     var pitchLow = Double(0.0)
@@ -366,8 +416,11 @@ public class StudentSound
             diffPitchSplitTime = noTimeValueSet
         }
     }
+    
+    var updateLinkedNoteCount = 0
+    let kNumSamaplesPerLinkedNoteUpdate = 15
 
-    // Normal call: Call this before pitch established, or if current sample is 
+    // Normal call: Call this before pitch established, or if current sample is
     // in current pitch range
     func addPitchSample( pitchSample : Double ) {
         
@@ -385,6 +438,12 @@ public class StudentSound
         clearPotentialDifferentPitchData()
         
         addPitchSampleAndUpdateRelatedData(pitchSample: pitchSample)
+        
+        updateLinkedNoteCount += 1
+        if updateLinkedNoteCount > kNumSamaplesPerLinkedNoteUpdate {
+            updateCurrentNoteIfLinkedPeriodic()
+            updateLinkedNoteCount = 0
+        }
     }
     
     // class / type vars and funcs - provides unique IDs for sounds
@@ -397,6 +456,21 @@ public class StudentSound
         StudentSound.uniqueSoundID = noSoundIDSet;
     }
     
+    func updateCurrentNoteIfLinkedFinal()
+    {
+        guard isLinkedToNote, let linkNote = linkedNoteObject else {return}
+        
+        linkNote.endTime = self.endTime - soundToNoteTimeOffset
+        linkNote.actualFrequency = self.averagePitchRunning
+    }
+    
+    func updateCurrentNoteIfLinkedPeriodic()
+    {
+        guard isLinkedToNote, let linkNote = linkedNoteObject else {return}
+        
+        linkNote.actualFrequency = self.averagePitchRunning
+    }
+    
     // For debugging support . . .
     
     func numPitchSamples() -> Int {  // called externally for debug output
@@ -405,6 +479,8 @@ public class StudentSound
     
     func printSamples() {
         guard kPrintStudentPerformanceDataDebugOutput else { return }
+        guard kPrintStudentPerformanceDataDebugSamplesOutput else { return }
+        
         
         print ("   pitchSumRunning == \(pitchSumRunning)")
         print ("       - sound had \(self.numPitchSamples()) pitched samples:")
@@ -448,6 +524,7 @@ public class StudentSound
         print ( "De-initing Sound \(soundID)" )
     }
 }
+*/
 
 
 func findSoundBySoundID(soundID: Int32) -> StudentSound? {
@@ -469,7 +546,7 @@ func findSoundBySoundID(soundID: Int32) -> StudentSound? {
 
 // This much of a freq change must be a different note
 //  (Diff between one note and another, say E4 to F4, is 0.944.)
-private let kDiffNotePercentage : Double = 0.955
+let kDiffNotePercentage : Double = 0.955
 
 // Used for determining if a constant sound is transitioning from one
 // note to another (legato playing)
@@ -535,4 +612,30 @@ func mXMLNoteStartInterval ( bpm: Int32,  beatsPerBar: Int32, startBarIndex : In
                                                       bpm:bpm)
     return noteStartInterval
 }
+
+func analyzePerfomance() {
+    
+    let rhythmFilter = RhythmPerfAnalysisFilter.init()
+    let pitchFilter  = TrumpetPitchPerfAnalysisFilter.init()
+    
+    for onePerfNote in performanceNotes {
+        onePerfNote.weightedRating = 0
+        rhythmFilter.analyzeNote( perfNote: onePerfNote )
+        pitchFilter.analyzeNote( perfNote: onePerfNote )
+    }
+    
+    print ( "\nPerformance Results:\n")
+    for onePerfNote in performanceNotes {
+        print ( "--------------------------")
+        print ( " Note #\(onePerfNote.noteID):" )
+        print ( "   Attack rating:   \(onePerfNote.attackRating)" )
+        print ( "   Duration rating: \(onePerfNote.durationRating)" )
+        print ( "   Pitch rating:    \(onePerfNote.pitchRating)" )
+        print ( "   Weighted rating: \(onePerfNote.weightedRating)" )
+    }
+}
+
+
+
+*/
 

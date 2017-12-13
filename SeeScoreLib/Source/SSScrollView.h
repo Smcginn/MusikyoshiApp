@@ -67,7 +67,7 @@ typedef NS_ENUM(NSInteger, ScrollType_e) {scroll_off, scroll_system, scroll_bar}
  * @interface SSScrollView
  * @abstract A scrollable view to display a MusicXML score as a vertical sequence of rectangular system views
  */
-@interface SSScrollView : UIScrollView <SSBarControlProtocol, ScoreChangeHandler, OverlayViewDelegate> {
+@interface SSScrollView : UIScrollView <SSBarControlProtocol, ScoreChangeHandler> {
 
 	IBOutlet UIView *containedView;
 }
@@ -454,13 +454,30 @@ typedef NS_ENUM(NSInteger, ScrollType_e) {scroll_off, scroll_system, scroll_bar}
 
 
 // For displaying student performance results
+//-(void) addNotePerformanceResultAtXPos:(CGFloat) iXPos
+//                    withWeightedRating:(int) iWeightedRating
+//                      withRhythmResult:(int) iRhythmResult
+//                       withPitchResult:(int) iPitchResult;
+
 -(void) addNotePerformanceResultAtXPos:(CGFloat) iXPos
-                      withRhythmResult:(int) iRhythmResult
-                       withPitchResult:(int) iPitchResult;
+                    withWeightedRating:(int)  iWeightedRating
+                      withRhythmResult:(int)  iRhythmResult
+                       withPitchResult:(int)  iPitchResult
+                                noteID:(int)  iNoteID
+                              isLinked:(bool) isLinked
+                         linkedSoundID:(int)  iLinkedSoundID;
+
+-(void) addSoundPerformanceResultAtXPos:(CGFloat) iXPos
+                           withDuration:(int) iDuration
+                                soundID:(int) iSoundID
+                               isLinked:(bool) isLinked
+                           linkedNoteID:(int) iLinkedNoteID;
 
 -(void) updateNotePerformanceResultAtXPos:(CGFloat) iXPos
                          withRhythmResult:(int) iRhythmResult
                           withPitchResult:(int) iPitchResult;
+
+-(CGFloat) getCurrentXOffset;
 
 -(void) clearNotePerformanceResultAtXPos:(CGFloat) iXPos;
 
