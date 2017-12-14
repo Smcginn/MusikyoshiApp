@@ -46,7 +46,7 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             tuneIds.removeAll()
             tuneNames.removeAll()
             for n in fnames {
-                let shortN = String(n.characters.dropLast(4))
+                let shortN = String(n.dropLast(4))
                 tuneIds.append(shortN)
                 tuneNames.append(shortN)
             }
