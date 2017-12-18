@@ -187,6 +187,13 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     var notInCountdown    = false
     var firstNoteOrRestEventAcknowledged = false // for placing note data on ScrollView
     var firstNoteOrRestXOffset =  0
+    // I think the visual metronome is behind. The SeaScore SW lets you specify a
+    // negative delay for the beat callback, which lets you anticipate the beat 
+    // event. This makes the event changing the metronome dotes fire earlier. When 
+    // I set this to -40ms, I think the metronome is more inline with actual beat
+    // of the music. But . . . I want others to try this out.
+    // So leaving it at 0.
+    let beatMillisecOffset:Int32 = -40 // Suggest trying between -40 and -100 . . .
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -512,7 +519,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                 //                synth?.setBarChangeHandler(BarChangeHandler(vc: self), delay: -cursorAnimationTime_ms)
                 //                synth?.setBarChangeHandler(BarChangeHandler(vc: self, anim: anim), delay: 0)
                 synth?.setEnd(EndHandler(vc: self), delay: 0)
-                synth?.setBeat(BeatHandler(vc: self), delay: 0)
+                synth?.setBeat(BeatHandler(vc: self), delay: beatMillisecOffset)
                 
                 var err = synth?.setup(playData)
                 if err == sscore_NoError {
@@ -677,6 +684,9 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         exerciseDuration = Double(exerciseDuration_ms) / 1000.0
         
         for bar in (playData?.bars)! {
+            // SCF - look to this area for smoothing out scrolling. Perhaps
+            // using bar start only ?
+            
             //we just have one part
             let part = bar.part(0)
             for note in (part?.notes)! {
@@ -796,7 +806,8 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
 
                         // get the x-coord of the spot where a sound should be
                         // drawn on the scroll view - for debugging
-                        let currXOffset = Int(ssScrollView.getCurrentXOffset())
+                        var currXOffset = Int(ssScrollView.getCurrentXOffset())
+                        currXOffset -= kOverlayPixelAdjustment
                         if let currSound = perfTrkgMgr.currentSound {
                             currSound.xOffsetEnd = firstNoteOrRestXOffset + currXOffset
                         }
@@ -843,7 +854,8 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
             
             var soundID: Int32 = 0
             if let currSound = perfTrkgMgr.currentSound {
-                let currXOffset = Int(ssScrollView.getCurrentXOffset())
+                var currXOffset = Int(ssScrollView.getCurrentXOffset())
+                currXOffset -= kOverlayPixelAdjustment
                 currSound.xOffsetStart = firstNoteOrRestXOffset + currXOffset
                 soundID = currSound.soundID
                 if kMKDebugOpt_PrintStudentPerformanceDataDebugOutput {
@@ -859,7 +871,8 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                 print ("  Stopping dead sound at \(timeSinceSongStart)")
             }
 
-            let currXOffset = Int(ssScrollView.getCurrentXOffset())
+            var currXOffset = Int(ssScrollView.getCurrentXOffset())
+            currXOffset -= kOverlayPixelAdjustment
             if let currSound = perfTrkgMgr.currentSound {
                 currSound.xOffsetEnd = currXOffset + firstNoteOrRestXOffset
             }
@@ -1580,7 +1593,10 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
 //                svc.playTickSound()
             }
             else if svc.shouldSetSongStartTime {
-                svc.songStartTm = Date()
+                let msOffset = TimeInterval(abs(svc.beatMillisecOffset/1000))
+                let now = Date()
+                let nowPlus = Date().addingTimeInterval(msOffset)
+                svc.songStartTm = nowPlus
                 svc.songStartTmOffset = svc.songStartTm.timeIntervalSince(svc.startTime)
                 svc.shouldSetSongStartTime  = false
             }

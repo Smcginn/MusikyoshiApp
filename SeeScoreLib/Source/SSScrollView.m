@@ -17,7 +17,7 @@
 #include <dispatch/dispatch.h>
 
 // If true. will send msg to overlayViewDelegate to invoke Note accurary popup
-static const bool kNoteAnalysisRespondToTouch = true;
+static const bool kMKDebugOpt_NoteAnalysisRespondToTouch = true;
 
 static const CGSize kMargin = {0,0}; // L/R margins
 
@@ -1835,7 +1835,7 @@ static float min(float a, float b)
 -(void)touchesBegan: (NSSet*) touches
           withEvent: (UIEvent*) event
 {
-    if ( !kNoteAnalysisRespondToTouch ) {
+    if ( !kMKDebugOpt_NoteAnalysisRespondToTouch ) {
         return;
     }
     

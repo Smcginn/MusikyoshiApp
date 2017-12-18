@@ -154,7 +154,7 @@ class PerformanceAnalysisMgr {
     var tablesBuilt = false;
     
     init() {
-        resetTranspoitionOffset()
+//        resetTranspoitionOffset()
     }
     
     func getNotePitchAnalyzer() {}
@@ -200,7 +200,9 @@ class PerformanceAnalysisMgr {
     }
     
     // Is this frequency an (accidentally played) overtone of the target note?
-    // return value: isPartialRetVal is a tuple of Bool and tNoteFreqRangeData
+    //  freq:   the actual frequency played.
+    //  noteID: This is the expected transposed note (not the expected concert note)
+    //  return value: isPartialRetVal is a tuple of Bool and tNoteFreqRangeData
     func isThisFreqAPartialOfThisNote(freq: Double, noteID: NoteID)
         -> isPartialRetVal {
         if !tablesBuilt {
@@ -212,7 +214,15 @@ class PerformanceAnalysisMgr {
     }
     
     // If working with a transposing instrument . . .
-    static var transpositionOffset: Int = 0
+    var haveSetTransOffset = false
+    private var transpositionOffset: Int = 0
+    func getTranspositionOffset() -> Int {
+        if !haveSetTransOffset {
+            resetTranspoitionOffset()
+            haveSetTransOffset = true
+        }
+        return transpositionOffset
+    }
     
     func resetTranspoitionOffset() {
         // This won't happen for Alpha, but if a different Instrument is selected,
@@ -220,7 +230,7 @@ class PerformanceAnalysisMgr {
         // transposition offset. So this needs to be reset for the code that goes
         // back and forth from the Concert Pitch world and the Transposed Pitch world.
         // Maybe some sort of KVO observer calls this? 
-        PerformanceAnalysisMgr.transpositionOffset =
+        transpositionOffset =
             UserDefaults.standard.integer(forKey: Constants.Settings.Transposition)
     }
 

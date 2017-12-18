@@ -174,8 +174,8 @@ class PerformanceTrackingMgr {
     
     var songStartTimeOffset : TimeInterval = 0.0
     
-    // Used to determine rhythmic accuracy. Orignal stuf; perhaps change to something
-    // similar to the pitch zones
+    // Used to determine rhythmic accuracy. (This is the Orignal First Stage 
+    // stuff; perhaps change to timing zones, similar to the pitch zones.)
     var userDefsTimingThreshold: Double
     
 
@@ -228,7 +228,10 @@ class PerformanceTrackingMgr {
     func analyzePerfomance() {
         
         let rhythmAnalyzer = NoteRhythmPerformanceAnalyzer.init()
-        let pitchAnalyzer  = NotePitchPerformanceAnalyzer.init()
+        let pitchAnalyzer  = TrumpetPitchPerformanceAnalyzer.init()
+        
+        // Uncomment this to test Partial lookup
+//        runPreAnalysisPartialTestingSetup()
         
         // Visit each Note, have analyzers grade and rate performance of that
         // Note compared with expectations
@@ -408,7 +411,8 @@ func quarterNoteTimeInterval( bpm: Int32) -> TimeInterval {
 // Given the MusicXML startTime or duration, and the BPM, return TimeInterval
 func musXMLNoteUnitToInterval( noteDur: Int32, bpm: Int32) -> TimeInterval {
     let bpmRatio: TimeInterval = secsPerMin / TimeInterval(bpm)
-    let noteInterval: TimeInterval = TimeInterval(noteDur/musicXMLUnitsPerQuarterNote)
+    let noteDurInQtrNotes: Double = Double(noteDur)/Double(musicXMLUnitsPerQuarterNote)
+    let noteInterval: TimeInterval = TimeInterval( noteDurInQtrNotes )
     let adjustedNoteInterval: TimeInterval  = noteInterval * bpmRatio
     
     return adjustedNoteInterval
@@ -416,7 +420,9 @@ func musXMLNoteUnitToInterval( noteDur: Int32, bpm: Int32) -> TimeInterval {
 
 // Given the start time within the bar, the BPM, and Bar index, return the
 // time interval since song startTime (which is 0) for a given note
-func mXMLNoteStartInterval ( bpm: Int32,  beatsPerBar: Int32, startBarIndex : Int32,
+func mXMLNoteStartInterval ( bpm: Int32,
+                             beatsPerBar: Int32,
+                             startBarIndex : Int32,
                              noteStartWithinBar: Int32 ) -> TimeInterval {
     let beatsToBeginningOfBar = startBarIndex * beatsPerBar
     let intervalToBarBegin =
@@ -427,3 +433,65 @@ func mXMLNoteStartInterval ( bpm: Int32,  beatsPerBar: Int32, startBarIndex : In
     return noteStartInterval
 }
 
+////////////////////////////////////////////////////////////////////////////
+//
+//   Testing related from this point on
+//
+////////////////////////////////////////////////////////////////////////////
+
+func runPreAnalysisPartialTestingSetup() {
+    // Force changes, after the performance, the detected freq and note of the
+    // first 5 performed notes to a partial of the expected note.
+    //
+    //        Uncomment only ONE of these for loops
+    
+    var count = 1
+    
+    /*
+    // Version one - use with "Rhythm Party 8 - tpt", which is all E4's
+    for onePerfNote in PerformanceTrackingMgr.instance.performanceNotes {
+        switch(count) {
+        case 1:
+            onePerfNote.actualMidiNote = NoteIDs.G3
+            onePerfNote.actualFrequency = 197.0
+        case 2:
+            onePerfNote.actualMidiNote = NoteIDs.D4
+            onePerfNote.actualFrequency = 293.0
+        case 3:
+            onePerfNote.actualMidiNote = NoteIDs.G4
+            onePerfNote.actualFrequency = 392.0
+        case 4:
+            onePerfNote.actualMidiNote = NoteIDs.B4
+            onePerfNote.actualFrequency = 494.0
+        case 5:
+            onePerfNote.actualMidiNote = NoteIDs.D5
+            onePerfNote.actualFrequency = 587.3
+        default: break
+        }
+        count += 1
+    }
+    */
+    
+    // Version two - use with any test that is all C's, like "Rhythm Party 5 - tpt"
+    for onePerfNote in PerformanceTrackingMgr.instance.performanceNotes {
+        switch(count) {
+        case 1:
+            onePerfNote.actualMidiNote = NoteIDs.F4
+            onePerfNote.actualFrequency = 349.0
+        case 2:
+            onePerfNote.actualMidiNote = NoteIDs.Bb4
+            onePerfNote.actualFrequency = 466.0
+        case 3:
+            onePerfNote.actualMidiNote = NoteIDs.D5
+            onePerfNote.actualFrequency = 587.0
+        case 4:
+            onePerfNote.actualMidiNote = NoteIDs.F5
+            onePerfNote.actualFrequency = 698.0
+        case 5:
+            onePerfNote.actualMidiNote = NoteIDs.Ab5
+            onePerfNote.actualFrequency = 830.6
+        default: break
+        }
+        count += 1
+    }
+}

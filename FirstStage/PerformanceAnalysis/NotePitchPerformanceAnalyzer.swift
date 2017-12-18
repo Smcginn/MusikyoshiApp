@@ -86,7 +86,7 @@ class TrumpetPitchPerformanceAnalyzer : NotePitchPerformanceAnalyzer {
             
             // Check for partials
             let actFreq = perfNote.actualFrequency
-            let theNoteID = NoteID(perfNote.perfNoteID)
+            let theNoteID = perfNote.transExpectedNoteID
             
             let isPartRV: isPartialRetVal =
                 PerformanceAnalysisMgr.instance.isThisFreqAPartialOfThisNote(

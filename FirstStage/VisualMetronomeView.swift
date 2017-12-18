@@ -13,9 +13,10 @@ class VisualMetronomeView: UIView {
     var numBeats = 4
     var dots = [DotView]()
     let beatColor = UIColor.black
-    let regularColor = UIColor.gray
-
+    var regularColor = UIColor.lightGray
+    
     override func awakeFromNib() {
+        regularColor = regularColor.withAlphaComponent(0.3)
         super.awakeFromNib()
     }
     

@@ -15,7 +15,7 @@
 const bool kMKDebugOpt_ShowSoundsAndNoteAnalysis = true;
 
 const bool kMKDebugOpt_ShowNotesAnalysis = true;
-const bool kMKDebugOpt_ShowSoundsAnalysis = true;
+const bool kMKDebugOpt_ShowSoundsAnalysis = false;
 
 // For storing the display data for a single note
 @interface NoteDisplayData : NSObject
