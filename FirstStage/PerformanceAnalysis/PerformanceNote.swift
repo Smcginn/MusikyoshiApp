@@ -200,24 +200,13 @@ public class PerformanceNote
         msgString += "       Note (Guess): " + actualNoteName + "\n"
         msgString += "       Duration:     " + actDurStr + "\n"
         msgString +=  "\n"
-        msgString += "Start Time Delta: " + timDiffStr + "ms\n"
+        msgString += "Start Time Delta: " + timDiffStr + "secs\n"
         msgString += "Timing Rating:    " + timingRatingStr + "\n"
         msgString += "Duration Rating:  " + durationRatingStr + "\n"
         msgString += "Pitch Rating:     " + pitchRatingStr + "\n"
        
-        if !( pitchRating == .slightlyFlat  ||
-              pitchRating == .pitchVeryGood ||
-              pitchRating == .slightlySharp   )
-        {
-            msgString += "\n"
-            msgString += "Possible Pitch Issues:\n"
-            msgString += "  Your fingering is wrong\n"
-            msgString += "  Your embouchure is off\n"
-            msgString += "  Your breath is bad ...\n"
-        }
-       
-//        if isInstrSpecificIssue && isActFreqIsPartial {
-             let concName = specificPartial.concertNoteFullName
+        if isInstrSpecificIssue && isActFreqIsPartial {
+            let concName = specificPartial.concertNoteFullName
             let concFreq = specificPartial.concertFreq
             let concFreqStr  = String(format: "%.2f", concFreq)
             let transName = specificPartial.noteFullName
@@ -226,7 +215,18 @@ public class PerformanceNote
             msgString += "  Note Name (Trans):    " + transName + "\n"
             msgString += "  Freq (Concert):       " + concFreqStr + "\n"
             msgString += "   (Concert Note Name): " + concName + "\n"
-//        }
+        } else {
+            if !( pitchRating == .slightlyFlat  ||
+                pitchRating == .pitchVeryGood ||
+                pitchRating == .slightlySharp   )
+            {
+                msgString += "\n"
+                msgString += "Possible Pitch Issues:\n"
+                msgString += "  Your fingering is wrong\n"
+                msgString += "  Your embouchure is off\n"
+                msgString += "  Your breath is bad ...\n"
+            }
+        }
         
         // overall rating
         let weightedStr = String(format: "%d", weightedRating)

@@ -18,7 +18,7 @@ public class PerformanceSound
     init ( start: TimeInterval, mode : soundType, noteOffset: TimeInterval )
     {
         soundID = PerformanceSound.getUniqueSoundID()
-        startTime = start
+        startTime = start - kSoundStartAdjustment
         soundMode = mode
         soundToNoteTimeOffset = noteOffset
         if kSavePitchSamples {
@@ -42,10 +42,15 @@ public class PerformanceSound
     
     // These are intervals since *analysis start*
     //   (Note times are intervals since *song start*)
-    var startTime           = noTimeValueSet
+    var startTime           = noTimeValueSet {
+        didSet {
+            startTime -= kSoundStartAdjustment
+        }
+    }
     var endTime             = noTimeValueSet {
-        didSet{
-            duration = endTime - startTime;
+        didSet {
+            endTime -= kSoundStartAdjustment
+            duration = endTime - startTime
         }
     }
     var duration = noTimeValueSet

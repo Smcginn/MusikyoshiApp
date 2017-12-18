@@ -8,10 +8,6 @@
 
 import Foundation
 
-let kMKDebugOpt_PrintStudentPerformanceDataDebugOutput = true
-let kMKDebugOpt_PrintStudentPerformanceDataDebugSamplesOutput = false
-let kMKDebugOpt_PrintPerfAnalysisResults = true
-
 // Save samples into a collection in the sound object? (useful for debugging)
 // If no, a running sum is used to determine average. (Performance improvement)
 let kSavePitchSamples = false
@@ -26,8 +22,16 @@ let kSamplesNeededToDeterminePitch = 10
 // common, so must have a certain number in a row before commmiting to a new note.)
 let kDifferentPitchSampleThreshold  = 10
 
+// This is the apparent delay between a sound and the acquisition of the sound
+// by the sound tracking code. (When the metronome is left on, this is the 
+// difference between epected time and when the metronome sound registers in the 
+// sample-scanning code.) Without this delay, students fight a 40ms delay to
+// get the timing right.
+let kSoundStartAdjustment = TimeInterval(0.040)
 
-
+// Given the delay explained above (kSoundStartAdjustment), need to adjust the
+// location of the beginning and end of sounds when displaying them.
+let kOverlayPixelAdjustment = 4
 
 let noNoteIDSet : Int32    =  0
 let noSoundIDSet : Int32   =  0
@@ -118,3 +122,22 @@ enum pitchAccuracyRating { // for pitchRating
         }
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////
+// Consts that control printing (lots of printing) to the debug console.
+//
+//   Do a search on "kMKDebugOpt_" for other consts, in other files, that can 
+//   turn on/off debugging features. Some are in Objective C files, which can't
+//   easily access this file.
+//
+//   In particular:
+//      kMKDebugOpt_ShowSoundsAndNoteAnalysis   // Display on AnalysisOverlayView
+//      kMKDebugOpt_ShowNotesAnalysis           // Display on AnalysisOverlayView
+//      kMKDebugOpt_ShowSoundsAnalysis          // Display on AnalysisOverlayView
+//      kMKDebugOpt_NoteAnalysisRespondToTouch  // If set, invokes NoteInfo alert
+//
+let kMKDebugOpt_PrintStudentPerformanceDataDebugOutput = true
+let kMKDebugOpt_PrintStudentPerformanceDataDebugSamplesOutput = false
+let kMKDebugOpt_PrintPerfAnalysisResults = true
+
+

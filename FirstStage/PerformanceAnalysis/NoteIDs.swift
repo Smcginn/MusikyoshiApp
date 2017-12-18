@@ -103,7 +103,8 @@ struct NoteIDs {
 // (Works corectly for non-transposing instruments as well.)
 func concertNoteIdToInstrumentNoteID(noteID: NoteID) -> NoteID {
     var returnNoteID = NoteIDs.noteUndefined
-    let transOffset = PerformanceAnalysisMgr.transpositionOffset
+    let transOffset =
+        UserDefaults.standard.integer(forKey: Constants.Settings.Transposition)
     let transNote  = Int(noteID) - transOffset
     if transNote >= Int(NoteID.min)  &&  transNote <= Int(NoteID.max) {
         returnNoteID = NoteID(transNote) // safe; will fit, tested above
@@ -118,7 +119,8 @@ func concertNoteIdToInstrumentNoteID(noteID: NoteID) -> NoteID {
 // (Works corectly for non-transposing instruments as well.)
 func instrumentNoteIdToConcertNoteID(transNote: NoteID) -> NoteID {
     var returnNoteID = NoteIDs.noteUndefined
-    let transOffset = PerformanceAnalysisMgr.transpositionOffset
+    let transOffset =
+        UserDefaults.standard.integer(forKey: Constants.Settings.Transposition)
     let concertNoteID = Int(transNote) + transOffset
     if concertNoteID >= Int(NoteID.min)  &&  concertNoteID <= Int(NoteID.max) {
         returnNoteID = NoteID(concertNoteID) // safe; will fit, tested above
