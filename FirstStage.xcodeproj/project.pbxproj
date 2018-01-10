@@ -1010,9 +1010,9 @@
 			buildPhases = (
 				6324D2CB1CE71B19001934A5 /* Sources */,
 				6324D2CC1CE71B19001934A5 /* Frameworks */,
+				6379EE871CE9C5FD00188A70 /* ShellScript */,
 				6324D2CD1CE71B19001934A5 /* Resources */,
 				6324D31C1CE7327F001934A5 /* Embed Frameworks */,
-				6379EE871CE9C5FD00188A70 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1505,7 +1505,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"$BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH/AudioKit.framework/fix-framework.sh\"";
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
 		6379EE881CE9C63B00188A70 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
