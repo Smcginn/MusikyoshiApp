@@ -313,9 +313,6 @@
 		63B4275A1E505573000E35AA /* Intonation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B427581E5016AB000E35AA /* Intonation.swift */; };
 		63B4275C1E5057BB000E35AA /* SSSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B4275B1E5057BB000E35AA /* SSSettingsViewController.swift */; };
 		63B4275D1E5057C2000E35AA /* SSSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B4275B1E5057BB000E35AA /* SSSettingsViewController.swift */; };
-		63C03ABA1E2A0B11009F4033 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63C03AB91E2A0B11009F4033 /* AudioKit.framework */; };
-		63C03ABB1E2A0B11009F4033 /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 63C03AB91E2A0B11009F4033 /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		63C03ABF1E2A0C43009F4033 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63C03AB91E2A0B11009F4033 /* AudioKit.framework */; };
 		63D5E8831EA37BCC007AE8D4 /* NoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324D3681CE73ED9001934A5 /* NoteService.swift */; };
 		63D5E8841EA37BCD007AE8D4 /* NoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324D3681CE73ED9001934A5 /* NoteService.swift */; };
 		63D5E8851EA37BDA007AE8D4 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324D36C1CE73ED9001934A5 /* Note.swift */; };
@@ -328,7 +325,6 @@
 		63D5E88C1EA37C1B007AE8D4 /* LongToneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6381294F1CF05BF800A40C8E /* LongToneViewController.swift */; };
 		63EB90171CF1C4EB00F09B05 /* AVAudioSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EB90161CF1C4EB00F09B05 /* AVAudioSessionManager.swift */; };
 		63EB90181CF1C4EC00F09B05 /* AVAudioSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EB90161CF1C4EB00F09B05 /* AVAudioSessionManager.swift */; };
-		63EE547D1E62A2F000F5E21D /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 63C03AB91E2A0B11009F4033 /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BD7C17471F860E3B002AF462 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7C17461F860E3B002AF462 /* HomeViewController.swift */; };
 		BD7C174E1F86148A002AF462 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7C17461F860E3B002AF462 /* HomeViewController.swift */; };
 		BD7C17501F861755002AF462 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7C174F1F861755002AF462 /* SettingsTableViewController.swift */; };
@@ -339,6 +335,8 @@
 		BD8B790F1F95BFB4005B31CB /* LessonOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8B790D1F95BFB4005B31CB /* LessonOverviewViewController.swift */; };
 		BDF308FA1F630AF500F0A819 /* SeeScoreLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6324D3151CE73234001934A5 /* SeeScoreLib.framework */; };
 		BDF308FB1F630AF500F0A819 /* SeeScoreLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6324D3151CE73234001934A5 /* SeeScoreLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C90339351FB126AA005A9C7D /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C931B0EF1FB120B4003376F9 /* AudioKit.framework */; };
+		C9BCD1671FB145C900E3434F /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C931B0EF1FB120B4003376F9 /* AudioKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -428,7 +426,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				63C03ABB1E2A0B11009F4033 /* AudioKit.framework in Embed Frameworks */,
 				635A60A91EC6BADD0099154A /* AEXML.framework in Embed Frameworks */,
 				BDF308FB1F630AF500F0A819 /* SeeScoreLib.framework in Embed Frameworks */,
 			);
@@ -441,7 +438,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				63EE547D1E62A2F000F5E21D /* AudioKit.framework in Embed Frameworks */,
 				638FECC31EC70A1100976340 /* AEXML.framework in Embed Frameworks */,
 				6324D31B1CE7327F001934A5 /* SeeScoreLib.framework in Embed Frameworks */,
 			);
@@ -630,12 +626,14 @@
 		63B427581E5016AB000E35AA /* Intonation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Intonation.swift; sourceTree = "<group>"; };
 		63B4275B1E5057BB000E35AA /* SSSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSSettingsViewController.swift; sourceTree = "<group>"; };
 		63BF9E061EBFFF07002BB5C1 /* MusicXMLModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicXMLModifier.swift; sourceTree = "<group>"; };
-		63C03AB91E2A0B11009F4033 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AudioKit.framework; sourceTree = "<group>"; };
 		63EB90161CF1C4EB00F09B05 /* AVAudioSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAudioSessionManager.swift; sourceTree = "<group>"; };
 		BD7C17461F860E3B002AF462 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		BD7C174F1F861755002AF462 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		BD8B79041F95BF75005B31CB /* PracticeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PracticeViewController.swift; sourceTree = "<group>"; };
 		BD8B790D1F95BFB4005B31CB /* LessonOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LessonOverviewViewController.swift; sourceTree = "<group>"; };
+		C90339361FB131D3005A9C7D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		C90339381FB13239005A9C7D /* Changelog.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Changelog.md; sourceTree = "<group>"; };
+		C931B0EF1FB120B4003376F9 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioKit.framework; path = Carthage/Build/iOS/AudioKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -643,8 +641,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63C03ABF1E2A0C43009F4033 /* AudioKit.framework in Frameworks */,
 				638FECC21EC70A1100976340 /* AEXML.framework in Frameworks */,
+				C9BCD1671FB145C900E3434F /* AudioKit.framework in Frameworks */,
 				6324D31A1CE7327F001934A5 /* SeeScoreLib.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -667,8 +665,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63C03ABA1E2A0B11009F4033 /* AudioKit.framework in Frameworks */,
 				635A60A81EC6BADD0099154A /* AEXML.framework in Frameworks */,
+				C90339351FB126AA005A9C7D /* AudioKit.framework in Frameworks */,
 				BDF308FA1F630AF500F0A819 /* SeeScoreLib.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -679,6 +677,8 @@
 		6324D2C61CE71B19001934A5 = {
 			isa = PBXGroup;
 			children = (
+				C90339381FB13239005A9C7D /* Changelog.md */,
+				C90339361FB131D3005A9C7D /* README.md */,
 				6324D2D11CE71B19001934A5 /* FirstStage */,
 				6324D31D1CE7329A001934A5 /* Frameworks */,
 				6324D2E91CE71B1A001934A5 /* FirstStageTests */,
@@ -740,7 +740,7 @@
 		6324D31D1CE7329A001934A5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				63C03AB91E2A0B11009F4033 /* AudioKit.framework */,
+				C931B0EF1FB120B4003376F9 /* AudioKit.framework */,
 				6324D3191CE7327F001934A5 /* SeeScoreLib.framework */,
 				6324D3151CE73234001934A5 /* SeeScoreLib.framework */,
 			);
@@ -1008,10 +1008,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6324D2FA1CE71B1A001934A5 /* Build configuration list for PBXNativeTarget "FirstStage" */;
 			buildPhases = (
+				C9BCD15B1FB1434D00E3434F /* Carthage Outdated Dependencies */,
 				6324D2CB1CE71B19001934A5 /* Sources */,
 				6324D2CC1CE71B19001934A5 /* Frameworks */,
 				6379EE871CE9C5FD00188A70 /* ShellScript */,
 				6324D2CD1CE71B19001934A5 /* Resources */,
+				C9BCD1621FB1437600E3434F /* Copy Carthage Frameworks */,
 				6324D31C1CE7327F001934A5 /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -1064,11 +1066,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6324D3101CE72F8D001934A5 /* Build configuration list for PBXNativeTarget "FirstStage-debug" */;
 			buildPhases = (
+				C90339341FB1265B005A9C7D /* Carthage Outdated Dependencies */,
 				6324D3061CE72F8D001934A5 /* Sources */,
 				6324D30B1CE72F8D001934A5 /* Frameworks */,
 				6324D30C1CE72F8D001934A5 /* Resources */,
+				C931B0EE1FB11B81003376F9 /* Copy Carthage Frameworks */,
 				6324D3181CE73234001934A5 /* Embed Frameworks */,
-				6379EE881CE9C63B00188A70 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1092,7 +1095,6 @@
 				TargetAttributes = {
 					6324D2CE1CE71B19001934A5 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = Q94UUT4TBF;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -1112,7 +1114,6 @@
 						TestTargetID = 6324D2CE1CE71B19001934A5;
 					};
 					6324D3051CE72F8D001934A5 = {
-						DevelopmentTeam = Q94UUT4TBF;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -1494,31 +1495,68 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6379EE871CE9C5FD00188A70 /* ShellScript */ = {
+		C90339341FB1265B005A9C7D /* Carthage Outdated Dependencies */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Carthage Outdated Dependencies";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
-		6379EE881CE9C63B00188A70 /* ShellScript */ = {
+		C931B0EE1FB11B81003376F9 /* Copy Carthage Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/AudioKit.framework",
+			);
+			name = "Copy Carthage Frameworks";
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/AudioKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+			showEnvVarsInLog = 0;
+		};
+		C9BCD15B1FB1434D00E3434F /* Carthage Outdated Dependencies */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Carthage Outdated Dependencies";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"$BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH/AudioKit.framework/fix-framework.sh\"";
+			shellScript = "/usr/local/bin/carthage outdated --xcode-warnings";
+			showEnvVarsInLog = 0;
+		};
+		C9BCD1621FB1437600E3434F /* Copy Carthage Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/AudioKit.framework",
+			);
+			name = "Copy Carthage Frameworks";
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/AudioKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1697,13 +1735,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1742,11 +1781,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1759,12 +1799,13 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = Q94UUT4TBF;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SeeScoreLib/AppStore-Release",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = FirstStage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1789,12 +1830,13 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = Q94UUT4TBF;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SeeScoreLib/AppStore-Release",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = FirstStage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1867,12 +1909,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: David Reich (JRZ683P359)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = Q94UUT4TBF;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SeeScoreLib/Universal",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = FirstStage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1895,12 +1938,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Stellar Software Pty Ltd (A2SGEM86LX)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = Q94UUT4TBF;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SeeScoreLib/Universal",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = FirstStage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
