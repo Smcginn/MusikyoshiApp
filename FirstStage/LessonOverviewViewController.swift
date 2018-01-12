@@ -8,8 +8,12 @@
 //  Copyright © 2015 Musikyoshi. All rights reserved.
 //
 import UIKit
+import CoreData
 
 class LessonOverviewViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    let managedContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
+    var userAttributes: UserAttributes?
     
     var optionIndex = 0
     
@@ -62,7 +66,8 @@ class LessonOverviewViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.title = "Lesson 1" // + profile.currentLessonNumber
+        fetch()
+        self.title = "Lesson " + "\(userAttributes!.getCurrentLessonNumber())"
         AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight)
     }
     
@@ -97,8 +102,7 @@ class LessonOverviewViewController: UIViewController, UIPickerViewDelegate, UIPi
         }
         else if segue.identifier == longToneSegueIdentifier {
             if let destination = segue.destination as? LongToneViewController {
-                if let sn = selectedNote
-                {
+                if let sn = selectedNote {
                     //TO DO -- is -2 correct??
                     //                    let an = NoteService.getNote(sn.orderId-2)
                     let an = NoteService.getNote(sn.orderId)
@@ -113,7 +117,6 @@ class LessonOverviewViewController: UIViewController, UIPickerViewDelegate, UIPi
                     destination.targetNote = NoteService.getNote(destination.kC4)
                     destination.targetNoteID = destination.kC4
                 }
-                
             }
         }
     }
@@ -229,8 +232,7 @@ class LessonOverviewViewController: UIViewController, UIPickerViewDelegate, UIPi
         return lbl
     }
     
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
-    {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if optionIndex == 1 {
             selectedNote = actionNotes[row]
         } else if optionIndex == 2 {
@@ -257,4 +259,11 @@ class LessonOverviewViewController: UIViewController, UIPickerViewDelegate, UIPi
         return nil
     }
     
+    func fetch() {
+        let entityName = String(describing: UserAttributes.self)
+        let request = NSFetchRequest<UserAttributes>(entityName: entityName)
+        if let fetchResults = (try? managedContext.fetch(request) as? [UserAttributes]) {
+            userAttributes = fetchResults?.first!
+        }
+    }
 }
