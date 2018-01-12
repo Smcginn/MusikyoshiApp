@@ -1011,6 +1011,7 @@
 				C9BCD15B1FB1434D00E3434F /* Carthage Outdated Dependencies */,
 				6324D2CB1CE71B19001934A5 /* Sources */,
 				6324D2CC1CE71B19001934A5 /* Frameworks */,
+				BDAAA9BF20089BD500C33B01 /* ShellScript */,
 				6324D2CD1CE71B19001934A5 /* Resources */,
 				C9BCD1621FB1437600E3434F /* Copy Carthage Frameworks */,
 				6324D31C1CE7327F001934A5 /* Embed Frameworks */,
@@ -1495,6 +1496,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		BDAAA9BF20089BD500C33B01 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
 		C90339341FB1265B005A9C7D /* Carthage Outdated Dependencies */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
