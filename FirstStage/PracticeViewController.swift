@@ -4,9 +4,9 @@
 //
 //  Created by Adam Kinney on 11/27/15.
 //  Changed by David S Reich - 2016.
+//  Changed by John Cook - 2017.
 //  Copyright © 2015 Musikyoshi. All rights reserved.
 //
-
 import UIKit
 
 class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
@@ -15,14 +15,14 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     var tuneIds = ["Note_test", "ex1", "ex2", "ex3", "ex4", "ex5"]
     var tuneNames = ["Test", "Exercise 1", "Exercise 2", "Exercise 3", "Exercise 4", "Exercise 5"]
-//    let tuneIds = ["110 The Entertainer -tpt", "119 Korobeiniki Trumpet", "100 Take Me Out to the Ball Game Trumpet", "109 Trepak - Trumpet", "Test Score", "Trepak", "Test", "Trepak", "Test"]
-//    let tuneNames = ["110 The Entertainer -tpt", "119 Korobeiniki Trumpet", "100 Take Me Out to the Ball Game Trumpet", "109 Trepak - Trumpet", "Test Score", "Trepak", "Test", "Trepak", "Test"]
+    //    let tuneIds = ["110 The Entertainer -tpt", "119 Korobeiniki Trumpet", "100 Take Me Out to the Ball Game Trumpet", "109 Trepak - Trumpet", "Test Score", "Trepak", "Test", "Trepak", "Test"]
+    //    let tuneNames = ["110 The Entertainer -tpt", "119 Korobeiniki Trumpet", "100 Take Me Out to the Ball Game Trumpet", "109 Trepak - Trumpet", "Test Score", "Trepak", "Test", "Trepak", "Test"]
     var selectedTuneId = ""
     var selectedTuneName = ""
     var selectedRhythmId = ""
     var selectedRhythmName = ""
     
-//    let noteIds = [53,55,57,58,60,62,63,65,67,69,70]
+    //    let noteIds = [53,55,57,58,60,62,63,65,67,69,70]
     // noteIds must be >= LongToneViewController.kFirstLongTone24Note = 54 && <= LongToneViewController.kLastLongTone24Note = 77
     let noteIds = [55,57,58,60,62,63,65,67,69,70,72]
     var actionNotes = [Note]()
@@ -42,7 +42,7 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         }
         
         if let fnames = getBundleFilesList("xml") {
-//            print("files:\(fnames)")
+            //            print("files:\(fnames)")
             tuneIds.removeAll()
             tuneNames.removeAll()
             for n in fnames {
@@ -51,18 +51,24 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
                 tuneNames.append(shortN)
             }
         }
-
+        
         selectedTuneId = tuneIds.first!
         selectedRhythmId = tuneIds.first!
-
+        
         selectedRhythmName = tuneNames.first!
         selectedTuneName = tuneNames.first!
         playRhythmBtn.setTitle("Play \(selectedRhythmName)", for: UIControlState())
         playTuneBtn.setTitle("Play \(selectedTuneName)", for: UIControlState())
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         self.title = "Practice"
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight)
+    }
+    
+    override func viewWillDisappear(_ animated : Bool) {
+        super.viewWillDisappear(animated)
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
     }
     
     let tuneSegueIdentifier = "ShowTuneSegue"
@@ -74,7 +80,7 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         guard identifier != longToneSegueIdentifier else { return false }
         return true
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         self.title = ""
         
@@ -93,8 +99,8 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             if let destination = segue.destination as? LongToneViewController {
                 if let sn = selectedNote
                 {
-//TO DO -- is -2 correct??
-//                    let an = NoteService.getNote(sn.orderId-2)
+                    //TO DO -- is -2 correct??
+                    //                    let an = NoteService.getNote(sn.orderId-2)
                     let an = NoteService.getNote(sn.orderId)
                     print("sn: \(sn.orderId) - 2?? ==>")
                     print("an == \(String(describing: an?.orderId))")
@@ -114,7 +120,6 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     @IBAction func changeLongToneNoteTap(_ sender: AnyObject) {
         return; //semicolon so next line isn't considered a return value!
-
         optionIndex = 1
         
         let ac = UIAlertController(title: "Choose a note for Long Tone", message: "\n\n\n\n\n\n\n\n", preferredStyle: .actionSheet)
@@ -138,40 +143,40 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     @IBAction func changeRhythmTuneTap(_ sender: AnyObject) {
         optionIndex = 2
-
+        
         let vc = UIViewController()
         vc.preferredContentSize = CGSize(width: 300, height: 160)
         let picker = UIPickerView(frame: CGRect(x: 0, y: 0, width: 300, height: 160))
         picker.delegate = self
         picker.dataSource = self
         vc.view.addSubview(picker)
-
+        
         let ac = UIAlertController(title: "Choose a tune for Rhythm", message: "", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-
+        
         func handler(_ act: UIAlertAction) {
             playRhythmBtn.setTitle("Play \(selectedRhythmName)", for: UIControlState())
         }
-
+        
         ac.setValue(vc, forKey: "contentViewController")
         ac.addAction(UIAlertAction(title: "Save", style: .default, handler: handler))
-
+        
         self.present(ac, animated: true, completion: nil)
-
+        
         let defaultRowIndex = tuneNames.index(of: selectedRhythmName) ?? 0
         picker.selectRow(defaultRowIndex, inComponent: 0, animated: true)
     }
-
+    
     @IBAction func changeTuneTap(_ sender: AnyObject) {
         optionIndex = 3
-
+        
         let vc = UIViewController()
         vc.preferredContentSize = CGSize(width: 300, height: 160)
         let picker = UIPickerView(frame: CGRect(x: 0, y: 0, width: 300, height: 160))
         picker.delegate = self
         picker.dataSource = self
         vc.view.addSubview(picker)
-
+        
         let ac = UIAlertController(title: "Choose a Tune", message: "", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
@@ -181,9 +186,9 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         
         ac.setValue(vc, forKey: "contentViewController")
         ac.addAction(UIAlertAction(title: "Save", style: .default, handler: handler))
-
+        
         self.present(ac, animated: true, completion: nil)
-
+        
         let defaultRowIndex = tuneNames.index(of: selectedTuneName) ?? 0
         picker.selectRow(defaultRowIndex, inComponent: 0, animated: true)
     }
@@ -236,7 +241,7 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             selectedTuneName = tuneNames[row]
         }
     }
-
+    
     //for development - list all xml files
     func getBundleFilesList(_ ofType: String) -> [String]? {
         let docsPath = Bundle.main.resourcePath! + "/XML Tunes"
@@ -248,8 +253,8 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         } catch {
             print(error)
         }
-
+        
         return nil
     }
-
+    
 }

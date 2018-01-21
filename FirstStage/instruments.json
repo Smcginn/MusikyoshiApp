@@ -1,0 +1,62 @@
+[{
+ "name": "trumpet",
+ "author": "shawn",
+ "title": "Beginner and Intermidiate level",
+ "levels":[{
+            "title":"Level 1",
+            "lessons":[{
+                      "title":"Hand Placement",
+                      "type":"informationNode",
+                      "resource":"Media/hand-placement.html"
+                      }, {
+                      "title":"Long tone C octave 4 (C4)",
+                      "type":"longTone",
+                      "description":"Play for 3 seconds",
+                      "note":"C4"
+                      
+                      },{
+                      "title":"Tune 1 - C4 whole note, whole rest",
+                      "type":"tune",
+                      "resource":"Rhythm Party 1  Trumpet.xml"
+                      
+                      },{
+                      "title":"Rhythm Party  1 - Whole Rest, Whole Note (reverse rhythm order of tune 1) Clap",
+                      "type":"rythm",
+                      "resource":"Rhythm Party 1  Trumpet.xml"
+                      
+                      }
+                    ]
+           },{
+           "title":"Level 2",
+           "lessons":[{
+                      "title":"Hand Placement",
+                      "type":"informationNode",
+                      "resource":"Media/hand-placement.html"
+                      }, {
+                      "title":"Long tone C octave 4 (C4)",
+                      "type":"longTone",
+                      "description":"Play for 3 seconds",
+                      "note":"C4"
+                      
+                      },{
+                      "title":"Tune 1 - C4 whole note, whole rest",
+                      "type":"tune",
+                      "resource":"Rhythm Party 1  Trumpet.xml"
+                      
+                      },{
+                      "title":"Rhythm Party  1 - Whole Rest, Whole Note Clap",
+                      "type":"rythm",
+                      "resource":"Rhythm Party 1  Trumpet.xml"
+                      
+                      }
+                      ]
+
+           
+           }
+ 
+         ]
+ }, {
+ "name": "piano",
+ "company": "shwan"
+ }
+ ]
