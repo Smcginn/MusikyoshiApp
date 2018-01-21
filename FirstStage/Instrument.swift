@@ -8,25 +8,16 @@
 
 import UIKit
 
-class Instrument{
+class Instrument {
     
-    var author: String?
-    var title: String?
     var type: InstrumentType?
     
-    init(author: String, title: String, type: InstrumentType){
-        self.author = author
-        self.title = title
+    init(type: InstrumentType){
         self.type = type
     }
     
-    
     static func getInstruments() -> [Instrument]{
-        
-        let instruments = [Instrument]()
-        return instruments
-        
-    
+        return [Instrument]()
     }
     
 }

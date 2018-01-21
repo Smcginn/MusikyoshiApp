@@ -10,8 +10,7 @@
 
 import UIKit
 
-class SettingsTableViewController: UITableViewController
-{
+class SettingsTableViewController: UITableViewController {
     
     @IBOutlet weak var bpmTextField: UITextField! {
         didSet { bpmTextField?.addDoneCancelToolbar() }
