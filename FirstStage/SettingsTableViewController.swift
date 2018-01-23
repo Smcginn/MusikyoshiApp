@@ -10,8 +10,7 @@
 
 import UIKit
 
-class SettingsTableViewController: UITableViewController
-{
+class SettingsTableViewController: UITableViewController {
     
     @IBOutlet weak var bpmTextField: UITextField! {
         didSet { bpmTextField?.addDoneCancelToolbar() }
@@ -118,6 +117,6 @@ extension UITextField {
     }
     
     // Default actions:
-    func doneButtonTapped() { self.resignFirstResponder() }
-    func cancelButtonTapped() { self.resignFirstResponder() }
+    @objc func doneButtonTapped() { self.resignFirstResponder() }
+    @objc func cancelButtonTapped() { self.resignFirstResponder() }
 }

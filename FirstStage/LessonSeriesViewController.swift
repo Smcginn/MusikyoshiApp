@@ -1,26 +1,26 @@
 //
-//  LessonSeriesTableViewController.swift
+//  LessonSeriesViewController.swift
 //  FirstStage
 //
-//  Created by Monday Ayewa on 11/17/17.
-//  Copyright © 2017 Musikyoshi. All rights reserved.
+//  Created by Caitlyn Chen on 1/22/18.
+//  Copyright © 2018 Musikyoshi. All rights reserved.
 //
 
 import UIKit
 import Foundation
 import SwiftyJSON
 
-class LessonSeriesTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
-    @IBOutlet weak var tView: UITableView!
+class LessonSeriesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+    @IBOutlet weak var tableView: UITableView!
     var instrumentJson: JSON?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tView.register(UITableViewCell.self, forCellReuseIdentifier: "LessonSeriesViewCell")
-        self.tView.delegate = self
-        self.tView.dataSource = self
-        self.tView.reloadData()
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.reloadData()
         
         if let file = Bundle.main.path(forResource: "instruments", ofType: "json"){
             let jsonData = try? Data(contentsOf: URL(fileURLWithPath: file))
@@ -40,26 +40,26 @@ class LessonSeriesTableViewController: UIViewController, UITableViewDelegate, UI
             print("unable to open instrument.json file")
         }
         
-       
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
     // MARK: - Table view data source
-
-//    public func numberOfSections(in tableView: UITableView) -> Int {
-//        // #warning Incomplete implementation, return the number of sections
-//        return 1
-//    }
-
-   // public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
     
-   // }
+    //    public func numberOfSections(in tableView: UITableView) -> Int {
+    //        // #warning Incomplete implementation, return the number of sections
+    //        return 1
+    //    }
     
-
+    // public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    // #warning Incomplete implementation, return the number of rows
+    
+    // }
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let count = instrumentJson?["levels"].count {
             return count
@@ -67,11 +67,11 @@ class LessonSeriesTableViewController: UIViewController, UITableViewDelegate, UI
         return 0
     }
     
-     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "LessonSeriesViewCell", for: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         // Configure the cell...
         if let levels = instrumentJson?["levels"] {
-              cell.textLabel?.text = levels[indexPath.row]["title"].string
+            cell.textLabel?.text = levels[indexPath.row]["title"].string
         }
         return cell
     }
@@ -84,12 +84,13 @@ class LessonSeriesTableViewController: UIViewController, UITableViewDelegate, UI
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let levels = instrumentJson?["levels"] {
-            if let destination = segue.destination as? LessonOverviewViewController {
+            if let destination = segue.destination as? LevelOverviewViewController {
                 if let row = sender as? Int {
-                   destination.lessonsJson = levels[row]["lessons"]
+                    destination.lessonsJson = levels[row]["lessons"]
                 }
             }
         }
     }
     
 }
+

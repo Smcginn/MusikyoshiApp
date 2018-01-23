@@ -347,7 +347,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
         startCountdown()
     }
     
-    func deflateBalloon(){
+    @objc func deflateBalloon(){
         if balloon.radius >= 10
         {
             balloon.radius -= 0.1
@@ -496,7 +496,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
         self.exerciseState = ExerciseState.feedbackProvided
     }
     
-    func updateTracking()
+    @objc func updateTracking()
     {
         if Date().timeIntervalSince(startTime) > longToneEndTime {
             // we're done!
