@@ -10,55 +10,31 @@ import UIKit
 import Foundation
 import SwiftyJSON
 
-class LessonSeriesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
     @IBOutlet weak var tableView: UITableView!
     var instrumentJson: JSON?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        
+        if let file = Bundle.main.path(forResource: "TrumpetLessons", ofType: "json"){
+            let jsonData = try? Data(contentsOf: URL(fileURLWithPath: file))
+            instrumentJson = try? JSON(data: jsonData!)
+            
+        } else {
+            print("Invalid filename/path.")
+        }
+        
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.reloadData()
-        
-        if let file = Bundle.main.path(forResource: "instruments", ofType: "json"){
-            let jsonData = try? Data(contentsOf: URL(fileURLWithPath: file))
-            let allInstrumentsJson = try? JSON(data: jsonData!)
-            
-            for (_, subJson) :(String, JSON) in  allInstrumentsJson! {
-                //TODO this is value will be based on user default configuration
-                if(subJson["name"] == "trumpet"){
-                    instrumentJson =  subJson
-                    break
-                }
-            }
-            let jsonString = String(data: jsonData!, encoding: .utf8)
-            print(jsonString!)
-            print(instrumentJson!)
-        } else {
-            print("unable to open instrument.json file")
-        }
-        
-        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-    // MARK: - Table view data source
-    
-    //    public func numberOfSections(in tableView: UITableView) -> Int {
-    //        // #warning Incomplete implementation, return the number of sections
-    //        return 1
-    //    }
-    
-    // public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    // #warning Incomplete implementation, return the number of rows
-    
-    // }
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let count = instrumentJson?["levels"].count {
@@ -86,7 +62,7 @@ class LessonSeriesViewController: UIViewController, UITableViewDelegate, UITable
         if let levels = instrumentJson?["levels"] {
             if let destination = segue.destination as? LevelOverviewViewController {
                 if let row = sender as? Int {
-                    destination.lessonsJson = levels[row]["lessons"]
+                    destination.lessonsJson = levels[row]["exercises"]
                 }
             }
         }

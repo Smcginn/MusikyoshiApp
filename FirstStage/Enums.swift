@@ -24,7 +24,7 @@ enum NoteLength {
 }
 
 enum LessonItemType: String {
-    case informnationNode = "informationNode"
+//    case informationNode = "informationNode"
     case longTone = "longtone"
     case rhythm = "rhythm"
     case tune = "tune"

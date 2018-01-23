@@ -120,10 +120,10 @@
             </objects>
             <point key="canvasLocation" x="4113" y="789"/>
         </scene>
-        <!--Lesson Series View Controller-->
+        <!--Level Series View Controller-->
         <scene sceneID="tIv-VO-fxc">
             <objects>
-                <viewController id="q79-EK-aSd" customClass="LessonSeriesViewController" customModule="FirstStage" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="q79-EK-aSd" customClass="LevelSeriesViewController" customModule="FirstStage" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8vU-ld-gmz"/>
                         <viewControllerLayoutGuide type="bottom" id="oFv-ga-Ijp"/>

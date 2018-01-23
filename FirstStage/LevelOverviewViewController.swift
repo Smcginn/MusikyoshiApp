@@ -20,12 +20,9 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
     
     @IBOutlet weak var tableView: UITableView!
     
-    
     let noteIds = [55,57,58,60,62,63,65,67,69,70,72]
     var actionNotes = [Note]()
     var selectedNote : Note?
-    
-    
     
     override func viewDidLoad() {
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -54,7 +51,7 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
     let tuneSegueIdentifier = "ShowTuneSegue"
     let longToneSegueIdentifier = "ShowLongToneSegue"
     let rhythmSegueIdentifier = "ShowRhythmSegue"
-    let informationBoardIdentifier = "InformationBoardSegue"
+//    let informationBoardIdentifier = "InformationBoardSegue"
     
     // MARK: - Navigation
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
@@ -78,8 +75,7 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
         }
         else if segue.identifier == longToneSegueIdentifier {
             if let destination = segue.destination as? LongToneViewController {
-                if let sn = selectedNote
-                {
+                if let sn = selectedNote {
                     //TO DO -- is -2 correct??
                     //                    let an = NoteService.getNote(sn.orderId-2)
                     let an = NoteService.getNote(sn.orderId)
@@ -89,20 +85,13 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
                     destination.targetNoteID = sn.orderId
                     destination.noteName = (selectedNote?.fullName)!
                 }
-                else
-                {
+                else {
                     destination.targetNote = NoteService.getNote(destination.kC4)
                     destination.targetNoteID = destination.kC4
                 }
                 
             }
         }
-    }
-    
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -123,17 +112,11 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
             
             cell.textLabel?.text = lessons[indexPath.row]["title"].string
         }
-        
-        
         return cell
-        
-        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        //Here we are going to seguae to the exercise that the user selected whcih could by content-type - rythm, long tone, tune, or information board.
-        
         
         if let lesssonType = LessonItemType(rawValue: (lessonsJson?[indexPath.row]["type"].string?.lowercased())!){
             
@@ -141,22 +124,18 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
             case .longTone:
                 performSegue(withIdentifier: longToneSegueIdentifier, sender: self)
             case .rhythm:
-                if let musicFile = lessonsJson?[indexPath.row]["resource"].string!
-                {
+                if let musicFile = lessonsJson?[indexPath.row]["resource"].string! {
                     selectedRhythmId = String(musicFile.characters.dropLast(4))
                 }
                 performSegue(withIdentifier: rhythmSegueIdentifier, sender: self)
             case .tune:
-                if let musicFile = lessonsJson?[indexPath.row]["resource"].string!
-                {
+                if let musicFile = lessonsJson?[indexPath.row]["resource"].string! {
                     selectedTuneId = String(musicFile.characters.dropLast(4))
                 }
                 performSegue(withIdentifier: tuneSegueIdentifier, sender: self)
-            case .informnationNode:
-                performSegue(withIdentifier: informationBoardIdentifier, sender: self)
-                
+//            case .informationNode:
+//                performSegue(withIdentifier: informationBoardIdentifier, sender: self)
             }
-            
         }
         
         
