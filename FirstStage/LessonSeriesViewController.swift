@@ -92,5 +92,8 @@ class LessonSeriesViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
+    @IBAction func backButtonTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 

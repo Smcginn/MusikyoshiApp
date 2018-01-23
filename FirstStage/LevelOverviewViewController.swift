@@ -162,6 +162,9 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
         
         
     }
+    @IBAction func backButtonTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     
 }

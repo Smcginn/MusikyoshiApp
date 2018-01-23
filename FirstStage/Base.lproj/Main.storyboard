@@ -153,12 +153,27 @@
                                     <outlet property="delegate" destination="q79-EK-aSd" id="ZVp-K7-1bD"/>
                                 </connections>
                             </tableView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TQ2-no-iHC">
+                                <rect key="frame" x="0.0" y="0.0" width="568" height="32"/>
+                                <items>
+                                    <navigationItem title="Level Series" id="QGz-mv-bnX">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="eiE-p8-Ipl">
+                                            <connections>
+                                                <action selector="backButtonTapped:" destination="q79-EK-aSd" id="Oiz-rJ-3Pe"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Cx9-i9-tIf" secondAttribute="trailing" id="5YY-Sq-8C0"/>
+                            <constraint firstAttribute="trailing" secondItem="TQ2-no-iHC" secondAttribute="trailing" id="7FG-df-ySa"/>
                             <constraint firstItem="Cx9-i9-tIf" firstAttribute="leading" secondItem="gsy-ga-2c2" secondAttribute="leading" id="CUu-bl-bok"/>
+                            <constraint firstItem="TQ2-no-iHC" firstAttribute="leading" secondItem="gsy-ga-2c2" secondAttribute="leading" id="TSE-8p-qHM"/>
                             <constraint firstItem="Cx9-i9-tIf" firstAttribute="top" secondItem="8vU-ld-gmz" secondAttribute="bottom" constant="37" id="a4v-h3-RMz"/>
+                            <constraint firstItem="TQ2-no-iHC" firstAttribute="top" secondItem="8vU-ld-gmz" secondAttribute="bottom" id="hAb-5m-e5Z"/>
                         </constraints>
                     </view>
                     <connections>
@@ -168,7 +183,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yd9-6m-hVY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2252" y="-716"/>
+            <point key="canvasLocation" x="2705" y="788"/>
         </scene>
         <!--Level Overview View Controller-->
         <scene sceneID="fjm-zc-ci9">
@@ -183,7 +198,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bJr-pA-qr1">
-                                <rect key="frame" x="0.0" y="8" width="568" height="312"/>
+                                <rect key="frame" x="0.0" y="37" width="568" height="312"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="312" id="OAo-1b-z6M"/>
@@ -203,12 +218,27 @@
                                     <outlet property="delegate" destination="f5l-JT-f6F" id="EuY-gd-a3J"/>
                                 </connections>
                             </tableView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="soS-zI-hFQ">
+                                <rect key="frame" x="0.0" y="0.0" width="568" height="32"/>
+                                <items>
+                                    <navigationItem title="Level Overview" id="WgK-f0-e7L">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="FAX-JW-KZ1">
+                                            <connections>
+                                                <action selector="backButtonTapped:" destination="f5l-JT-f6F" id="Ngh-ai-RfP"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="soS-zI-hFQ" secondAttribute="trailing" id="BKX-C0-9ZC"/>
+                            <constraint firstItem="soS-zI-hFQ" firstAttribute="top" secondItem="cHm-ZS-rb3" secondAttribute="bottom" id="LoT-My-vGs"/>
                             <constraint firstAttribute="trailing" secondItem="bJr-pA-qr1" secondAttribute="trailing" id="Q2k-P2-vWZ"/>
+                            <constraint firstItem="soS-zI-hFQ" firstAttribute="leading" secondItem="2Ew-Cf-jTJ" secondAttribute="leading" id="VFb-2R-G2m"/>
                             <constraint firstItem="bJr-pA-qr1" firstAttribute="leading" secondItem="2Ew-Cf-jTJ" secondAttribute="leading" id="fyj-8J-scB"/>
-                            <constraint firstItem="bJr-pA-qr1" firstAttribute="top" secondItem="cHm-ZS-rb3" secondAttribute="bottom" constant="8" id="kK4-y5-gWJ"/>
+                            <constraint firstItem="bJr-pA-qr1" firstAttribute="top" secondItem="cHm-ZS-rb3" secondAttribute="bottom" constant="37" id="kK4-y5-gWJ"/>
                         </constraints>
                     </view>
                     <connections>
@@ -220,7 +250,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yNx-Mi-L3G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2961.9718309859154" y="-716.25"/>
+            <point key="canvasLocation" x="3393" y="788"/>
         </scene>
         <!--Home-->
         <scene sceneID="m9M-pR-XIt">
@@ -442,7 +472,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZUV-Fh-GrU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3801" y="2612"/>
+            <point key="canvasLocation" x="3792" y="5638"/>
         </scene>
         <!--Lesson Menu-->
         <scene sceneID="T0x-XP-eac">
@@ -471,7 +501,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6oE-nH-V3a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3069" y="2612"/>
+            <point key="canvasLocation" x="2783" y="4028"/>
         </scene>
         <!--Long Tone-->
         <scene sceneID="Vqe-FU-GXQ">
