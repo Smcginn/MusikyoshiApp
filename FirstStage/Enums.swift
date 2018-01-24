@@ -22,3 +22,17 @@ enum NoteLength {
     case whole
 //    case Eighth
 }
+
+enum LessonItemType: String {
+//    case informationNode = "informationNode"
+    case longTone = "longtone"
+    case rhythm = "rhythm"
+    case tune = "tune"
+}
+
+enum InstrumentType {
+    case trumpet
+    case piano
+}
+
+
