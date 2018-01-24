@@ -89,7 +89,6 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
                     destination.targetNote = NoteService.getNote(destination.kC4)
                     destination.targetNoteID = destination.kC4
                 }
-                
             }
         }
     }
@@ -97,28 +96,24 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if let count = lessonsJson?.count {
-            
             return count
         }
-        return 0
-        
+        return 0 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LessonItemCell", for: indexPath)
         
         // Configure the cell...
-        if let lessons = lessonsJson{
-            
+        if let lessons = lessonsJson {
             cell.textLabel?.text = lessons[indexPath.row]["title"].string
         }
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
-    {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if let lesssonType = LessonItemType(rawValue: (lessonsJson?[indexPath.row]["type"].string?.lowercased())!){
+        if let lesssonType = LessonItemType(rawValue: (lessonsJson?[indexPath.row]["type"].string?.lowercased())!) {
             
             switch lesssonType {
             case .longTone:
@@ -136,15 +131,10 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
 //            case .informationNode:
 //                performSegue(withIdentifier: informationBoardIdentifier, sender: self)
             }
-        }
-        
-        
-        
+        }    
     }
+    
     @IBAction func backButtonTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
-    }
-    
-    
+    }  
 }
-
