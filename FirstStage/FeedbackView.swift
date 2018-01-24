@@ -45,7 +45,7 @@ class FeedbackView: UIImageView, UIGestureRecognizerDelegate {
         isHidden = false
     }
 
-    func feedbackViewTapped(_ sender: UITapGestureRecognizer) {
+    @objc func feedbackViewTapped(_ sender: UITapGestureRecognizer) {
         isHidden = true
         feedbackViewTapRecognizer.isEnabled = false
     }

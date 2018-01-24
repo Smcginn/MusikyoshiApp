@@ -102,7 +102,7 @@ class AVAudioSessionManager: NSObject {
 
     //MARK: Audio Session Route Change Notification
     
-    func handleRouteChange(_ notification: Notification) {
+    @objc func handleRouteChange(_ notification: Notification) {
         let reasonValue = (notification.userInfo?[AVAudioSessionRouteChangeReasonKey] as AnyObject).uintValue
         //AVAudioSessionRouteDescription *routeDescription = [notification.userInfo valueForKey:AVAudioSessionRouteChangePreviousRouteKey];
         
@@ -112,7 +112,7 @@ class AVAudioSessionManager: NSObject {
         print("Audio route change: \(String(describing: reasonValue))")
     }
     
-    func handleInterruption(_ n: Notification) {
+    @objc func handleInterruption(_ n: Notification) {
         print("Audio interruption")
         guard let why = n.userInfo?[AVAudioSessionInterruptionTypeKey] as? UInt else { return }
         guard let type = AVAudioSessionInterruptionType(rawValue: why) else { return }

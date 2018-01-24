@@ -1,1 +1,2 @@
-github "audiokit/AudioKit" "v3.6"
+github "SwiftyJSON/SwiftyJSON" "4.0.0"
+github "audiokit/AudioKit" "v4.0.4"

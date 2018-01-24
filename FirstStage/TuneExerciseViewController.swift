@@ -206,7 +206,6 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func playButtonTapped(_ sender: UIButton) {
@@ -600,7 +599,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     // if pitch before thresholdEndTime compare to low/high thresholds and set to pitchlow, pitchhigh, or pitchmatch
     // if pitch after thresholdEndTime compare to low/high thresholds and set to pitchlowlate, pitchhighlate, or pitchmatchlate
 
-    func analyzePerformance() {
+    @objc func analyzePerformance() {
         guard insideNote || insideRest else { return }
 
         let inThreshold = Date().timeIntervalSince(startTime) < thresholdEndTime
