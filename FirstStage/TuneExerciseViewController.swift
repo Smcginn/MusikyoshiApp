@@ -14,6 +14,7 @@ let DEBUG_PRINT_PLAYALONG__ALL = false
 
 class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNoteHandler, SSSynthParameterControls, SSFrequencyConverter {
 
+    @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var ssScrollView: SSScrollView!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var playForMeButton: UIButton!
@@ -21,6 +22,8 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var gateView: UIView!
     @IBOutlet weak var metronomeView: VisualMetronomeView!
+    
+    var tuneType: String?
 
     // protocol SSFrequencyConverter
 
@@ -174,8 +177,9 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navBar.topItem?.title = "\(tuneType!) Exercise"
 
-        // Do any additional setup after loading the view.
         gateView.isHidden = true
         showingSinglePart = false // is set when a single part is being displayed
         cursorBarIndex = 0
@@ -195,7 +199,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight)
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeLeft)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -1284,5 +1288,10 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         // Pass the selected object to the new view controller.
     }
     */
+    @IBAction func backButtonTapped(_ sender: Any) {
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
 
+        self.dismiss(animated: true, completion: nil)
+    }
+    
 }

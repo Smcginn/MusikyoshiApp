@@ -115,7 +115,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight)
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeLeft)
     }
     
     override func viewWillDisappear(_ animated : Bool) {
@@ -612,4 +612,11 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     }
     //@end
         
+    @IBAction func backButtonTapped(_ sender: Any) {
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
+
+        self.dismiss(animated: true, completion: nil)
+
+    }
+
 }

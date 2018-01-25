@@ -1,8 +1,8 @@
  {
   "name": "trumpet",
   "title": "Beginner and Intermidiate level",
-  "levels":[{
-            "title":"Level 1",
+  "lessons":[{
+            "title":"Lesson 1",
             "infoNode":[{"title": "Hand Placement",
                         "type":"informationNode",
                         "resource":"Media/hand-placement.html"
@@ -22,7 +22,7 @@
                          }
                          ]
             },{
-            "title":"Level 2",
+            "title":"Lesson 2",
             "infoNode":[{"title": "Hand Placement",
                         "type":"informationNode",
                         "resource":"Media/hand-placement.html"
