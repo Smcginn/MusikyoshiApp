@@ -441,7 +441,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     
     func stopPlaying() {
         playingSynth = false
-        metronomeView.setBeat(-1)
+//        metronomeView.setBeat(-1)
         stopAnalysisTimer()
 
         gateView.isHidden = true

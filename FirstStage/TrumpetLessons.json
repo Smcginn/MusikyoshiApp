@@ -14,11 +14,11 @@
                          },{
                          "title":"Tune 1 - C4 whole note, whole rest",
                          "type":"tune",
-                         "resource":"Rhythm Party 1  Trumpet.xml"
+                         "resource":"Rhythm Party 1 Trumpet.xml"
                          },{
                          "title":"Rhythm Party  1 - Whole Rest, Whole Note (reverse rhythm order of tune 1) Clap",
                          "type":"rhythm",
-                         "resource":"Rhythm Party 1  Trumpet.xml"
+                         "resource":"Rhythm Party 1 Trumpet.xml"
                          }
                          ]
             },{
@@ -34,11 +34,11 @@
                          },{
                          "title":"Tune 1 - C4 whole note, whole rest",
                          "type":"tune",
-                         "resource":"Rhythm Party 1  Trumpet.xml"
+                         "resource":"Rhythm Party 1 Trumpet.xml"
                          },{
                          "title":"Rhythm Party  1 - Whole Rest, Whole Note (reverse rhythm order of tune 1) Clap",
                          "type":"rhythm",
-                         "resource":"Rhythm Party 1  Trumpet.xml"
+                         "resource":"Rhythm Party 1 Trumpet.xml"
                          }
                          ]
             }
