@@ -13,7 +13,8 @@ import AVFoundation
 let DEBUG_PRINT_PLAYALONG__ALL = false
 
 class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNoteHandler, SSSynthParameterControls, SSFrequencyConverter {
-
+    
+    @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var ssScrollView: SSScrollView!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var playForMeButton: UIButton!
@@ -21,9 +22,10 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var gateView: UIView!
     @IBOutlet weak var metronomeView: VisualMetronomeView!
-
+    
+    var tuneType: String?
+    
     // protocol SSFrequencyConverter
-
     /*!
      @method frequency:
      @abstract convert a midi pitch to frequency
@@ -31,9 +33,8 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     public func frequency(_ midiPitch: Int32) -> Float {
         return intonation.frequency(midiPitch)
     }
-
+    
     //protocol SSSynthParameterControls
-
     /*!
      @method waveform
      @abstract return a waveform type for the waveform generator
@@ -49,7 +50,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         default: return sscore_sy_sine
         }
     }
-
+    
     /*!
      @method waveformSymmetry
      @abstract return a symmetry value for square and triangle waveforms
@@ -59,7 +60,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     {
         return waveformSymmetryValue
     }
-
+    
     /*!
      @method waveformRiseFall
      @abstract return a rise-fall value for the square waveform (in samples at 44100samples/s)
@@ -78,9 +79,9 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
             return rval
         }
     }
-
+    
     private let intonation = Intonation(temperament: Intonation.Temperament.Equal)
-
+    
     private var kSynthesizedInstrumentsInfo : [SSSynthesizedInstrumentInfo] {
         get {
             var rval = [SSSynthesizedInstrumentInfo]()
@@ -89,13 +90,12 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
             return rval
         }
     }
-
-//    let feedbackView = FeedbackView()
-
+    
+    //    let feedbackView = FeedbackView()
     var exerciseName = ""
     var isTune = false
     
-//    let mxmlService = MusicXMLService()
+    //    let mxmlService = MusicXMLService()
     let amplitudeThreshold = UserDefaults.standard.double(forKey: Constants.Settings.AmplitudeThreshold)
     let timingThreshold = UserDefaults.standard.double(forKey: Constants.Settings.TimingThreshold)
     let tempoBPM = UserDefaults.standard.integer(forKey: Constants.Settings.BPM)
@@ -106,44 +106,39 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     var score: SSScore?
     var showingSinglePart = false // is set when a single part is being displayed
     var showingSinglePartIndex: Int32 = 0
-    var	showingParts = [NSNumber]()
+    var    showingParts = [NSNumber]()
     var layOptions = SSLayoutOptions()  // set of options for layout
     var playData: SSPData?
     var synth: SSSynth?
-//    var instrumentId = [UInt32]()
-//    var metronomeInstrumentId: UInt32 = 0
-
+    //    var instrumentId = [UInt32]()
+    //    var metronomeInstrumentId: UInt32 = 0
     private static  let kDefaultRiseFallSamples = 4
     private var synthVoice = SSSynthVoice.Sampled
     private var waveformSymmetryValue = Float(0.5)
     private var waveformRiseFallValue = kDefaultRiseFallSamples // samples in rise/fall of square waveform
-
     private var sampledInstrumentIds = [UInt]()
     private var synthesizedInstrumentIds = [UInt]()
     private var metronomeInstrumentIds = [UInt]()
     private static let kMaxInstruments = 10
-
+    
     var cursorBarIndex = Int32(0)
-//    let kDefaultMagnification: Float = 1.5
+    //    let kDefaultMagnification: Float = 1.5
     let kDefaultMagnification: Float = UserDefaults.standard.float(forKey: Constants.Settings.ScoreMagnification) / 10.0
     var metronomeOn = false
     var beatsPerBar = 0
-
+    
     var playingSynth = false    //if !playingSynth then must be analysing
-
-//    var tickPlayer: AVAudioPlayer?
-
-//    // 3 metronome ticks are currently supported (tickpitch = 0, 1 or 2):
-//    //    static const sscore_sy_synthesizedinstrumentinfo kTick1Info = {"Tick1", 0, 1.0};
-//    var kTick1Info = sscore_sy_synthesizedinstrumentinfo(instrument_name: ("Tick1" as NSString).utf8String, tickpitch: Int32(0), volume: Float(1.0), voice: sscore_sy_tick1, dummy: (0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0))
-
+    //    var tickPlayer: AVAudioPlayer?
+    //    // 3 metronome ticks are currently supported (tickpitch = 0, 1 or 2):
+    //    //    static const sscore_sy_synthesizedinstrumentinfo kTick1Info = {"Tick1", 0, 1.0};
+    //    var kTick1Info = sscore_sy_synthesizedinstrumentinfo(instrument_name: ("Tick1" as NSString).utf8String, tickpitch: Int32(0), volume: Float(1.0), voice: sscore_sy_tick1, dummy: (0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0))
     let kfAnim = CAKeyframeAnimation()
     var exerciseDuration = 0.0
     var animHorzOffset = 0.0
     var animValues = [Double]()
     var animKeyTimes = [Double]()
     var playingAnimation = false
-
+    
     var analysisTimer: Timer?
     var startTime : Date = Date()
     var thresholdStartTime = 0.0
@@ -171,11 +166,12 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     //used for colored notes
     let kUseColoredNotes = false
     var currentNotes = [AnyObject]()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        navBar.topItem?.title = "\(tuneType!) Exercise"
+        
         gateView.isHidden = true
         showingSinglePart = false // is set when a single part is being displayed
         cursorBarIndex = 0
@@ -186,18 +182,18 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
             title = "Rhythm"
             infoLabel.text = "Clap at the beginning of each note and count the beats"
         }
-
+        
         loadFile("XML Tunes/" + exerciseName)
         countOffLabel.text = ""
-
+        
         frequencyThresholdPercent = 1.0 + frequencyThreshold
-//        setupSounds()
+        //        setupSounds()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight)
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeLeft)
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         stopPlaying()
         super.viewWillDisappear(animated)
@@ -211,9 +207,9 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     @IBAction func playButtonTapped(_ sender: UIButton) {
         playForMeButton.isEnabled = false
         if playButton.currentTitle == "Start Playing" {
-//            playButton.setTitle("Stop", forState: UIControlState.Normal)
+            //            playButton.setTitle("Stop", forState: UIControlState.Normal)
             playButton.setTitle("Listening ...", for: UIControlState())
-//            playButton.isEnabled = false
+            //            playButton.isEnabled = false
             playScore()
         } else if playButton.currentTitle == "Next Exercise" {
             //TODO: goto Next Exercise
@@ -223,19 +219,19 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
             stopPlaying()
         }
     }
-
+    
     @IBAction func playForMeButtonTapped(_ sender: UIButton) {
         playingSynth = true
         playForMeButton.isEnabled = false
         playButton.setTitle("Playing ...", for: UIControlState())
         playScore()
     }
-
+    
     func loadFile(_ scoreFile: String) {
         playButton.setTitle("Start Playing", for: UIControlState())
-//        playButton.isEnabled = true
+        //        playButton.isEnabled = true
         playingAnimation = false
-
+        
         if let filePath = Bundle.main.path(forResource: scoreFile, ofType: "xml") {
             ssScrollView.abortBackgroundProcessing({self.loadTheFile(filePath)})
         } else {
@@ -253,27 +249,25 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         cursorBarIndex = 0
         let loadOptions = SSLoadOptions(key: sscore_libkey)
         loadOptions?.checkxml = true
-
-//        let errP = UnsafeMutablePointer<sscore_loaderror>.allocate(capacity: 1)
+        
+        //        let errP = UnsafeMutablePointer<sscore_loaderror>.allocate(capacity: 1)
         var err : SSLoadError?
-
+        
         print("filePath: \(filePath)")
         print("loadOptions: \(String(describing: loadOptions))")
-//        print("errP: \(errP)")
-
-
+        //        print("errP: \(errP)")
+        
         ////////////
         guard let xmlData = MusicXMLModifier.modifyXMLToData(musicXMLUrl: URL(fileURLWithPath: filePath), smallestWidth: UserDefaults.standard.double(forKey: Constants.Settings.SmallestNoteWidth), signatureWidth: UserDefaults.standard.double(forKey: Constants.Settings.SignatureWidth)) else {
             print("Cannot get modified xmlData from \(filePath)!")
             return
         }
         ////////////
-
-//        if let score0 = SSScore(xmlFile: filePath, options: loadOptions, error: errP) {
-//        if let score0 = SSScore(xmlFile: filePath, options: loadOptions, error: &err) {
+        //        if let score0 = SSScore(xmlFile: filePath, options: loadOptions, error: errP) {
+        //        if let score0 = SSScore(xmlFile: filePath, options: loadOptions, error: &err) {
         if let score0 = SSScore(xmlData: xmlData, options: loadOptions, error: &err) {
             score = score0
-            //				titleLabel.text = [filePath lastPathComponent];
+            //                titleLabel.text = [filePath lastPathComponent];
             let numParts = score!.numParts
             for _ in 0..<numParts {
                 showingParts.append(NSNumber(value: true as Bool)) // display all parts
@@ -282,32 +276,32 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
             showingSinglePart = false;
             layOptions.hidePartNames = true
             layOptions.hideBarNumbers = true
-
+            
             if true {
                 layOptions.ignoreXMLPositions = false
                 layOptions.useXMLxLayout = true
                 ssScrollView.optimalXMLxLayoutMagnification = true
-//            } else {
-//                ssScrollView.optimalSingleSystem = true
+                //            } else {
+                //                ssScrollView.optimalSingleSystem = true
             }
             //            ssScrollView.setupScore(score, openParts: showingParts, mag: kDefaultMagnification, opt: layOptions)
             ssScrollView.setupScore(score, openParts: showingParts, mag: kDefaultMagnification, opt: layOptions, completion: getPlayData)
         }
-
+        
         if let err = err {
             switch (err.err) {
-            case sscore_OutOfMemoryError:	print("out of memory")
-
+            case sscore_OutOfMemoryError:    print("out of memory")
+                
             case sscore_XMLValidationError: print("XML validation error line:" + String(err.line) + " col:" + String(err.col) + " " + err.text)
-
-            case sscore_NoBarsInFileError:	print("No bars in file error")
-            case sscore_NoPartsError:		print("NoParts Error")
-
-            case sscore_UnknownError:		print("Unknown error")
-
+                
+            case sscore_NoBarsInFileError:    print("No bars in file error")
+            case sscore_NoPartsError:        print("NoParts Error")
+                
+            case sscore_UnknownError:        print("Unknown error")
+                
             default: break
             }
-
+            
             if !err.warnings.isEmpty {
                 print("MusicXML consistency warnings:")
                 for warning in err.warnings {
@@ -325,18 +319,18 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                 infoLabel.text = "Listen - and clap at the beginning of each note and count the beats"
             }
         } else
-        if isTune {
-            infoLabel.text = "Play the notes"
-        } else {
-            infoLabel.text = "Clap at the beginning of each note and count the beats"
+            if isTune {
+                infoLabel.text = "Play the notes"
+            } else {
+                infoLabel.text = "Clap at the beginning of each note and count the beats"
         }
-
+        
         ssScrollView.contentOffset = CGPoint.zero
         ssScrollView.isScrollEnabled = false
         playingAnimation = false
         countOffLabel.isHidden = true;
         metronomeOn = true
-
+        
         noteResultValues.removeAll()
         
         guard score != nil else { return }
@@ -344,22 +338,21 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         guard playData != nil else { return }
         
         ssScrollView.clearAllColouring()
-
+        
         if synth != nil && (synth?.isPlaying)! {
             synth?.reset()
         } else {
             if synth == nil {
                 if let synth0 = SSSynth.createSynth(self, score: score) {
                     synth = synth0
-/*
- old
+                    /*
+                     old
                      instrumentId.removeAll()
                      
-                    instrumentId.append((synth?.addSampledInstrument(pianoSampleInfo))!)
-//                    instrumentId.append((synth?.addSampledInstrument(trumpetSampleInfo))!)
-
-                    metronomeInstrumentId = (synth?.addSynthesizedInstrument(&kTick1Info))!
- */
+                     instrumentId.append((synth?.addSampledInstrument(pianoSampleInfo))!)
+                     //                    instrumentId.append((synth?.addSampledInstrument(trumpetSampleInfo))!)
+                     metronomeInstrumentId = (synth?.addSynthesizedInstrument(&kTick1Info))!
+                     */
                     ////new:
                     sampledInstrumentIds.removeAll()
                     synthesizedInstrumentIds.removeAll()
@@ -404,13 +397,12 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                 // setup bar change notification to set threshold - or move cursor
                 let cursorAnimationTime_ms = Int32(timingThreshold * 1000)
                 
-//                if showNoteMarkers {
-//                    let cursorAnimationTime = CATransaction.animationDuration()
-//                    cursorAnimationTime_ms = Int32(cursorAnimationTime * 1000)
-//                }
-
+                //                if showNoteMarkers {
+                //                    let cursorAnimationTime = CATransaction.animationDuration()
+                //                    cursorAnimationTime_ms = Int32(cursorAnimationTime * 1000)
+                //                }
                 synth?.setNoteHandler(self, delay: -cursorAnimationTime_ms)
-
+                
                 //                synth?.setBarChangeHandler(BarChangeHandler(vc: self), delay: -cursorAnimationTime_ms)
                 //                synth?.setBarChangeHandler(BarChangeHandler(vc: self, anim: anim), delay: 0)
                 synth?.setEnd(EndHandler(vc: self), delay: 0)
@@ -420,11 +412,11 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                 if err == sscore_NoError {
                     let delayInSeconds = 2.0
                     let startTime = DispatchTime.now() + DispatchTimeInterval.milliseconds(Int(delayInSeconds * 1000.0))
-//                    let startTime = DispatchTime.now() + Double(Int64(delayInSeconds * NSEC_PER_SEC)) / Double(NSEC_PER_SEC)
+                    //                    let startTime = DispatchTime.now() + Double(Int64(delayInSeconds * NSEC_PER_SEC)) / Double(NSEC_PER_SEC)
                     err = synth?.start(at: startTime.rawValue, bar: cursorBarIndex, countIn: true)
                     
                 }
-
+                
                 print("synth.start err == \(String(describing: err))")
                 if err == sscore_UnlicensedFunctionError {
                     print("synth license expired!")
@@ -437,11 +429,11 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     
     func stopPlaying() {
         playingSynth = false
-        metronomeView.setBeat(-1)
+        //        metronomeView.setBeat(-1)
         stopAnalysisTimer()
-
+        
         gateView.isHidden = true
-
+        
         if (synth != nil && synth!.isPlaying)
         {
             synth?.reset()
@@ -452,35 +444,35 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
             playingAnimation = false
             ssScrollView.layer.removeAnimation(forKey: "move")
         }
-
+        
         playButton.setTitle("Start Playing", for: UIControlState())
-//        playButton.setTitle("Next Exercise", for: UIControlState())
-//        playButton.isEnabled = true
+        //        playButton.setTitle("Next Exercise", for: UIControlState())
+        //        playButton.isEnabled = true
         playForMeButton.isEnabled = true
         ssScrollView.hideCursor()
         ssScrollView.isScrollEnabled = true
-
-//        feedbackView.setupFeedbackView(self)
-//        var feedbackRect = self.view.frame.insetBy(dx: 100, dy: 100)    //make it small so we can see analysis results.
-//        feedbackRect.origin.y = feedbackRect.origin.y + 20
-//        feedbackView.contentMode = .scaleAspectFit
-//        feedbackView.showFeedback(feedbackRect)
+        
+        //        feedbackView.setupFeedbackView(self)
+        //        var feedbackRect = self.view.frame.insetBy(dx: 100, dy: 100)    //make it small so we can see analysis results.
+        //        feedbackRect.origin.y = feedbackRect.origin.y + 20
+        //        feedbackView.contentMode = .scaleAspectFit
+        //        feedbackView.showFeedback(feedbackRect)
     }
     
     //build arrays for CAKeyframeAnimation of UIScrollView (base class of SSScrollView)
     //maybe also collect breath marks?
     func getPlayData() {
         guard score != nil else { return }
-
+        
         DispatchQueue.main.async(execute: {
             if let numBeats = self.score?.actualBeats(forBar: 1) {
                 self.beatsPerBar = Int(numBeats.numbeats)
-//                self.metronomeView.numBeats = Int(numBeats.numbeats)
+                //                self.metronomeView.numBeats = Int(numBeats.numbeats)
                 self.metronomeView.numBeats = self.beatsPerBar
                 self.metronomeView.rebuildMetronome()
             }
         });
-
+        
         playData = SSPData.createPlay(from: score, tempo: self)
         guard playData != nil else { return }
         
@@ -504,7 +496,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
             //we just have one part
             let part = bar.part(0)
             for note in (part?.notes)! {
-//                let graceNote = (note.grace == sscore_pd_grace_no) ? "note" : "grace"
+                //                let graceNote = (note.grace == sscore_pd_grace_no) ? "note" : "grace"
                 //                print("part 0 \(graceNote) pitch:\(note.midiPitch) startbar:\(note.startBarIndex) start:\(note.start)ms duration:\(note.duration)ms at x=\(noteXPos(note))")
                 
                 thisNoteXPos = Double(noteXPos(note))
@@ -561,9 +553,9 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         //don't start twice
         guard !analysisStarted else { return }
         analysisStarted = true
-
+        
         startTime = Date()
-
+        
         AudioKitManager.sharedInstance.start()
         print("starting analysis timer")
         analysisTimer = Timer.scheduledTimer(timeInterval: soundSampleRate, target: self, selector: #selector(TuneExerciseViewController.analyzePerformance), userInfo: nil, repeats: true)
@@ -573,7 +565,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         //don't stop twice
         guard analysisStarted else { return }
         analysisStarted = false
-
+        
         if analysisTimer != nil {
             analysisTimer?.invalidate()
             analysisTimer = nil;
@@ -593,27 +585,25 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     // if insideRest then a NO-sound and reach thresholdEndTime => rest match
     // if insideRest a sound after threshold ==> rest late miss
     // if insideRest after thresholdEndTime any additional sound ==> rest late miss repeat
-
     // analysis - pitch
     // only care about pitch insideNote
     // if pitch before thresholdEndTime compare to low/high thresholds and set to pitchlow, pitchhigh, or pitchmatch
     // if pitch after thresholdEndTime compare to low/high thresholds and set to pitchlowlate, pitchhighlate, or pitchmatchlate
-
     @objc func analyzePerformance() {
         guard insideNote || insideRest else { return }
-
+        
         let inThreshold = Date().timeIntervalSince(startTime) < thresholdEndTime
-//        let amplitude = AudioKitManager.sharedInstance.amplitude()
-//        let frequency = AudioKitManager.sharedInstance.frequency()
+        //        let amplitude = AudioKitManager.sharedInstance.amplitude()
+        //        let frequency = AudioKitManager.sharedInstance.frequency()
         let amplitude = AudioKitManager.sharedInstance.frequencyTracker.amplitude
         let frequency = AudioKitManager.sharedInstance.frequencyTracker.frequency
         if DEBUG_PRINT_PLAYALONG__ALL {
             print("  amplitude = \(amplitude),   freq = \(self.frequency)") }
-
+        
         // FIXME? - I think this ignores and does not process the case where the rhythm is correct
         // but the note is wrong. Either rename "hasCorrectSound", or create two separate vars
         let hasSound = amplitude > 0.01 && (minPitch...maxPitch ~= frequency)
-
+        
         var result = NoteAnalysis.NoteResult.noResult
         
         if insideNote {
@@ -638,15 +628,15 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                 result = NoteAnalysis.NoteResult.noteRhythmMiss
             } else if hasSound && !inThreshold  && !lateSound {
                 //cannot be late if we have not missed
-    //yes we can on longer notes - one clap on time and then a second one later -- fix this later
+                //yes we can on longer notes - one clap on time and then a second one later -- fix this later
                 guard missedSound else { return }
                 lateSound = true
                 result = NoteAnalysis.NoteResult.noteRhythmLate
-//            } else if hasSound && !inThreshold  && lateSound {
-//                //cannot repeat if we haven't already been late
-//                result = NoteAnalysis.NoteResult.NoteRhythmLateRepeat
+                //            } else if hasSound && !inThreshold  && lateSound {
+                //                //cannot repeat if we haven't already been late
+                //                result = NoteAnalysis.NoteResult.NoteRhythmLateRepeat
             }
-
+            
             if isTune && hasSound {
                 //if we have a rhythm result save it first
                 if result != NoteAnalysis.NoteResult.noResult {
@@ -657,10 +647,10 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                         noteResultValues[result] = 1
                         print("rhythm result: \(amplitude) - \(result) 1")
                     }
-
+                    
                     result = NoteAnalysis.NoteResult.noResult
                 }
-
+                
                 var freqMatch = false
                 var freqLow = false
                 var freqHigh = false
@@ -672,7 +662,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                 } else {
                     freqMatch = true
                 }
-
+                
                 print("freq ...    low \(freqLow)    high \(freqHigh)    match \(freqMatch)")
                 if inThreshold {
                     if freqLow {
@@ -687,7 +677,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                         guard !pitchMatched else { return }
                         pitchMatched = true
                         result = NoteAnalysis.NoteResult.pitchMatch
-
+                        
                         if kUseColoredNotes {
                             colorTheNote(currentNotes, theColor: UIColor.green)
                         }
@@ -728,12 +718,12 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                 guard missedSound else { return }
                 lateSound = true
                 result = NoteAnalysis.NoteResult.restLateMiss
-//            } else if hasSound && !inThreshold  && lateSound {
-//                //cannot repeat if we haven't already been late
-//                result = NoteAnalysis.NoteResult.RestLateMissRepeat
+                //            } else if hasSound && !inThreshold  && lateSound {
+                //                //cannot repeat if we haven't already been late
+                //                result = NoteAnalysis.NoteResult.RestLateMissRepeat
             }
         }
-
+        
         guard result != NoteAnalysis.NoteResult.noResult else { return }
         if let count = noteResultValues[result] {
             noteResultValues[result] = count + 1
@@ -744,43 +734,42 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         }
     }
     
-//    func showResult(isCorrect: Bool)
-//    {
-//        let bn = beatNotes[analyzeTime]
-//        playHead.frame.origin.x = CGFloat(bn.xPos + animHorzOffset)
-//        
-//        if bn.length == .Whole
-//        {
-//            playHead.frame.size.width = 17
-//        }
-//        else
-//        {
-//            playHead.frame.size.width = 12
-//        }
-//        
-//        if isCorrect
-//        {
-//            playHead.backgroundColor = UIColor.greenColor()
-//        }
-//        else
-//        {
-//            playHead.backgroundColor = UIColor.redColor()
-//        }
-//        
-//        playHead.alpha = 0.6
-//        UIView.animateWithDuration(0.2, animations: {
-//            self.playHead.alpha = 0
-//        })
-//    }
-
+    //    func showResult(isCorrect: Bool)
+    //    {
+    //        let bn = beatNotes[analyzeTime]
+    //        playHead.frame.origin.x = CGFloat(bn.xPos + animHorzOffset)
+    //
+    //        if bn.length == .Whole
+    //        {
+    //            playHead.frame.size.width = 17
+    //        }
+    //        else
+    //        {
+    //            playHead.frame.size.width = 12
+    //        }
+    //
+    //        if isCorrect
+    //        {
+    //            playHead.backgroundColor = UIColor.greenColor()
+    //        }
+    //        else
+    //        {
+    //            playHead.backgroundColor = UIColor.redColor()
+    //        }
+    //
+    //        playHead.alpha = 0.6
+    //        UIView.animateWithDuration(0.2, animations: {
+    //            self.playHead.alpha = 0
+    //        })
+    //    }
     func showScore() {
         if noteResultValues.count == 0 {
             infoLabel.text = ""
             return
         }
-
+        
         var scoreString = "You got"
-
+        
         if isTune {
             if let numResults = noteResultValues[NoteAnalysis.NoteResult.pitchMatch] {
                 if numResults != 0 {
@@ -818,74 +807,74 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                 }
             }
         }
-
+        
         if let numResults = noteResultValues[NoteAnalysis.NoteResult.noteRhythmMatch] {
             if numResults != 0 {
                 scoreString = scoreString + ": NoteRhythmMatch - \(numResults)"
             }
         }
-
+        
         if let numResults = noteResultValues[NoteAnalysis.NoteResult.noteRhythmMiss] {
             if numResults != 0 {
                 scoreString = scoreString + ": NoteRhythmMiss - \(numResults)"
             }
         }
-
+        
         if let numResults = noteResultValues[NoteAnalysis.NoteResult.noteRhythmLate] {
             if numResults != 0 {
                 scoreString = scoreString + ": NoteRhythmLate - \(numResults)"
             }
         }
-
+        
         if let numResults = noteResultValues[NoteAnalysis.NoteResult.noteRhythmLateRepeat] {
             if numResults != 0 {
                 scoreString = scoreString + ": NoteRhythmLateRepeat - \(numResults)"
             }
         }
-
+        
         if let numResults = noteResultValues[NoteAnalysis.NoteResult.restMatch] {
             if numResults != 0 {
                 scoreString = scoreString + ": RestMatch - \(numResults)"
             }
         }
-
+        
         if let numResults = noteResultValues[NoteAnalysis.NoteResult.restMiss] {
             if numResults != 0 {
                 scoreString = scoreString + ": RestMiss - \(numResults)"
             }
         }
-
+        
         if let numResults = noteResultValues[NoteAnalysis.NoteResult.restLateMiss] {
             if numResults != 0 {
                 scoreString = scoreString + ": RestLateMiss - \(numResults)"
             }
         }
-
+        
         if let numResults = noteResultValues[NoteAnalysis.NoteResult.restLateMissRepeat] {
             if numResults != 0 {
                 scoreString = scoreString + ": RestLateMissRepeat - \(numResults)"
             }
         }
-
+        
         infoLabel.text = scoreString
-
-//        var numberCorrect = 0
-//        
-//        for sb in scoringBeats {
-//            if sb != nil && sb! {
-//                numberCorrect++
-//            }
-//        }
-//        
-//        if numberCorrect == 0 {
-//            infoLbl.text = "Hmm, we didn't hear anything. Try clapping louder next time."
-//        } else if numberCorrect < scoringBeats.count {
-//            infoLbl.text = "Almost! You got \(numberCorrect) out of \(scoringBeats.count)"
-//        } else {
-//            infoLbl.text = "Congrats! You got them all :)"
-//        }
+        
+        //        var numberCorrect = 0
+        //
+        //        for sb in scoringBeats {
+        //            if sb != nil && sb! {
+        //                numberCorrect++
+        //            }
+        //        }
+        //
+        //        if numberCorrect == 0 {
+        //            infoLbl.text = "Hmm, we didn't hear anything. Try clapping louder next time."
+        //        } else if numberCorrect < scoringBeats.count {
+        //            infoLbl.text = "Almost! You got \(numberCorrect) out of \(scoringBeats.count)"
+        //        } else {
+        //            infoLbl.text = "Congrats! You got them all :)"
+        //        }
     }
-
+    
     //used for colored notes
     func colorTheNote(_ theNote: [AnyObject], theColor: UIColor) {
         if kUseColoredNotes {
@@ -894,11 +883,11 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
             for note in theNote as! [SSPDPartNote] {
                 notes.append(note.note)
             }
-
+            
             ssScrollView.colour(notes, colour: theColor)
         }
     }
-
+    
     //MARK: SSSyControls protocol
     func partEnabled(_ partIndex: Int32) -> Bool {
         return true;
@@ -910,73 +899,73 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
             return 0
         }
         
-//        if (kNumSampledInstruments > 1) {
-//            return instrumentId[1]
-//        }
-//        return instrumentIds[0] // we can return any other instrument here
+        //        if (kNumSampledInstruments > 1) {
+        //            return instrumentId[1]
+        //        }
+        //        return instrumentIds[0] // we can return any other instrument here
         if synthVoice == SSSynthVoice.Sampled {
             return UInt32(instrumentForPart(partIndex : Int(partIndex)))
         } else if !synthesizedInstrumentIds.isEmpty {
             return UInt32(synthesizedInstrumentIds[0])
         }
         return 0
-  }
+    }
     
     func instrumentForPart(partIndex : Int) -> UInt
     {
         guard !sampledInstrumentIds.isEmpty else { return 0 }
-
+        
         var index = 0
         if sampledInstrumentIds.count > 1 {
             index = UserDefaults.standard.bool(forKey: Constants.Settings.PlayTrumpet) ? 1 : 0
         }
-
+        
         return sampledInstrumentIds[index]
-
-//        if let iid = instrumentToPart_cache[partIndex]
-//        {
-//            return iid
-//        }
-//        else
-//        {
-//            if let score = score
-//            {
-//                // try matching part name to library instrument
-//                let partName = score.header.parts[partIndex]
-//                if let full_name = partName.full_name
-//                {
-//                    if full_name.characters.count > 0
-//                    {
-//                        let matchingIndex = indexOfInstrumentMatchingName(name: partName.full_name)
-//                        if matchingIndex >= 0 && matchingIndex < SSSampleViewController.kMaxInstruments
-//                        {
-//                            let iid = sampledInstrumentIds[matchingIndex]
-//                            instrumentToPart_cache[partIndex] = iid
-//                            return iid
-//                        }
-//                    }
-//                }
-//                // try matching instrument name to library instrument
-//                if let instrumentNameForPart = score.instrumentName(forPart: Int32(partIndex))
-//                {
-//                    if instrumentNameForPart.characters.count > 0
-//                    {
-//                        let matchingIndex = indexOfInstrumentMatchingName(name: instrumentNameForPart)
-//                        if matchingIndex >= 0 && matchingIndex < SSSampleViewController.kMaxInstruments
-//                        {
-//                            let iid = sampledInstrumentIds[matchingIndex]
-//                            instrumentToPart_cache[partIndex] = iid
-//                            return iid
-//                        }
-//                    }
-//                }
-//            }
-//            let iid = sampledInstrumentIds[0] // default is first in list (piano) if no name match
-//            instrumentToPart_cache[partIndex] = iid
-//            return iid
-//        }
+        
+        //        if let iid = instrumentToPart_cache[partIndex]
+        //        {
+        //            return iid
+        //        }
+        //        else
+        //        {
+        //            if let score = score
+        //            {
+        //                // try matching part name to library instrument
+        //                let partName = score.header.parts[partIndex]
+        //                if let full_name = partName.full_name
+        //                {
+        //                    if full_name.characters.count > 0
+        //                    {
+        //                        let matchingIndex = indexOfInstrumentMatchingName(name: partName.full_name)
+        //                        if matchingIndex >= 0 && matchingIndex < SSSampleViewController.kMaxInstruments
+        //                        {
+        //                            let iid = sampledInstrumentIds[matchingIndex]
+        //                            instrumentToPart_cache[partIndex] = iid
+        //                            return iid
+        //                        }
+        //                    }
+        //                }
+        //                // try matching instrument name to library instrument
+        //                if let instrumentNameForPart = score.instrumentName(forPart: Int32(partIndex))
+        //                {
+        //                    if instrumentNameForPart.characters.count > 0
+        //                    {
+        //                        let matchingIndex = indexOfInstrumentMatchingName(name: instrumentNameForPart)
+        //                        if matchingIndex >= 0 && matchingIndex < SSSampleViewController.kMaxInstruments
+        //                        {
+        //                            let iid = sampledInstrumentIds[matchingIndex]
+        //                            instrumentToPart_cache[partIndex] = iid
+        //                            return iid
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //            let iid = sampledInstrumentIds[0] // default is first in list (piano) if no name match
+        //            instrumentToPart_cache[partIndex] = iid
+        //            return iid
+        //        }
     }
-
+    
     func partVolume(_ partIndex: Int32) -> Float {
         if playingSynth {
             return 1.0
@@ -993,11 +982,11 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         if !metronomeOn {
             return 0
         }
-
+        
         if metronomeInstrumentIds.isEmpty {
             return 0
         }
-
+        
         return UInt32(metronomeInstrumentIds[0])
     }
     
@@ -1006,22 +995,22 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
             return 0
         }
         return 1.5
-//        return 1.0
-//        return 0.50
+        //        return 1.0
+        //        return 0.50
     }
     
     //@end
     
     //MARK: SSUTempo protocol
     func bpm() -> Int32 {
-//        print("tempoBPM = \(tempoBPM)")
+        //        print("tempoBPM = \(tempoBPM)")
         return Int32(tempoBPM)
     }
     
     func tempoScaling() -> Float {
         let tempo = score!.tempoAtStart
         let tBPM = Float(tempoBPM) / Float(tempo().bpm)
-//        print("tempoAtStart // tBPM = \(tempo().bpm) // \(tBPM)")
+        //        print("tempoAtStart // tBPM = \(tempo().bpm) // \(tBPM)")
         return tBPM
     }
     //@end
@@ -1048,28 +1037,28 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         if DEBUG_PRINT_PLAYALONG__ALL {
             print ("") // blank line w/o timestamp.
             NSLog ( "In TuneExerciseViewController::start, notes.count = \(notes.count)" ) }
-    
+        
         assert(notes.count > 0)
         if !playingAnimation {
             gateView.frame.origin.x = CGFloat(animHorzOffset - 12.0)
             gateView.frame.origin.x = CGFloat(animHorzOffset - 24.0)
             gateView.isHidden = false
             print("addAnimation!")
-//            print("anim.values: \(kfAnim.values)")
-//            print("keyTimes: \(kfAnim.keyTimes)")
+            //            print("anim.values: \(kfAnim.values)")
+            //            print("keyTimes: \(kfAnim.keyTimes)")
             print("anim.duration: \(kfAnim.duration)")
             ssScrollView.layer.add(kfAnim, forKey: "move")
             playingAnimation = true
         }
-
+        
         if !playingSynth {
             setNoteThresholdState(notes as NSArray)
         }
-
+        
         if kUseColoredNotes {
             currentNotes = notes
         }
-
+        
         if showNoteMarkers {
             moveNoteCursor(notes as NSArray)
         }
@@ -1089,7 +1078,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         
         return 0
     }
-
+    
     //this only makes sense if setNoteHandler() delay is -timingThreshold
     func setNoteThresholdState(_ notes: NSArray) {
         // normally this will not need to iterate over the whole chord, but will exit as soon as it has a valid xpos
@@ -1106,7 +1095,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                     foundSound = false
                     missedSound = false
                     lateSound = false
-
+                    
                     thresholdStartTime = Date().timeIntervalSince(startTime) - timingThreshold * 2
                     thresholdEndTime = Date().timeIntervalSince(startTime) + timingThreshold * 2
                     if DEBUG_PRINT_PLAYALONG__ALL {
@@ -1117,7 +1106,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                         print ( "    currTime           = \(currTime)" )
                         print ( "    thresholdEndTime   = \(thresholdEndTime)\n" )
                     }
-
+                    
                     if isTune {
                         //do all this here so we don't have to do it everytime analyzePerformance is called.
                         pitchMatched = false
@@ -1127,7 +1116,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                         pitchLowLate = false
                         pitchHighLate = false
                         //midiPitch from SeeScore has already had the -2 offset applied from the XML file
-//                        if let freq = NoteService.getNote(Int(note.note.midiPitch) + transpositionOffset)?.frequency {
+                        //                        if let freq = NoteService.getNote(Int(note.note.midiPitch) + transpositionOffset)?.frequency {
                         if let freq = NoteService.getNote(Int(note.note.midiPitch))?.frequency {
                             targetPitch = freq
                             lowPitchThreshold = freq / frequencyThresholdPercent
@@ -1156,9 +1145,9 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                     foundSound = false
                     missedSound = false
                     lateSound = false
-
+                    
                     thresholdEndTime = Date().timeIntervalSince(startTime) + timingThreshold * 2
-
+                    
                     if isTune {
                         //do all this here so we don't have to do it everytime analyzePerformance is called.
                         pitchMatched = false
@@ -1174,17 +1163,17 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                             highPitchThreshold = freq * frequencyThresholdPercent
                         }
                     }
-
+                    
                     return // abandon iteration
                 }
             }
         }
     }
-
+    
     func moveNoteCursor(_ notes: NSArray) {
         // normally this will not need to iterate over the whole chord, but will exit as soon as it has a valid xpos
         for note in notes as! [SSPDPartNote] {
-            // priority given to notes over rests, but ignore cross-bar tied notes 
+            // priority given to notes over rests, but ignore cross-bar tied notes
             //   (negative note.start means note started prev measure - unique to 2nd note of cross-bar tie)
             if note.note.midiPitch > 0 && note.note.start >= 0 {
                 let xpos = noteXPos(note.note)
@@ -1207,7 +1196,7 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
             }
         }
     }
-
+    
     class BeatHandler: SSEventHandler {
         let svc: TuneExerciseViewController
         
@@ -1222,14 +1211,14 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                 if !svc.playingSynth {
                     svc.startAnalysisTimer()
                 }
-
+                
                 if index >= Int32(svc.beatsPerBar - 1) {
                     svc.metronomeOn = false
                     svc.synth?.changedControls()
                 }
-//                svc.playTickSound()
+                //                svc.playTickSound()
             }
-
+            
             svc.metronomeView.setBeat(Int(index))
         }
     }
@@ -1250,39 +1239,42 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
             }
         }
     }
-
+    
     //MARK: - Sounds
     //TODO - get rid of this if we can keep using SeeScore metronome.
-//    func setupSounds() {
-//        let ticksound = "marmstk1"
-//        let ticktype = "wav"
-//        
-//        if let soundPath = Bundle.main.path(forResource: ticksound, ofType: ticktype) {
-//            let soundUrl = URL(fileURLWithPath: soundPath)
-//            
-//            do {
-//                tickPlayer = try AVAudioPlayer(contentsOf: soundUrl)
-//                tickPlayer?.prepareToPlay()
-//            } catch {
-//                print("No sound found by URL:\(soundUrl)")
-//            }
-//        }
-//    }
-//    
-//    func playTickSound() {
-//        if let tp = tickPlayer {
-//            tp.play()
-//        }
-//    }
-
+    //    func setupSounds() {
+    //        let ticksound = "marmstk1"
+    //        let ticktype = "wav"
+    //
+    //        if let soundPath = Bundle.main.path(forResource: ticksound, ofType: ticktype) {
+    //            let soundUrl = URL(fileURLWithPath: soundPath)
+    //
+    //            do {
+    //                tickPlayer = try AVAudioPlayer(contentsOf: soundUrl)
+    //                tickPlayer?.prepareToPlay()
+    //            } catch {
+    //                print("No sound found by URL:\(soundUrl)")
+    //            }
+    //        }
+    //    }
+    //
+    //    func playTickSound() {
+    //        if let tp = tickPlayer {
+    //            tp.play()
+    //        }
+    //    }
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+     // MARK: - Navigation
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    @IBAction func backButtonTapped(_ sender: Any) {
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
+        
+        self.dismiss(animated: true, completion: nil)
     }
-    */
-
+    
 }

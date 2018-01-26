@@ -6,7 +6,6 @@
 //  Changed by David S Reich - 2016.
 //  Copyright © 2015 Musikyoshi. All rights reserved.
 //
-
 import UIKit
 
 class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
@@ -18,17 +17,17 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     var absoluteTargetNote: Note?
     var showFarText = true
     var noteName = ""
-
+    
     var targetTime = 3.0
     var targetNoteID = 0
     let kFirstLongTone25Note = 55
     let kLastLongTone25Note = 79
     var kC4 = 60
     /* Long_Tone_25G3G5:
-        G3 Ab A Bb B C4 C# D Eb E F F# G Ab A Bb B C5 C# D Eb E F F# G5
-    */
-
-
+     G3 Ab A Bb B C4 C# D Eb E F F# G Ab A Bb B C5 C# D Eb E F F# G5
+     */
+    
+    
     let amplitudeThreshold = UserDefaults.standard.double(forKey: Constants.Settings.AmplitudeThreshold)
     let tempoBPM = 60
     let transpositionOffset = UserDefaults.standard.integer(forKey: Constants.Settings.Transposition)
@@ -47,7 +46,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     var balloonUpdateRate = 0.01
     var longToneEndTime = 0.0
     var startTime = Date()
-
+    
     var score: SSScore?
     var partIndex: Int32 = 0
     var layOptions = SSLayoutOptions()  // set of options for layout
@@ -56,7 +55,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     var instrumentId = UInt32(0)
     var cursorBarIndex = Int32(0)
     let kDefaultMagnification : Float = 2.85
-
+    
     var hasNoteStarted = false
     var isExerciseSuccess = false
     var sparkLineCount : CGFloat = 0
@@ -67,7 +66,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     var arrowImageView : UIImageView!
     var smileImage = UIImage(named: "GreenSmile")
     var smileImageView : UIImageView!
-
+    
     let feedbackView = FeedbackView()
     
     @IBOutlet weak var instructionLbl: UILabel!
@@ -87,16 +86,16 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
         super.viewDidLoad()
         
         AudioKitManager.sharedInstance.setup()
-
+        
         absoluteTargetNote = NoteService.getNote(targetNoteID + transpositionOffset)
         targetNote = NoteService.getNote(targetNoteID)
         if targetNote != nil {
             print("targetNote: \(String(describing: targetNote))")
-
+            
             navigationItem.title = "Long Tone - \(targetNote!.fullName)"
             instructionLbl.text = "Play a long \(targetNote!.friendlyName) note and fill up the balloon until it turns green!"
         }
-
+        
         var notesFileName = "XML Tunes/Long_Tone_25G3G5"
         if noteName.count > 1 {
             let secondChar = noteName[noteName.index(after: noteName.startIndex)]
@@ -105,9 +104,9 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
                 notesFileName = "XML Tunes/Long_Tone_25G3G5_flat"
             }
         }
-
+        
         loadFile(notesFileName)
-
+        
         frequencyThresholdPercent = 1.0 + frequencyThreshold
         farFrequencyThresholdPercent = frequencyThresholdPercent + (frequencyThreshold * 1.5)
         firstTime = true
@@ -115,7 +114,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight)
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeLeft)
     }
     
     override func viewWillDisappear(_ animated : Bool) {
@@ -131,8 +130,8 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
         playBtn.isHidden = false
         playBtn.isEnabled = true
         playBtn.setTitle("Start Playing", for: UIControlState())
-//        playButton.setTitle("Start Playing", forState: UIControlState.Normal)
-//        playingAnimation = false
+        //        playButton.setTitle("Start Playing", forState: UIControlState.Normal)
+        //        playingAnimation = false
         
         if let filePath = Bundle.main.path(forResource: scoreFile, ofType: "xml") {
             ssScrollView.abortBackgroundProcessing({self.loadTheFile(filePath)})
@@ -141,15 +140,14 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
             return
         }
     }
-
+    
     func setupImageViews() {
         //start with near, up - located below
         arrowImageView = UIImageView(image: nearUpArrowImage)
         arrowImageView.isHidden = true
         ssScrollView.addSubview(arrowImageView)
-//        arrowImageView.clipsToBounds = false
-//        ssScrollView.clipsToBounds = false
-
+        //        arrowImageView.clipsToBounds = false
+        //        ssScrollView.clipsToBounds = false
         smileImageView = UIImageView(image: smileImage)
         smileImageView.isHidden = true
         ssScrollView.addSubview(smileImageView)
@@ -158,7 +156,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
         let imageY = ssScrollView.frame.height * 0.05
         smileImageView.frame = CGRect(x: imageX, y: imageY, width: smileImageView.frame.width, height: smileImageView.frame.height)
     }
-
+    
     func setArrowAndPrompt(_ isNear: Bool, isUp: Bool) {
         //near or far, up or down
         arrowImageView.isHidden = false
@@ -166,31 +164,31 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
         guideTextView.text = ""
         var imageX = CGFloat(0)
         var imageY = CGFloat(0)
-//        imageX = 120
+        //        imageX = 120
         imageX = ssScrollView.frame.width * 0.7
         switch (isNear, isUp) {
         case (true, true):
-//            imageY = 100
+            //            imageY = 100
             imageY = ssScrollView.frame.height * 0.56
             arrowImageView.image = nearUpArrowImage
             guideTextView.text = "Almost There!\nFaster Air!\nCurve lips in Slightly"
         case (true, false):
-//            imageY = 40
+            //            imageY = 40
             imageY = ssScrollView.frame.height * 0.22
             arrowImageView.image = nearDownArrowImage
             guideTextView.text = "Might be pinching, relax lips\nSay \"Ohh\"\nPull out tuning slide 1/2 inch"
         case (false, true):
-//            imageY = 120
+            //            imageY = 120
             imageY = ssScrollView.frame.height * 0.67
             arrowImageView.image = farUpArrowImage
             guideTextView.text = "Firm lip setting\nUse more air\nCheck Fingering"
         case (false, false):
-//            imageY = 20
+            //            imageY = 20
             imageY = ssScrollView.frame.height * 0.11
             arrowImageView.image = farDownArrowImage
             guideTextView.text = "Curve lips out - think \"mm\"\nOpen throat - Say \"Oh\"\nMight be on a G or Upper C\nCheck Fingering"
         }
-
+        
         //if far and no far text
         if !isNear && !showFarText {
             guideTextView.isHidden = true
@@ -198,72 +196,72 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
         }
         arrowImageView.frame = CGRect(x: imageX, y: imageY, width: arrowImageView.frame.width, height: arrowImageView.frame.height)
     }
-
+    
     func clearArrowAndPrompt() {
         arrowImageView.isHidden = true
         guideTextView.isHidden = true
         guideTextView.text = ""
     }
-
+    
     func loadTheFile(_ filePath: String) {
-//        ssScrollView.clearAll()
-//        score = nil
-//        cursorBarIndex = 0
-//        let loadOptions = SSLoadOptions(key: sscore_libkey)
-//        loadOptions?.checkxml = true
-//        let errP = UnsafeMutablePointer<sscore_loaderror>.allocate(capacity: 1)
-//        
-//        print("filePath: \(filePath)")
-//        print("loadOptions: \(loadOptions)")
-//        print("errP: \(errP)")
-//        
-//        if let score0 = SSScore(xmlFile: filePath, options: loadOptions, error: errP) {
-//            score = score0
-//
-//            //figure out which part#
-//            partIndex = Int32(kC4 - kFirstLongTone25Note)   //default to C4
-//            let partNumber = Int32(targetNoteID - kFirstLongTone25Note)
-//            if 0..<score!.numParts ~= partNumber {
-//                partIndex = partNumber
-//            }
-//
-//            var	showingParts = [NSNumber]()
-//            showingParts.removeAll()
-//            let numParts = Int(score!.numParts)
-//            for i in 0..<numParts {
-//                showingParts.append(NSNumber(value: (Int32(i) == partNumber) as Bool)) // display the selected part
-//            }
-//            
-//            layOptions.hidePartNames = true
-//            layOptions.hideBarNumbers = true
-//            //            ssScrollView.optimalSingleSystem = true
-//            //            sysssScrollView.frame.size.width = CGFloat(scoreWidth * 2.28)
-//            //            ssScrollView.setupScore(score, openParts: showingParts, mag: kDefaultMagnification, opt: layOptions)
-//            ssScrollView.optimalSingleSystem = false
-//            ssScrollView.setupScore(score, openParts: showingParts, mag: kDefaultMagnification, opt: layOptions, completion: getPlayData)
-////            ssScrollView.setupScore(score, openParts: showingParts, mag: kDefaultMagnification, opt: layOptions)
-//        }
-//        else
-//        {
-//            var err: sscore_loaderror
-//            err = errP.pointee
-//            switch err.err {
-//            case sscore_OutOfMemoryError:
-//                print("out of memory")
-//            case sscore_XMLValidationError:
-//                print("XML validation error line:%d col:%d %s", err.line, err.col, err.text);
-//            case sscore_NoBarsInFileError:
-//                print("No bars in file error")
-//            case sscore_NoPartsError:
-//                print("NoParts Error")
-//            case sscore_UnknownError:
-//                print("Unknown error")
-//            default:
-//                print("Other error")
-//            }
-//        }
+        //        ssScrollView.clearAll()
+        //        score = nil
+        //        cursorBarIndex = 0
+        //        let loadOptions = SSLoadOptions(key: sscore_libkey)
+        //        loadOptions?.checkxml = true
+        //        let errP = UnsafeMutablePointer<sscore_loaderror>.allocate(capacity: 1)
+        //
+        //        print("filePath: \(filePath)")
+        //        print("loadOptions: \(loadOptions)")
+        //        print("errP: \(errP)")
+        //
+        //        if let score0 = SSScore(xmlFile: filePath, options: loadOptions, error: errP) {
+        //            score = score0
+        //
+        //            //figure out which part#
+        //            partIndex = Int32(kC4 - kFirstLongTone25Note)   //default to C4
+        //            let partNumber = Int32(targetNoteID - kFirstLongTone25Note)
+        //            if 0..<score!.numParts ~= partNumber {
+        //                partIndex = partNumber
+        //            }
+        //
+        //            var    showingParts = [NSNumber]()
+        //            showingParts.removeAll()
+        //            let numParts = Int(score!.numParts)
+        //            for i in 0..<numParts {
+        //                showingParts.append(NSNumber(value: (Int32(i) == partNumber) as Bool)) // display the selected part
+        //            }
+        //
+        //            layOptions.hidePartNames = true
+        //            layOptions.hideBarNumbers = true
+        //            //            ssScrollView.optimalSingleSystem = true
+        //            //            sysssScrollView.frame.size.width = CGFloat(scoreWidth * 2.28)
+        //            //            ssScrollView.setupScore(score, openParts: showingParts, mag: kDefaultMagnification, opt: layOptions)
+        //            ssScrollView.optimalSingleSystem = false
+        //            ssScrollView.setupScore(score, openParts: showingParts, mag: kDefaultMagnification, opt: layOptions, completion: getPlayData)
+        ////            ssScrollView.setupScore(score, openParts: showingParts, mag: kDefaultMagnification, opt: layOptions)
+        //        }
+        //        else
+        //        {
+        //            var err: sscore_loaderror
+        //            err = errP.pointee
+        //            switch err.err {
+        //            case sscore_OutOfMemoryError:
+        //                print("out of memory")
+        //            case sscore_XMLValidationError:
+        //                print("XML validation error line:%d col:%d %s", err.line, err.col, err.text);
+        //            case sscore_NoBarsInFileError:
+        //                print("No bars in file error")
+        //            case sscore_NoPartsError:
+        //                print("NoParts Error")
+        //            case sscore_UnknownError:
+        //                print("Unknown error")
+        //            default:
+        //                print("Other error")
+        //            }
+        //        }
     }
-
+    
     func getPlayData() {
         guard score != nil else { return }
         
@@ -273,7 +271,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     func playScore() {
         ssScrollView.contentOffset = CGPoint.zero
         ssScrollView.isScrollEnabled = false
-
+        
         guard score != nil else { return }
         playData = SSPData.createPlay(from: score, tempo: self)
         guard playData != nil else { return }
@@ -284,8 +282,8 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
             if synth == nil {
                 if let synth0 = SSSynth.createSynth(self, score: score) {
                     synth = synth0
-
-//                    instrumentId = (synth?.addSampledInstrument(trumpetMinus2SampleInfo))!
+                    
+                    //                    instrumentId = (synth?.addSampledInstrument(trumpetMinus2SampleInfo))!
                 }
             }
             
@@ -293,18 +291,18 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
                 print("No licence for synth");
                 return
             }
-
+            
             // start playing if not playing
             if AVAudioSessionManager.sharedInstance.setupAudioSession() {
                 print("setupAudioSession == true")
                 playData?.clearLoop()
                 
-//                synth?.setEndHandler(EndHandler(vc: self), delay: 0)
+                //                synth?.setEndHandler(EndHandler(vc: self), delay: 0)
                 
                 var err = synth?.setup(playData)
                 if err == sscore_NoError {
                     let startTime = UInt64(0)
-//                    let startTime = DispatchTime.now() //+ Double(Int64(0)) / Double(NSEC_PER_SEC)
+                    //                    let startTime = DispatchTime.now() //+ Double(Int64(0)) / Double(NSEC_PER_SEC)
                     err = synth?.start(at: startTime, bar: cursorBarIndex, countIn: false)
                 }
                 
@@ -319,7 +317,6 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     
     @IBAction func playBtnTap(_ sender: UIButton) {
         //TODO - add extra states to ExerciseState to better cycle through Long Tone, instead of checking button title
-
         if playBtn.currentTitle == "Try Again" {
             tryAgainTap(sender)
             return
@@ -339,7 +336,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     @IBAction func tryAgainTap(_ sender: UIButton) {
         
         UIView.animate(withDuration: 0.1, animations: {
-//            self.feedbackPnl.alpha = 0
+            //            self.feedbackPnl.alpha = 0
             self.feedbackLbl.text = ""
             self.smileImageView.isHidden = true
         })
@@ -377,7 +374,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
         balloon.alpha = 0
         balloon.fillColor = UIColor.blue.cgColor
         balloon.radius = 10
-
+        
         if let freq = absoluteTargetNote?.frequency {
             targetPitch = freq
             lowPitchThreshold = freq / frequencyThresholdPercent
@@ -391,10 +388,10 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
             lowFarPitchThreshold = Double(0.0)
             highFarPitchThreshold = Double(0.0)
         }
-
+        
         playBtn.isEnabled = false
         playBtn.setTitle("", for: UIControlState())
-//        playBtn.setTitle("Get Ready", forState: .Normal)
+        //        playBtn.setTitle("Get Ready", forState: .Normal)
         countdownLbl.text = "3"
         countdownLbl.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
         
@@ -406,7 +403,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
         })
         
         delay(1.0){
-//            self.playBtn.setTitle("Set", forState: .Normal)
+            //            self.playBtn.setTitle("Set", forState: .Normal)
             
             self.countdownLbl.alpha = 0
             self.countdownLbl.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
@@ -418,7 +415,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
             })
             
             delay(1.0){
-//                self.playBtn.setTitle("Go!", forState: .Normal)
+                //                self.playBtn.setTitle("Go!", forState: .Normal)
                 
                 self.countdownLbl.alpha = 0
                 self.countdownLbl.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
@@ -462,7 +459,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
         }
         
         feedbackLbl.isHidden = false
-
+        
         if firstTime {
             playBtn.isHidden = false
             playBtn.isEnabled = true
@@ -473,26 +470,26 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
             playBtn.isEnabled = true
             playBtn.setTitle("Next Exercise", for: UIControlState())
         }
- 
+        
         exerciseState = ExerciseState.completed
-
+        
         if isExerciseSuccess {
             feedbackView.setupFeedbackView(self)
             let feedbackRect = visualizationPanel.frame
             feedbackView.contentMode = .scaleAspectFill
             feedbackView.showFeedback(feedbackRect)
         }
-//        delay(0.5){
-//            self.feedbackPnl.center.y += 40
-//            self.feedbackPnl.transform = CGAffineTransformMakeScale(0.5, 0.5)
-//            UIView.animateWithDuration(0.3, animations: {
-//                self.feedbackPnl.center.y -= 40
-//                self.feedbackPnl.transform = CGAffineTransformMakeScale(1, 1)
-//                self.feedbackPnl.alpha = 1
-//            })
-//            
-//            self.exerciseState = ExerciseState.FeedbackProvided
-//        }
+        //        delay(0.5){
+        //            self.feedbackPnl.center.y += 40
+        //            self.feedbackPnl.transform = CGAffineTransformMakeScale(0.5, 0.5)
+        //            UIView.animateWithDuration(0.3, animations: {
+        //                self.feedbackPnl.center.y -= 40
+        //                self.feedbackPnl.transform = CGAffineTransformMakeScale(1, 1)
+        //                self.feedbackPnl.alpha = 1
+        //            })
+        //
+        //            self.exerciseState = ExerciseState.FeedbackProvided
+        //        }
         self.exerciseState = ExerciseState.feedbackProvided
     }
     
@@ -502,14 +499,13 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
             // we're done!
             stopExercise()
         }
-
-//        let amplitude = AudioKitManager.sharedInstance.amplitude()
-//        let frequency = AudioKitManager.sharedInstance.frequency()
+        
+        //        let amplitude = AudioKitManager.sharedInstance.amplitude()
+        //        let frequency = AudioKitManager.sharedInstance.frequency()
         let amplitude = AudioKitManager.sharedInstance.frequencyTracker.amplitude
         let frequency = AudioKitManager.sharedInstance.frequencyTracker.frequency
-
-//        print("amplitude / freq = \(amplitude) / \(frequency)")
-
+        
+        //        print("amplitude / freq = \(amplitude) / \(frequency)")
         if amplitude > 0.01 {
             if minPitch...maxPitch ~= frequency {
                 if lowPitchThreshold...highPitchThreshold ~= frequency {
@@ -541,22 +537,22 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
                 } else {
                     setArrowAndPrompt(false, isUp: frequency < targetPitch)
                 }
-
-//                if let noteHit = NoteService.getNote(frequency) {
-//                    if sparkLineCount < sparkLine.bounds.width {
-//                        sparkLineCount++
-//                    } else {
-//                        resetSparkLine()
-//                    }
-//
-//                    //TODO: color green if hasNoteStarted==true, else red
-//                    //TODO: the above requires adding a color input to sparkLine
-//                    //TODO: make this continuous based upon freq
-//                    let yPos = CGFloat(NoteService.getYPos(noteHit.orderId!) + Constants.MusicLine.yOffset)
-//                    
-//                    sparkLine.addValue(hasNoteStarted, newValue: CGPointMake(sparkLineCount, yPos))
-//                    //print(String(format: "note hit: %@ x: \(trackingCount) y: \(yPos)", (noteHit?.fullName)!))
-//                }
+                
+                //                if let noteHit = NoteService.getNote(frequency) {
+                //                    if sparkLineCount < sparkLine.bounds.width {
+                //                        sparkLineCount++
+                //                    } else {
+                //                        resetSparkLine()
+                //                    }
+                //
+                //                    //TODO: color green if hasNoteStarted==true, else red
+                //                    //TODO: the above requires adding a color input to sparkLine
+                //                    //TODO: make this continuous based upon freq
+                //                    let yPos = CGFloat(NoteService.getYPos(noteHit.orderId!) + Constants.MusicLine.yOffset)
+                //
+                //                    sparkLine.addValue(hasNoteStarted, newValue: CGPointMake(sparkLineCount, yPos))
+                //                    //print(String(format: "note hit: %@ x: \(trackingCount) y: \(yPos)", (noteHit?.fullName)!))
+                //                }
             } else {
                 //stop extremely out-of-range
                 print("sound out-of-range")
@@ -611,5 +607,12 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
         return tBPM
     }
     //@end
+    
+    @IBAction func backButtonTapped(_ sender: Any) {
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
         
+        self.dismiss(animated: true, completion: nil)
+        
+    }
+    
 }

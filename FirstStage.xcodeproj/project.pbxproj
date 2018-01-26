@@ -8,17 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		1C33BAE7201518CE00CD83A6 /* hand-placement.html in Resources */ = {isa = PBXBuildFile; fileRef = 1C33BAE6201518CE00CD83A6 /* hand-placement.html */; };
-		1C33BB342016DCDC00CD83A6 /* LevelSeriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C33BB332016DCDC00CD83A6 /* LevelSeriesViewController.swift */; };
-		1C33BB352016DF6500CD83A6 /* LevelSeriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C33BB332016DCDC00CD83A6 /* LevelSeriesViewController.swift */; };
 		1C33BBB62016E81D00CD83A6 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C33BB542016E80900CD83A6 /* SwiftyJSON.framework */; };
 		1C33BBB72016E81D00CD83A6 /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1C33BB542016E80900CD83A6 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1C87C0A32016EA940038784E /* TrumpetLessons.json in Resources */ = {isa = PBXBuildFile; fileRef = 1C87C0A22016EA930038784E /* TrumpetLessons.json */; };
 		1C87C0A42016EA940038784E /* TrumpetLessons.json in Resources */ = {isa = PBXBuildFile; fileRef = 1C87C0A22016EA930038784E /* TrumpetLessons.json */; };
 		1C87C0A52016EA9F0038784E /* TrumpetLessons.json in Sources */ = {isa = PBXBuildFile; fileRef = 1C87C0A22016EA930038784E /* TrumpetLessons.json */; };
-		1C87C0A82016F0030038784E /* LevelOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C87C0A72016F0030038784E /* LevelOverviewViewController.swift */; };
-		1C87C0A92016F0040038784E /* LevelOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C87C0A72016F0030038784E /* LevelOverviewViewController.swift */; };
-		1C87C0AD2016F3F70038784E /* LessonOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C87C0AC2016F3F70038784E /* LessonOverviewViewController.swift */; };
-		1C87C0AE2016F3F70038784E /* LessonOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C87C0AC2016F3F70038784E /* LessonOverviewViewController.swift */; };
+		1C87C0AD2016F3F70038784E /* OLDLessonOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C87C0AC2016F3F70038784E /* OLDLessonOverviewViewController.swift */; };
+		1C87C0AE2016F3F70038784E /* OLDLessonOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C87C0AC2016F3F70038784E /* OLDLessonOverviewViewController.swift */; };
+		1CC92E86201BB960008AC68F /* LessonSeriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC92E85201BB960008AC68F /* LessonSeriesViewController.swift */; };
+		1CC92E87201BB960008AC68F /* LessonSeriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC92E85201BB960008AC68F /* LessonSeriesViewController.swift */; };
+		1CC92E89201BB984008AC68F /* LessonOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC92E88201BB984008AC68F /* LessonOverviewViewController.swift */; };
+		1CC92E8A201BB984008AC68F /* LessonOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC92E88201BB984008AC68F /* LessonOverviewViewController.swift */; };
 		6324D2D31CE71B19001934A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324D2D21CE71B19001934A5 /* AppDelegate.swift */; };
 		6324D2D81CE71B19001934A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6324D2D61CE71B19001934A5 /* Main.storyboard */; };
 		6324D2DB1CE71B1A001934A5 /* FirstStage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6324D2D91CE71B1A001934A5 /* FirstStage.xcdatamodeld */; };
@@ -517,7 +517,6 @@
 
 /* Begin PBXFileReference section */
 		1C33BAE6201518CE00CD83A6 /* hand-placement.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "hand-placement.html"; sourceTree = "<group>"; };
-		1C33BB332016DCDC00CD83A6 /* LevelSeriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelSeriesViewController.swift; sourceTree = "<group>"; };
 		1C33BB382016E80900CD83A6 /* ISSUE_TEMPLATE */ = {isa = PBXFileReference; lastKnownFileType = text; path = ISSUE_TEMPLATE; sourceTree = "<group>"; };
 		1C33BB392016E80900CD83A6 /* PULL_REQUEST_TEMPLATE */ = {isa = PBXFileReference; lastKnownFileType = text; path = PULL_REQUEST_TEMPLATE; sourceTree = "<group>"; };
 		1C33BB3A2016E80900CD83A6 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -602,8 +601,9 @@
 		1C33BB9B2016E80A00CD83A6 /* SubscriptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptTests.swift; sourceTree = "<group>"; };
 		1C33BB9C2016E80A00CD83A6 /* Tests.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Tests.json; sourceTree = "<group>"; };
 		1C87C0A22016EA930038784E /* TrumpetLessons.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TrumpetLessons.json; sourceTree = "<group>"; };
-		1C87C0A72016F0030038784E /* LevelOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelOverviewViewController.swift; sourceTree = "<group>"; };
-		1C87C0AC2016F3F70038784E /* LessonOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonOverviewViewController.swift; sourceTree = "<group>"; };
+		1C87C0AC2016F3F70038784E /* OLDLessonOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OLDLessonOverviewViewController.swift; sourceTree = "<group>"; };
+		1CC92E85201BB960008AC68F /* LessonSeriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonSeriesViewController.swift; sourceTree = "<group>"; };
+		1CC92E88201BB984008AC68F /* LessonOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonOverviewViewController.swift; sourceTree = "<group>"; };
 		6324D2CF1CE71B19001934A5 /* FirstStage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirstStage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6324D2D21CE71B19001934A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6324D2D71CE71B19001934A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -1060,7 +1060,7 @@
 		1C87C0AB2016F3D00038784E /* Not Used View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				1C87C0AC2016F3F70038784E /* LessonOverviewViewController.swift */,
+				1C87C0AC2016F3F70038784E /* OLDLessonOverviewViewController.swift */,
 			);
 			name = "Not Used View Controllers";
 			sourceTree = "<group>";
@@ -1186,8 +1186,8 @@
 		633C2AD81CE80D80001C5C16 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				1C33BB332016DCDC00CD83A6 /* LevelSeriesViewController.swift */,
-				1C87C0A72016F0030038784E /* LevelOverviewViewController.swift */,
+				1CC92E85201BB960008AC68F /* LessonSeriesViewController.swift */,
+				1CC92E88201BB984008AC68F /* LessonOverviewViewController.swift */,
 				6381294F1CF05BF800A40C8E /* LongToneViewController.swift */,
 				6324D3031CE72E5D001934A5 /* TuneExerciseViewController.swift */,
 				BD7C17461F860E3B002AF462 /* HomeViewController.swift */,
@@ -2045,7 +2045,8 @@
 				633D1B6D1CF94BEC00B5C4FD /* FeedbackView.swift in Sources */,
 				6324D3631CE73C47001934A5 /* First Stage_key.m in Sources */,
 				638129591CF05C7900A40C8E /* Balloon.swift in Sources */,
-				1C87C0AD2016F3F70038784E /* LessonOverviewViewController.swift in Sources */,
+				1CC92E8A201BB984008AC68F /* LessonOverviewViewController.swift in Sources */,
+				1C87C0AD2016F3F70038784E /* OLDLessonOverviewViewController.swift in Sources */,
 				6324D2DB1CE71B1A001934A5 /* FirstStage.xcdatamodeld in Sources */,
 				639A2E461CF5AB09004F7B1A /* DotView.swift in Sources */,
 				6379EE921CE9C8ED00188A70 /* AudioKitManager.swift in Sources */,
@@ -2059,8 +2060,8 @@
 				6324D3041CE72E5D001934A5 /* TuneExerciseViewController.swift in Sources */,
 				63B4275C1E5057BB000E35AA /* SSSettingsViewController.swift in Sources */,
 				639A2E551CF5E6CA004F7B1A /* VisualMetronomeView.swift in Sources */,
-				1C33BB342016DCDC00CD83A6 /* LevelSeriesViewController.swift in Sources */,
 				6324D3651CE73C47001934A5 /* SSPlayLoopGraphics.m in Sources */,
+				1CC92E87201BB960008AC68F /* LessonSeriesViewController.swift in Sources */,
 				6324D35F1CE73C47001934A5 /* SSScrollView.m in Sources */,
 				BD7C17471F860E3B002AF462 /* HomeViewController.swift in Sources */,
 				BD8B79121F95C11B005B31CB /* UserAtributes.swift in Sources */,
@@ -2072,7 +2073,6 @@
 				633C2AE21CE86915001C5C16 /* Constants.swift in Sources */,
 				63D5E8871EA37BEA007AE8D4 /* NoteOffset.swift in Sources */,
 				63D5E88B1EA37C1B007AE8D4 /* LongToneViewController.swift in Sources */,
-				1C87C0A92016F0040038784E /* LevelOverviewViewController.swift in Sources */,
 				BD8B79061F95BF75005B31CB /* PracticeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2098,7 +2098,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C87C0A52016EA9F0038784E /* TrumpetLessons.json in Sources */,
-				1C33BB352016DF6500CD83A6 /* LevelSeriesViewController.swift in Sources */,
 				633D1B711CF94BF000B5C4FD /* FeedbackView.swift in Sources */,
 				6324D3621CE73C47001934A5 /* First Stage_key.m in Sources */,
 				638129581CF05C7900A40C8E /* Balloon.swift in Sources */,
@@ -2116,11 +2115,12 @@
 				63B4275D1E5057C2000E35AA /* SSSettingsViewController.swift in Sources */,
 				639A2E541CF5E6CA004F7B1A /* VisualMetronomeView.swift in Sources */,
 				6324D3641CE73C47001934A5 /* SSPlayLoopGraphics.m in Sources */,
+				1CC92E86201BB960008AC68F /* LessonSeriesViewController.swift in Sources */,
 				6324D35E1CE73C47001934A5 /* SSScrollView.m in Sources */,
-				1C87C0A82016F0030038784E /* LevelOverviewViewController.swift in Sources */,
 				BD7C174E1F86148A002AF462 /* HomeViewController.swift in Sources */,
 				BD8B79111F95C11B005B31CB /* UserAtributes.swift in Sources */,
-				1C87C0AE2016F3F70038784E /* LessonOverviewViewController.swift in Sources */,
+				1C87C0AE2016F3F70038784E /* OLDLessonOverviewViewController.swift in Sources */,
+				1CC92E89201BB984008AC68F /* LessonOverviewViewController.swift in Sources */,
 				6381295A1CF05C7900A40C8E /* SparkLine.swift in Sources */,
 				6379EE7D1CE95CDF00188A70 /* NoteAnalysis.swift in Sources */,
 				6324D3721CE73ED9001934A5 /* Enums.swift in Sources */,

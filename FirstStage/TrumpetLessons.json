@@ -1,46 +1,46 @@
- {
-  "name": "trumpet",
-  "title": "Beginner and Intermidiate level",
-  "levels":[{
-            "title":"Level 1",
-            "infoNode":[{"title": "Hand Placement",
-                        "type":"informationNode",
-                        "resource":"Media/hand-placement.html"
-                        }
-                        ],
-            "exercises":[{
-                         "title":"Long tone C octave 4 (C4)",
-                         "type":"longTone"
-                         },{
-                         "title":"Tune 1 - C4 whole note, whole rest",
-                         "type":"tune",
-                         "resource":"Rhythm Party 1  Trumpet.xml"
-                         },{
-                         "title":"Rhythm Party  1 - Whole Rest, Whole Note (reverse rhythm order of tune 1) Clap",
-                         "type":"rhythm",
-                         "resource":"Rhythm Party 1  Trumpet.xml"
-                         }
-                         ]
-            },{
-            "title":"Level 2",
-            "infoNode":[{"title": "Hand Placement",
-                        "type":"informationNode",
-                        "resource":"Media/hand-placement.html"
-                        }
-                        ],
-            "exercises":[{
-                         "title":"Long tone C octave 4 (C4)",
-                         "type":"longTone"
-                         },{
-                         "title":"Tune 1 - C4 whole note, whole rest",
-                         "type":"tune",
-                         "resource":"Rhythm Party 1  Trumpet.xml"
-                         },{
-                         "title":"Rhythm Party  1 - Whole Rest, Whole Note (reverse rhythm order of tune 1) Clap",
-                         "type":"rhythm",
-                         "resource":"Rhythm Party 1  Trumpet.xml"
-                         }
-                         ]
-            }
-            ]
-  }
+{
+    "name": "trumpet",
+    "title": "Beginner and Intermidiate level",
+    "lessons":[{
+               "title":"Lesson 1",
+               "infoNode":[{"title": "Hand Placement",
+                           "type":"informationNode",
+                           "resource":"Media/hand-placement.html"
+                           }
+                           ],
+               "exercises":[{
+                            "title":"Long tone C octave 4 (C4)",
+                            "type":"longTone"
+                            },{
+                            "title":"Tune 1 - C4 whole note, whole rest",
+                            "type":"tune",
+                            "resource":"Rhythm Party 1 Trumpet.xml"
+                            },{
+                            "title":"Rhythm Party  1 - Whole Rest, Whole Note (reverse rhythm order of tune 1) Clap",
+                            "type":"rhythm",
+                            "resource":"Rhythm Party 1 Trumpet.xml"
+                            }
+                            ]
+               },{
+               "title":"Lesson 2",
+               "infoNode":[{"title": "Hand Placement",
+                           "type":"informationNode",
+                           "resource":"Media/hand-placement.html"
+                           }
+                           ],
+               "exercises":[{
+                            "title":"Long tone C octave 4 (C4)",
+                            "type":"longTone"
+                            },{
+                            "title":"Tune 1 - C4 whole note, whole rest",
+                            "type":"tune",
+                            "resource":"Rhythm Party 1 Trumpet.xml"
+                            },{
+                            "title":"Rhythm Party  1 - Whole Rest, Whole Note (reverse rhythm order of tune 1) Clap",
+                            "type":"rhythm",
+                            "resource":"Rhythm Party 1 Trumpet.xml"
+                            }
+                            ]
+               }
+               ]
+}
