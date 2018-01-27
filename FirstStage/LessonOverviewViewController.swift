@@ -2,7 +2,7 @@
 //  LessonOverviewViewController.swift
 //  FirstStage
 //
-//  Created by Caitlyn Chen on 1/22/18.
+//  Created by Adam Kinney on 11/27/15.
 //  Copyright © 2018 Musikyoshi. All rights reserved.
 //
 import UIKit

@@ -290,14 +290,12 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         
         if let err = err {
             switch (err.err) {
-            case sscore_OutOfMemoryError:    print("out of memory")
                 
+            case sscore_OutOfMemoryError: print("out of memory")
             case sscore_XMLValidationError: print("XML validation error line:" + String(err.line) + " col:" + String(err.col) + " " + err.text)
-                
-            case sscore_NoBarsInFileError:    print("No bars in file error")
-            case sscore_NoPartsError:        print("NoParts Error")
-                
-            case sscore_UnknownError:        print("Unknown error")
+            case sscore_NoBarsInFileError: print("No bars in file error")
+            case sscore_NoPartsError: print("NoParts Error")
+            case sscore_UnknownError: print("Unknown error")
                 
             default: break
             }

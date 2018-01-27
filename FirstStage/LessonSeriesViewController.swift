@@ -71,11 +71,9 @@ class LessonSeriesViewController: UIViewController, UITableViewDelegate, UITable
     
     @IBAction func backButtonTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
         AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait)
     }
     
@@ -83,6 +81,5 @@ class LessonSeriesViewController: UIViewController, UITableViewDelegate, UITable
         super.viewWillDisappear(animated)
         AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
     }
-    
     
 }

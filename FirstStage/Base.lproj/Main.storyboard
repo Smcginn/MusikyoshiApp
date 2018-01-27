@@ -53,7 +53,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="hOC-AT-tf6">
-                                <rect key="frame" x="199" y="10" width="170" height="170.5"/>
+                                <rect key="frame" x="199" y="10" width="170" height="170"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="hOC-AT-tf6" secondAttribute="height" multiplier="1:1" id="D6f-4T-dPb"/>
                                 </constraints>
@@ -365,160 +365,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yXk-8u-fxA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1326" y="793"/>
-        </scene>
-        <!--Lesson 1-->
-        <scene sceneID="xqv-Sv-Y5a">
-            <objects>
-                <viewController id="BeF-9b-eZF" customClass="LessonOverviewViewController" customModule="FirstStage" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="idO-9l-42Q"/>
-                        <viewControllerLayoutGuide type="bottom" id="fbF-iz-Azj"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="N86-Vv-dWk">
-                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="pd7-e9-Z7M">
-                                <rect key="frame" x="26" y="26" width="177" height="199.5"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="8b8-NS-llr">
-                                        <rect key="frame" x="0.0" y="0.0" width="167" height="50.5"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Long Tone 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fq0-89-gh8">
-                                                <rect key="frame" x="0.0" y="0.0" width="92" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="TUE-Rj-B1o">
-                                                <rect key="frame" x="0.0" y="20.5" width="167" height="30"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hYh-VK-qvw">
-                                                        <rect key="frame" x="0.0" y="0.0" width="53" height="30"/>
-                                                        <state key="normal" title="Play C4"/>
-                                                        <connections>
-                                                            <segue destination="dfT-RI-27z" kind="show" identifier="ShowLongToneSegue" id="eUN-2j-fSy"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8iS-gf-bCU">
-                                                        <rect key="frame" x="77" y="0.0" width="90" height="30"/>
-                                                        <state key="normal" title="Change Note"/>
-                                                        <connections>
-                                                            <action selector="changeLongToneNoteTap:" destination="BeF-9b-eZF" eventType="touchUpInside" id="gqZ-X4-Vbz"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                            </stackView>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="2gb-9O-OEM">
-                                        <rect key="frame" x="0.0" y="74.5" width="177" height="50.5"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rhythm Party 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lgb-an-RWR">
-                                                <rect key="frame" x="0.0" y="0.0" width="115.5" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="mml-iI-Jj5">
-                                                <rect key="frame" x="0.0" y="20.5" width="177" height="30"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A3H-HL-Qy3">
-                                                        <rect key="frame" x="0.0" y="0.0" width="62" height="30"/>
-                                                        <state key="normal" title="Play Test"/>
-                                                        <connections>
-                                                            <segue destination="RFs-C5-TzE" kind="show" identifier="ShowRhythmSegue" id="jE0-YO-Jck"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jkm-k1-pJh">
-                                                        <rect key="frame" x="86" y="0.0" width="91" height="30"/>
-                                                        <state key="normal" title="Change Tune"/>
-                                                        <connections>
-                                                            <action selector="changeRhythmTuneTap:" destination="BeF-9b-eZF" eventType="touchUpInside" id="Rgb-Jd-6jQ"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                            </stackView>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="oCV-Yb-rqD">
-                                        <rect key="frame" x="0.0" y="149" width="177" height="50.5"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tune 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gxa-Hs-it9">
-                                                <rect key="frame" x="0.0" y="0.0" width="49.5" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="dOH-Gk-umy">
-                                                <rect key="frame" x="0.0" y="20.5" width="177" height="30"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u3T-Id-nwy">
-                                                        <rect key="frame" x="0.0" y="0.0" width="62" height="30"/>
-                                                        <state key="normal" title="Play Test"/>
-                                                        <connections>
-                                                            <segue destination="RFs-C5-TzE" kind="show" identifier="ShowTuneSegue" id="bGC-9Y-bIq"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zgb-cY-DrV">
-                                                        <rect key="frame" x="86" y="0.0" width="91" height="30"/>
-                                                        <state key="normal" title="Change Tune"/>
-                                                        <connections>
-                                                            <action selector="changeTuneTap:" destination="BeF-9b-eZF" eventType="touchUpInside" id="FH6-u0-VtN"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                            </stackView>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="pd7-e9-Z7M" firstAttribute="leading" secondItem="N86-Vv-dWk" secondAttribute="leadingMargin" constant="6" id="JEP-Zt-5dc"/>
-                            <constraint firstItem="pd7-e9-Z7M" firstAttribute="top" secondItem="idO-9l-42Q" secondAttribute="bottom" constant="26" id="o0v-hl-jjr"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Lesson 1" id="Rje-b9-HLI"/>
-                    <connections>
-                        <outlet property="playLongNoteBtn" destination="hYh-VK-qvw" id="lkq-jQ-2Yi"/>
-                        <outlet property="playRhythmBtn" destination="A3H-HL-Qy3" id="5Zs-xP-QS3"/>
-                        <outlet property="playTuneBtn" destination="u3T-Id-nwy" id="uGY-QQ-vYM"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZUV-Fh-GrU" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3792" y="5638"/>
-        </scene>
-        <!--Lesson Menu-->
-        <scene sceneID="T0x-XP-eac">
-            <objects>
-                <viewController id="Rfs-ce-a3h" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="eGv-1O-Qe7"/>
-                        <viewControllerLayoutGuide type="bottom" id="4ag-sZ-3IA"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="hBM-2H-OnR">
-                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4EL-UQ-QcG">
-                                <rect key="frame" x="26" y="111" width="60" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Lesson 1"/>
-                                <connections>
-                                    <segue destination="BeF-9b-eZF" kind="show" id="fQY-nf-07E"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Lesson Menu" id="tzv-TQ-bG5"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6oE-nH-V3a" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2783" y="4028"/>
         </scene>
         <!--Long Tone-->
         <scene sceneID="Vqe-FU-GXQ">
@@ -979,7 +825,6 @@
         <image name="MK" width="60" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="VV6-MN-jRE"/>
         <segue reference="q4t-qW-U8B"/>
     </inferredMetricsTieBreakers>
 </document>

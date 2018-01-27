@@ -13,8 +13,6 @@
 		1C87C0A32016EA940038784E /* TrumpetLessons.json in Resources */ = {isa = PBXBuildFile; fileRef = 1C87C0A22016EA930038784E /* TrumpetLessons.json */; };
 		1C87C0A42016EA940038784E /* TrumpetLessons.json in Resources */ = {isa = PBXBuildFile; fileRef = 1C87C0A22016EA930038784E /* TrumpetLessons.json */; };
 		1C87C0A52016EA9F0038784E /* TrumpetLessons.json in Sources */ = {isa = PBXBuildFile; fileRef = 1C87C0A22016EA930038784E /* TrumpetLessons.json */; };
-		1C87C0AD2016F3F70038784E /* OLDLessonOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C87C0AC2016F3F70038784E /* OLDLessonOverviewViewController.swift */; };
-		1C87C0AE2016F3F70038784E /* OLDLessonOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C87C0AC2016F3F70038784E /* OLDLessonOverviewViewController.swift */; };
 		1CC92E86201BB960008AC68F /* LessonSeriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC92E85201BB960008AC68F /* LessonSeriesViewController.swift */; };
 		1CC92E87201BB960008AC68F /* LessonSeriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC92E85201BB960008AC68F /* LessonSeriesViewController.swift */; };
 		1CC92E89201BB984008AC68F /* LessonOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC92E88201BB984008AC68F /* LessonOverviewViewController.swift */; };
@@ -601,7 +599,6 @@
 		1C33BB9B2016E80A00CD83A6 /* SubscriptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptTests.swift; sourceTree = "<group>"; };
 		1C33BB9C2016E80A00CD83A6 /* Tests.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Tests.json; sourceTree = "<group>"; };
 		1C87C0A22016EA930038784E /* TrumpetLessons.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TrumpetLessons.json; sourceTree = "<group>"; };
-		1C87C0AC2016F3F70038784E /* OLDLessonOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OLDLessonOverviewViewController.swift; sourceTree = "<group>"; };
 		1CC92E85201BB960008AC68F /* LessonSeriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonSeriesViewController.swift; sourceTree = "<group>"; };
 		1CC92E88201BB984008AC68F /* LessonOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonOverviewViewController.swift; sourceTree = "<group>"; };
 		6324D2CF1CE71B19001934A5 /* FirstStage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirstStage.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1057,14 +1054,6 @@
 			path = SwiftyJSONTests;
 			sourceTree = "<group>";
 		};
-		1C87C0AB2016F3D00038784E /* Not Used View Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				1C87C0AC2016F3F70038784E /* OLDLessonOverviewViewController.swift */,
-			);
-			name = "Not Used View Controllers";
-			sourceTree = "<group>";
-		};
 		6324D2C61CE71B19001934A5 = {
 			isa = PBXGroup;
 			children = (
@@ -1093,7 +1082,6 @@
 		6324D2D11CE71B19001934A5 /* FirstStage */ = {
 			isa = PBXGroup;
 			children = (
-				1C87C0AB2016F3D00038784E /* Not Used View Controllers */,
 				6324D3661CE73ECB001934A5 /* Brain */,
 				633C2ADF1CE81402001C5C16 /* Data */,
 				6324D3341CE7358C001934A5 /* SeeScore */,
@@ -2046,7 +2034,6 @@
 				6324D3631CE73C47001934A5 /* First Stage_key.m in Sources */,
 				638129591CF05C7900A40C8E /* Balloon.swift in Sources */,
 				1CC92E8A201BB984008AC68F /* LessonOverviewViewController.swift in Sources */,
-				1C87C0AD2016F3F70038784E /* OLDLessonOverviewViewController.swift in Sources */,
 				6324D2DB1CE71B1A001934A5 /* FirstStage.xcdatamodeld in Sources */,
 				639A2E461CF5AB09004F7B1A /* DotView.swift in Sources */,
 				6379EE921CE9C8ED00188A70 /* AudioKitManager.swift in Sources */,
@@ -2119,7 +2106,6 @@
 				6324D35E1CE73C47001934A5 /* SSScrollView.m in Sources */,
 				BD7C174E1F86148A002AF462 /* HomeViewController.swift in Sources */,
 				BD8B79111F95C11B005B31CB /* UserAtributes.swift in Sources */,
-				1C87C0AE2016F3F70038784E /* OLDLessonOverviewViewController.swift in Sources */,
 				1CC92E89201BB984008AC68F /* LessonOverviewViewController.swift in Sources */,
 				6381295A1CF05C7900A40C8E /* SparkLine.swift in Sources */,
 				6379EE7D1CE95CDF00188A70 /* NoteAnalysis.swift in Sources */,
