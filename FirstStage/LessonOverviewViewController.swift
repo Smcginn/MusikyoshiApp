@@ -3,8 +3,9 @@
 //  FirstStage
 //
 //  Created by Adam Kinney on 11/27/15.
+//  Changed by David S Reich - 2016.
 //  Copyright © 2018 Musikyoshi. All rights reserved.
-//
+
 import UIKit
 import Foundation
 import SwiftyJSON
