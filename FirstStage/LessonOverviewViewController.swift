@@ -16,9 +16,7 @@ class LessonOverviewViewController: UIViewController, UITableViewDataSource, UIT
     
     @IBOutlet weak var navBar: UINavigationBar!
     var selectedTuneId: String?
-    var selectedTuneName: String?
     var selectedRhythmId: String?
-    var selectedRhythmName: String?
     var lessonsJson: JSON?
     var lessonTitle: String?
     var userAttributes: UserAttributes?
