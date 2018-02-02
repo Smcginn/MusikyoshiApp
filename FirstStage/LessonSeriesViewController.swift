@@ -5,18 +5,18 @@
 //  Created by Caitlyn Chen on 1/22/18.
 //  Copyright © 2018 Musikyoshi. All rights reserved.
 //
-
 import UIKit
 import Foundation
 import SwiftyJSON
 
-class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class LessonSeriesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
     var instrumentJson: JSON?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
         if let file = Bundle.main.path(forResource: "TrumpetLessons", ofType: "json"){
@@ -37,7 +37,7 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let count = instrumentJson?["levels"].count {
+        if let count = instrumentJson?["lessons"].count {
             return count
         }
         return 0
@@ -46,8 +46,8 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         // Configure the cell...
-        if let levels = instrumentJson?["levels"] {
-            cell.textLabel?.text = levels[indexPath.row]["title"].string
+        if let lessons = instrumentJson?["lessons"] {
+            cell.textLabel?.text = lessons[indexPath.row]["title"].string
         }
         return cell
     }
@@ -59,10 +59,11 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if let levels = instrumentJson?["levels"] {
-            if let destination = segue.destination as? LevelOverviewViewController {
+        if let lessons = instrumentJson?["lessons"] {
+            if let destination = segue.destination as? LessonOverviewViewController {
                 if let row = sender as? Int {
-                    destination.lessonsJson = levels[row]["exercises"]
+                    destination.lessonsJson = lessons[row]["exercises"]
+                    destination.lessonTitle = " \(lessons[row]["title"].string ?? "") Overview"
                 }
             }
         }
@@ -71,5 +72,14 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
     @IBAction func backButtonTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait)
+    }
+    
+    override func viewWillDisappear(_ animated : Bool) {
+        super.viewWillDisappear(animated)
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
+    }
+    
 }
-
