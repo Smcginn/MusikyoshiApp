@@ -454,12 +454,9 @@ typedef NS_ENUM(NSInteger, ScrollType_e) {scroll_off, scroll_system, scroll_bar}
 
 
 // For displaying student performance results
-//-(void) addNotePerformanceResultAtXPos:(CGFloat) iXPos
-//                    withWeightedRating:(int) iWeightedRating
-//                      withRhythmResult:(int) iRhythmResult
-//                       withPitchResult:(int) iPitchResult;
 
 -(void) addNotePerformanceResultAtXPos:(CGFloat) iXPos
+                                atYpos:(CGFloat) iYPos
                     withWeightedRating:(int)  iWeightedRating
                       withRhythmResult:(int)  iRhythmResult
                        withPitchResult:(int)  iPitchResult
@@ -478,6 +475,11 @@ typedef NS_ENUM(NSInteger, ScrollType_e) {scroll_off, scroll_system, scroll_bar}
                           withPitchResult:(int) iPitchResult;
 
 -(CGFloat) getCurrentXOffset;
+
+// scroll to and highlight note with this PerfromanceNote ID
+-(bool) highlightNote:(int) iNoteID;
+
+-(void) turnHighlightOff;
 
 -(void) clearNotePerformanceResultAtXPos:(CGFloat) iXPos;
 

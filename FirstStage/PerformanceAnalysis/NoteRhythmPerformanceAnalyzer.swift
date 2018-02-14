@@ -15,21 +15,10 @@ import Foundation
 // NoteRhythmPerformanceAnalyzer - Analyzes PerformanceNote for
 //                                 Attack and Duration accuracy
 
-// Thresholds; Delta values In milliseconds
-let kRhythmAttackVariance_OK : Double             = 0.05
-let kRhythmAttackVariance_Acceptable : Double     = 0.20
-let kRhythmAttackVariance_Unacceptable : Double   = 0.40
-
+// Duraton Thresholds; Delta values In seconds
 let kRhythmDurationVariance_OK : Double           = 0.05
-let kRhythmDurationVariance_Acceptable : Double   = 0.20
-let kRhythmDurationVariance_Unacceptable : Double = 0.40
-
-let kAttackSlightlyEarlyOrLateWeight : Int32      = 3
-let kAttackVeryEarlyOrLateWeght : Int32           = 6
-let kAttackMissedWeght : Int32                    = 9
-let kDurationSlightyLongOrShortWeight : Int32     = 1
-let kDurationVeryLongOrShortWeight : Int32        = 2
-let kDurationTooLongOrShortWeight : Int32         = 3
+let kRhythmDurationVariance_Acceptable : Double   = 0.25
+let kRhythmDurationVariance_Unacceptable : Double = 0.5  
 
 class NoteRhythmPerformanceAnalyzer : NotePerformanceAnalyzer {
     
@@ -37,48 +26,58 @@ class NoteRhythmPerformanceAnalyzer : NotePerformanceAnalyzer {
         
         // Adjust weightedRating based on attack time accuracy
         if perfNote.attackRating == .slightlyEarly || perfNote.attackRating == .slightlyLate {
-            perfNote.weightedRating += kAttackSlightlyEarlyOrLateWeight
+            perfNote.attackScore = IssueWeight.kSlightlyEarlyOrLate
         }
         else if perfNote.attackRating == .veryEarly || perfNote.attackRating == .veryLate {
-            perfNote.weightedRating += kAttackVeryEarlyOrLateWeght
+            perfNote.attackScore = IssueWeight.kVeryEarlyOrLate
         }
-        else if perfNote.attackRating == .missed {
-            perfNote.weightedRating += kAttackMissedWeght
+        else if perfNote.attackRating == .missedNote {
+            if kIgnoreMissedNotes { // for debugging . . .
+                perfNote.attackScore = IssueWeight.kCorrect
+           } else {
+                perfNote.attackScore = IssueWeight.kMissed
+            }
         }
+        perfNote.weightedScore += perfNote.attackScore
         
         // Adjust weightedRating based on duration accuracy
         if perfNote.durationRating == .slightlyShort || perfNote.durationRating == .slightlyLong {
-            perfNote.weightedRating += kDurationSlightyLongOrShortWeight
+            perfNote.durationScore = IssueWeight.kSlightyLongOrShort
         }
         else if perfNote.durationRating == .veryShort || perfNote.durationRating == .veryLong {
-            perfNote.weightedRating += kDurationVeryLongOrShortWeight
+            perfNote.durationScore = IssueWeight.kVeryLongOrShort
         }
         else if perfNote.durationRating == .tooShort || perfNote.durationRating == .tooLong {
-            perfNote.weightedRating += kDurationTooLongOrShortWeight
+            perfNote.durationScore = IssueWeight.kTooLongOrShort
         }
+        perfNote.weightedScore += perfNote.durationScore
     }
     
     func rateAttack( perfNote: PerformanceNote )
     {
         let startTimeDelta     = perfNote.expectedStartTime - perfNote.actualStartTime
         let startTimeDeltaABS  = abs(startTimeDelta)
-        if startTimeDeltaABS <= kRhythmAttackVariance_OK {
+        if startTimeDeltaABS <= attackVariance_Correct {
             perfNote.attackRating = .timingGood
         }
-        else if startTimeDeltaABS <= kRhythmDurationVariance_Acceptable {
+        else if startTimeDeltaABS <= attackVariance_ABitOff {
             if startTimeDelta > 0.0 {
                 perfNote.attackRating = .slightlyEarly
             } else {
                 perfNote.attackRating = .slightlyLate
             }
-        } else if startTimeDeltaABS <= kRhythmAttackVariance_Acceptable {
+        } else if startTimeDeltaABS <= attackVariance_VeryOff {
             if startTimeDelta > 0.0 {
                 perfNote.attackRating = .veryEarly
             } else {
                 perfNote.attackRating = .veryLate
             }
-        } else {
-            perfNote.attackRating = .missed
+        } else {   // > attackVariance_VeryOff
+            if kIgnoreMissedNotes { // for debugging . . .
+                perfNote.attackRating = .timingGood
+            } else {
+                perfNote.attackRating = .missedNote
+            }
         }
     }
     
@@ -117,9 +116,20 @@ class NoteRhythmPerformanceAnalyzer : NotePerformanceAnalyzer {
     override func analyzeNote( perfNote: PerformanceNote? ) {
         guard let note = perfNote else { return }
         
+        note.attackRating   = .timingGood
+        note.durationRating = .durationGood
+        note.attackScore    =  0
+        note.durationScore  =  0
+        
         if !note.isLinkedToSound {
-            note.attackRating   = .missed
-            note.durationRating = .missed
+            if kIgnoreMissedNotes { // for debugging . . .
+                note.attackRating   = .timingGood
+                note.durationRating = .durationGood
+            } else {
+                note.attackRating   = .missedNote
+                note.durationRating = .missedNote
+            }
+
             determineWeightedRating( perfNote: note )
             return
         }

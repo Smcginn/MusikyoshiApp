@@ -351,6 +351,14 @@
 		C9BCD1671FB145C900E3434F /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C931B0EF1FB120B4003376F9 /* AudioKit.framework */; };
 		E940183E1FA998CF00FC6271 /* FSAnalysisOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = E940183D1FA998CF00FC6271 /* FSAnalysisOverlayView.m */; };
 		E940183F1FA998CF00FC6271 /* FSAnalysisOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = E940183D1FA998CF00FC6271 /* FSAnalysisOverlayView.m */; };
+		E9794BA91FFD45EA00CDC7FD /* PerformanceIssueMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9794BA81FFD45EA00CDC7FD /* PerformanceIssueMgr.swift */; };
+		E9794BAA1FFD45EA00CDC7FD /* PerformanceIssueMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9794BA81FFD45EA00CDC7FD /* PerformanceIssueMgr.swift */; };
+		E9815A37200511430046445B /* VideoHelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9815A36200511430046445B /* VideoHelpView.swift */; };
+		E9815A392005124D0046445B /* VideoHelpResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9815A382005124D0046445B /* VideoHelpResources.swift */; };
+		E9815A3A2005127B0046445B /* VideoHelpResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9815A382005124D0046445B /* VideoHelpResources.swift */; };
+		E9815A3B200512810046445B /* VideoHelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9815A36200511430046445B /* VideoHelpView.swift */; };
+		E9815A3D2009A0930046445B /* PerfAnalysisSettingsPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9815A3C2009A0930046445B /* PerfAnalysisSettingsPopup.swift */; };
+		E9815A3E2009A0930046445B /* PerfAnalysisSettingsPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9815A3C2009A0930046445B /* PerfAnalysisSettingsPopup.swift */; };
 		E9AD0CBE1FD9BCDF006472CE /* NoteFreqRangeTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AD0CB81FD9BCDF006472CE /* NoteFreqRangeTable.swift */; };
 		E9AD0CBF1FD9BCDF006472CE /* NoteIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AD0CB91FD9BCDF006472CE /* NoteIDs.swift */; };
 		E9AD0CC01FD9BCDF006472CE /* PerformanceAnalysisMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AD0CBA1FD9BCDF006472CE /* PerformanceAnalysisMgr.swift */; };
@@ -375,6 +383,20 @@
 		E9AD0CE71FE09D32006472CE /* NotePitchPerformanceAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AD0CE51FE09D32006472CE /* NotePitchPerformanceAnalyzer.swift */; };
 		E9AD0CE91FE09E63006472CE /* NoteRhythmPerformanceAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AD0CE81FE09E63006472CE /* NoteRhythmPerformanceAnalyzer.swift */; };
 		E9AD0CEA1FE09E63006472CE /* NoteRhythmPerformanceAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AD0CE81FE09E63006472CE /* NoteRhythmPerformanceAnalyzer.swift */; };
+		E9CFE62420263C0700C69C43 /* Monkey_Jumping Temples_monkey 02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E9CFE62020263C0700C69C43 /* Monkey_Jumping Temples_monkey 02@2x.png */; };
+		E9CFE62520263C0700C69C43 /* Monkey_Jumping Temples_monkey 03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E9CFE62120263C0700C69C43 /* Monkey_Jumping Temples_monkey 03@2x.png */; };
+		E9CFE62620263C0700C69C43 /* Monkey_Jumping Temples_monkey 04@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E9CFE62220263C0700C69C43 /* Monkey_Jumping Temples_monkey 04@2x.png */; };
+		E9CFE62720263C0700C69C43 /* Monkey_Jumping Temples_monkey 06@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E9CFE62320263C0700C69C43 /* Monkey_Jumping Temples_monkey 06@2x.png */; };
+		E9CFE62820263C0F00C69C43 /* Monkey_Jumping Temples_monkey 02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E9CFE62020263C0700C69C43 /* Monkey_Jumping Temples_monkey 02@2x.png */; };
+		E9CFE62920263C0F00C69C43 /* Monkey_Jumping Temples_monkey 03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E9CFE62120263C0700C69C43 /* Monkey_Jumping Temples_monkey 03@2x.png */; };
+		E9CFE62A20263C0F00C69C43 /* Monkey_Jumping Temples_monkey 04@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E9CFE62220263C0700C69C43 /* Monkey_Jumping Temples_monkey 04@2x.png */; };
+		E9CFE62B20263C0F00C69C43 /* Monkey_Jumping Temples_monkey 06@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E9CFE62320263C0700C69C43 /* Monkey_Jumping Temples_monkey 06@2x.png */; };
+		E9CFE63A2027975B00C69C43 /* ABitHigh.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E9CFE6372027975B00C69C43 /* ABitHigh.mp4 */; };
+		E9CFE63B2027975B00C69C43 /* ABitLow.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E9CFE6382027975B00C69C43 /* ABitLow.mp4 */; };
+		E9CFE63C2027975B00C69C43 /* UpperPartial.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E9CFE6392027975B00C69C43 /* UpperPartial.mp4 */; };
+		E9CFE63D202798C900C69C43 /* ABitHigh.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E9CFE6372027975B00C69C43 /* ABitHigh.mp4 */; };
+		E9CFE63E202798C900C69C43 /* ABitLow.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E9CFE6382027975B00C69C43 /* ABitLow.mp4 */; };
+		E9CFE63F202798C900C69C43 /* UpperPartial.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E9CFE6392027975B00C69C43 /* UpperPartial.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -817,9 +839,12 @@
 		C90339361FB131D3005A9C7D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C90339381FB13239005A9C7D /* Changelog.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Changelog.md; sourceTree = "<group>"; };
 		C931B0EF1FB120B4003376F9 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioKit.framework; path = Carthage/Build/iOS/AudioKit.framework; sourceTree = "<group>"; };
-		BD8B790D1F95BFB4005B31CB /* LessonOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LessonOverviewViewController.swift; sourceTree = "<group>"; };
 		E940183C1FA998CF00FC6271 /* FSAnalysisOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSAnalysisOverlayView.h; path = SeeScoreLib/Source/FSAnalysisOverlayView.h; sourceTree = SOURCE_ROOT; };
 		E940183D1FA998CF00FC6271 /* FSAnalysisOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSAnalysisOverlayView.m; path = SeeScoreLib/Source/FSAnalysisOverlayView.m; sourceTree = SOURCE_ROOT; };
+		E9794BA81FFD45EA00CDC7FD /* PerformanceIssueMgr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PerformanceIssueMgr.swift; path = PerformanceAnalysis/PerformanceIssueMgr.swift; sourceTree = "<group>"; };
+		E9815A36200511430046445B /* VideoHelpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoHelpView.swift; sourceTree = "<group>"; };
+		E9815A382005124D0046445B /* VideoHelpResources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoHelpResources.swift; path = PerformanceAnalysis/VideoHelpResources.swift; sourceTree = "<group>"; };
+		E9815A3C2009A0930046445B /* PerfAnalysisSettingsPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PerfAnalysisSettingsPopup.swift; path = PerformanceAnalysis/PerfAnalysisSettingsPopup.swift; sourceTree = "<group>"; };
 		E9AD0CB81FD9BCDF006472CE /* NoteFreqRangeTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NoteFreqRangeTable.swift; path = PerformanceAnalysis/NoteFreqRangeTable.swift; sourceTree = "<group>"; };
 		E9AD0CB91FD9BCDF006472CE /* NoteIDs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NoteIDs.swift; path = PerformanceAnalysis/NoteIDs.swift; sourceTree = "<group>"; };
 		E9AD0CBA1FD9BCDF006472CE /* PerformanceAnalysisMgr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PerformanceAnalysisMgr.swift; path = PerformanceAnalysis/PerformanceAnalysisMgr.swift; sourceTree = "<group>"; };
@@ -832,6 +857,13 @@
 		E9AD0CE21FE09B77006472CE /* NotePerformanceAnalyzer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotePerformanceAnalyzer.swift; path = PerformanceAnalysis/NotePerformanceAnalyzer.swift; sourceTree = "<group>"; };
 		E9AD0CE51FE09D32006472CE /* NotePitchPerformanceAnalyzer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotePitchPerformanceAnalyzer.swift; path = PerformanceAnalysis/NotePitchPerformanceAnalyzer.swift; sourceTree = "<group>"; };
 		E9AD0CE81FE09E63006472CE /* NoteRhythmPerformanceAnalyzer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NoteRhythmPerformanceAnalyzer.swift; path = PerformanceAnalysis/NoteRhythmPerformanceAnalyzer.swift; sourceTree = "<group>"; };
+		E9CFE62020263C0700C69C43 /* Monkey_Jumping Temples_monkey 02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Monkey_Jumping Temples_monkey 02@2x.png"; path = "Images/Monkey_Jumping Temples_monkey 02@2x.png"; sourceTree = "<group>"; };
+		E9CFE62120263C0700C69C43 /* Monkey_Jumping Temples_monkey 03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Monkey_Jumping Temples_monkey 03@2x.png"; path = "Images/Monkey_Jumping Temples_monkey 03@2x.png"; sourceTree = "<group>"; };
+		E9CFE62220263C0700C69C43 /* Monkey_Jumping Temples_monkey 04@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Monkey_Jumping Temples_monkey 04@2x.png"; path = "Images/Monkey_Jumping Temples_monkey 04@2x.png"; sourceTree = "<group>"; };
+		E9CFE62320263C0700C69C43 /* Monkey_Jumping Temples_monkey 06@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Monkey_Jumping Temples_monkey 06@2x.png"; path = "Images/Monkey_Jumping Temples_monkey 06@2x.png"; sourceTree = "<group>"; };
+		E9CFE6372027975B00C69C43 /* ABitHigh.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = ABitHigh.mp4; path = Videos/ABitHigh.mp4; sourceTree = "<group>"; };
+		E9CFE6382027975B00C69C43 /* ABitLow.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = ABitLow.mp4; path = Videos/ABitLow.mp4; sourceTree = "<group>"; };
+		E9CFE6392027975B00C69C43 /* UpperPartial.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = UpperPartial.mp4; path = Videos/UpperPartial.mp4; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1246,6 +1278,8 @@
 			children = (
 				1C87C0A22016EA930038784E /* TrumpetLessons.json */,
 				1C33BAE5201518CE00CD83A6 /* Media */,
+				E9CFE60D201A6D9200C69C43 /* Images */,
+				E9794BAB1FFDB36200CDC7FD /* Videos */,
 				633C2ADC1CE813E7001C5C16 /* XML Tunes */,
 			);
 			name = Data;
@@ -1422,9 +1456,11 @@
 			children = (
 				638129561CF05C7900A40C8E /* Balloon.swift */,
 				639A2E441CF5AB09004F7B1A /* DotView.swift */,
-				638129571CF05C7900A40C8E /* SparkLine.swift */,
-				639A2E531CF5E6CA004F7B1A /* VisualMetronomeView.swift */,
 				633D1B6C1CF94BEC00B5C4FD /* FeedbackView.swift */,
+				E9815A3C2009A0930046445B /* PerfAnalysisSettingsPopup.swift */,
+				638129571CF05C7900A40C8E /* SparkLine.swift */,
+				E9815A36200511430046445B /* VideoHelpView.swift */,
+				639A2E531CF5E6CA004F7B1A /* VisualMetronomeView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1441,6 +1477,16 @@
 				6324D31E1CE73574001934A5 /* FirstStage-Bridging-Header.h */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E9794BAB1FFDB36200CDC7FD /* Videos */ = {
+			isa = PBXGroup;
+			children = (
+				E9CFE6372027975B00C69C43 /* ABitHigh.mp4 */,
+				E9CFE6382027975B00C69C43 /* ABitLow.mp4 */,
+				E9CFE6392027975B00C69C43 /* UpperPartial.mp4 */,
+			);
+			name = Videos;
 			sourceTree = "<group>";
 		};
 		E9AD0C891FC483FF006472CE /* AudioKit */ = {
@@ -1461,12 +1507,25 @@
 				E9AD0CE81FE09E63006472CE /* NoteRhythmPerformanceAnalyzer.swift */,
 				E9AD0CBA1FD9BCDF006472CE /* PerformanceAnalysisMgr.swift */,
 				E9AD0CDF1FDF4457006472CE /* PerformanceAndTrackingDefs.swift */,
+				E9794BA81FFD45EA00CDC7FD /* PerformanceIssueMgr.swift */,
 				E9AD0CBB1FD9BCDF006472CE /* PerformanceNote.swift */,
 				E9AD0CBC1FD9BCDF006472CE /* PerformanceSound.swift */,
 				E9AD0CDC1FDF4180006472CE /* PerformanceTrackingMgr.swift */,
 				E9AD0CBD1FD9BCDF006472CE /* TrumpetPartials.swift */,
+				E9815A382005124D0046445B /* VideoHelpResources.swift */,
 			);
 			name = PerformanceAnalysis;
+			sourceTree = "<group>";
+		};
+		E9CFE60D201A6D9200C69C43 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				E9CFE62020263C0700C69C43 /* Monkey_Jumping Temples_monkey 02@2x.png */,
+				E9CFE62120263C0700C69C43 /* Monkey_Jumping Temples_monkey 03@2x.png */,
+				E9CFE62220263C0700C69C43 /* Monkey_Jumping Temples_monkey 04@2x.png */,
+				E9CFE62320263C0700C69C43 /* Monkey_Jumping Temples_monkey 06@2x.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1563,6 +1622,7 @@
 				TargetAttributes = {
 					6324D2CE1CE71B19001934A5 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = Q94UUT4TBF;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -1582,7 +1642,7 @@
 						TestTargetID = 6324D2CE1CE71B19001934A5;
 					};
 					6324D3051CE72F8D001934A5 = {
-						LastSwiftMigration = 0920;
+						DevelopmentTeam = Q94UUT4TBF;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -1756,11 +1816,13 @@
 				634658D61E90C68E00C162CF /* Piano.mf.91.m4a in Resources */,
 				634658B61E90C68E00C162CF /* Piano.mf.59.m4a in Resources */,
 				634659211E90C6A000C162CF /* Trumpet.novib.mf.74.m4a in Resources */,
+				E9CFE63C2027975B00C69C43 /* UpperPartial.mp4 in Resources */,
 				6346592D1E90C6A000C162CF /* Trumpet.novib.mf.86.m4a in Resources */,
 				6346590C1E90C6A000C162CF /* Trumpet.novib.mf.53.m4a in Resources */,
 				634658D11E90C68E00C162CF /* Piano.mf.86.m4a in Resources */,
 				634659291E90C6A000C162CF /* Trumpet.novib.mf.82.m4a in Resources */,
 				634658CD1E90C68E00C162CF /* Piano.mf.82.m4a in Resources */,
+				E9CFE62420263C0700C69C43 /* Monkey_Jumping Temples_monkey 02@2x.png in Resources */,
 				633CA1D41CF73D0C00061F3D /* FarArrow.png in Resources */,
 				634659201E90C6A000C162CF /* Trumpet.novib.mf.73.m4a in Resources */,
 				634658AC1E90C68E00C162CF /* Piano.mf.49.m4a in Resources */,
@@ -1783,6 +1845,7 @@
 				634658B51E90C68E00C162CF /* Piano.mf.58.m4a in Resources */,
 				634658C81E90C68E00C162CF /* Piano.mf.77.m4a in Resources */,
 				634659241E90C6A000C162CF /* Trumpet.novib.mf.77.m4a in Resources */,
+				E9CFE62720263C0700C69C43 /* Monkey_Jumping Temples_monkey 06@2x.png in Resources */,
 				634658BA1E90C68E00C162CF /* Piano.mf.63.m4a in Resources */,
 				634658D51E90C68E00C162CF /* Piano.mf.90.m4a in Resources */,
 				634658A71E90C68E00C162CF /* Piano.mf.44.m4a in Resources */,
@@ -1801,6 +1864,7 @@
 				634658931E90C68E00C162CF /* Piano.mf.24.m4a in Resources */,
 				634658D21E90C68E00C162CF /* Piano.mf.87.m4a in Resources */,
 				634658A61E90C68E00C162CF /* Piano.mf.43.m4a in Resources */,
+				E9CFE63B2027975B00C69C43 /* ABitLow.mp4 in Resources */,
 				6346591B1E90C6A000C162CF /* Trumpet.novib.mf.68.m4a in Resources */,
 				634658A81E90C68E00C162CF /* Piano.mf.45.m4a in Resources */,
 				634658A91E90C68E00C162CF /* Piano.mf.46.m4a in Resources */,
@@ -1835,13 +1899,16 @@
 				634658B91E90C68E00C162CF /* Piano.mf.62.m4a in Resources */,
 				634659111E90C6A000C162CF /* Trumpet.novib.mf.58.m4a in Resources */,
 				6346591E1E90C6A000C162CF /* Trumpet.novib.mf.71.m4a in Resources */,
+				E9CFE62520263C0700C69C43 /* Monkey_Jumping Temples_monkey 03@2x.png in Resources */,
 				634659251E90C6A000C162CF /* Trumpet.novib.mf.78.m4a in Resources */,
 				634658C61E90C68E00C162CF /* Piano.mf.75.m4a in Resources */,
+				E9CFE62620263C0700C69C43 /* Monkey_Jumping Temples_monkey 04@2x.png in Resources */,
 				634658D31E90C68E00C162CF /* Piano.mf.88.m4a in Resources */,
 				634658A01E90C68E00C162CF /* Piano.mf.37.m4a in Resources */,
 				634658D71E90C68E00C162CF /* Piano.mf.92.m4a in Resources */,
 				634658BE1E90C68E00C162CF /* Piano.mf.67.m4a in Resources */,
 				6346589E1E90C68E00C162CF /* Piano.mf.35.m4a in Resources */,
+				E9CFE63A2027975B00C69C43 /* ABitHigh.mp4 in Resources */,
 				6346591C1E90C6A000C162CF /* Trumpet.novib.mf.69.m4a in Resources */,
 				634658C01E90C68E00C162CF /* Piano.mf.69.m4a in Resources */,
 				6355ECF81CF68EB70037945F /* marmstk1.wav in Resources */,
@@ -1909,11 +1976,13 @@
 				6336B1DA1EA32B0200A78D02 /* Piano.mf.62.m4a in Resources */,
 				6336B1CC1EA32B0200A78D02 /* Piano.mf.48.m4a in Resources */,
 				6336B1B91EA32B0200A78D02 /* Piano.mf.29.m4a in Resources */,
+				E9CFE63F202798C900C69C43 /* UpperPartial.mp4 in Resources */,
 				6336B1C91EA32B0200A78D02 /* Piano.mf.45.m4a in Resources */,
 				6336B2001EA32B0200A78D02 /* Piano.mf.100.m4a in Resources */,
 				6336B1BF1EA32B0200A78D02 /* Piano.mf.35.m4a in Resources */,
 				6336B1F21EA32B0200A78D02 /* Piano.mf.86.m4a in Resources */,
 				6336B1E91EA32B0200A78D02 /* Piano.mf.77.m4a in Resources */,
+				E9CFE62820263C0F00C69C43 /* Monkey_Jumping Temples_monkey 02@2x.png in Resources */,
 				6336B1941EA32AF000A78D02 /* Trumpet.novib.mf.56.m4a in Resources */,
 				6336B1FD1EA32B0200A78D02 /* Piano.mf.97.m4a in Resources */,
 				6336B1BC1EA32B0200A78D02 /* Piano.mf.32.m4a in Resources */,
@@ -1936,6 +2005,7 @@
 				6336B1E41EA32B0200A78D02 /* Piano.mf.72.m4a in Resources */,
 				6336B1951EA32AF000A78D02 /* Trumpet.novib.mf.57.m4a in Resources */,
 				6336B1A91EA32AF000A78D02 /* Trumpet.novib.mf.77.m4a in Resources */,
+				E9CFE62B20263C0F00C69C43 /* Monkey_Jumping Temples_monkey 06@2x.png in Resources */,
 				6336B1A41EA32AF000A78D02 /* Trumpet.novib.mf.72.m4a in Resources */,
 				6336B1BE1EA32B0200A78D02 /* Piano.mf.34.m4a in Resources */,
 				6336B1971EA32AF000A78D02 /* Trumpet.novib.mf.59.m4a in Resources */,
@@ -1953,6 +2023,7 @@
 				1C87C0A32016EA940038784E /* TrumpetLessons.json in Resources */,
 				6336B1D51EA32B0200A78D02 /* Piano.mf.57.m4a in Resources */,
 				6336B1A01EA32AF000A78D02 /* Trumpet.novib.mf.68.m4a in Resources */,
+				E9CFE63E202798C900C69C43 /* ABitLow.mp4 in Resources */,
 				6336B1AC1EA32AF000A78D02 /* Trumpet.novib.mf.80.m4a in Resources */,
 				6336B1DF1EA32B0200A78D02 /* Piano.mf.67.m4a in Resources */,
 				6336B1E61EA32B0200A78D02 /* Piano.mf.74.m4a in Resources */,
@@ -1987,13 +2058,16 @@
 				6355ECF71CF68EB70037945F /* marmstk1.wav in Resources */,
 				6336B1FA1EA32B0200A78D02 /* Piano.mf.94.m4a in Resources */,
 				6336B1CD1EA32B0200A78D02 /* Piano.mf.49.m4a in Resources */,
+				E9CFE62920263C0F00C69C43 /* Monkey_Jumping Temples_monkey 03@2x.png in Resources */,
 				6336B1E31EA32B0200A78D02 /* Piano.mf.71.m4a in Resources */,
 				6336B1EC1EA32B0200A78D02 /* Piano.mf.80.m4a in Resources */,
+				E9CFE62A20263C0F00C69C43 /* Monkey_Jumping Temples_monkey 04@2x.png in Resources */,
 				6336B1E71EA32B0200A78D02 /* Piano.mf.75.m4a in Resources */,
 				6336B1981EA32AF000A78D02 /* Trumpet.novib.mf.60.m4a in Resources */,
 				633C2ADD1CE813E7001C5C16 /* XML Tunes in Resources */,
 				6336B1A51EA32AF000A78D02 /* Trumpet.novib.mf.73.m4a in Resources */,
 				6336B1AE1EA32AF000A78D02 /* Trumpet.novib.mf.82.m4a in Resources */,
+				E9CFE63D202798C900C69C43 /* ABitHigh.mp4 in Resources */,
 				6336B1D11EA32B0200A78D02 /* Piano.mf.53.m4a in Resources */,
 				6336B1DB1EA32B0200A78D02 /* Piano.mf.63.m4a in Resources */,
 				6336B1AF1EA32AF000A78D02 /* Trumpet.novib.mf.83.m4a in Resources */,
@@ -2115,15 +2189,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9AD0CC31FD9BCDF006472CE /* TrumpetPartials.swift in Sources */,
+				E9794BAA1FFD45EA00CDC7FD /* PerformanceIssueMgr.swift in Sources */,
 				E9AD0CC21FD9BCDF006472CE /* PerformanceSound.swift in Sources */,
 				633D1B6D1CF94BEC00B5C4FD /* FeedbackView.swift in Sources */,
 				E9AD0CE41FE09B77006472CE /* NotePerformanceAnalyzer.swift in Sources */,
-				BD8B790F1F95BFB4005B31CB /* LessonOverviewViewController.swift in Sources */,
+				E9815A3E2009A0930046445B /* PerfAnalysisSettingsPopup.swift in Sources */,
 				6324D3631CE73C47001934A5 /* First Stage_key.m in Sources */,
 				638129591CF05C7900A40C8E /* Balloon.swift in Sources */,
 				1C87C0AD2016F3F70038784E /* LessonOverviewViewController.swift in Sources */,
 				6324D2DB1CE71B1A001934A5 /* FirstStage.xcdatamodeld in Sources */,
 				E9AD0CC11FD9BCDF006472CE /* PerformanceNote.swift in Sources */,
+				E9815A392005124D0046445B /* VideoHelpResources.swift in Sources */,
+				E9815A37200511430046445B /* VideoHelpView.swift in Sources */,
 				E9AD0CE71FE09D32006472CE /* NotePitchPerformanceAnalyzer.swift in Sources */,
 				639A2E461CF5AB09004F7B1A /* DotView.swift in Sources */,
 				6379EE921CE9C8ED00188A70 /* AudioKitManager.swift in Sources */,
@@ -2187,14 +2264,17 @@
 				1C33BB352016DF6500CD83A6 /* LevelSeriesViewController.swift in Sources */,
 				633D1B711CF94BF000B5C4FD /* FeedbackView.swift in Sources */,
 				E9AD0CCB1FD9BF08006472CE /* PerformanceSound.swift in Sources */,
+				E9794BA91FFD45EA00CDC7FD /* PerformanceIssueMgr.swift in Sources */,
 				633D1B711CF94BF000B5C4FD /* FeedbackView.swift in Sources */,
-				BD8B790E1F95BFB4005B31CB /* LessonOverviewViewController.swift in Sources */,
 				E9AD0CE31FE09B77006472CE /* NotePerformanceAnalyzer.swift in Sources */,
 				6324D3621CE73C47001934A5 /* First Stage_key.m in Sources */,
+				E9815A3D2009A0930046445B /* PerfAnalysisSettingsPopup.swift in Sources */,
+				E9815A3A2005127B0046445B /* VideoHelpResources.swift in Sources */,
 				638129581CF05C7900A40C8E /* Balloon.swift in Sources */,
 				E9AD0CC71FD9BEF6006472CE /* NoteFreqRangeTable.swift in Sources */,
 				6324D3071CE72F8D001934A5 /* FirstStage.xcdatamodeld in Sources */,
 				639A2E451CF5AB09004F7B1A /* DotView.swift in Sources */,
+				E9815A3B200512810046445B /* VideoHelpView.swift in Sources */,
 				E9AD0CE61FE09D32006472CE /* NotePitchPerformanceAnalyzer.swift in Sources */,
 				6379EE911CE9C8ED00188A70 /* AudioKitManager.swift in Sources */,
 				63B4275A1E505573000E35AA /* Intonation.swift in Sources */,
@@ -2413,7 +2493,7 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = Q94UUT4TBF;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2445,7 +2525,7 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = Q94UUT4TBF;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2456,7 +2536,7 @@
 				INFOPLIST_FILE = FirstStage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.musikyoshi.FirstStageCook;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sfreshour.FirstStageDSR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
