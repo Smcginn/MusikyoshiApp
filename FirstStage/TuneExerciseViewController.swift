@@ -8,9 +8,9 @@
 
 import UIKit
 import AVFoundation
-//import StudentPerfomanceData.swift
 
-class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNoteHandler, SSSynthParameterControls, SSFrequencyConverter, OverlayViewDelegate {
+class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNoteHandler, SSSynthParameterControls, SSFrequencyConverter,
+OverlayViewDelegate,PerfAnalysisSettingsChanged {
 
 
     @IBOutlet weak var ssScrollView: SSScrollView!
@@ -187,13 +187,14 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     var notInCountdown    = false
     var firstNoteOrRestEventAcknowledged = false // for placing note data on ScrollView
     var firstNoteOrRestXOffset =  0
-    // I think the visual metronome is behind. The SeaScore SW lets you specify a
+    // I think the visual metronome is behind. The SeeScore SW lets you specify a
     // negative delay for the beat callback, which lets you anticipate the beat
     // event. This makes the event changing the metronome dotes fire earlier. When
     // I set this to -40ms, I think the metronome is more inline with actual beat
     // of the music. But . . . I want others to try this out.
     // So leaving it at 0.
     let beatMillisecOffset:Int32 = -40 // Suggest trying between -40 and -100 . . .
+    var trackingAudioAndNotes = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -217,81 +218,10 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
 //        setupSounds()
 
         ssScrollView.overlayViewDelegate = self
-
-        ////////////////////////////////////////////////////////////////////////
-        //
-        //  Testing from here to bottom of func. Temp. Will be taken out at some
-        //  point soon, probably to be more formalized and placed elsewhere
-        //
-        guard kMKDebugOpt_PrintPerfAnalysisValues else { return }
-
-        let perfAnalysisMgr: PerformanceAnalysisMgr! = PerformanceAnalysisMgr.instance
-
-        var tolerances = pitchAndRhythmTolerances()
-        tolerances.setWithInverse( rhythmTolerancePercentage: 0.03,
-                                   correctPitchPercentage:    0.03,
-                                   aBitToVeryPercentage:      0.085,
-                                   veryBoundaryPercentage:    0.60 )
-        perfAnalysisMgr.rebuildAllAnalysisTables( tolerances )
-
-        perfAnalysisMgr.trumpetPartialsTable.printAllPartials()
-        print ("===================================================================")
-        print ("\nAll Partials by Note\n")
-        perfAnalysisMgr.trumpetPartialsTable.printAllPartialsByNote()
-        print ("\n")
-
-        ////////////////////////////////////////////////
-        let aNote = NoteService.getNote(Int(NoteIDs.A4))
-        if aNote != nil {
-            print("")
-            print("For \(aNote!.fullName), freq = \(aNote!.frequency)")
-            print("")
+        setupDebugSettingsBtn()
+        if kMKDebugOpt_PrintStudentPerformanceDataDebugOutput {
+            printAndTestAnalysisTables()
         }
-
-        func printNoteFRInfo(noteFR: tNoteFreqRangeData) {
-            let lo = String(format: "%.3f", noteFR.freqRange.lowerBound)
-            let hi = String(format: "%.3f", noteFR.freqRange.upperBound)
-            print("!! noteWithFreqRange; Name: \(noteFR.noteFullName), ConcName: \(noteFR.concertNoteFullName), ConcPitch: \(noteFR.concertFreq), Range: \(lo)...\(hi)")
-        }
-
-        print("")
-        var noteFR: tNoteFreqRangeData =
-            perfAnalysisMgr.getNoteFreqRangeData(noteID: NoteIDs.F3)
-        printNoteFRInfo(noteFR: noteFR)
-
-        noteFR = perfAnalysisMgr.getNoteFreqRangeData(noteID: NoteIDs.C4)
-        printNoteFRInfo(noteFR: noteFR)
-
-        noteFR = perfAnalysisMgr.getNoteFreqRangeData(noteID: NoteIDs.E4)
-        printNoteFRInfo(noteFR: noteFR)
-
-        noteFR = perfAnalysisMgr.getNoteFreqRangeData(noteID: NoteIDs.C5)
-        printNoteFRInfo(noteFR: noteFR)
-
-        noteFR = perfAnalysisMgr.getNoteFreqRangeData(noteID: NoteIDs.C6)
-        printNoteFRInfo(noteFR: noteFR)
-
-        ////////////////////////////////////////////////
-        print("")
-
-        tolerances.setWithInverse( rhythmTolerancePercentage: 0.03,
-                                   correctPitchPercentage:    0.020,
-                                   aBitToVeryPercentage:      0.035,
-                                   veryBoundaryPercentage:    0.050 )
-        perfAnalysisMgr.rebuildAllAnalysisTables( tolerances)
-
-        noteFR = perfAnalysisMgr.getNoteFreqRangeData(noteID: NoteIDs.F3)
-        printNoteFRInfo(noteFR: noteFR)
-
-        noteFR = perfAnalysisMgr.getNoteFreqRangeData(noteID: NoteIDs.E4)
-        printNoteFRInfo(noteFR: noteFR)
-
-        noteFR = perfAnalysisMgr.getNoteFreqRangeData(noteID: NoteIDs.C5)
-        printNoteFRInfo(noteFR: noteFR)
-
-        noteFR = perfAnalysisMgr.getNoteFreqRangeData(noteID: NoteIDs.C6)
-        printNoteFRInfo(noteFR: noteFR)
-        print("")
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -300,6 +230,14 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
 
     override func viewWillDisappear(_ animated: Bool) {
         stopPlaying()
+        if vhView != nil {
+            vhView?.hideVideoVC()
+            vhView?.cleanup()
+            if let viewWithTag = self.view.viewWithTag(vhViewTag) {
+                viewWithTag.removeFromSuperview()
+            }
+            vhView = nil
+        }
         super.viewWillDisappear(animated)
         AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
     }
@@ -309,12 +247,20 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     }
 
     @IBAction func playButtonTapped(_ sender: UIButton) {
+
+        // remove when Video help view is more correct (Modal, etc.) and this
+        // is not an issue
+        if vhView != nil && !(vhView!.isHidden) {
+            vhView?.hideVideoVC()
+        }
+
         playForMeButton.isEnabled = false
         if playButton.currentTitle == "Start Playing" {
 //            playButton.setTitle("Stop", forState: UIControlState.Normal)
             playButton.setTitle("Listening ...", for: UIControlState())
 //            playButton.isEnabled = false
             playScore()
+            trackingAudioAndNotes = true
         } else if playButton.currentTitle == "Next Exercise" {
             //TODO: goto Next Exercise
             _ = navigationController?.popViewController(animated: true)
@@ -325,6 +271,13 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     }
 
     @IBAction func playForMeButtonTapped(_ sender: UIButton) {
+
+        // remove when Video help view is more correct (Modal, etc.) and this
+        // is not an issue
+        if vhView != nil && !(vhView!.isHidden) {
+            vhView?.hideVideoVC()
+        }
+
         playingSynth = true
         playForMeButton.isEnabled = false
         playButton.setTitle("Playing ...", for: UIControlState())
@@ -442,10 +395,17 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         firstNoteOrRestEventAcknowledged = false
         PerformanceTrackingMgr.instance.resetSoundAndNoteTracking()
         ssScrollView.clearNotePerformanceResults();
+        ssScrollView.turnHighlightOff()
 
         guard score != nil else { return }
         playData = SSPData.createPlay(from: score, tempo: self)
         guard playData != nil else { return }
+
+        let beatsPerBar = score!.getBarBeats( 0,  bpm: Int32(tempoBPM),
+                                              barType: sscore_bartype_full_bar)
+        PerformanceTrackingMgr.instance.setPlaybackVals(
+                                    tempoInBPM: tempoBPM,
+                                    beatsPerBar: Int(beatsPerBar.beatsinbar) )
 
         ssScrollView.clearAllColouring()
 
@@ -540,7 +500,9 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     }
 
     func stopPlaying() {
+        let doPostPerfAnalysis = !playingSynth && trackingAudioAndNotes
         playingSynth = false
+        trackingAudioAndNotes = false
         shouldSetSongStartTime  = true
 
         metronomeView.setBeat(-1)
@@ -572,80 +534,68 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
 //        feedbackView.contentMode = .scaleAspectFit
 //        feedbackView.showFeedback(feedbackRect)
 
-        //////////////////////////////////////////////////////////////////////////
-        // From this point to end of func, debugging printing for PerformanceNotes
-        guard kMKDebugOpt_PrintStudentPerformanceDataDebugOutput else { return }
+        // uncomment to quickly see/test Monkey animation, as if perfect performance
+        // animateMonkeyImageView();   return  // won't do doPostPerfAnalysis
 
-        print ("\n\n")
-        print ("timingThreshold is: \(timingThreshold)\n")
-        for oneExpNote in PerformanceTrackingMgr.instance.performanceNotes {
-            if oneExpNote.linkedToSoundID == noSoundIDSet {
-                print ( "Note ID: \(oneExpNote.perfNoteID) is not linked to a sound" )
-            }
-            else {
-                let expectedStart = oneExpNote.expectedStartTime
-                let actualStart   = oneExpNote.actualStartTime
-                let diff          = actualStart - expectedStart
-                let endTime       = oneExpNote.endTime
-                let duration      = oneExpNote.actualDuration
-                let expPitch      = oneExpNote.expectedFrequency
-                let actPitch      = oneExpNote.actualFrequency
-                let expMidiNote   = oneExpNote.expectedMidiNote
-                let actMidiNote   = oneExpNote.actualMidiNote
-                let actMidiNoteD  = oneExpNote.actualMidiNoteD
-
-                let expNote = NoteService.getNote(Int(expMidiNote))
-                let actNote = NoteService.getNote(Int(actMidiNote))
-
-                let expNoteName = expNote != nil ? expNote!.fullName : ""
-                let actNoteName = actNote != nil ? actNote!.fullName : ""
-
-                print ( "Note ID: \(oneExpNote.perfNoteID) is linked to sound \(oneExpNote.linkedToSoundID)" )
-                print ( "  ExpectedStart Time: \(expectedStart)" )
-                print ( "  Actual Start Time:  \(actualStart)" )
-                print ( "  Difference:         \(diff)" )
-                print ( "  End Time:           \(endTime)" )
-                print ( "  Duration:         \(duration)" )
-                print ( "  ExpectedPitch:      \(expPitch)" )
-                print ( "  Actual Pitch:       \(actPitch)" )
-                print ( "  Expected MIDI Note: \(expMidiNote) - \(expNoteName)" )
-                print ( "  Actual MIDI Note:   \(actMidiNote) - \(actNoteName)" )
-                print ( "  Actual MIDI Note D: \(actMidiNoteD)" )
-                let avgPitch      = oneExpNote.averageFrequency()
-                print ( "  AveragePitch:       \(avgPitch)" )
-            }
+        if doPostPerfAnalysis {
+            performPostPerfAnalysis()
         }
-        print ("\n\n")
+    }
 
-        PerformanceTrackingMgr.instance.analyzePerfomance()
+    func performPostPerfAnalysis()
+    {
+        PerformanceTrackingMgr.instance.analyzePerformance()
 
+        printPostPerfDebugData(timingThreshold: timingThreshold)
+
+        // Send PerfNote info to SeeScore overlay view - needed by a subview to
+        // determine location of highlighted note, if called on to highlight.
         for onePerfNote in PerformanceTrackingMgr.instance.performanceNotes {
-            let weightedAsInt32 : Int32 = onePerfNote.weightedRating
-            //            let rhythmRatingAsInt32 : Int32 = onePerfNote.attackRating.rawValue
-            //           let pitchRatingAsInt32 : Int32 = onePerfNote.pitchRating
+            let weightedAsInt32 : Int32 = Int32(onePerfNote.weightedScore)
             let xPos = CGFloat(onePerfNote.xPos)
-            ssScrollView.addNotePerformanceResult(
+            let yPos = CGFloat(onePerfNote.yPos)
+            self.ssScrollView.addNotePerformanceResult(
                 atXPos: xPos,
+                atYpos: yPos,
                 withWeightedRating: weightedAsInt32,
-                withRhythmResult: 0, //rhythmRatingAsInt32,
-                withPitchResult: 0,  //pitchRatingAsInt32 );
+                withRhythmResult: 0,
+                withPitchResult: 0,
                 noteID:  onePerfNote.perfNoteID,
                 isLinked: onePerfNote.isLinkedToSound,
                 linkedSoundID: onePerfNote.linkedToSoundID )
         }
 
-        for onePerfSound in PerformanceTrackingMgr.instance.performanceSounds {
-            guard let onePerfSound = onePerfSound else { continue }
-            var dur: Int32 = Int32(onePerfSound.xOffsetEnd - onePerfSound.xOffsetStart)
-            if dur <= 0 {
-                dur = 1
+        // Send PerfSound info to SeeScore overlay view (only needed for debugging)
+        if FSAnalysisOverlayView.getShowSoundsAnalysis() {
+            for onePerfSound in PerformanceTrackingMgr.instance.performanceSounds {
+                guard let onePerfSound = onePerfSound else { continue }
+                var dur: Int32 = Int32(onePerfSound.xOffsetEnd - onePerfSound.xOffsetStart)
+                if dur <= 0 {
+                    dur = 1
+                }
+                self.ssScrollView.addSoundPerformanceResult(
+                    atXPos:       CGFloat(onePerfSound.xOffsetStart),
+                    withDuration: dur,
+                    soundID:      onePerfSound.soundID,
+                    isLinked:     onePerfSound.isLinkedToNote,
+                    linkedNoteID: onePerfSound.linkedToNote )
             }
-            ssScrollView.addSoundPerformanceResult(
-                atXPos:       CGFloat(onePerfSound.xOffsetStart),
-                withDuration: dur,
-                soundID:      onePerfSound.soundID,
-                isLinked:     onePerfSound.isLinkedToNote,
-                linkedNoteID: onePerfSound.linkedToNote )
+        }
+
+        // Reacting to worst issue must be delayed slightly
+        delay(0.1) {
+            let worstPerfIssue = PerformanceIssueMgr.instance.getFirstPerfIssue()
+            if worstPerfIssue != nil {
+                let perfNoteID:Int32 = worstPerfIssue!.perfNoteID
+                if worstPerfIssue!.videoID != vidIDs.kVid_NoVideoAvailable {
+                    self.scrollToNoteAndLaunchVideo(perfNoteID: perfNoteID,
+                                                    videoID: worstPerfIssue!.videoID)
+                }
+                else if worstPerfIssue!.alertID != alertIDs.kAlt_NoAlertMsgAvailable {
+                    self.scrollToNoteAndLaunchAlert(perfNoteID: perfNoteID,
+                                                    alertID: worstPerfIssue!.alertID)
+                }
+            }
         }
     }
 
@@ -692,6 +642,21 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
 //                let graceNote = (note.grace == sscore_pd_grace_no) ? "note" : "grace"
                 //                print("part 0 \(graceNote) pitch:\(note.midiPitch) startbar:\(note.startBarIndex) start:\(note.start)ms duration:\(note.duration)ms at x=\(noteXPos(note))")
 
+                let startFromBarBeginning = note.start // start offset within current measure
+                if startFromBarBeginning != 0 {
+                    continue // comment this line out to see per-note scrolling
+                    // Doing this creates animation "points" only for the first
+                    // element - note or rest - in the measure and ignores all
+                    // others. (Previously, animation points were added for each
+                    // individual note/rest.)
+                    // This creates a smoother scrolling animation. While there
+                    // is some variation between the lengths of measures, there
+                    // can be a lot of difference between the distance between
+                    // notes in a single measure and distance between the last
+                    // note of one measure and the first of the next. This was
+                    // the source of uneven scrolling.
+                }
+
                 thisNoteXPos = Double(noteXPos(note))
 
                 if firstNote {
@@ -699,8 +664,6 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                     print("animHorxOffset= \(animHorzOffset)")
                     firstNote = false
                 }
-
-                let startFromBarBeginning = note.start // start offset within current measure
 
                 // Exclude the second note of a cross-bar tied note pair, which has a negative
                 // start-from-bar-start time (i.e., previous measure). All data needed for animation
@@ -755,10 +718,18 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     }
 
     //////////////////////////////////////////////////////////////////////////////
-    //     TODO: Ultimately want to move this func out to PerformanceTrackingMgr,
-    //        but currently this func uses too many vars local to this VC to make
-    //        this a quick task. Will try again at a later date.
+    //     TODO: Ultimately want to move this func out (or most of it) to
+    //        PerformanceTrackingMgr, but currently this func uses too many vars
+    //        local to this VC to make this a quick task. Will try again at a
+    //        later date.
+    //
+    //        The main issue is the use of the existing timer and vars set up for
+    //        the preliminary rhythm and pitch analysis by another dev. If we
+    //        commit to using the newer code and none of the old, this will not
+    //        be that hard.
+    //
     func trackSounds() {
+
         let perfTrkgMgr: PerformanceTrackingMgr! = PerformanceTrackingMgr.instance
         guard perfTrkgMgr != nil else { return }
 
@@ -771,7 +742,6 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         // 3) Detect the the end of a Sound
         // (4 - no signal and no existing Sound, then do nothing)
 
-        let kAmplitudeThresholdForIsSound = 0.05 // 0.01
         let currAmpltd = AudioKitManager.sharedInstance.frequencyTracker.amplitude
         let signalDetected : Bool = currAmpltd > kAmplitudeThresholdForIsSound
         let currFreq = AudioKitManager.sharedInstance.frequencyTracker.frequency
@@ -1411,41 +1381,48 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
         return 0
     }
 
-    /////////////////////////////////////////////
+    func noteYPos(_ note: SSPDNote) -> Float {
+        let system = ssScrollView.systemContainingBarIndex(note.startBarIndex)
+        guard system != nil else { return 0 }
+
+        let comps = system?.components(forItem: note.item_h)
+        for comp in comps! {
+            if (comp.type == sscore_comp_notehead || comp.type == sscore_comp_rest) {
+                let result = Float(comp.rect.origin.y + comp.rect.size.height / 2)
+                return result
+            }
+        }
+
+        return 0
+    }
+
+    /////////////////////////////////////////////////////////////////////////////
     // Create a new PerformanceNote, add to appropriate container,
     // link to sound if one exists.
     //     TODO: Ultimately want to move this func out to PerformanceTrackingMgr,
-    //        but currently this func uses too many vars local to this VC to make
-    //        this a quick task. Will try again at a later date.
+    //        but may not be possible b/c currently this func uses too many vars
+    //        local to this VC (mostly related to SeeScore, which can't be moved
+    //        outside the VC). Will look at this again at a later date.
     func createNewPerfNote( nsNote: SSPDNote ) {
 
         // W let xpos = noteXPos(note.note)
         let xpos = noteXPos( nsNote )
         currNoteXPos = CGFloat(xpos)
+        let ypos = noteYPos( nsNote )
 
         PerformanceTrackingMgr.instance.currentlyInAScoreNote = true
         let newNote : PerformanceNote = PerformanceNote.init()
-
-        // let noteID = newNote.noteID
-        // W let noteDur = note.note.duration
         let noteDur = nsNote.duration
-
-        let noteDurTimeInterval = musXMLNoteUnitToInterval( noteDur: noteDur,
-                                                            bpm: bpm() )
-// W      let barStartIntvl =
-//            mXMLNoteStartInterval( bpm:bpm(), beatsPerBar: Int32(beatsPerBar),
-//                                   startBarIndex: note.note.startBarIndex,
-//                                   noteStartWithinBar: note.note.start )
         let barStartIntvl =
             mXMLNoteStartInterval( bpm: bpm(),
                                    beatsPerBar: Int32(beatsPerBar),
                                    startBarIndex: nsNote.startBarIndex,
                                    noteStartWithinBar: nsNote.start )
         newNote.expectedStartTime = barStartIntvl
-        newNote.expectedDuration = noteDurTimeInterval
+        newNote.expectedDuration = Double(noteDur) / 1000.0
         newNote.xPos = Int32(xpos)
+        newNote.yPos = Int32(ypos)
 
-// W      newNote.expectedMidiNote = NoteID(note.note.midiPitch)
         newNote.expectedMidiNote = NoteID(nsNote.midiPitch)
 
         PerformanceTrackingMgr.instance.performanceNotes.append( newNote )
@@ -1454,8 +1431,6 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
 
         if let freq = NoteService.getNote( Int(nsNote.midiPitch) )?.frequency {
             targetPitch = freq
-//            lowPitchThreshold = freq / frequencyThresholdPercent
-//            highPitchThreshold = freq * frequencyThresholdPercent
             newNote.expectedFrequency = freq
         }
     }
@@ -1493,8 +1468,6 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
                         pitchHighLate = false
                         //midiPitch from SeeScore has already had the -2 offset applied from the XML file
 //                        if let freq = NoteService.getNote(Int(note.note.midiPitch) + transpositionOffset)?.frequency {
-
-                        let thisNote = NoteService.getNote(Int(note.note.midiPitch))
 
                         if let freq = NoteService.getNote(Int(note.note.midiPitch))?.frequency {
                             targetPitch = freq
@@ -1594,7 +1567,6 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
             }
             else if svc.shouldSetSongStartTime {
                 let msOffset = TimeInterval(abs(svc.beatMillisecOffset/1000))
-                let now = Date()
                 let nowPlus = Date().addingTimeInterval(msOffset)
                 svc.songStartTm = nowPlus
                 svc.songStartTmOffset = svc.songStartTm.timeIntervalSince(svc.startTime)
@@ -1657,14 +1629,306 @@ class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNo
     }
     */
 
-    //MARK: - OverlayViewDelegate
-    //////////////////////////////////////////////////
-    //   SeeScore view OverlayViewDelegate method
-    //
-    func noteTapped(withThisID: Int32) {
+    // MARK: PerfAnalysisSettingsPopupView
 
-        PerformanceTrackingMgr.instance.displayPerfInfoAlert(
-                                                        perfNoteID: withThisID,
-                                                        parentVC: self )
+    ///////////////////////////////////////////////////////////////////////////
+    //
+    // Vars, funcs for popup to set Performance Analysis criteria at runtime.
+    //
+    //   This popup dialog allows you, for tuning and testing, to change some
+    //   of the Performance Analysis vars at runtime.
+    //
+    //   Set kMKDebugOpt_ShowDebugSettingsBtn true or false to:
+    //   1) Expose or hide the Button that launches the dialog.
+    //   2) Secondarily, Unblocks/Blocks popping up dialog after button push
+    //
+    //   This button and the popup dialog are ONLY to be exposed (if desired) in
+    //   development mode. It is a development tool only. NOT for release.
+    //
+    //   The PerfAnalysisSettingsPopupView popup allows setting:
+    //   1) The Sort Criteria for post-performance analysis, for choosing which
+    //      performance issue to consider "worst". See sortCriteria of class
+    //      PerformanceIssueMgr.
+    //   2) Whether to ignore Missd Nots during PerformanceAnalysis (they can
+    //      get in the way if you stop the performance early to test something -
+    //      you will most likely "miss" the last note).
+    //   3) Turn on/off showing Notes and Sounds on the SeeScore scroll view
+    //
+
+    var showDebugSettingsBtn: UIButton?
+
+    func setupDebugSettingsBtn() {
+        guard kMKDebugOpt_ShowDebugSettingsBtn else { return }
+
+        let btnWd: CGFloat     = 110.0
+        let btnHt: CGFloat     = 45.0
+        let debugBtnFrame = CGRect( x: 10,  y: 45,
+                                    width: btnWd, height: btnHt )
+        showDebugSettingsBtn = UIButton(frame: debugBtnFrame)
+        showDebugSettingsBtn?.roundedButton()
+        showDebugSettingsBtn?.backgroundColor = (UIColor.blue).withAlphaComponent(0.05)
+        showDebugSettingsBtn?.addTarget(self,
+                           action: #selector(doShowDebugSetupBtnPressed(sender:)),
+                           for: .touchUpInside )
+        showDebugSettingsBtn?.isEnabled = true
+        showDebugSettingsBtn?.titleLabel?.lineBreakMode = .byWordWrapping
+        let btnStr = "    Performance\nGrading Settings"
+        let btnAttrStr =
+            NSMutableAttributedString( string: btnStr,
+                                       attributes: [NSFontAttributeName:UIFont(
+                                        name: "System Font",
+                                        size: 11.0)!])
+        showDebugSettingsBtn?.titleLabel?.attributedText = btnAttrStr
+        showDebugSettingsBtn?.setTitle(btnStr, for: .normal)
+        showDebugSettingsBtn?.setTitleColor( (UIColor.black).withAlphaComponent(0.4),
+                                             for: .normal )
+        self.view.addSubview(showDebugSettingsBtn!)
+    }
+
+    var perfSettingsPopView: PerfAnalysisSettingsPopupView?
+
+    func doShowDebugSetupBtnPressed(sender: UIButton) {
+        guard kMKDebugOpt_ShowDebugSettingsBtn else { return }
+
+        if perfSettingsPopView == nil {
+            let sz = PerfAnalysisSettingsPopupView.getSize()
+            let frm = CGRect(x: 20, y: 60, width: sz.width, height: sz.height )
+            perfSettingsPopView = PerfAnalysisSettingsPopupView.init(frame:frm)
+            perfSettingsPopView?.settingsChangedDelegate = self
+            self.view.addSubview(perfSettingsPopView!)
+        }
+        perfSettingsPopView?.showPopup()
+    }
+
+    // PerfAnalysisSettingsChangedProtocol func
+    func perfAnalysisSettingsChange(_ whatChanged : Int)
+    {
+        guard kMKDebugOpt_ShowDebugSettingsBtn else { return }
+
+        // Analysis sttings have been changed. Redo the analysis
+        ssScrollView.turnHighlightOff()
+        ssScrollView.clearNotePerformanceResults()
+        performPostPerfAnalysis()
+    }
+
+    //MARK: - OverlayViewDelegate
+
+    ////////////////////////////////////////////////////////////
+    //   SeeScore view OverlayViewDelegate-related methods
+    //
+
+    func noteTapped(withThisID: Int32) {
+        if FSAnalysisOverlayView.getShowNotesAnalysis() {
+            PerformanceTrackingMgr.instance.displayPerfInfoAlert(
+                perfNoteID: withThisID,
+                parentVC: self )
+        }
+    }
+
+    var vhView: VideoHelpView?
+    let vhViewTag = 901 // just something unique
+
+    func createVideoHelpView() {
+        if self.vhView == nil {
+            let sz = VideoHelpView.getSize()
+            let horzSpacing = (self.view.frame.width - sz.width) / 2
+            let x = horzSpacing * 1.75
+            let frm = CGRect( x: x, y:40, width: sz.width, height: sz.height )
+            self.vhView = VideoHelpView.init(frame: frm)
+            self.vhView?.tag = vhViewTag
+            self.view.addSubview(self.vhView!)
+        }
+    }
+
+    func scrollToNoteAndLaunchVideo(perfNoteID: Int32, videoID: Int) {
+
+        if ssScrollView.highlightNote(perfNoteID) {
+            delay(1.0) {
+                if self.vhView == nil {
+                    self.createVideoHelpView()
+                }
+                self.vhView?.videoID = videoID
+                self.vhView?.showVideoVC()
+            }
+        }
+    }
+
+    func scrollToNoteAndLaunchAlert(perfNoteID: Int32, alertID: Int) {
+
+        if ssScrollView.highlightNote(perfNoteID) {
+            delay(1.0) {
+                if self.vhView == nil {
+                    self.createVideoHelpView()
+                }
+                self.vhView?.videoID = vidIDs.kVid_NoVideoAvailable
+                let msgText = getMsgTextForAlertID(alertID)
+                self.vhView?.showTempMsg(tempMsg: msgText)
+            }
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+    //  Jumping Monkey stuff
+
+    var monkeyImageView: UIImageView? = nil
+
+    func buildMonkeyImageView() {
+        let mnkyImg1 = UIImage(named:"Monkey_Jumping Temples_monkey 06@2x")!
+        let mnkyImg2 = UIImage(named:"Monkey_Jumping Temples_monkey 02@2x")!
+        let mnkyImg3 = UIImage(named:"Monkey_Jumping Temples_monkey 03@2x")!
+        let mnkyImg4 = UIImage(named:"Monkey_Jumping Temples_monkey 04@2x")!
+        // iOS 10 or later:
+        //  let emptyImg = UIGraphicsImageRenderer(size: mnkyImg1.size).image {_ in}
+        UIGraphicsBeginImageContextWithOptions(mnkyImg1.size, false, 0.0);
+        let emptyImg = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        // Using images, alternate to create dancing . . .
+        let imgArr = [mnkyImg1, mnkyImg2, mnkyImg1, mnkyImg2,
+                      mnkyImg1, mnkyImg2, mnkyImg3, mnkyImg2,
+                      mnkyImg3, mnkyImg4, mnkyImg3, mnkyImg4,
+                      mnkyImg3, mnkyImg4, mnkyImg3, mnkyImg2,
+                      // now hold the thumbs up pose for a bit:
+                      mnkyImg1, mnkyImg1, mnkyImg1, mnkyImg1,
+                      mnkyImg1, mnkyImg1, mnkyImg1, mnkyImg1]
+        monkeyImageView = UIImageView(image:emptyImg)
+        monkeyImageView?.frame.origin = CGPoint(x: 160, y: 63)
+        self.view.addSubview(monkeyImageView!)
+        monkeyImageView?.animationImages = imgArr
+        monkeyImageView?.animationDuration = 2.5
+        monkeyImageView?.animationRepeatCount = 1
+    }
+
+    func animateMonkeyImageView() {
+        if monkeyImageView == nil {
+            buildMonkeyImageView()
+        }
+        monkeyImageView?.startAnimating()
+    }
+
+
+    //MARK: - Testing or debugging related
+
+    ////////////////////////////////////////////////////////////////////////////
+    //
+    //  Testing or debugging related, from here to end of file
+    //
+    ////////////////////////////////////////////////////////////////////////////
+
+    func printAndTestAnalysisTables() {
+
+        guard kMKDebugOpt_PrintPerfAnalysisValues else { return }
+
+        let perfAnalysisMgr: PerformanceAnalysisMgr! = PerformanceAnalysisMgr.instance
+
+        var tolerances = pitchAndRhythmTolerances()
+        tolerances.setWithInverse( rhythmTolerance:         0.3,
+                                   correctPitchPercentage:  0.03,
+                                   aBitToVeryPercentage:    0.085,
+                                   veryBoundaryPercentage:  0.60 )
+        perfAnalysisMgr.rebuildAllAnalysisTables( tolerances )
+
+        perfAnalysisMgr.trumpetPartialsTable.printAllPartials()
+        print ("===================================================================")
+        print ("\nAll Partials by Note\n")
+        perfAnalysisMgr.trumpetPartialsTable.printAllPartialsByNote()
+        print ("\n")
+
+        ////////////////////////////////////////////////
+        let aNote = NoteService.getNote(Int(NoteIDs.A4))
+        if aNote != nil {
+            print("")
+            print("For \(aNote!.fullName), freq = \(aNote!.frequency)")
+            print("")
+        }
+
+        func printNoteFRInfo(noteFR: tNoteFreqRangeData) {
+            let lo = String(format: "%.3f", noteFR.freqRange.lowerBound)
+            let hi = String(format: "%.3f", noteFR.freqRange.upperBound)
+            print("!! noteWithFreqRange; Name: \(noteFR.noteFullName), ConcName: \(noteFR.concertNoteFullName), ConcPitch: \(noteFR.concertFreq), Range: \(lo)...\(hi)")
+        }
+
+        print("")
+        var noteFR: tNoteFreqRangeData =
+            perfAnalysisMgr.getNoteFreqRangeData(noteID: NoteIDs.F3)
+        printNoteFRInfo(noteFR: noteFR)
+
+        noteFR = perfAnalysisMgr.getNoteFreqRangeData(noteID: NoteIDs.C4)
+        printNoteFRInfo(noteFR: noteFR)
+
+        noteFR = perfAnalysisMgr.getNoteFreqRangeData(noteID: NoteIDs.E4)
+        printNoteFRInfo(noteFR: noteFR)
+
+        noteFR = perfAnalysisMgr.getNoteFreqRangeData(noteID: NoteIDs.C5)
+        printNoteFRInfo(noteFR: noteFR)
+
+        noteFR = perfAnalysisMgr.getNoteFreqRangeData(noteID: NoteIDs.C6)
+        printNoteFRInfo(noteFR: noteFR)
+
+        ////////////////////////////////////////////////
+        print("")
+
+        tolerances.setWithInverse( rhythmTolerance:         0.3,
+                                   correctPitchPercentage:  0.020,
+                                   aBitToVeryPercentage:    0.035,
+                                   veryBoundaryPercentage:  0.050 )
+        perfAnalysisMgr.rebuildAllAnalysisTables( tolerances)
+
+        noteFR = perfAnalysisMgr.getNoteFreqRangeData(noteID: NoteIDs.F3)
+        printNoteFRInfo(noteFR: noteFR)
+
+        noteFR = perfAnalysisMgr.getNoteFreqRangeData(noteID: NoteIDs.E4)
+        printNoteFRInfo(noteFR: noteFR)
+
+        noteFR = perfAnalysisMgr.getNoteFreqRangeData(noteID: NoteIDs.C5)
+        printNoteFRInfo(noteFR: noteFR)
+
+        noteFR = perfAnalysisMgr.getNoteFreqRangeData(noteID: NoteIDs.C6)
+        printNoteFRInfo(noteFR: noteFR)
+        print("")
+    }
+
+    func printPostPerfDebugData(timingThreshold: Double) {
+
+        guard kMKDebugOpt_PrintStudentPerformanceDataDebugOutput else { return }
+
+        print ("\n\n")
+        print ("timingThreshold is: \(timingThreshold)\n")
+        for oneExpNote in PerformanceTrackingMgr.instance.performanceNotes {
+            let expectedStart = oneExpNote.expectedStartTime
+            if oneExpNote.linkedToSoundID == noSoundIDSet {
+                print ( "Note ID: \(oneExpNote.perfNoteID) is not linked to a sound" )
+                print ( "  ExpectedStart Time: \(expectedStart)" )
+            }
+            else {
+                let actualStart   = oneExpNote.actualStartTime
+                let diff          = actualStart - expectedStart
+                let endTime       = oneExpNote.endTime
+                let duration      = oneExpNote.actualDuration
+                let expPitch      = oneExpNote.expectedFrequency
+                let actPitch      = oneExpNote.actualFrequency
+                let expMidiNote   = oneExpNote.expectedMidiNote
+                let actMidiNote   = oneExpNote.actualMidiNote
+
+                let expNote = NoteService.getNote(Int(expMidiNote))
+                let actNote = NoteService.getNote(Int(actMidiNote))
+
+                let expNoteName = expNote != nil ? expNote!.fullName : ""
+                let actNoteName = actNote != nil ? actNote!.fullName : ""
+
+                print ( "Note ID: \(oneExpNote.perfNoteID) is linked to sound \(oneExpNote.linkedToSoundID)" )
+                print ( "  ExpectedStart Time: \(expectedStart)" )
+                print ( "  Actual Start Time:  \(actualStart)" )
+                print ( "  Difference:         \(diff)" )
+                print ( "  End Time:           \(endTime)" )
+                print ( "  Duration:         \(duration)" )
+                print ( "  ExpectedPitch:      \(expPitch)" )
+                print ( "  Actual Pitch:       \(actPitch)" )
+                print ( "  Expected MIDI Note: \(expMidiNote) - \(expNoteName)" )
+                print ( "  Actual MIDI Note:   \(actMidiNote) - \(actNoteName)" )
+                let avgPitch      = oneExpNote.averageFrequency()
+                print ( "  AveragePitch:       \(avgPitch)" )
+            }
+        }
+        print ("\n\n")
     }
 }

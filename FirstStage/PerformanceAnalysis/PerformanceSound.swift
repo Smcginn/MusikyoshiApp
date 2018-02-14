@@ -51,6 +51,11 @@ public class PerformanceSound
         didSet {
             endTime -= kSoundStartAdjustment
             duration = endTime - startTime
+            if !initialPitchHasStablized() {
+                let lastSamp = lastEarlySample()
+                averagePitch = lastSamp
+                averagePitchRunning = lastSamp
+            }
         }
     }
     var duration = noTimeValueSet
@@ -72,13 +77,16 @@ public class PerformanceSound
     
     // A short time is allowed for the pitch to settle, i.e., these samples are ignored
     // when determining the pitch of the sound. They are stored for debugging purposes.
-    private var earlySamples = [Double]() // not used to determine avg pitch
+    private var earlySamples = [Double]() // not generally used to determine avg pitch
     var earlyPitchSampleCount = 0
     private func addEarlyPitchSample(pitchSample : Double) {
         earlyPitchSampleCount += 1
         if kSavePitchSamples {
             earlySamples.append(pitchSample)
         }
+    }
+    func lastEarlySample() -> Double {
+        return earlySamples.isEmpty ? 0.0 : earlySamples.last!
     }
     func initialPitchHasStablized() -> Bool {
         return earlyPitchSampleCount > kSamplesNeededToDeterminePitch || forcedPitch
@@ -246,8 +254,6 @@ public class PerformanceSound
         guard kMKDebugOpt_PrintStudentPerformanceDataDebugOutput else { return }
         
         print ("   Detecting change note while playing legato. ")
-        //        print ("       - Amplitude is: \(amplitudeSCF)")
-        //        print ("       - Stopping current sound at \(self.endTime)")
         print ("       - duration: \(self.duration)")
         print ("       - avgPitch: \(self.averagePitch)")
         print ("       - avPtcRun: \(self.averagePitchRunning)")

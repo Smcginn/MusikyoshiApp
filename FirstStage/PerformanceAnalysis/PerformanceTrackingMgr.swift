@@ -55,6 +55,13 @@ class PerformanceTrackingMgr {
     init() {
         userDefsTimingThreshold =
             UserDefaults.standard.double(forKey: Constants.Settings.TimingThreshold)
+        if UIDevice.current.modelName == "Simulator" {
+            print("In Simulator")
+            kAmplitudeThresholdForIsSound = kAmpThresholdForIsSound_Sim
+        } else {
+            print("In Real Device")
+            kAmplitudeThresholdForIsSound = kAmpThresholdForIsSound_HW
+        }
     }
     
     ///////////////////////////////////////////////////////////////////////////
@@ -162,8 +169,8 @@ class PerformanceTrackingMgr {
     //    (Two are necessary to be able to determine if first note is played early)
     var soundToNoteOffset : TimeInterval = 0.0
     
-    // Needed by student Note and Sound Performance data and methods - SCF
-    var songStartTime : Date = Date() // {
+    // Needed by student Note and Sound Performance data and methods
+    var songStartTime : Date = Date()
     
     // For setting start time of note, adjusting for:
     //      note startTime is relative to songStart;
@@ -178,7 +185,17 @@ class PerformanceTrackingMgr {
     // stuff; perhaps change to timing zones, similar to the pitch zones.)
     var userDefsTimingThreshold: Double
     
-
+    var currTempoBPM: Int = 60
+    var currBeatsPerBar: Int = 4
+    var qtrNoteTimeInterval: TimeInterval = 1.0
+    func setPlaybackVals( tempoInBPM: Int, beatsPerBar: Int )
+    {
+        currTempoBPM    = tempoInBPM
+        currBeatsPerBar = beatsPerBar
+        let bpmRatio: TimeInterval = secsPerMin / TimeInterval(tempoInBPM)
+        qtrNoteTimeInterval = TimeInterval(1.0) * bpmRatio
+    }
+    
     ///////////////////////////////////////////////////////////////////////////
     //
     //  MARK:      Miscellaneous funcs . . .
@@ -205,8 +222,10 @@ class PerformanceTrackingMgr {
         guard !currSound.isLinkedToNote && !currPerfNote.isLinkedToSound else { return }
         
         let diff = abs( soundTimeToNoteTime(songStart: currSound.startTime) -
-            currPerfNote.expectedStartTime  )
-        if (diff <= userDefsTimingThreshold ) {
+                        currPerfNote.expectedStartTime  )
+        // if (diff <= userDefsTimingThreshold) {
+        let attackTol = PerformanceAnalysisMgr.instance.currTolerances.rhythmTolerance
+        if (diff <= attackTol) {
             currPerfNote.linkToSound(soundID: currSound.soundID, sound: currSound)
             currSound.linkToNote(noteID: currPerfNote.perfNoteID, note: currPerfNote)
             currPerfNote.actualStartTime = soundTimeToNoteTime(songStart: currSound.startTime)
@@ -224,8 +243,8 @@ class PerformanceTrackingMgr {
         currSound.updateCurrentNoteIfLinkedFinal()
     }
     
-    // Do post-performance analysis: Pitch and Rhythm accuracy
-    func analyzePerfomance() {
+    // Do post-performance analysis and grading: Pitch and Rhythm accuracy
+    func analyzePerformance() {
         
         let rhythmAnalyzer = NoteRhythmPerformanceAnalyzer.init()
         let pitchAnalyzer  = TrumpetPitchPerformanceAnalyzer.init()
@@ -236,11 +255,13 @@ class PerformanceTrackingMgr {
         // Visit each Note, have analyzers grade and rate performance of that
         // Note compared with expectations
         for onePerfNote in performanceNotes {
-            onePerfNote.weightedRating = 0
+            onePerfNote.weightedScore = 0
             rhythmAnalyzer.analyzeNote( perfNote: onePerfNote )
             pitchAnalyzer.analyzeNote( perfNote: onePerfNote )
         }
         
+        PerformanceIssueMgr.instance.scanPerfNotesForIssues( kPerfIssueSortCriteria )
+
         if kMKDebugOpt_PrintPerfAnalysisResults {
             print ( "\nPerformance Results:\n")
             for onePerfNote in performanceNotes {
@@ -249,16 +270,18 @@ class PerformanceTrackingMgr {
                 print ( "   Attack rating:   \(onePerfNote.attackRating)" )
                 print ( "   Duration rating: \(onePerfNote.durationRating)" )
                 print ( "   Pitch rating:    \(onePerfNote.pitchRating)" )
-                print ( "   Weighted rating: \(onePerfNote.weightedRating)" )
+                print ( "   Weighted rating: \(onePerfNote.weightedScore)" )
             }
         }
     }
     
     // Pops up an Alert with the details of the Performed Note's accuracy.
+    //   This is intended for debugging, or to show what can potentially be 
+    //   displayed. Not for user consumption.
     func displayPerfInfoAlert( perfNoteID: Int32,
                                parentVC: UIViewController ) {
         let possibleNote: PerformanceNote? =
-            findPerfomanceNoteByID(perfNoteID: perfNoteID)
+            findPerformanceNoteByID(perfNoteID: perfNoteID)
         guard let foundNote = possibleNote else { return }
         
         let titleStr: String = "Info for Note  \(foundNote.perfNoteID)"
@@ -319,7 +342,7 @@ class PerformanceTrackingMgr {
         return returnSound
     }
 
-    func findPerfomanceNoteByID(perfNoteID: Int32) -> PerformanceNote? {
+    func findPerformanceNoteByID(perfNoteID: Int32) -> PerformanceNote? {
         var returnNote : PerformanceNote? = nil
         for onePerformanceNote in performanceNotes {
             if ( onePerformanceNote.perfNoteID == perfNoteID ) {
@@ -348,7 +371,7 @@ class PerformanceTrackingMgr {
         return returnNote
     }
 
-    func findPerfomanceNoteByXPos(xPos: Int32) -> PerformanceNote? {
+    func findPerformanceNoteByXPos(xPos: Int32) -> PerformanceNote? {
         
         var returnNote : PerformanceNote? = nil
         
@@ -379,6 +402,9 @@ class PerformanceTrackingMgr {
 //  (Diff between one note and another, say E4 to F4, is 0.944.)
 let kDiffNotePercentage : Double = 0.955
 
+// This is halfway between two adjacent note's center freqs.
+let kDiffNotePercentageHalf : Double = 0.972
+
 // Used for determining if a constant sound is transitioning from one
 // note to another (legato playing)
 func areDifferentNotes( pitch1: Double, pitch2: Double ) -> Bool {
@@ -400,14 +426,6 @@ func areDifferentNotes( pitch1: Double, pitch2: Double ) -> Bool {
 //   MusicXML note start times and durations are stored as values independant of
 //   BPM, etc., using 1 quarter note = 1000  as the reference, regardless of tempo.
 
-// What is the length of a quarter note at the current tempo?
-func quarterNoteTimeInterval( bpm: Int32) -> TimeInterval {
-    let bpmRatio: TimeInterval = secsPerMin / TimeInterval(bpm)
-    let retVal: TimeInterval = TimeInterval(1.0) * bpmRatio
-    
-    return retVal
-}
-
 // Given the MusicXML startTime or duration, and the BPM, return TimeInterval
 func musXMLNoteUnitToInterval( noteDur: Int32, bpm: Int32) -> TimeInterval {
     let bpmRatio: TimeInterval = secsPerMin / TimeInterval(bpm)
@@ -425,17 +443,38 @@ func mXMLNoteStartInterval ( bpm: Int32,
                              startBarIndex : Int32,
                              noteStartWithinBar: Int32 ) -> TimeInterval {
     let beatsToBeginningOfBar = startBarIndex * beatsPerBar
+    let numBeatsToBarBeginAsIntvl = TimeInterval(beatsToBeginningOfBar)
     let intervalToBarBegin =
-        quarterNoteTimeInterval(bpm:bpm) * TimeInterval(beatsToBeginningOfBar)
+        PerformanceTrackingMgr.instance.qtrNoteTimeInterval * numBeatsToBarBeginAsIntvl
     let noteStartInterval =
-        intervalToBarBegin + musXMLNoteUnitToInterval(noteDur: noteStartWithinBar,
-                                                      bpm:bpm)
+        intervalToBarBegin + Double(noteStartWithinBar) / 1000.0
     return noteStartInterval
+}
+
+// Needed to determine if running in simulator or on actual device. Note: if needed,
+// this could be expanded to detect the actual model of the iOS hardware.
+public extension UIDevice {
+    
+    var modelName: String {
+        var systemInfo = utsname()
+        uname(&systemInfo)
+        let machineMirror = Mirror(reflecting: systemInfo.machine)
+        let identifier = machineMirror.children.reduce("") { identifier, element in
+            guard let value = element.value as? Int8, value != 0 else { return identifier }
+            return identifier + String(UnicodeScalar(UInt8(value)))
+        }
+        
+        switch identifier {
+        case "i386",
+             "x86_64":   return "Simulator"
+        default:         return "Device"
+        }
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////
 //
-//   Testing related from this point on
+//   Testing-related from this point on
 //
 ////////////////////////////////////////////////////////////////////////////
 
@@ -447,7 +486,7 @@ func runPreAnalysisPartialTestingSetup() {
     
     var count = 1
     
-    /*
+    /*  Don't delete:  Commented out becasue this is an alternate test
     // Version one - use with "Rhythm Party 8 - tpt", which is all E4's
     for onePerfNote in PerformanceTrackingMgr.instance.performanceNotes {
         switch(count) {

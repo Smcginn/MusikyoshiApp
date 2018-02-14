@@ -12,7 +12,7 @@ public class PerformanceNote
 {
     var perfNoteID          = noNoteIDSet
     var isLinkedToSound     = false
-    var linkedToSoundID     = noSoundIDSet // get / set
+    var linkedToSoundID     = noSoundIDSet
     public weak var linkedSoundObject : PerformanceSound?
     func linkToSound( soundID : Int32, sound: PerformanceSound? ) {
         linkedToSoundID = soundID
@@ -23,6 +23,7 @@ public class PerformanceNote
     // The X-Coord of where on the scrolling view the XMLMusic note is diaplayed. 
     // Used to specify where to draw note-related factoids (debug or otherwise).
     var xPos : Int32 = 0
+    var yPos : Int32 = 0
     
     // These are TimeIntervals since the beginning of song playback
     //   (Sound times are intervals since analysis start)
@@ -67,8 +68,9 @@ public class PerformanceNote
     var actualFrequency     = noPitchValueSet { // concert pitch of performacne
         didSet {
             guard actualFrequency > 0.0 else { return }
-            actualMidiNoteD = actualFrequency.frequencyToMIDINote()
-            actualMidiNote  = NoteID(actualMidiNoteD.rounded())
+            actualMidiNote  = NoteID(actualFrequency.frequencyToRoundedMIDINote())
+            actualMidiNoteTransposed =
+                         concertNoteIdToInstrumentNoteID( noteID: actualMidiNote)
         }
     }
     var expectedMidiNote: NoteID = 0 { // note ID for concert pitch of expected note
@@ -79,7 +81,7 @@ public class PerformanceNote
     }
     var transExpectedNoteID: NoteID = 0 // note ID for transposed note (note on score)
     var actualMidiNote:      NoteID = 0 // note ID for concert pitch of performance note
-    var actualMidiNoteD:     Double = 0 //   "   "  "     "      "   "       "       "
+    var actualMidiNoteTransposed: NoteID = 0 // transposed note ID of performance note
     
     func averageFrequency() -> Double {
         var pitchVal = 0.0
@@ -91,11 +93,18 @@ public class PerformanceNote
         return pitchVal
     }
     
-    var attackRating: timingRating =  .notRated
-    var durationRating: timingRating = .notRated
+    // the performance issue for each category, if there was one
+    var attackRating: performanceRating   = .notRated
+    var durationRating: performanceRating = .notRated
+    var pitchRating: performanceRating    = .notRated
+    
+    // the weighted score, or severity of the issue for each category
+    var attackScore:   Int =  0  // 0 is the best, 1 next best, etc.
+    var durationScore: Int =  0
+    var pitchScore:    Int =  0
+    var weightedScore: Int =  0  // Overall; combined of the above
+    
     var pitchVariance = noPitchValueSet
-    var pitchRating: pitchAccuracyRating = .notRated
-    var weightedRating: Int32 = 0  // Overall. 0 is the best, 1 next best, etc.
 
     //////////////////////////////////////////////////////////////////////////
     // Did post-performance analysis discover an instrument-specific problem?
@@ -135,6 +144,7 @@ public class PerformanceNote
     }
 
     // Used by an Alert to populate the messageString with data about this Note.
+    //  (The Alert is a debug feature. It is not visible in release mode.)
     func constructSummaryMsgString( msgString: inout String )
     {
         let expFreqStr = String(format: "%.2f", expectedFrequency)
@@ -183,14 +193,14 @@ public class PerformanceNote
         }
        
         var timingRatingStr = ""
-        timingRating.displayStringForRating( attackRating,
-                                             ratingText: &timingRatingStr )
+        performanceRating.displayStringForRating( attackRating,
+                                                  ratingText: &timingRatingStr )
         var durationRatingStr = ""
-        timingRating.displayStringForRating( durationRating,
-                                             ratingText: &durationRatingStr )
+        performanceRating.displayStringForRating( durationRating,
+                                                  ratingText: &durationRatingStr )
         var pitchRatingStr = ""
-        pitchAccuracyRating.displayStringForRating( pitchRating,
-                                                    ratingText: &pitchRatingStr )
+        performanceRating.displayStringForRating( pitchRating,
+                                                  ratingText: &pitchRatingStr )
         
         msgString += "Expected Note:     " + expectedNoteName + "\n"
         msgString += "         Freq:     " + expFreqStr + "\n"
@@ -200,7 +210,7 @@ public class PerformanceNote
         msgString += "       Note (Guess): " + actualNoteName + "\n"
         msgString += "       Duration:     " + actDurStr + "\n"
         msgString +=  "\n"
-        msgString += "Start Time Delta: " + timDiffStr + "secs\n"
+        msgString += "Start Time Delta: " + timDiffStr + "secs\n\n"
         msgString += "Timing Rating:    " + timingRatingStr + "\n"
         msgString += "Duration Rating:  " + durationRatingStr + "\n"
         msgString += "Pitch Rating:     " + pitchRatingStr + "\n"
@@ -216,35 +226,43 @@ public class PerformanceNote
             msgString += "  Freq (Concert):       " + concFreqStr + "\n"
             msgString += "   (Concert Note Name): " + concName + "\n"
         } else {
-            if !( pitchRating == .slightlyFlat  ||
-                pitchRating == .pitchVeryGood ||
-                pitchRating == .slightlySharp   )
+            if !( pitchRating == .slightlyFlat ||
+                  pitchRating == .pitchGood    ||
+                  pitchRating == .slightlySharp  )
             {
                 msgString += "\n"
                 msgString += "Possible Pitch Issues:\n"
                 msgString += "  Your fingering is wrong\n"
                 msgString += "  Your embouchure is off\n"
-                msgString += "  Your breath is bad ...\n"
+                msgString += "  Your breath is too fast\n"
+                msgString += "    or too slow\n"
             }
         }
         
         // overall rating
-        let weightedStr = String(format: "%d", weightedRating)
+        let weightedStr = String(format: "%d", weightedScore)
         msgString += "\n"
         msgString += "Overall Weighted Rating: " + weightedStr + "\n"
     }
 }
 
-// Copied from AudioKeyHelpers - couldn't figure out how to bring into project
-/// Extension to Double to get the a MIDI Note Number from the frequency 
+// frequencyToMIDINote copied from AudioKeyHelpers - couldn't figure out how to bring 
+// into project Extension to Double to get the a MIDI Note Number from the frequency 
+//   (frequencyToRoundedMIDINote my variant)
 extension Double {
     
     /// Calculate MIDI Note Number from a frequency in Hz
     ///
     /// - parameter aRef: Reference frequency of A Note (Default: 440Hz)
-    ///
+
     public func frequencyToMIDINote(_ aRef: Double = 440.0) -> Double {
         return 69 + 12 * log2(self / aRef)
+    }
+    
+    // uses the freq halfway between notes as the cutoff
+    public func frequencyToRoundedMIDINote(_ aRef: Double = 440.0) -> Int {
+        let nonRounded = 69 + 12 * log2(self / aRef)
+        return Int(nonRounded.rounded())
     }
 }
 

@@ -16,9 +16,6 @@
 
 #include <dispatch/dispatch.h>
 
-// If true. will send msg to overlayViewDelegate to invoke Note accurary popup
-static const bool kMKDebugOpt_NoteAnalysisRespondToTouch = true;
-
 static const CGSize kMargin = {0,0}; // L/R margins
 
 static const float kWindowPlayingCentreFractionFromTop = 0.333; // autoscroll centres the current playing system around here
@@ -780,12 +777,6 @@ static float min(float a, float b)
 
 - (void)layoutSubviews
 {
-    // SCF - delete
-//    NSLog ( @"\n" );
-//    NSLog ( @"\n" );
-//    NSLog ( @" . . . in layoutSubviews, thread = %@", [NSThread currentThread]);
-//    NSLog ( @"\n" );
-//    NSLog ( @"\n" );
 	[super layoutSubviews];
 	if (self.abortingBackground == 0 && score && systemlist.count > 0) // this is called on every scroll movement
 	{
@@ -1774,6 +1765,7 @@ static float min(float a, float b)
 
 // For displaying student performance results
 -(void) addNotePerformanceResultAtXPos:(CGFloat) iXPos
+                                atYpos:(CGFloat) iYPos
                     withWeightedRating:(int)  iWeightedRating
                       withRhythmResult:(int)  iRhythmResult
                        withPitchResult:(int)  iPitchResult
@@ -1784,6 +1776,7 @@ static float min(float a, float b)
     if (analysisOverlayView)
     {
         [analysisOverlayView addNoteAtXPos: iXPos
+                                    atYpos: iYPos
                         withWeightedRating: iWeightedRating
                              withRhythmRes: iRhythmResult
                               withPitchRes: iPitchResult
@@ -1822,6 +1815,28 @@ static float min(float a, float b)
     return pXPos;
 }
 
+-(bool) highlightNote:(int) iNoteID
+{
+    CGFloat xPos = 0.0;
+    if (analysisOverlayView)
+    {
+        bool found = [analysisOverlayView highlightNote: iNoteID
+                                                useXPos: &xPos];
+        if (found)
+        {
+            CGPoint pos = CGPointMake(xPos-kHighlightNoteXOffset, 0);
+            [self setContentOffset:pos animated:true];
+            return true;
+        }
+    }
+    return false;
+}
+
+-(void) turnHighlightOff
+{
+    if (analysisOverlayView)
+        [analysisOverlayView hideHighlight];
+}
 
 -(void) clearNotePerformanceResultAtXPos:(CGFloat) iXPos
 {
@@ -1835,10 +1850,15 @@ static float min(float a, float b)
 -(void)touchesBegan: (NSSet*) touches
           withEvent: (UIEvent*) event
 {
+<<<<<<< HEAD
     if ( !kMKDebugOpt_NoteAnalysisRespondToTouch ) {
         return;
     }
 
+=======
+    if (![FSAnalysisOverlayView getShowNotesAnalysis]) { return; }
+    
+>>>>>>> Fleshing out of Performance Tracking and Analysis
     UITouch *t = [touches anyObject];
     CGPoint _downLocation =[t locationInView:self];
 
