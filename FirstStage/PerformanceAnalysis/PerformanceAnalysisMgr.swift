@@ -16,14 +16,6 @@ import Foundation
 
 let kMKDebugOpt_PrintPerfAnalysisValues = false
 
-// Default Tolerance Percentages
-struct DefaultTolerancePCs {
-    static let defaultRhythmTolerancePC = 0.97
-    static let defaultCorrectPitchPC    = 0.97
-    static let defaultABitToVeryPC      = 0.915
-    static let defaultVeryBoundaryPC    = 0.05
-}
-
 struct pitchAndRhythmTolerances {
     /////////////////////////////////////////////////////////////////////////////
     // This struct is a param for rebuildAllAnalysisTables(), which rebuilds the
@@ -32,9 +24,10 @@ struct pitchAndRhythmTolerances {
     /////////////////////////////////////////////////////////////////////////////
     
     /////////////////////////////////////////////////////////////////////////////
-    // Applied to a millisecond constant, and adjusts how forgiving the app is
-    // when grading rhythmic accuracy
-    var rhythmTolerancePC: Double
+    // How forgiving is the app when grading rhythmic accuracy? This is the
+    // fraction of a second on either side of the expected attack time that is 
+    // still acceptable.)
+    var rhythmTolerance: Double
     
     /////////////////////////////////////////////////////////////////////////////
     // There are five zones for grading pitch where the performed pitch is still
@@ -73,18 +66,25 @@ struct pitchAndRhythmTolerances {
     var veryBoundaryPC: Double
     
     init() {
-        rhythmTolerancePC = DefaultTolerancePCs.defaultRhythmTolerancePC
+        rhythmTolerance   = DefaultTolerancePCs.defaultRhythmTolerance
         correctPitchPC    = DefaultTolerancePCs.defaultCorrectPitchPC
         aBitToVeryPC      = DefaultTolerancePCs.defaultABitToVeryPC
         veryBoundaryPC    = DefaultTolerancePCs.defaultVeryBoundaryPC
+        attackVariance_Correct  = 0.05 // assigned default values here,
+        attackVariance_ABitOff  = rhythmTolerance / 2.0
+        attackVariance_VeryOff  = rhythmTolerance
     }
     
     // Set using internal form (e.g., 0.97 vs 0.03)
-    mutating func set( rhythmTolerancePercentage: Double,
+    mutating func set( rhythmTolerance: Double,
                        correctPitchPercentage: Double,
                        aBitToVeryPercentage: Double,
                        veryBoundaryPercentage: Double ) {
-        self.rhythmTolerancePC = rhythmTolerancePercentage
+        self.rhythmTolerance   = rhythmTolerance
+        attackVariance_Correct = 0.05
+        attackVariance_ABitOff = rhythmTolerance / 2.0
+        attackVariance_VeryOff = rhythmTolerance
+
         self.correctPitchPC    = correctPitchPercentage
         self.aBitToVeryPC      = aBitToVeryPercentage
         self.veryBoundaryPC    = veryBoundaryPercentage
@@ -95,11 +95,15 @@ struct pitchAndRhythmTolerances {
     //   E.g.,
     //     Supply 0.03,  this will convert to 0.97
     //     Supply 0.022, this will convert to 0.978
-    mutating func setWithInverse( rhythmTolerancePercentage: Double,
+    mutating func setWithInverse( rhythmTolerance: Double,
                                   correctPitchPercentage: Double,
                                   aBitToVeryPercentage: Double,
                                   veryBoundaryPercentage: Double ) {
-        self.rhythmTolerancePC = 1.0 - rhythmTolerancePercentage
+        self.rhythmTolerance   = rhythmTolerance
+        attackVariance_Correct = 0.05
+        attackVariance_ABitOff = rhythmTolerance / 2.0
+        attackVariance_VeryOff = rhythmTolerance
+
         self.correctPitchPC    = 1.0 - correctPitchPercentage
         self.aBitToVeryPC      = 1.0 - aBitToVeryPercentage
         self.veryBoundaryPC    = 1.0 - veryBoundaryPercentage
@@ -163,8 +167,7 @@ class PerformanceAnalysisMgr {
     // Store the percentages for each zone used for the current build of the tables
     var currTolerances = pitchAndRhythmTolerances()
     
-    func rebuildAllAnalysisTables(
-        _ prTols: pitchAndRhythmTolerances = pitchAndRhythmTolerances()) {
+    func rebuildAllAnalysisTables(_ prTols: pitchAndRhythmTolerances = pitchAndRhythmTolerances()) {
         
         currTolerances = prTols
         

@@ -8,29 +8,21 @@
 
 #import "FSAnalysisOverlayView.h"
 
-// If true, adds Sound and Note data overlay (for debugging, not for release)
-
-// If this is false, won't draw anything to do with Sounds And Note Analysis
-// If ttrue, will consult the other consts for drawing Notes or Sounds
-const bool kMKDebugOpt_ShowSoundsAndNoteAnalysis = true;
-
-const bool kMKDebugOpt_ShowNotesAnalysis = true;
-const bool kMKDebugOpt_ShowSoundsAnalysis = false;
-
 // For storing the display data for a single note
 @interface NoteDisplayData : NSObject
 @property (nonatomic) float xPos;
+@property (nonatomic) float yPos;
 @property (nonatomic) int   weightedRating;
 @property (nonatomic) int   rhythmResult;
 @property (nonatomic) int   pitchResult;
 @property (nonatomic) int   noteID;
 @property (nonatomic) bool  isLinked;
 @property (nonatomic) int   linkedSoundID;
+@property (nonatomic) bool  highlight;
 @end
 
 @implementation NoteDisplayData
 @end
-
 
 @interface SoundDisplayData : NSObject
 @property (nonatomic) float xPos;
@@ -47,26 +39,141 @@ const bool kMKDebugOpt_ShowSoundsAnalysis = false;
 {
     NSMutableArray*  _notes;
     NSMutableArray*  _sounds;
+    
+    // This is a red, transparent circle, that will pulse when animated, which
+    // encircles a note to show which note a video or alert is referring to.
+    CAShapeLayer*    _highlightLayer;
+
+    CALayer*    _monkeyLayer;
 }
 @end
 
-
 @implementation FSAnalysisOverlayView
 
-- (id)initWithFrame:(CGRect)frame
+-(id) initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self)
     {
         _notes  = [[NSMutableArray alloc] init];
         _sounds = [[NSMutableArray alloc] init];
+        
+        [self createHighlightCircleLayer: self];
+        
+        // These should be checked in as NO for release mode.
+        [FSAnalysisOverlayView  setShowSoundsAnalysis: NO];
+        [FSAnalysisOverlayView  setShowNotesAnalysis: NO];
     }
     
     return self;
 }
 
++(BOOL) getShowNotesAnalysis
+{
+    return kMKDebugOpt_ShowNotesAnalysis;
+}
+
++(void) setShowNotesAnalysis: (BOOL)iShowNotes
+{
+    kMKDebugOpt_ShowNotesAnalysis = iShowNotes;
+}
+
++(BOOL) getShowSoundsAnalysis {
+    return kMKDebugOpt_ShowSoundsAnalysis;
+}
+
++(void) setShowSoundsAnalysis: (BOOL)iShowSounds
+{
+    kMKDebugOpt_ShowSoundsAnalysis = iShowSounds;
+}
+
+#pragma mark - Red Circle Highlight Related
+
+-(void) createHighlightCircleLayer:(UIView*) view
+{
+    _highlightLayer = [CAShapeLayer new];
+    _highlightLayer.contentsScale = [UIScreen mainScreen].scale;
+    _highlightLayer.lineWidth = 2.0;
+    _highlightLayer.fillColor =
+            [UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:0.05].CGColor;
+    _highlightLayer.strokeColor =
+            [UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:0.2].CGColor;
+    
+    const CGFloat kHLRadius =  40.0f;
+    CGMutablePathRef p = CGPathCreateMutable();
+    CGRect circRect = CGRectMake(-kHLRadius, -kHLRadius, kHLRadius*2, kHLRadius*2);
+    CGPathAddEllipseInRect(p, nil, circRect );
+    _highlightLayer.path = p;
+    _highlightLayer.opaque = NO;
+    _highlightLayer.drawsAsynchronously = YES;
+    [_highlightLayer setHidden: YES];
+    
+    CGRect frm = _highlightLayer.frame;
+    frm.origin.x = 100;
+    _highlightLayer.frame = frm;
+
+    [view.layer addSublayer: _highlightLayer];
+}
+
+-(void) showHighlight
+{
+    [_highlightLayer setHidden: NO];
+}
+
+-(void) hideHighlight
+{
+    [self stopHighlightAnim];
+    [_highlightLayer setHidden: YES];
+}
+
+-(void) moveHightlightTo:(CGPoint) pos
+{
+    _highlightLayer.position = pos;
+}
+
+-(void) startHighlightAnim
+{
+    CABasicAnimation* anim = [CABasicAnimation animationWithKeyPath:@"transform"];
+    anim.toValue   = [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.1, 1.1, 1)];
+    anim.fromValue = [NSValue valueWithCATransform3D:CATransform3DIdentity];
+    anim.repeatCount = HUGE_VALF;
+    anim.autoreverses = YES;
+    [_highlightLayer addAnimation: anim forKey:nil];
+}
+
+-(void) stopHighlightAnim
+{
+    [self.layer removeAllAnimations];
+    [_highlightLayer removeAllAnimations];
+}
+
+// If note found, hightlight it, set ioXPos, and return true; return false otherwise
+// param ioXPos: on return, set to xPos the caller should scroll to
+-(bool) highlightNote:(int) iNoteID
+              useXPos:(CGFloat*) ioXPos
+{
+    *ioXPos = 0.0;
+    for (NoteDisplayData* noteData in _notes)
+    {
+        if (noteData.noteID == iNoteID)
+        {
+            *ioXPos = noteData.xPos;
+            noteData.highlight = true;
+            
+            CGPoint pos = CGPointMake(noteData.xPos, noteData.yPos);
+            [self moveHightlightTo: pos];
+            [self showHighlight];
+            [self startHighlightAnim];
+            return true;
+        }
+    }
+    return false;
+}
+
+#pragma mark - Performance Sound and Note related
 
 -(void) addNoteAtXPos:(CGFloat) iXPos
+               atYpos:(CGFloat) iYPos
    withWeightedRating:(int) iWeightedRating
         withRhythmRes:(int) iRhythmResult
          withPitchRes:(int) iPitchResult
@@ -82,9 +189,11 @@ const bool kMKDebugOpt_ShowSoundsAnalysis = false;
             noteData.weightedRating = iWeightedRating;
             noteData.rhythmResult = iRhythmResult;
             noteData.pitchResult =  iPitchResult;
+            noteData.yPos =  iYPos;
             noteData.noteID =  iNoteID;
             noteData.isLinked =  isLinked;
             noteData.linkedSoundID =  iLinkedSoundID;
+            noteData.highlight = false;
             return;
         }
     }
@@ -92,12 +201,14 @@ const bool kMKDebugOpt_ShowSoundsAnalysis = false;
     // if still here, then didn't find existing entry.  Add one.
     NoteDisplayData* noteData = [[NoteDisplayData alloc] init];
     noteData.xPos = iXPos;
+    noteData.yPos = iYPos;
     noteData.weightedRating = iWeightedRating;
     noteData.rhythmResult = iRhythmResult;
     noteData.pitchResult = iPitchResult;
     noteData.noteID =  iNoteID;
     noteData.isLinked =  isLinked;
     noteData.linkedSoundID =  iLinkedSoundID;
+    noteData.highlight = false;
     
     [_notes addObject: noteData];
     
@@ -171,11 +282,11 @@ const bool kMKDebugOpt_ShowSoundsAnalysis = false;
     [self setNeedsDisplayInRect:rct];
 }
 
-- (void)drawRect:(CGRect)rect
+-(void) drawRect:(CGRect)rect
 {
     [super drawRect:rect];
     
-    if (!kMKDebugOpt_ShowSoundsAndNoteAnalysis) {
+    if ( !(kMKDebugOpt_ShowSoundsAnalysis || kMKDebugOpt_ShowNotesAnalysis) ) {
         return;
     }
     
@@ -193,7 +304,7 @@ const bool kMKDebugOpt_ShowSoundsAnalysis = false;
         {
             float x = noteData.xPos;
             
-            // on a scale of 1-15, with 0 the best . . .
+            // on a scale of 1-20-ish, with 0 the best . . .
             CGFloat weightedRatio = (CGFloat)noteData.weightedRating / 15.0f;
             if ( weightedRatio > 1.0 )
                 weightedRatio = 1.0;

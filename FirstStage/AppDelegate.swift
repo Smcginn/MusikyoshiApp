@@ -60,6 +60,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ = AVAudioSessionManager.sharedInstance.setupAudioSession()
         NoteService.initNotes()
 
+        // When the app gets to a point that it needs to set these progressively 
+        // "tighter" as the student improves and moves to harder exercises, this 
+        // should be moved to the point where the level changes are managed, so 
+        // the tables can be rebuilt with progressively less forgiving values.
+        var tolerances = pitchAndRhythmTolerances()
+        tolerances.setWithInverse( rhythmTolerance:         0.4,
+                                   correctPitchPercentage:  0.03,
+                                   aBitToVeryPercentage:    0.085,
+                                   veryBoundaryPercentage:  0.05 )// Shawn wants a very wide acceptance
+        PerformanceAnalysisMgr.instance.rebuildAllAnalysisTables( tolerances )
+
         return true
     }
 
