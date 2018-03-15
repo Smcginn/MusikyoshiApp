@@ -1642,6 +1642,7 @@
 						TestTargetID = 6324D2CE1CE71B19001934A5;
 					};
 					6324D3051CE72F8D001934A5 = {
+						LastSwiftMigration = 0920;
 						DevelopmentTeam = Q94UUT4TBF;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
@@ -2193,6 +2194,7 @@
 				E9AD0CC21FD9BCDF006472CE /* PerformanceSound.swift in Sources */,
 				633D1B6D1CF94BEC00B5C4FD /* FeedbackView.swift in Sources */,
 				E9AD0CE41FE09B77006472CE /* NotePerformanceAnalyzer.swift in Sources */,
+				BD8B790F1F95BFB4005B31CB /* LessonOverviewViewController.swift in Sources */,
 				E9815A3E2009A0930046445B /* PerfAnalysisSettingsPopup.swift in Sources */,
 				6324D3631CE73C47001934A5 /* First Stage_key.m in Sources */,
 				638129591CF05C7900A40C8E /* Balloon.swift in Sources */,
@@ -2536,6 +2538,7 @@
 				INFOPLIST_FILE = FirstStage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.musikyoshi.FirstStageCook;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sfreshour.FirstStageDSR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
