@@ -119,7 +119,14 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     }
     
     @IBAction func changeLongToneNoteTap(_ sender: AnyObject) {
-        return; //semicolon so next line isn't considered a return value!
+        return
+        
+        // Apparently we want to disable this response, but retain the code to be able to reinstate it
+        // at a later time. So the return was inserted above. But leaving the code below in place
+        // uncommented generates a warning ("Code will never be reached...").
+        // So commenting entire section out to avoid the warning.
+ 
+        /*
         optionIndex = 1
         
         let ac = UIAlertController(title: "Choose a note for Long Tone", message: "\n\n\n\n\n\n\n\n", preferredStyle: .actionSheet)
@@ -139,6 +146,7 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         ac.view.addSubview(picker)
         
         self.present(ac, animated: true, completion: nil)
+        */
     }
     
     @IBAction func changeRhythmTuneTap(_ sender: AnyObject) {

@@ -872,7 +872,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged {
     // if pitch before thresholdEndTime compare to low/high thresholds and set to pitchlow, pitchhigh, or pitchmatch
     // if pitch after thresholdEndTime compare to low/high thresholds and set to pitchlowlate, pitchhighlate, or pitchmatchlate
 
-    func analyzePerformance() {
+    @objc func analyzePerformance() {
 
         trackSounds()
 
@@ -1675,7 +1675,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged {
         let btnStr = "    Performance\nGrading Settings"
         let btnAttrStr =
             NSMutableAttributedString( string: btnStr,
-                                       attributes: [NSFontAttributeName:UIFont(
+                                       attributes: [NSAttributedStringKey.font:UIFont(
                                         name: "System Font",
                                         size: 11.0)!])
         showDebugSettingsBtn?.titleLabel?.attributedText = btnAttrStr
@@ -1687,7 +1687,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged {
 
     var perfSettingsPopView: PerfAnalysisSettingsPopupView?
 
-    func doShowDebugSetupBtnPressed(sender: UIButton) {
+    @objc func doShowDebugSetupBtnPressed(sender: UIButton) {
         guard kMKDebugOpt_ShowDebugSettingsBtn else { return }
 
         if perfSettingsPopView == nil {

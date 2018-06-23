@@ -166,7 +166,7 @@ class PerfAnalysisSettingsPopupView: UIView, UIPickerViewDataSource, UIPickerVie
         let okStr = "OK"
         let doneMutableString =
             NSMutableAttributedString( string: okStr,
-                                       attributes: [NSFontAttributeName:UIFont(
+                                       attributes: [NSAttributedStringKey.font:UIFont(
                                         name: "Marker Felt",
                                         size: 24.0)!])
         doneBtn?.titleLabel?.attributedText = doneMutableString
@@ -177,12 +177,12 @@ class PerfAnalysisSettingsPopupView: UIView, UIPickerViewDataSource, UIPickerVie
         self.backgroundColor = UIColor.lightGray
     }
     
-    func ignoreMsdNtsSwitchChange(_ sender: UISwitch) {
+    @objc func ignoreMsdNtsSwitchChange(_ sender: UISwitch) {
         somethingChanged = true
         kIgnoreMissedNotes = sender.isOn
     }
     
-    func showSoundsSwitchChange(_ sender: UISwitch) {
+    @objc func showSoundsSwitchChange(_ sender: UISwitch) {
         somethingChanged = true
         if sender.isOn {
             FSAnalysisOverlayView.setShowSoundsAnalysis( true );
@@ -191,7 +191,7 @@ class PerfAnalysisSettingsPopupView: UIView, UIPickerViewDataSource, UIPickerVie
         }
     }
     
-    func ShowNotesSwitchChange(_ sender: UISwitch) {
+    @objc func ShowNotesSwitchChange(_ sender: UISwitch) {
         somethingChanged = true
         if sender.isOn {
             FSAnalysisOverlayView.setShowNotesAnalysis( true );
@@ -254,7 +254,7 @@ class PerfAnalysisSettingsPopupView: UIView, UIPickerViewDataSource, UIPickerVie
         isHidden = false
     }
     
-    func allDone(sender: UIButton) {
+    @objc func allDone(sender: UIButton) {
         if somethingChanged {
             settingsChangedDelegate?.perfAnalysisSettingsChange(0)
         }

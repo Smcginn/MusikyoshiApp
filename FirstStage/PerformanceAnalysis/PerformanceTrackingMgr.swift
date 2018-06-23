@@ -301,13 +301,13 @@ class PerformanceTrackingMgr {
         let messageText = NSMutableAttributedString(
             string: msgStr,
             attributes: [
-                NSParagraphStyleAttributeName: paragraphStyle
+                NSAttributedStringKey.paragraphStyle: paragraphStyle
             ]
         )
-        messageText.addAttribute(NSFontAttributeName,
+        messageText.addAttribute(NSAttributedStringKey.font,
                                  value:fnt!,
                                  range: NSRange.init(location: 0,
-                                                     length: msgStr.characters.count))
+                                                     length: msgStr.count))
         alert.setValue(messageText, forKey: "attributedMessage")
         
         // Add the OK button

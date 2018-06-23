@@ -11,10 +11,8 @@
 		1C33BB342016DCDC00CD83A6 /* LevelSeriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C33BB332016DCDC00CD83A6 /* LevelSeriesViewController.swift */; };
 		1C33BB352016DF6500CD83A6 /* LevelSeriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C33BB332016DCDC00CD83A6 /* LevelSeriesViewController.swift */; };
 		1C33BBB62016E81D00CD83A6 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C33BB542016E80900CD83A6 /* SwiftyJSON.framework */; };
-		1C33BBB72016E81D00CD83A6 /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1C33BB542016E80900CD83A6 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1C87C0A32016EA940038784E /* TrumpetLessons.json in Resources */ = {isa = PBXBuildFile; fileRef = 1C87C0A22016EA930038784E /* TrumpetLessons.json */; };
 		1C87C0A42016EA940038784E /* TrumpetLessons.json in Resources */ = {isa = PBXBuildFile; fileRef = 1C87C0A22016EA930038784E /* TrumpetLessons.json */; };
-		1C87C0A52016EA9F0038784E /* TrumpetLessons.json in Sources */ = {isa = PBXBuildFile; fileRef = 1C87C0A22016EA930038784E /* TrumpetLessons.json */; };
 		1C87C0A82016F0030038784E /* LevelOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C87C0A72016F0030038784E /* LevelOverviewViewController.swift */; };
 		1C87C0A92016F0040038784E /* LevelOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C87C0A72016F0030038784E /* LevelOverviewViewController.swift */; };
 		1C87C0AD2016F3F70038784E /* LessonOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C87C0AC2016F3F70038784E /* LessonOverviewViewController.swift */; };
@@ -177,7 +175,6 @@
 		633CA1DA1CF73D1600061F3D /* FarArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 633CA1D11CF73D0C00061F3D /* FarArrow.png */; };
 		633CA1DB1CF73D1A00061F3D /* NearArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 633CA1D21CF73D0C00061F3D /* NearArrow.png */; };
 		633D1B6D1CF94BEC00B5C4FD /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633D1B6C1CF94BEC00B5C4FD /* FeedbackView.swift */; };
-		633D1B711CF94BF000B5C4FD /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633D1B6C1CF94BEC00B5C4FD /* FeedbackView.swift */; };
 		633D1B731CF94CEB00B5C4FD /* FeedbackImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 633D1B721CF94CEB00B5C4FD /* FeedbackImage.png */; };
 		633D1B741CF9588700B5C4FD /* FeedbackImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 633D1B721CF94CEB00B5C4FD /* FeedbackImage.png */; };
 		634658921E90C68E00C162CF /* Piano.mf.23.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6346583C1E90C68D00C162CF /* Piano.mf.23.m4a */; };
@@ -337,6 +334,7 @@
 		63D5E88C1EA37C1B007AE8D4 /* LongToneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6381294F1CF05BF800A40C8E /* LongToneViewController.swift */; };
 		63EB90171CF1C4EB00F09B05 /* AVAudioSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EB90161CF1C4EB00F09B05 /* AVAudioSessionManager.swift */; };
 		63EB90181CF1C4EC00F09B05 /* AVAudioSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EB90161CF1C4EB00F09B05 /* AVAudioSessionManager.swift */; };
+		6D22AEC620D06E8200ACEC81 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633D1B6C1CF94BEC00B5C4FD /* FeedbackView.swift */; };
 		BD7C17471F860E3B002AF462 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7C17461F860E3B002AF462 /* HomeViewController.swift */; };
 		BD7C174E1F86148A002AF462 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7C17461F860E3B002AF462 /* HomeViewController.swift */; };
 		BD7C17501F861755002AF462 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7C174F1F861755002AF462 /* SettingsTableViewController.swift */; };
@@ -544,7 +542,6 @@
 			files = (
 				635A60A91EC6BADD0099154A /* AEXML.framework in Embed Frameworks */,
 				BDF308FB1F630AF500F0A819 /* SeeScoreLib.framework in Embed Frameworks */,
-				1C33BBB72016E81D00CD83A6 /* SwiftyJSON.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1622,7 +1619,7 @@
 				TargetAttributes = {
 					6324D2CE1CE71B19001934A5 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = Q94UUT4TBF;
+						DevelopmentTeam = 2NK3FR42Y7;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -1642,8 +1639,7 @@
 						TestTargetID = 6324D2CE1CE71B19001934A5;
 					};
 					6324D3051CE72F8D001934A5 = {
-						LastSwiftMigration = 0920;
-						DevelopmentTeam = Q94UUT4TBF;
+						DevelopmentTeam = PXMA5KCSKK;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -2140,10 +2136,12 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/AudioKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
 			);
 			name = "Copy Carthage Frameworks";
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/AudioKit.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2194,7 +2192,6 @@
 				E9AD0CC21FD9BCDF006472CE /* PerformanceSound.swift in Sources */,
 				633D1B6D1CF94BEC00B5C4FD /* FeedbackView.swift in Sources */,
 				E9AD0CE41FE09B77006472CE /* NotePerformanceAnalyzer.swift in Sources */,
-				BD8B790F1F95BFB4005B31CB /* LessonOverviewViewController.swift in Sources */,
 				E9815A3E2009A0930046445B /* PerfAnalysisSettingsPopup.swift in Sources */,
 				6324D3631CE73C47001934A5 /* First Stage_key.m in Sources */,
 				638129591CF05C7900A40C8E /* Balloon.swift in Sources */,
@@ -2262,12 +2259,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1C87C0A52016EA9F0038784E /* TrumpetLessons.json in Sources */,
 				1C33BB352016DF6500CD83A6 /* LevelSeriesViewController.swift in Sources */,
-				633D1B711CF94BF000B5C4FD /* FeedbackView.swift in Sources */,
 				E9AD0CCB1FD9BF08006472CE /* PerformanceSound.swift in Sources */,
 				E9794BA91FFD45EA00CDC7FD /* PerformanceIssueMgr.swift in Sources */,
-				633D1B711CF94BF000B5C4FD /* FeedbackView.swift in Sources */,
 				E9AD0CE31FE09B77006472CE /* NotePerformanceAnalyzer.swift in Sources */,
 				6324D3621CE73C47001934A5 /* First Stage_key.m in Sources */,
 				E9815A3D2009A0930046445B /* PerfAnalysisSettingsPopup.swift in Sources */,
@@ -2305,6 +2299,7 @@
 				E9AD0CE91FE09E63006472CE /* NoteRhythmPerformanceAnalyzer.swift in Sources */,
 				6324D3721CE73ED9001934A5 /* Enums.swift in Sources */,
 				63D5E8891EA37BF6007AE8D4 /* MusicFont.swift in Sources */,
+				6D22AEC620D06E8200ACEC81 /* FeedbackView.swift in Sources */,
 				6324D30A1CE72F8D001934A5 /* AppDelegate.swift in Sources */,
 				E9AD0CDD1FDF4180006472CE /* PerformanceTrackingMgr.swift in Sources */,
 				633C2AE11CE86915001C5C16 /* Constants.swift in Sources */,
@@ -2495,7 +2490,7 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Q94UUT4TBF;
+				DEVELOPMENT_TEAM = 2NK3FR42Y7;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2512,7 +2507,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FirstStage/FirstStage-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "AudioKit/AudioKit/**";
 			};
@@ -2527,7 +2522,7 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Q94UUT4TBF;
+				DEVELOPMENT_TEAM = 2NK3FR42Y7;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2538,13 +2533,12 @@
 				INFOPLIST_FILE = FirstStage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.musikyoshi.FirstStageCook;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sfreshour.FirstStageDSR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FirstStage/FirstStage-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "AudioKit/AudioKit/**";
 			};
@@ -2607,14 +2601,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: David Reich (JRZ683P359)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = PXMA5KCSKK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SeeScoreLib/Universal",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Checkouts/SwiftyJSON/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = FirstStage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2637,15 +2630,15 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Stellar Software Pty Ltd (A2SGEM86LX)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: Stellar Software Pty Ltd (A2SGEM86LX)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = PXMA5KCSKK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SeeScoreLib/Universal",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Checkouts/SwiftyJSON/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = FirstStage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

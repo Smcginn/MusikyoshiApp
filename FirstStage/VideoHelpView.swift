@@ -81,7 +81,7 @@ class VideoHelpView: UIView {
         let comingSoonStr = "Coming Soon, a Video About:"
         let comingSoonAttrStr =
             NSMutableAttributedString( string: comingSoonStr,
-                                       attributes: [NSFontAttributeName:UIFont(
+                                       attributes: [NSAttributedStringKey.font:UIFont(
                                        name: "Marker Felt",
                                        size: 24.0)!])
         comingSoonLabel?.attributedText  = comingSoonAttrStr
@@ -121,7 +121,7 @@ class VideoHelpView: UIView {
         let str = "Again"
         let againMutableString =
             NSMutableAttributedString( string: str,
-                                       attributes: [NSFontAttributeName:UIFont(
+                                       attributes: [NSAttributedStringKey.font:UIFont(
                                         name: "Marker Felt",
                                         size: 24.0)!])
         againBtn?.titleLabel?.attributedText = againMutableString
@@ -142,7 +142,7 @@ class VideoHelpView: UIView {
         let okStr = "OK"
         let doneMutableString =
             NSMutableAttributedString( string: okStr,
-                                       attributes: [NSFontAttributeName:UIFont(
+                                       attributes: [NSAttributedStringKey.font:UIFont(
                                         name: "Marker Felt",
                                         size: 24.0)!])
         doneBtn?.titleLabel?.attributedText = doneMutableString
@@ -203,9 +203,9 @@ class VideoHelpView: UIView {
         let issueMsgAttrStr =
             NSMutableAttributedString(
                 string: issueMsgText!,
-                attributes: [NSFontAttributeName:UIFont(name: "Marker Felt",
+                attributes: [NSAttributedStringKey.font:UIFont(name: "Marker Felt",
                                                         size: 24.0)!,
-                             NSParagraphStyleAttributeName: paragraphStyle])
+                             NSAttributedStringKey.paragraphStyle: paragraphStyle])
         issueMsgLabel?.attributedText  = issueMsgAttrStr
         
         avpVC?.view.isHidden = true
@@ -234,13 +234,13 @@ class VideoHelpView: UIView {
         }
     }
     
-    func playAgain(sender: UIButton) {
+    @objc func playAgain(sender: UIButton) {
         avPlayer?.pause()
         avPlayer?.seek(to: kCMTimeZero)
         avPlayer?.play()
     }
     
-    func allDone(sender: UIButton) {
+    @objc func allDone(sender: UIButton) {
         hideVideoVC()
     }
     

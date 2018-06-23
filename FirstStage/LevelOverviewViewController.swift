@@ -120,12 +120,12 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
                 performSegue(withIdentifier: longToneSegueIdentifier, sender: self)
             case .rhythm:
                 if let musicFile = lessonsJson?[indexPath.row]["resource"].string! {
-                    selectedRhythmId = String(musicFile.characters.dropLast(4))
+                    selectedRhythmId = String(musicFile.dropLast(4))
                 }
                 performSegue(withIdentifier: rhythmSegueIdentifier, sender: self)
             case .tune:
                 if let musicFile = lessonsJson?[indexPath.row]["resource"].string! {
-                    selectedTuneId = String(musicFile.characters.dropLast(4))
+                    selectedTuneId = String(musicFile.dropLast(4))
                 }
                 performSegue(withIdentifier: tuneSegueIdentifier, sender: self)
 //            case .informationNode:

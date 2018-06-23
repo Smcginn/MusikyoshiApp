@@ -1,2 +1,7 @@
-github "audiokit/AudioKit"
-github "SwiftyJSON/SwiftyJSON"
+# These are locked to specific releases for Xcode/swift compatibility. At the
+# moment there is nothing special about these particular versions; they worked 
+# best for my current Swift/Xcode versions. (Current versions would not compile.)
+# It will probably be necessary to upgrade to newer versions to match 
+# the current Xcode environment.
+github "audiokit/AudioKit" == 4.0.4
+github "SwiftyJSON/SwiftyJSON" == 4.0.0
