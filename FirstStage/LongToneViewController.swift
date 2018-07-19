@@ -83,6 +83,10 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     @IBOutlet weak var guideTextView: UITextView!
     @IBOutlet var sparkLineTapRecognizer: UITapGestureRecognizer!
     
+    @IBAction func backButtonTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         

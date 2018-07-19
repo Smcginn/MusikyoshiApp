@@ -21,6 +21,10 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged {
     @IBOutlet weak var gateView: UIView!
     @IBOutlet weak var metronomeView: VisualMetronomeView!
 
+    @IBAction func backButtonTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+
     // protocol SSFrequencyConverter
 
     /*!
