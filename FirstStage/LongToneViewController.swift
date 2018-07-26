@@ -9,7 +9,7 @@
 
 import UIKit
 
-class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
+class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthParameterControls, SSFrequencyConverter {
     
     var exerciseState = ExerciseState.notStarted
     var timer = Timer()
@@ -18,6 +18,25 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     var absoluteTargetNote: Note?
     var showFarText = true
     var noteName = ""
+
+    @IBOutlet weak var tapToHearButton: UIButton!
+    
+    @IBAction func tapToHearBtnTapped(_ sender: Any) {
+        playScore()
+    }
+    
+    // protocol SSFrequencyConverter
+    
+    /*!
+     @method frequency:
+     @abstract convert a midi pitch to frequency
+     */
+    public func frequency(_ midiPitch: Int32) -> Float {
+        return intonation.frequency(midiPitch)
+    }
+    
+    private let intonation = Intonation(temperament: Intonation.Temperament.Equal)
+
 
     var targetTime = 3.0
     var targetNoteID = 0
@@ -69,6 +88,74 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     var smileImageView : UIImageView!
 
     let feedbackView = FeedbackView()
+    
+    ///////////////////////////////////////////////
+    // New SF
+    private var sampledInstrumentIds = [UInt]()
+    private var synthesizedInstrumentIds = [UInt]()
+    private var metronomeInstrumentIds = [UInt]()
+    private static let kMaxInstruments = 10
+    private var synthVoice = SSSynthVoice.Sampled
+    private static  let kDefaultRiseFallSamples = 4
+    private var waveformSymmetryValue = Float(0.5)
+    private var waveformRiseFallValue = kDefaultRiseFallSamples // samples in rise/fall of square waveform
+    
+    /*!
+     @method waveform
+     @abstract return a waveform type for the waveform generator
+     @discussion called by the synthesizer while playing
+     */
+    func waveform() -> sscore_sy_synthesizedinstrument_waveform
+    {
+        switch synthVoice
+        {
+        case .Sine : return sscore_sy_sine
+        case .Square : return sscore_sy_square
+        case .Triangle : return sscore_sy_triangle
+        default: return sscore_sy_sine
+        }
+    }
+    
+    /*!
+     @method waveformSymmetry
+     @abstract return a symmetry value for square and triangle waveforms
+     @discussion called by the synthesizer while playing
+     */
+    func waveformSymmetry() -> Float
+    {
+        return waveformSymmetryValue
+    }
+    
+    /*!
+     @method waveformRiseFall
+     @abstract return a rise-fall value for the square waveform (in samples at 44100samples/s)
+     @discussion called by the synthesizer while playing
+     */
+    public func waveformRiseFall() -> Int32 {
+        return Int32(waveformRiseFallValue)
+    }
+
+    private var kSampledInstrumentsInfo : [SSSampledInstrumentInfo] {
+        get {
+            var rval = [SSSampledInstrumentInfo]()
+            rval.append(SSSampledInstrumentInfo("Piano", base_filename: "Piano.mf", extension: "m4a", base_midipitch: 23, numfiles: 86, volume: Float(1.0), attack_time_ms: 4, decay_time_ms: 10, overlap_time_ms: 10, alternativenames: "piano,pianoforte,klavier", pitch_offset: 0, family: sscore_sy_instrumentfamily_hammeredstring, flags: 0, samplesflags: 0))
+            //rval.append(SSSampledInstrumentInfo("MidiPercussion", base_filename: "Drum", extension: "mp3", base_midipitch: 35, numfiles: 47, volume: Float(1.0), attack_time_ms: 4, decay_time_ms: 10, overlap_time_ms: 10, alternativenames: "percussion,MidiPercussion", pitch_offset: 0, family: sscore_sy_instrumentfamily_midi_percussion, flags: sscore_sy_suppressrmscompensation_flag, samplesflags: 0))
+            rval.append(SSSampledInstrumentInfo("Trumpet", base_filename: "Trumpet.novib.mf", extension: "m4a", base_midipitch: 52, numfiles: 35, volume: Float(1.0), attack_time_ms: 2, decay_time_ms: 10, overlap_time_ms: 1, alternativenames: "trumpet", pitch_offset: 0, family: sscore_sy_instrumentfamily_hammeredstring, flags: 0, samplesflags: 0))
+            return rval
+        }
+    }
+    
+    private var kSynthesizedInstrumentsInfo : [SSSynthesizedInstrumentInfo] {
+        get {
+            var rval = [SSSynthesizedInstrumentInfo]()
+            rval.append(SSSynthesizedInstrumentInfo("Tick", volume: Float(1.0), type:sscore_sy_tick1, attack_time_ms:4, decay_time_ms:20, flags:0, frequencyConv: nil, parameters: nil))
+            rval.append(SSSynthesizedInstrumentInfo("Waveform", volume: Float(1.0), type:sscore_sy_pitched_waveform_instrument, attack_time_ms:4, decay_time_ms:20, flags:0, frequencyConv: self, parameters: self))
+            return rval
+        }
+    }
+
+    // New SF
+    ///////////////////////////////
     
     @IBOutlet weak var instructionLbl: UILabel!
     @IBOutlet weak var timerLbl: UILabel!
@@ -210,62 +297,67 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     }
 
     func loadTheFile(_ filePath: String) {
-//        ssScrollView.clearAll()
-//        score = nil
-//        cursorBarIndex = 0
-//        let loadOptions = SSLoadOptions(key: sscore_libkey)
-//        loadOptions?.checkxml = true
-//        let errP = UnsafeMutablePointer<sscore_loaderror>.allocate(capacity: 1)
-//        
-//        print("filePath: \(filePath)")
-//        print("loadOptions: \(loadOptions)")
-//        print("errP: \(errP)")
-//        
-//        if let score0 = SSScore(xmlFile: filePath, options: loadOptions, error: errP) {
-//            score = score0
-//
-//            //figure out which part#
-//            partIndex = Int32(kC4 - kFirstLongTone25Note)   //default to C4
-//            let partNumber = Int32(targetNoteID - kFirstLongTone25Note)
-//            if 0..<score!.numParts ~= partNumber {
-//                partIndex = partNumber
-//            }
-//
-//            var	showingParts = [NSNumber]()
-//            showingParts.removeAll()
-//            let numParts = Int(score!.numParts)
-//            for i in 0..<numParts {
-//                showingParts.append(NSNumber(value: (Int32(i) == partNumber) as Bool)) // display the selected part
-//            }
-//            
-//            layOptions.hidePartNames = true
-//            layOptions.hideBarNumbers = true
-//            //            ssScrollView.optimalSingleSystem = true
-//            //            sysssScrollView.frame.size.width = CGFloat(scoreWidth * 2.28)
-//            //            ssScrollView.setupScore(score, openParts: showingParts, mag: kDefaultMagnification, opt: layOptions)
-//            ssScrollView.optimalSingleSystem = false
-//            ssScrollView.setupScore(score, openParts: showingParts, mag: kDefaultMagnification, opt: layOptions, completion: getPlayData)
-////            ssScrollView.setupScore(score, openParts: showingParts, mag: kDefaultMagnification, opt: layOptions)
-//        }
-//        else
-//        {
-//            var err: sscore_loaderror
-//            err = errP.pointee
-//            switch err.err {
-//            case sscore_OutOfMemoryError:
-//                print("out of memory")
-//            case sscore_XMLValidationError:
-//                print("XML validation error line:%d col:%d %s", err.line, err.col, err.text);
-//            case sscore_NoBarsInFileError:
-//                print("No bars in file error")
-//            case sscore_NoPartsError:
-//                print("NoParts Error")
-//            case sscore_UnknownError:
-//                print("Unknown error")
-//            default:
-//                print("Other error")
-//            }
-//        }
+        ssScrollView.clearAll()
+        score = nil
+        cursorBarIndex = 0
+        let loadOptions = SSLoadOptions(key: sscore_libkey)
+        loadOptions?.checkxml = true
+        let errP = UnsafeMutablePointer<sscore_loaderror>.allocate(capacity: 1)
+        
+        print("filePath: \(filePath)")
+        print("loadOptions: \(loadOptions)")
+        print("errP: \(errP)")
+        
+        ////////////
+        // New, from TuneExer
+        guard let xmlData = MusicXMLModifier.modifyXMLToData(musicXMLUrl: URL(fileURLWithPath: filePath), smallestWidth: UserDefaults.standard.double(forKey: Constants.Settings.SmallestNoteWidth), signatureWidth: UserDefaults.standard.double(forKey: Constants.Settings.SignatureWidth)) else {
+            print("Cannot get modified xmlData from \(filePath)!")
+            return
+        }
+        var err : SSLoadError?
+        
+         if let score0 = SSScore(xmlData: xmlData, options: loadOptions, error: &err) {
+
+            score = score0
+
+            //figure out which part#
+            partIndex = Int32(kC4 - kFirstLongTone25Note)   //default to C4
+            var partNumber = Int32(targetNoteID - kFirstLongTone25Note)
+            if 0..<score!.numParts ~= partNumber {
+                partIndex = partNumber
+            }
+
+            var    showingParts = [NSNumber]()
+            showingParts.removeAll()
+            let numParts = Int(score!.numParts)
+            for i in 0..<numParts {
+                showingParts.append(NSNumber(value: (Int32(i) == partNumber) as Bool)) // display the selected part
+            }
+            
+            layOptions.hidePartNames = true
+            layOptions.hideBarNumbers = true
+            ssScrollView.optimalSingleSystem = false
+            ssScrollView.setupScore(score, openParts: showingParts, mag: kDefaultMagnification, opt: layOptions, completion: getPlayData)
+        }
+        else
+        {
+            var err: sscore_loaderror
+            err = errP.pointee
+            switch err.err {
+            case sscore_OutOfMemoryError:
+                print("out of memory")
+            case sscore_XMLValidationError:
+                print("XML validation error line:%d col:%d %s", err.line, err.col, err.text);
+            case sscore_NoBarsInFileError:
+                print("No bars in file error")
+            case sscore_NoPartsError:
+                print("NoParts Error")
+            case sscore_UnknownError:
+                print("Unknown error")
+            default:
+                print("Other error")
+            }
+        }
     }
 
     func getPlayData() {
@@ -288,11 +380,28 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
             if synth == nil {
                 if let synth0 = SSSynth.createSynth(self, score: score) {
                     synth = synth0
-
-//                    instrumentId = (synth?.addSampledInstrument(trumpetMinus2SampleInfo))!
+                }
+                sampledInstrumentIds.removeAll()
+                synthesizedInstrumentIds.removeAll()
+                metronomeInstrumentIds.removeAll()
+                assert(kSampledInstrumentsInfo.count + kSynthesizedInstrumentsInfo.count < LongToneViewController.kMaxInstruments)
+                for info in kSampledInstrumentsInfo {
+                    let iid = synth?.addSampledInstrument_alt(info)
+                    assert(iid! > 0 && iid! < 1000000)
+                    sampledInstrumentIds.append(UInt(iid!))
+                }
+                for info in kSynthesizedInstrumentsInfo {
+                    let iid = synth?.addSynthesizedInstrument_alt(info)
+                    switch info.info.type
+                    {
+                    case sscore_sy_tick1: metronomeInstrumentIds.append(UInt(iid!))
+                    case sscore_sy_pitched_waveform_instrument: synthesizedInstrumentIds.append(UInt(iid!))
+                    default: break
+                    }
                 }
             }
-            
+        
+
             guard synth != nil else {
                 print("No licence for synth");
                 return
@@ -303,17 +412,24 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
                 print("setupAudioSession == true")
                 playData?.clearLoop()
                 
-//                synth?.setEndHandler(EndHandler(vc: self), delay: 0)
+                guard playData != nil else {
+                    print("No playData");
+                    return
+                }
                 
                 var err = synth?.setup(playData)
                 if err == sscore_NoError {
-                    let startTime = UInt64(0)
-//                    let startTime = DispatchTime.now() //+ Double(Int64(0)) / Double(NSEC_PER_SEC)
-                    err = synth?.start(at: startTime, bar: cursorBarIndex, countIn: false)
+                    let delayInSeconds = 0.2
+                    let startTime = DispatchTime.now() + DispatchTimeInterval.milliseconds(Int(delayInSeconds * 1000.0))
+                    err = synth?.start(at: startTime.rawValue, bar: cursorBarIndex, countIn: false)
                 }
                 
                 if err == sscore_UnlicensedFunctionError {
                     print("synth license expired!")
+                } else if err == sscore_SynthStartFailedError {
+                    print("synth Start Failed Error!")
+                } else if err == sscore_SynthNoInstrumentsError {
+                    print("synth No Instruments Error!")
                 } else if err != sscore_NoError {
                     print("synth failed to start: \(String(describing: err))")
                 }
@@ -581,7 +697,25 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo {
     }
     
     func partInstrument(_ partIndex: Int32) -> UInt32 {
-        return instrumentId
+        if synthVoice == SSSynthVoice.Sampled {
+            return UInt32(instrumentForPart(partIndex : Int(partIndex)))
+        } else if !synthesizedInstrumentIds.isEmpty {
+            return UInt32(synthesizedInstrumentIds[0])
+        }
+
+        return 0 // instrumentId
+    }
+    
+    func instrumentForPart(partIndex : Int) -> UInt
+    {
+        guard !sampledInstrumentIds.isEmpty else { return 0 }
+        
+        var index = 0
+        if sampledInstrumentIds.count > 1 {
+            index = UserDefaults.standard.bool(forKey: Constants.Settings.PlayTrumpet) ? 1 : 0
+        }
+        
+        return sampledInstrumentIds[index]
     }
     
     func partVolume(_ partIndex: Int32) -> Float {
