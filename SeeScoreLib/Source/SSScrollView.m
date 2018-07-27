@@ -1764,25 +1764,25 @@ static float min(float a, float b)
 }
 
 // For displaying student performance results
--(void) addNotePerformanceResultAtXPos:(CGFloat) iXPos
-                                atYpos:(CGFloat) iYPos
-                    withWeightedRating:(int)  iWeightedRating
-                      withRhythmResult:(int)  iRhythmResult
-                       withPitchResult:(int)  iPitchResult
-                                noteID:(int)  iNoteID
-                              isLinked:(bool) isLinked
-                         linkedSoundID:(int)  iLinkedSoundID
+-(void) addScoreObjectPerformanceResultAtXPos:(CGFloat) iXPos
+                                       atYpos:(CGFloat) iYPos
+                           withWeightedRating:(int)  iWeightedRating
+                                       isNote:(bool)isNote
+                             withNoteOrRestID:(int) iNoteOrRestID
+                                scoreObjectID:(int) iScoreObjectID
+                                     isLinked:(bool) isLinked
+                                linkedSoundID:(int)  iLinkedSoundID
 {
     if (analysisOverlayView)
     {
-        [analysisOverlayView addNoteAtXPos: iXPos
-                                    atYpos: iYPos
-                        withWeightedRating: iWeightedRating
-                             withRhythmRes: iRhythmResult
-                              withPitchRes: iPitchResult
-                                    noteID: iNoteID
-                                  isLinked: isLinked
-                             linkedSoundID: iLinkedSoundID];
+        [analysisOverlayView addScoreObjectAtXPos: iXPos
+                                           atYpos: iYPos
+                               withWeightedRating: iWeightedRating
+                                           isNote: isNote
+                                 withNoteOrRestID: iNoteOrRestID
+                                    scoreObjectID: iScoreObjectID
+                                         isLinked: isLinked
+                                    linkedSoundID: iLinkedSoundID];
     }
 }
 
@@ -1802,12 +1802,6 @@ static float min(float a, float b)
     }
 }
 
--(void) updateNotePerformanceResultAtXPos:(CGFloat) iXPos
-                         withRhythmResult:(int) iRhythmResult
-                          withPitchResult:(int) iPitchResult
-{
-}
-
 -(CGFloat) getCurrentXOffset
 {
     CGPoint currOrg = [[self.layer presentationLayer] bounds].origin;
@@ -1815,13 +1809,13 @@ static float min(float a, float b)
     return pXPos;
 }
 
--(bool) highlightNote:(int) iNoteID
+-(bool) highlightScoreObject:(int) iScoreObjectID
 {
     CGFloat xPos = 0.0;
     if (analysisOverlayView)
     {
-        bool found = [analysisOverlayView highlightNote: iNoteID
-                                                useXPos: &xPos];
+        bool found = [analysisOverlayView highlightScoreObject: iScoreObjectID
+                                                       useXPos: &xPos];
         if (found)
         {
             CGPoint pos = CGPointMake(xPos-kHighlightNoteXOffset, 0);
@@ -1854,11 +1848,11 @@ static float min(float a, float b)
     CGPoint _downLocation =[t locationInView:self];
 
     CGFloat touchX = _downLocation.x;
-    int noteID = [analysisOverlayView findNoteIDFromXPos: touchX];
-    if ( noteID >= 0 ) // -1 means not found
+    int scoreObjectID = [analysisOverlayView findScoreObjectIDFromXPos: touchX];
+    if ( scoreObjectID >= 0 ) // -1 means not found
     {
          if ( self.overlayViewDelegate )
-            [self.overlayViewDelegate noteTappedWithThisID: noteID];
+            [self.overlayViewDelegate noteTappedWithThisID: scoreObjectID];
     }
 }
 

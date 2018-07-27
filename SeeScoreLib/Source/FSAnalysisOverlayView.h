@@ -44,14 +44,14 @@ static bool kMKDebugOpt_ShowSoundsAnalysis;
 +(BOOL) getShowSoundsAnalysis;
 +(void) setShowSoundsAnalysis: (BOOL)iShowSounds;
 
--(void) addNoteAtXPos:(CGFloat) iXPos
-               atYpos:(CGFloat) iYPos
-   withWeightedRating:(int) iWeightedRating
-        withRhythmRes:(int) iRhythmResult
-         withPitchRes:(int) iPitchResult
-               noteID:(int) iNoteID
-             isLinked:(bool) isLinked
-        linkedSoundID:(int) iLinkedSoundID;
+-(void) addScoreObjectAtXPos:(CGFloat) iXPos
+                      atYpos:(CGFloat) iYPos
+          withWeightedRating:(int) iWeightedRating
+                      isNote:(bool)isNote
+            withNoteOrRestID:(int) iNoteOrRestID
+               scoreObjectID:(int) iScoreObjectID
+                    isLinked:(bool) isLinked
+               linkedSoundID:(int) iLinkedSoundID;
 
 -(void) addSoundAtXPos:(CGFloat) iXPos
           withDuration:(int) iDuration
@@ -59,11 +59,11 @@ static bool kMKDebugOpt_ShowSoundsAnalysis;
               isLinked:(bool) isLinked
           linkedNoteID:(int) iLinkedNoteID;
 
--(int) findNoteIDFromXPos: (int) iXpos;
+-(int) findScoreObjectIDFromXPos: (int) iXpos;
 
 // scroll to and highlight note (with red circle) with this PerfromanceNote ID
--(bool) highlightNote:(int) iNoteID
-               useXPos:(CGFloat*) ioXPos;
+-(bool) highlightScoreObject:(int) iScoreObjectID
+                     useXPos:(CGFloat*) ioXPos;
 
 -(void) hideHighlight;
 

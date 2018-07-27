@@ -58,7 +58,7 @@ class NoteRhythmPerformanceAnalyzer : NotePerformanceAnalyzer {
         let startTimeDelta     = perfNote.expectedStartTime - perfNote.actualStartTime
         let startTimeDeltaABS  = abs(startTimeDelta)
         if startTimeDeltaABS <= attackVariance_Correct {
-            perfNote.attackRating = .timingGood
+            perfNote.attackRating = .timingOrRestGood
         }
         else if startTimeDeltaABS <= attackVariance_ABitOff {
             if startTimeDelta > 0.0 {
@@ -74,7 +74,7 @@ class NoteRhythmPerformanceAnalyzer : NotePerformanceAnalyzer {
             }
         } else {   // > attackVariance_VeryOff
             if kIgnoreMissedNotes { // for debugging . . .
-                perfNote.attackRating = .timingGood
+                perfNote.attackRating = .timingOrRestGood
             } else {
                 perfNote.attackRating = .missedNote
             }
@@ -113,17 +113,17 @@ class NoteRhythmPerformanceAnalyzer : NotePerformanceAnalyzer {
         }
     }
     
-    override func analyzeNote( perfNote: PerformanceNote? ) {
-        guard let note = perfNote else { return }
+    override func analyzeScoreObject( perfScoreObject: PerformanceScoreObject? )  {
+        guard let note = perfScoreObject as! PerformanceNote? else { return }
         
-        note.attackRating   = .timingGood
+        note.attackRating   = .timingOrRestGood
         note.durationRating = .durationGood
         note.attackScore    =  0
         note.durationScore  =  0
         
         if !note.isLinkedToSound {
             if kIgnoreMissedNotes { // for debugging . . .
-                note.attackRating   = .timingGood
+                note.attackRating   = .timingOrRestGood
                 note.durationRating = .durationGood
             } else {
                 note.attackRating   = .missedNote

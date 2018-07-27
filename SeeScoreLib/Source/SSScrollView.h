@@ -455,14 +455,14 @@ typedef NS_ENUM(NSInteger, ScrollType_e) {scroll_off, scroll_system, scroll_bar}
 
 // For displaying student performance results
 
--(void) addNotePerformanceResultAtXPos:(CGFloat) iXPos
-                                atYpos:(CGFloat) iYPos
-                    withWeightedRating:(int)  iWeightedRating
-                      withRhythmResult:(int)  iRhythmResult
-                       withPitchResult:(int)  iPitchResult
-                                noteID:(int)  iNoteID
-                              isLinked:(bool) isLinked
-                         linkedSoundID:(int)  iLinkedSoundID;
+-(void) addScoreObjectPerformanceResultAtXPos:(CGFloat) iXPos
+                                       atYpos:(CGFloat) iYPos
+                           withWeightedRating:(int)  iWeightedRating
+                                       isNote:(bool)isNote
+                             withNoteOrRestID:(int) iNoteOrRestID
+                                scoreObjectID:(int) iScoreObjectID
+                                     isLinked:(bool) isLinked
+                                linkedSoundID:(int)  iLinkedSoundID;
 
 -(void) addSoundPerformanceResultAtXPos:(CGFloat) iXPos
                            withDuration:(int) iDuration
@@ -470,14 +470,10 @@ typedef NS_ENUM(NSInteger, ScrollType_e) {scroll_off, scroll_system, scroll_bar}
                                isLinked:(bool) isLinked
                            linkedNoteID:(int) iLinkedNoteID;
 
--(void) updateNotePerformanceResultAtXPos:(CGFloat) iXPos
-                         withRhythmResult:(int) iRhythmResult
-                          withPitchResult:(int) iPitchResult;
-
 -(CGFloat) getCurrentXOffset;
 
-// scroll to and highlight note with this PerfromanceNote ID
--(bool) highlightNote:(int) iNoteID;
+// scroll to and highlight note or rest with this ScoreObject ID
+-(bool) highlightScoreObject:(int) iScoreObjectID;
 
 -(void) turnHighlightOff;
 

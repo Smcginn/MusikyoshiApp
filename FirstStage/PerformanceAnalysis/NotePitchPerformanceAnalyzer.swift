@@ -18,8 +18,8 @@ import Foundation
 
 class NotePitchPerformanceAnalyzer : NotePerformanceAnalyzer {
     
-    override func analyzeNote( perfNote: PerformanceNote? ) {
-        guard let note = perfNote else { return }
+    override func analyzeScoreObject( perfScoreObject: PerformanceScoreObject?  ) {
+        guard let note = perfScoreObject as! PerformanceNote? else { return }
         
         note.pitchRating = .pitchGood
         note.pitchScore =  0

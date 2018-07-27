@@ -29,5 +29,5 @@ class NotePerformanceAnalyzer {
     }
     
     // setting for must override for this func?  ~sort of like~ pure virtual in C++?
-    func analyzeNote( perfNote: PerformanceNote? ) {}
+    func analyzeScoreObject( perfScoreObject: PerformanceScoreObject? ) {}
 }

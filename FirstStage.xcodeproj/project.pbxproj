@@ -335,6 +335,12 @@
 		63EB90171CF1C4EB00F09B05 /* AVAudioSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EB90161CF1C4EB00F09B05 /* AVAudioSessionManager.swift */; };
 		63EB90181CF1C4EC00F09B05 /* AVAudioSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EB90161CF1C4EB00F09B05 /* AVAudioSessionManager.swift */; };
 		6D22AEC620D06E8200ACEC81 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633D1B6C1CF94BEC00B5C4FD /* FeedbackView.swift */; };
+		6DBCAACA2102953A009D78F0 /* PerformanceScoreObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBCAAC92102953A009D78F0 /* PerformanceScoreObject.swift */; };
+		6DBCAADA210298AB009D78F0 /* PerformanceScoreObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBCAAC92102953A009D78F0 /* PerformanceScoreObject.swift */; };
+		6DBCAADC21029DCF009D78F0 /* PerformanceRest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBCAADB21029DCF009D78F0 /* PerformanceRest.swift */; };
+		6DBCAADD2102A543009D78F0 /* PerformanceRest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBCAADB21029DCF009D78F0 /* PerformanceRest.swift */; };
+		6DBCAADF210555AD009D78F0 /* RestPerformanceAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBCAADE210555AD009D78F0 /* RestPerformanceAnalyzer.swift */; };
+		6DBCAAE0210555F4009D78F0 /* RestPerformanceAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBCAADE210555AD009D78F0 /* RestPerformanceAnalyzer.swift */; };
 		BD7C17471F860E3B002AF462 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7C17461F860E3B002AF462 /* HomeViewController.swift */; };
 		BD7C174E1F86148A002AF462 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7C17461F860E3B002AF462 /* HomeViewController.swift */; };
 		BD7C17501F861755002AF462 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7C174F1F861755002AF462 /* SettingsTableViewController.swift */; };
@@ -829,6 +835,9 @@
 		63B4275B1E5057BB000E35AA /* SSSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSSettingsViewController.swift; sourceTree = "<group>"; };
 		63BF9E061EBFFF07002BB5C1 /* MusicXMLModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicXMLModifier.swift; sourceTree = "<group>"; };
 		63EB90161CF1C4EB00F09B05 /* AVAudioSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAudioSessionManager.swift; sourceTree = "<group>"; };
+		6DBCAAC92102953A009D78F0 /* PerformanceScoreObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceScoreObject.swift; sourceTree = "<group>"; };
+		6DBCAADB21029DCF009D78F0 /* PerformanceRest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceRest.swift; sourceTree = "<group>"; };
+		6DBCAADE210555AD009D78F0 /* RestPerformanceAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestPerformanceAnalyzer.swift; sourceTree = "<group>"; };
 		BD7C17461F860E3B002AF462 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		BD7C174F1F861755002AF462 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		BD8B79041F95BF75005B31CB /* PracticeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PracticeViewController.swift; sourceTree = "<group>"; };
@@ -1506,8 +1515,11 @@
 				E9AD0CDF1FDF4457006472CE /* PerformanceAndTrackingDefs.swift */,
 				E9794BA81FFD45EA00CDC7FD /* PerformanceIssueMgr.swift */,
 				E9AD0CBB1FD9BCDF006472CE /* PerformanceNote.swift */,
+				6DBCAADB21029DCF009D78F0 /* PerformanceRest.swift */,
+				6DBCAAC92102953A009D78F0 /* PerformanceScoreObject.swift */,
 				E9AD0CBC1FD9BCDF006472CE /* PerformanceSound.swift */,
 				E9AD0CDC1FDF4180006472CE /* PerformanceTrackingMgr.swift */,
+				6DBCAADE210555AD009D78F0 /* RestPerformanceAnalyzer.swift */,
 				E9AD0CBD1FD9BCDF006472CE /* TrumpetPartials.swift */,
 				E9815A382005124D0046445B /* VideoHelpResources.swift */,
 			);
@@ -2189,8 +2201,10 @@
 			files = (
 				E9AD0CC31FD9BCDF006472CE /* TrumpetPartials.swift in Sources */,
 				E9794BAA1FFD45EA00CDC7FD /* PerformanceIssueMgr.swift in Sources */,
+				6DBCAADC21029DCF009D78F0 /* PerformanceRest.swift in Sources */,
 				E9AD0CC21FD9BCDF006472CE /* PerformanceSound.swift in Sources */,
 				633D1B6D1CF94BEC00B5C4FD /* FeedbackView.swift in Sources */,
+				6DBCAACA2102953A009D78F0 /* PerformanceScoreObject.swift in Sources */,
 				E9AD0CE41FE09B77006472CE /* NotePerformanceAnalyzer.swift in Sources */,
 				E9815A3E2009A0930046445B /* PerfAnalysisSettingsPopup.swift in Sources */,
 				6324D3631CE73C47001934A5 /* First Stage_key.m in Sources */,
@@ -2219,6 +2233,7 @@
 				63B4275C1E5057BB000E35AA /* SSSettingsViewController.swift in Sources */,
 				639A2E551CF5E6CA004F7B1A /* VisualMetronomeView.swift in Sources */,
 				1C33BB342016DCDC00CD83A6 /* LevelSeriesViewController.swift in Sources */,
+				6DBCAADF210555AD009D78F0 /* RestPerformanceAnalyzer.swift in Sources */,
 				6324D3651CE73C47001934A5 /* SSPlayLoopGraphics.m in Sources */,
 				6324D35F1CE73C47001934A5 /* SSScrollView.m in Sources */,
 				BD7C17471F860E3B002AF462 /* HomeViewController.swift in Sources */,
@@ -2261,8 +2276,10 @@
 			files = (
 				1C33BB352016DF6500CD83A6 /* LevelSeriesViewController.swift in Sources */,
 				E9AD0CCB1FD9BF08006472CE /* PerformanceSound.swift in Sources */,
+				6DBCAADD2102A543009D78F0 /* PerformanceRest.swift in Sources */,
 				E9794BA91FFD45EA00CDC7FD /* PerformanceIssueMgr.swift in Sources */,
 				E9AD0CE31FE09B77006472CE /* NotePerformanceAnalyzer.swift in Sources */,
+				6DBCAADA210298AB009D78F0 /* PerformanceScoreObject.swift in Sources */,
 				6324D3621CE73C47001934A5 /* First Stage_key.m in Sources */,
 				E9815A3D2009A0930046445B /* PerfAnalysisSettingsPopup.swift in Sources */,
 				E9815A3A2005127B0046445B /* VideoHelpResources.swift in Sources */,
@@ -2291,6 +2308,7 @@
 				6324D35E1CE73C47001934A5 /* SSScrollView.m in Sources */,
 				1C87C0A82016F0030038784E /* LevelOverviewViewController.swift in Sources */,
 				BD7C174E1F86148A002AF462 /* HomeViewController.swift in Sources */,
+				6DBCAAE0210555F4009D78F0 /* RestPerformanceAnalyzer.swift in Sources */,
 				BD8B79111F95C11B005B31CB /* UserAtributes.swift in Sources */,
 				1C87C0AE2016F3F70038784E /* LessonOverviewViewController.swift in Sources */,
 				E9AD0CCC1FD9BF0B006472CE /* TrumpetPartials.swift in Sources */,

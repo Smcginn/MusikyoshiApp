@@ -8,23 +8,8 @@
 
 import Foundation
 
-public class PerformanceNote
+public class PerformanceNote : PerformanceScoreObject
 {
-    var perfNoteID          = noNoteIDSet
-    var isLinkedToSound     = false
-    var linkedToSoundID     = noSoundIDSet
-    public weak var linkedSoundObject : PerformanceSound?
-    func linkToSound( soundID : Int32, sound: PerformanceSound? ) {
-        linkedToSoundID = soundID
-        isLinkedToSound = true
-        linkedSoundObject = sound
-    }
-    
-    // The X-Coord of where on the scrolling view the XMLMusic note is diaplayed. 
-    // Used to specify where to draw note-related factoids (debug or otherwise).
-    var xPos : Int32 = 0
-    var yPos : Int32 = 0
-    
     // These are TimeIntervals since the beginning of song playback
     //   (Sound times are intervals since analysis start)
     var expectedStartTime : TimeInterval = noTimeValueSet
@@ -93,17 +78,6 @@ public class PerformanceNote
         return pitchVal
     }
     
-    // the performance issue for each category, if there was one
-    var attackRating: performanceRating   = .notRated
-    var durationRating: performanceRating = .notRated
-    var pitchRating: performanceRating    = .notRated
-    
-    // the weighted score, or severity of the issue for each category
-    var attackScore:   Int =  0  // 0 is the best, 1 next best, etc.
-    var durationScore: Int =  0
-    var pitchScore:    Int =  0
-    var weightedScore: Int =  0  // Overall; combined of the above
-    
     var pitchVariance = noPitchValueSet
 
     //////////////////////////////////////////////////////////////////////////
@@ -121,31 +95,22 @@ public class PerformanceNote
     // Was the freq an accidental partial of the expected note? If so which one?
     var isActFreqIsPartial = false
     var specificPartial: tNoteFreqRangeData = kEmptyNoteFreqRangeData
-    
-    // class functions/var; ID to uniquely identify PerformanceNote objects
-    static private var currUniqueNoteID : Int32 = noNoteIDSet
-    static func getUniqueNoteID() -> Int32 {
-        PerformanceNote.currUniqueNoteID += 1
-        return PerformanceNote.currUniqueNoteID
-    }
-    static func resetUniqueNoteID() {
-        PerformanceNote.currUniqueNoteID = noNoteIDSet
-    }
-
+        
     init () {
-        perfNoteID = PerformanceNote.getUniqueNoteID()
+        super.init(noteOrRest : .note)
+        perfNoteOrRestID = PerformanceScoreObject.getUniqueNoteID()
     }
     
     deinit {
         // here for debugging, making sure there are no reference cycles
         if kMKDebugOpt_PrintStudentPerformanceDataDebugOutput {
-            print ( "De-initing note \(perfNoteID)" )
+            print ( "De-initing note \(perfNoteOrRestID)" )
         }
     }
 
     // Used by an Alert to populate the messageString with data about this Note.
     //  (The Alert is a debug feature. It is not visible in release mode.)
-    func constructSummaryMsgString( msgString: inout String )
+    override func constructSummaryMsgString( msgString: inout String )
     {
         let expFreqStr = String(format: "%.2f", expectedFrequency)
         var expDurStr = String(format: "%.2f", expectedDuration)

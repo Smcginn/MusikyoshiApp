@@ -29,12 +29,22 @@ public class PerformanceSound
     }
     
     var isLinkedToNote  = false
-    var linkedToNote    = noNoteIDSet
+    var linkedToNote    = noScoreObjIDSet
     public weak var linkedNoteObject : PerformanceNote?
     func linkToNote( noteID : Int32, note: PerformanceNote? ) {
         linkedToNote = noteID
         isLinkedToNote = true
         linkedNoteObject = note
+    }
+ 
+    // separate vars for Rests and Notes.
+    var isLinkedToRest    = false
+    var linkedToRest    = noScoreObjIDSet
+    public weak var linkedRestObject : PerformanceRest?
+    func linkToRest( restID : Int32, rest: PerformanceRest? ) {
+        isLinkedToRest = true
+        linkedToRest = restID
+        linkedRestObject = rest
     }
     
     var soundMode : soundType = .pitched
@@ -208,6 +218,7 @@ public class PerformanceSound
     func updateCurrentNoteIfLinkedFinal()
     {
         guard isLinkedToNote, let linkNote = linkedNoteObject else {return}
+        guard linkNote.isNote() else {return}
         
         linkNote.endTime = self.endTime - soundToNoteTimeOffset
         linkNote.actualFrequency = self.averagePitchRunning
@@ -216,6 +227,7 @@ public class PerformanceSound
     func updateCurrentNoteIfLinkedPeriodic()
     {
         guard isLinkedToNote, let linkNote = linkedNoteObject else {return}
+        guard linkNote.isNote() else {return}
         
         linkNote.actualFrequency = self.averagePitchRunning
     }

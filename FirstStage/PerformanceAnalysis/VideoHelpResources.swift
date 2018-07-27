@@ -85,6 +85,8 @@ struct alertIDs {
     static let kAlt_ABitLong                 : Int   = 12
     static let kAlt_VeryLong                 : Int   = 13
     static let kAlt_TooLong                  : Int   = 14
+    
+    static let kAlt_NotesDuringRest          : Int   = 15
 }
 
 func mapPerfIssueToAlertID( _ issueCode: performanceRating ) -> Int {
@@ -99,6 +101,8 @@ func mapPerfIssueToAlertID( _ issueCode: performanceRating ) -> Int {
     case .veryEarly:        return alertIDs.kAlt_VeryEarly
     case .slightlyLate:     return alertIDs.kAlt_ABitLate
     case .veryLate:         return alertIDs.kAlt_VeryLate
+        
+    case .soundsDuringRest: return alertIDs.kAlt_NotesDuringRest
         
     case .tooShort:         return alertIDs.kAlt_TooShort
     case .veryShort:        return alertIDs.kAlt_VeryShort
@@ -134,6 +138,9 @@ func getMsgTextForAlertID( _ alertID: Int ) -> String {
     case alertIDs.kAlt_VeryLate:
         retStr = "You played that note a very late"
         
+    case alertIDs.kAlt_NotesDuringRest:
+        retStr = "You played one or more notes during a rest"
+
     case alertIDs.kAlt_TooShort:
         retStr = "You played that note way too short"
     case alertIDs.kAlt_VeryShort:

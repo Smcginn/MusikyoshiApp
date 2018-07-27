@@ -554,19 +554,38 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged {
 
         // Send PerfNote info to SeeScore overlay view - needed by a subview to
         // determine location of highlighted note, if called on to highlight.
-        for onePerfNote in PerformanceTrackingMgr.instance.performanceNotes {
-            let weightedAsInt32 : Int32 = Int32(onePerfNote.weightedScore)
-            let xPos = CGFloat(onePerfNote.xPos)
-            let yPos = CGFloat(onePerfNote.yPos)
-            self.ssScrollView.addNotePerformanceResult(
-                atXPos: xPos,
-                atYpos: yPos,
-                withWeightedRating: weightedAsInt32,
-                withRhythmResult: 0,
-                withPitchResult: 0,
-                noteID:  onePerfNote.perfNoteID,
-                isLinked: onePerfNote.isLinkedToSound,
-                linkedSoundID: onePerfNote.linkedToSoundID )
+        for onePerfScoreObj in PerformanceTrackingMgr.instance.perfNotesAndRests {
+            if onePerfScoreObj.isNote() {
+                guard let onePerfNote = onePerfScoreObj as? PerformanceNote else {continue }
+                
+                let weightedAsInt32 : Int32 = Int32(onePerfNote.weightedScore)
+                let xPos = CGFloat(onePerfNote.xPos)
+                let yPos = CGFloat(onePerfNote.yPos)
+                self.ssScrollView.addScoreObjectPerformanceResult(
+                    atXPos: xPos,
+                    atYpos: yPos,
+                    withWeightedRating: weightedAsInt32,
+                    isNote: true,
+                    withNoteOrRestID: onePerfNote.perfNoteOrRestID,
+                    scoreObjectID:  onePerfNote.perfScoreObjectID,
+                    isLinked: onePerfNote.isLinkedToSound,
+                    linkedSoundID: onePerfNote.linkedToSoundID )
+            } else {
+                guard let onePerfRest = onePerfScoreObj as? PerformanceRest else {continue }
+                
+                let weightedAsInt32 : Int32 = Int32(onePerfRest.weightedScore)
+                let xPos = CGFloat(onePerfRest.xPos)
+                let yPos = CGFloat(onePerfRest.yPos)
+                self.ssScrollView.addScoreObjectPerformanceResult(
+                    atXPos: xPos,
+                    atYpos: yPos,
+                    withWeightedRating: weightedAsInt32,
+                    isNote: false,    // Is Note RESTCHANGE
+                    withNoteOrRestID: onePerfRest.perfNoteOrRestID,
+                    scoreObjectID:  onePerfRest.perfScoreObjectID,
+                    isLinked: onePerfRest.isLinkedToSound,
+                    linkedSoundID: onePerfRest.linkedToSoundID )
+            }
         }
 
         // Send PerfSound info to SeeScore overlay view (only needed for debugging)
@@ -590,7 +609,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged {
         delay(0.1) {
             let worstPerfIssue = PerformanceIssueMgr.instance.getFirstPerfIssue()
             if worstPerfIssue != nil {
-                let perfNoteID:Int32 = worstPerfIssue!.perfNoteID
+                let perfNoteID:Int32 = worstPerfIssue!.perfScoreObjectID
                 if worstPerfIssue!.videoID != vidIDs.kVid_NoVideoAvailable {
                     self.scrollToNoteAndLaunchVideo(perfNoteID: perfNoteID,
                                                     videoID: worstPerfIssue!.videoID)
@@ -802,7 +821,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged {
                             newSound.xOffsetStart = firstNoteOrRestXOffset + currXOffset
                             newSound.forceAveragePitch(pitchSample: currFreq)
                             // see if there's an unclaimed note
-                            perfTrkgMgr.linkCurrSoundToCurrNote()
+                            perfTrkgMgr.linkCurrSoundToCurrScoreObject() // linkCurrSoundToCurrNote()
                             if kMKDebugOpt_PrintStudentPerformanceDataDebugOutput {
                                 print (" \nCreated new sound \(newSound.soundID) (due to legato split) at \(timeSinceSongStart)")
                             }
@@ -823,7 +842,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged {
                 startAt: timeSinceAnalysisStart,
                 soundMode: soundMode,
                 noteOffset: perfTrkgMgr.songStartTimeOffset )
-            perfTrkgMgr.linkCurrSoundToCurrNote() // see if there's an unclaimed note
+            perfTrkgMgr.linkCurrSoundToCurrScoreObject() // linkCurrSoundToCurrNote() // see if there's an unclaimed note
 
             var soundID: Int32 = 0
             if let currSound = perfTrkgMgr.currentSound {
@@ -1329,7 +1348,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged {
 
         currNoteXPos = -1.0
         PerformanceTrackingMgr.instance.currentlyInAScoreNote = false
-
+        PerformanceTrackingMgr.instance.currentlyInAScoreRest = false
     }
 
     /*!
@@ -1429,9 +1448,9 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged {
 
         newNote.expectedMidiNote = NoteID(nsNote.midiPitch)
 
-        PerformanceTrackingMgr.instance.performanceNotes.append( newNote )
+        PerformanceTrackingMgr.instance.perfNotesAndRests.append( newNote )
         PerformanceTrackingMgr.instance.currentPerfNote = newNote
-        PerformanceTrackingMgr.instance.linkCurrSoundToCurrNote()
+        PerformanceTrackingMgr.instance.linkCurrSoundToCurrScoreObject()
 
         if let freq = NoteService.getNote( Int(nsNote.midiPitch) )?.frequency {
             targetPitch = freq
@@ -1439,6 +1458,41 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged {
         }
     }
 
+    /////////////////////////////////////////////////////////////////////////////
+    // Create a new PerformanceRest, add to appropriate container,
+    // link to sound if one exists.
+    //     TODO: Ultimately want to move this func out to PerformanceTrackingMgr,
+    //        but may not be possible b/c currently this func uses too many vars
+    //        local to this VC (mostly related to SeeScore, which can't be moved
+    //        outside the VC). Will look at this again at a later date.
+    func createNewPerfRest( nsNote: SSPDNote ) {
+        
+        // W let xpos = noteXPos(note.note)
+        let xpos = noteXPos( nsNote )
+        currNoteXPos = CGFloat(xpos)
+        let ypos = noteYPos( nsNote )
+        
+        PerformanceTrackingMgr.instance.currentlyInAScoreRest = true
+        let newRest : PerformanceRest = PerformanceRest.init()
+        let restDur = nsNote.duration
+        let barStartIntvl =
+            mXMLNoteStartInterval( bpm: bpm(),
+                                   beatsPerBar: Int32(beatsPerBar),
+                                   startBarIndex: nsNote.startBarIndex,
+                                   noteStartWithinBar: nsNote.start )
+        newRest.startTime = barStartIntvl
+        newRest.duration = Double(restDur) / 1000.0
+        newRest.xPos = Int32(xpos)
+        newRest.yPos = Int32(ypos)
+        
+        PerformanceTrackingMgr.instance.perfNotesAndRests.append( newRest )
+        PerformanceTrackingMgr.instance.currentPerfRest = newRest
+        PerformanceTrackingMgr.instance.linkCurrSoundToCurrScoreObject() 
+    }
+
+    
+    
+    // Called within  start  (a note/chord or rest has started)
     //this only makes sense if setNoteHandler() delay is -timingThreshold
     func setNoteThresholdState(_ notes: NSArray) {
         // normally this will not need to iterate over the whole chord, but will exit as soon as it has a valid xpos
@@ -1495,6 +1549,9 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged {
                     foundSound = false
                     missedSound = false
                     lateSound = false
+                    
+                    // For tracking student performance
+                    createNewPerfRest( nsNote: note.note )
 
                     thresholdEndTime = Date().timeIntervalSince(startTime) + timingThreshold * 2
 
@@ -1746,7 +1803,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged {
 
     func scrollToNoteAndLaunchVideo(perfNoteID: Int32, videoID: Int) {
 
-        if ssScrollView.highlightNote(perfNoteID) {
+        if ssScrollView.highlightScoreObject(perfNoteID) {
             delay(1.0) {
                 if self.vhView == nil {
                     self.createVideoHelpView()
@@ -1759,7 +1816,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged {
 
     func scrollToNoteAndLaunchAlert(perfNoteID: Int32, alertID: Int) {
 
-        if ssScrollView.highlightNote(perfNoteID) {
+        if ssScrollView.highlightScoreObject(perfNoteID) {
             delay(1.0) {
                 if self.vhView == nil {
                     self.createVideoHelpView()
@@ -1897,40 +1954,45 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged {
 
         print ("\n\n")
         print ("timingThreshold is: \(timingThreshold)\n")
-        for oneExpNote in PerformanceTrackingMgr.instance.performanceNotes {
-            let expectedStart = oneExpNote.expectedStartTime
-            if oneExpNote.linkedToSoundID == noSoundIDSet {
-                print ( "Note ID: \(oneExpNote.perfNoteID) is not linked to a sound" )
-                print ( "  ExpectedStart Time: \(expectedStart)" )
-            }
-            else {
-                let actualStart   = oneExpNote.actualStartTime
-                let diff          = actualStart - expectedStart
-                let endTime       = oneExpNote.endTime
-                let duration      = oneExpNote.actualDuration
-                let expPitch      = oneExpNote.expectedFrequency
-                let actPitch      = oneExpNote.actualFrequency
-                let expMidiNote   = oneExpNote.expectedMidiNote
-                let actMidiNote   = oneExpNote.actualMidiNote
+        for onePerfScoreObj in PerformanceTrackingMgr.instance.perfNotesAndRests {
+            if onePerfScoreObj.isNote() {
+                guard let oneExpNote: PerformanceNote = onePerfScoreObj as? PerformanceNote
+                    else { return }
+                
+                let expectedStart = oneExpNote.expectedStartTime
+                if oneExpNote.linkedToSoundID == noSoundIDSet {
+                    print ( "Note ID: \(oneExpNote.perfNoteOrRestID) is not linked to a sound" )
+                    print ( "  ExpectedStart Time: \(expectedStart)" )
+                }
+                else {
+                    let actualStart   = oneExpNote.actualStartTime
+                    let diff          = actualStart - expectedStart
+                    let endTime       = oneExpNote.endTime
+                    let duration      = oneExpNote.actualDuration
+                    let expPitch      = oneExpNote.expectedFrequency
+                    let actPitch      = oneExpNote.actualFrequency
+                    let expMidiNote   = oneExpNote.expectedMidiNote
+                    let actMidiNote   = oneExpNote.actualMidiNote
 
-                let expNote = NoteService.getNote(Int(expMidiNote))
-                let actNote = NoteService.getNote(Int(actMidiNote))
+                    let expNote = NoteService.getNote(Int(expMidiNote))
+                    let actNote = NoteService.getNote(Int(actMidiNote))
 
-                let expNoteName = expNote != nil ? expNote!.fullName : ""
-                let actNoteName = actNote != nil ? actNote!.fullName : ""
+                    let expNoteName = expNote != nil ? expNote!.fullName : ""
+                    let actNoteName = actNote != nil ? actNote!.fullName : ""
 
-                print ( "Note ID: \(oneExpNote.perfNoteID) is linked to sound \(oneExpNote.linkedToSoundID)" )
-                print ( "  ExpectedStart Time: \(expectedStart)" )
-                print ( "  Actual Start Time:  \(actualStart)" )
-                print ( "  Difference:         \(diff)" )
-                print ( "  End Time:           \(endTime)" )
-                print ( "  Duration:         \(duration)" )
-                print ( "  ExpectedPitch:      \(expPitch)" )
-                print ( "  Actual Pitch:       \(actPitch)" )
-                print ( "  Expected MIDI Note: \(expMidiNote) - \(expNoteName)" )
-                print ( "  Actual MIDI Note:   \(actMidiNote) - \(actNoteName)" )
-                let avgPitch      = oneExpNote.averageFrequency()
-                print ( "  AveragePitch:       \(avgPitch)" )
+                    print ( "Note ID: \(oneExpNote.perfNoteOrRestID) is linked to sound \(oneExpNote.linkedToSoundID)" )
+                    print ( "  ExpectedStart Time: \(expectedStart)" )
+                    print ( "  Actual Start Time:  \(actualStart)" )
+                    print ( "  Difference:         \(diff)" )
+                    print ( "  End Time:           \(endTime)" )
+                    print ( "  Duration:         \(duration)" )
+                    print ( "  ExpectedPitch:      \(expPitch)" )
+                    print ( "  Actual Pitch:       \(actPitch)" )
+                    print ( "  Expected MIDI Note: \(expMidiNote) - \(expNoteName)" )
+                    print ( "  Actual MIDI Note:   \(actMidiNote) - \(actNoteName)" )
+                    let avgPitch      = oneExpNote.averageFrequency()
+                    print ( "  AveragePitch:       \(avgPitch)" )
+                }
             }
         }
         print ("\n\n")

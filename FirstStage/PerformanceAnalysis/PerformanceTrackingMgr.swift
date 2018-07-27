@@ -34,10 +34,10 @@ class PerformanceTrackingMgr {
 
     // PerformanceTrackingMgr keeps track of:
     //
-    //    PerformanceNotes: there is one of these for every note in the score.
-    //       A PerformanceNotes contains the expectatations and the actual
-    //       values of the studuent's performance for things like start time,
-    //       duration, pitch, etc.
+    //    PerfNotesAndRests: there is one of these for every note or rest in the
+    //       score. A PerformanceNoteOrRest contains the expectatations and the actual
+    //       values of the studuent's performance for things like start time and
+    //       duration, and for notes, pitch, etc.
     //
     //    PerformanceSounds: every sound that is made by the student is represented
     //       by one of these; they contain start time, pitch, duration, etc.
@@ -66,7 +66,7 @@ class PerformanceTrackingMgr {
     
     ///////////////////////////////////////////////////////////////////////////
     //
-    //  MARK:      PerformanceNote related
+    //  MARK:      PerformanceNote and PerformanceRest related
     //
     ///////////////////////////////////////////////////////////////////////////
     
@@ -76,13 +76,15 @@ class PerformanceTrackingMgr {
     // already linked to another Note), the Note and the Sound are linked. The 
     // Sound's data is the basis for the "reality" portion, and can be compared 
     // to the expectations for the given note.
-    var performanceNotes = [PerformanceNote]()
+    var perfNotesAndRests = [PerformanceScoreObject]()
     
     // If there is a current active Note from the score (that the student should 
     // be playing) these will be set (cleared when the Note ends, set for the next 
     // note, etc.)
     public weak var currentPerfNote : PerformanceNote?
     var currentlyInAScoreNote = false
+    public weak var currentPerfRest : PerformanceRest?
+    var currentlyInAScoreRest = false
 
     ///////////////////////////////////////////////////////////////////////////
     //
@@ -206,10 +208,10 @@ class PerformanceTrackingMgr {
     func resetSoundAndNoteTracking() {
         currentPerfNote = nil
         currentSound = nil
-        performanceNotes.removeAll()
+        perfNotesAndRests.removeAll()
         performanceSounds.removeAll()
         PerformanceSound.resetUniqueSoundID()
-        PerformanceNote.resetUniqueNoteID()
+        PerformanceScoreObject.resetUniqueIDs()
         currentlyInAScoreNote  = false
         currentlyTrackingSound = false
     }
@@ -227,11 +229,39 @@ class PerformanceTrackingMgr {
         let attackTol = PerformanceAnalysisMgr.instance.currTolerances.rhythmTolerance
         if (diff <= attackTol) {
             currPerfNote.linkToSound(soundID: currSound.soundID, sound: currSound)
-            currSound.linkToNote(noteID: currPerfNote.perfNoteID, note: currPerfNote)
+            currSound.linkToNote(noteID: currPerfNote.perfNoteOrRestID, note: currPerfNote)
             currPerfNote.actualStartTime = soundTimeToNoteTime(songStart: currSound.startTime)
             currPerfNote.actualFrequency = currSound.averagePitchRunning
         }
     }
+    
+    // called when either a new note or rest begins in the score, or new sound is detected
+    func linkCurrSoundToCurrScoreObject() {
+        guard (currentlyInAScoreNote || currentlyInAScoreRest) && currentlyTrackingSound else { return }
+        guard let currSound : PerformanceSound = currentSound else { return }
+        
+         if currentlyInAScoreNote {
+            guard let currPerfNote : PerformanceNote = currentPerfNote else { return }
+
+            let diff = abs( soundTimeToNoteTime(songStart: currSound.startTime) -
+                currPerfNote.expectedStartTime  )
+            // if (diff <= userDefsTimingThreshold) {
+            let attackTol = PerformanceAnalysisMgr.instance.currTolerances.rhythmTolerance
+            if (diff <= attackTol) {
+                currPerfNote.linkToSound(soundID: currSound.soundID, sound: currSound)
+                currSound.linkToNote(noteID: currPerfNote.perfNoteOrRestID, note: currPerfNote)
+                currPerfNote.actualStartTime = soundTimeToNoteTime(songStart: currSound.startTime)
+                currPerfNote.actualFrequency = currSound.averagePitchRunning
+            }
+        } else if currentlyInAScoreRest {
+            // NOTE: RESTCHANGE  need to deal with reclaiming sound claimed by
+            //                   Rest if should be Note
+            guard let currPerfRest : PerformanceRest = currentPerfRest else { return }
+
+            currPerfRest.linkToSound(soundID: currSound.soundID, sound: currSound)
+            currSound.linkToRest(restID: currPerfRest.perfNoteOrRestID, rest: currPerfRest)
+        }
+	}
     
     // called periodically to update sound with current average pitch, etc. Also, 
     // (if Sound linked to a Note) always called when a Sound ends, to update 
@@ -248,29 +278,48 @@ class PerformanceTrackingMgr {
         
         let rhythmAnalyzer = NoteRhythmPerformanceAnalyzer.init()
         let pitchAnalyzer  = TrumpetPitchPerformanceAnalyzer.init()
-        
+        let restAnalyzer   = RestPerformanceAnalyzer.init()
+
         // Uncomment this to test Partial lookup
 //        runPreAnalysisPartialTestingSetup()
         
         // Visit each Note, have analyzers grade and rate performance of that
         // Note compared with expectations
-        for onePerfNote in performanceNotes {
-            onePerfNote.weightedScore = 0
-            rhythmAnalyzer.analyzeNote( perfNote: onePerfNote )
-            pitchAnalyzer.analyzeNote( perfNote: onePerfNote )
-        }
+        for onePerfScoreObj in perfNotesAndRests {
+            onePerfScoreObj.weightedScore = 0
+            if onePerfScoreObj.isNote() {
+                //guard let onePerfNote: PerformanceNote = onePerfScoreObj as? PerformanceNote
+                //    else { continue }
+                
+                rhythmAnalyzer.analyzeScoreObject( perfScoreObject: onePerfScoreObj )
+                pitchAnalyzer.analyzeScoreObject( perfScoreObject: onePerfScoreObj )
+            }
+            
+            // RESTCHANGE
+            else if onePerfScoreObj.isRest() {
+                //guard let onePerfNote: PerformanceNote = onePerfScoreObj as? PerformanceNote
+                //    else { continue }
+                
+                restAnalyzer.analyzeScoreObject( perfScoreObject: onePerfScoreObj )
+             }
+       }
         
         PerformanceIssueMgr.instance.scanPerfNotesForIssues( kPerfIssueSortCriteria )
 
         if kMKDebugOpt_PrintPerfAnalysisResults {
             print ( "\nPerformance Results:\n")
-            for onePerfNote in performanceNotes {
-                print ( "--------------------------")
-                print ( " Note #\(onePerfNote.perfNoteID):" )
-                print ( "   Attack rating:   \(onePerfNote.attackRating)" )
-                print ( "   Duration rating: \(onePerfNote.durationRating)" )
-                print ( "   Pitch rating:    \(onePerfNote.pitchRating)" )
-                print ( "   Weighted rating: \(onePerfNote.weightedScore)" )
+            for onePerfScoreObj in perfNotesAndRests {
+                if onePerfScoreObj.isNote() {
+                    guard let onePerfNote: PerformanceNote = onePerfScoreObj as? PerformanceNote
+                        else { continue }
+                    print ( "--------------------------")
+                    print ( " Note #\(onePerfNote.perfNoteOrRestID):" )
+                    print ( "   Attack rating:   \(onePerfNote.attackRating)" )
+                    print ( "   Duration rating: \(onePerfNote.durationRating)" )
+                    print ( "   Pitch rating:    \(onePerfNote.pitchRating)" )
+                    print ( "   Weighted rating: \(onePerfNote.weightedScore)" )
+                }
+                // else RESTCHANGE
             }
         }
     }
@@ -280,13 +329,19 @@ class PerformanceTrackingMgr {
     //   displayed. Not for user consumption.
     func displayPerfInfoAlert( perfNoteID: Int32,
                                parentVC: UIViewController ) {
-        let possibleNote: PerformanceNote? =
-            findPerformanceNoteByID(perfNoteID: perfNoteID)
-        guard let foundNote = possibleNote else { return }
+        let possibleScoreObj: PerformanceScoreObject? =
+            findPerformanceScoreObjByID(perfScoreObjID: perfNoteID)
+            // findPerformanceNoteByID(perfNoteID: perfNoteID)
+        guard let scoreObj = possibleScoreObj else { return }
         
-        let titleStr: String = "Info for Note  \(foundNote.perfNoteID)"
         var msgStr: String = ""
-        foundNote.constructSummaryMsgString( msgString: &msgStr )
+        var titleStr: String = ""
+        if scoreObj.isNote() {
+            titleStr = "Info for Note  \(scoreObj.perfNoteOrRestID)"
+        } else {
+            titleStr = "Info for Rest  \(scoreObj.perfNoteOrRestID)"
+        }
+        scoreObj.constructSummaryMsgString( msgString: &msgStr )
         
         let alert = UIAlertController( title: titleStr,
                                        message: msgStr,
@@ -342,15 +397,15 @@ class PerformanceTrackingMgr {
         return returnSound
     }
 
-    func findPerformanceNoteByID(perfNoteID: Int32) -> PerformanceNote? {
-        var returnNote : PerformanceNote? = nil
-        for onePerformanceNote in performanceNotes {
-            if ( onePerformanceNote.perfNoteID == perfNoteID ) {
-                returnNote = onePerformanceNote
+    func findPerformanceScoreObjByID(perfScoreObjID: Int32) -> PerformanceScoreObject? {
+        var returnScoreObj : PerformanceScoreObject? = nil
+        for onePerfObj in perfNotesAndRests {
+            if ( onePerfObj.perfScoreObjectID == perfScoreObjID ) {
+                returnScoreObj = onePerfObj
                 break;
             }
         }
-        return returnNote
+        return returnScoreObj
     }
     
     func findPerformanceNoteByStartTime(start: TimeInterval) -> PerformanceNote? {
@@ -360,7 +415,10 @@ class PerformanceTrackingMgr {
         let lowBound  = start - userDefsTimingThreshold
         let highBound = start + userDefsTimingThreshold
         
-        for onePerformanceNote in PerformanceTrackingMgr.instance.performanceNotes {
+        for onePerfObj in PerformanceTrackingMgr.instance.perfNotesAndRests {
+            guard let onePerformanceNote: PerformanceNote =
+                onePerfObj as? PerformanceNote else { continue }
+            
             let expStart = onePerformanceNote.expectedStartTime
             if ( expStart >= lowBound && expStart <= highBound ) {
                 returnNote = onePerformanceNote
@@ -378,7 +436,10 @@ class PerformanceTrackingMgr {
         let lowBoundXpos  = xPos - 10
         let highBoundXpos = xPos + 10
         
-        for onePerformanceNote in PerformanceTrackingMgr.instance.performanceNotes {
+        for onePerfObj in PerformanceTrackingMgr.instance.perfNotesAndRests {
+            guard let onePerformanceNote: PerformanceNote =
+                onePerfObj as? PerformanceNote else { continue }
+            
             let xPos = onePerformanceNote.xPos
             if ( xPos >= lowBoundXpos && xPos <= highBoundXpos ) {
                 returnNote = onePerformanceNote
@@ -421,7 +482,7 @@ func areDifferentNotes( pitch1: Double, pitch2: Double ) -> Bool {
 }
 
 /////////////////////////////////////////////////////////////////////////
-//    These are needed when creating PerformanceNotes from MusicXML data
+//    These are needed when creating perfNotesAndRests from MusicXML data
 //
 //   MusicXML note start times and durations are stored as values independant of
 //   BPM, etc., using 1 quarter note = 1000  as the reference, regardless of tempo.
@@ -488,7 +549,7 @@ func runPreAnalysisPartialTestingSetup() {
     
     /*  Don't delete:  Commented out becasue this is an alternate test
     // Version one - use with "Rhythm Party 8 - tpt", which is all E4's
-    for onePerfNote in PerformanceTrackingMgr.instance.performanceNotes {
+    for onePerfNote in PerformanceTrackingMgr.instance.perfNotesAndRests {
         switch(count) {
         case 1:
             onePerfNote.actualMidiNote = NoteIDs.G3
@@ -512,7 +573,14 @@ func runPreAnalysisPartialTestingSetup() {
     */
     
     // Version two - use with any test that is all C's, like "Rhythm Party 5 - tpt"
-    for onePerfNote in PerformanceTrackingMgr.instance.performanceNotes {
+    for onePerfObj in PerformanceTrackingMgr.instance.perfNotesAndRests { //hyar
+        if !onePerfObj.isNote() {
+            continue
+        }
+        
+        guard let onePerfNote : PerformanceNote = onePerfObj as? PerformanceNote
+            else { return }
+        
         switch(count) {
         case 1:
             onePerfNote.actualMidiNote = NoteIDs.F4

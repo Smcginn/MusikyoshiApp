@@ -68,6 +68,8 @@ struct IssueWeight {
     static let kVeryEarlyOrLate:      Int  =  6
     static let kMissed:               Int  =  9
     
+    static let kNoteDuringRest:       Int  =  9  // Only grading of rest objects
+
     static let kSlightyLongOrShort:   Int  =  1
     static let kVeryLongOrShort:      Int  =  2
     static let kTooLongOrShort:       Int  =  3
@@ -117,7 +119,7 @@ let kSoundStartAdjustment = TimeInterval(0.040)
 // location of the beginning and end of sounds when displaying them.
 let kOverlayPixelAdjustment = 4
 
-let noNoteIDSet: Int32     =  0
+let noScoreObjIDSet: Int32 =  0  // Score object: Note or Rest
 let noSoundIDSet: Int32    =  0
 let noTimeValueSet         =  0.0
 let noPitchValueSet        =  0.0
@@ -142,9 +144,11 @@ enum performanceRating { // for attack, duration, and pitch
     // attack
     case veryEarly
     case slightlyEarly
-    case timingGood
+    case timingOrRestGood
     case slightlyLate
     case veryLate
+    
+    case soundsDuringRest  // Only applies to rests. One or more sounds...
     
     // duration
     case tooShort
@@ -174,10 +178,11 @@ enum performanceRating { // for attack, duration, and pitch
         // start of note accuracy
         case .veryEarly:      ratingText = "Very Early"
         case .slightlyEarly:  ratingText = "A Bit Early"
-        case .timingGood:     ratingText = "Correct!"
+        case .timingOrRestGood: ratingText = "Correct!"
         case .slightlyLate:   ratingText = "A Bit Late"
         case .veryLate:       ratingText = "Very Late"
-            
+        case .soundsDuringRest: ratingText = "Note over Rest"
+
         // duration accuracy
         case .tooShort:       ratingText = "Too Short"
         case .veryShort:      ratingText = "Very Short"

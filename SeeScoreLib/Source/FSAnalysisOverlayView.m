@@ -13,9 +13,9 @@
 @property (nonatomic) float xPos;
 @property (nonatomic) float yPos;
 @property (nonatomic) int   weightedRating;
-@property (nonatomic) int   rhythmResult;
-@property (nonatomic) int   pitchResult;
-@property (nonatomic) int   noteID;
+@property (nonatomic) bool  isNote;
+@property (nonatomic) int   noteOrRestID;
+@property (nonatomic) int   scoreObjectID;
 @property (nonatomic) bool  isLinked;
 @property (nonatomic) int   linkedSoundID;
 @property (nonatomic) bool  highlight;
@@ -149,18 +149,18 @@
 
 // If note found, hightlight it, set ioXPos, and return true; return false otherwise
 // param ioXPos: on return, set to xPos the caller should scroll to
--(bool) highlightNote:(int) iNoteID
-              useXPos:(CGFloat*) ioXPos
+-(bool) highlightScoreObject:(int) iScoreObjectID
+                     useXPos:(CGFloat*) ioXPos
 {
     *ioXPos = 0.0;
-    for (NoteDisplayData* noteData in _notes)
+    for (NoteDisplayData* scoreObjectData in _notes)
     {
-        if (noteData.noteID == iNoteID)
+        if (scoreObjectData.scoreObjectID == iScoreObjectID)
         {
-            *ioXPos = noteData.xPos;
-            noteData.highlight = true;
+            *ioXPos = scoreObjectData.xPos;
+            scoreObjectData.highlight = true;
             
-            CGPoint pos = CGPointMake(noteData.xPos, noteData.yPos);
+            CGPoint pos = CGPointMake(scoreObjectData.xPos, scoreObjectData.yPos);
             [self moveHightlightTo: pos];
             [self showHighlight];
             [self startHighlightAnim];
@@ -172,14 +172,14 @@
 
 #pragma mark - Performance Sound and Note related
 
--(void) addNoteAtXPos:(CGFloat) iXPos
-               atYpos:(CGFloat) iYPos
-   withWeightedRating:(int) iWeightedRating
-        withRhythmRes:(int) iRhythmResult
-         withPitchRes:(int) iPitchResult
-               noteID:(int) iNoteID
-             isLinked:(bool)isLinked
-        linkedSoundID:(int) iLinkedSoundID
+-(void) addScoreObjectAtXPos:(CGFloat) iXPos
+                      atYpos:(CGFloat) iYPos
+          withWeightedRating:(int) iWeightedRating
+                      isNote:(bool)isNote
+            withNoteOrRestID:(int) iNoteOrRestID
+               scoreObjectID:(int) iScoreObjectID
+                    isLinked:(bool)isLinked
+               linkedSoundID:(int) iLinkedSoundID
 {
     for (NoteDisplayData* noteData in _notes)
     {
@@ -187,10 +187,10 @@
         if (x == iXPos) // already an entry. Just update the exisiting one
         {
             noteData.weightedRating = iWeightedRating;
-            noteData.rhythmResult = iRhythmResult;
-            noteData.pitchResult =  iPitchResult;
+            noteData.isNote = isNote;
+            noteData.noteOrRestID = iNoteOrRestID;
             noteData.yPos =  iYPos;
-            noteData.noteID =  iNoteID;
+            noteData.scoreObjectID =  iScoreObjectID;
             noteData.isLinked =  isLinked;
             noteData.linkedSoundID =  iLinkedSoundID;
             noteData.highlight = false;
@@ -203,9 +203,9 @@
     noteData.xPos = iXPos;
     noteData.yPos = iYPos;
     noteData.weightedRating = iWeightedRating;
-    noteData.rhythmResult = iRhythmResult;
-    noteData.pitchResult = iPitchResult;
-    noteData.noteID =  iNoteID;
+    noteData.isNote = isNote;
+    noteData.noteOrRestID = iNoteOrRestID; 
+    noteData.scoreObjectID =  iScoreObjectID;
     noteData.isLinked =  isLinked;
     noteData.linkedSoundID =  iLinkedSoundID;
     noteData.highlight = false;
@@ -247,7 +247,7 @@
      [self redrawMe];
 }
 
--(int) findNoteIDFromXPos: (int) iXpos {
+-(int) findScoreObjectIDFromXPos: (int) iXpos {
     int retVal = -1; // not found
     
     float lowerBnd = iXpos - 15;
@@ -257,7 +257,7 @@
     {
         float x = noteData.xPos;
         if ( x > lowerBnd && x < upperBnd )
-            retVal = noteData.noteID;
+            retVal = noteData.scoreObjectID;
     }
     
     return retVal;
@@ -335,8 +335,12 @@
             CGContextStrokePath(ctx);
             
             // print the note # to the right of the note
-            NSString* numstr = [NSString stringWithFormat:@"%d",noteData.noteID];
-            CGRect rect = CGRectMake(x+10, kNoteBottomY-3, 20, 20);
+            NSString* numstr = @"";
+            if (noteData.isNote)
+                numstr = [NSString stringWithFormat:@"N%d",noteData.noteOrRestID];
+            else
+                numstr = [NSString stringWithFormat:@"R%d",noteData.noteOrRestID];
+            CGRect rect = CGRectMake(x+10, kNoteBottomY-3, 45, 20);
             NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:10]};
             [numstr drawInRect:rect withAttributes:attributes];
         }

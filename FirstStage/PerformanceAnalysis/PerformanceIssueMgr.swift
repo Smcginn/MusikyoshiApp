@@ -19,42 +19,42 @@ enum issueType {
     case notSet
     case overall
     case pitch
-    case attack
+    case attack  // includes notes played over rests  RESTCHANGE
     case duration
 }
 
 class PerfIssue {
-    var perfNoteID:       Int32 // ID of the PerformanceNote object (not MIDI ID)
-    var issueCode:        performanceRating
-    var issueType:        issueType
-    var issueScore:       Int // lowest (0) is best; e.g., 7, okay; 15 very bad, etc.
+    var perfScoreObjectID:  Int32 // ID of the PerformanceNote object (not MIDI ID)
+    var issueCode:          performanceRating
+    var issueType:          issueType
+    var issueScore:         Int // lowest (0) is best; e.g., 7, okay; 15 very bad, etc.
     
     // issueSubcodes allow for getting more specific when defining the errorCode.
     // Examples could include:
     // - if very sharp, how many half steps sharp
     // - instrument specific error subcodes: If the error code is for a higher
     //   partial these could be used to define which partial.
-    var issueSubcode1:    Int32
-    var issueSubcode2:    Int32
+    var issueSubcode1:      Int32
+    var issueSubcode2:      Int32
     
-    var videoID:          Int     // Is there a video available?
-    var alertID:          Int     // If no video, the alert ID for this
+    var videoID:            Int     // Is there a video available?
+    var alertID:            Int     // If no video, the alert ID for this
     
     init() {
-        perfNoteID      = 0
-        issueCode       = .notRated
-        issueType       = .notSet
-        issueScore      = 0
-        issueSubcode1   = 0
-        issueSubcode2   = 0
+        perfScoreObjectID   = 0
+        issueCode           = .notRated
+        issueType           = .notSet
+        issueScore          = 0
+        issueSubcode1       = 0
+        issueSubcode2       = 0
         
-        videoID         = vidIDs.kVid_NoVideoAvailable
-        alertID         = alertIDs.kAlt_NoAlertMsgAvailable
+        videoID             = vidIDs.kVid_NoVideoAvailable
+        alertID             = alertIDs.kAlt_NoAlertMsgAvailable
     }
     
-    convenience init( perfNoteID: Int32 ) {
+    convenience init( perfScoreObjID: Int32 ) {
         self.init()
-        self.perfNoteID      = perfNoteID
+        self.perfScoreObjectID  = perfScoreObjID
     }
 }
 
@@ -111,7 +111,7 @@ class PerformanceIssueMgr {
         
         clearExisitingIssues()
         
-        func handle_ByIndividualRating( perfNote: PerformanceNote,
+        func handle_ByIndividualRating( perfNote: PerformanceScoreObject,
                                         perfIssue: inout PerfIssue ) {
             // 3-way "max".   First, attack vs duration
             if perfNote.attackScore > perfNote.durationScore {
@@ -131,28 +131,28 @@ class PerformanceIssueMgr {
             }
         }
         
-        for onePerfNote in PerformanceTrackingMgr.instance.performanceNotes {
-            var perfIssue = PerfIssue(perfNoteID: onePerfNote.perfNoteID)
+        for onePerfScoreObj in PerformanceTrackingMgr.instance.perfNotesAndRests {
+            var perfIssue = PerfIssue(perfScoreObjID: onePerfScoreObj.perfScoreObjectID)
             
             switch sortCrit {
             case .byAttackRating:
-                perfIssue.issueCode  = onePerfNote.attackRating
-                perfIssue.issueScore = onePerfNote.attackScore
+                perfIssue.issueCode  = onePerfScoreObj.attackRating
+                perfIssue.issueScore = onePerfScoreObj.attackScore
                 perfIssue.issueType  = .attack
             case .byDurationRating:
-                perfIssue.issueCode  = onePerfNote.durationRating
-                perfIssue.issueScore = onePerfNote.durationScore
+                perfIssue.issueCode  = onePerfScoreObj.durationRating
+                perfIssue.issueScore = onePerfScoreObj.durationScore
                 perfIssue.issueType  = .duration
             case .byPitchRating:
-                perfIssue.issueCode  = onePerfNote.pitchRating
-                perfIssue.issueScore = onePerfNote.pitchScore
+                perfIssue.issueCode  = onePerfScoreObj.pitchRating
+                perfIssue.issueScore = onePerfScoreObj.pitchScore
                 perfIssue.issueType  = .pitch
             case .byOverallRating:
                 perfIssue.issueCode  = .cumulative
-                perfIssue.issueScore = onePerfNote.weightedScore
+                perfIssue.issueScore = onePerfScoreObj.weightedScore
                 perfIssue.issueType  = .overall
             case .byIndividualRating:
-                handle_ByIndividualRating( perfNote: onePerfNote,
+                handle_ByIndividualRating( perfNote: onePerfScoreObj,
                                            perfIssue: &perfIssue )
             }
             
