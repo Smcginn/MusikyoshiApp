@@ -24,7 +24,7 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
             instrumentJson = try? JSON(data: jsonData!)
             
         } else {
-            print("Invalid filename/path.")
+            print("Invalid TrumpetLessons filename/path.")
         }
         
         self.tableView.delegate = self
@@ -62,6 +62,7 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
         if let levels = instrumentJson?["levels"] {
             if let destination = segue.destination as? LevelOverviewViewController {
                 if let row = sender as? Int {
+                    destination.exerLevelIndex = row
                     destination.lessonsJson = levels[row]["exercises"]
                 }
             }

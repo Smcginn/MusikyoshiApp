@@ -9,6 +9,12 @@
 
 import UIKit
 
+enum enharmonicSpelling {
+    case displayAsNatural
+    case displayAsSharp
+    case displayAsFlat
+}
+
 class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthParameterControls, SSFrequencyConverter {
     
     var exerciseState = ExerciseState.notStarted
@@ -18,9 +24,15 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
     var absoluteTargetNote: Note?
     var showFarText = true
     var noteName = ""
-
-    @IBOutlet weak var tapToHearButton: UIButton!
+    var enharmonicDisplay = enharmonicSpelling.displayAsNatural
+    var exerLevelIndex: Int = 0
+    var exerExerciseIndex: Int = 0
+    var exerExerciseTag: String = ""
     
+
+    // These were added because it wasn't clear that "sparklinetapped" resulted
+    // in playback. This was all part of getting this broken view working again.
+    @IBOutlet weak var tapToHearButton: UIButton!
     @IBAction func tapToHearBtnTapped(_ sender: Any) {
         playScore()
     }
@@ -43,6 +55,9 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
     let kFirstLongTone25Note = 55
     let kLastLongTone25Note = 79
     var kC4 = 60
+    var kDb4 = 61
+    var kD4 = 62
+    var kE4 = 64
     /* Long_Tone_25G3G5:
         G3 Ab A Bb B C4 C# D Eb E F F# G Ab A Bb B C5 C# D Eb E F F# G5
     */
@@ -171,14 +186,50 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
     @IBOutlet var sparkLineTapRecognizer: UITapGestureRecognizer!
     
     @IBAction func backButtonTapped(_ sender: Any) {
+        if synth != nil && (synth?.isPlaying)! {
+            synth?.reset()
+        }
         self.dismiss(animated: true, completion: nil)
     }
 
+    func setNoteID() {
+        switch noteName {
+        case "Bb3":         targetNoteID = 58
+        case "B3" :         targetNoteID = 59
+        case "C4" :         targetNoteID = 60
+        case "C#4", "Db4":  targetNoteID = 61
+                                                //case "Db4": targetNoteID = 61
+        case "D4":          targetNoteID = 62
+        case "D#4", "Eb4":  targetNoteID = 63
+                                                //case "Eb4":       targetNoteID = 63
+        case "E4" :         targetNoteID = 64
+        default:            targetNoteID = 60 // C4
+        }
+    }
+    
+    func setEnharmoniDisplay() {
+        let flatChar:  Character = "b"
+        let sharpChar: Character = "#"
+
+        if noteName.contains(flatChar) {
+            enharmonicDisplay = .displayAsFlat
+        } else if noteName.contains(sharpChar) {
+            enharmonicDisplay = .displayAsSharp
+        } else {
+            enharmonicDisplay = .displayAsNatural
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         AudioKitManager.sharedInstance.setup()
 
+        _ = ScoreMgr.instance.loadExercise(currLevelIndex: exerLevelIndex,
+                                           currExerciseIndex: exerExerciseIndex,
+                                           exerciseTag: exerExerciseTag )
+        
+        setNoteID()
         absoluteTargetNote = NoteService.getNote(targetNoteID + transpositionOffset)
         targetNote = NoteService.getNote(targetNoteID)
         if targetNote != nil {
@@ -188,17 +239,32 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
             instructionLbl.text = "Play a long \(targetNote!.friendlyName) note and fill up the balloon until it turns green!"
         }
 
-        var notesFileName = "XML Tunes/Long_Tone_25G3G5"
-        if noteName.count > 1 {
-            let secondChar = noteName[noteName.index(after: noteName.startIndex)]
-            
-            if secondChar == "♭" {
-                notesFileName = "XML Tunes/Long_Tone_25G3G5_flat"
-            }
+        setEnharmoniDisplay() // scan NoteName for "#" or "b"
+        
+        // If note is sharp, the # is already in the note name, and using
+        // Long_Tone_25G3G5, it will display as sharp on the SeeScore view.
+        // If note is flat, must use the flatName and Long_Tone_25G3G5_flat file,
+        // and then it will display as flat on the SeeScore view.
+        var notesMusicXMLFileName = "XML Tunes/Long_Tone_25G3G5"
+        if targetNote != nil {
+            switch enharmonicDisplay {
+            case .displayAsNatural:
+                noteName = targetNote!.name
+            case .displayAsSharp:
+                noteName = targetNote!.name
+            case .displayAsFlat:
+                notesMusicXMLFileName = "XML Tunes/Long_Tone_25G3G5_flat"
+                noteName = targetNote!.flatName
+             }
         }
+        loadFile(notesMusicXMLFileName)
 
-        loadFile(notesFileName)
+        navigationItem.title = "Long Tone - \(noteName)"
+        instructionLbl.text  = "Play a long \(noteName) note and fill up the balloon until it turns green!"
 
+        ScoreMgr.instance.currentExerciseState = kExer_InProgress
+        ScoreMgr.instance.saveCurrentExercise()
+        
         frequencyThresholdPercent = 1.0 + frequencyThreshold
         farFrequencyThresholdPercent = frequencyThresholdPercent + (frequencyThreshold * 1.5)
         firstTime = true
@@ -210,11 +276,21 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
     }
     
     override func viewWillDisappear(_ animated : Bool) {
+        
+        ScoreMgr.instance.currentExerciseState = kExer_Completed
+        ScoreMgr.instance.saveCurrentExercise()
+        _ = ScoreMgr.instance.saveScoreFile()
+        
         super.viewWillDisappear(animated)
         AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
     }
     
     @IBAction func sparkLineTapped(_ sender: UITapGestureRecognizer) {
+        let currScore = ScoreMgr.instance.currentExerciseScore
+        if currScore < 4 {
+            ScoreMgr.instance.currentExerciseScore += 1
+            ScoreMgr.instance.saveCurrentExercise()
+        }
         playScore()
     }
     
@@ -316,13 +392,13 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
         }
         var err : SSLoadError?
         
-         if let score0 = SSScore(xmlData: xmlData, options: loadOptions, error: &err) {
+        if let score0 = SSScore(xmlData: xmlData, options: loadOptions, error: &err) {
 
             score = score0
 
             //figure out which part#
             partIndex = Int32(kC4 - kFirstLongTone25Note)   //default to C4
-            var partNumber = Int32(targetNoteID - kFirstLongTone25Note)
+            let partNumber = Int32(targetNoteID - kFirstLongTone25Note)
             if 0..<score!.numParts ~= partNumber {
                 partIndex = partNumber
             }
@@ -419,7 +495,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
                 
                 var err = synth?.setup(playData)
                 if err == sscore_NoError {
-                    let delayInSeconds = 0.2
+                    let delayInSeconds = 0.5
                     let startTime = DispatchTime.now() + DispatchTimeInterval.milliseconds(Int(delayInSeconds * 1000.0))
                     err = synth?.start(at: startTime.rawValue, bar: cursorBarIndex, countIn: false)
                 }

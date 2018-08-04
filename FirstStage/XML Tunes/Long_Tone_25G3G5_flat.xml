@@ -418,6 +418,10 @@
           <sign>G</sign>
           <line>2</line>
           </clef>
+        <transpose>
+            <diatonic>-1</diatonic>
+            <chromatic>-2</chromatic>
+        </transpose>
         </attributes>
       <note default-x="83.04" default-y="-65.00">
         <pitch>
@@ -453,6 +457,10 @@
           <sign>G</sign>
           <line>2</line>
           </clef>
+        <transpose>
+            <diatonic>-1</diatonic>
+            <chromatic>-2</chromatic>
+        </transpose>
         </attributes>
       <note default-x="83.04" default-y="-165.00">
         <pitch>
@@ -490,6 +498,10 @@
           <sign>G</sign>
           <line>2</line>
           </clef>
+        <transpose>
+            <diatonic>-1</diatonic>
+            <chromatic>-2</chromatic>
+        </transpose>
         </attributes>
       <note default-x="83.04" default-y="-270.00">
         <pitch>
@@ -525,6 +537,10 @@
           <sign>G</sign>
           <line>2</line>
           </clef>
+        <transpose>
+            <diatonic>-1</diatonic>
+            <chromatic>-2</chromatic>
+        </transpose>
         </attributes>
       <note default-x="83.04" default-y="-370.00">
         <pitch>
@@ -562,6 +578,10 @@
           <sign>G</sign>
           <line>2</line>
           </clef>
+        <transpose>
+            <diatonic>-1</diatonic>
+            <chromatic>-2</chromatic>
+        </transpose>
         </attributes>
       <note default-x="83.04" default-y="-475.00">
         <pitch>
@@ -597,6 +617,10 @@
           <sign>G</sign>
           <line>2</line>
           </clef>
+        <transpose>
+            <diatonic>-1</diatonic>
+            <chromatic>-2</chromatic>
+        </transpose>
         </attributes>
       <note default-x="83.04" default-y="-575.00">
         <pitch>
@@ -632,6 +656,10 @@
           <sign>G</sign>
           <line>2</line>
           </clef>
+        <transpose>
+            <diatonic>-1</diatonic>
+            <chromatic>-2</chromatic>
+        </transpose>
         </attributes>
       <note default-x="83.04" default-y="-675.00">
         <pitch>
@@ -669,6 +697,10 @@
           <sign>G</sign>
           <line>2</line>
           </clef>
+        <transpose>
+            <diatonic>-1</diatonic>
+            <chromatic>-2</chromatic>
+        </transpose>
         </attributes>
       <note default-x="83.04" default-y="-780.00">
         <pitch>
@@ -704,6 +736,10 @@
           <sign>G</sign>
           <line>2</line>
           </clef>
+        <transpose>
+            <diatonic>-1</diatonic>
+            <chromatic>-2</chromatic>
+        </transpose>
         </attributes>
       <note default-x="83.04" default-y="-880.00">
         <pitch>
@@ -741,6 +777,10 @@
           <sign>G</sign>
           <line>2</line>
           </clef>
+        <transpose>
+            <diatonic>-1</diatonic>
+            <chromatic>-2</chromatic>
+        </transpose>
         </attributes>
       <note default-x="83.04" default-y="-985.00">
         <pitch>
@@ -776,6 +816,10 @@
           <sign>G</sign>
           <line>2</line>
           </clef>
+        <transpose>
+            <diatonic>-1</diatonic>
+            <chromatic>-2</chromatic>
+        </transpose>
         </attributes>
       <note default-x="83.04" default-y="-1085.00">
         <pitch>
@@ -811,6 +855,10 @@
           <sign>G</sign>
           <line>2</line>
           </clef>
+        <transpose>
+            <diatonic>-1</diatonic>
+            <chromatic>-2</chromatic>
+        </transpose>
         </attributes>
       <note default-x="83.04" default-y="-1185.00">
         <pitch>
@@ -848,6 +896,10 @@
           <sign>G</sign>
           <line>2</line>
           </clef>
+        <transpose>
+            <diatonic>-1</diatonic>
+            <chromatic>-2</chromatic>
+        </transpose>
         </attributes>
       <note default-x="83.04" default-y="-1290.00">
         <pitch>
@@ -883,6 +935,10 @@
           <sign>G</sign>
           <line>2</line>
           </clef>
+        <transpose>
+            <diatonic>-1</diatonic>
+            <chromatic>-2</chromatic>
+        </transpose>
         </attributes>
       <note default-x="83.04" default-y="-1390.00">
         <pitch>
@@ -920,6 +976,10 @@
           <sign>G</sign>
           <line>2</line>
           </clef>
+        <transpose>
+            <diatonic>-1</diatonic>
+            <chromatic>-2</chromatic>
+        </transpose>
         </attributes>
       <note default-x="83.04" default-y="-1495.00">
         <pitch>
@@ -955,6 +1015,10 @@
           <sign>G</sign>
           <line>2</line>
           </clef>
+        <transpose>
+            <diatonic>-1</diatonic>
+            <chromatic>-2</chromatic>
+        </transpose>
         </attributes>
       <note default-x="83.04" default-y="-1595.00">
         <pitch>
@@ -992,6 +1056,10 @@
           <sign>G</sign>
           <line>2</line>
           </clef>
+        <transpose>
+            <diatonic>-1</diatonic>
+            <chromatic>-2</chromatic>
+        </transpose>
         </attributes>
       <note default-x="83.04" default-y="-1700.00">
         <pitch>
@@ -1027,6 +1095,10 @@
           <sign>G</sign>
           <line>2</line>
           </clef>
+        <transpose>
+            <diatonic>-1</diatonic>
+            <chromatic>-2</chromatic>
+        </transpose>
         </attributes>
       <note default-x="83.04" default-y="-1800.00">
         <pitch>
@@ -1062,6 +1134,10 @@
           <sign>G</sign>
           <line>2</line>
           </clef>
+        <transpose>
+            <diatonic>-1</diatonic>
+            <chromatic>-2</chromatic>
+        </transpose>
         </attributes>
       <note default-x="83.04" default-y="-1900.00">
         <pitch>
@@ -1099,6 +1175,10 @@
           <sign>G</sign>
           <line>2</line>
           </clef>
+        <transpose>
+            <diatonic>-1</diatonic>
+            <chromatic>-2</chromatic>
+        </transpose>
         </attributes>
       <note default-x="83.04" default-y="-2005.00">
         <pitch>
@@ -1134,6 +1214,10 @@
           <sign>G</sign>
           <line>2</line>
           </clef>
+        <transpose>
+            <diatonic>-1</diatonic>
+            <chromatic>-2</chromatic>
+        </transpose>
         </attributes>
       <note default-x="83.04" default-y="-2105.00">
         <pitch>
@@ -1171,6 +1255,10 @@
           <sign>G</sign>
           <line>2</line>
           </clef>
+        <transpose>
+            <diatonic>-1</diatonic>
+            <chromatic>-2</chromatic>
+        </transpose>
         </attributes>
       <note default-x="83.04" default-y="-2210.00">
         <pitch>
@@ -1206,6 +1294,10 @@
           <sign>G</sign>
           <line>2</line>
           </clef>
+        <transpose>
+            <diatonic>-1</diatonic>
+            <chromatic>-2</chromatic>
+        </transpose>
         </attributes>
       <note default-x="83.04" default-y="-2310.00">
         <pitch>
@@ -1241,6 +1333,10 @@
           <sign>G</sign>
           <line>2</line>
           </clef>
+        <transpose>
+            <diatonic>-1</diatonic>
+            <chromatic>-2</chromatic>
+        </transpose>
         </attributes>
       <note default-x="83.04" default-y="-2410.00">
         <pitch>
@@ -1278,6 +1374,10 @@
           <sign>G</sign>
           <line>2</line>
           </clef>
+        <transpose>
+            <diatonic>-1</diatonic>
+            <chromatic>-2</chromatic>
+        </transpose>
         </attributes>
       <note default-x="83.04" default-y="-2515.00">
         <pitch>

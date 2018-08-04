@@ -69,6 +69,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
 
+        // Load the student score data from disk. If first time using app, will create
+        // an empty file using the levels/exercises JSON file as the template.
+        _ = ScoreMgr.instance.loadScoreFile()
+        
         // When the app gets to a point that it needs to set these progressively 
         // "tighter" as the student improves and moves to harder exercises, this 
         // should be moved to the point where the level changes are managed, so 
@@ -79,7 +83,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                    aBitToVeryPercentage:    0.085,
                                    veryBoundaryPercentage:  0.05 )// Shawn wants a very wide acceptance
         PerformanceAnalysisMgr.instance.rebuildAllAnalysisTables( tolerances )
-
+        
         return true
     }
     

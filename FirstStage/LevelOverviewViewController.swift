@@ -17,6 +17,12 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
     var selectedRhythmId: String?
     var selectedRhythmName: String?
     var lessonsJson: JSON?
+    var exerLevelIndex: Int = 0
+    var exerExerciseIndex: Int = 0
+    var exerExerciseTag: String = ""
+
+    // temp: get rid of when solidified . . .
+    var ltNoteID: String = "C4"
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -75,20 +81,11 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
         }
         else if segue.identifier == longToneSegueIdentifier {
             if let destination = segue.destination as? LongToneViewController {
-                if let sn = selectedNote {
-                    //TO DO -- is -2 correct??
-                    //                    let an = NoteService.getNote(sn.orderId-2)
-                    let an = NoteService.getNote(sn.orderId)
-                    print("sn: \(sn.orderId) - 2?? ==>")
-                    print("an == \(String(describing: an?.orderId))")
-                    destination.targetNote = an
-                    destination.targetNoteID = sn.orderId
-                    destination.noteName = (selectedNote?.fullName)!
-                }
-                else {
-                    destination.targetNote = NoteService.getNote(destination.kC4)
-                    destination.targetNoteID = destination.kC4
-                }
+                destination.noteName = self.ltNoteID
+                destination.targetNoteID = destination.kDb4
+                destination.exerLevelIndex = self.exerLevelIndex
+                destination.exerExerciseIndex = self.exerExerciseIndex
+                destination.exerExerciseTag = self.exerExerciseTag
             }
         }
     }
@@ -106,17 +103,31 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
         
         // Configure the cell...
         if let lessons = lessonsJson {
-            cell.textLabel?.text = lessons[indexPath.row]["title"].string
+            let tagStr = lessons[indexPath.row]["exerciseTag"].string
+            let titleStr = lessons[indexPath.row]["title"].string
+            let labelStr = tagStr! + " - " + titleStr!
+            cell.textLabel?.text = labelStr
+            // restore: cell.textLabel?.text = lessons[indexPath.row]["title"].string
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if let lesssonType = LessonItemType(rawValue: (lessonsJson?[indexPath.row]["type"].string?.lowercased())!) {
+        if let lesssonType =
+            LessonItemType(rawValue: (lessonsJson?[indexPath.row]["type"].string?.lowercased())!) {
             
+            if let exerTag = lessonsJson?[indexPath.row]["exerciseTag"].string! {
+                exerExerciseTag = exerTag
+            }
+            self.exerExerciseIndex = indexPath.row
+
             switch lesssonType {
             case .longTone:
+                // NoteID
+                if let noteID = lessonsJson?[indexPath.row]["noteID"].string! {
+                    ltNoteID = noteID
+                }
                 performSegue(withIdentifier: longToneSegueIdentifier, sender: self)
             case .rhythm:
                 if let musicFile = lessonsJson?[indexPath.row]["resource"].string! {
