@@ -111,56 +111,10 @@ class PerformanceIssueMgr {
         
         clearExisitingIssues()
         
-        func handle_ByIndividualRating( perfNote: PerformanceScoreObject,
-                                        perfIssue: inout PerfIssue ) {
-            // 3-way "max".   First, attack vs duration
-            if perfNote.attackScore > perfNote.durationScore {
-                perfIssue.issueCode  = perfNote.attackRating
-                perfIssue.issueScore = perfNote.attackScore
-                perfIssue.issueType  = .attack
-            } else {
-                perfIssue.issueCode  = perfNote.durationRating
-                perfIssue.issueScore = perfNote.durationScore
-                perfIssue.issueType  = .duration
-            }
-            // Now, pitch vs winner of above
-            if perfNote.pitchScore > perfIssue.issueScore {
-                perfIssue.issueCode  = perfNote.pitchRating
-                perfIssue.issueScore = perfNote.pitchScore
-                perfIssue.issueType  = .pitch
-            }
-        }
-        
         for onePerfScoreObj in PerformanceTrackingMgr.instance.perfNotesAndRests {
-            var perfIssue = PerfIssue(perfScoreObjID: onePerfScoreObj.perfScoreObjectID)
-            
-            switch sortCrit {
-            case .byAttackRating:
-                perfIssue.issueCode  = onePerfScoreObj.attackRating
-                perfIssue.issueScore = onePerfScoreObj.attackScore
-                perfIssue.issueType  = .attack
-            case .byDurationRating:
-                perfIssue.issueCode  = onePerfScoreObj.durationRating
-                perfIssue.issueScore = onePerfScoreObj.durationScore
-                perfIssue.issueType  = .duration
-            case .byPitchRating:
-                perfIssue.issueCode  = onePerfScoreObj.pitchRating
-                perfIssue.issueScore = onePerfScoreObj.pitchScore
-                perfIssue.issueType  = .pitch
-            case .byOverallRating:
-                perfIssue.issueCode  = .cumulative
-                perfIssue.issueScore = onePerfScoreObj.weightedScore
-                perfIssue.issueType  = .overall
-            case .byIndividualRating:
-                handle_ByIndividualRating( perfNote: onePerfScoreObj,
-                                           perfIssue: &perfIssue )
-            }
-            
-            perfIssue.videoID = mapPerfIssueToVideoID(perfIssue.issueCode)
-            if perfIssue.videoID == vidIDs.kVid_NoVideoAvailable {
-                perfIssue.alertID = mapPerfIssueToAlertID( perfIssue.issueCode)
-            }
-            
+            let perfIssue =
+                       scanPerfScoreObjForIssues( perfScoreObj: onePerfScoreObj,
+                                                  sortCrit: sortCrit )
             perfIssues.append(perfIssue)
         }
         
@@ -170,6 +124,64 @@ class PerformanceIssueMgr {
         sortedPerfIssues = perfIssues.sorted {
             let er0 = $0.issueScore, er1 = $1.issueScore
             return er0 > er1 ? true : false
+        }
+    }
+    
+    // Can be called for single note/rest ("Ejector Seat"), as well as
+    // in loop of scanPerfNotesForIssues method above
+    func scanPerfScoreObjForIssues( perfScoreObj: PerformanceScoreObject,
+                                    sortCrit: sortCriteria = .byIndividualRating )
+        -> PerfIssue {
+        var perfIssue = PerfIssue(perfScoreObjID: perfScoreObj.perfScoreObjectID)
+
+        switch sortCrit {
+        case .byAttackRating:
+            perfIssue.issueCode  = perfScoreObj.attackRating
+            perfIssue.issueScore = perfScoreObj.attackScore
+            perfIssue.issueType  = .attack
+        case .byDurationRating:
+            perfIssue.issueCode  = perfScoreObj.durationRating
+            perfIssue.issueScore = perfScoreObj.durationScore
+            perfIssue.issueType  = .duration
+        case .byPitchRating:
+            perfIssue.issueCode  = perfScoreObj.pitchRating
+            perfIssue.issueScore = perfScoreObj.pitchScore
+            perfIssue.issueType  = .pitch
+        case .byOverallRating:
+            perfIssue.issueCode  = .cumulative
+            perfIssue.issueScore = perfScoreObj.weightedScore
+            perfIssue.issueType  = .overall
+        case .byIndividualRating:
+            handle_ByIndividualRating( perfNote: perfScoreObj,
+                                       perfIssue: &perfIssue )
+        }
+        
+        perfIssue.videoID = mapPerfIssueToVideoID(perfIssue.issueCode)
+        if perfIssue.videoID == vidIDs.kVid_NoVideoAvailable {
+            perfIssue.alertID = mapPerfIssueToAlertID( perfIssue.issueCode)
+        }
+            
+        return perfIssue
+    }
+    
+    // support method for scanPerfScoreObjForIssues method
+    func handle_ByIndividualRating( perfNote: PerformanceScoreObject,
+                                    perfIssue: inout PerfIssue ) {
+        // 3-way "max".   First, attack vs duration
+        if perfNote.attackScore > perfNote.durationScore {
+            perfIssue.issueCode  = perfNote.attackRating
+            perfIssue.issueScore = perfNote.attackScore
+            perfIssue.issueType  = .attack
+        } else {
+            perfIssue.issueCode  = perfNote.durationRating
+            perfIssue.issueScore = perfNote.durationScore
+            perfIssue.issueType  = .duration
+        }
+        // Now, pitch vs winner of above
+        if perfNote.pitchScore > perfIssue.issueScore {
+            perfIssue.issueCode  = perfNote.pitchRating
+            perfIssue.issueScore = perfNote.pitchScore
+            perfIssue.issueType  = .pitch
         }
     }
 }

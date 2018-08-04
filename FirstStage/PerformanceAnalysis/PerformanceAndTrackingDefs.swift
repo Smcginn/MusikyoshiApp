@@ -213,6 +213,12 @@ var kPerfIssueSortCriteria: PerformanceIssueMgr.sortCriteria = .byIndividualRati
 // Must be set to false for release
 var kIgnoreMissedNotes = false
 
+// "Ejector Seat". This is the error threshold that a given note or rest cannot
+// exceed within a Tune or Rhythm exercise. If it does, the exercise is stopped
+// and the student is notified of the error immediately.
+var kStopPerformanceThreshold = 5
+
+
 ///////////////////////////////////////////////////////////////////////////////
 // Consts that control debug info display and printing (lots of printing) to 
 // the debug console.

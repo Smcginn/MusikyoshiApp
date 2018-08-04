@@ -21,7 +21,7 @@ class RestPerformanceAnalyzer : NotePerformanceAnalyzer {
             rest.attackRating = .soundsDuringRest
             rest.attackScore  = IssueWeight.kNoteDuringRest
         } else {
-            rest.attackRating = .soundsDuringRest
+            rest.attackRating = .timingOrRestGood
             rest.attackScore  = IssueWeight.kCorrect
         }
         rest.weightedScore = rest.attackScore

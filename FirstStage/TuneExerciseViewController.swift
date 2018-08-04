@@ -140,6 +140,8 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged {
 //    //    static const sscore_sy_synthesizedinstrumentinfo kTick1Info = {"Tick1", 0, 1.0};
 //    var kTick1Info = sscore_sy_synthesizedinstrumentinfo(instrument_name: ("Tick1" as NSString).utf8String, tickpitch: Int32(0), volume: Float(1.0), voice: sscore_sy_tick1, dummy: (0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0))
 
+    let perfTrkgMgr: PerformanceTrackingMgr! = PerformanceTrackingMgr.instance
+
     let kfAnim = CAKeyframeAnimation()
     var exerciseDuration = 0.0
     var animHorzOffset = 0.0
@@ -174,7 +176,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged {
     //used for colored notes
     let kUseColoredNotes = false
     var currentNotes = [AnyObject]()
-
+    
     // Needed by PerformanceTrackingMgr methods
     var songStartTm : Date = Date() {
         didSet {
@@ -753,7 +755,6 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged {
     //
     func trackSounds() {
 
-        let perfTrkgMgr: PerformanceTrackingMgr! = PerformanceTrackingMgr.instance
         guard perfTrkgMgr != nil else { return }
 
         // Do one of:
@@ -1346,6 +1347,23 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged {
             insideRest = false
         }
 
+        // Note or rest ended. See if there were errors with this particular note/rest that were
+        // bad enough to reject the performance. If so, stop now, so student doesn't go through
+        // entire song only to find out performance rejected due to error early on.
+        if let currScoreObj: PerformanceScoreObject? =
+            PerfTrkMgr.instance.currentlyInAScoreNote ? PerfTrkMgr.instance.currentPerfNote
+                                                      : PerfTrkMgr.instance.currentPerfRest
+        {
+            let good = PerfTrkMgr.instance.analyzeOneScoreObject(perfScoreObj:currScoreObj!)
+            if !good {
+                let issue: PerfIssue =
+                    PerformanceIssueMgr.instance.scanPerfScoreObjForIssues( perfScoreObj: currScoreObj!,
+                                                                            sortCrit: kPerfIssueSortCriteria )
+                if issue.issueScore > kStopPerformanceThreshold {
+                    stopPlaying() // Ejector Seat !!!!
+                }
+            }
+        }
         currNoteXPos = -1.0
         PerformanceTrackingMgr.instance.currentlyInAScoreNote = false
         PerformanceTrackingMgr.instance.currentlyInAScoreRest = false

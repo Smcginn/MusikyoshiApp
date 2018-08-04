@@ -30,6 +30,10 @@ import Foundation
 //        bar, etc. Also, the funcs will need to be adjusted as well.
 //
 
+// So other code can use much shorter "PerfTrkMgr.instance" instead of unmanagable
+// "PerformanceTrackingMgr.instance"
+typealias PerfTrkMgr = PerformanceTrackingMgr
+
 class PerformanceTrackingMgr {
 
     // PerformanceTrackingMgr keeps track of:
@@ -51,6 +55,13 @@ class PerformanceTrackingMgr {
     //    to give feedback on timing issues (not implemented yet).
     
     static let instance = PerformanceTrackingMgr()
+
+    // When modified so thresholds are reset with level advancement, these need to
+    // be changed to vars, and reset at that time as well.
+    let rhythmAnalyzer = NoteRhythmPerformanceAnalyzer.init()
+    let pitchAnalyzer  = TrumpetPitchPerformanceAnalyzer.init()
+    let restAnalyzer   = RestPerformanceAnalyzer.init()
+
     
     init() {
         userDefsTimingThreshold =
@@ -273,12 +284,27 @@ class PerformanceTrackingMgr {
         currSound.updateCurrentNoteIfLinkedFinal()
     }
     
+    func analyzeOneScoreObject(perfScoreObj: PerformanceScoreObject) -> Bool {
+        var retVal = true
+    
+        if perfScoreObj.isNote() {
+            rhythmAnalyzer.analyzeScoreObject( perfScoreObject: perfScoreObj )
+            pitchAnalyzer.analyzeScoreObject( perfScoreObject: perfScoreObj )
+        }
+            
+        else if perfScoreObj.isRest() {
+            restAnalyzer.analyzeScoreObject( perfScoreObject: perfScoreObj )
+        }
+
+        if perfScoreObj.weightedScore > 5 {
+            retVal = false
+        }
+        
+        return retVal
+    }
+    
     // Do post-performance analysis and grading: Pitch and Rhythm accuracy
     func analyzePerformance() {
-        
-        let rhythmAnalyzer = NoteRhythmPerformanceAnalyzer.init()
-        let pitchAnalyzer  = TrumpetPitchPerformanceAnalyzer.init()
-        let restAnalyzer   = RestPerformanceAnalyzer.init()
 
         // Uncomment this to test Partial lookup
 //        runPreAnalysisPartialTestingSetup()
@@ -288,21 +314,14 @@ class PerformanceTrackingMgr {
         for onePerfScoreObj in perfNotesAndRests {
             onePerfScoreObj.weightedScore = 0
             if onePerfScoreObj.isNote() {
-                //guard let onePerfNote: PerformanceNote = onePerfScoreObj as? PerformanceNote
-                //    else { continue }
-                
                 rhythmAnalyzer.analyzeScoreObject( perfScoreObject: onePerfScoreObj )
                 pitchAnalyzer.analyzeScoreObject( perfScoreObject: onePerfScoreObj )
             }
             
-            // RESTCHANGE
             else if onePerfScoreObj.isRest() {
-                //guard let onePerfNote: PerformanceNote = onePerfScoreObj as? PerformanceNote
-                //    else { continue }
-                
                 restAnalyzer.analyzeScoreObject( perfScoreObject: onePerfScoreObj )
              }
-       }
+        }
         
         PerformanceIssueMgr.instance.scanPerfNotesForIssues( kPerfIssueSortCriteria )
 
