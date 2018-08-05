@@ -69,9 +69,11 @@ class PerformanceTrackingMgr {
         if UIDevice.current.modelName == "Simulator" {
             print("In Simulator")
             kAmplitudeThresholdForIsSound = kAmpThresholdForIsSound_Sim
+            kSoundStartAdjustment = kSoundStartAdjustment_Sim
         } else {
             print("In Real Device")
             kAmplitudeThresholdForIsSound = kAmpThresholdForIsSound_HW
+            kSoundStartAdjustment = kSoundStartAdjustment_HW
         }
     }
     

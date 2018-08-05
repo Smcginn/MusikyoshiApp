@@ -113,7 +113,12 @@ let kDifferentPitchSampleThreshold  = 10
 // difference between epected time and when the metronome sound registers in the 
 // sample-scanning code.) Without this delay, students fight a 40ms delay to
 // get the timing right.
-let kSoundStartAdjustment = TimeInterval(0.040)
+// (This timing may be different for an actual iOS device vs when using the
+// simulator - which uses the Mac's mic and is running in a virtual machine, etc. So
+// this is set dynamically in PerformanceTrackingMgr.init, depending on the device.)
+let kSoundStartAdjustment_Sim = TimeInterval(0.040)
+let kSoundStartAdjustment_HW  = TimeInterval(0.0)
+var kSoundStartAdjustment = kSoundStartAdjustment_HW
 
 // Given the delay explained above (kSoundStartAdjustment), need to adjust the
 // location of the beginning and end of sounds when displaying them.
