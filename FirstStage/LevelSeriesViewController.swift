@@ -6,6 +6,8 @@
 //  Copyright © 2018 Musikyoshi. All rights reserved.
 //
 
+// Top Level VC
+
 import UIKit
 import Foundation
 import SwiftyJSON
@@ -14,6 +16,9 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
     
     @IBOutlet weak var tableView: UITableView!
     var instrumentJson: JSON?
+    
+    var thresholdsID         = kThershIDsStr_Begin_1
+    var singleEventThreshold = kSingleEventThreshDefaultStr
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,6 +69,14 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
                 if let row = sender as? Int {
                     destination.exerLevelIndex = row
                     destination.lessonsJson = levels[row]["exercises"]
+                    destination.thresholdsID         = thresholdsID
+                    destination.singleEventThreshold = singleEventThreshold
+                    if let threshIDStr = levels[row]["thresholdsID"].string {
+                       destination.thresholdsID = threshIDStr
+                    }
+                    if let singEvtThersh = levels[row]["singleEventThreshold"].string {
+                        destination.singleEventThreshold = singEvtThersh
+                    }
                 }
             }
         }

@@ -5,6 +5,8 @@
             "title":"Level 1",
             "levelTag":"L1",
             "levelIdx":"0",
+            "thresholdsID":"beginner1",
+            "singleEventThreshold":"6",
             "infoNode":[{"title": "Hand Placement",
                         "type":"informationNode",
                         "resource":"Media/hand-placement.html"
@@ -34,7 +36,9 @@
             "title":"Level 2",
             "levelTag":"L2",
             "levelIdx":"1",
-           "infoNode":[{"title": "Hand Placement",
+            "thresholdsID":"beginner3",
+            "singleEventThreshold":"5",
+            "infoNode":[{"title": "Hand Placement",
                         "type":"informationNode",
                         "resource":"Media/hand-placement.html"
                         }
@@ -63,6 +67,8 @@
             "title":"Level 3",
             "levelTag":"L3",
             "levelIdx":"2",
+            "thresholdsID":"intermediate1",
+            "singleEventThreshold":"4",
             "infoNode":[{"title": "Hand Placement",
                         "type":"informationNode",
                         "resource":"Media/hand-placement.html"
@@ -92,7 +98,9 @@
             "title":"Level 4",
             "levelTag":"L4",
             "levelIdx":"3",
-           "infoNode":[{"title": "Hand Placement",
+            "thresholdsID":"intermediate2",
+            "singleEventThreshold":"3",
+            "infoNode":[{"title": "Hand Placement",
                         "type":"informationNode",
                         "resource":"Media/hand-placement.html"
                         }

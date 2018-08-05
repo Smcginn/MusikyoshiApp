@@ -6,6 +6,8 @@
 //  Copyright © 2018 Musikyoshi. All rights reserved.
 //
 
+// Second Level VC, suboridinate to LessonSeriesViewController
+
 import UIKit
 import Foundation
 import SwiftyJSON
@@ -20,7 +22,10 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
     var exerLevelIndex: Int = 0
     var exerExerciseIndex: Int = 0
     var exerExerciseTag: String = ""
-
+    
+    var thresholdsID: String = ""
+    var singleEventThreshold: String = ""
+    
     // temp: get rid of when solidified . . .
     var ltNoteID: String = "C4"
     
@@ -42,6 +47,9 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
         } else {
             print("did load test")
         }
+        
+        ThresholdsMgr.instance.setThresholds(thresholdsID: thresholdsID,
+                                             ejectorSeatThreshold: singleEventThreshold)
     }
     
     override func viewWillAppear(_ animated: Bool) {

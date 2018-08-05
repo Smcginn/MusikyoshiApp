@@ -343,6 +343,8 @@
 		6D6093B72114F6C300874A40 /* PerformanceRest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6093AF2114F66D00874A40 /* PerformanceRest.swift */; };
 		6D6093B82114F6CB00874A40 /* RestPerformanceAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6093B02114F66D00874A40 /* RestPerformanceAnalyzer.swift */; };
 		6D6093B92114F6CE00874A40 /* ScoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6093AE2114F66C00874A40 /* ScoreData.swift */; };
+		6D6093BB21163E1800874A40 /* ThresholdsMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6093BA21163E1800874A40 /* ThresholdsMgr.swift */; };
+		6D6093BC21163E1800874A40 /* ThresholdsMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6093BA21163E1800874A40 /* ThresholdsMgr.swift */; };
 		6DA54C47210BC8F9004BECB2 /* ScoreMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA54C46210BC8F9004BECB2 /* ScoreMgr.swift */; };
 		6DA54C48210BC8FA004BECB2 /* ScoreMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA54C46210BC8F9004BECB2 /* ScoreMgr.swift */; };
 		BD7C17471F860E3B002AF462 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7C17461F860E3B002AF462 /* HomeViewController.swift */; };
@@ -843,6 +845,7 @@
 		6D6093AF2114F66D00874A40 /* PerformanceRest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PerformanceRest.swift; path = PerformanceAnalysis/PerformanceRest.swift; sourceTree = "<group>"; };
 		6D6093B02114F66D00874A40 /* RestPerformanceAnalyzer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RestPerformanceAnalyzer.swift; path = PerformanceAnalysis/RestPerformanceAnalyzer.swift; sourceTree = "<group>"; };
 		6D6093B12114F66D00874A40 /* PerformanceScoreObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PerformanceScoreObject.swift; path = PerformanceAnalysis/PerformanceScoreObject.swift; sourceTree = "<group>"; };
+		6D6093BA21163E1800874A40 /* ThresholdsMgr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ThresholdsMgr.swift; path = PerformanceAnalysis/ThresholdsMgr.swift; sourceTree = "<group>"; };
 		6DA54C46210BC8F9004BECB2 /* ScoreMgr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ScoreMgr.swift; path = PerformanceAnalysis/ScoreMgr.swift; sourceTree = "<group>"; };
 		BD7C17461F860E3B002AF462 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		BD7C174F1F861755002AF462 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
@@ -1511,6 +1514,7 @@
 		E9AD0C991FD115F1006472CE /* PerformanceAnalysis */ = {
 			isa = PBXGroup;
 			children = (
+				6D6093BA21163E1800874A40 /* ThresholdsMgr.swift */,
 				E9AD0CB81FD9BCDF006472CE /* NoteFreqRangeTable.swift */,
 				E9AD0CB91FD9BCDF006472CE /* NoteIDs.swift */,
 				E9AD0CE21FE09B77006472CE /* NotePerformanceAnalyzer.swift */,
@@ -2222,6 +2226,7 @@
 				E9815A392005124D0046445B /* VideoHelpResources.swift in Sources */,
 				E9815A37200511430046445B /* VideoHelpView.swift in Sources */,
 				E9AD0CE71FE09D32006472CE /* NotePitchPerformanceAnalyzer.swift in Sources */,
+				6D6093BC21163E1800874A40 /* ThresholdsMgr.swift in Sources */,
 				639A2E461CF5AB09004F7B1A /* DotView.swift in Sources */,
 				6379EE921CE9C8ED00188A70 /* AudioKitManager.swift in Sources */,
 				6324D3611CE73C47001934A5 /* SSSystemView.m in Sources */,
@@ -2299,6 +2304,7 @@
 				639A2E451CF5AB09004F7B1A /* DotView.swift in Sources */,
 				E9815A3B200512810046445B /* VideoHelpView.swift in Sources */,
 				E9AD0CE61FE09D32006472CE /* NotePitchPerformanceAnalyzer.swift in Sources */,
+				6D6093BB21163E1800874A40 /* ThresholdsMgr.swift in Sources */,
 				6379EE911CE9C8ED00188A70 /* AudioKitManager.swift in Sources */,
 				63B4275A1E505573000E35AA /* Intonation.swift in Sources */,
 				635A60A71EC6B8060099154A /* MusicXMLModifier.swift in Sources */,

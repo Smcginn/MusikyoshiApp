@@ -216,7 +216,9 @@ var kIgnoreMissedNotes = false
 // "Ejector Seat". This is the error threshold that a given note or rest cannot
 // exceed within a Tune or Rhythm exercise. If it does, the exercise is stopped
 // and the student is notified of the error immediately.
-var kStopPerformanceThreshold = 5
+let kStopPerformanceThresholdDefault: UInt = 5
+let kStopPerformanceThresholdMax: UInt = 15
+var kStopPerformanceThreshold: UInt = kStopPerformanceThresholdDefault
 
 
 ///////////////////////////////////////////////////////////////////////////////
