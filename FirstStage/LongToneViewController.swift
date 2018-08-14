@@ -29,7 +29,16 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
     var exerExerciseIndex: Int = 0
     var exerExerciseTag: String = ""
     
+    // To compensate for inevitable drift in signal that may have nothing
+    // to do with performance
+    let kMaxTimesWrongPitchAllowed: UInt = 15
+    let kMaxTimesNoSoundAllowed: UInt    =  5
+    var numTimesWrongPitch: UInt = 0
+    var numTimesNoSound: UInt = 0
 
+    // AK_ISSUE
+    var firstTimeAfterAKRestart = true
+    
     // These were added because it wasn't clear that "sparklinetapped" resulted
     // in playback. This was all part of getting this broken view working again.
     @IBOutlet weak var tapToHearButton: UIButton!
@@ -81,7 +90,9 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
     var balloonUpdateRate = 0.01
     var longToneEndTime = 0.0
     var startTime = Date()
+    var actualStartTime = Date()
 
+    
     var score: SSScore?
     var partIndex: Int32 = 0
     var layOptions = SSLayoutOptions()  // set of options for layout
@@ -103,7 +114,9 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
     var smileImageView : UIImageView!
 
     let feedbackView = FeedbackView()
-    
+    var starScoreView = StarScore()
+    var starScore: Int = 0
+
     ///////////////////////////////////////////////
     // New SF
     private var sampledInstrumentIds = [UInt]()
@@ -222,12 +235,39 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        AudioKitManager.sharedInstance.setup()
 
-        _ = ScoreMgr.instance.loadExercise(currLevelIndex: exerLevelIndex,
-                                           currExerciseIndex: exerExerciseIndex,
-                                           exerciseTag: exerExerciseTag )
+        // Parsing stuff:  Save for later.
+//        let origStr: String = "LT_C4_10, LT_C#4_10, LT_D4_15, LT_Eb4_15, LT_E4_20"
+//        let strArray = origStr.components(separatedBy: ", ")
+//        for oneStr in strArray {
+//            let chunks = oneStr.components(separatedBy: "_")
+//            print("oneStr")
+//        }
+        
+        // Set up the StarScore view as a subview of the Balloon view
+        let ballFrame = balloon.frame
+        let starSz  = StarScore.getSize()
+        let starY = ballFrame.origin.y + (ballFrame.size.height/2.0) + (starSz.height/2.0)
+        let starX = (ballFrame.size.width/2.0) - (starSz.width/2.0)
+        let starOrigin = CGPoint(x:starX, y:starY)
+        
+        starScoreView.initWithPoint(atPoint: starOrigin)
+        starScoreView.setStarCount(numStars: 3)
+        starScoreView.isHidden = true
+        balloon.addSubview(starScoreView)
+        
+        // AK_ISSUE was: (comment 1 line below)
+        AudioKitManager.sharedInstance.setup()  // SFAUDIO
+        
+        // AK_ISSUE - now:   (uncomment 4 lines below)
+//        if !AudioKitManager.sharedInstance.isRunning {
+//            AudioKitManager.sharedInstance.setup()  // SFAUDIO
+//            firstTimeAfterAKRestart = true  // AK_ISSUE
+//        }
+
+//        _ = ScoreMgr.instance.loadExercise(currLevelIndex: exerLevelIndex,
+//                                           currExerciseIndex: exerExerciseIndex,
+//                                           exerciseTag: exerExerciseTag )
         
         setNoteID()
         absoluteTargetNote = NoteService.getNote(targetNoteID + transpositionOffset)
@@ -262,8 +302,8 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
         navigationItem.title = "Long Tone - \(noteName)"
         instructionLbl.text  = "Play a long \(noteName) note and fill up the balloon until it turns green!"
 
-        ScoreMgr.instance.currentExerciseState = kExer_InProgress
-        ScoreMgr.instance.saveCurrentExercise()
+//        ScoreMgr.instance.currentExerciseState = kExer_InProgress
+//        ScoreMgr.instance.saveCurrentExercise()
         
         frequencyThresholdPercent = 1.0 + frequencyThreshold
         farFrequencyThresholdPercent = frequencyThresholdPercent + (frequencyThreshold * 1.5)
@@ -277,20 +317,20 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
     
     override func viewWillDisappear(_ animated : Bool) {
         
-        ScoreMgr.instance.currentExerciseState = kExer_Completed
-        ScoreMgr.instance.saveCurrentExercise()
-        _ = ScoreMgr.instance.saveScoreFile()
+//        ScoreMgr.instance.currentExerciseState = kExer_Completed
+//        ScoreMgr.instance.saveCurrentExercise()
+//        _ = ScoreMgr.instance.saveScoreFile()
         
         super.viewWillDisappear(animated)
         AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
     }
     
     @IBAction func sparkLineTapped(_ sender: UITapGestureRecognizer) {
-        let currScore = ScoreMgr.instance.currentExerciseScore
-        if currScore < 4 {
-            ScoreMgr.instance.currentExerciseScore += 1
-            ScoreMgr.instance.saveCurrentExercise()
-        }
+//        let currScore = ScoreMgr.instance.currentExerciseScore
+//        if currScore < 4 {
+//            ScoreMgr.instance.currentExerciseScore += 1
+//            ScoreMgr.instance.saveCurrentExercise()
+//        }
         playScore()
     }
     
@@ -483,7 +523,8 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
                 return
             }
 
-            // start playing if not playing
+            // AK_ISSUE - did not change this
+            // start playing if not playing   SFAUDIO
             if AVAudioSessionManager.sharedInstance.setupAudioSession() {
                 print("setupAudioSession == true")
                 playData?.clearLoop()
@@ -627,34 +668,51 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
                 delay(1.0){
                     self.countdownLbl.alpha = 0
                     self.balloon.alpha = 1
+                    self.startExercise()
                 }
-                self.startExercise()
             }
         }
     }
     
     func startExercise(){
+        actualStartTime = Date()
+        starScore = 0
+        balloon.reset()
+        numTimesWrongPitch = 0
+        numTimesNoSound = 0
         AudioKitManager.sharedInstance.start()
-        longToneEndTime = Date().timeIntervalSince(startTime) + 30.0
+        firstTimeAfterAKRestart = true // AK_ISSUE  added
+        
+        print("\n    In startExercise, startTime == \(startTime)\n")
+        
+        longToneEndTime = Date().timeIntervalSince(actualStartTime) + targetTime + 2.0
         timer = Timer.scheduledTimer(timeInterval: pitchSampleRate, target: self, selector: #selector(LongToneViewController.updateTracking), userInfo: nil, repeats: true)
     }
     
     func stopExercise(){
         resetSparkLine()
         
-        AudioKitManager.sharedInstance.stop()
+        AudioKitManager.sharedInstance.stop() // SFAUDIO // AK_ISSUE - didn't change this
+        firstTimeAfterAKRestart = true // AK_ISSUE   new
         timer.invalidate()
         
         if isExerciseSuccess
         {
+            balloon.explodeBalloon()
             balloon.fillColor = UIColor.green.cgColor
             feedbackLbl.text = "You did it!"
-            smileImageView.isHidden = false
+            //smileImageView.isHidden = false
+            starScoreView.setStarCount(numStars: starScore)
+            starScoreView.isHidden = false
+            starScoreView.pulseView()
         }
         else
         {
-            timer = Timer.scheduledTimer(timeInterval: balloonUpdateRate, target: self, selector: #selector(LongToneViewController.deflateBalloon), userInfo: nil, repeats: true)
+            balloon.deflateBallon()
+           // timer = Timer.scheduledTimer(timeInterval: balloonUpdateRate, target: self, selector: #selector(LongToneViewController.deflateBalloon), userInfo: nil, repeats: true)
             feedbackLbl.text = "Almost..."
+            starScoreView.setStarCount(numStars: starScore)
+            starScoreView.isHidden = false
         }
         
         feedbackLbl.isHidden = false
@@ -673,10 +731,13 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
         exerciseState = ExerciseState.completed
 
         if isExerciseSuccess {
-            feedbackView.setupFeedbackView(self)
-            let feedbackRect = visualizationPanel.frame
-            feedbackView.contentMode = .scaleAspectFill
-            feedbackView.showFeedback(feedbackRect)
+            starScoreView.isHidden = false
+
+            balloon.explodeBalloon()
+//            feedbackView.setupFeedbackView(self)
+//            let feedbackRect = visualizationPanel.frame
+//            feedbackView.contentMode = .scaleAspectFill
+//            feedbackView.showFeedback(feedbackRect)
         }
 //        delay(0.5){
 //            self.feedbackPnl.center.y += 40
@@ -694,21 +755,42 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
     
     @objc func updateTracking()
     {
-        if Date().timeIntervalSince(startTime) > longToneEndTime {
+        
+        if Date().timeIntervalSince(actualStartTime) > longToneEndTime {
             // we're done!
             stopExercise()
         }
 
 //        let amplitude = AudioKitManager.sharedInstance.amplitude()
 //        let frequency = AudioKitManager.sharedInstance.frequency()
+        // SFAUDIO
+        
+        print("frequencyTracker == \(AudioKitManager.sharedInstance.frequencyTracker)")
+
         let amplitude = AudioKitManager.sharedInstance.frequencyTracker.amplitude
         let frequency = AudioKitManager.sharedInstance.frequencyTracker.frequency
+        
+        // AK_ISSUE  -- just printing data, nos real audio changes
+        if firstTimeAfterAKRestart {
+            firstTimeAfterAKRestart = false
+            if frequency > 199.95 && frequency < 200.05 {
+                print("FrequencyTracker probably bad")
+                print("  frequencyTracker == \(AudioKitManager.sharedInstance.frequencyTracker)")
+            } else {
+                print("FrequencyTracker probably good")
+                print("  frequencyTracker == \(AudioKitManager.sharedInstance.frequencyTracker)")
+            }
+        }
+        
+        print ("----> Current Frequency: \(frequency)")
+        print ("----> Current Amplitude: \(amplitude)")
 
-//        print("amplitude / freq = \(amplitude) / \(frequency)")
 
-        if amplitude > 0.01 {
+        if amplitude > kAmplitudeThresholdForIsSound {
             if minPitch...maxPitch ~= frequency {
                 if lowPitchThreshold...highPitchThreshold ~= frequency {
+                    numTimesWrongPitch = 0
+                    numTimesNoSound = 0
                     //inside threshold
                     clearArrowAndPrompt()
                     hasNoteStarted = true
@@ -718,20 +800,45 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
                         stopExercise()
                         return
                     } else {
+                        
+                        let elapsed = Date().timeIntervalSince(actualStartTime)
+                        let timeLen = TimeInterval(targetTime)
+                        print ("elapsed == \(elapsed)")
+                        print ("timeLen == \(timeLen)")
+                        let percent:CGFloat = CGFloat(elapsed/timeLen)
+                        let percentInt = Int(percent*100)
+                        print ("percent == \(percent)")
+                        balloon.increaseBalloonSize(toPercentage: percent)
+                        if percentInt > 95 {
+                            starScore = 4
+                        } else if percentInt > 55 {
+                            starScore = 3
+                        } else if percentInt > 35 {
+                            starScore = 2
+                        } else if percentInt > 10 {
+                            starScore = 1 }
+                        else  {
+                            starScore = 0
+                        }
+                        
                         timerLbl.text = String(format: "%.2f/%.2f", currentTime, targetTime)
-                        balloon.radius += 0.3
+                        // balloon.radius += 0.3
                         playBtn.isHidden = false
                         playBtn.isEnabled = false
                         playBtn.setTitle("Keep it up!", for: UIControlState())
                     }
                 } else if hasNoteStarted {
-                    //outside threshold
-                    if let noteHit = NoteService.getNote(frequency) {
-                        print(String(format: "note hit: %@ not equal to %@", noteHit.fullName, (targetNote?.fullName)!))
-                    } else {
-                        print(String(format: "note hit: 'nil' not equal to %@", (targetNote?.fullName)!))
+                    // outside threshold. But make sure it's not an intermittant
+                    // signal; wait a few samples to see if it's back to correct
+                    numTimesWrongPitch += 1
+                    if numTimesWrongPitch > kMaxTimesWrongPitchAllowed {
+                         if let noteHit = NoteService.getNote(frequency) {
+                            print(String(format: "note hit: %@ not equal to %@", noteHit.fullName, (targetNote?.fullName)!))
+                        } else {
+                            print(String(format: "note hit: 'nil' not equal to %@", (targetNote?.fullName)!))
+                        }
+                        stopExercise()
                     }
-                    stopExercise()
                 } else if lowFarPitchThreshold...highFarPitchThreshold ~= frequency {
                     setArrowAndPrompt(true, isUp: frequency < targetPitch)
                 } else {
@@ -759,9 +866,13 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
                 return
             }
         } else if hasNoteStarted {
-            print("no sound tracked")
-            stopExercise()
-            return
+            print("no sound tracked; waiting to see if temp glitch")
+           numTimesNoSound += 1
+            if numTimesNoSound > kMaxTimesNoSoundAllowed {
+                print("no sound tracked; stopping")
+                stopExercise()
+                return
+            }
         } else {
             clearArrowAndPrompt()
         }

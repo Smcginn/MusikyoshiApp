@@ -116,9 +116,13 @@ let kDifferentPitchSampleThreshold  = 10
 // (This timing may be different for an actual iOS device vs when using the
 // simulator - which uses the Mac's mic and is running in a virtual machine, etc. So
 // this is set dynamically in PerformanceTrackingMgr.init, depending on the device.)
-let kSoundStartAdjustment_Sim = TimeInterval(0.040)
+let kSoundStartAdjustment_Sim = TimeInterval(0.080) // (0.180)// (0.120) // (0.080)   //0.180 (0.160)//(0.220) //(0.250) //.040)
 let kSoundStartAdjustment_HW  = TimeInterval(0.0)
 var kSoundStartAdjustment = kSoundStartAdjustment_HW
+
+let kMetronomeTimingAdjustment_Sim: Int32  = -175 // -175!!!!! // -170
+let kMetronomeTimingAdjustment_HW:  Int32  = -175
+var kMetronomeTimingAdjustment:     Int32  = kMetronomeTimingAdjustment_Sim
 
 // Given the delay explained above (kSoundStartAdjustment), need to adjust the
 // location of the beginning and end of sounds when displaying them.
@@ -243,3 +247,6 @@ let kMKDebugOpt_ShowDebugSettingsBtn = true
 let kMKDebugOpt_PrintStudentPerformanceDataDebugOutput = false
 let kMKDebugOpt_PrintStudentPerformanceDataDebugSamplesOutput = false
 let kMKDebugOpt_PrintPerfAnalysisResults = false
+let kMKDebugOpt_PrintMinimalNoteAndSoundResults = true
+var kMKDebugOpt_PrintMinimalNoteAnalysis        = true
+
