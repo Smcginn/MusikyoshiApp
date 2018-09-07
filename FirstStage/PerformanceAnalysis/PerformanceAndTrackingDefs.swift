@@ -64,21 +64,26 @@ struct IssueWeight {
     
     static let kCorrect:              Int  =  0
     
-    static let kSlightlyEarlyOrLate:  Int  =  3
-    static let kVeryEarlyOrLate:      Int  =  6
-    static let kMissed:               Int  =  9
+    // attack
+    static let kSlightlyEarlyOrLate:  Int  =  6     // 20 // 6
+    static let kVeryEarlyOrLate:      Int  =  12    // 60 // 12
+    static let kMissed:               Int  =  18    // 92 // 18
     
-    static let kNoteDuringRest:       Int  =  9  // Only grading of rest objects
+    // pitch
+    static let kSlightyFlatOrSharp:   Int  =  2     // 18 // 2
+    static let kVeryFlatOrSharp:      Int  =  4     // 20 // 4
+    static let kFlatOrSharpWrongNote: Int  =  10    // 50 // 10
+    
+    static let kUpperPartial:         Int  =  12    // 60 // 12
+    static let kLowerPartial:         Int  =  12    // 60 //12
+    
+    static let kNoteDuringRest:       Int  =  18    // 92 // 18
 
-    static let kSlightyLongOrShort:   Int  =  1
-    static let kVeryLongOrShort:      Int  =  2
-    static let kTooLongOrShort:       Int  =  3
+    // duration
+    static let kSlightyLongOrShort:   Int  =  2     // 10 // 2
+    static let kVeryLongOrShort:      Int  =  4     // 20 // 4
+    static let kTooLongOrShort:       Int  =  6     // 30 // 6
     
-    static let kSlightyFlatOrSharp:   Int  =  1
-    static let kVeryFlatOrSharp:      Int  =  2
-    static let kFlatOrSharpWrongNote: Int  =  5
-    static let kUpperPartial:         Int  =  6
-    static let kLowerPartial:         Int  =  6
     
     // Question: Does a missed note also get weighted score in pitch category?
     // E.g., if rating by pitch alone, is a missed note worse than very low? Or 
@@ -86,17 +91,25 @@ struct IssueWeight {
     // static let kPitchMissed:       Int  =  9
 }
 
+// matched against average scores to determine start score
+let kDefaultMaxScore_FourStars:  Int = 5
+let kDefaultMaxScore_ThreeStars: Int = 8
+let kDefaultMaxScore_TwoStars:   Int = 11
+let kDefaultMaxScore_OneStars:   Int = 16
+
 // Save samples into a collection in the sound object? (useful for debugging)
 // If no, a running sum is used to determine average. (Performance improvement)
 let kSavePitchSamples = false
 let kNumSamplesToCollect = 300
 
+//////   Signal Amplitude   ////////////////////////////
+//
 // Signal Amplitude used to determine if an actual sound, when creating or ending
 // a PerformanceSound. (The sensitivity of the mic is very different for an actual 
 // iOS device vs when using the simulator - which uses the Mac's mic. So this is
 // set dynamically in PerformanceTrackingMgr.init, depending on the device.)
-let kAmpThresholdForIsSound_Sim = 0.05
-let kAmpThresholdForIsSound_HW  = 0.01
+let kAmpThresholdForIsSound_Sim = 0.07
+let kAmpThresholdForIsSound_HW  = 0.02
 var kAmplitudeThresholdForIsSound = kAmpThresholdForIsSound_HW
 
 // Number of samples to let pass before before beginning to average the pitch, to
@@ -108,6 +121,8 @@ let kSamplesNeededToDeterminePitch = 10
 // common, so must have a certain number in a row before commmiting to a new note.)
 let kDifferentPitchSampleThreshold  = 10
 
+//////   Sound Start Adjustment   ////////////////////////////
+//
 // This is the apparent delay between a sound and the acquisition of the sound
 // by the sound tracking code. (When the metronome is left on, this is the 
 // difference between epected time and when the metronome sound registers in the 
@@ -116,13 +131,19 @@ let kDifferentPitchSampleThreshold  = 10
 // (This timing may be different for an actual iOS device vs when using the
 // simulator - which uses the Mac's mic and is running in a virtual machine, etc. So
 // this is set dynamically in PerformanceTrackingMgr.init, depending on the device.)
-let kSoundStartAdjustment_Sim = TimeInterval(0.080) // (0.180)// (0.120) // (0.080)   //0.180 (0.160)//(0.220) //(0.250) //.040)
-let kSoundStartAdjustment_HW  = TimeInterval(0.0)
+let kSoundStartAdjustment_Sim = TimeInterval(0.080) // (0.180)// (0.120)
+let kSoundStartAdjustment_HW  = TimeInterval(0.075)
 var kSoundStartAdjustment = kSoundStartAdjustment_HW
 
+//////   Metronome Adjustment   ////////////////////////////
 let kMetronomeTimingAdjustment_Sim: Int32  = -175 // -175!!!!! // -170
 let kMetronomeTimingAdjustment_HW:  Int32  = -175
 var kMetronomeTimingAdjustment:     Int32  = kMetronomeTimingAdjustment_Sim
+
+//////   Playback Volume   ////////////////////////////
+let kPlaybackVolume_Sim: Double  = 0.0
+let kPlaybackVolume_HW:  Double  = 1.0
+var kPlaybackVolume:     Double  = kPlaybackVolume_HW
 
 // Given the delay explained above (kSoundStartAdjustment), need to adjust the
 // location of the beginning and end of sounds when displaying them.
@@ -215,7 +236,11 @@ enum performanceRating { // for attack, duration, and pitch
 
 // Used after post-performance analysis to determine which is the worst
 // issue for all performed notes
-var kPerfIssueSortCriteria: PerformanceIssueMgr.sortCriteria = .byIndividualRating
+var gPerfIssueSortCriteria: PerformanceIssueMgr.sortCriteria = .byIndividualRating
+func setPerfIssueSortCriteria(sortCrit: PerformanceIssueMgr.sortCriteria) {
+    gPerfIssueSortCriteria = sortCrit
+    print("\n  Just set gPerfIssueSortCriteria to \(gPerfIssueSortCriteria)\n")
+}
 
 // Used during post-performance analysis to debug other issues, as it's hard to
 // stop a lesson without generating a missed note at the end. 
@@ -229,6 +254,14 @@ let kStopPerformanceThresholdDefault: UInt = 5
 let kStopPerformanceThresholdMax: UInt = 15
 var kStopPerformanceThreshold: UInt = kStopPerformanceThresholdDefault
 
+// Severity -  How bad is the issue. Used to determine color of pulsing circle,
+// Line colors for note display, and perhaps Text in the Video or Alert dialogs.
+let kYellowSeverityThreshold = 10
+let kGreenSeverityThreshold  =  6
+let kSeverityNone     = 0
+let kSeverityGreen    = 0
+let kSeverityYellow   = 1
+let kSeverityRed      = 2
 
 ///////////////////////////////////////////////////////////////////////////////
 // Consts that control debug info display and printing (lots of printing) to 

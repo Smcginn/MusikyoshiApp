@@ -38,25 +38,36 @@ class PerformanceScoreObjectScheduler {
             case .active:        checkTimeForDeactivating(perfScObj: onePSO)
             case .ended:         break
             }
-            // See if any active pso's transitioned to ended
-            if onePSO.status == .ended {
-                activePerfScoreObjects.remove(at: index)
-            }
             index += 1
         }
         if index != startCount {
             print ("PROBLEM: index != startCount in inspectPerfScoreObjectsForTransitions() !!!! ")
         }
+        // See if any active pso's transitioned to ended
+        index = 0
+        for onePSO in activePerfScoreObjects {
+            if onePSO.status == .ended {
+                activePerfScoreObjects.remove(at: index)
+                break
+           }
+           index += 1
+        }
     }
         
     func checkStartTimeForActivating(perfScObj: PerformanceScoreObject) {
         // Must wait until the song started to schedule a note.
-        guard PerfTrkMgr.instance.songStarted,
-              perfScObj.status == .pendingStart,
-              !perfScObj.completed     else {
-                  print("Something screwed up in PSTMgr: PendingObject is completed")
-                  return }
+        guard PerfTrkMgr.instance.songStarted else { return }
         
+        guard perfScObj.status == .pendingStart else {
+            print("Something screwed up in PSTMgr: PendingObject is not .pendingStart")
+            return
+        }
+        
+        guard !perfScObj.completed else {
+            print("Something screwed up in PSTMgr: PendingObject is completed")
+            return
+        }
+
         let currSongTime = currentSongTime()
         if currSongTime > perfScObj.expectedStartTime {
             if perfScObj.isNote() {
@@ -89,20 +100,45 @@ class PerformanceScoreObjectScheduler {
                  return }
         
         let currSongTime = currentSongTime()
-        if currSongTime > perfScObj._deactivateTime {
+        let deactivateTime = perfScObj.isNote() ? perfScObj._deactivateTime
+                                                : perfScObj._deactivateTime_comp
+        if currSongTime > deactivateTime {    // perfScObj._deactivateTime_comp {
+            var isGood = true
             if perfScObj.isNote() {
                 print ("Attempting to deactivate PerfNote #\(perfScObj.perfNoteOrRestID), at \(currSongTime)")
-                if let currPerfNote = PerfTrkMgr.instance.currentPerfNote {
-                    if currPerfNote.perfNoteOrRestID == perfScObj.perfNoteOrRestID {
+                let currPerfNote = PerfTrkMgr.instance.currentPerfNote
+                if currPerfNote != nil {
+                    isGood = PerfTrkMgr.instance.analyzeOneScoreObject(perfScoreObj:currPerfNote!)
+                    if !isGood {
+                        let issue: PerfIssue =
+                            PerformanceIssueMgr.instance.scanPerfScoreObjForIssues(
+                                perfScoreObj: currPerfNote!,
+                                sortCrit: gPerfIssueSortCriteria )
+                        if issue.issueScore > kStopPerformanceThreshold {
+                            tuneExerVC?.stopPlaying() // Ejector Seat !!!!
+                        }
+                    }
+                    if currPerfNote!.perfNoteOrRestID == perfScObj.perfNoteOrRestID {
                         PerfTrkMgr.instance.currentPerfNote = nil
                         PerfTrkMgr.instance.currentlyInAScoreNote = false
                     }
-                }
+                 }
                 perfScObj.status = .ended
-            } else {
+            } else { // it's a rest
                 print ("Attempting to deactivate PerfRest #\(perfScObj.perfNoteOrRestID), at \(currSongTime)")
-                if let currPerfRest = PerfTrkMgr.instance.currentPerfRest {
-                    if currPerfRest.perfNoteOrRestID == perfScObj.perfNoteOrRestID {
+                let currPerfRest = PerfTrkMgr.instance.currentPerfRest
+                if currPerfRest != nil {
+                    isGood = PerfTrkMgr.instance.analyzeOneScoreObject(perfScoreObj:currPerfRest!)
+                    if !isGood {
+                        let issue: PerfIssue =
+                            PerformanceIssueMgr.instance.scanPerfScoreObjForIssues(
+                                perfScoreObj: currPerfRest!,
+                                sortCrit: gPerfIssueSortCriteria )
+                        if issue.issueScore > kStopPerformanceThreshold {
+                            tuneExerVC?.stopPlaying() // Ejector Seat !!!!
+                        }
+                    }
+                    if currPerfRest!.perfNoteOrRestID == perfScObj.perfNoteOrRestID {
                         PerfTrkMgr.instance.currentPerfRest = nil
                         PerfTrkMgr.instance.currentlyInAScoreRest = false
                     }

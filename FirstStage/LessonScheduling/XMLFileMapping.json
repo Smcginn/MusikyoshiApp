@@ -1,0 +1,1372 @@
+{
+  "helpCodeEntries":[
+    {
+    "helpCode":"TuneHelp1",
+    "helpText":"Play the song"
+    },{
+    "helpCode":"RhythmPartyHelp1",
+    "helpText":"Clap along with the notes, concentrating on the Note start"
+    },{
+    "helpCode":"RhythmPrepHelp1",
+    "helpText":"Play the notes, concentrating on the Note start"
+    },{
+    "helpCode":"LipSlurHelp1",
+    "helpText":"Switch between notes, keeping the fingering the same"
+    }
+ ],
+ "tuneFileEntries":[
+        {
+        "fileCode":"TUN001",
+        "xmlFile":"1 Whole Lotta Wholes-tpt.xml",
+        "title":"Whole Lotta Wholes",
+        "commentStr1":"",
+        "commentStr2":"Take a deep breath!",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN002",
+        "xmlFile":"2 Stepping Up -tpt.xml",
+        "title":"2. Stepping Up",
+        "commentStr1":"",
+        "commentStr2":"New Note D, 1st and 3rd Valve",
+        "helpCode1":"",
+        "helpCode2":""
+         },{
+        "fileCode":"TUN003",
+        "xmlFile":"3 Gimme Three tpt.xml",
+        "title":"3. Gimme Three",
+        "commentStr1":"",
+        "commentStr2":"New Note E, 1st and 2nd Valve",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN004",
+        "xmlFile":"4 Leaping Down-tpt.xml",
+        "title":"4. Leaping Down",
+        "commentStr1":"",
+        "commentStr2":"Use your tongue to make the note sound. Say 'taaaaa'",
+        "helpCode1":"",
+        "helpCode2":""
+         },{
+        "fileCode":"TUN005",
+        "xmlFile":"5 One More Makes Four-tpt.xml",
+        "title":"5. One More Makes Four",
+        "commentStr1":"",
+        "commentStr2":"New Note F, 1st Valve",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN006",
+        "xmlFile":"6 Trumpet Half Notes Float Boats.xml",
+        "title":"6. Half Notes Float Boats",
+        "commentStr1":"",
+        "commentStr2":"Half Notes and Half Rests get 2 beats",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN007",
+        "xmlFile":"7 Trumpet Half and Half.xml",
+        "title":"7. Half and Half",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN008",
+        "xmlFile":"8 Tpt. Half Up, Half Down - Trumpet in Bb.xml",
+        "title":"8. Half Up, Half Down",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN009",
+        "xmlFile":"9 A New Note Down Under - Trumpet in Bb.xml",
+        "title":"9. A New Note Down Under",
+        "commentStr1":"",
+        "commentStr2":"Remember, B is 2nd Valve",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN010",
+        "xmlFile":"10 Tpt Counting Halves with My Whole Head.xml",
+        "title":"10. Counting Halves with My Whole Head",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN011",
+        "xmlFile":"11 Mix and Match - Trumpet in Bb.xml",
+        "title":"11. Mix and Match",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN012",
+        "xmlFile":"12 Tpt-  The Fifth Note! Beethoven_s 9th.xml",
+        "title":"12. The Fifth Note! Beethoven's 9th",
+        "commentStr1":"",
+        "commentStr2":"New Note G, open, no valves down",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN013",
+        "xmlFile":"13 Tpt. Four Quarters.xml",
+        "title":"13. Four Quarters",
+        "commentStr1":"",
+        "commentStr2":"A quarter note and a quarter rest get one beat",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN014",
+        "xmlFile":"14 Tpt. Sliding Down.xml",
+        "title":"14. Sliding Down",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN015",
+        "xmlFile":"15 Leaps and Bounds.xml",
+        "title":"15. Leaps and Bounds",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN016",
+        "xmlFile":"16 Tpt Hot Cross Buns.xml",
+        "title":"16. Hot Cross Buns",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN017",
+        "xmlFile":"17 Tpt. Sweetly Sings the Donkey.xml",
+        "title":"",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN018",
+        "xmlFile":"18 Like a Boss -Tpt.xml",
+        "title":"18. Like a Boss",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN019",
+        "xmlFile":"19 Up the Down Staircase - Tpt.xml",
+        "title":"19. Up the Down Staircase",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN020",
+        "xmlFile":"20 Moving Up - Tpt.xml",
+        "title":"20. Moving Up",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN021",
+        "xmlFile":"21 Feels Like Home - Tpt.musicxml",
+        "title":"21. Feels Like Home",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN0222",
+        "xmlFile":"22 The Twinkle Twinkle In Mozar_ts Eyes - Tpt.xml",
+        "title":"22. The Twinkle Twinkle In Mozart's Eyes",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN023",
+        "xmlFile":"23 Lightly Row Tpt.xml",
+        "title":"23. Lightly Row ",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN024",
+        "xmlFile":"24 London Bridge - Tpt.xml",
+        "title":"24. London Bridge",
+        "commentStr1":"",
+        "commentStr2":"English Folk Song",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN025",
+        "xmlFile":"25 Old MacDonald - Trumpet.xml",
+        "title":"25. Old MacDonald  ",
+        "commentStr1":"",
+        "commentStr2":"Traditional",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN026",
+        "xmlFile":"26 Good King Wenceslas - Trumpet in Bb.xml",
+        "title":"26. Good King Wenceslas",
+        "commentStr1":"",
+        "commentStr2":"Traditional English Carol",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN027",
+        "xmlFile":"27 Jumping up, Leaping down - Trumpet in Bb.xml",
+        "title":"27. Jumping up, Leaping down",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN028",
+        "xmlFile":"28 Recess Trumpet.xml",
+        "title":"28. Recess",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN029",
+        "xmlFile":"29 - Climb and Return -Trumpet in Bb.xml",
+        "title":"29. Climb and Return",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN030",
+        "xmlFile":"30 Connect the Dots - Trumpet in Bb.xml",
+        "title":"30. Connect the Dots",
+        "commentStr1":"",
+        "commentStr2":"Dotted Half Note - 3 beats!",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN031",
+        "xmlFile":"31 Au Claire De La Lune.xml",
+        "title":"31. Au Claire De La Lune",
+        "commentStr1":"",
+        "commentStr2":"French Folk Song",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN032",
+        "xmlFile":"32 Go Tell Aunt Rhodie - Trumpet in Bb.xml",
+        "title":"32. Go Tell Aunt Rhodie",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN033",
+        "xmlFile":"33 Skip Gets Air - Trumpet in Bb.xml",
+        "title":"33. Skip Gets Air   ",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN034",
+        "xmlFile":"34 Forge On - Trumpet in Bb.xml",
+        "title":"34. Forge On",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN035",
+        "xmlFile":"35 Lizard Town - Trumpet in Bb.xml",
+        "title":"35. Lizard Town",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN036",
+        "xmlFile":"36 Always Counting - Trumpet in Bb.xml",
+        "title":"36. Always Counting",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN037",
+        "xmlFile":"37 Unsure Footing - Trumpet in Bb.xml",
+        "title":"37. Unsure Footing",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN038",
+        "xmlFile":"38 Pop a Wheelie - Trumpet in Bb.xml",
+        "title":"38. Pop a Wheelie",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN039",
+        "xmlFile":"39 B-OOTIFUL - Trumpet in Bb.xml",
+        "title":"39. B-OOTIFUL",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN040",
+        "xmlFile":"40 Three Quarters, Please! - Trumpet in Bb.xml",
+        "title":"40. Three Quarters, Please!",
+        "commentStr1":"",
+        "commentStr2":"3/4 Time Signature - 3 Beats per measure!",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN041",
+        "xmlFile":"41 Mexican Hat Dance - Trumpet in Bb.xml",
+        "title":"41. Mexican Hat Dance",
+        "commentStr1":"",
+        "commentStr2":"Traditional Mexican Folk Song",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN042",
+        "xmlFile":"42 Blue Danube Waltz - Trumpet in Bb.xml",
+        "title":"42. Blue Danube Waltz",
+        "commentStr1":"",
+        "commentStr2":"Johann Strauss, Adapted",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN043",
+        "xmlFile":"43 Waltz Times Three - Trumpet in Bb.xml",
+        "title":"43. Waltz Times Three",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN044",
+        "xmlFile":"44 Soaring High - Trumpet in Bb.xml",
+        "title":"44. Soaring High",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN045",
+        "xmlFile":"45 We Finally Meet, Eighth Note! - Trumpet in Bb.xml",
+        "title":"45. We Finally Meet, Eighth Note!",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN046",
+        "xmlFile":"46 Squash the Eighth Note - Trumpet in Bb.xml",
+        "title":"46. Squash the Eighth Note",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN047",
+        "xmlFile":"47 William Tell Overture - Trumpet in Bb.xml",
+        "title":"47. William Tell Overture",
+        "commentStr1":"",
+        "commentStr2":"Rossini, Adapted",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN048",
+        "xmlFile":"48 Rock Climbing - Trumpet in Bb.xml",
+        "title":"48. Rock Climbing",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN049",
+        "xmlFile":"49 Frére Jacques - Trumpet in Bb.xml",
+        "title":"49. Frére Jacques",
+        "commentStr1":"",
+        "commentStr2":"French Folk Song",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN050",
+        "xmlFile":"50 It_s a Trap! - Trumpet in Bb.xml",
+        "title":"50. It's a Trap!",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN051",
+        "xmlFile":"51 Bullseye - Trumpet in Bb.xml",
+        "title":"51. Bullseye",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN052",
+        "xmlFile":"52 Ha Ha Ha Ha! - Trumpet in Bb.xml",
+        "title":"52. Ha Ha Ha Ha!",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN053",
+        "xmlFile":"53 Flat Cat - Trumpet in Bb.xml",
+        "title":"53. Flat Cat",
+        "commentStr1":"",
+        "commentStr2":"Bb is played 1st Valve",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN054",
+        "xmlFile":"54 BINGO- Trumpet in Bb.xml",
+        "title":"54. B-I-N-G-O",
+        "commentStr1":"",
+        "commentStr2":"Watch the Bb! 1st Valve",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN055",
+        "xmlFile":"55 Rhythm Trix - Trumpet in Bb.xml",
+        "title":"55. Rhythm Trix",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN056",
+        "xmlFile":"56 Calico Calypso - Trumpet in Bb.xml",
+        "title":"56. Calico Calypso",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN057",
+        "xmlFile":"57 Sweet Pickles - Trumpet in Bb.xml",
+        "title":"57. Sweet Pickles",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN058",
+        "xmlFile":"58 Tie Pie - Trumpet in Bb.xml",
+        "title":"58. Tie Pie",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN059",
+        "xmlFile":"59 Building my future - Trumpet in Bb.xml",
+        "title":"59. Building my future",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN060",
+        "xmlFile":"60 Silly Ties - Trumpet in Bb.xml",
+        "title":"60. Silly Ties",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN061",
+        "xmlFile":"61 Tricky Slurs - Trumpet in Bb.xml",
+        "title":"61. Tricky Slurs",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN062",
+        "xmlFile":"62 Slurful - Trumpet in Bb.xml",
+        "title":"62. Slurful   ",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN063",
+        "xmlFile":"63 Rise and Fall - Trumpet in Bb.xml",
+        "title":"63. Rise and Fall",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN064",
+        "xmlFile":"64 Minuet - Trumpet in Bb.xml",
+        "title":"64. Minuet",
+        "commentStr1":"",
+        "commentStr2":"Bach",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN065",
+        "xmlFile":"65 Sonata in A Major - Trumpet in Bb.xml",
+        "title":"65. Sonata in A Major",
+        "commentStr1":"",
+        "commentStr2":"Mozart, adapted",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN066",
+        "xmlFile":"66 Haydn Allegro - Trumpet in Bb.xml",
+        "title":"66. Haydn Allegro",
+        "commentStr1":"",
+        "commentStr2":"Excerpt from 12 Easy Pieces",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN067",
+        "xmlFile":"67 Swing Low Sweet Chariot - Trumpet in Bb.xml",
+        "title":"67. Swing Low Sweet Chariot",
+        "commentStr1":"",
+        "commentStr2":"Traditional",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN068",
+        "xmlFile":"68 The Treasure - Trumpet in Bb.xml",
+        "title":"68. The Treasure",
+        "commentStr1":"",
+        "commentStr2":"Czech Folk Song",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN069",
+        "xmlFile":"69 Hard Times Come Again No More - Trumpet in Bb.xml",
+        "title":"69. Hard Times Come Again No More",
+        "commentStr1":"",
+        "commentStr2":"Stephen Collins Foster",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN070",
+        "xmlFile":"70 Auld Lang Syne- Trumpet in Bb.xml",
+        "title":"70. Auld Lang Syne",
+        "commentStr1":"",
+        "commentStr2":"Scottish Traditional",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN071",
+        "xmlFile":"71 Lilly Dale- Trumpet in Bb.xml",
+        "title":"71. Lilly Dale",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN072",
+        "xmlFile":"72 Nanuma- Trumpet in Bb.xml",
+        "title":"72. Nanuma",
+        "commentStr1":"",
+        "commentStr2":"Ghanian Folk Melody",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN073",
+        "xmlFile":"73 A Keelie Macolay - Trumpet in Bb.xml",
+        "title":"73. A Keelie Macolay",
+        "commentStr1":"",
+        "commentStr2":"Ghanian Folk Melody",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN074",
+        "xmlFile":"74 Uele! The Current is Very Strong! - Trumpet in Bb.xml",
+        "title":"74. Uele! The Current is Very Strong!",
+        "commentStr1":"",
+        "commentStr2":"Congalese Lullaby",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN075",
+        "xmlFile":"75 Azulao - Trumpet in Bb.xml",
+        "title":"75. Azulao",
+        "commentStr1":"",
+        "commentStr2":"Brazilian Children's Song",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN076",
+        "xmlFile":"76 Daisy Deane - Trumpet in Bb.xml",
+        "title":"76. Daisy Deane",
+        "commentStr1":"",
+        "commentStr2":"JR Murray",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN077",
+        "xmlFile":"77 Sleep My Baby - Trumpet.xml",
+        "title":"77. Sleep My Baby",
+        "commentStr1":"",
+        "commentStr2":"Moroccan Folk Melody",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN078",
+        "xmlFile":"78 My Old Kentucky Home, Goodnight- Trumpet in Bb.xml",
+        "title":"78. My Old Kentucky Home, Goodnight",
+        "commentStr1":"",
+        "commentStr2":"Stephen Collins Foster",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN079",
+        "xmlFile":"79 man on the flying trapeze.xml",
+        "title":"79. Man on the Flying Trapeze",
+        "commentStr1":"",
+        "commentStr2":"Greg Leybourne",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN080",
+        "xmlFile":"80 Sakura Trumpet.xml",
+        "title":"80. Sakura",
+        "commentStr1":"",
+        "commentStr2":"Japanese Folk Song",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN081",
+        "xmlFile":"81 A Penny for Your Thoughts - Trumpet.xml",
+        "title":"81. A Penny for Your Thoughts",
+        "commentStr1":"",
+        "commentStr2":"Stephen Collins Foster",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN082",
+        "xmlFile":"82 Jeanie with the Light Brown Hair - Trumpet.xml",
+        "title":"82. Jeanie with the Light Brown Hair",
+        "commentStr1":"",
+        "commentStr2":"Stephen Collins Foster",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN083",
+        "xmlFile":"83 - Day OH!.xml",
+        "title":"83.  Day OH!",
+        "commentStr1":"",
+        "commentStr2":"Jamaican Folk Song",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN084",
+        "xmlFile":"84 - O Sapo Nao Lava O Pe.xml",
+        "title":"84.  O Sapo Nao Lava O Pe",
+        "commentStr1":"",
+        "commentStr2":"The Toad Does Not Wash It's Foot- Brazilian Children's Song",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN085",
+        "xmlFile":"85 Oh Shenandoah - Trumpet in Bb.xml",
+        "title":"85. Oh Shenandoah",
+        "commentStr1":"",
+        "commentStr2":"American Folk Song",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN086",
+        "xmlFile":"86 C Me Go! tpt.xml",
+        "title":"86. C Me Go! ",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN087",
+        "xmlFile":"87 C Scale - Trumpet in Bb.xml",
+        "title":"87. C Scale",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN088",
+        "xmlFile":"88 C Arpeggio- tpt.xml",
+        "title":"88. C Arpeggio",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN089",
+        "xmlFile":"89 On Top of Old Smoky.xml",
+        "title":"89. On Top of Old Smoky",
+        "commentStr1":"",
+        "commentStr2":"American Folk Song",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN090",
+        "xmlFile":"90 Joy to the World tpt.xml",
+        "title":"90. Joy to the World ",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN091",
+        "xmlFile":"91 Second Valve, Pal!.xml",
+        "title":"91. Second Valve, Pal!",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN092",
+        "xmlFile":"92 F Sharp City -tpt.xml",
+        "title":"92. F Sharp City",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN093",
+        "xmlFile":"93 Farendole .xml",
+        "title":"93. Farendole",
+        "commentStr1":"",
+        "commentStr2":"Bizet",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN094",
+        "xmlFile":"94 Symphonie Fantastique _Dies Irae_ .xml",
+        "title":"94. Symphonie Fantastique, Dies Irae",
+        "commentStr1":"",
+        "commentStr2":"Berlioz",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN095",
+        "xmlFile":"95 Pomp and Circumstance - tpt.xml",
+        "title":"95. Pomp and Circumstance",
+        "commentStr1":"",
+        "commentStr2":"Elgar",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN096",
+        "xmlFile":"96 Knuckle Song (Bubblegum) Trumpet.xml",
+        "title":"96. Knuckle Song (Bubblegum)",
+        "commentStr1":"",
+        "commentStr2":"Traditional",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN097",
+        "xmlFile":"97 Old Timer Bill.xml",
+        "title":"97. Old Timer Bill",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN098",
+        "xmlFile":"98 See_ That_s Sharp! - tpt.xml",
+        "title":"98 See? That's Sharp!",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN099",
+        "xmlFile":"99 See_ That_s Still Sharp! - tpt.xml",
+        "title":"99. See? That's Still Sharp!",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN100",
+        "xmlFile":"100 Take Me Out to the Ball Game.xml",
+        "title":"100. Take Me Out to the Ball Game",
+        "commentStr1":"",
+        "commentStr2":"Norworth/VonTilzer",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN101",
+        "xmlFile":"101 Deck the Halls Trumpet.xml",
+        "title":"101. Deck the Halls",
+        "commentStr1":"",
+        "commentStr2":"Traditional",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN102",
+        "xmlFile":"102 Loch Lamond Trumpet.xml",
+        "title":"102. Loch Lamond",
+        "commentStr1":"",
+        "commentStr2":"Scottish Traditional Tune",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN103",
+        "xmlFile":"103 Korobeiniki Trumpet.xml",
+        "title":"103. Korobeiniki ",
+        "commentStr1":"",
+        "commentStr2":"Traditional Russian Melody",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN104",
+        "xmlFile":"104 Shalom, Chavarim Trumpet.xml",
+        "title":"104. Shalom, Chavarim ",
+        "commentStr1":"",
+        "commentStr2":"Israeli Folk Song",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN105",
+        "xmlFile":"105 Habanera - Trumpet.xml",
+        "title":"105. Habanera ",
+        "commentStr1":"",
+        "commentStr2":"Bizet's Carmen",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN106",
+        "xmlFile":"106 Entry of the Gladiators -tpt.xml",
+        "title":"106. Entry of the Gladiators",
+        "commentStr1":"",
+        "commentStr2":"Fucik",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN107",
+        "xmlFile":"107 Trumpet Voluntary - Trumpet.xml",
+        "title":"107. Trumpet Voluntary",
+        "commentStr1":"",
+        "commentStr2":"Clarke",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN108",
+        "xmlFile":"108 Red River Valley - Trumpet.xml",
+        "title":"108. Red River Valley",
+        "commentStr1":"",
+        "commentStr2":"American Folk Song",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN109",
+        "xmlFile":"109 Trepak - Trumpet.xml",
+        "title":"109. Trepak",
+        "commentStr1":"",
+        "commentStr2":"Tchaikovsky's Nutcracker Suite",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN110",
+        "xmlFile":"110 The Entertainer -tpt.xml",
+        "title":"110. The Entertainer ",
+        "commentStr1":"",
+        "commentStr2":"Scott Joplin",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN111",
+        "xmlFile":"111 Waltzing Matilda - Trumpet.xml",
+        "title":"111. Waltzing Matilda",
+        "commentStr1":"",
+        "commentStr2":"Australian Folk Song",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN112",
+        "xmlFile":"112 Irish Tune From County Derry Trumpet.xml",
+        "title":"112. Irish Tune From County Derry",
+        "commentStr1":"",
+        "commentStr2":"Percy Grainger",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN113",
+        "xmlFile":"113 Go Down Moses - Trumpet in Bb.xml",
+        "title":"113. Go Down Moses   ",
+        "commentStr1":"",
+        "commentStr2":"Traditional",
+        "helpCode1":"",
+        "helpCode2":""
+         },{
+        "fileCode":"TUN114",
+        "xmlFile":"114 Children_s March - Trumpet.xml",
+        "title":"114. Children's March",
+        "commentStr1":"",
+        "commentStr2":"Percy Grainger",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN115",
+        "xmlFile":"115 When Johnny Comes Marching Home Trumpet.xml",
+        "title":"115. When Johnny Comes Marching Home ",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN116",
+        "xmlFile":"116 Irish Washer Woman Trumpet.xml",
+        "title":"116. Irish Washer Woman",
+        "commentStr1":"",
+        "commentStr2":"Irish Traditional Tune",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN117",
+        "xmlFile":"117 Simple Gifts - tpt.xml",
+        "title":"117. Simple Gifts",
+        "commentStr1":"",
+        "commentStr2":"Shaker Tune - Brackett",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN118",
+        "xmlFile":"118 March from The Nutcracker - Trumpet.xml",
+        "title":"118. March from The Nutcracker",
+        "commentStr1":"",
+        "commentStr2":"Tchaikovsky",
+        "helpCode1":"",
+        "helpCode2":""
+         },{
+        "fileCode":"TUN119",
+        "xmlFile":"119 Joy to the World .musicxml",
+        "title":"119. Joy to the World",
+        "commentStr1":"",
+        "commentStr2":"Traditional",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"TUN120",
+        "xmlFile":"120 Nessun Dorma - tpt.xml",
+        "title":"120. Nessun Dorma",
+        "commentStr1":"",
+        "commentStr2":"Puccini, Adapted",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"INT001",
+        "xmlFile":"Intervals 1 Major 2nd.xml",
+        "title":"Intervals 1 Major 2nd",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"INT002",
+        "xmlFile":"Intervals 2- 3rds.xml",
+        "title":"Intervals 2- 3rds",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"INT003",
+        "xmlFile":"Intervals 3 - 4ths.xml",
+        "title":"Intervals 3 - 4ths",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"INT004",
+        "xmlFile":"Intervals 4 - 5ths.xml",
+        "title":"Intervals 4 - 5ths",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"INT005",
+        "xmlFile":"Intervals 5 - More 5ths.xml",
+        "title":"Intervals 5 - More 5ths",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"INT006",
+        "xmlFile":"Intervals 6 - Quicker 2nds, 3rds, 4ths.xml",
+        "title":"Intervals 6 - Quicker 2nds, 3rds, 4ths",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"SLR005",
+        "xmlFile":"Lip Slur 5 - Trumpet in Bb.xml",
+        "title":"Lip Slur 5 ",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"SLR006",
+        "xmlFile":"Lip Slur 6 Trumpet.xml",
+        "title":"Lip Slur 6 ",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"SLR007",
+        "xmlFile":"Lip Slur 7 Trumpet.xml",
+        "title":"Lip Slur 7 ",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"SLR015",
+        "xmlFile":"Lip Slur 15 Trumpet.xml",
+        "title":"Lip Slur 15",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"SLR016",
+        "xmlFile":"Lip Slur 16 Trumpet.xml",
+        "title":"Lip Slur 16",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"SLR017",
+        "xmlFile":"Lip Slur 17 Trumpet.xml",
+        "title":"Lip Slur 17",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"SLR025",
+        "xmlFile":"Lip Slur 25 Trumpet.xml",
+        "title":"Lip Slur 25",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"SLR026",
+        "xmlFile":"Lip Slur 26.xml",
+        "title":"Lip Slur 26",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY001",
+        "xmlFile":"Rhythm Party 1  Trumpet.xml",
+        "title":"Rhythm Party 1",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY002",
+        "xmlFile":"Rhythm Party 2 Trumpet.xml",
+        "title":"Rhythm Party 2",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY003",
+        "xmlFile":"Rhythm Party 3 Trumpet.xml",
+        "title":"Rhythm Party 3",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY004",
+        "xmlFile":"Rhythm Party 4 Trumpet.xml",
+        "title":"Rhythm Party 4",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY005",
+        "xmlFile":"Rhythm Party 5 Trumpet.xml",
+        "title":"Rhythm Party 5",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY006",
+        "xmlFile":"Rhythm Party 6 - tpt.xml",
+        "title":"Rhythm Party 6",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY007",
+        "xmlFile":"Rhythm Party 7 - tpt.xml",
+        "title":"Rhythm Party 7",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY008",
+        "xmlFile":"Rhythm Party 8 - tpt.xml",
+        "title":"Rhythm Party 8",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY009",
+        "xmlFile":"Rhythm Party 9 - tpt.xml",
+        "title":"Rhythm Party 9",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY010",
+        "xmlFile":"Rhythm Party 10.xml",
+        "title":"Rhythm Party 10",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY020",
+        "xmlFile":"Rhythm Party 20.xml",
+        "title":"Rhythm Party 20",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY021",
+        "xmlFile":"Rhythm Party 21.xml",
+        "title":"Rhythm Party 21",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY022",
+        "xmlFile":"Rhythm Party 22.xml",
+        "title":"Rhythm Party 22",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY040",
+        "xmlFile":"Rhythm Party 40 - tpt.xml",
+        "title":"Rhythm Party 40",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY041",
+        "xmlFile":"Rhythm Party 41 - tpt.xml",
+        "title":"Rhythm Party 41",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY042",
+        "xmlFile":"Rhythm Party 42 - tpt.xml",
+        "title":"Rhythm Party 42",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY059",
+        "xmlFile":"Rhythm Party 59- tpt.xml",
+        "title":"Rhythm Party 59",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY060",
+        "xmlFile":"Rhythm Party 60- tpt.xml",
+        "title":"Rhythm Party 60",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP002",
+        "xmlFile":"Rhythm Prep Tune 2.xml",
+        "title":"Rhythm Prep for Tune 2",
+        "commentStr1":"This exercise will prepare you for the next Tune",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP003",
+        "xmlFile":"Rhythm Prep Tune 3.xml",
+        "title":"Rhythm Prep for Tune 3",
+        "commentStr1":"This exercise will prepare you for the next Tune",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP004",
+        "xmlFile":"Rhythm Prep Tune 4.xml",
+        "title":"Rhythm Prep for Tune 4",
+        "commentStr1":"This exercise will prepare you for the next Tune",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP006",
+        "xmlFile":"Rhythm Prep Tune 6 Trumpet.xml",
+        "title":"Rhythm Prep for Tune 6",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP007",
+        "xmlFile":"Rhythm Prep Tune 7 Trumpet.xml",
+        "title":"Rhythm Prep for Tune 7",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP009",
+        "xmlFile":"Rhythm Prep Tune 9 Trumpet.xml",
+        "title":"Rhythm Prep for Tune 9",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP010",
+        "xmlFile":"Rhythm Prep Tune 10 Trumpet.xml",
+        "title":"Rhythm Prep for Tune 10",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP037",
+        "xmlFile":"Rhythm Prep for Tune 37 Tpt.xml",
+        "title":"Rhythm Prep for Tune 37",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP038",
+        "xmlFile":"Rhythm Prep Tune 38.xml",
+        "title":"Rhythm Prep for Tune 38",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP040",
+        "xmlFile":"Rhythm Prep for Tune 40 - tpt.xml",
+        "title":"Rhythm Prep for Tune 40",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP075",
+        "xmlFile":"Rhythm Prep for Tune 75 - tpt.xml",
+        "title":"Rhythm Prep for Tune 75",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP076",
+        "xmlFile":"Rhythm Prep for Tune 76 Daisy Deane - Trumpet in Bb.xml",
+        "title":"Rhythm Prep for Tune 76",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP077",
+        "xmlFile":"Rhythm Prep for Tune 77 Sleep My Baby - Trumpet.xml",
+        "title":"Rhythm Prep for Tune 77 ",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP079",
+        "xmlFile":"Rhythm Prep for Tune 79 man on the flying trapeze.xml",
+        "title":"Rhythm Prep for Tune 79",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP114",
+        "xmlFile":"Rhythm Prep for Tune 114.xml",
+        "title":"Rhythm Prep for Tune 114",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP116",
+        "xmlFile":"Rhythm Prep for Tune 116.xml",
+        "title":"Rhythm Prep for Tune 116",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"SCP009",
+        "xmlFile":"Scale Power 9 D minor - Trumpet in Bb.xml",
+        "title":"Scale Power 9 - D minor",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        }
+ ]
+}

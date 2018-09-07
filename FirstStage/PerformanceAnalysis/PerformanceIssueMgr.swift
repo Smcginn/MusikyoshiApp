@@ -8,12 +8,45 @@
 
 import Foundation
 
+
+let kFourStars  = 4
+let kThreeStars = 3
+let kTwoStars   = 2
+let kOneStar    = 1
+let kNoStars    = 0
+
+struct StarThresholds {
+    var fourStarMaxScore:  Int
+    var threeStarMaxScore: Int
+    var twoStarMaxScore:   Int
+    var oneStarMaxScore:   Int // Ejector seat?
+    
+    init() {
+        self.fourStarMaxScore   = kDefaultMaxScore_FourStars
+        self.threeStarMaxScore  = kDefaultMaxScore_ThreeStars
+        self.twoStarMaxScore    = kDefaultMaxScore_TwoStars
+        self.oneStarMaxScore    = kDefaultMaxScore_OneStars
+    }
+    init( fourStarMaxScore:  Int,
+          threeStarMaxScore: Int,
+          twoStarMaxScore:   Int,
+          oneStarMaxScore:   Int ) {
+        self.fourStarMaxScore   = fourStarMaxScore
+        self.threeStarMaxScore  = threeStarMaxScore
+        self.twoStarMaxScore    = twoStarMaxScore
+        self.oneStarMaxScore    = oneStarMaxScore
+    }
+}
+
+
 /*
  
   Ideas:
     - field(s) for recurring issues: One of this particular issue not so
         bad, but this is the nth time the student did this.
  */
+
+let kNoneAvailable: Int = -1
 
 enum issueType {
     case notSet
@@ -60,21 +93,28 @@ class PerfIssue {
 
 class PerformanceIssueMgr {
     
+    var starThresholds = StarThresholds()
+    
+    
     static let instance = PerformanceIssueMgr()
     
     private var perfIssues:[PerfIssue] = []
     var sortedPerfIssues:[PerfIssue] = []
     
+    private var justNotesPerfIssues:[PerfIssue] = []
+    var sortedJustNotesPerfIssues:[PerfIssue] = []
+
     // To be able to filter issues by pitch, attack, duration, highest of any
     // category, or highest cumulative.
     enum sortCriteria {
         case byAttackRating
         case byDurationRating
+        case byAttackAndDurationRating // for Rhythm Prep
         case byPitchRating
         case byIndividualRating // highest score, regardless of category - default
         case byOverallRating    // highest cumulative (sum of all categories)
     }
-    static let kNumSortCriteria = 5
+    static let kNumSortCriteria = 6
     
     var perfIssueCount: Int {
         return perfIssues.count
@@ -99,6 +139,41 @@ class PerformanceIssueMgr {
     func clearExisitingIssues() {
         perfIssues.removeAll()
         sortedPerfIssues.removeAll()
+        justNotesPerfIssues.removeAll()
+        sortedJustNotesPerfIssues.removeAll()
+   }
+    
+    func worstScore() -> Int {
+        var retVal: Int = kNoneAvailable
+        
+        if let worstPerfIssue = getFirstPerfIssue() {
+            retVal = worstPerfIssue.issueScore
+        }
+        
+        return retVal
+    }
+    
+    func averageScore(justForNotes: Bool) -> Double {
+        var retVal: Double = Double(kNoneAvailable)
+        
+        var total: Double = 0.0
+        if justForNotes {
+            if justNotesPerfIssues.count > 0 {
+                for onePerfIssue in perfIssues {
+                    total += Double(onePerfIssue.issueScore)
+                }
+                retVal = total/Double(justNotesPerfIssues.count)
+            }
+        } else {    // Notes and Rests, too
+            if perfIssues.count > 0 {
+                for onePerfIssue in perfIssues {
+                    total += Double(onePerfIssue.issueScore)
+                }
+                retVal = total/Double(perfIssues.count)
+            }
+        }
+        
+        return retVal
     }
     
     ///////////////////////////////////////////////////////////////////////////
@@ -116,12 +191,20 @@ class PerformanceIssueMgr {
                        scanPerfScoreObjForIssues( perfScoreObj: onePerfScoreObj,
                                                   sortCrit: sortCrit )
             perfIssues.append(perfIssue)
+            
+            if onePerfScoreObj.isNote() {
+                justNotesPerfIssues.append(perfIssue)
+            }
         }
         
         // Finally, sort the issues by score severity, highest score to lowest.
         // Note: sorted -> separate array, for debugging purposes. (Can look at 
         //       unsorted array as well if needed.)
         sortedPerfIssues = perfIssues.sorted {
+            let er0 = $0.issueScore, er1 = $1.issueScore
+            return er0 > er1 ? true : false
+        }
+        sortedJustNotesPerfIssues = justNotesPerfIssues.sorted {
             let er0 = $0.issueScore, er1 = $1.issueScore
             return er0 > er1 ? true : false
         }
@@ -143,6 +226,9 @@ class PerformanceIssueMgr {
             perfIssue.issueCode  = perfScoreObj.durationRating
             perfIssue.issueScore = perfScoreObj.durationScore
             perfIssue.issueType  = .duration
+        case .byAttackAndDurationRating:
+            handle_ByAttackAndDurationRating( perfNote: perfScoreObj,
+                                              perfIssue: &perfIssue )
         case .byPitchRating:
             perfIssue.issueCode  = perfScoreObj.pitchRating
             perfIssue.issueScore = perfScoreObj.pitchScore
@@ -165,6 +251,21 @@ class PerformanceIssueMgr {
     }
     
     // support method for scanPerfScoreObjForIssues method
+    func handle_ByAttackAndDurationRating( perfNote: PerformanceScoreObject,
+                                    perfIssue: inout PerfIssue ) {
+        // return worst of attack or duration
+        if perfNote.attackScore > perfNote.durationScore {
+            perfIssue.issueCode  = perfNote.attackRating
+            perfIssue.issueScore = perfNote.attackScore
+            perfIssue.issueType  = .attack
+        } else {
+            perfIssue.issueCode  = perfNote.durationRating
+            perfIssue.issueScore = perfNote.durationScore
+            perfIssue.issueType  = .duration
+        }
+    }
+
+    // support method for scanPerfScoreObjForIssues method
     func handle_ByIndividualRating( perfNote: PerformanceScoreObject,
                                     perfIssue: inout PerfIssue ) {
         // 3-way "max".   First, attack vs duration
@@ -182,6 +283,56 @@ class PerformanceIssueMgr {
             perfIssue.issueCode  = perfNote.pitchRating
             perfIssue.issueScore = perfNote.pitchScore
             perfIssue.issueType  = .pitch
+        }
+    }
+    
+    func setStarThresholds( fourStarMaxScore:  Int,
+                            threeStarMaxScore: Int,
+                            twoStarMaxScore:   Int,
+                            oneStarMaxScore:   Int ) {
+        starThresholds.fourStarMaxScore   = fourStarMaxScore
+        starThresholds.threeStarMaxScore  = threeStarMaxScore
+        starThresholds.twoStarMaxScore    = twoStarMaxScore
+        starThresholds.oneStarMaxScore    = oneStarMaxScore
+    }
+    func setStarThresholds( thresholds: StarThresholds ) {
+        starThresholds = thresholds
+    }
+    func getStarScoreForPerformanceAverage( perfAvg: Int ) -> Int {
+        if perfIssues.count <= 0 {
+            return kNoStars
+        } else if perfAvg <= starThresholds.fourStarMaxScore {
+            return kFourStars
+        } else if perfAvg <= starThresholds.threeStarMaxScore {
+            return kThreeStars
+        } else if perfAvg <= starThresholds.twoStarMaxScore {
+            return kTwoStars
+        } else if perfAvg <= starThresholds.oneStarMaxScore {
+            return kOneStar
+        } else {
+            return kNoStars
+        }
+    }
+    func getStarScoreForPerformanceAverage( perfAvgFlt: Float ) -> Int {
+        //var retVal = Int(round(floatScore))
+
+        let avgAsInt = Int(round(perfAvgFlt))
+        return getStarScoreForPerformanceAverage(perfAvg: avgAsInt)
+    }
+    
+    func getStarScoreForMostRecentPerformance() -> Int {
+        let avgScoreFlt = Float(averageScore(justForNotes: true))
+        let starScoreInt = getStarScoreForPerformanceAverage( perfAvgFlt: avgScoreFlt)
+        return starScoreInt
+    }
+    
+    func getSeverity(issueScore: Int) -> Int {
+        if issueScore <=  kGreenSeverityThreshold  {
+            return kSeverityGreen
+        } else if issueScore <= kYellowSeverityThreshold {
+            return kSeverityYellow
+        } else {
+            return kSeverityRed
         }
     }
 }

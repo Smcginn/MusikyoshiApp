@@ -32,6 +32,9 @@ static const float kMaxMagnification = 2.5;
 static const float kMagnificationReductionScreenWidthThreshold = 768;
 static const float kMagnificationProportionToScreenWidth = 0.8F;// this is 0 for constant magnification at different screen widths, 1.0 for magnification proportional to screen width/768.
 
+static const BOOL kReturnFromCursorCalls = YES;
+
+
 @interface SSScrollView ()
 {
 
@@ -95,6 +98,8 @@ static const float kMagnificationProportionToScreenWidth = 0.8F;// this is 0 for
 
 -(void)initAll
 {
+ //   NSString* verString  = SSScore.versionString;
+
 	if (containedView == nil)// if contained view was not defined in storyboard create it here
 	{
 		containedView = [[UIView alloc] initWithFrame:self.bounds];
@@ -1207,6 +1212,9 @@ static float min(float a, float b)
 
 -(void)displayCursor
 {
+    if (kReturnFromCursorCalls)
+        return;
+    
     int sysIndex = [self systemContainingBarIndex:cursorBarIndex].index;
     // show cursor in correct system and hide it in all others
     for (UIView *v in [containedView subviews])
@@ -1238,6 +1246,9 @@ static float min(float a, float b)
             type:(enum CursorType_e)type
           scroll:(enum ScrollType_e)scroll
 {
+    if (kReturnFromCursorCalls)
+        return;
+    
     assert(barIndex >= 0 && barIndex < score.numBars);
     if (score && systemlist.count > 0)
     {
@@ -1266,6 +1277,9 @@ static float min(float a, float b)
 				 type:(enum CursorType_e)type
 			   scroll:(enum ScrollType_e)scroll
 {
+	if (kReturnFromCursorCalls)
+        return;
+    
 	[self setCursor:barIndex
 			   xpos:0
 			   type:type
@@ -1276,6 +1290,9 @@ static float min(float a, float b)
 			  barIndex:(int)barIndex
 				scroll:(enum ScrollType_e)scroll
 {
+    if (kReturnFromCursorCalls)
+        return;
+    
 	[self setCursor:barIndex
 			   xpos:xpos
 			   type:cursor_line
@@ -1698,6 +1715,8 @@ static float min(float a, float b)
 // barcontrol cursor moved
 - (void)cursorChanged:(int)cursorIndex
 {
+   // return;
+    
 	[self scrollToBar:cursorIndex];
 }
 //@end
@@ -1810,12 +1829,14 @@ static float min(float a, float b)
 }
 
 -(bool) highlightScoreObject:(int) iScoreObjectID
+                    severity:(int) iSeverity
 {
     CGFloat xPos = 0.0;
     if (analysisOverlayView)
     {
         bool found = [analysisOverlayView highlightScoreObject: iScoreObjectID
-                                                       useXPos: &xPos];
+                                                       useXPos: &xPos
+                                                      severity: iSeverity ];
         if (found)
         {
             CGPoint pos = CGPointMake(xPos-kHighlightNoteXOffset, 0);
@@ -1839,6 +1860,14 @@ static float min(float a, float b)
 -(void) clearNotePerformanceResults
 {
     [analysisOverlayView clearPerfNoteAndSoundData];
+}
+
+-(void) clearCurrNoteLines{
+    [analysisOverlayView clearCurrNoteLines];
+}
+
+-(void) drawCurrNoteLineAt:(CGFloat) iXPos{
+    [analysisOverlayView drawCurrNoteLineAt: iXPos];
 }
 
 -(void)touchesBegan: (NSSet*) touches

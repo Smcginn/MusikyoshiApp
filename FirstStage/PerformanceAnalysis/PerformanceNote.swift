@@ -10,32 +10,6 @@ import Foundation
 
 public class PerformanceNote : PerformanceScoreObject
 {
-    // These are TimeIntervals since the beginning of song playback
-    //   (Sound times are intervals since analysis start)
-    var expectedStartTime : TimeInterval = noTimeValueSet
-    var actualStartTime : TimeInterval = noTimeValueSet
-    var endTime : TimeInterval = noTimeValueSet {
-        didSet {
-            actualDuration = endTime - actualStartTime
-        }
-    }
-    
-    // The expected and actual duration of the played notes
-    var expectedDuration: TimeInterval = noTimeValueSet
-    {
-        didSet {
-            // The input is a calculation using MusicXML note type (e.g., quarter),
-            // BPM, and the definition of the note in question, e.g., qtr note == 1
-            // second at 60 BPM). In reality, a correctedly played note might need
-            // a slight gap between notes (breath, stress non-legato, etc.), so 
-            // adjust accordingly.
-            let kDurationAdjustment = 0.05 // milliseconds. Change this to dial in.
-            expectedDurAdjusted = expectedDuration - kDurationAdjustment
-        }
-    }
-    var expectedDurAdjusted  : TimeInterval   = noTimeValueSet
-    var actualDuration  : TimeInterval     = noTimeValueSet
-    
     // Ah, transposing instruments. Our code has to deal with two worlds: the
     // transposed notes (as they appear on the score) and the concert-pitch
     // oriented pitch detection modules and functions that translate pitch
@@ -149,7 +123,7 @@ public class PerformanceNote : PerformanceScoreObject
         let actFreqStr = String(format: "%.2f", actualFrequency)
         let actDurStr = String(format: "%.2f", actualDuration)
         
-        let timingDiff = actualStartTime - expectedStartTime
+        let timingDiff = _actualStartTime_comp - _expectedStartTime
         var timDiffStr = ""
         if timingDiff > 0 {
             timDiffStr = String(format: "+%.2f", timingDiff)

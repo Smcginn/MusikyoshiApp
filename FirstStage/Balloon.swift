@@ -3,7 +3,8 @@
 //  FirstStage
 //
 //  Created by Adam Kinney on 12/13/15.
-//  Changed by David S Reich - 2016.
+//  Changed by David S Reich  - 2016.
+//  Changed by Scott Freshour - 2018.
 //  Copyright © 2015 Musikyoshi. All rights reserved.
 //
 
@@ -15,6 +16,8 @@ class Balloon: UIView {
     fileprivate let length : CGFloat = 128
     
     var imgView: UIImageView!
+    var monkeyFaceImgVw: UIImageView!
+    
     let balloonImage1 = UIImage(named: "Balloon_1")
     let balloonImage2 = UIImage(named: "Balloon_2")
     let balloonImage3 = UIImage(named: "Balloon_3")
@@ -65,11 +68,9 @@ class Balloon: UIView {
               imgView != nil
             else { return }
         
-        //print("  (past guard in increaseBalloonSize")
-        
         currPercentage = toPercentageInt
         
-        // change image if necessary
+        // change image if necessary, as balloon gets bigger
         if currPercentage > 20 &&  currImg <= 1 {
             imgView.image = balloonImage2
             currImg = 2
@@ -121,6 +122,7 @@ class Balloon: UIView {
             // by 1 every time you press button
             self.imgView.center.y += 300
             self.imgView.alpha = 0.0
+            self.monkeyFaceImgVw.alpha = 0.0
         } )
         }
     }
@@ -192,10 +194,28 @@ class Balloon: UIView {
    }
     
     override func awakeFromNib() {
+        
         startWd = balloonImage1!.size.width
         endWd   = self.frame.size.width
         wdRange = endWd - startWd
         
+        let selfFrame = self.frame
+        let selfWd = selfFrame.size.width
+        let selfHt = selfFrame.size.height
+        
+        let monkeyFaceImg = UIImage(named: "Monkey_Ballon-Face02@2x")
+        monkeyFaceImgVw = UIImageView(image:monkeyFaceImg)
+        let monkeyWd = monkeyFaceImgVw.bounds.size.width
+        let monkeyHt = monkeyFaceImgVw.bounds.size.height
+        let monkeyX = selfWd/2.0 - monkeyWd/2.0
+        var monkeyY = selfHt/2.0 - monkeyHt/2.0
+        monkeyY -= 25.0 // this is the amount that the mouth is not centered
+                        //   in Monkey face image
+        
+        addSubview(monkeyFaceImgVw)
+        monkeyFaceImgVw.frame.origin.x = monkeyX
+        monkeyFaceImgVw.frame.origin.y = monkeyY
+
         imgView = UIImageView(image: balloonImage1)
         imgView.frame.size = balloonImage1!.size
         addSubview(imgView)

@@ -31,6 +31,127 @@ public class PerformanceScoreObject
         }
     }
     
+    enum perfObjStatus {
+        case pendingStart
+        case active
+        case ended
+    }
+    var status: perfObjStatus = .pendingStart
+    var completed: Bool = false
+    
+    
+    ////////////////////////////////////////////////////////////////////////////
+    //  ""Expected": values based on XML file: EXACTLY when the note/rest
+    //  should start and end, and it's duration. These are used to determine if
+    //  sound is associated with note/rest, and to grade performance, etc.
+    //
+    //  In TimeIntervals since the beginning of song playback
+    //     (Sound times are intervals since analysis start)
+    var _expectedStartTime      : TimeInterval = noTimeValueSet
+    var _expectedStartTime_comp : TimeInterval = noTimeValueSet
+    var _expectedEndTime        : TimeInterval = noTimeValueSet
+    var _expectedEndTime_comp   : TimeInterval = noTimeValueSet
+    var _expectedDuration       : TimeInterval = noTimeValueSet
+    var _expectedDurAdjusted    : TimeInterval = noTimeValueSet
+    
+    // This will be used when evaluating Sounds that begin while
+    // Rest supposedly still active
+    var _expectedEndTimeMinusTolerance: TimeInterval = noTimeValueSet
+    
+    // Used by Scheduler
+    var _deactivateTime         : TimeInterval = noTimeValueSet
+    var _deactivateTime_comp    : TimeInterval = noTimeValueSet
+
+    // The ammount to deduct when evaluating the performance duration. Notes
+    // can't be exactly right next to each other. Some gap must be allowed.
+    let kDurationAdjustment = 0.05 // milliseconds. Change this to dial in.
+
+    func setExpectedTimes( startTime: TimeInterval, duration: TimeInterval ) {
+        _expectedStartTime      = startTime
+        _expectedDuration       = duration
+        _expectedDurAdjusted    = _expectedDuration - kDurationAdjustment
+        _expectedEndTime        = _expectedStartTime + _expectedDuration
+        _expectedStartTime_comp = _expectedStartTime + kSoundStartAdjustment // changed + to -
+        _expectedEndTime_comp   = _expectedEndTime   + kSoundStartAdjustment // changed + to -
+        _expectedEndTimeMinusTolerance =
+            _expectedEndTime - PerformanceAnalysisMgr.instance.currTolerances.rhythmTolerance
+        
+        _deactivateTime
+            = self.isNote() ? _expectedEndTimeMinusTolerance
+                            : _expectedStartTime + _expectedDurAdjusted
+        _deactivateTime_comp   = _deactivateTime // removed: - kSoundStartAdjustment 
+    }
+    
+    var expectedStartTime   : TimeInterval {
+        return _expectedStartTime
+    }
+    var expectedStartTime_comp   : TimeInterval {
+        return _expectedStartTime_comp
+    }
+    var expectedEndTime   : TimeInterval {
+        return _expectedEndTime
+    }
+    var expectedEndTime_comp   : TimeInterval {
+        return _expectedEndTime_comp
+    }
+    var expectedEndTimeMinusTolerance   : TimeInterval {
+        return _expectedEndTimeMinusTolerance
+    }
+    var expectedDuration   : TimeInterval {
+        return _expectedDuration
+    }
+    var expectedDurAdjusted   : TimeInterval {
+        return _expectedDurAdjusted
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+    //  ""Actual": values based on performance: When the note/rest
+    //  actually started, ended, and it's actual duration. These are compared to
+    //  "expected" values to determine to grade performance, etc.
+    //
+    //  These are TimeIntervals since the beginning of song playback
+    //     (Sound times are intervals since analysis start)
+    var _actualStartTime_song:      TimeInterval = noTimeValueSet
+    var _actualStartTime_comp: TimeInterval = noTimeValueSet
+    var actualStartTime_song: TimeInterval {
+        set {
+            _actualStartTime_song = newValue
+            _actualStartTime_comp = _actualStartTime_song - kSoundStartAdjustment
+        }
+        get {
+            return _actualStartTime_song
+        }
+    }
+    var actualStartTime_comp: TimeInterval {
+        return _actualStartTime_comp
+    }
+    
+    var _actualEndTime_abs:  TimeInterval = noTimeValueSet
+    var _actualEndTime_song: TimeInterval = noTimeValueSet
+    var _actualEndTime_comp: TimeInterval = noTimeValueSet
+    // This is called by Sound, or Soundlinking, and therefore must take a
+    // Sound-relative timestamp
+    func setActualEndTimeAbs( endTimeAbs: TimeInterval) {
+        _actualEndTime_abs  = endTimeAbs
+        _actualEndTime_song = soundTimeToNoteTimeExt(soundStart: endTimeAbs)
+        _actualEndTime_comp = _actualEndTime_song - kSoundStartAdjustment
+        _actualDuration     = _actualEndTime_song - _actualStartTime_song
+    }
+    var actualEndTime_song: TimeInterval {
+        return _actualEndTime_song
+    }
+    var actualEndTime_abs: TimeInterval {
+        return _actualEndTime_abs
+    }
+    var actualEndTime_comp: TimeInterval {
+        return _actualEndTime_comp
+    }
+    
+    var _actualDuration : TimeInterval = noTimeValueSet
+    var actualDuration  : TimeInterval {
+        return _actualDuration
+    }
+    
     var perfScoreObjectID   = noScoreObjIDSet
     var perfNoteOrRestID    = noScoreObjIDSet
     var isLinkedToSound     = false

@@ -212,6 +212,12 @@ class VideoHelpView: UIView {
         isHidden = false
     }
     
+    ///////////////////////////////////////////////////////////////////
+    // TESTING TESTING TESTING      (see below, too)
+    var doTestVideos = false // Set this to true for testing all video IDs
+    var videoTestID = vidIDs.kVid_Pitch_ABitLow_SpeedUpAir // starting ID for testing
+    ///////////////////////////////////////////////////////////////////
+
     func showVideoVC() {
         if avPlayer == nil || avpVC == nil {
             buildVideoVC()
@@ -221,8 +227,19 @@ class VideoHelpView: UIView {
         avPlayer?.pause()
         avPlayer?.seek(to: kCMTimeZero)
         
-        guard createPlayerItemForVideoID( videoID ) else { return }
+        var videoIDToUse = self.videoID
+        if self.doTestVideos {  // Only invoked if testing
+            // TESTING TESTING TESTING
+            self.videoTestID += 1
+            if self.videoTestID < vidIDs.kVid_NoSound_AreYouPlaying {
+                videoIDToUse = self.videoTestID
+            }
+        }
         
+        guard createPlayerItemForVideoID( videoIDToUse ) else {
+            return // format like this so can add a breakpoint
+        }
+
         avPlayer?.replaceCurrentItem(with: playerItem)
         let playerStatus = avPlayer?.status
         if playerStatus != .failed {

@@ -55,9 +55,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Constants.Settings.ScoreMagnification: Int(14)
             ])
         
-        
+
+        // hyarhyar   SFAUDIO
         //initialize data
-        _ = AVAudioSessionManager.sharedInstance.setupAudioSession()
+        
+        // This line was active in original file:
+ //       _ = AVAudioSessionManager.sharedInstance.setupAudioSession()
+        
+        
+ //       _ = AVAudioSessionManager.sharedInstance.setupAudioSessionCat()
+        
         NoteService.initNotes()
         
         let entityName = String(describing: UserAttributes.self)
@@ -71,7 +78,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Load the student score data from disk. If first time using app, will create
         // an empty file using the levels/exercises JSON file as the template.
-        _ = ScoreMgr.instance.loadScoreFile()
+        _ = LessonScheduler.instance.loadScoreFile()
+        
+        //let lessonScheduler: LessonScheduler? = LessonScheduler.instance
         
         // When the app gets to a point that it needs to set these progressively 
         // "tighter" as the student improves and moves to harder exercises, this 
@@ -101,24 +110,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+        AudioKitManager.sharedInstance.enabledForcedReSetup()
+        print("\n   applicationWillResignActive() called\n")
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        AudioKitManager.sharedInstance.enabledForcedReSetup()
+        print("\n   applicationDidEnterBackground() called\n")
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+        print("\n   applicationWillEnterForeground() called\n")
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        print("\n   applicationDidBecomeActive() called\n")
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
+        AudioKitManager.sharedInstance.enabledForcedReSetup()
         self.saveContext()
     }
 

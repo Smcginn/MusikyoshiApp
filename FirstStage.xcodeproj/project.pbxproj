@@ -334,7 +334,15 @@
 		63D5E88C1EA37C1B007AE8D4 /* LongToneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6381294F1CF05BF800A40C8E /* LongToneViewController.swift */; };
 		63EB90171CF1C4EB00F09B05 /* AVAudioSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EB90161CF1C4EB00F09B05 /* AVAudioSessionManager.swift */; };
 		63EB90181CF1C4EC00F09B05 /* AVAudioSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EB90161CF1C4EB00F09B05 /* AVAudioSessionManager.swift */; };
+		6D01C40021238C75004B8440 /* LessonScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D01C3FF21238C75004B8440 /* LessonScheduler.swift */; };
+		6D01C40121238C75004B8440 /* LessonScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D01C3FF21238C75004B8440 /* LessonScheduler.swift */; };
+		6D01C40321238CAC004B8440 /* TuneFileMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D01C40221238CAC004B8440 /* TuneFileMapper.swift */; };
+		6D01C40421238CAC004B8440 /* TuneFileMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D01C40221238CAC004B8440 /* TuneFileMapper.swift */; };
 		6D22AEC620D06E8200ACEC81 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633D1B6C1CF94BEC00B5C4FD /* FeedbackView.swift */; };
+		6D34A17D2139F9E10071BAB6 /* AppDefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D34A17C2139F9E10071BAB6 /* AppDefs.swift */; };
+		6D34A17E2139F9E10071BAB6 /* AppDefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D34A17C2139F9E10071BAB6 /* AppDefs.swift */; };
+		6D5A266E2138C2BD00D2B637 /* MiscSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5A266D2138C2BD00D2B637 /* MiscSupport.swift */; };
+		6D5A266F2138C2BD00D2B637 /* MiscSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5A266D2138C2BD00D2B637 /* MiscSupport.swift */; };
 		6D6093B22114F66D00874A40 /* ScoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6093AE2114F66C00874A40 /* ScoreData.swift */; };
 		6D6093B32114F66D00874A40 /* PerformanceRest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6093AF2114F66D00874A40 /* PerformanceRest.swift */; };
 		6D6093B42114F66D00874A40 /* RestPerformanceAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6093B02114F66D00874A40 /* RestPerformanceAnalyzer.swift */; };
@@ -345,10 +353,121 @@
 		6D6093B92114F6CE00874A40 /* ScoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6093AE2114F66C00874A40 /* ScoreData.swift */; };
 		6D6093BB21163E1800874A40 /* ThresholdsMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6093BA21163E1800874A40 /* ThresholdsMgr.swift */; };
 		6D6093BC21163E1800874A40 /* ThresholdsMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6093BA21163E1800874A40 /* ThresholdsMgr.swift */; };
+		6D63167B212D0610004F2DE4 /* SingleStar - 32.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D63166A212D060F004F2DE4 /* SingleStar - 32.png */; };
+		6D63167C212D0610004F2DE4 /* SingleStar - 32.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D63166A212D060F004F2DE4 /* SingleStar - 32.png */; };
+		6D63167D212D0610004F2DE4 /* SingleStar - 64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D63167A212D0610004F2DE4 /* SingleStar - 64.png */; };
+		6D63167E212D0610004F2DE4 /* SingleStar - 64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D63167A212D0610004F2DE4 /* SingleStar - 64.png */; };
+		6D631681212D0670004F2DE4 /* blank 64x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D63167F212D0670004F2DE4 /* blank 64x64.png */; };
+		6D631682212D0670004F2DE4 /* blank 64x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D63167F212D0670004F2DE4 /* blank 64x64.png */; };
+		6D631683212D0670004F2DE4 /* blank 256x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D631680212D0670004F2DE4 /* blank 256x64.png */; };
+		6D631684212D0670004F2DE4 /* blank 256x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D631680212D0670004F2DE4 /* blank 256x64.png */; };
+		6D631686212DF4D5004F2DE4 /* LevelSeriesTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D631685212DF4D5004F2DE4 /* LevelSeriesTableViewHeaderFooterView.swift */; };
+		6D631687212DF4D5004F2DE4 /* LevelSeriesTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D631685212DF4D5004F2DE4 /* LevelSeriesTableViewHeaderFooterView.swift */; };
 		6D6C8CED2123422B00874F86 /* PerformanceScoreObjectScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6C8CEC2123422B00874F86 /* PerformanceScoreObjectScheduler.swift */; };
 		6D6C8CEE2123422B00874F86 /* PerformanceScoreObjectScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6C8CEC2123422B00874F86 /* PerformanceScoreObjectScheduler.swift */; };
+		6D7248FD2128771600378131 /* Stars-2 256x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7248EA2128771500378131 /* Stars-2 256x64.png */; };
+		6D7248FE2128771600378131 /* Stars-2 256x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7248EA2128771500378131 /* Stars-2 256x64.png */; };
+		6D7248FF2128771600378131 /* Stars-4 256x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7248FA2128771500378131 /* Stars-4 256x64.png */; };
+		6D7249002128771600378131 /* Stars-4 256x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7248FA2128771500378131 /* Stars-4 256x64.png */; };
+		6D7249012128771600378131 /* Stars-1 256x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7248FB2128771500378131 /* Stars-1 256x64.png */; };
+		6D7249022128771600378131 /* Stars-1 256x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7248FB2128771500378131 /* Stars-1 256x64.png */; };
+		6D7249032128771600378131 /* Stars-3 256x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7248FC2128771600378131 /* Stars-3 256x64.png */; };
+		6D7249042128771600378131 /* Stars-3 256x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7248FC2128771600378131 /* Stars-3 256x64.png */; };
+		6D7249062128775000378131 /* Stars-0 256x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7249052128775000378131 /* Stars-0 256x64.png */; };
+		6D7249072128775000378131 /* Stars-0 256x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7249052128775000378131 /* Stars-0 256x64.png */; };
+		6D7249092128807600378131 /* Stars-4 128x32.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7249082128807600378131 /* Stars-4 128x32.png */; };
+		6D72490A2128807600378131 /* Stars-4 128x32.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7249082128807600378131 /* Stars-4 128x32.png */; };
+		6D72490C2128817100378131 /* Stars-4 64x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D72490B2128817100378131 /* Stars-4 64x16.png */; };
+		6D72490D2128817100378131 /* Stars-4 64x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D72490B2128817100378131 /* Stars-4 64x16.png */; };
+		6D7249112128991F00378131 /* Stars-0 64x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D72490E2128991E00378131 /* Stars-0 64x16.png */; };
+		6D7249122128991F00378131 /* Stars-0 64x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D72490E2128991E00378131 /* Stars-0 64x16.png */; };
+		6D7249132128991F00378131 /* Current Arrow 64x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D72490F2128991E00378131 /* Current Arrow 64x16.png */; };
+		6D7249142128991F00378131 /* Current Arrow 64x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D72490F2128991E00378131 /* Current Arrow 64x16.png */; };
+		6D7249152128991F00378131 /* Blank 64x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7249102128991F00378131 /* Blank 64x16.png */; };
+		6D7249162128991F00378131 /* Blank 64x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7249102128991F00378131 /* Blank 64x16.png */; };
+		6D7249182128A8B100378131 /* Monkey_Ballon-Face02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7249172128A8B100378131 /* Monkey_Ballon-Face02@2x.png */; };
+		6D7249192128A8B100378131 /* Monkey_Ballon-Face02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7249172128A8B100378131 /* Monkey_Ballon-Face02@2x.png */; };
+		6D72491B2128FD6100378131 /* MonkeyPlaneWithProp large.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D72491A2128FD6000378131 /* MonkeyPlaneWithProp large.png */; };
+		6D72491C2128FD6100378131 /* MonkeyPlaneWithProp large.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D72491A2128FD6000378131 /* MonkeyPlaneWithProp large.png */; };
+		6D8E10462130DD6F00B1B3B8 /* Current Arrow 40x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D8E10362130DD6F00B1B3B8 /* Current Arrow 40x16.png */; };
+		6D8E10472130E55100B1B3B8 /* Current Arrow 40x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D8E10362130DD6F00B1B3B8 /* Current Arrow 40x16.png */; };
+		6D8E10492130E77200B1B3B8 /* Current Arrow 22x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D8E10482130E77200B1B3B8 /* Current Arrow 22x16.png */; };
+		6D8E104A2130E77200B1B3B8 /* Current Arrow 22x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D8E10482130E77200B1B3B8 /* Current Arrow 22x16.png */; };
+		6D8E104C2131031D00B1B3B8 /* Current Arrow 36x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D8E104B2131031C00B1B3B8 /* Current Arrow 36x16.png */; };
+		6D8E104D2131031D00B1B3B8 /* Current Arrow 36x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D8E104B2131031C00B1B3B8 /* Current Arrow 36x16.png */; };
+		6D8E104F213103DA00B1B3B8 /* Current Arrow 30x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D8E104E213103DA00B1B3B8 /* Current Arrow 30x16.png */; };
+		6D8E1050213103DA00B1B3B8 /* Current Arrow 30x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D8E104E213103DA00B1B3B8 /* Current Arrow 30x16.png */; };
 		6DA54C47210BC8F9004BECB2 /* ScoreMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA54C46210BC8F9004BECB2 /* ScoreMgr.swift */; };
 		6DA54C48210BC8FA004BECB2 /* ScoreMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA54C46210BC8F9004BECB2 /* ScoreMgr.swift */; };
+		6DB8533A21248EF600F999C3 /* XMLFileMapping.json in Resources */ = {isa = PBXBuildFile; fileRef = 6DB8532A21248EF500F999C3 /* XMLFileMapping.json */; };
+		6DB8533B212498C700F999C3 /* XMLFileMapping.json in Resources */ = {isa = PBXBuildFile; fileRef = 6DB8532A21248EF500F999C3 /* XMLFileMapping.json */; };
+		6DB8533D2126438E00F999C3 /* LaunchingNextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB8533C2126438E00F999C3 /* LaunchingNextView.swift */; };
+		6DB8533E2126438E00F999C3 /* LaunchingNextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB8533C2126438E00F999C3 /* LaunchingNextView.swift */; };
+		6DB853432127A87600F999C3 /* Monkey_Skiing_03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DB8533F2127A87500F999C3 /* Monkey_Skiing_03@2x.png */; };
+		6DB853442127A87600F999C3 /* Monkey_Skiing_03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DB8533F2127A87500F999C3 /* Monkey_Skiing_03@2x.png */; };
+		6DB853452127A87600F999C3 /* Monkey_Skiing_02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DB853402127A87500F999C3 /* Monkey_Skiing_02@2x.png */; };
+		6DB853462127A87600F999C3 /* Monkey_Skiing_02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DB853402127A87500F999C3 /* Monkey_Skiing_02@2x.png */; };
+		6DB853472127A87600F999C3 /* Monkey_Skiing_01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DB853412127A87500F999C3 /* Monkey_Skiing_01@2x.png */; };
+		6DB853482127A87600F999C3 /* Monkey_Skiing_01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DB853412127A87500F999C3 /* Monkey_Skiing_01@2x.png */; };
+		6DB853492127A87600F999C3 /* Monkey_Skiing_06@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DB853422127A87600F999C3 /* Monkey_Skiing_06@2x.png */; };
+		6DB8534A2127A87600F999C3 /* Monkey_Skiing_06@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DB853422127A87600F999C3 /* Monkey_Skiing_06@2x.png */; };
+		6DBF1F0A213E23D10052AD57 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C33BBA92016E80B00CD83A6 /* SwiftyJSON.framework */; };
+		6DBF1F0C213ED8D60052AD57 /* Stars-4 Even 256x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F0B213ED8D50052AD57 /* Stars-4 Even 256x64.png */; };
+		6DBF1F0D213ED8E30052AD57 /* Stars-4 Even 256x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F0B213ED8D50052AD57 /* Stars-4 Even 256x64.png */; };
+		6DBF1F29213EEB850052AD57 /* Duration - A bit short.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F0E213EEB820052AD57 /* Duration - A bit short.mp4 */; };
+		6DBF1F2A213EEB850052AD57 /* Duration - A bit short.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F0E213EEB820052AD57 /* Duration - A bit short.mp4 */; };
+		6DBF1F2B213EEB850052AD57 /* Duration - Too Long.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F0F213EEB820052AD57 /* Duration - Too Long.mp4 */; };
+		6DBF1F2C213EEB850052AD57 /* Duration - Too Long.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F0F213EEB820052AD57 /* Duration - Too Long.mp4 */; };
+		6DBF1F2D213EEB850052AD57 /* No Sound - relax embouchure_512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F10213EEB820052AD57 /* No Sound - relax embouchure_512Kbps_288p.mp4 */; };
+		6DBF1F2E213EEB850052AD57 /* No Sound - relax embouchure_512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F10213EEB820052AD57 /* No Sound - relax embouchure_512Kbps_288p.mp4 */; };
+		6DBF1F2F213EEB850052AD57 /* Pitch - Upper Partial - Relax embouchure_512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F11213EEB820052AD57 /* Pitch - Upper Partial - Relax embouchure_512Kbps_288p.mp4 */; };
+		6DBF1F30213EEB850052AD57 /* Pitch - Upper Partial - Relax embouchure_512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F11213EEB820052AD57 /* Pitch - Upper Partial - Relax embouchure_512Kbps_288p.mp4 */; };
+		6DBF1F31213EEB850052AD57 /* Pitch - A Bit High, check fingering_512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F12213EEB820052AD57 /* Pitch - A Bit High, check fingering_512Kbps_288p.mp4 */; };
+		6DBF1F32213EEB850052AD57 /* Pitch - A Bit High, check fingering_512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F12213EEB820052AD57 /* Pitch - A Bit High, check fingering_512Kbps_288p.mp4 */; };
+		6DBF1F33213EEB850052AD57 /* Pitch - A bit low - firm up embouchure.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F13213EEB820052AD57 /* Pitch - A bit low - firm up embouchure.mp4 */; };
+		6DBF1F34213EEB850052AD57 /* Pitch - A bit low - firm up embouchure.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F13213EEB820052AD57 /* Pitch - A bit low - firm up embouchure.mp4 */; };
+		6DBF1F35213EEB850052AD57 /* Pitch - Upper Partial, Slow air.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F14213EEB820052AD57 /* Pitch - Upper Partial, Slow air.mp4 */; };
+		6DBF1F36213EEB850052AD57 /* Pitch - Upper Partial, Slow air.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F14213EEB820052AD57 /* Pitch - Upper Partial, Slow air.mp4 */; };
+		6DBF1F39213EEB850052AD57 /* Pitch - A Bit Low, Speed Up Air_512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F16213EEB820052AD57 /* Pitch - A Bit Low, Speed Up Air_512Kbps_288p.mp4 */; };
+		6DBF1F3A213EEB850052AD57 /* Pitch - A Bit Low, Speed Up Air_512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F16213EEB820052AD57 /* Pitch - A Bit Low, Speed Up Air_512Kbps_288p.mp4 */; };
+		6DBF1F3B213EEB850052AD57 /* Sound during rest - _512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F17213EEB820052AD57 /* Sound during rest - _512Kbps_288p.mp4 */; };
+		6DBF1F3C213EEB850052AD57 /* Sound during rest - _512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F17213EEB820052AD57 /* Sound during rest - _512Kbps_288p.mp4 */; };
+		6DBF1F3D213EEB850052AD57 /* Pitch - A Bit High, Relax embouchure_512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F18213EEB830052AD57 /* Pitch - A Bit High, Relax embouchure_512Kbps_288p.mp4 */; };
+		6DBF1F3E213EEB850052AD57 /* Pitch - A Bit High, Relax embouchure_512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F18213EEB830052AD57 /* Pitch - A Bit High, Relax embouchure_512Kbps_288p.mp4 */; };
+		6DBF1F3F213EEB850052AD57 /* Attack - Early - wait a bit before entering_512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F19213EEB830052AD57 /* Attack - Early - wait a bit before entering_512Kbps_288p.mp4 */; };
+		6DBF1F40213EEB850052AD57 /* Attack - Early - wait a bit before entering_512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F19213EEB830052AD57 /* Attack - Early - wait a bit before entering_512Kbps_288p.mp4 */; };
+		6DBF1F41213EEB850052AD57 /* Pitch - Very High - relax embouchure_512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F1A213EEB830052AD57 /* Pitch - Very High - relax embouchure_512Kbps_288p.mp4 */; };
+		6DBF1F42213EEB850052AD57 /* Pitch - Very High - relax embouchure_512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F1A213EEB830052AD57 /* Pitch - Very High - relax embouchure_512Kbps_288p.mp4 */; };
+		6DBF1F43213EEB850052AD57 /* Duration - Too short_512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F1B213EEB830052AD57 /* Duration - Too short_512Kbps_288p.mp4 */; };
+		6DBF1F44213EEB850052AD57 /* Duration - Too short_512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F1B213EEB830052AD57 /* Duration - Too short_512Kbps_288p.mp4 */; };
+		6DBF1F45213EEB850052AD57 /* Pitch - Very High - Double Check fingering.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F1C213EEB830052AD57 /* Pitch - Very High - Double Check fingering.mp4 */; };
+		6DBF1F46213EEB850052AD57 /* Pitch - Very High - Double Check fingering.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F1C213EEB830052AD57 /* Pitch - Very High - Double Check fingering.mp4 */; };
+		6DBF1F47213EEB850052AD57 /* Ptich - Very Low, Reset with B embouchure, use a mirror_512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F1D213EEB830052AD57 /* Ptich - Very Low, Reset with B embouchure, use a mirror_512Kbps_288p.mp4 */; };
+		6DBF1F48213EEB850052AD57 /* Ptich - Very Low, Reset with B embouchure, use a mirror_512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F1D213EEB830052AD57 /* Ptich - Very Low, Reset with B embouchure, use a mirror_512Kbps_288p.mp4 */; };
+		6DBF1F49213EEB850052AD57 /* No Sound - wet lips_512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F1E213EEB830052AD57 /* No Sound - wet lips_512Kbps_288p.mp4 */; };
+		6DBF1F4A213EEB850052AD57 /* No Sound - wet lips_512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F1E213EEB830052AD57 /* No Sound - wet lips_512Kbps_288p.mp4 */; };
+		6DBF1F4B213EEB850052AD57 /* Ptich - Very Low, Curve lips in_512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F1F213EEB830052AD57 /* Ptich - Very Low, Curve lips in_512Kbps_288p.mp4 */; };
+		6DBF1F4C213EEB850052AD57 /* Ptich - Very Low, Curve lips in_512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F1F213EEB830052AD57 /* Ptich - Very Low, Curve lips in_512Kbps_288p.mp4 */; };
+		6DBF1F4D213EEB850052AD57 /* Pitch - A Bit High, Slow Airspeed_512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F20213EEB840052AD57 /* Pitch - A Bit High, Slow Airspeed_512Kbps_288p.mp4 */; };
+		6DBF1F4E213EEB850052AD57 /* Pitch - A Bit High, Slow Airspeed_512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F20213EEB840052AD57 /* Pitch - A Bit High, Slow Airspeed_512Kbps_288p.mp4 */; };
+		6DBF1F4F213EEB850052AD57 /* No Sound - firm up embouchure_512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F21213EEB840052AD57 /* No Sound - firm up embouchure_512Kbps_288p.mp4 */; };
+		6DBF1F50213EEB850052AD57 /* No Sound - firm up embouchure_512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F21213EEB840052AD57 /* No Sound - firm up embouchure_512Kbps_288p.mp4 */; };
+		6DBF1F51213EEB850052AD57 /* Pitch - A bit low - check fingering.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F22213EEB840052AD57 /* Pitch - A bit low - check fingering.mp4 */; };
+		6DBF1F52213EEB850052AD57 /* Pitch - A bit low - check fingering.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F22213EEB840052AD57 /* Pitch - A bit low - check fingering.mp4 */; };
+		6DBF1F53213EEB850052AD57 /* Attack - Late - Enter earlier.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F23213EEB840052AD57 /* Attack - Late - Enter earlier.mp4 */; };
+		6DBF1F54213EEB850052AD57 /* Attack - Late - Enter earlier.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F23213EEB840052AD57 /* Attack - Late - Enter earlier.mp4 */; };
+		6DBF1F55213EEB850052AD57 /* No Sound - Are You Playing_512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F24213EEB840052AD57 /* No Sound - Are You Playing_512Kbps_288p.mp4 */; };
+		6DBF1F56213EEB850052AD57 /* No Sound - Are You Playing_512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F24213EEB840052AD57 /* No Sound - Are You Playing_512Kbps_288p.mp4 */; };
+		6DBF1F57213EEB850052AD57 /* Pitch - Low Partial, Change Tongue Arch_512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F25213EEB840052AD57 /* Pitch - Low Partial, Change Tongue Arch_512Kbps_288p.mp4 */; };
+		6DBF1F58213EEB850052AD57 /* Pitch - Low Partial, Change Tongue Arch_512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F25213EEB840052AD57 /* Pitch - Low Partial, Change Tongue Arch_512Kbps_288p.mp4 */; };
+		6DBF1F59213EEB850052AD57 /* Pitch - Low Partial, Firm Up Embouchure_512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F26213EEB840052AD57 /* Pitch - Low Partial, Firm Up Embouchure_512Kbps_288p.mp4 */; };
+		6DBF1F5A213EEB850052AD57 /* Pitch - Low Partial, Firm Up Embouchure_512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F26213EEB840052AD57 /* Pitch - Low Partial, Firm Up Embouchure_512Kbps_288p.mp4 */; };
+		6DBF1F5B213EEB850052AD57 /* No Sound - Check Mic Settings.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F27213EEB850052AD57 /* No Sound - Check Mic Settings.mp4 */; };
+		6DBF1F5C213EEB850052AD57 /* No Sound - Check Mic Settings.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F27213EEB850052AD57 /* No Sound - Check Mic Settings.mp4 */; };
+		6DBF1F5D213EEB850052AD57 /* Pitch - Very Low - Speed up air.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F28213EEB850052AD57 /* Pitch - Very Low - Speed up air.mp4 */; };
+		6DBF1F5E213EEB850052AD57 /* Pitch - Very Low - Speed up air.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F28213EEB850052AD57 /* Pitch - Very Low - Speed up air.mp4 */; };
+		6DBF1F60213EEF0F0052AD57 /* Duration - Very Long_512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F5F213EEF0F0052AD57 /* Duration - Very Long_512Kbps_288p.mp4 */; };
+		6DBF1F61213EEF0F0052AD57 /* Duration - Very Long_512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F5F213EEF0F0052AD57 /* Duration - Very Long_512Kbps_288p.mp4 */; };
 		6DC3FE802118DD1D00168950 /* Balloon_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DC3FE7B2118DD1D00168950 /* Balloon_4.png */; };
 		6DC3FE812118DD1D00168950 /* Balloon_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DC3FE7C2118DD1D00168950 /* Balloon_3.png */; };
 		6DC3FE822118DD1D00168950 /* Balloon_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DC3FE7D2118DD1D00168950 /* Balloon_2.png */; };
@@ -369,8 +488,24 @@
 		6DC3FE962119628100168950 /* bananas_incomplete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DC3FE8F2119628000168950 /* bananas_incomplete@2x.png */; };
 		6DC3FE972119628100168950 /* bananas.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DC3FE902119628000168950 /* bananas.png */; };
 		6DC3FE982119628100168950 /* bananas.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DC3FE902119628000168950 /* bananas.png */; };
+		6DC834B52134B94B00AAA613 /* IconImageMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC834B42134B94B00AAA613 /* IconImageMgr.swift */; };
+		6DC834B62134B94B00AAA613 /* IconImageMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC834B42134B94B00AAA613 /* IconImageMgr.swift */; };
+		6DC834C72135136400AAA613 /* OneStarNew 64x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DC834C62135136400AAA613 /* OneStarNew 64x64.png */; };
+		6DC834C82135136400AAA613 /* OneStarNew 64x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DC834C62135136400AAA613 /* OneStarNew 64x64.png */; };
 		6DCDFF162118AF9F000E8E38 /* Monkey_Ballon_Explode.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DCDFF102118AF9F000E8E38 /* Monkey_Ballon_Explode.png */; };
 		6DCDFF212118AFAB000E8E38 /* Monkey_Ballon_Explode.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DCDFF102118AF9F000E8E38 /* Monkey_Ballon_Explode.png */; };
+		6DDE849E2135A61B00A81875 /* LongtonePersonalBestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDE849D2135A61B00A81875 /* LongtonePersonalBestSupport.swift */; };
+		6DDE849F2135A61B00A81875 /* LongtonePersonalBestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDE849D2135A61B00A81875 /* LongtonePersonalBestSupport.swift */; };
+		6DF608D12131C666007D69A5 /* star_icon 16x16.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DF608C02131C665007D69A5 /* star_icon 16x16.jpg */; };
+		6DF608D22131C666007D69A5 /* star_icon 16x16.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DF608C02131C665007D69A5 /* star_icon 16x16.jpg */; };
+		6DF608D32131C666007D69A5 /* star_icon 64x64.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DF608D02131C666007D69A5 /* star_icon 64x64.jpg */; };
+		6DF608D42131C666007D69A5 /* star_icon 64x64.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DF608D02131C666007D69A5 /* star_icon 64x64.jpg */; };
+		6DFA9BF6212A7CC1002BD4AB /* Stars-3 64x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DFA9BE4212A7CC0002BD4AB /* Stars-3 64x16.png */; };
+		6DFA9BF7212A7CC1002BD4AB /* Stars-2 64x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DFA9BF4212A7CC0002BD4AB /* Stars-2 64x16.png */; };
+		6DFA9BF8212A7CC1002BD4AB /* Stars-1 64x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DFA9BF5212A7CC0002BD4AB /* Stars-1 64x16.png */; };
+		6DFA9BF9212A7D0B002BD4AB /* Stars-1 64x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DFA9BF5212A7CC0002BD4AB /* Stars-1 64x16.png */; };
+		6DFA9BFA212A7D0B002BD4AB /* Stars-2 64x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DFA9BF4212A7CC0002BD4AB /* Stars-2 64x16.png */; };
+		6DFA9BFB212A7D0B002BD4AB /* Stars-3 64x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DFA9BE4212A7CC0002BD4AB /* Stars-3 64x16.png */; };
 		BD7C17471F860E3B002AF462 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7C17461F860E3B002AF462 /* HomeViewController.swift */; };
 		BD7C174E1F86148A002AF462 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7C17461F860E3B002AF462 /* HomeViewController.swift */; };
 		BD7C17501F861755002AF462 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7C174F1F861755002AF462 /* SettingsTableViewController.swift */; };
@@ -425,12 +560,6 @@
 		E9CFE62920263C0F00C69C43 /* Monkey_Jumping Temples_monkey 03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E9CFE62120263C0700C69C43 /* Monkey_Jumping Temples_monkey 03@2x.png */; };
 		E9CFE62A20263C0F00C69C43 /* Monkey_Jumping Temples_monkey 04@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E9CFE62220263C0700C69C43 /* Monkey_Jumping Temples_monkey 04@2x.png */; };
 		E9CFE62B20263C0F00C69C43 /* Monkey_Jumping Temples_monkey 06@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E9CFE62320263C0700C69C43 /* Monkey_Jumping Temples_monkey 06@2x.png */; };
-		E9CFE63A2027975B00C69C43 /* ABitHigh.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E9CFE6372027975B00C69C43 /* ABitHigh.mp4 */; };
-		E9CFE63B2027975B00C69C43 /* ABitLow.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E9CFE6382027975B00C69C43 /* ABitLow.mp4 */; };
-		E9CFE63C2027975B00C69C43 /* UpperPartial.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E9CFE6392027975B00C69C43 /* UpperPartial.mp4 */; };
-		E9CFE63D202798C900C69C43 /* ABitHigh.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E9CFE6372027975B00C69C43 /* ABitHigh.mp4 */; };
-		E9CFE63E202798C900C69C43 /* ABitLow.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E9CFE6382027975B00C69C43 /* ABitLow.mp4 */; };
-		E9CFE63F202798C900C69C43 /* UpperPartial.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E9CFE6392027975B00C69C43 /* UpperPartial.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -865,13 +994,72 @@
 		63B4275B1E5057BB000E35AA /* SSSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSSettingsViewController.swift; sourceTree = "<group>"; };
 		63BF9E061EBFFF07002BB5C1 /* MusicXMLModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicXMLModifier.swift; sourceTree = "<group>"; };
 		63EB90161CF1C4EB00F09B05 /* AVAudioSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAudioSessionManager.swift; sourceTree = "<group>"; };
+		6D01C3FF21238C75004B8440 /* LessonScheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LessonScheduler.swift; path = LessonScheduling/LessonScheduler.swift; sourceTree = "<group>"; };
+		6D01C40221238CAC004B8440 /* TuneFileMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TuneFileMapper.swift; path = LessonScheduling/TuneFileMapper.swift; sourceTree = "<group>"; };
+		6D34A17C2139F9E10071BAB6 /* AppDefs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDefs.swift; sourceTree = "<group>"; };
+		6D5A266D2138C2BD00D2B637 /* MiscSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscSupport.swift; sourceTree = "<group>"; };
 		6D6093AE2114F66C00874A40 /* ScoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScoreData.swift; path = PerformanceAnalysis/ScoreData.swift; sourceTree = "<group>"; };
 		6D6093AF2114F66D00874A40 /* PerformanceRest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PerformanceRest.swift; path = PerformanceAnalysis/PerformanceRest.swift; sourceTree = "<group>"; };
 		6D6093B02114F66D00874A40 /* RestPerformanceAnalyzer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RestPerformanceAnalyzer.swift; path = PerformanceAnalysis/RestPerformanceAnalyzer.swift; sourceTree = "<group>"; };
 		6D6093B12114F66D00874A40 /* PerformanceScoreObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PerformanceScoreObject.swift; path = PerformanceAnalysis/PerformanceScoreObject.swift; sourceTree = "<group>"; };
 		6D6093BA21163E1800874A40 /* ThresholdsMgr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ThresholdsMgr.swift; path = PerformanceAnalysis/ThresholdsMgr.swift; sourceTree = "<group>"; };
+		6D63166A212D060F004F2DE4 /* SingleStar - 32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "SingleStar - 32.png"; path = "Images/SingleStar - 32.png"; sourceTree = "<group>"; };
+		6D63167A212D0610004F2DE4 /* SingleStar - 64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "SingleStar - 64.png"; path = "Images/SingleStar - 64.png"; sourceTree = "<group>"; };
+		6D63167F212D0670004F2DE4 /* blank 64x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "blank 64x64.png"; path = "Images/blank 64x64.png"; sourceTree = "<group>"; };
+		6D631680212D0670004F2DE4 /* blank 256x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "blank 256x64.png"; path = "Images/blank 256x64.png"; sourceTree = "<group>"; };
+		6D631685212DF4D5004F2DE4 /* LevelSeriesTableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelSeriesTableViewHeaderFooterView.swift; sourceTree = "<group>"; };
 		6D6C8CEC2123422B00874F86 /* PerformanceScoreObjectScheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PerformanceScoreObjectScheduler.swift; path = PerformanceAnalysis/PerformanceScoreObjectScheduler.swift; sourceTree = "<group>"; };
+		6D7248EA2128771500378131 /* Stars-2 256x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Stars-2 256x64.png"; path = "Images/Stars-2 256x64.png"; sourceTree = "<group>"; };
+		6D7248FA2128771500378131 /* Stars-4 256x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Stars-4 256x64.png"; path = "Images/Stars-4 256x64.png"; sourceTree = "<group>"; };
+		6D7248FB2128771500378131 /* Stars-1 256x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Stars-1 256x64.png"; path = "Images/Stars-1 256x64.png"; sourceTree = "<group>"; };
+		6D7248FC2128771600378131 /* Stars-3 256x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Stars-3 256x64.png"; path = "Images/Stars-3 256x64.png"; sourceTree = "<group>"; };
+		6D7249052128775000378131 /* Stars-0 256x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Stars-0 256x64.png"; path = "Images/Stars-0 256x64.png"; sourceTree = "<group>"; };
+		6D7249082128807600378131 /* Stars-4 128x32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Stars-4 128x32.png"; path = "Images/Stars-4 128x32.png"; sourceTree = "<group>"; };
+		6D72490B2128817100378131 /* Stars-4 64x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Stars-4 64x16.png"; path = "Images/Stars-4 64x16.png"; sourceTree = "<group>"; };
+		6D72490E2128991E00378131 /* Stars-0 64x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Stars-0 64x16.png"; path = "Images/Stars-0 64x16.png"; sourceTree = "<group>"; };
+		6D72490F2128991E00378131 /* Current Arrow 64x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Current Arrow 64x16.png"; path = "Images/Current Arrow 64x16.png"; sourceTree = "<group>"; };
+		6D7249102128991F00378131 /* Blank 64x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Blank 64x16.png"; path = "Images/Blank 64x16.png"; sourceTree = "<group>"; };
+		6D7249172128A8B100378131 /* Monkey_Ballon-Face02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Monkey_Ballon-Face02@2x.png"; path = "Images/Monkey_Ballon-Face02@2x.png"; sourceTree = "<group>"; };
+		6D72491A2128FD6000378131 /* MonkeyPlaneWithProp large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "MonkeyPlaneWithProp large.png"; path = "Images/MonkeyPlaneWithProp large.png"; sourceTree = "<group>"; };
+		6D8E10362130DD6F00B1B3B8 /* Current Arrow 40x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Current Arrow 40x16.png"; path = "Images/Current Arrow 40x16.png"; sourceTree = "<group>"; };
+		6D8E10482130E77200B1B3B8 /* Current Arrow 22x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Current Arrow 22x16.png"; path = "Images/Current Arrow 22x16.png"; sourceTree = "<group>"; };
+		6D8E104B2131031C00B1B3B8 /* Current Arrow 36x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Current Arrow 36x16.png"; path = "Images/Current Arrow 36x16.png"; sourceTree = "<group>"; };
+		6D8E104E213103DA00B1B3B8 /* Current Arrow 30x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Current Arrow 30x16.png"; path = "Images/Current Arrow 30x16.png"; sourceTree = "<group>"; };
 		6DA54C46210BC8F9004BECB2 /* ScoreMgr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ScoreMgr.swift; path = PerformanceAnalysis/ScoreMgr.swift; sourceTree = "<group>"; };
+		6DB8532A21248EF500F999C3 /* XMLFileMapping.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = XMLFileMapping.json; path = LessonScheduling/XMLFileMapping.json; sourceTree = "<group>"; };
+		6DB8533C2126438E00F999C3 /* LaunchingNextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LaunchingNextView.swift; path = LessonScheduling/LaunchingNextView.swift; sourceTree = "<group>"; };
+		6DB8533F2127A87500F999C3 /* Monkey_Skiing_03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Monkey_Skiing_03@2x.png"; path = "Images/Monkey_Skiing_03@2x.png"; sourceTree = "<group>"; };
+		6DB853402127A87500F999C3 /* Monkey_Skiing_02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Monkey_Skiing_02@2x.png"; path = "Images/Monkey_Skiing_02@2x.png"; sourceTree = "<group>"; };
+		6DB853412127A87500F999C3 /* Monkey_Skiing_01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Monkey_Skiing_01@2x.png"; path = "Images/Monkey_Skiing_01@2x.png"; sourceTree = "<group>"; };
+		6DB853422127A87600F999C3 /* Monkey_Skiing_06@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Monkey_Skiing_06@2x.png"; path = "Images/Monkey_Skiing_06@2x.png"; sourceTree = "<group>"; };
+		6DBF1F0B213ED8D50052AD57 /* Stars-4 Even 256x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Stars-4 Even 256x64.png"; path = "Images/Stars-4 Even 256x64.png"; sourceTree = "<group>"; };
+		6DBF1F0E213EEB820052AD57 /* Duration - A bit short.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Duration - A bit short.mp4"; path = "Videos/Duration - A bit short.mp4"; sourceTree = "<group>"; };
+		6DBF1F0F213EEB820052AD57 /* Duration - Too Long.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Duration - Too Long.mp4"; path = "Videos/Duration - Too Long.mp4"; sourceTree = "<group>"; };
+		6DBF1F10213EEB820052AD57 /* No Sound - relax embouchure_512Kbps_288p.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "No Sound - relax embouchure_512Kbps_288p.mp4"; path = "Videos/No Sound - relax embouchure_512Kbps_288p.mp4"; sourceTree = "<group>"; };
+		6DBF1F11213EEB820052AD57 /* Pitch - Upper Partial - Relax embouchure_512Kbps_288p.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pitch - Upper Partial - Relax embouchure_512Kbps_288p.mp4"; path = "Videos/Pitch - Upper Partial - Relax embouchure_512Kbps_288p.mp4"; sourceTree = "<group>"; };
+		6DBF1F12213EEB820052AD57 /* Pitch - A Bit High, check fingering_512Kbps_288p.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pitch - A Bit High, check fingering_512Kbps_288p.mp4"; path = "Videos/Pitch - A Bit High, check fingering_512Kbps_288p.mp4"; sourceTree = "<group>"; };
+		6DBF1F13213EEB820052AD57 /* Pitch - A bit low - firm up embouchure.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pitch - A bit low - firm up embouchure.mp4"; path = "Videos/Pitch - A bit low - firm up embouchure.mp4"; sourceTree = "<group>"; };
+		6DBF1F14213EEB820052AD57 /* Pitch - Upper Partial, Slow air.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pitch - Upper Partial, Slow air.mp4"; path = "Videos/Pitch - Upper Partial, Slow air.mp4"; sourceTree = "<group>"; };
+		6DBF1F16213EEB820052AD57 /* Pitch - A Bit Low, Speed Up Air_512Kbps_288p.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pitch - A Bit Low, Speed Up Air_512Kbps_288p.mp4"; path = "Videos/Pitch - A Bit Low, Speed Up Air_512Kbps_288p.mp4"; sourceTree = "<group>"; };
+		6DBF1F17213EEB820052AD57 /* Sound during rest - _512Kbps_288p.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Sound during rest - _512Kbps_288p.mp4"; path = "Videos/Sound during rest - _512Kbps_288p.mp4"; sourceTree = "<group>"; };
+		6DBF1F18213EEB830052AD57 /* Pitch - A Bit High, Relax embouchure_512Kbps_288p.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pitch - A Bit High, Relax embouchure_512Kbps_288p.mp4"; path = "Videos/Pitch - A Bit High, Relax embouchure_512Kbps_288p.mp4"; sourceTree = "<group>"; };
+		6DBF1F19213EEB830052AD57 /* Attack - Early - wait a bit before entering_512Kbps_288p.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Attack - Early - wait a bit before entering_512Kbps_288p.mp4"; path = "Videos/Attack - Early - wait a bit before entering_512Kbps_288p.mp4"; sourceTree = "<group>"; };
+		6DBF1F1A213EEB830052AD57 /* Pitch - Very High - relax embouchure_512Kbps_288p.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pitch - Very High - relax embouchure_512Kbps_288p.mp4"; path = "Videos/Pitch - Very High - relax embouchure_512Kbps_288p.mp4"; sourceTree = "<group>"; };
+		6DBF1F1B213EEB830052AD57 /* Duration - Too short_512Kbps_288p.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Duration - Too short_512Kbps_288p.mp4"; path = "Videos/Duration - Too short_512Kbps_288p.mp4"; sourceTree = "<group>"; };
+		6DBF1F1C213EEB830052AD57 /* Pitch - Very High - Double Check fingering.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pitch - Very High - Double Check fingering.mp4"; path = "Videos/Pitch - Very High - Double Check fingering.mp4"; sourceTree = "<group>"; };
+		6DBF1F1D213EEB830052AD57 /* Ptich - Very Low, Reset with B embouchure, use a mirror_512Kbps_288p.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Ptich - Very Low, Reset with B embouchure, use a mirror_512Kbps_288p.mp4"; path = "Videos/Ptich - Very Low, Reset with B embouchure, use a mirror_512Kbps_288p.mp4"; sourceTree = "<group>"; };
+		6DBF1F1E213EEB830052AD57 /* No Sound - wet lips_512Kbps_288p.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "No Sound - wet lips_512Kbps_288p.mp4"; path = "Videos/No Sound - wet lips_512Kbps_288p.mp4"; sourceTree = "<group>"; };
+		6DBF1F1F213EEB830052AD57 /* Ptich - Very Low, Curve lips in_512Kbps_288p.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Ptich - Very Low, Curve lips in_512Kbps_288p.mp4"; path = "Videos/Ptich - Very Low, Curve lips in_512Kbps_288p.mp4"; sourceTree = "<group>"; };
+		6DBF1F20213EEB840052AD57 /* Pitch - A Bit High, Slow Airspeed_512Kbps_288p.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pitch - A Bit High, Slow Airspeed_512Kbps_288p.mp4"; path = "Videos/Pitch - A Bit High, Slow Airspeed_512Kbps_288p.mp4"; sourceTree = "<group>"; };
+		6DBF1F21213EEB840052AD57 /* No Sound - firm up embouchure_512Kbps_288p.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "No Sound - firm up embouchure_512Kbps_288p.mp4"; path = "Videos/No Sound - firm up embouchure_512Kbps_288p.mp4"; sourceTree = "<group>"; };
+		6DBF1F22213EEB840052AD57 /* Pitch - A bit low - check fingering.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pitch - A bit low - check fingering.mp4"; path = "Videos/Pitch - A bit low - check fingering.mp4"; sourceTree = "<group>"; };
+		6DBF1F23213EEB840052AD57 /* Attack - Late - Enter earlier.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Attack - Late - Enter earlier.mp4"; path = "Videos/Attack - Late - Enter earlier.mp4"; sourceTree = "<group>"; };
+		6DBF1F24213EEB840052AD57 /* No Sound - Are You Playing_512Kbps_288p.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "No Sound - Are You Playing_512Kbps_288p.mp4"; path = "Videos/No Sound - Are You Playing_512Kbps_288p.mp4"; sourceTree = "<group>"; };
+		6DBF1F25213EEB840052AD57 /* Pitch - Low Partial, Change Tongue Arch_512Kbps_288p.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pitch - Low Partial, Change Tongue Arch_512Kbps_288p.mp4"; path = "Videos/Pitch - Low Partial, Change Tongue Arch_512Kbps_288p.mp4"; sourceTree = "<group>"; };
+		6DBF1F26213EEB840052AD57 /* Pitch - Low Partial, Firm Up Embouchure_512Kbps_288p.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pitch - Low Partial, Firm Up Embouchure_512Kbps_288p.mp4"; path = "Videos/Pitch - Low Partial, Firm Up Embouchure_512Kbps_288p.mp4"; sourceTree = "<group>"; };
+		6DBF1F27213EEB850052AD57 /* No Sound - Check Mic Settings.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "No Sound - Check Mic Settings.mp4"; path = "Videos/No Sound - Check Mic Settings.mp4"; sourceTree = "<group>"; };
+		6DBF1F28213EEB850052AD57 /* Pitch - Very Low - Speed up air.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pitch - Very Low - Speed up air.mp4"; path = "Videos/Pitch - Very Low - Speed up air.mp4"; sourceTree = "<group>"; };
+		6DBF1F5F213EEF0F0052AD57 /* Duration - Very Long_512Kbps_288p.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Duration - Very Long_512Kbps_288p.mp4"; path = "Videos/Duration - Very Long_512Kbps_288p.mp4"; sourceTree = "<group>"; };
 		6DC3FE7B2118DD1D00168950 /* Balloon_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Balloon_4.png; path = Images/Balloon_4.png; sourceTree = "<group>"; };
 		6DC3FE7C2118DD1D00168950 /* Balloon_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Balloon_3.png; path = Images/Balloon_3.png; sourceTree = "<group>"; };
 		6DC3FE7D2118DD1D00168950 /* Balloon_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Balloon_2.png; path = Images/Balloon_2.png; sourceTree = "<group>"; };
@@ -882,7 +1070,15 @@
 		6DC3FE8E2119628000168950 /* bananas_incomplete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bananas_incomplete.png; path = Images/bananas_incomplete.png; sourceTree = "<group>"; };
 		6DC3FE8F2119628000168950 /* bananas_incomplete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bananas_incomplete@2x.png"; path = "Images/bananas_incomplete@2x.png"; sourceTree = "<group>"; };
 		6DC3FE902119628000168950 /* bananas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bananas.png; path = Images/bananas.png; sourceTree = "<group>"; };
+		6DC834B42134B94B00AAA613 /* IconImageMgr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IconImageMgr.swift; path = LessonScheduling/IconImageMgr.swift; sourceTree = "<group>"; };
+		6DC834C62135136400AAA613 /* OneStarNew 64x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "OneStarNew 64x64.png"; path = "Images/OneStarNew 64x64.png"; sourceTree = "<group>"; };
 		6DCDFF102118AF9F000E8E38 /* Monkey_Ballon_Explode.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Monkey_Ballon_Explode.png; path = Images/Monkey_Ballon_Explode.png; sourceTree = "<group>"; };
+		6DDE849D2135A61B00A81875 /* LongtonePersonalBestSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LongtonePersonalBestSupport.swift; path = LessonScheduling/LongtonePersonalBestSupport.swift; sourceTree = "<group>"; };
+		6DF608C02131C665007D69A5 /* star_icon 16x16.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "star_icon 16x16.jpg"; path = "Images/star_icon 16x16.jpg"; sourceTree = "<group>"; };
+		6DF608D02131C666007D69A5 /* star_icon 64x64.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "star_icon 64x64.jpg"; path = "Images/star_icon 64x64.jpg"; sourceTree = "<group>"; };
+		6DFA9BE4212A7CC0002BD4AB /* Stars-3 64x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Stars-3 64x16.png"; path = "Images/Stars-3 64x16.png"; sourceTree = "<group>"; };
+		6DFA9BF4212A7CC0002BD4AB /* Stars-2 64x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Stars-2 64x16.png"; path = "Images/Stars-2 64x16.png"; sourceTree = "<group>"; };
+		6DFA9BF5212A7CC0002BD4AB /* Stars-1 64x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Stars-1 64x16.png"; path = "Images/Stars-1 64x16.png"; sourceTree = "<group>"; };
 		BD7C17461F860E3B002AF462 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		BD7C174F1F861755002AF462 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		BD8B79041F95BF75005B31CB /* PracticeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PracticeViewController.swift; sourceTree = "<group>"; };
@@ -912,9 +1108,6 @@
 		E9CFE62120263C0700C69C43 /* Monkey_Jumping Temples_monkey 03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Monkey_Jumping Temples_monkey 03@2x.png"; path = "Images/Monkey_Jumping Temples_monkey 03@2x.png"; sourceTree = "<group>"; };
 		E9CFE62220263C0700C69C43 /* Monkey_Jumping Temples_monkey 04@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Monkey_Jumping Temples_monkey 04@2x.png"; path = "Images/Monkey_Jumping Temples_monkey 04@2x.png"; sourceTree = "<group>"; };
 		E9CFE62320263C0700C69C43 /* Monkey_Jumping Temples_monkey 06@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Monkey_Jumping Temples_monkey 06@2x.png"; path = "Images/Monkey_Jumping Temples_monkey 06@2x.png"; sourceTree = "<group>"; };
-		E9CFE6372027975B00C69C43 /* ABitHigh.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = ABitHigh.mp4; path = Videos/ABitHigh.mp4; sourceTree = "<group>"; };
-		E9CFE6382027975B00C69C43 /* ABitLow.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = ABitLow.mp4; path = Videos/ABitLow.mp4; sourceTree = "<group>"; };
-		E9CFE6392027975B00C69C43 /* UpperPartial.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = UpperPartial.mp4; path = Videos/UpperPartial.mp4; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -922,6 +1115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DBF1F0A213E23D10052AD57 /* SwiftyJSON.framework in Frameworks */,
 				638FECC21EC70A1100976340 /* AEXML.framework in Frameworks */,
 				C9BCD1671FB145C900E3434F /* AudioKit.framework in Frameworks */,
 				6324D31A1CE7327F001934A5 /* SeeScoreLib.framework in Frameworks */,
@@ -1220,6 +1414,7 @@
 				1C87C0AB2016F3D00038784E /* Not Used View Controllers */,
 				6324D3661CE73ECB001934A5 /* Brain */,
 				633C2ADF1CE81402001C5C16 /* Data */,
+				6D01C3FE21238C0E004B8440 /* LessonScheduling */,
 				E9AD0C991FD115F1006472CE /* PerformanceAnalysis */,
 				6324D3341CE7358C001934A5 /* SeeScore */,
 				6387FDE61CEDB5110054DE44 /* Supporting Files */,
@@ -1513,6 +1708,7 @@
 				E9815A36200511430046445B /* VideoHelpView.swift */,
 				639A2E531CF5E6CA004F7B1A /* VisualMetronomeView.swift */,
 				6DC3FE8A2119617500168950 /* StarScoreView.swift */,
+				6D631685212DF4D5004F2DE4 /* LevelSeriesTableViewHeaderFooterView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1527,16 +1723,55 @@
 				6355ECF61CF68EB60037945F /* marmstk1.wav */,
 				633CA1D21CF73D0C00061F3D /* NearArrow.png */,
 				6324D31E1CE73574001934A5 /* FirstStage-Bridging-Header.h */,
+				6D5A266D2138C2BD00D2B637 /* MiscSupport.swift */,
+				6D34A17C2139F9E10071BAB6 /* AppDefs.swift */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6D01C3FE21238C0E004B8440 /* LessonScheduling */ = {
+			isa = PBXGroup;
+			children = (
+				6D01C3FF21238C75004B8440 /* LessonScheduler.swift */,
+				6D01C40221238CAC004B8440 /* TuneFileMapper.swift */,
+				6DB8532A21248EF500F999C3 /* XMLFileMapping.json */,
+				6DB8533C2126438E00F999C3 /* LaunchingNextView.swift */,
+				6DC834B42134B94B00AAA613 /* IconImageMgr.swift */,
+				6DDE849D2135A61B00A81875 /* LongtonePersonalBestSupport.swift */,
+			);
+			name = LessonScheduling;
 			sourceTree = "<group>";
 		};
 		E9794BAB1FFDB36200CDC7FD /* Videos */ = {
 			isa = PBXGroup;
 			children = (
-				E9CFE6372027975B00C69C43 /* ABitHigh.mp4 */,
-				E9CFE6382027975B00C69C43 /* ABitLow.mp4 */,
-				E9CFE6392027975B00C69C43 /* UpperPartial.mp4 */,
+				6DBF1F19213EEB830052AD57 /* Attack - Early - wait a bit before entering_512Kbps_288p.mp4 */,
+				6DBF1F23213EEB840052AD57 /* Attack - Late - Enter earlier.mp4 */,
+				6DBF1F0E213EEB820052AD57 /* Duration - A bit short.mp4 */,
+				6DBF1F0F213EEB820052AD57 /* Duration - Too Long.mp4 */,
+				6DBF1F1B213EEB830052AD57 /* Duration - Too short_512Kbps_288p.mp4 */,
+				6DBF1F5F213EEF0F0052AD57 /* Duration - Very Long_512Kbps_288p.mp4 */,
+				6DBF1F24213EEB840052AD57 /* No Sound - Are You Playing_512Kbps_288p.mp4 */,
+				6DBF1F27213EEB850052AD57 /* No Sound - Check Mic Settings.mp4 */,
+				6DBF1F21213EEB840052AD57 /* No Sound - firm up embouchure_512Kbps_288p.mp4 */,
+				6DBF1F10213EEB820052AD57 /* No Sound - relax embouchure_512Kbps_288p.mp4 */,
+				6DBF1F1E213EEB830052AD57 /* No Sound - wet lips_512Kbps_288p.mp4 */,
+				6DBF1F12213EEB820052AD57 /* Pitch - A Bit High, check fingering_512Kbps_288p.mp4 */,
+				6DBF1F18213EEB830052AD57 /* Pitch - A Bit High, Relax embouchure_512Kbps_288p.mp4 */,
+				6DBF1F20213EEB840052AD57 /* Pitch - A Bit High, Slow Airspeed_512Kbps_288p.mp4 */,
+				6DBF1F22213EEB840052AD57 /* Pitch - A bit low - check fingering.mp4 */,
+				6DBF1F13213EEB820052AD57 /* Pitch - A bit low - firm up embouchure.mp4 */,
+				6DBF1F16213EEB820052AD57 /* Pitch - A Bit Low, Speed Up Air_512Kbps_288p.mp4 */,
+				6DBF1F25213EEB840052AD57 /* Pitch - Low Partial, Change Tongue Arch_512Kbps_288p.mp4 */,
+				6DBF1F26213EEB840052AD57 /* Pitch - Low Partial, Firm Up Embouchure_512Kbps_288p.mp4 */,
+				6DBF1F11213EEB820052AD57 /* Pitch - Upper Partial - Relax embouchure_512Kbps_288p.mp4 */,
+				6DBF1F14213EEB820052AD57 /* Pitch - Upper Partial, Slow air.mp4 */,
+				6DBF1F1C213EEB830052AD57 /* Pitch - Very High - Double Check fingering.mp4 */,
+				6DBF1F1A213EEB830052AD57 /* Pitch - Very High - relax embouchure_512Kbps_288p.mp4 */,
+				6DBF1F28213EEB850052AD57 /* Pitch - Very Low - Speed up air.mp4 */,
+				6DBF1F1F213EEB830052AD57 /* Ptich - Very Low, Curve lips in_512Kbps_288p.mp4 */,
+				6DBF1F1D213EEB830052AD57 /* Ptich - Very Low, Reset with B embouchure, use a mirror_512Kbps_288p.mp4 */,
+				6DBF1F17213EEB820052AD57 /* Sound during rest - _512Kbps_288p.mp4 */,
 			);
 			name = Videos;
 			sourceTree = "<group>";
@@ -1579,6 +1814,32 @@
 		E9CFE60D201A6D9200C69C43 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6DBF1F0B213ED8D50052AD57 /* Stars-4 Even 256x64.png */,
+				6DC834C62135136400AAA613 /* OneStarNew 64x64.png */,
+				6DF608C02131C665007D69A5 /* star_icon 16x16.jpg */,
+				6DF608D02131C666007D69A5 /* star_icon 64x64.jpg */,
+				6D8E104E213103DA00B1B3B8 /* Current Arrow 30x16.png */,
+				6D8E104B2131031C00B1B3B8 /* Current Arrow 36x16.png */,
+				6D63167F212D0670004F2DE4 /* blank 64x64.png */,
+				6D631680212D0670004F2DE4 /* blank 256x64.png */,
+				6D63166A212D060F004F2DE4 /* SingleStar - 32.png */,
+				6D63167A212D0610004F2DE4 /* SingleStar - 64.png */,
+				6D72491A2128FD6000378131 /* MonkeyPlaneWithProp large.png */,
+				6D7249172128A8B100378131 /* Monkey_Ballon-Face02@2x.png */,
+				6D7249102128991F00378131 /* Blank 64x16.png */,
+				6D8E10482130E77200B1B3B8 /* Current Arrow 22x16.png */,
+				6D8E10362130DD6F00B1B3B8 /* Current Arrow 40x16.png */,
+				6D72490F2128991E00378131 /* Current Arrow 64x16.png */,
+				6D7249082128807600378131 /* Stars-4 128x32.png */,
+				6D7249052128775000378131 /* Stars-0 256x64.png */,
+				6D7248FB2128771500378131 /* Stars-1 256x64.png */,
+				6D7248EA2128771500378131 /* Stars-2 256x64.png */,
+				6D7248FC2128771600378131 /* Stars-3 256x64.png */,
+				6D7248FA2128771500378131 /* Stars-4 256x64.png */,
+				6DB853412127A87500F999C3 /* Monkey_Skiing_01@2x.png */,
+				6DB853402127A87500F999C3 /* Monkey_Skiing_02@2x.png */,
+				6DB8533F2127A87500F999C3 /* Monkey_Skiing_03@2x.png */,
+				6DB853422127A87600F999C3 /* Monkey_Skiing_06@2x.png */,
 				6DC3FE8E2119628000168950 /* bananas_incomplete.png */,
 				6DC3FE8F2119628000168950 /* bananas_incomplete@2x.png */,
 				6DC3FE902119628000168950 /* bananas.png */,
@@ -1593,6 +1854,11 @@
 				E9CFE62120263C0700C69C43 /* Monkey_Jumping Temples_monkey 03@2x.png */,
 				E9CFE62220263C0700C69C43 /* Monkey_Jumping Temples_monkey 04@2x.png */,
 				E9CFE62320263C0700C69C43 /* Monkey_Jumping Temples_monkey 06@2x.png */,
+				6D72490E2128991E00378131 /* Stars-0 64x16.png */,
+				6DFA9BF5212A7CC0002BD4AB /* Stars-1 64x16.png */,
+				6DFA9BF4212A7CC0002BD4AB /* Stars-2 64x16.png */,
+				6DFA9BE4212A7CC0002BD4AB /* Stars-3 64x16.png */,
+				6D72490B2128817100378131 /* Stars-4 64x16.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -1875,58 +2141,89 @@
 				634658AA1E90C68E00C162CF /* Piano.mf.47.m4a in Resources */,
 				634658B11E90C68E00C162CF /* Piano.mf.54.m4a in Resources */,
 				6346589B1E90C68E00C162CF /* Piano.mf.32.m4a in Resources */,
+				6DBF1F5E213EEB850052AD57 /* Pitch - Very Low - Speed up air.mp4 in Resources */,
+				6DB853442127A87600F999C3 /* Monkey_Skiing_03@2x.png in Resources */,
+				6DBF1F30213EEB850052AD57 /* Pitch - Upper Partial - Relax embouchure_512Kbps_288p.mp4 in Resources */,
 				634658CE1E90C68E00C162CF /* Piano.mf.83.m4a in Resources */,
 				634658981E90C68E00C162CF /* Piano.mf.29.m4a in Resources */,
 				634658941E90C68E00C162CF /* Piano.mf.25.m4a in Resources */,
 				633CA1D51CF73D0C00061F3D /* NearArrow.png in Resources */,
+				6D7249142128991F00378131 /* Current Arrow 64x16.png in Resources */,
 				634658B01E90C68E00C162CF /* Piano.mf.53.m4a in Resources */,
+				6D72490A2128807600378131 /* Stars-4 128x32.png in Resources */,
 				634658E31E90C68E00C162CF /* Piano.mf.104.m4a in Resources */,
 				6346590D1E90C6A000C162CF /* Trumpet.novib.mf.54.m4a in Resources */,
+				6D72491C2128FD6100378131 /* MonkeyPlaneWithProp large.png in Resources */,
 				634658D61E90C68E00C162CF /* Piano.mf.91.m4a in Resources */,
 				634658B61E90C68E00C162CF /* Piano.mf.59.m4a in Resources */,
+				6DBF1F48213EEB850052AD57 /* Ptich - Very Low, Reset with B embouchure, use a mirror_512Kbps_288p.mp4 in Resources */,
+				6D8E1050213103DA00B1B3B8 /* Current Arrow 30x16.png in Resources */,
+				6DBF1F56213EEB850052AD57 /* No Sound - Are You Playing_512Kbps_288p.mp4 in Resources */,
 				634659211E90C6A000C162CF /* Trumpet.novib.mf.74.m4a in Resources */,
-				E9CFE63C2027975B00C69C43 /* UpperPartial.mp4 in Resources */,
+				6D72490D2128817100378131 /* Stars-4 64x16.png in Resources */,
 				6346592D1E90C6A000C162CF /* Trumpet.novib.mf.86.m4a in Resources */,
 				6346590C1E90C6A000C162CF /* Trumpet.novib.mf.53.m4a in Resources */,
 				634658D11E90C68E00C162CF /* Piano.mf.86.m4a in Resources */,
+				6DC834C82135136400AAA613 /* OneStarNew 64x64.png in Resources */,
 				634659291E90C6A000C162CF /* Trumpet.novib.mf.82.m4a in Resources */,
+				6DBF1F3E213EEB850052AD57 /* Pitch - A Bit High, Relax embouchure_512Kbps_288p.mp4 in Resources */,
+				6D7249192128A8B100378131 /* Monkey_Ballon-Face02@2x.png in Resources */,
 				634658CD1E90C68E00C162CF /* Piano.mf.82.m4a in Resources */,
 				E9CFE62420263C0700C69C43 /* Monkey_Jumping Temples_monkey 02@2x.png in Resources */,
 				633CA1D41CF73D0C00061F3D /* FarArrow.png in Resources */,
+				6D7249072128775000378131 /* Stars-0 256x64.png in Resources */,
+				6DBF1F0C213ED8D60052AD57 /* Stars-4 Even 256x64.png in Resources */,
 				634659201E90C6A000C162CF /* Trumpet.novib.mf.73.m4a in Resources */,
 				634658AC1E90C68E00C162CF /* Piano.mf.49.m4a in Resources */,
 				634658D91E90C68E00C162CF /* Piano.mf.94.m4a in Resources */,
 				633D1B731CF94CEB00B5C4FD /* FeedbackImage.png in Resources */,
+				6DF608D42131C666007D69A5 /* star_icon 64x64.jpg in Resources */,
+				6DBF1F61213EEF0F0052AD57 /* Duration - Very Long_512Kbps_288p.mp4 in Resources */,
 				634658AB1E90C68E00C162CF /* Piano.mf.48.m4a in Resources */,
+				6DBF1F52213EEB850052AD57 /* Pitch - A bit low - check fingering.mp4 in Resources */,
 				634658D81E90C68E00C162CF /* Piano.mf.93.m4a in Resources */,
 				634658B81E90C68E00C162CF /* Piano.mf.61.m4a in Resources */,
 				634658E71E90C68E00C162CF /* Piano.mf.108.m4a in Resources */,
 				634658CC1E90C68E00C162CF /* Piano.mf.81.m4a in Resources */,
 				634658B31E90C68E00C162CF /* Piano.mf.56.m4a in Resources */,
+				6DBF1F2A213EEB850052AD57 /* Duration - A bit short.mp4 in Resources */,
 				634658CA1E90C68E00C162CF /* Piano.mf.79.m4a in Resources */,
 				6346592B1E90C6A000C162CF /* Trumpet.novib.mf.84.m4a in Resources */,
+				6DB8534A2127A87600F999C3 /* Monkey_Skiing_06@2x.png in Resources */,
+				6DBF1F46213EEB850052AD57 /* Pitch - Very High - Double Check fingering.mp4 in Resources */,
+				6DB853462127A87600F999C3 /* Monkey_Skiing_02@2x.png in Resources */,
 				634659261E90C6A000C162CF /* Trumpet.novib.mf.79.m4a in Resources */,
+				6DFA9BF6212A7CC1002BD4AB /* Stars-3 64x16.png in Resources */,
+				6D7249022128771600378131 /* Stars-1 256x64.png in Resources */,
 				634658AF1E90C68E00C162CF /* Piano.mf.52.m4a in Resources */,
 				634658E01E90C68E00C162CF /* Piano.mf.101.m4a in Resources */,
 				634658A31E90C68E00C162CF /* Piano.mf.40.m4a in Resources */,
 				6346589D1E90C68E00C162CF /* Piano.mf.34.m4a in Resources */,
 				634658E41E90C68E00C162CF /* Piano.mf.105.m4a in Resources */,
+				6DBF1F50213EEB850052AD57 /* No Sound - firm up embouchure_512Kbps_288p.mp4 in Resources */,
 				634658B51E90C68E00C162CF /* Piano.mf.58.m4a in Resources */,
 				634658C81E90C68E00C162CF /* Piano.mf.77.m4a in Resources */,
+				6DBF1F2E213EEB850052AD57 /* No Sound - relax embouchure_512Kbps_288p.mp4 in Resources */,
 				634659241E90C6A000C162CF /* Trumpet.novib.mf.77.m4a in Resources */,
 				E9CFE62720263C0700C69C43 /* Monkey_Jumping Temples_monkey 06@2x.png in Resources */,
 				6DC3FE962119628100168950 /* bananas_incomplete@2x.png in Resources */,
+				6DFA9BF7212A7CC1002BD4AB /* Stars-2 64x16.png in Resources */,
 				634658BA1E90C68E00C162CF /* Piano.mf.63.m4a in Resources */,
 				634658D51E90C68E00C162CF /* Piano.mf.90.m4a in Resources */,
+				6DB8533A21248EF600F999C3 /* XMLFileMapping.json in Resources */,
 				634658A71E90C68E00C162CF /* Piano.mf.44.m4a in Resources */,
 				634658B21E90C68E00C162CF /* Piano.mf.55.m4a in Resources */,
+				6D7249002128771600378131 /* Stars-4 256x64.png in Resources */,
 				634658991E90C68E00C162CF /* Piano.mf.30.m4a in Resources */,
+				6DBF1F58213EEB850052AD57 /* Pitch - Low Partial, Change Tongue Arch_512Kbps_288p.mp4 in Resources */,
 				6DC3FE822118DD1D00168950 /* Balloon_2.png in Resources */,
 				634658DC1E90C68E00C162CF /* Piano.mf.97.m4a in Resources */,
 				1C87C0A42016EA940038784E /* TrumpetLessons.json in Resources */,
+				6D63167C212D0610004F2DE4 /* SingleStar - 32.png in Resources */,
 				6324D2E01CE71B1A001934A5 /* LaunchScreen.storyboard in Resources */,
 				634658C71E90C68E00C162CF /* Piano.mf.76.m4a in Resources */,
 				6DC3FE842118DD1D00168950 /* Balloon_1.png in Resources */,
+				6D8E104A2130E77200B1B3B8 /* Current Arrow 22x16.png in Resources */,
 				634658A21E90C68E00C162CF /* Piano.mf.39.m4a in Resources */,
 				1C33BAE7201518CE00CD83A6 /* hand-placement.html in Resources */,
 				6346592C1E90C6A000C162CF /* Trumpet.novib.mf.85.m4a in Resources */,
@@ -1935,25 +2232,35 @@
 				6DC3FE982119628100168950 /* bananas.png in Resources */,
 				634659231E90C6A000C162CF /* Trumpet.novib.mf.76.m4a in Resources */,
 				634658931E90C68E00C162CF /* Piano.mf.24.m4a in Resources */,
+				6DBF1F32213EEB850052AD57 /* Pitch - A Bit High, check fingering_512Kbps_288p.mp4 in Resources */,
 				634658D21E90C68E00C162CF /* Piano.mf.87.m4a in Resources */,
+				6DBF1F42213EEB850052AD57 /* Pitch - Very High - relax embouchure_512Kbps_288p.mp4 in Resources */,
 				634658A61E90C68E00C162CF /* Piano.mf.43.m4a in Resources */,
-				E9CFE63B2027975B00C69C43 /* ABitLow.mp4 in Resources */,
 				6346591B1E90C6A000C162CF /* Trumpet.novib.mf.68.m4a in Resources */,
 				634658A81E90C68E00C162CF /* Piano.mf.45.m4a in Resources */,
+				6DBF1F4C213EEB850052AD57 /* Ptich - Very Low, Curve lips in_512Kbps_288p.mp4 in Resources */,
 				634658A91E90C68E00C162CF /* Piano.mf.46.m4a in Resources */,
 				634658D41E90C68E00C162CF /* Piano.mf.89.m4a in Resources */,
+				6D7249122128991F00378131 /* Stars-0 64x16.png in Resources */,
 				634658AE1E90C68E00C162CF /* Piano.mf.51.m4a in Resources */,
 				6DC3FE942119628100168950 /* bananas_incomplete.png in Resources */,
+				6D63167E212D0610004F2DE4 /* SingleStar - 64.png in Resources */,
 				634658971E90C68E00C162CF /* Piano.mf.28.m4a in Resources */,
 				634658CB1E90C68E00C162CF /* Piano.mf.80.m4a in Resources */,
+				6D7249162128991F00378131 /* Blank 64x16.png in Resources */,
 				634658AD1E90C68E00C162CF /* Piano.mf.50.m4a in Resources */,
 				6324D2DD1CE71B1A001934A5 /* Assets.xcassets in Resources */,
 				634658DF1E90C68E00C162CF /* Piano.mf.100.m4a in Resources */,
 				634659171E90C6A000C162CF /* Trumpet.novib.mf.64.m4a in Resources */,
+				6D631682212D0670004F2DE4 /* blank 64x64.png in Resources */,
 				634659281E90C6A000C162CF /* Trumpet.novib.mf.81.m4a in Resources */,
 				634658A41E90C68E00C162CF /* Piano.mf.41.m4a in Resources */,
+				6DBF1F5C213EEB850052AD57 /* No Sound - Check Mic Settings.mp4 in Resources */,
+				6DBF1F4E213EEB850052AD57 /* Pitch - A Bit High, Slow Airspeed_512Kbps_288p.mp4 in Resources */,
 				634659131E90C6A000C162CF /* Trumpet.novib.mf.60.m4a in Resources */,
+				6DBF1F3C213EEB850052AD57 /* Sound during rest - _512Kbps_288p.mp4 in Resources */,
 				634659271E90C6A000C162CF /* Trumpet.novib.mf.80.m4a in Resources */,
+				6DBF1F44213EEB850052AD57 /* Duration - Too short_512Kbps_288p.mp4 in Resources */,
 				634659151E90C6A000C162CF /* Trumpet.novib.mf.62.m4a in Resources */,
 				634658D01E90C68E00C162CF /* Piano.mf.85.m4a in Resources */,
 				6346590E1E90C6A000C162CF /* Trumpet.novib.mf.55.m4a in Resources */,
@@ -1961,11 +2268,13 @@
 				634659101E90C6A000C162CF /* Trumpet.novib.mf.57.m4a in Resources */,
 				633CA1D31CF73D0C00061F3D /* GreenSmile.png in Resources */,
 				6346590B1E90C6A000C162CF /* Trumpet.novib.mf.52.m4a in Resources */,
+				6D7249042128771600378131 /* Stars-3 256x64.png in Resources */,
 				634658921E90C68E00C162CF /* Piano.mf.23.m4a in Resources */,
 				634658A11E90C68E00C162CF /* Piano.mf.38.m4a in Resources */,
 				634658951E90C68E00C162CF /* Piano.mf.26.m4a in Resources */,
 				634658BD1E90C68E00C162CF /* Piano.mf.66.m4a in Resources */,
 				6346592A1E90C6A000C162CF /* Trumpet.novib.mf.83.m4a in Resources */,
+				6DF608D22131C666007D69A5 /* star_icon 16x16.jpg in Resources */,
 				634658B71E90C68E00C162CF /* Piano.mf.60.m4a in Resources */,
 				634659221E90C6A000C162CF /* Trumpet.novib.mf.75.m4a in Resources */,
 				634658C31E90C68E00C162CF /* Piano.mf.72.m4a in Resources */,
@@ -1977,37 +2286,50 @@
 				634659251E90C6A000C162CF /* Trumpet.novib.mf.78.m4a in Resources */,
 				634658C61E90C68E00C162CF /* Piano.mf.75.m4a in Resources */,
 				E9CFE62620263C0700C69C43 /* Monkey_Jumping Temples_monkey 04@2x.png in Resources */,
+				6DBF1F34213EEB850052AD57 /* Pitch - A bit low - firm up embouchure.mp4 in Resources */,
 				634658D31E90C68E00C162CF /* Piano.mf.88.m4a in Resources */,
 				634658A01E90C68E00C162CF /* Piano.mf.37.m4a in Resources */,
+				6DBF1F40213EEB850052AD57 /* Attack - Early - wait a bit before entering_512Kbps_288p.mp4 in Resources */,
+				6D8E10462130DD6F00B1B3B8 /* Current Arrow 40x16.png in Resources */,
 				634658D71E90C68E00C162CF /* Piano.mf.92.m4a in Resources */,
 				634658BE1E90C68E00C162CF /* Piano.mf.67.m4a in Resources */,
 				6346589E1E90C68E00C162CF /* Piano.mf.35.m4a in Resources */,
-				E9CFE63A2027975B00C69C43 /* ABitHigh.mp4 in Resources */,
 				6346591C1E90C6A000C162CF /* Trumpet.novib.mf.69.m4a in Resources */,
 				634658C01E90C68E00C162CF /* Piano.mf.69.m4a in Resources */,
 				6355ECF81CF68EB70037945F /* marmstk1.wav in Resources */,
 				633C2ADE1CE813E7001C5C16 /* XML Tunes in Resources */,
 				6346590F1E90C6A000C162CF /* Trumpet.novib.mf.56.m4a in Resources */,
 				634658DB1E90C68E00C162CF /* Piano.mf.96.m4a in Resources */,
+				6DBF1F36213EEB850052AD57 /* Pitch - Upper Partial, Slow air.mp4 in Resources */,
+				6DB853482127A87600F999C3 /* Monkey_Skiing_01@2x.png in Resources */,
 				634658B41E90C68E00C162CF /* Piano.mf.57.m4a in Resources */,
 				6DC3FE922119628100168950 /* bananas@2x.png in Resources */,
+				6DBF1F2C213EEB850052AD57 /* Duration - Too Long.mp4 in Resources */,
+				6D8E104D2131031D00B1B3B8 /* Current Arrow 36x16.png in Resources */,
 				634659181E90C6A000C162CF /* Trumpet.novib.mf.65.m4a in Resources */,
 				634658C21E90C68E00C162CF /* Piano.mf.71.m4a in Resources */,
+				6D7248FE2128771600378131 /* Stars-2 256x64.png in Resources */,
 				634658C41E90C68E00C162CF /* Piano.mf.73.m4a in Resources */,
+				6DFA9BF8212A7CC1002BD4AB /* Stars-1 64x16.png in Resources */,
 				6346589A1E90C68E00C162CF /* Piano.mf.31.m4a in Resources */,
 				634658E21E90C68E00C162CF /* Piano.mf.103.m4a in Resources */,
 				634658E51E90C68E00C162CF /* Piano.mf.106.m4a in Resources */,
 				6DC3FE802118DD1D00168950 /* Balloon_4.png in Resources */,
+				6DBF1F54213EEB850052AD57 /* Attack - Late - Enter earlier.mp4 in Resources */,
 				634658CF1E90C68E00C162CF /* Piano.mf.84.m4a in Resources */,
+				6DBF1F5A213EEB850052AD57 /* Pitch - Low Partial, Firm Up Embouchure_512Kbps_288p.mp4 in Resources */,
 				634658C51E90C68E00C162CF /* Piano.mf.74.m4a in Resources */,
 				634658BF1E90C68E00C162CF /* Piano.mf.68.m4a in Resources */,
 				634658961E90C68E00C162CF /* Piano.mf.27.m4a in Resources */,
+				6D631684212D0670004F2DE4 /* blank 256x64.png in Resources */,
 				634658DD1E90C68E00C162CF /* Piano.mf.98.m4a in Resources */,
 				6DCDFF162118AF9F000E8E38 /* Monkey_Ballon_Explode.png in Resources */,
 				6324D2D81CE71B19001934A5 /* Main.storyboard in Resources */,
 				6DC3FE812118DD1D00168950 /* Balloon_3.png in Resources */,
 				634658BC1E90C68E00C162CF /* Piano.mf.65.m4a in Resources */,
+				6DBF1F4A213EEB850052AD57 /* No Sound - wet lips_512Kbps_288p.mp4 in Resources */,
 				634658C91E90C68E00C162CF /* Piano.mf.78.m4a in Resources */,
+				6DBF1F3A213EEB850052AD57 /* Pitch - A Bit Low, Speed Up Air_512Kbps_288p.mp4 in Resources */,
 				634658E61E90C68E00C162CF /* Piano.mf.107.m4a in Resources */,
 				6346589F1E90C68E00C162CF /* Piano.mf.36.m4a in Resources */,
 				6346591F1E90C6A000C162CF /* Trumpet.novib.mf.72.m4a in Resources */,
@@ -2040,6 +2362,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D63167B212D0610004F2DE4 /* SingleStar - 32.png in Resources */,
+				6DBF1F0D213ED8E30052AD57 /* Stars-4 Even 256x64.png in Resources */,
 				6336B1D41EA32B0200A78D02 /* Piano.mf.56.m4a in Resources */,
 				6336B1CB1EA32B0200A78D02 /* Piano.mf.47.m4a in Resources */,
 				6336B1BA1EA32B0200A78D02 /* Piano.mf.30.m4a in Resources */,
@@ -2053,30 +2377,37 @@
 				6336B1D21EA32B0200A78D02 /* Piano.mf.54.m4a in Resources */,
 				6336B1BD1EA32B0200A78D02 /* Piano.mf.33.m4a in Resources */,
 				6336B1DA1EA32B0200A78D02 /* Piano.mf.62.m4a in Resources */,
+				6DBF1F4D213EEB850052AD57 /* Pitch - A Bit High, Slow Airspeed_512Kbps_288p.mp4 in Resources */,
 				6336B1CC1EA32B0200A78D02 /* Piano.mf.48.m4a in Resources */,
 				6336B1B91EA32B0200A78D02 /* Piano.mf.29.m4a in Resources */,
-				E9CFE63F202798C900C69C43 /* UpperPartial.mp4 in Resources */,
 				6DC3FE882118E08900168950 /* Balloon_4.png in Resources */,
 				6336B1C91EA32B0200A78D02 /* Piano.mf.45.m4a in Resources */,
 				6336B2001EA32B0200A78D02 /* Piano.mf.100.m4a in Resources */,
 				6336B1BF1EA32B0200A78D02 /* Piano.mf.35.m4a in Resources */,
 				6336B1F21EA32B0200A78D02 /* Piano.mf.86.m4a in Resources */,
 				6336B1E91EA32B0200A78D02 /* Piano.mf.77.m4a in Resources */,
+				6D8E104C2131031D00B1B3B8 /* Current Arrow 36x16.png in Resources */,
 				E9CFE62820263C0F00C69C43 /* Monkey_Jumping Temples_monkey 02@2x.png in Resources */,
 				6DC3FE862118E08900168950 /* Balloon_2.png in Resources */,
 				6336B1941EA32AF000A78D02 /* Trumpet.novib.mf.56.m4a in Resources */,
 				6336B1FD1EA32B0200A78D02 /* Piano.mf.97.m4a in Resources */,
+				6DBF1F5D213EEB850052AD57 /* Pitch - Very Low - Speed up air.mp4 in Resources */,
 				6336B1BC1EA32B0200A78D02 /* Piano.mf.32.m4a in Resources */,
 				6336B2011EA32B0200A78D02 /* Piano.mf.101.m4a in Resources */,
 				6336B1901EA32AF000A78D02 /* Trumpet.novib.mf.52.m4a in Resources */,
+				6D631683212D0670004F2DE4 /* blank 256x64.png in Resources */,
 				6336B1F11EA32B0200A78D02 /* Piano.mf.85.m4a in Resources */,
 				6336B1D31EA32B0200A78D02 /* Piano.mf.55.m4a in Resources */,
 				6336B1C61EA32B0200A78D02 /* Piano.mf.42.m4a in Resources */,
+				6D7249182128A8B100378131 /* Monkey_Ballon-Face02@2x.png in Resources */,
+				6DBF1F4F213EEB850052AD57 /* No Sound - firm up embouchure_512Kbps_288p.mp4 in Resources */,
+				6D7249112128991F00378131 /* Stars-0 64x16.png in Resources */,
 				633D1B741CF9588700B5C4FD /* FeedbackImage.png in Resources */,
 				6336B1B31EA32B0200A78D02 /* Piano.mf.23.m4a in Resources */,
 				6336B19B1EA32AF000A78D02 /* Trumpet.novib.mf.63.m4a in Resources */,
 				6336B1C81EA32B0200A78D02 /* Piano.mf.44.m4a in Resources */,
 				6336B1E81EA32B0200A78D02 /* Piano.mf.76.m4a in Resources */,
+				6DBF1F59213EEB850052AD57 /* Pitch - Low Partial, Firm Up Embouchure_512Kbps_288p.mp4 in Resources */,
 				6DC3FE852118E08900168950 /* Balloon_1.png in Resources */,
 				6336B1B11EA32AF000A78D02 /* Trumpet.novib.mf.85.m4a in Resources */,
 				6336B1921EA32AF000A78D02 /* Trumpet.novib.mf.54.m4a in Resources */,
@@ -2084,15 +2415,22 @@
 				6336B19F1EA32AF000A78D02 /* Trumpet.novib.mf.67.m4a in Resources */,
 				6336B2071EA32B0200A78D02 /* Piano.mf.107.m4a in Resources */,
 				6336B19D1EA32AF000A78D02 /* Trumpet.novib.mf.65.m4a in Resources */,
+				6DBF1F2D213EEB850052AD57 /* No Sound - relax embouchure_512Kbps_288p.mp4 in Resources */,
+				6D7248FD2128771600378131 /* Stars-2 256x64.png in Resources */,
 				6336B1E41EA32B0200A78D02 /* Piano.mf.72.m4a in Resources */,
 				6336B1951EA32AF000A78D02 /* Trumpet.novib.mf.57.m4a in Resources */,
 				6336B1A91EA32AF000A78D02 /* Trumpet.novib.mf.77.m4a in Resources */,
+				6DFA9BFB212A7D0B002BD4AB /* Stars-3 64x16.png in Resources */,
 				E9CFE62B20263C0F00C69C43 /* Monkey_Jumping Temples_monkey 06@2x.png in Resources */,
+				6D631681212D0670004F2DE4 /* blank 64x64.png in Resources */,
 				6336B1A41EA32AF000A78D02 /* Trumpet.novib.mf.72.m4a in Resources */,
+				6DBF1F5B213EEB850052AD57 /* No Sound - Check Mic Settings.mp4 in Resources */,
+				6DB853492127A87600F999C3 /* Monkey_Skiing_06@2x.png in Resources */,
 				6336B1BE1EA32B0200A78D02 /* Piano.mf.34.m4a in Resources */,
 				6336B1971EA32AF000A78D02 /* Trumpet.novib.mf.59.m4a in Resources */,
 				6336B1E01EA32B0200A78D02 /* Piano.mf.68.m4a in Resources */,
 				6336B1CA1EA32B0200A78D02 /* Piano.mf.46.m4a in Resources */,
+				6DF608D12131C666007D69A5 /* star_icon 16x16.jpg in Resources */,
 				6336B1EF1EA32B0200A78D02 /* Piano.mf.83.m4a in Resources */,
 				6DC3FE932119628100168950 /* bananas_incomplete.png in Resources */,
 				6336B1EE1EA32B0200A78D02 /* Piano.mf.82.m4a in Resources */,
@@ -2100,26 +2438,40 @@
 				6336B1C21EA32B0200A78D02 /* Piano.mf.38.m4a in Resources */,
 				6336B1D81EA32B0200A78D02 /* Piano.mf.60.m4a in Resources */,
 				6336B1911EA32AF000A78D02 /* Trumpet.novib.mf.53.m4a in Resources */,
+				6DB8533B212498C700F999C3 /* XMLFileMapping.json in Resources */,
+				6DFA9BFA212A7D0B002BD4AB /* Stars-2 64x16.png in Resources */,
 				6336B1BB1EA32B0200A78D02 /* Piano.mf.31.m4a in Resources */,
 				6324D30D1CE72F8D001934A5 /* LaunchScreen.storyboard in Resources */,
+				6DBF1F55213EEB850052AD57 /* No Sound - Are You Playing_512Kbps_288p.mp4 in Resources */,
 				6336B1A11EA32AF000A78D02 /* Trumpet.novib.mf.69.m4a in Resources */,
 				1C87C0A32016EA940038784E /* TrumpetLessons.json in Resources */,
 				6336B1D51EA32B0200A78D02 /* Piano.mf.57.m4a in Resources */,
 				6336B1A01EA32AF000A78D02 /* Trumpet.novib.mf.68.m4a in Resources */,
-				E9CFE63E202798C900C69C43 /* ABitLow.mp4 in Resources */,
+				6D8E10472130E55100B1B3B8 /* Current Arrow 40x16.png in Resources */,
 				6336B1AC1EA32AF000A78D02 /* Trumpet.novib.mf.80.m4a in Resources */,
+				6DBF1F49213EEB850052AD57 /* No Sound - wet lips_512Kbps_288p.mp4 in Resources */,
 				6336B1DF1EA32B0200A78D02 /* Piano.mf.67.m4a in Resources */,
 				6336B1E61EA32B0200A78D02 /* Piano.mf.74.m4a in Resources */,
 				6336B1B51EA32B0200A78D02 /* Piano.mf.25.m4a in Resources */,
+				6DBF1F2B213EEB850052AD57 /* Duration - Too Long.mp4 in Resources */,
 				6336B1F91EA32B0200A78D02 /* Piano.mf.93.m4a in Resources */,
+				6DBF1F29213EEB850052AD57 /* Duration - A bit short.mp4 in Resources */,
+				6DBF1F53213EEB850052AD57 /* Attack - Late - Enter earlier.mp4 in Resources */,
+				6D7249012128771600378131 /* Stars-1 256x64.png in Resources */,
 				6336B2031EA32B0200A78D02 /* Piano.mf.103.m4a in Resources */,
+				6DBF1F39213EEB850052AD57 /* Pitch - A Bit Low, Speed Up Air_512Kbps_288p.mp4 in Resources */,
 				6336B1DC1EA32B0200A78D02 /* Piano.mf.64.m4a in Resources */,
 				6336B1E21EA32B0200A78D02 /* Piano.mf.70.m4a in Resources */,
 				6336B19C1EA32AF000A78D02 /* Trumpet.novib.mf.64.m4a in Resources */,
 				6DC3FE912119628100168950 /* bananas@2x.png in Resources */,
+				6D8E104F213103DA00B1B3B8 /* Current Arrow 30x16.png in Resources */,
+				6DBF1F43213EEB850052AD57 /* Duration - Too short_512Kbps_288p.mp4 in Resources */,
 				6336B1F41EA32B0200A78D02 /* Piano.mf.88.m4a in Resources */,
+				6DBF1F51213EEB850052AD57 /* Pitch - A bit low - check fingering.mp4 in Resources */,
+				6DBF1F2F213EEB850052AD57 /* Pitch - Upper Partial - Relax embouchure_512Kbps_288p.mp4 in Resources */,
 				6336B1A31EA32AF000A78D02 /* Trumpet.novib.mf.71.m4a in Resources */,
 				6336B19E1EA32AF000A78D02 /* Trumpet.novib.mf.66.m4a in Resources */,
+				6DB853452127A87600F999C3 /* Monkey_Skiing_02@2x.png in Resources */,
 				6336B1CE1EA32B0200A78D02 /* Piano.mf.50.m4a in Resources */,
 				6336B1B71EA32B0200A78D02 /* Piano.mf.27.m4a in Resources */,
 				6336B1B01EA32AF000A78D02 /* Trumpet.novib.mf.84.m4a in Resources */,
@@ -2127,13 +2479,18 @@
 				6336B1D61EA32B0200A78D02 /* Piano.mf.58.m4a in Resources */,
 				6324D30E1CE72F8D001934A5 /* Assets.xcassets in Resources */,
 				6336B2021EA32B0200A78D02 /* Piano.mf.102.m4a in Resources */,
+				6DBF1F60213EEF0F0052AD57 /* Duration - Very Long_512Kbps_288p.mp4 in Resources */,
 				633CA1D91CF73D1100061F3D /* GreenSmile.png in Resources */,
 				6336B1D01EA32B0200A78D02 /* Piano.mf.52.m4a in Resources */,
 				6336B1CF1EA32B0200A78D02 /* Piano.mf.51.m4a in Resources */,
 				6336B1C01EA32B0200A78D02 /* Piano.mf.36.m4a in Resources */,
 				6336B1F01EA32B0200A78D02 /* Piano.mf.84.m4a in Resources */,
+				6DC834C72135136400AAA613 /* OneStarNew 64x64.png in Resources */,
+				6D8E10492130E77200B1B3B8 /* Current Arrow 22x16.png in Resources */,
+				6D72491B2128FD6100378131 /* MonkeyPlaneWithProp large.png in Resources */,
 				6336B1F31EA32B0200A78D02 /* Piano.mf.87.m4a in Resources */,
 				6336B1C51EA32B0200A78D02 /* Piano.mf.41.m4a in Resources */,
+				6DBF1F45213EEB850052AD57 /* Pitch - Very High - Double Check fingering.mp4 in Resources */,
 				6336B1DD1EA32B0200A78D02 /* Piano.mf.65.m4a in Resources */,
 				6336B1FB1EA32B0200A78D02 /* Piano.mf.95.m4a in Resources */,
 				6336B1C31EA32B0200A78D02 /* Piano.mf.39.m4a in Resources */,
@@ -2142,46 +2499,67 @@
 				6355ECF71CF68EB70037945F /* marmstk1.wav in Resources */,
 				6336B1FA1EA32B0200A78D02 /* Piano.mf.94.m4a in Resources */,
 				6336B1CD1EA32B0200A78D02 /* Piano.mf.49.m4a in Resources */,
+				6DB853432127A87600F999C3 /* Monkey_Skiing_03@2x.png in Resources */,
 				E9CFE62920263C0F00C69C43 /* Monkey_Jumping Temples_monkey 03@2x.png in Resources */,
+				6D63167D212D0610004F2DE4 /* SingleStar - 64.png in Resources */,
 				6336B1E31EA32B0200A78D02 /* Piano.mf.71.m4a in Resources */,
 				6336B1EC1EA32B0200A78D02 /* Piano.mf.80.m4a in Resources */,
 				6DC3FE952119628100168950 /* bananas_incomplete@2x.png in Resources */,
 				E9CFE62A20263C0F00C69C43 /* Monkey_Jumping Temples_monkey 04@2x.png in Resources */,
+				6DFA9BF9212A7D0B002BD4AB /* Stars-1 64x16.png in Resources */,
 				6336B1E71EA32B0200A78D02 /* Piano.mf.75.m4a in Resources */,
+				6DBF1F3B213EEB850052AD57 /* Sound during rest - _512Kbps_288p.mp4 in Resources */,
 				6336B1981EA32AF000A78D02 /* Trumpet.novib.mf.60.m4a in Resources */,
 				633C2ADD1CE813E7001C5C16 /* XML Tunes in Resources */,
 				6336B1A51EA32AF000A78D02 /* Trumpet.novib.mf.73.m4a in Resources */,
+				6DBF1F4B213EEB850052AD57 /* Ptich - Very Low, Curve lips in_512Kbps_288p.mp4 in Resources */,
 				6336B1AE1EA32AF000A78D02 /* Trumpet.novib.mf.82.m4a in Resources */,
-				E9CFE63D202798C900C69C43 /* ABitHigh.mp4 in Resources */,
+				6DB853472127A87600F999C3 /* Monkey_Skiing_01@2x.png in Resources */,
+				6D7249132128991F00378131 /* Current Arrow 64x16.png in Resources */,
 				6336B1D11EA32B0200A78D02 /* Piano.mf.53.m4a in Resources */,
 				6336B1DB1EA32B0200A78D02 /* Piano.mf.63.m4a in Resources */,
 				6336B1AF1EA32AF000A78D02 /* Trumpet.novib.mf.83.m4a in Resources */,
+				6D72490C2128817100378131 /* Stars-4 64x16.png in Resources */,
 				6336B1C71EA32B0200A78D02 /* Piano.mf.43.m4a in Resources */,
 				6336B1A71EA32AF000A78D02 /* Trumpet.novib.mf.75.m4a in Resources */,
+				6DBF1F3F213EEB850052AD57 /* Attack - Early - wait a bit before entering_512Kbps_288p.mp4 in Resources */,
 				6336B1ED1EA32B0200A78D02 /* Piano.mf.81.m4a in Resources */,
 				6336B1D71EA32B0200A78D02 /* Piano.mf.59.m4a in Resources */,
 				6DCDFF212118AFAB000E8E38 /* Monkey_Ballon_Explode.png in Resources */,
 				6336B1991EA32AF000A78D02 /* Trumpet.novib.mf.61.m4a in Resources */,
+				6D7249032128771600378131 /* Stars-3 256x64.png in Resources */,
 				6336B1B41EA32B0200A78D02 /* Piano.mf.24.m4a in Resources */,
 				6336B1FE1EA32B0200A78D02 /* Piano.mf.98.m4a in Resources */,
 				6336B1EB1EA32B0200A78D02 /* Piano.mf.79.m4a in Resources */,
+				6DBF1F41213EEB850052AD57 /* Pitch - Very High - relax embouchure_512Kbps_288p.mp4 in Resources */,
+				6DBF1F3D213EEB850052AD57 /* Pitch - A Bit High, Relax embouchure_512Kbps_288p.mp4 in Resources */,
 				6336B1AA1EA32AF000A78D02 /* Trumpet.novib.mf.78.m4a in Resources */,
 				6336B1F51EA32B0200A78D02 /* Piano.mf.89.m4a in Resources */,
 				6324D30F1CE72F8D001934A5 /* Main.storyboard in Resources */,
+				6D7249092128807600378131 /* Stars-4 128x32.png in Resources */,
+				6DBF1F47213EEB850052AD57 /* Ptich - Very Low, Reset with B embouchure, use a mirror_512Kbps_288p.mp4 in Resources */,
+				6DF608D32131C666007D69A5 /* star_icon 64x64.jpg in Resources */,
 				6336B1A21EA32AF000A78D02 /* Trumpet.novib.mf.70.m4a in Resources */,
+				6DBF1F31213EEB850052AD57 /* Pitch - A Bit High, check fingering_512Kbps_288p.mp4 in Resources */,
 				6336B1FC1EA32B0200A78D02 /* Piano.mf.96.m4a in Resources */,
 				6336B1A61EA32AF000A78D02 /* Trumpet.novib.mf.74.m4a in Resources */,
 				6336B1DE1EA32B0200A78D02 /* Piano.mf.66.m4a in Resources */,
 				6336B1D91EA32B0200A78D02 /* Piano.mf.61.m4a in Resources */,
 				6DC3FE872118E08900168950 /* Balloon_3.png in Resources */,
+				6D7249152128991F00378131 /* Blank 64x16.png in Resources */,
 				6336B1AB1EA32AF000A78D02 /* Trumpet.novib.mf.79.m4a in Resources */,
 				6336B1A81EA32AF000A78D02 /* Trumpet.novib.mf.76.m4a in Resources */,
+				6D7248FF2128771600378131 /* Stars-4 256x64.png in Resources */,
+				6DBF1F57213EEB850052AD57 /* Pitch - Low Partial, Change Tongue Arch_512Kbps_288p.mp4 in Resources */,
 				6336B1FF1EA32B0200A78D02 /* Piano.mf.99.m4a in Resources */,
 				6336B2081EA32B0200A78D02 /* Piano.mf.108.m4a in Resources */,
 				6DC3FE972119628100168950 /* bananas.png in Resources */,
+				6D7249062128775000378131 /* Stars-0 256x64.png in Resources */,
+				6DBF1F35213EEB850052AD57 /* Pitch - Upper Partial, Slow air.mp4 in Resources */,
 				6336B1EA1EA32B0200A78D02 /* Piano.mf.78.m4a in Resources */,
 				6336B1B61EA32B0200A78D02 /* Piano.mf.26.m4a in Resources */,
 				6336B2041EA32B0200A78D02 /* Piano.mf.104.m4a in Resources */,
+				6DBF1F33213EEB850052AD57 /* Pitch - A bit low - firm up embouchure.mp4 in Resources */,
 				6336B1F71EA32B0200A78D02 /* Piano.mf.91.m4a in Resources */,
 				6DC3FE892118E08900168950 /* Balloon_5.png in Resources */,
 				6336B19A1EA32AF000A78D02 /* Trumpet.novib.mf.62.m4a in Resources */,
@@ -2262,6 +2640,7 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/AudioKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
 			);
 			name = "Copy Carthage Frameworks";
 			outputPaths = (
@@ -2287,6 +2666,7 @@
 				E9AD0CE41FE09B77006472CE /* NotePerformanceAnalyzer.swift in Sources */,
 				E9815A3E2009A0930046445B /* PerfAnalysisSettingsPopup.swift in Sources */,
 				6324D3631CE73C47001934A5 /* First Stage_key.m in Sources */,
+				6D34A17E2139F9E10071BAB6 /* AppDefs.swift in Sources */,
 				638129591CF05C7900A40C8E /* Balloon.swift in Sources */,
 				1C87C0AD2016F3F70038784E /* LessonOverviewViewController.swift in Sources */,
 				6324D2DB1CE71B1A001934A5 /* FirstStage.xcdatamodeld in Sources */,
@@ -2298,12 +2678,15 @@
 				639A2E461CF5AB09004F7B1A /* DotView.swift in Sources */,
 				6379EE921CE9C8ED00188A70 /* AudioKitManager.swift in Sources */,
 				6D6C8CEE2123422B00874F86 /* PerformanceScoreObjectScheduler.swift in Sources */,
+				6D631687212DF4D5004F2DE4 /* LevelSeriesTableViewHeaderFooterView.swift in Sources */,
 				6324D3611CE73C47001934A5 /* SSSystemView.m in Sources */,
 				E9AD0CBF1FD9BCDF006472CE /* NoteIDs.swift in Sources */,
 				635A60A61EC6B8050099154A /* MusicXMLModifier.swift in Sources */,
 				E9AD0CCF1FD9BFE5006472CE /* NotePitchAnalysisCriteria.swift in Sources */,
+				6D01C40121238C75004B8440 /* LessonScheduler.swift in Sources */,
 				63B427591E5016AB000E35AA /* Intonation.swift in Sources */,
 				6D6093B52114F66D00874A40 /* PerformanceScoreObject.swift in Sources */,
+				6DC834B62134B94B00AAA613 /* IconImageMgr.swift in Sources */,
 				63EB90181CF1C4EC00F09B05 /* AVAudioSessionManager.swift in Sources */,
 				BD7C17501F861755002AF462 /* SettingsTableViewController.swift in Sources */,
 				E9AD0CBE1FD9BCDF006472CE /* NoteFreqRangeTable.swift in Sources */,
@@ -2327,10 +2710,14 @@
 				6324D3731CE73ED9001934A5 /* Enums.swift in Sources */,
 				63D5E88A1EA37BF7007AE8D4 /* MusicFont.swift in Sources */,
 				6324D2D31CE71B19001934A5 /* AppDelegate.swift in Sources */,
+				6DB8533E2126438E00F999C3 /* LaunchingNextView.swift in Sources */,
 				E9AD0CDE1FDF4180006472CE /* PerformanceTrackingMgr.swift in Sources */,
+				6D5A266F2138C2BD00D2B637 /* MiscSupport.swift in Sources */,
+				6D01C40421238CAC004B8440 /* TuneFileMapper.swift in Sources */,
 				633C2AE21CE86915001C5C16 /* Constants.swift in Sources */,
 				E940183F1FA998CF00FC6271 /* FSAnalysisOverlayView.m in Sources */,
 				6D6093B22114F66D00874A40 /* ScoreData.swift in Sources */,
+				6DDE849F2135A61B00A81875 /* LongtonePersonalBestSupport.swift in Sources */,
 				63D5E8871EA37BEA007AE8D4 /* NoteOffset.swift in Sources */,
 				63D5E88B1EA37C1B007AE8D4 /* LongToneViewController.swift in Sources */,
 				1C87C0A92016F0040038784E /* LevelOverviewViewController.swift in Sources */,
@@ -2367,6 +2754,7 @@
 				6324D3621CE73C47001934A5 /* First Stage_key.m in Sources */,
 				E9815A3D2009A0930046445B /* PerfAnalysisSettingsPopup.swift in Sources */,
 				E9815A3A2005127B0046445B /* VideoHelpResources.swift in Sources */,
+				6D34A17D2139F9E10071BAB6 /* AppDefs.swift in Sources */,
 				638129581CF05C7900A40C8E /* Balloon.swift in Sources */,
 				E9AD0CC71FD9BEF6006472CE /* NoteFreqRangeTable.swift in Sources */,
 				6D6093B92114F6CE00874A40 /* ScoreData.swift in Sources */,
@@ -2378,12 +2766,15 @@
 				6379EE911CE9C8ED00188A70 /* AudioKitManager.swift in Sources */,
 				63B4275A1E505573000E35AA /* Intonation.swift in Sources */,
 				6D6C8CED2123422B00874F86 /* PerformanceScoreObjectScheduler.swift in Sources */,
+				6D631686212DF4D5004F2DE4 /* LevelSeriesTableViewHeaderFooterView.swift in Sources */,
 				635A60A71EC6B8060099154A /* MusicXMLModifier.swift in Sources */,
 				6324D3601CE73C47001934A5 /* SSSystemView.m in Sources */,
 				63EB90171CF1C4EB00F09B05 /* AVAudioSessionManager.swift in Sources */,
 				E9AD0CCE1FD9BFE5006472CE /* NotePitchAnalysisCriteria.swift in Sources */,
+				6D01C40021238C75004B8440 /* LessonScheduler.swift in Sources */,
 				BD7C17511F861759002AF462 /* SettingsTableViewController.swift in Sources */,
 				63D5E8851EA37BDA007AE8D4 /* Note.swift in Sources */,
+				6DC834B52134B94B00AAA613 /* IconImageMgr.swift in Sources */,
 				E9AD0CC81FD9BEFA006472CE /* NoteIDs.swift in Sources */,
 				63D5E8841EA37BCD007AE8D4 /* NoteService.swift in Sources */,
 				E9AD0CE01FDF4457006472CE /* PerformanceAndTrackingDefs.swift in Sources */,
@@ -2407,10 +2798,14 @@
 				6324D3721CE73ED9001934A5 /* Enums.swift in Sources */,
 				63D5E8891EA37BF6007AE8D4 /* MusicFont.swift in Sources */,
 				6D22AEC620D06E8200ACEC81 /* FeedbackView.swift in Sources */,
+				6DB8533D2126438E00F999C3 /* LaunchingNextView.swift in Sources */,
 				6324D30A1CE72F8D001934A5 /* AppDelegate.swift in Sources */,
+				6D5A266E2138C2BD00D2B637 /* MiscSupport.swift in Sources */,
+				6D01C40321238CAC004B8440 /* TuneFileMapper.swift in Sources */,
 				E9AD0CDD1FDF4180006472CE /* PerformanceTrackingMgr.swift in Sources */,
 				633C2AE11CE86915001C5C16 /* Constants.swift in Sources */,
 				E940183E1FA998CF00FC6271 /* FSAnalysisOverlayView.m in Sources */,
+				6DDE849E2135A61B00A81875 /* LongtonePersonalBestSupport.swift in Sources */,
 				63D5E8881EA37BEA007AE8D4 /* NoteOffset.swift in Sources */,
 				63D5E88C1EA37C1B007AE8D4 /* LongToneViewController.swift in Sources */,
 				BD8B79051F95BF75005B31CB /* PracticeViewController.swift in Sources */,

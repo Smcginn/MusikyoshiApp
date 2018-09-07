@@ -136,14 +136,16 @@ class PerformanceTrackingMgr {
     }
 
     // End current sound if signal stopped.  (Non-legato note change)
+    // soundEndTime is in SoundTime, not SongTime
     func endTrackedSoundAsSignalStopped(soundEndTime: TimeInterval,
                                         noteOffset: TimeInterval ) {
-        guard currentlyTrackingSound, let currSound = currentSound else { return }
+        guard currentlyTrackingSound,
+              let currSound = currentSound   else { return }
         
-        currSound.endTime = soundEndTime
+        currSound.setEndTimeAbs(endTimeAbs: soundEndTime)
         
         if let soundsNote = currSound.linkedNoteObject {
-            soundsNote.endTime = soundEndTime - noteOffset
+            soundsNote.setActualEndTimeAbs( endTimeAbs: soundEndTime )
         }
         
         currSound.printSoundResults()
@@ -158,10 +160,10 @@ class PerformanceTrackingMgr {
         guard currentlyTrackingSound, let currSound = currentSound else { return }
         
         splitTime = currSound.diffPitchSplitTime // end of old, start of new
-        currSound.endTime = splitTime
-        
+        currSound.setEndTimeAbs(endTimeAbs: splitTime)
+
         if let soundsNote = currSound.linkedNoteObject {
-            soundsNote.endTime = splitTime - noteOffset
+            soundsNote.setActualEndTimeAbs( endTimeAbs: splitTime )
         }
         
         // stop current sound
@@ -186,6 +188,8 @@ class PerformanceTrackingMgr {
     
     // Needed by student Note and Sound Performance data and methods
     var songStartTime : Date = Date()
+    
+    var songStarted = false
     
     // For setting start time of note, adjusting for:
     //      note startTime is relative to songStart;
@@ -229,50 +233,92 @@ class PerformanceTrackingMgr {
         currentlyTrackingSound = false
     }
     
-    // called when either a new note begins in the score, or new sound is detected
+    // called when a new sound is detected, to see if an existing note needs a sound
     func linkCurrSoundToCurrNote() {
+
+        print ("Link Sound to Note - in version 1")
+
+        guard let currPerfNote : PerformanceNote = currentPerfNote
+            else { return }
+
         guard currentlyInAScoreNote && currentlyTrackingSound else { return }
-        guard let currPerfNote : PerformanceNote = currentPerfNote else { return }
         guard let currSound : PerformanceSound = currentSound else { return }
         guard !currSound.isLinkedToNote && !currPerfNote.isLinkedToSound else { return }
         
-        let diff = abs( soundTimeToNoteTime(songStart: currSound.startTime) -
-                        currPerfNote.expectedStartTime  )
-        // if (diff <= userDefsTimingThreshold) {
+        let diff = abs( currSound.startTime_comp - currPerfNote.expectedStartTime  )
         let attackTol = PerformanceAnalysisMgr.instance.currTolerances.rhythmTolerance
+        print("   SO to NO Linking: For Note \(currPerfNote.perfNoteOrRestID), exp/act start diff = \(diff), attackTol = \(attackTol)")
         if (diff <= attackTol) {
             currPerfNote.linkToSound(soundID: currSound.soundID, sound: currSound)
             currSound.linkToNote(noteID: currPerfNote.perfNoteOrRestID, note: currPerfNote)
-            currPerfNote.actualStartTime = soundTimeToNoteTime(songStart: currSound.startTime)
-            currPerfNote.actualFrequency = currSound.averagePitchRunning
+            currPerfNote.actualStartTime_song = currSound.startTime_song
+            currPerfNote.actualFrequency      = currSound.averagePitchRunning
         }
     }
     
+  
     // called when either a new note or rest begins in the score, or new sound is detected
-    func linkCurrSoundToCurrScoreObject() {
-        guard (currentlyInAScoreNote || currentlyInAScoreRest) && currentlyTrackingSound else { return }
-        guard let currSound : PerformanceSound = currentSound else { return }
+    func linkCurrSoundToCurrScoreObject(isNewScoreObject: Bool) {
         
-         if currentlyInAScoreNote {
-            guard let currPerfNote : PerformanceNote = currentPerfNote else { return }
+        if isNewScoreObject {
+            print ("   SO to SC Linking: New Note or Rest, looking for Sound")
+        } else {
+            print ("   SO to SC Linking: New Sound, looking for Note or Rest")
+        }
+        
+        // Confirm in A Sound, we can get it, and it is not already linked
+        guard currentlyTrackingSound   else {
+            print("       - rejecting; not currently Tracking Sound");     return
+        }
+        guard let currSound : PerformanceSound = currentSound   else {
+            print("       - rejecting; cannot get currSound");       return
+        }
+        guard !(currSound.isLinkedToNote || currSound.isLinkedToRest)   else {
+            print("       - rejecting; currSound already Linked to Note or Rest");  return
+        }
+        
+        // Confirm in a Note or Rest
+        guard (currentlyInAScoreNote || currentlyInAScoreRest) else {
+            print("       - rejecting; not in a current Note or Rest");  return
+        }
 
-            let diff = abs( soundTimeToNoteTime(songStart: currSound.startTime) -
-                currPerfNote.expectedStartTime  )
-            // if (diff <= userDefsTimingThreshold) {
+        if currentlyInAScoreNote {
+            guard let currPerfNote : PerformanceNote = currentPerfNote else {
+                print("       - rejecting; cannot get current Note");   return
+            }
+            guard !currPerfNote.isLinkedToSound   else {
+                print("       - rejecting; currPerfNote already Linked to Sound");  return
+            }
+            
+            let diff = abs( currSound.startTime_comp - currPerfNote.expectedStartTime  )
             let attackTol = PerformanceAnalysisMgr.instance.currTolerances.rhythmTolerance
+            print("   SO to SC Linking: For Sound \(currSound.soundID), StartTime_song =  \(currSound.startTime_comp)")
+            print("   SO to SC Linking: For Note  \(currPerfNote.perfNoteOrRestID), exp/act start diff = \(diff), attackTol = \(attackTol)")
+
             if (diff <= attackTol) {
+                print("   SO to SC Linking: -> Note LINKED !\n.")
                 currPerfNote.linkToSound(soundID: currSound.soundID, sound: currSound)
                 currSound.linkToNote(noteID: currPerfNote.perfNoteOrRestID, note: currPerfNote)
-                currPerfNote.actualStartTime = soundTimeToNoteTime(songStart: currSound.startTime)
+                currPerfNote.actualStartTime_song = currSound.startTime_song
                 currPerfNote.actualFrequency = currSound.averagePitchRunning
+            } else {
+                print("   SO to SC Linking:   -> Rejecting, bc (diff <= attackTol)")
             }
-        } else if currentlyInAScoreRest {
-            // NOTE: RESTCHANGE  need to deal with reclaiming sound claimed by
-            //                   Rest if should be Note
-            guard let currPerfRest : PerformanceRest = currentPerfRest else { return }
-
+        }
+        
+        else if currentlyInAScoreRest {
+            guard let currPerfRest: PerformanceRest = currentPerfRest else {
+                print("       - rejecting; cannot get current Rest");   return
+            }
+            guard !currPerfRest.isLinkedToSound   else {
+                print("       - rejecting; currPerfRest already Linked to Sound");  return
+            }
+            print("   SO to SC Linking: rest's expectedEndTime: \(currPerfRest.expectedEndTimeMinusTolerance)")
+            print("   SO to SC Linking: rest's  deactivateTime_comp: \(currPerfRest._deactivateTime_comp)")
+            print("   SO to SC Linking: sound's cpmensated start time: \(currSound.startTime_comp)")
+            
             currPerfRest.linkToSound(soundID: currSound.soundID, sound: currSound)
-            currSound.linkToRest(restID: currPerfRest.perfNoteOrRestID, rest: currPerfRest)
+            print("   SO to SC Linking: -> Rest LINKED !  (not good)\n.")
         }
 	}
     
@@ -286,10 +332,17 @@ class PerformanceTrackingMgr {
         currSound.updateCurrentNoteIfLinkedFinal()
     }
     
+    func repairCurrentSoundIfNeeded() {
+        if currentlyTrackingSound && currentSound != nil {
+            currentSound!.makeAdjustmentsAfterSongStart()
+        }
+    }
+    
     func analyzeOneScoreObject(perfScoreObj: PerformanceScoreObject) -> Bool {
         var retVal = true
     
         if perfScoreObj.isNote() {
+            rhythmAnalyzer.resetAverages()
             rhythmAnalyzer.analyzeScoreObject( perfScoreObject: perfScoreObj )
             pitchAnalyzer.analyzeScoreObject( perfScoreObject: perfScoreObj )
         }
@@ -313,6 +366,7 @@ class PerformanceTrackingMgr {
         
         // Visit each Note, have analyzers grade and rate performance of that
         // Note compared with expectations
+        rhythmAnalyzer.resetAverages()
         for onePerfScoreObj in perfNotesAndRests {
             onePerfScoreObj.weightedScore = 0
             if onePerfScoreObj.isNote() {
@@ -325,7 +379,7 @@ class PerformanceTrackingMgr {
              }
         }
         
-        PerformanceIssueMgr.instance.scanPerfNotesForIssues( kPerfIssueSortCriteria )
+        PerformanceIssueMgr.instance.scanPerfNotesForIssues( gPerfIssueSortCriteria )
 
         if kMKDebugOpt_PrintPerfAnalysisResults {
             print ( "\nPerformance Results:\n")
@@ -471,7 +525,25 @@ class PerformanceTrackingMgr {
         return returnNote
     }
 
-} // end of PerformanceTrackingManager
+} // end of PerformanceTrackingMgr
+
+
+// For setting start time of note, adjusting for:
+//      note startTime is relative to songStart;
+//      sound startTime is relative to analysis Start.
+func soundTimeToNoteTimeExt( soundStart: TimeInterval ) -> TimeInterval {
+    return soundStart - PerformanceTrackingMgr.instance.songStartTimeOffset
+}
+
+func noteTimeToSoundTime( noteStart: TimeInterval ) -> TimeInterval {
+    return noteStart + PerformanceTrackingMgr.instance.songStartTimeOffset
+}
+
+func currentSongTime() -> TimeInterval {
+    let elapsed = Date().timeIntervalSince(PerfTrkMgr.instance.songStartTime)
+    return elapsed
+}
+
 
 /////////////////////////////////////////////////////////////////////////
 //

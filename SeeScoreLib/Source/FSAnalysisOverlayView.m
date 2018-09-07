@@ -8,6 +8,18 @@
 
 #import "FSAnalysisOverlayView.h"
 
+static const int kNoHighlight     = -1;
+static const int kGreenHighlight  = 0;
+static const int kYellowHighlight = 1;
+static const int kRedHighlight    = 2;
+
+// static const int kSeverityNone    = 0;
+static const int kSeverityGreen   = 0;
+static const int kSeverityYellow  = 1;
+static const int kSeverityRed     = 2;
+
+
+
 // For storing the display data for a single note
 @interface NoteDisplayData : NSObject
 @property (nonatomic) float xPos;
@@ -42,9 +54,17 @@
     
     // This is a red, transparent circle, that will pulse when animated, which
     // encircles a note to show which note a video or alert is referring to.
-    CAShapeLayer*    _highlightLayer;
-
+    CAShapeLayer*    _redHighlightLayer;
+    CAShapeLayer*    _greenHighlightLayer;
+    CAShapeLayer*    _yellowHighlightLayer;
+    
     CALayer*    _monkeyLayer;
+    
+    BOOL        _kDoDrawNoteLines;  // general: turn feature on/off
+    BOOL        _doDrawNoteLine;    // for a single note
+    CGFloat     _noteLineXPos;
+    
+    int         _whichHighlight;
 }
 @end
 
@@ -57,12 +77,17 @@
     {
         _notes  = [[NSMutableArray alloc] init];
         _sounds = [[NSMutableArray alloc] init];
+        _kDoDrawNoteLines = YES;
         
-        [self createHighlightCircleLayer: self];
-        
+        [self createRedHighlightCircleLayer: self];
+        [self createGreenHighlightCircleLayer: self];
+        [self createYellowHighlightCircleLayer: self];
+
         // These should be checked in as NO for release mode.
         [FSAnalysisOverlayView  setShowSoundsAnalysis: NO];
         [FSAnalysisOverlayView  setShowNotesAnalysis: NO];
+        
+        _whichHighlight = kNoHighlight;
     }
     
     return self;
@@ -89,46 +114,107 @@
 
 #pragma mark - Red Circle Highlight Related
 
--(void) createHighlightCircleLayer:(UIView*) view
+-(void) createRedHighlightCircleLayer:(UIView*) view
 {
-    _highlightLayer = [CAShapeLayer new];
-    _highlightLayer.contentsScale = [UIScreen mainScreen].scale;
-    _highlightLayer.lineWidth = 2.0;
-    _highlightLayer.fillColor =
+    _redHighlightLayer = [CAShapeLayer new];
+    _redHighlightLayer.contentsScale = [UIScreen mainScreen].scale;
+    _redHighlightLayer.lineWidth = 2.0;
+    _redHighlightLayer.fillColor =
             [UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:0.05].CGColor;
-    _highlightLayer.strokeColor =
+    _redHighlightLayer.strokeColor =
             [UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:0.2].CGColor;
     
     const CGFloat kHLRadius =  40.0f;
     CGMutablePathRef p = CGPathCreateMutable();
     CGRect circRect = CGRectMake(-kHLRadius, -kHLRadius, kHLRadius*2, kHLRadius*2);
     CGPathAddEllipseInRect(p, nil, circRect );
-    _highlightLayer.path = p;
-    _highlightLayer.opaque = NO;
-    _highlightLayer.drawsAsynchronously = YES;
-    [_highlightLayer setHidden: YES];
+    _redHighlightLayer.path = p;
+    _redHighlightLayer.opaque = NO;
+    _redHighlightLayer.drawsAsynchronously = YES;
+    [_redHighlightLayer setHidden: YES];
     
-    CGRect frm = _highlightLayer.frame;
+    CGRect frm = _redHighlightLayer.frame;
     frm.origin.x = 100;
-    _highlightLayer.frame = frm;
+    _redHighlightLayer.frame = frm;
 
-    [view.layer addSublayer: _highlightLayer];
+    [view.layer addSublayer: _redHighlightLayer];
+}
+
+-(void) createGreenHighlightCircleLayer:(UIView*) view
+{
+    _greenHighlightLayer = [CAShapeLayer new];
+    _greenHighlightLayer.contentsScale = [UIScreen mainScreen].scale;
+    _greenHighlightLayer.lineWidth = 2.0;
+    _greenHighlightLayer.fillColor =
+            [UIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:0.07].CGColor;
+    _greenHighlightLayer.strokeColor =
+            [UIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:0.25].CGColor;
+    
+    const CGFloat kHLRadius =  40.0f;
+    CGMutablePathRef p = CGPathCreateMutable();
+    CGRect circRect = CGRectMake(-kHLRadius, -kHLRadius, kHLRadius*2, kHLRadius*2);
+    CGPathAddEllipseInRect(p, nil, circRect );
+    _greenHighlightLayer.path = p;
+    _greenHighlightLayer.opaque = NO;
+    _greenHighlightLayer.drawsAsynchronously = YES;
+    [_greenHighlightLayer setHidden: YES];
+    
+    CGRect frm = _greenHighlightLayer.frame;
+    frm.origin.x = 100;
+    _greenHighlightLayer.frame = frm;
+    
+    [view.layer addSublayer: _greenHighlightLayer];
+}
+
+-(void) createYellowHighlightCircleLayer:(UIView*) view
+{
+    _yellowHighlightLayer = [CAShapeLayer new];
+    _yellowHighlightLayer.contentsScale = [UIScreen mainScreen].scale;
+    _yellowHighlightLayer.lineWidth = 3.0;
+    _yellowHighlightLayer.fillColor =
+            [UIColor colorWithRed:0.84 green:0.62 blue:0.0 alpha:0.1].CGColor;
+    _yellowHighlightLayer.strokeColor =
+            [UIColor colorWithRed:0.84 green:0.62 blue:0.0 alpha:0.25].CGColor;
+    
+    const CGFloat kHLRadius =  40.0f;
+    CGMutablePathRef p = CGPathCreateMutable();
+    CGRect circRect = CGRectMake(-kHLRadius, -kHLRadius, kHLRadius*2, kHLRadius*2);
+    CGPathAddEllipseInRect(p, nil, circRect );
+    _yellowHighlightLayer.path = p;
+    _yellowHighlightLayer.opaque = NO;
+    _yellowHighlightLayer.drawsAsynchronously = YES;
+    [_yellowHighlightLayer setHidden: YES];
+    
+    CGRect frm = _yellowHighlightLayer.frame;
+    frm.origin.x = 100;
+    _yellowHighlightLayer.frame = frm;
+    
+    [view.layer addSublayer: _yellowHighlightLayer];
 }
 
 -(void) showHighlight
 {
-    [_highlightLayer setHidden: NO];
+    if (_whichHighlight == kRedHighlight)
+        [_redHighlightLayer setHidden: NO];
+    else if (_whichHighlight == kGreenHighlight)
+        [_greenHighlightLayer setHidden: NO];
+    else
+        [_yellowHighlightLayer setHidden: NO];
 }
 
 -(void) hideHighlight
 {
     [self stopHighlightAnim];
-    [_highlightLayer setHidden: YES];
+    [_redHighlightLayer setHidden: YES];
+    [_greenHighlightLayer setHidden: YES];
+    [_yellowHighlightLayer setHidden: YES];
 }
 
 -(void) moveHightlightTo:(CGPoint) pos
 {
-    _highlightLayer.position = pos;
+    _redHighlightLayer.position = pos;
+    _greenHighlightLayer.position = pos;
+    _yellowHighlightLayer.position = pos;
 }
 
 -(void) startHighlightAnim
@@ -138,20 +224,34 @@
     anim.fromValue = [NSValue valueWithCATransform3D:CATransform3DIdentity];
     anim.repeatCount = HUGE_VALF;
     anim.autoreverses = YES;
-    [_highlightLayer addAnimation: anim forKey:nil];
+    if (_whichHighlight == kRedHighlight)
+        [_redHighlightLayer addAnimation: anim forKey:nil];
+    else if (_whichHighlight == kGreenHighlight)
+        [_greenHighlightLayer addAnimation: anim forKey:nil];
+    else
+        [_yellowHighlightLayer addAnimation: anim forKey:nil];
 }
 
 -(void) stopHighlightAnim
 {
     [self.layer removeAllAnimations];
-    [_highlightLayer removeAllAnimations];
+    [_redHighlightLayer removeAllAnimations];
+    [_greenHighlightLayer removeAllAnimations];
+    [_yellowHighlightLayer removeAllAnimations];
 }
 
 // If note found, hightlight it, set ioXPos, and return true; return false otherwise
 // param ioXPos: on return, set to xPos the caller should scroll to
 -(bool) highlightScoreObject:(int) iScoreObjectID
                      useXPos:(CGFloat*) ioXPos
+                    severity:(int) iSeverity
 {
+    switch( iSeverity ) {
+        case kSeverityRed:     _whichHighlight = kRedHighlight;    break;
+        case kSeverityGreen:   _whichHighlight = kGreenHighlight;  break;
+        case kSeverityYellow:  _whichHighlight = kYellowHighlight;
+    }
+  
     *ioXPos = 0.0;
     for (NoteDisplayData* scoreObjectData in _notes)
     {
@@ -282,17 +382,52 @@
     [self setNeedsDisplayInRect:rct];
 }
 
+-(void) drawCurrNoteLineAt:(CGFloat) iXPos
+{
+    if (_kDoDrawNoteLines)
+    {
+        _doDrawNoteLine = true;
+        _noteLineXPos = iXPos;
+        CGRect rct = self.frame;
+        [self setNeedsDisplayInRect:rct];
+    }
+}
+
+-(void) clearCurrNoteLines
+{
+    _doDrawNoteLine = false;
+    CGRect rct = self.frame;
+    [self setNeedsDisplayInRect:rct];
+}
+
 -(void) drawRect:(CGRect)rect
 {
     [super drawRect:rect];
     
+    if ( !(kMKDebugOpt_ShowSoundsAnalysis ||
+           kMKDebugOpt_ShowNotesAnalysis ||
+           _kDoDrawNoteLines) )
+    {  return; }
+
+    const CGFloat kNoteBottomY  = 130.0f;
+    
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+
+    if (_kDoDrawNoteLines && _doDrawNoteLine)
+    {
+        UIColor* vertLineColor = [UIColor redColor]; // colorWithAlphaComponent: a * 0.5];
+        CGContextSetStrokeColorWithColor (ctx, vertLineColor.CGColor);
+        CGContextBeginPath(ctx);
+        CGContextMoveToPoint(ctx, _noteLineXPos, 20.0f);
+        CGContextAddLineToPoint(ctx, _noteLineXPos, kNoteBottomY);
+        CGContextSetLineWidth(ctx, 3.0f);
+        CGContextStrokePath(ctx);
+    }
+
     if ( !(kMKDebugOpt_ShowSoundsAnalysis || kMKDebugOpt_ShowNotesAnalysis) ) {
         return;
     }
     
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
-    
-    const CGFloat kNoteBottomY  = 130.0f;
     const CGFloat kSoundBTopY   = 150.0f;
     const CGFloat kSoundBottomY = 155.0f;
     const CGFloat kSoundHeight  = kSoundBottomY - kSoundBTopY;

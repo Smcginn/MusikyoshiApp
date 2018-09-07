@@ -10,11 +10,6 @@ import Foundation
 
 public class PerformanceRest : PerformanceScoreObject
 {
-    // These are TimeIntervals since the beginning of song playback
-    //   (Sound times are intervals since analysis start)
-    var startTime : TimeInterval = noTimeValueSet
-    var duration: TimeInterval = noTimeValueSet
-
     init () {
         super.init(noteOrRest : .rest)
         perfNoteOrRestID = PerformanceScoreObject.getUniqueRestID()

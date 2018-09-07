@@ -473,7 +473,8 @@ typedef NS_ENUM(NSInteger, ScrollType_e) {scroll_off, scroll_system, scroll_bar}
 -(CGFloat) getCurrentXOffset;
 
 // scroll to and highlight note or rest with this ScoreObject ID
--(bool) highlightScoreObject:(int) iScoreObjectID;
+-(bool) highlightScoreObject:(int) iScoreObjectID
+                    severity:(int) iSeverity;
 
 -(void) turnHighlightOff;
 
@@ -481,5 +482,7 @@ typedef NS_ENUM(NSInteger, ScrollType_e) {scroll_off, scroll_system, scroll_bar}
 
 -(void) clearNotePerformanceResults;
 
+-(void) clearCurrNoteLines;
+-(void) drawCurrNoteLineAt:(CGFloat) iXPos;
 
 @end

@@ -10,9 +10,16 @@ import Foundation
 
 class StarScore: UIView {
 
-    let bananaOnImage  = UIImage(named: "bananas")
-    let bananaOffImage = UIImage(named: "bananas_incomplete")!.alpha(0.5)
+    static let imageV1Name_On   = "bananas"
+    static let imageV1Name_Off  = "bananas_incomplete"
+    static let imageV2Name_On   = "SingleStar - 64"
+    static let imageV2Name_Off  = "SingleStar - 64"
+    static let imageV3Name_On   = "OneStarNew 64x64"
+    static let imageV3Name_Off  = "OneStarNew 64x64"
 
+    let bananaOnImage  = UIImage(named: imageV2Name_On)
+    let bananaOffImage = UIImage(named: imageV2Name_Off)!.alpha(0.35)
+    
     var imgView: UIImageView!
 
     var star1ImgView: UIImageView!
@@ -72,7 +79,7 @@ class StarScore: UIView {
     }
     
     static func getSize() -> CGSize {
-        let bananaOnImage  = UIImage(named: "bananas")
+        let bananaOnImage  = UIImage(named: StarScore.imageV2Name_On)
         let oneStarSize = bananaOnImage?.size
         let viewHt = (oneStarSize?.height)! + 2
         let viewWd = ((oneStarSize?.width)! * 4) + 10

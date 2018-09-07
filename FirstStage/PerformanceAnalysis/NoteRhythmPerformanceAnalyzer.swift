@@ -22,6 +22,9 @@ let kRhythmDurationVariance_Unacceptable : Double = 0.5
 
 class NoteRhythmPerformanceAnalyzer : NotePerformanceAnalyzer {
     
+    var runningDiffSum: Double = 0.0
+    var numDifs: Int = 0
+    
     func determineWeightedRating( perfNote: PerformanceNote ) {
         
         // Adjust weightedRating based on attack time accuracy
@@ -55,8 +58,18 @@ class NoteRhythmPerformanceAnalyzer : NotePerformanceAnalyzer {
     
     func rateAttack( perfNote: PerformanceNote )
     {
-        let startTimeDelta     = perfNote.expectedStartTime - perfNote.actualStartTime
+        let startTimeDelta     = perfNote.expectedStartTime - perfNote.actualStartTime_comp
         let startTimeDeltaABS  = abs(startTimeDelta)
+        
+        if kMKDebugOpt_PrintMinimalNoteAnalysis {
+            if perfNote.isLinkedToSound {
+                runningDiffSum += startTimeDelta
+                numDifs += 1
+                let currAverage = runningDiffSum/Double(numDifs)
+                print("In Note Analysis; note #\(perfNote.perfNoteOrRestID) attack off by:\t\(startTimeDelta), \tcurr avg: \(currAverage)")
+            }
+        }
+        
         if startTimeDeltaABS <= attackVariance_Correct {
             perfNote.attackRating = .timingOrRestGood
         }
@@ -111,6 +124,11 @@ class NoteRhythmPerformanceAnalyzer : NotePerformanceAnalyzer {
                 perfNote.durationRating = .tooLong
             }
         }
+    }
+    
+    func resetAverages() {
+        runningDiffSum  = 0.0
+        numDifs         = 0
     }
     
     override func analyzeScoreObject( perfScoreObject: PerformanceScoreObject? )  {

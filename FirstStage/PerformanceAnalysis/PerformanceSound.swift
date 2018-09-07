@@ -18,7 +18,10 @@ public class PerformanceSound
     init ( start: TimeInterval, mode : soundType, noteOffset: TimeInterval )
     {
         soundID = PerformanceSound.getUniqueSoundID()
-        startTime = start - kSoundStartAdjustment
+        _startTime_abs  = start
+        _startTime_song = soundTimeToNoteTimeExt(soundStart: _startTime_abs)
+        _startTime_comp = _startTime_song - kSoundStartAdjustment
+
         soundMode = mode
         soundToNoteTimeOffset = noteOffset
         if kSavePitchSamples {
@@ -50,25 +53,77 @@ public class PerformanceSound
     var soundMode : soundType = .pitched
     var soundID = noSoundIDSet
     
-    // These are intervals since *analysis start*
-    //   (Note times are intervals since *song start*)
-    var startTime           = noTimeValueSet {
-        didSet {
-            startTime -= kSoundStartAdjustment
+    // XYZ_abs   - "Absolute"         - interval since *analysis start*
+    // XYZ_song  - "Song"             - interval since *song start*
+    // XYZ_comp  - "Song Compensated" - interval since *song start*, with
+    //                                    HW vs Sim delay compensation
+    var _startTime_abs  = noTimeValueSet
+    var _startTime_song = noTimeValueSet
+    var _startTime_comp = noTimeValueSet
+    var startTime_abs:TimeInterval {
+        return _startTime_abs
+    }
+    var startTime_song:TimeInterval {
+        return _startTime_song
+    }
+    var startTime_comp:TimeInterval {
+        return _startTime_comp
+    }
+    
+    func setStartTimeAbs(startTimeAbs: TimeInterval) {
+        _startTime_abs  = startTimeAbs
+        _startTime_song = soundTimeToNoteTimeExt(soundStart: _startTime_abs)
+        _startTime_comp = _startTime_song - kSoundStartAdjustment
+    }
+    
+    var _endTime_abs  = noTimeValueSet
+    var _endTime_song = noTimeValueSet
+    var _endTime_comp = noTimeValueSet
+    var endTime_abs:TimeInterval {
+        return _endTime_abs
+    }
+    var endTime_song:TimeInterval {
+        return _endTime_song
+    }
+    var endTime_songComp:TimeInterval {
+        return _endTime_comp
+    }
+    func setEndTimeAbs(endTimeAbs: TimeInterval) {
+        _endTime_abs  = endTimeAbs
+        _endTime_song = soundTimeToNoteTimeExt(soundStart: _endTime_abs)
+        _endTime_comp = _endTime_song - kSoundStartAdjustment
+        
+        _duration = _endTime_abs - _startTime_abs
+        if !initialPitchHasStablized() {
+            let lastSamp = lastEarlySample()
+            averagePitch = lastSamp
+            averagePitchRunning = lastSamp
         }
     }
-    var endTime             = noTimeValueSet {
-        didSet {
-            endTime -= kSoundStartAdjustment
-            duration = endTime - startTime
-            if !initialPitchHasStablized() {
-                let lastSamp = lastEarlySample()
-                averagePitch = lastSamp
-                averagePitchRunning = lastSamp
-            }
+    
+    var _duration = noTimeValueSet
+    var duration: TimeInterval {
+        return _duration
+    }
+
+    func makeAdjustmentsAfterSongStart() {
+        // _startTime_abs was set correctly; everything else could be off
+        print("In makeAdjustmentsAfterSongStart")
+        print("   Before: _startTime_song == \(_startTime_song), _startTime_comp == \(_startTime_comp)")
+        
+        _startTime_song = soundTimeToNoteTimeExt(soundStart: _startTime_abs)
+        _startTime_comp = _startTime_song - kSoundStartAdjustment
+        print("   After:  _startTime_song == \(_startTime_song), _startTime_comp == \(_startTime_comp)")
+
+        if isLinkedToNote && linkedNoteObject != nil {
+            linkedNoteObject!.actualStartTime_song = _startTime_song
+        }
+        
+        if isLinkedToRest && linkedRestObject != nil {
+            linkedRestObject!.actualStartTime_song = _startTime_song
         }
     }
-    var duration = noTimeValueSet
+    
     var soundToNoteTimeOffset: TimeInterval // difference b/t sound and note times.
     var xOffsetStart = 0 // relevant to a scrolling view that would display this sound
     var xOffsetEnd   = 0 // relevant to a scrolling view that would display this sound
@@ -218,9 +273,9 @@ public class PerformanceSound
     func updateCurrentNoteIfLinkedFinal()
     {
         guard isLinkedToNote, let linkNote = linkedNoteObject else {return}
-        guard linkNote.isNote() else {return}
+        guard linkNote.isNote() else {return}  // WHAT ??? !!! FIMEUP
         
-        linkNote.endTime = self.endTime - soundToNoteTimeOffset
+        linkNote.setActualEndTimeAbs(endTimeAbs: self._endTime_abs)
         linkNote.actualFrequency = self.averagePitchRunning
     }
     

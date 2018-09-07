@@ -12,14 +12,13 @@ import UIKit
 
 class SettingsTableViewController: UITableViewController {
     
-    @IBOutlet weak var bpmTextField: UITextField! {
-        didSet { bpmTextField?.addDoneCancelToolbar() }
-    }
     @IBOutlet weak var showMarkersControl: UISwitch!
     @IBOutlet weak var showAnalysisControl: UISwitch!
     @IBOutlet weak var synthInstrumentControl: UISegmentedControl!
     @IBOutlet weak var magnificationLabel: UILabel!
     @IBOutlet weak var magnificationStepper: UIStepper!
+    @IBOutlet weak var bpmLabel: UILabel!
+    @IBOutlet weak var bpmStepper: UIStepper!
     @IBOutlet weak var noteWidthLabel: UILabel!
     @IBOutlet weak var noteWidthStepper: UIStepper!
     @IBOutlet weak var signatureWidthLabel: UILabel!
@@ -34,6 +33,10 @@ class SettingsTableViewController: UITableViewController {
     @IBAction func showMarkersControlChanged(_ sender: UISwitch) {
     }
     
+    @IBAction func bpmStepperValueChanged(_ sender: Any) {
+        bpmLabel.text = String(Int(bpmStepper.value))
+    }
+    
     @IBAction func magnificationStepperChanged(_ sender: UIStepper) {
         magnificationLabel.text = String(magnificationStepper.value / 10)
     }
@@ -45,6 +48,8 @@ class SettingsTableViewController: UITableViewController {
     @IBAction func signatureWidthStepperChanged(_ sender: UIStepper) {
         signatureWidthLabel.text = String(Int(signatureWidthStepper.value))
     }
+    
+    
     
     //    @IBAction func showNoteMarkerSwitchChanged(_ sender: UISwitch) {
     //        if showNoteMarkersSwitch.isOn {
@@ -70,12 +75,12 @@ class SettingsTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        bpmTextField.text = Constants.Settings.BPM
-
         showAnalysisControl.isSelected = UserDefaults.standard.bool(forKey: Constants.Settings.ShowAnalysis) ? true : false
         showMarkersControl.isSelected = UserDefaults.standard.bool(forKey: Constants.Settings.ShowNoteMarkers) ? true : false
         synthInstrumentControl.selectedSegmentIndex = UserDefaults.standard.bool(forKey: Constants.Settings.PlayTrumpet) ? 0 : 1
+        
+        bpmStepper.value = UserDefaults.standard.double(forKey: Constants.Settings.BPM)
+        bpmLabel.text = String(Int(bpmStepper.value))
         
         magnificationStepper.value = Double(UserDefaults.standard.integer(forKey: Constants.Settings.ScoreMagnification))
         magnificationLabel.text = String(magnificationStepper.value / 10)
@@ -91,6 +96,7 @@ class SettingsTableViewController: UITableViewController {
         UserDefaults.standard.set(showMarkersControl.isSelected == true, forKey: Constants.Settings.ShowNoteMarkers)
         UserDefaults.standard.set(showAnalysisControl.isSelected == true, forKey: Constants.Settings.ShowAnalysis)
         UserDefaults.standard.set(synthInstrumentControl.selectedSegmentIndex != 1, forKey: Constants.Settings.PlayTrumpet)
+        UserDefaults.standard.set(bpmStepper.value, forKey: Constants.Settings.BPM)
         UserDefaults.standard.set(magnificationStepper.value, forKey: Constants.Settings.ScoreMagnification)
         UserDefaults.standard.set(noteWidthStepper.value, forKey: Constants.Settings.SmallestNoteWidth)
         UserDefaults.standard.set(signatureWidthStepper.value, forKey: Constants.Settings.SignatureWidth)

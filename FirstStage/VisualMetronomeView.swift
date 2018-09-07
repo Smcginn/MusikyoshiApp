@@ -13,10 +13,12 @@ class VisualMetronomeView: UIView {
     var numBeats = 4
     var dots = [DotView]()
     let beatColor = UIColor.black
+    var beatClearColor = UIColor.black
     var regularColor = UIColor.lightGray
-    
+
     override func awakeFromNib() {
         regularColor = regularColor.withAlphaComponent(0.3)
+        beatClearColor = beatColor.withAlphaComponent(0.3)
         super.awakeFromNib()
     }
     
@@ -47,12 +49,18 @@ class VisualMetronomeView: UIView {
     }
 
     func setBeat(_ dotIndex: Int) {
+        if dots.count <= 0 { return }
+        
         for i in 0 ..< numBeats {
             dots[i].layer.backgroundColor = (i == dotIndex) ? beatColor.cgColor : regularColor.cgColor
         }
+        if !(0...numBeats).contains(dotIndex) { // a -1 is sent to indicate "reset"
+            return                              // only do the animation if running . . .
+        }
+        UIView.animate(withDuration: 0.25, delay: 0.25, options: .curveLinear, animations: {
+             self.dots[dotIndex].layer.backgroundColor = self.beatClearColor.cgColor
+        } )
     }
-
-
 
     /*
     // Only override drawRect: if you perform custom drawing.

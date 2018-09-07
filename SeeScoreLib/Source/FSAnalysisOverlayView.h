@@ -63,12 +63,16 @@ static bool kMKDebugOpt_ShowSoundsAnalysis;
 
 // scroll to and highlight note (with red circle) with this PerfromanceNote ID
 -(bool) highlightScoreObject:(int) iScoreObjectID
-                     useXPos:(CGFloat*) ioXPos;
+                     useXPos:(CGFloat*) ioXPos
+                    severity:(int) iSeverity;
 
 -(void) hideHighlight;
 
 -(void) clearPerfNoteAndSoundData;
 
 -(void) redrawMe;
+
+-(void) clearCurrNoteLines;
+-(void) drawCurrNoteLineAt:(CGFloat) iXPos;
 
 @end

@@ -16,6 +16,7 @@ class PerfAnalysisSettingsPopupView: UIView, UIPickerViewDataSource, UIPickerVie
 
     let issueCatText = [ "By Attack Rating",
                          "By Duration Rating",
+                         "By Attack And DurationRating",
                          "By Pitch Rating",
                          "By Individual Rating" ]
                          // map-to-video/alert doesn't support Overall mode yet,
@@ -41,7 +42,7 @@ class PerfAnalysisSettingsPopupView: UIView, UIPickerViewDataSource, UIPickerVie
     weak var settingsChangedDelegate: PerfAnalysisSettingsChanged?
     
     static func getSize() -> CGSize {
-        return CGSize(width: 320, height: 300)
+        return CGSize(width: 320, height: 280)
     }
     
     required init(coder: NSCoder) {
@@ -62,18 +63,19 @@ class PerfAnalysisSettingsPopupView: UIView, UIPickerViewDataSource, UIPickerVie
         self.issueCriteriaPickerView = UIPickerView()
         self.issueCriteriaPickerView?.dataSource = self as UIPickerViewDataSource
         self.issueCriteriaPickerView?.delegate = self
-        self.issueCriteriaPickerView?.frame = CGRect(x: 50, y: 45,
-                                                     width: 260, height: 60)
+        self.issueCriteriaPickerView?.frame = CGRect(x: 50, y: 40,
+                                                     width: 260, height: 45)
         self.issueCriteriaPickerView?.layer.borderColor = UIColor.darkGray.cgColor
         self.issueCriteriaPickerView?.layer.borderWidth = 1
         self.issueCriteriaPickerView?.isUserInteractionEnabled = true
         let currRow: Int = {
-            switch kPerfIssueSortCriteria {
-            case .byAttackRating:     return 0
-            case .byDurationRating:   return 1
-            case .byPitchRating:      return 2
-            case .byIndividualRating: return 3
-            case .byOverallRating:    return 4
+            switch gPerfIssueSortCriteria {
+            case .byAttackRating:               return 0
+            case .byDurationRating:             return 1
+            case .byAttackAndDurationRating:    return 2
+            case .byPitchRating:                return 3
+            case .byIndividualRating:           return 4
+            case .byOverallRating:              return 5
             }
         }()
         self.issueCriteriaPickerView?.selectRow(currRow,
@@ -88,8 +90,8 @@ class PerfAnalysisSettingsPopupView: UIView, UIPickerViewDataSource, UIPickerVie
         let labelWd: CGFloat  = sz.width-100.0
         let switchX: CGFloat  = sz.width-90.0
         let switchWd:CGFloat  = 100.0
-        var labelRect  = CGRect(x: 10, y: 120, width: labelWd, height: 25)
-        var switchRect = CGRect(x: switchX, y: 120.0, width: switchWd, height: 25.0)
+        var labelRect  = CGRect(x: 10, y: 105, width: labelWd, height: 25)
+        var switchRect = CGRect(x: switchX, y: 105.0, width: switchWd, height: 25.0)
         
         ////////////////////////////////////////////////////////////////////////
         // Ignore Missed Notes Label and Switch
@@ -111,13 +113,13 @@ class PerfAnalysisSettingsPopupView: UIView, UIPickerViewDataSource, UIPickerVie
         // Show Sounds On Overlay Label and Switch
         
         showSoundsOnOverlayLabel = UILabel()
-        labelRect.origin.y = 165
+        labelRect.origin.y = 150
         showSoundsOnOverlayLabel?.frame = labelRect
         showSoundsOnOverlayLabel?.text = "Show Sounds On Overlay:"
         self.addSubview(showSoundsOnOverlayLabel!)
         
         showSoundsOnOverlaySwitch = UISwitch()
-        switchRect.origin.y = 165
+        switchRect.origin.y = 150
         showSoundsOnOverlaySwitch?.frame = switchRect
         showSoundsOnOverlaySwitch?.addTarget(self,
                                              action: #selector(showSoundsSwitchChange(_:)),
@@ -129,13 +131,13 @@ class PerfAnalysisSettingsPopupView: UIView, UIPickerViewDataSource, UIPickerVie
         // Show Notes On Overlay Label and Switch
         
         showNotesOnOverlayLabel = UILabel()
-        labelRect.origin.y = 210
+        labelRect.origin.y = 195
         showNotesOnOverlayLabel?.frame = labelRect
         showNotesOnOverlayLabel?.text = "Show Notes On Overlay:"
         self.addSubview(showNotesOnOverlayLabel!)
         
         showNotesOnOverlaySwitch = UISwitch()
-        switchRect.origin.y = 210
+        switchRect.origin.y = 195
         showNotesOnOverlaySwitch?.frame = switchRect
         showNotesOnOverlaySwitch?.addTarget(self,
                                             action: #selector(ShowNotesSwitchChange(_:)),
@@ -155,7 +157,7 @@ class PerfAnalysisSettingsPopupView: UIView, UIPickerViewDataSource, UIPickerVie
         ///////////////////////////////////////////////////////////////
         // Done Button
         
-        let btnFrame = CGRect( x: 10 , y: sz.height-50, width: 100, height: 40 )
+        let btnFrame = CGRect( x: 10 , y: sz.height-40, width: 100, height: 30 )
         doneBtn = UIButton(frame: btnFrame)
         doneBtn?.roundedButton()
         doneBtn?.backgroundColor = UIColor.blue
@@ -168,7 +170,7 @@ class PerfAnalysisSettingsPopupView: UIView, UIPickerViewDataSource, UIPickerVie
             NSMutableAttributedString( string: okStr,
                                        attributes: [NSAttributedStringKey.font:UIFont(
                                         name: "Marker Felt",
-                                        size: 24.0)!])
+                                        size: 18.0)!])
         doneBtn?.titleLabel?.attributedText = doneMutableString
         doneBtn?.titleLabel?.textColor = UIColor.yellow
         doneBtn?.setTitle("OK", for: .normal)
@@ -237,12 +239,13 @@ class PerfAnalysisSettingsPopupView: UIView, UIPickerViewDataSource, UIPickerVie
                     inComponent component: Int) {
         somethingChanged = true
         switch row {
-        case 0:  kPerfIssueSortCriteria = .byAttackRating
-        case 1:  kPerfIssueSortCriteria = .byDurationRating
-        case 2:  kPerfIssueSortCriteria = .byPitchRating
-        case 3:  kPerfIssueSortCriteria = .byIndividualRating
+        case 0:  setPerfIssueSortCriteria( sortCrit: .byAttackRating )
+        case 1:  setPerfIssueSortCriteria( sortCrit: .byDurationRating )
+        case 2:  setPerfIssueSortCriteria( sortCrit: .byAttackAndDurationRating )
+        case 3:  setPerfIssueSortCriteria( sortCrit: .byPitchRating )
+        case 4:  setPerfIssueSortCriteria( sortCrit: .byIndividualRating )
             
-        default: kPerfIssueSortCriteria = .byIndividualRating
+        default: setPerfIssueSortCriteria( sortCrit: .byIndividualRating )
         // map-to-video/alert doesn't support Overall mode yet;
         // include when available
         // default: kPerfIssueSortCriteria = .byOverallRating
