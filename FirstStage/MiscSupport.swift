@@ -71,3 +71,10 @@ extension UIColor {
         return nil
     }
 }
+
+
+extension UIDevice {
+    public var is_iPhoneX: Bool {
+        return UIScreen.main.nativeBounds.height == 2436
+    }
+}

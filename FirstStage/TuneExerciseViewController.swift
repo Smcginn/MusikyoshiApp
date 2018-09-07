@@ -365,7 +365,19 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged {
             metronomeView.frame.origin.y = ssFrame.origin.y + ssFrame.size.height + 10
             metronomeView.frame.size.width = (metronomeView.frame.size.height*5)
             layoutStarScoreForiPad = true
+        } else if UIDevice.current.is_iPhoneX {
+            var ssFrame = ssScrollView.frame
+            ssScrollView.frame = ssFrame
+            let leftOffset:  CGFloat = 40.0
+            let rightOffset: CGFloat = 30.0
+            let newWidth: CGFloat = ssScrollView.frame.size.width - (leftOffset+rightOffset)
+            ssScrollView.frame.size.width = newWidth
+            ssScrollView.frame.origin.x  += leftOffset
+            ssScrollView.clipsToBounds = true
+            metronomeView.frame.origin.x += leftOffset
         }
+         
+        
 //        let metFr   = metronomeView.frame
 //        let metBnds = metronomeView.bounds
         if !starScoreViewIsSetup {
