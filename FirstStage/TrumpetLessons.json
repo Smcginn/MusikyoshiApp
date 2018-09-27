@@ -9,7 +9,7 @@
             "levelTag":"L1",
             "levelIdx":"0",
             "thresholdsID":"beginner1",
-            "singleEventThreshold":"16",
+            "singleEventThreshold":"100",
             "days":[{
                     "title":"Day 1   (Level 1)",
                     "exercises":"LT_C4_2, LT_C4_2, TUN001, PTY001, PRP002, TUN002, PTY002, TUN003, LT_D4_2, LT_D4_2, TUN004, PTY003, TUN005, LTR_C4, PRP006, TUN006"

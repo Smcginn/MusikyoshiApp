@@ -32,7 +32,6 @@ static const float kMaxMagnification = 2.5;
 static const float kMagnificationReductionScreenWidthThreshold = 768;
 static const float kMagnificationProportionToScreenWidth = 0.8F;// this is 0 for constant magnification at different screen widths, 1.0 for magnification proportional to screen width/768.
 
-static const BOOL kReturnFromCursorCalls = YES;
 
 
 @interface SSScrollView ()
@@ -83,6 +82,8 @@ static const BOOL kReturnFromCursorCalls = YES;
 	SSPlayLoopGraphics *playLoopGraphics;
 
 	sscore_changeHandler_id handlerId; // handler registered with SSScore is automatically notified of changes to the score when editing
+    
+    BOOL useSeeScoreCursor;
 }
 
 @property (atomic) int abortingBackground; // set when background layout/draw is aborting
@@ -125,6 +126,8 @@ static const BOOL kReturnFromCursorCalls = YES;
 	layOptions = [[SSLayoutOptions alloc] init]; // default layout options
     [self resetBarRectCursor];
 
+    useSeeScoreCursor = YES;
+    
     [self addOverlayView];
 }
 
@@ -1212,7 +1215,7 @@ static float min(float a, float b)
 
 -(void)displayCursor
 {
-    if (kReturnFromCursorCalls)
+    if (!useSeeScoreCursor)
         return;
     
     int sysIndex = [self systemContainingBarIndex:cursorBarIndex].index;
@@ -1246,7 +1249,7 @@ static float min(float a, float b)
             type:(enum CursorType_e)type
           scroll:(enum ScrollType_e)scroll
 {
-    if (kReturnFromCursorCalls)
+    if (!useSeeScoreCursor)
         return;
     
     assert(barIndex >= 0 && barIndex < score.numBars);
@@ -1277,7 +1280,7 @@ static float min(float a, float b)
 				 type:(enum CursorType_e)type
 			   scroll:(enum ScrollType_e)scroll
 {
-	if (kReturnFromCursorCalls)
+	if (!useSeeScoreCursor)
         return;
     
 	[self setCursor:barIndex
@@ -1290,7 +1293,7 @@ static float min(float a, float b)
 			  barIndex:(int)barIndex
 				scroll:(enum ScrollType_e)scroll
 {
-    if (kReturnFromCursorCalls)
+    if (!useSeeScoreCursor)
         return;
     
 	[self setCursor:barIndex
@@ -1862,12 +1865,16 @@ static float min(float a, float b)
     [analysisOverlayView clearPerfNoteAndSoundData];
 }
 
--(void) clearCurrNoteLines{
+-(void) clearCurrNoteLines {
     [analysisOverlayView clearCurrNoteLines];
 }
 
--(void) drawCurrNoteLineAt:(CGFloat) iXPos{
+-(void) drawCurrNoteLineAt:(CGFloat) iXPos {
     [analysisOverlayView drawCurrNoteLineAt: iXPos];
+}
+
+-(void) useSeeScoreCursor:(BOOL) iUseSSCursor {
+    useSeeScoreCursor = iUseSSCursor;
 }
 
 -(void)touchesBegan: (NSSet*) touches

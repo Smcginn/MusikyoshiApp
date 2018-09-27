@@ -27,7 +27,7 @@ struct pitchAndRhythmTolerances {
     // How forgiving is the app when grading rhythmic accuracy? This is the
     // fraction of a second on either side of the expected attack time that is 
     // still acceptable.)
-    var rhythmTolerance: Double
+    var rhythmTolerance: Double   // SLIDERABLE
     
     /////////////////////////////////////////////////////////////////////////////
     // There are five zones for grading pitch where the performed pitch is still
@@ -54,16 +54,16 @@ struct pitchAndRhythmTolerances {
     // -veryBoundaryPC                                              +veryBoundaryPC
     
     // % above or below target pitch to be considered still in the "correct" zone
-    var correctPitchPC: Double     // uses 0.97 vs 0.03, 0.98 vs 0.02, etc.
+    var correctPitchPC: Double     // uses 0.97 vs 0.03, 0.98 vs 0.02, etc.   // SLIDERABLE
     
     // Used to define the lower bound for "a bit flat" zone, and the upper bound 
     // of the "a bit sharp" zone
-    var aBitToVeryPC: Double
+    var aBitToVeryPC: Double  // SLIDERABLE
     
     // Used to define the lower bound for "very flat" zone, and the upper bound
     // of the "very sharp" zone. Outside of these two zones, the pitch is
     // considered a different note.
-    var veryBoundaryPC: Double
+    var veryBoundaryPC: Double // SLIDERABLE
     
     init() {
         rhythmTolerance   = DefaultTolerancePCs.defaultRhythmTolerance
@@ -159,6 +159,17 @@ class PerformanceAnalysisMgr {
     
     init() {
 //        resetTranspoitionOffset()
+    }
+    
+    func printThresholdsInUse() {
+        print("\n--------------------------------------------")
+        print("Tolerances in use by PerformanceAnalysisMgr:")
+        print("  correctPitchPC:    \(currTolerances.correctPitchPC)")
+        print("  aBitToVeryPC:      \(currTolerances.aBitToVeryPC)")
+        print("  veryBoundaryPC:    \(currTolerances.veryBoundaryPC)")
+        print("  rhythmTolerance:   \(currTolerances.rhythmTolerance)")
+        print("  Ejector Seat:      \(kStopPerformanceThreshold)")
+        print("--------------------------------------------\n")
     }
     
     func getNotePitchAnalyzer() {}

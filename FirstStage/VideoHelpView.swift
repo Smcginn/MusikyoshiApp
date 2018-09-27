@@ -46,6 +46,8 @@ class VideoHelpView: UIView {
     var issueMsgLabel: UILabel?
     var issueMsgText: String?
 
+    var doneShowingVideoDelegate: DoneShowingVideo?
+    
     static func getSize() -> CGSize {
         let sz = CGSize(width: avcWd, height: avcHt+bottomButtonSpacing)
         return sz
@@ -103,13 +105,34 @@ class VideoHelpView: UIView {
     func addButtons() {
         let btnWd: CGFloat     = 80.0
         let btnHt: CGFloat     = 35.0
-        let rightBtnX: CGFloat = 50.0
-        let leftBtnX: CGFloat  = frame.size.width - (rightBtnX + btnWd)
+        let leftBtnX: CGFloat = 50.0
+        let rightBtnX: CGFloat  = frame.size.width - (leftBtnX + btnWd)
         let btnY: CGFloat      = frame.size.height - (btnHt + 2)
         
         ////////////////////////////////////////////////////////////////////////
+        // Done button
+        var btnFrame = CGRect( x: leftBtnX , y: btnY, width: btnWd, height: btnHt )
+        doneBtn = UIButton(frame: btnFrame)
+        doneBtn?.roundedButton()
+        doneBtn?.backgroundColor = UIColor.blue
+        doneBtn?.addTarget(self,
+                           action: #selector(allDone(sender:)),
+                           for: .touchUpInside )
+        doneBtn?.isEnabled = true
+        let okStr = "OK"
+        let doneMutableString =
+            NSMutableAttributedString( string: okStr,
+                                       attributes: [NSAttributedStringKey.font:UIFont(
+                                        name: "Marker Felt",
+                                        size: 24.0)!])
+        doneBtn?.titleLabel?.attributedText = doneMutableString
+        doneBtn?.titleLabel?.textColor = UIColor.yellow
+        doneBtn?.setTitle("OK", for: .normal)
+        self.addSubview(doneBtn!)
+        
+        ////////////////////////////////////////////////////////////////////////
         // Again button
-        var btnFrame = CGRect( x: rightBtnX , y: btnY, width: btnWd, height: btnHt )
+        btnFrame.origin.x = rightBtnX
         againBtn = UIButton(frame: btnFrame)
         againBtn?.roundedButton()
         againBtn?.backgroundColor = UIColor.blue
@@ -128,27 +151,6 @@ class VideoHelpView: UIView {
         againBtn?.titleLabel?.textColor = UIColor.yellow
         againBtn?.setTitle("Again", for: .normal)
         self.addSubview(againBtn!)
-        
-        ////////////////////////////////////////////////////////////////////////
-        // Done button
-        btnFrame.origin.x = leftBtnX
-        doneBtn = UIButton(frame: btnFrame)
-        doneBtn?.roundedButton()
-        doneBtn?.backgroundColor = UIColor.blue
-        doneBtn?.addTarget(self,
-                           action: #selector(allDone(sender:)),
-                           for: .touchUpInside )
-        doneBtn?.isEnabled = true
-        let okStr = "OK"
-        let doneMutableString =
-            NSMutableAttributedString( string: okStr,
-                                       attributes: [NSAttributedStringKey.font:UIFont(
-                                        name: "Marker Felt",
-                                        size: 24.0)!])
-        doneBtn?.titleLabel?.attributedText = doneMutableString
-        doneBtn?.titleLabel?.textColor = UIColor.yellow
-        doneBtn?.setTitle("OK", for: .normal)
-        self.addSubview(doneBtn!)
     }
     
     func roundedView(){
@@ -245,7 +247,16 @@ class VideoHelpView: UIView {
         if playerStatus != .failed {
             self.isHidden = false
             self.avpVC?.view.isHidden = false
-            delay(0.5) {  
+            delay(0.5) {
+                _ = AVAudioSessionManager.sharedInstance.setupAudioSession(sessionMode: .playbackMode)
+                var vol:Float = 0.0
+                if let avPlaya: AVPlayer = self.avPlayer {
+                    let volOpt:Float = avPlaya.volume //{
+                        vol = volOpt
+                        print("avPlayer volume = \(vol)")
+                    //}
+                    print("avPlayer volume = \(vol)")
+                }
                 self.avPlayer?.play()
             }
         }
@@ -258,7 +269,7 @@ class VideoHelpView: UIView {
     }
     
     @objc func allDone(sender: UIButton) {
-        hideVideoVC()
+        stop_hide_andResignModal()
     }
     
     func hideVideoVC() {
@@ -266,6 +277,15 @@ class VideoHelpView: UIView {
         avPlayer?.seek(to: kCMTimeZero)
         self.isHidden = true
     } 
+    
+    func stop_hide_andResignModal() {   //  Not really Modal . . .
+        avPlayer?.pause()
+        avPlayer?.seek(to: kCMTimeZero)
+        self.isHidden = true
+        if doneShowingVideoDelegate != nil {
+            doneShowingVideoDelegate!.VideoViewClosed()
+        }
+    }
     
     func cleanup() {
         avPlayer?.pause()
@@ -279,14 +299,49 @@ class VideoHelpView: UIView {
     }
 }
 
-extension UIButton {
-    func roundedButton(){
-        let maskPAth1 = UIBezierPath(roundedRect: self.bounds,
-                                     byRoundingCorners: .allCorners,
-                                     cornerRadii:CGSize(width:8.0, height:8.0))
-        let maskLayer1 = CAShapeLayer()
-        maskLayer1.frame = self.bounds
-        maskLayer1.path = maskPAth1.cgPath
-        self.layer.mask = maskLayer1
+
+// Below, lame attempt at creating a Modal View, VC
+
+class PopoverVC: UIViewController {
+//    let dismissButton:UIButton! = UIButton.(type:UIButtonType.Custom)
+//    let myImage:UIImage! = UIImage(named:"popover_sm")
+    
+    func pizzaDidFinish(){
+        dismiss(animated: true, completion: nil)
+    }
+    
+    var boundsRect = CGRect(x: 100.0, y: 40.0, width: 300, height: 250)
+    var frameRect  = CGRect(x: 100.0, y: 40.0, width: 300, height: 250)
+    var vhView: VideoHelpView? = nil
+    
+    init(rect: CGRect) {
+        super.init(nibName: nil, bundle: nil)
+        self.frameRect  = rect
+        self.boundsRect = CGRect(x: 0, y:0, width:
+                                 rect.size.width, height: rect.size.height)
+        self.vhView = VideoHelpView(frame: boundsRect)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // orientation BS
+    let appDel = UIApplication.shared.delegate as! AppDelegate
+    
+    override func loadView() {
+        self.vhView = VideoHelpView(frame: boundsRect)
+        self.view = vhView
+        self.view.frame = frameRect
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // orientation BS
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.orientationLock = .landscape
+
+        modalTransitionStyle = UIModalTransitionStyle.crossDissolve
     }
 }

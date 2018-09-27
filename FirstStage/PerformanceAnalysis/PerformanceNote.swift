@@ -181,7 +181,12 @@ public class PerformanceNote : PerformanceScoreObject
         // overall rating
         let weightedStr = String(format: "%d", weightedScore)
         msgString += "\n"
-        msgString += "Overall Weighted Rating: " + weightedStr + "\n"
+        msgString += "Overall Weighted Rating: " + weightedStr
+        
+        var worstScore = max(attackScore, durationScore)
+        worstScore = max(worstScore, pitchScore)
+        let worstStr = String(format: "%d", worstScore)
+        msgString += "\nWorst Rating: " + worstStr
     }
 }
 

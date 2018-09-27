@@ -158,19 +158,25 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
         if firstTimeInView {
             firstTimeInView = false
             self.launchingNextView?.isHidden =  true
-            var titleStr = "Press 'Go' to automatically go through exercises in order"
+            var titleStr = "Press 'GO' to go through a guided practice session"
             titleStr +=    "\n\nPress 'Choose' to pick individual exercises"
             let ac = UIAlertController(title: titleStr,
                                        message: "",
                                        preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "Go",
+            ac.addAction(UIAlertAction(title: "GO",
                                        style: .default,
                                        handler: startAutoSchedHandler))
             ac.addAction(UIAlertAction(title: "Choose",
                                        style: .default,
                                        handler: nil))
+            //ac.view.backgroundColor =  kLightGold
+//            ac.view.tintColor = UIColor.green
+            ac.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = kDefault_AlertBackgroundColor
+
             self.present(ac, animated: true, completion: nil)
        }
+        
+       PerformanceAnalysisMgr.instance.printThresholdsInUse()
     }
     
     func thisorthat()
@@ -503,6 +509,7 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
                     ac.addAction(UIAlertAction(title: "OK!",
                                                style: .default,
                                                handler: nil))
+                ac.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = kDefault_AlertBackgroundColor
                     self.present(ac, animated: true, completion: nil)
                 }
             }

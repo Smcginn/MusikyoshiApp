@@ -58,6 +58,7 @@ struct DefaultTolerancePCs {
 var attackVariance_Correct: Double = 0.05
 var attackVariance_ABitOff: Double = DefaultTolerancePCs.defaultRhythmTolerance/2.0
 var attackVariance_VeryOff: Double = DefaultTolerancePCs.defaultRhythmTolerance
+// SLIDERABLE ^
 
 // For weighted scoring of the severity of a performance issue
 struct IssueWeight {
@@ -67,22 +68,22 @@ struct IssueWeight {
     // attack
     static let kSlightlyEarlyOrLate:  Int  =  6     // 20 // 6
     static let kVeryEarlyOrLate:      Int  =  12    // 60 // 12
-    static let kMissed:               Int  =  18    // 92 // 18
+    static let kMissed:               Int  =  19    // 92 // 18
     
     // pitch
     static let kSlightyFlatOrSharp:   Int  =  2     // 18 // 2
-    static let kVeryFlatOrSharp:      Int  =  4     // 20 // 4
+    static let kVeryFlatOrSharp:      Int  =  7     // 20 // 4
     static let kFlatOrSharpWrongNote: Int  =  10    // 50 // 10
     
-    static let kUpperPartial:         Int  =  12    // 60 // 12
-    static let kLowerPartial:         Int  =  12    // 60 //12
+    static let kUpperPartial:         Int  =  13    // 60 // 12
+    static let kLowerPartial:         Int  =  13    // 60 //12
     
     static let kNoteDuringRest:       Int  =  18    // 92 // 18
 
     // duration
     static let kSlightyLongOrShort:   Int  =  2     // 10 // 2
     static let kVeryLongOrShort:      Int  =  4     // 20 // 4
-    static let kTooLongOrShort:       Int  =  6     // 30 // 6
+    static let kTooLongOrShort:       Int  =  8     // 30 // 6
     
     
     // Question: Does a missed note also get weighted score in pitch category?
@@ -96,6 +97,7 @@ let kDefaultMaxScore_FourStars:  Int = 5
 let kDefaultMaxScore_ThreeStars: Int = 8
 let kDefaultMaxScore_TwoStars:   Int = 11
 let kDefaultMaxScore_OneStars:   Int = 16
+// SLIDERABLE ^
 
 // Save samples into a collection in the sound object? (useful for debugging)
 // If no, a running sum is used to determine average. (Performance improvement)
@@ -108,18 +110,18 @@ let kNumSamplesToCollect = 300
 // a PerformanceSound. (The sensitivity of the mic is very different for an actual 
 // iOS device vs when using the simulator - which uses the Mac's mic. So this is
 // set dynamically in PerformanceTrackingMgr.init, depending on the device.)
-let kAmpThresholdForIsSound_Sim = 0.07
-let kAmpThresholdForIsSound_HW  = 0.02
+let kAmpThresholdForIsSound_Sim = 0.05 // 0.15  // before MicTracker: 0.07
+let kAmpThresholdForIsSound_HW  = 0.02 // before MicTracker: 0.02 ;  Mic Tracker: 0.12 
 var kAmplitudeThresholdForIsSound = kAmpThresholdForIsSound_HW
 
 // Number of samples to let pass before before beginning to average the pitch, to
 // consider it "stable". Without a little time to settle, pitch average is inaccurate
-let kSamplesNeededToDeterminePitch = 10
+let kSamplesNeededToDeterminePitch = 10  // SLIDERABLE ?
 
 // In legato playing: Number of consecutive samples consistantly not equal to established
 // pitch before considered a different note. (One or two variants in a stable pitch is
 // common, so must have a certain number in a row before commmiting to a new note.)
-let kDifferentPitchSampleThreshold  = 10
+let kDifferentPitchSampleThreshold  = 10 // SLIDERABLE ?
 
 //////   Sound Start Adjustment   ////////////////////////////
 //
@@ -131,8 +133,8 @@ let kDifferentPitchSampleThreshold  = 10
 // (This timing may be different for an actual iOS device vs when using the
 // simulator - which uses the Mac's mic and is running in a virtual machine, etc. So
 // this is set dynamically in PerformanceTrackingMgr.init, depending on the device.)
-let kSoundStartAdjustment_Sim = TimeInterval(0.080) // (0.180)// (0.120)
-let kSoundStartAdjustment_HW  = TimeInterval(0.075)
+let kSoundStartAdjustment_Sim = TimeInterval(0.180) // (0.130) // (0.080) // (0.180)// (0.120)
+let kSoundStartAdjustment_HW  = TimeInterval(0.175) // (0.075)
 var kSoundStartAdjustment = kSoundStartAdjustment_HW
 
 //////   Metronome Adjustment   ////////////////////////////
@@ -144,6 +146,8 @@ var kMetronomeTimingAdjustment:     Int32  = kMetronomeTimingAdjustment_Sim
 let kPlaybackVolume_Sim: Double  = 0.0
 let kPlaybackVolume_HW:  Double  = 1.0
 var kPlaybackVolume:     Double  = kPlaybackVolume_HW
+
+var kRunningInSim           = true
 
 // Given the delay explained above (kSoundStartAdjustment), need to adjust the
 // location of the beginning and end of sounds when displaying them.
@@ -251,8 +255,10 @@ var kIgnoreMissedNotes = false
 // exceed within a Tune or Rhythm exercise. If it does, the exercise is stopped
 // and the student is notified of the error immediately.
 let kStopPerformanceThresholdDefault: UInt = 5
-let kStopPerformanceThresholdMax: UInt = 15
+let kStopPerformanceThresholdMax: UInt = 100
+let kStopPerformanceThresholdNoStop = kStopPerformanceThresholdMax
 var kStopPerformanceThreshold: UInt = kStopPerformanceThresholdDefault
+// SLIDERABLE ^
 
 // Severity -  How bad is the issue. Used to determine color of pulsing circle,
 // Line colors for note display, and perhaps Text in the Video or Alert dialogs.
@@ -262,6 +268,7 @@ let kSeverityNone     = 0
 let kSeverityGreen    = 0
 let kSeverityYellow   = 1
 let kSeverityRed      = 2
+// SLIDERABLE ^
 
 ///////////////////////////////////////////////////////////////////////////////
 // Consts that control debug info display and printing (lots of printing) to 
@@ -275,7 +282,9 @@ let kSeverityRed      = 2
 //      kMKDebugOpt_ShowNotesAnalysis           // Display on AnalysisOverlayView
 //      kMKDebugOpt_ShowSoundsAnalysis          // Display on AnalysisOverlayView
 //
-let kMKDebugOpt_ShowDebugSettingsBtn = true
+var gMKDebugOpt_ShowDebugSettingsBtn = false
+var gMKDebugOpt_ShowFakeScoreInLTAlert = false
+var gMKDebugOpt_TestVideoViewInLessonOverview = false
 
 let kMKDebugOpt_PrintStudentPerformanceDataDebugOutput = false
 let kMKDebugOpt_PrintStudentPerformanceDataDebugSamplesOutput = false

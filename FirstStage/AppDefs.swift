@@ -18,10 +18,16 @@ let kDarkGold   = UIColor(hexString: "#F28044ff")
 let kGold       = UIColor(hexString: "#F0A761ff")
 let kLightGold  = UIColor(hexString: "#FEC362ff")   
 
+let kTanBackgroundColor2 = UIColor(red:   0.15,  green:  0.15,
+                                   blue:  0.15,  alpha:  0.15)
+let kTanBackgroundColor3 = UIColor(red:   1.0,   green:  0.93,
+                                   blue:  0.66,  alpha:  0.15)
+
 let kTanBackgroundColor                 = kTan0
 let kLtTanBackgroundColor1              = UIColor(hexString: "#FFCC77ff")
 let kLtTanBackgroundColor2              = UIColor(hexString: "#FFE6A7ff")
 let kLtTanBackgroundColor3              = UIColor(hexString: "#FFDDAAff")
+let kLtTanBackgroundColor4              = UIColor(hexString: "#E3CB924f")
 
 /////////////////////////////////////////////////////////////
 // App-wide defaults
@@ -37,6 +43,10 @@ let kDefault_BackButtonTextColor        =  UIColor.blue
 
 let kDefault_ButtonBckgrndColor         =  (UIColor.black).withAlphaComponent(0.4)
 let kDefault_ButtonTextColor            =  UIColor.yellow
+
+let kDefault_AlertBackgroundColor       =  kLtTanBackgroundColor4
+
+
 
 ////////////////////////////////////////////////////////////
 // Section/Cell colors

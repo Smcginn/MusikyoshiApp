@@ -484,5 +484,6 @@ typedef NS_ENUM(NSInteger, ScrollType_e) {scroll_off, scroll_system, scroll_bar}
 
 -(void) clearCurrNoteLines;
 -(void) drawCurrNoteLineAt:(CGFloat) iXPos;
+-(void) useSeeScoreCursor:(BOOL) iUseSSCursor;
 
 @end

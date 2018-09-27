@@ -399,9 +399,9 @@ class ScoreMgr {
             let jsonDecoder = JSONDecoder()
             let retreivedData = try? Data(contentsOf:mkScoreFileURL)
             if let jsonString = String(data:retreivedData!, encoding: .utf8) {
-                print("\nLoaded file:\n")
-                print(jsonString)
-                print("\n")
+ //               print("\nLoaded file:\n")
+ //               print(jsonString)
+  //              print("\n")
             }
             currUserScore = try? jsonDecoder.decode(studentScore.self, from: retreivedData!)
             if currUserScore != nil {
@@ -433,9 +433,9 @@ class ScoreMgr {
         if jsonData != nil  {
             if kPrintJsonBeforeWritingToDisk,
                let jsonString = String(data:jsonData!, encoding: .utf8) {
-                print("\nJSON when saving file:\n")
-                print(jsonString)
-                print("\n")
+//                print("\nJSON when saving file:\n")
+ //               print(jsonString)
+//                print("\n")
             }
             try? jsonData!.write(to: mkScoreFileURL, options: .atomic)
         }
@@ -553,9 +553,9 @@ class ScoreMgr {
         if jsonData != nil  {
             try? jsonData!.write(to: mkScoreFileUrl!, options: .atomic)
             if let jsonString = String(data:jsonData!, encoding: .utf8) {
-                print("\nJSON when creating initial Student Score file:\n")
-                print(jsonString)
-                print("\n")
+//                print("\nJSON when creating initial Student Score file:\n")
+//                print(jsonString)
+//                print("\n")
             }
         }
         if fm.fileExists(atPath: mkScoreFilePath) {

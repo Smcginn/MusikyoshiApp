@@ -63,8 +63,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  //       _ = AVAudioSessionManager.sharedInstance.setupAudioSession()
         
         
- //       _ = AVAudioSessionManager.sharedInstance.setupAudioSessionCat()
-        
         NoteService.initNotes()
         
         let entityName = String(describing: UserAttributes.self)
@@ -92,6 +90,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                    aBitToVeryPercentage:    0.085,
                                    veryBoundaryPercentage:  0.05 )// Shawn wants a very wide acceptance
         PerformanceAnalysisMgr.instance.rebuildAllAnalysisTables( tolerances )
+        
+  //      AVAudioSessionManager.sharedInstance.setupAudioSession()
         
         return true
     }

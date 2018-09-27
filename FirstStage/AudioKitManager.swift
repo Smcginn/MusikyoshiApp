@@ -14,11 +14,8 @@ class AudioKitManager: NSObject {
     static var minimumFrequency = AudioKitManager.minTrackingFrequency
     static var maximumFrequency = AudioKitManager.maxTrackingFrequency
 
-    //    var amplitudeTracker: AKAmplitudeTracker!
     var frequencyTracker: AKFrequencyTracker!
-    var microphone: AKMicrophone!
-//    var trumpetSampler: AKSampler!
-//    var ampedTSampler: AKBooster!
+	var microphone: AKMicrophone!
 
     static let sharedInstance = AudioKitManager()
 
@@ -30,135 +27,80 @@ class AudioKitManager: NSObject {
             print("AK:init() - In Simulator")
             kAmplitudeThresholdForIsSound = kAmpThresholdForIsSound_Sim
             kPlaybackVolume = kPlaybackVolume_Sim
+            kAmpDropForNewSound = kAmpDropForNewSound_Sim
+
         } else {
             print("AK:init() - In Real Device")
             kAmplitudeThresholdForIsSound = kAmpThresholdForIsSound_HW
             kPlaybackVolume = kPlaybackVolume_HW
+            kAmpDropForNewSound = kAmpDropForNewSound_HW
         }
-        
-        AKSettings.audioInputEnabled = true
-        
- //       AKSettings.numberOfChannels = 1
-        
-//        let playbackVolume = kPlaybackVolume
-//        let cat = AKSettings.computedSessionCategory()
-//        
-//        let opts = AKSettings.computedSessionOptions()
-//        
-//        let loc_notificationsEnabled = AKSettings.notificationsEnabled ? true : false
-//        let loc_disableAVAudioSessionCategoryManagement = AKSettings.disableAVAudioSessionCategoryManagement ? true : false
-//        let loc_enableRouteChangeHandling = AKSettings.enableRouteChangeHandling ? true : false
-//        let loc_enableCategoryChangeHandling = AKSettings.enableCategoryChangeHandling ? true : false
-//        let loc_appSupportsBackgroundAudio = AKSettings.appSupportsBackgroundAudio ? true : false
-      
-        print("yo")
     }
 
     func enabledForcedReSetup() {
-        print("\n AudioKitManager.enabledForcedReSetup() called \n")
+        print("\nAudioKitManager.enabledForcedReSetup() called \n")
         isSetup = false
-        AudioKit.stop()         // NEW Since Toehold
-        microphone = nil        // NEW Since Toehold
-        frequencyTracker = nil  // NEW Since Toehold
+//        AudioKit.stop()         // NEW Since Toehold
+//        microphone = nil        // NEW Since Toehold
+ //       frequencyTracker = nil  // NEW Since Toehold
     }
     
-    func setup() {
-        guard !isSetup else { return }
-        isSetup = true
-        
-//        if frequencyTracker != nil {
-//            frequencyTracker.stop()
-//        }
-//        if microphone != nil {
-//            microphone.stop()
-//        }
+
+    func setupForUsingMic() {
         AudioKit.stop()
-        //monitor
-        
         print("\n\n          In AudioKitManager.setup, rebuilding everything, recreating Mic, Tracker, etc.\n\n")
+
         microphone = AKMicrophone()
         frequencyTracker = AKFrequencyTracker(microphone, hopSize: 200, peakCount: 300)
-        print("frequencyTracker == \(frequencyTracker)")
+         print("frequencyTracker == \(frequencyTracker)")
         
-        // was:
-        // let ampedFTrack = AKBooster(frequencyTracker, gain: 0.0 )
-        let ampedFTrack = AKBooster(frequencyTracker, gain: 1.0 ) // kPlaybackVolume) // was 0.0
+        let ampedFTrack = AKBooster(frequencyTracker, gain: 0.0 )
+        AudioKit.output = ampedFTrack  // so there is no putput while using the mic
 
-        //        amplitudeTracker = AKAmplitudeTracker(microphone)
-        //        let ampedATrack = AKBooster(amplitudeTracker, gain: 0.0)
-
-//        //play
-//        trumpetSampler = AKSampler()
-//        trumpetSampler.loadWav("trumpetShort2")
-//        ampedTSampler = AKBooster(trumpetSampler, gain: 3.0)
-
-        //        let mixed = AKMixer(ampedFTrack, ampedATrack, ampedTSampler)
-//        let mixed = AKMixer(ampedFTrack, ampedTSampler)
-//        AudioKit.output = mixed
-        AudioKit.output = ampedFTrack
-        
-       //  try AKSettings.sharedInstance().setCategory( category: AVAudioSessionCategoryPlayAndRecord,
-        //                                             with: AVAudioSessionCategoryOptions.mixWithOthers )
-        
-//        try AKSettings.setSession(category: .playAndRecord, with: AVAudioSessionCategoryOptions.defaultToSpeaker)
-        
-        
         AudioKit.start()
-        print("\n\n@@@@@     AudioKit started (in setup method)\n")
-
-        // I switched the order of these two:       SCF
+        frequencyTracker?.start()
         microphone.start()
-        frequencyTracker.start()
-        //can do:
-        //        aTracker.start()
-        //        aTracker.stop()
-        //        tSampler.playNote(70)
 
         isRunning = true
- 
-        AKSettings.defaultToSpeaker = true
-        do {
-            
-            //  try AKSettings.setSession(category: .playAndRecord, with:  AVAudioSessionCategoryOptions.defaultToSpeaker)
-            
-            let session = AVAudioSession.sharedInstance()
-            try session.setCategory(AVAudioSessionCategoryPlayAndRecord)
-            
-            if !AKSettings.headPhonesPlugged {
-                try session.overrideOutputAudioPort(AVAudioSessionPortOverride.speaker)
-            }
-        } catch {
-            print("Errored setting category.")
-        }
-
+        isSetup = true
+    }
     
-    
+    func shutDownMicWorkMode() {
+        
     }
 
-    func start() {
+    func start(forRecordToo: Bool) {
+        
+        return;
+        
+        
         guard !isRunning
             else { return }
-        AudioKit.start()
+        print("\n@@@@@     About to call AudioKit.start, then mic, then freqT")
+ //       AudioKit.start()
         print("\n\n@@@@@     AudioKit started (in start method)\n")
         isRunning = true
     }
 
     func stop() {
+        print("\n@@@@@       In AudioKit.stop() ! \n")
+        
+        if frequencyTracker != nil {
+            frequencyTracker.stop()
+        }
+        if microphone != nil {
+            microphone.stop()
+        }
+        
         AudioKit.stop()
-        print("\n@@@@@     AudioKit stopped (in stop method)\n\n")
-        isRunning = false
+        frequencyTracker = nil
+        microphone       = nil
+        
+        
+        return;
+        
+//        isRunning = false
     }
-
-//    func playNote(noteID: Int, duration: Double) {
-//        print("playNote \(noteID - 2)")
-//        ampedTSampler.gain = 3.0
-//        trumpetSampler.play(noteNumber: noteID - 2)
-//        delay(duration, closure: {
-//            self.ampedTSampler.gain = 0.0
-//            self.trumpetSampler.stop(noteNumber: noteID - 2)
-//        })
-//    }
-
 }
 
 //class AudioKitManager: NSObject {

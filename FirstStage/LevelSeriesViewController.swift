@@ -70,6 +70,24 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
         tableView.reloadData()
         
         navigationBar.topItem?.title = "Levels"
+        
+        testBPM()
+    }
+    
+    func testBPM() {
+        let currBPM = UserDefaults.standard.double(forKey: Constants.Settings.BPM)
+        
+        let wholeLen  = 4.0 * PerfTrkMgr.instance.qtrNoteTimeInterval
+        let halfLen   = 2.0 * PerfTrkMgr.instance.qtrNoteTimeInterval
+        let eighthLen = 0.5 * PerfTrkMgr.instance.qtrNoteTimeInterval
+        
+        print("\n============================================================")
+        print("   BPM Tests, at \(currBPM) BPM:")
+        print("         WholeLen:   \(wholeLen)")
+        print("         HalfLen:    \(halfLen)")
+        print("         QtrLen:     \(PerfTrkMgr.instance.qtrNoteTimeInterval)")
+        print("         EighthLen:  \(eighthLen)")
+        print("============================================================\n")
     }
     
     override func didReceiveMemoryWarning() {
@@ -180,7 +198,7 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
         
         let section = indexPath.section
         let row = indexPath.row
-        print ("in cellForRowAt;  section = \(section),  row = \(row)")
+ //       print ("in cellForRowAt;  section = \(section),  row = \(row)")
         if isSelectedCell(indexPath:indexPath) {
         // if cell.isSelected {
             cell.contentView.backgroundColor = kDefault_SelectCellBkgrndColor
@@ -223,7 +241,70 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
         return indexPath
     }
     
+
+    // For Viedo Testing.  Invoked if kMKDebugOpt_TestVideoViewInLessonOverview is true
+    var vhView: VideoHelpView?
+    let vhViewTag = 901 // just something unique
+    var popVC: PopoverVC?
+
+    func createVideoHelpView() {
+        /*  Modal attempt
+        if self.popVC == nil {
+            let sz = VideoHelpView.getSize()
+            let selfViewFrame = self.view.frame
+            var selfVwWd = selfViewFrame.size.width
+            var selfVwht = selfViewFrame.size.height
+            if selfVwht > selfVwWd {
+                let tempHt = selfVwht
+                selfVwht = selfVwWd
+                selfVwWd = tempHt
+            }
+            let horzSpacing = (selfVwWd - sz.width) / 2
+            let x = horzSpacing * 1.75
+            let frm = CGRect( x: x, y:40, width: sz.width, height: sz.height )
+            self.popVC = PopoverVC.init(rect: frm)
+        }
+        */
+
+        if self.vhView == nil {
+            let sz = VideoHelpView.getSize()
+            let horzSpacing = (self.view.frame.width - sz.width) / 2
+            let x = horzSpacing * 1.75
+            let frm = CGRect( x: x, y:40, width: sz.width, height: sz.height )
+            self.vhView = VideoHelpView.init(frame: frm)
+            self.vhView?.tag = vhViewTag
+            self.view.addSubview(self.vhView!)
+        }
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+ 
+        if gMKDebugOpt_TestVideoViewInLessonOverview { // For Video Testing.
+            if indexPath.row == 1 {
+                if vhView == nil {
+                    createVideoHelpView()
+                }
+
+                vhView?.videoID = vidIDs.kVid_Pitch_VeryLow_SpeedUpAir
+                vhView?.showVideoVC()
+
+                /*  Modal attempt
+                if self.popVC == nil {
+                    self.createVideoHelpView()
+                }
+                if self.popVC != nil && self.popVC?.vhView != nil {
+                    self.popVC?.vhView?.videoID = vidIDs.kVid_Pitch_VeryLow_SpeedUpAir // vidIDs.kVid_Pitch_VeryLow_SpeedUpAir // videoID
+                    self.popVC?.vhView?.showVideoVC()
+                    self.popVC?.modalPresentationStyle = .popover
+                    self.present((self.popVC!), animated: true, completion: nil)
+                    //                    self.popVC!.popoverPresentationController?.sourceView = view
+                    //                    self.popVC!.popoverPresentationController?.sourceRect = sender.frame
+                }
+                */
+                return
+            }
+        }
+        
         //Here we are going to seguae to the lesson that the user selected
         //performSegue(withIdentifier: "LessonSegue", sender: indexPath.row)  // PPPproblem!!!!!
         let selectedCell:UITableViewCell? = tableView.cellForRow(at: indexPath)!

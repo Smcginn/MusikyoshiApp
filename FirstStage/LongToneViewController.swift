@@ -8,6 +8,8 @@
 //
 
 import UIKit
+import AVFoundation
+import AudioKit
 
 enum enharmonicSpelling {
     case displayAsNatural
@@ -417,7 +419,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
 //        let kLongtone_ButtonTextColor           =  kDefault_ButtonTextColor
 
         // AK_ISSUE was: (comment 1 line below)
-        AudioKitManager.sharedInstance.setup()  // SFAUDIO
+ //       AudioKitManager.sharedInstance.setup()  // SFAUDIO
         
         // AK_ISSUE - now:   (uncomment 4 lines below)
 //        if !AudioKitManager.sharedInstance.isRunning {
@@ -444,16 +446,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
             targetTime = 60.0
             timerLbl.text = String(format: "Current Record: %.2f", currPersBest)
 
-            if currPersBest > 0.0 {
-                self.feedbackLbl.text =
-                    String(format: "See if you can beat your current record",
-                                   currPersBest)
-            } else {
-                self.feedbackLbl.text = "See how long you can play the note"
-            }
-            self.feedbackLbl.isHidden = false
-            
-            // updateTimerText()
+            setTargetTimeIfDoingPersonalBest(setLabels: true)
             print("In Longtone;   doingPersonalRecord is true")
         }
       
@@ -500,9 +493,17 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
         
         self.view.backgroundColor = kLongtone_BackgroundColor
         self.guideTextView.backgroundColor  = kLongtone_BackgroundColor
+        self.guideTextView.isHidden = true // per Shawn's request
+        
         if kLongtone_DoSetVisPanelColor {
             self.visualizationPanel.backgroundColor = kLongtone_VisPanelBkgrndColor
         }
+        
+        NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(handleAVAudioInterruption(_:)),
+                name: NSNotification.Name.AVAudioSessionInterruption,
+                object: self)
     }
     
     func setupStarScoreStuff() {
@@ -538,36 +539,12 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
 
     }
     
-//    func createAttributedText(str: String, fontSize: CGFloat) -> NSMutableAttributedString {
-//        let paragraphStyle = NSMutableParagraphStyle()
-//        paragraphStyle.alignment = NSTextAlignment.center
-//        let retAttrStr =
-//            NSMutableAttributedString(
-//                string: str,
-//                attributes: [
-//                    NSAttributedStringKey.font:UIFont( name: "Marker Felt",
-//                                                       size: fontSize)!,
-//                    NSAttributedStringKey.paragraphStyle: paragraphStyle] )
-//        if retAttrStr.length == 0 {
-//            print ("Unable to create NSMutableAttributedString in createAttributedText()")
-//        }
-//
-//        return retAttrStr
-//    }
-//
-
     override func viewWillAppear(_ animated: Bool) {
         AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight)
+        ssScrollView.useSeeScoreCursor(false)
     }
     
     override func viewWillDisappear(_ animated : Bool) {
-        
-//        ScoreMgr.instance.currentExerciseState = kLDEState_Completed
-//        ScoreMgr.instance.saveCurrentExercise()
-//        _ = ScoreMgr.instance.saveScoreFile()
-        
- //       let btnState = playBtn.isEnabled
-        
         super.viewWillDisappear(animated)
         AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
     }
@@ -784,7 +761,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
 
             // AK_ISSUE - did not change this
             // start playing if not playing   SFAUDIO
-            if AVAudioSessionManager.sharedInstance.setupAudioSession() {
+            if AVAudioSessionManager.sharedInstance.setupAudioSession(sessionMode: .playbackMode) {
                 print("setupAudioSession == true")
                 playData?.clearLoop()
                 
@@ -975,7 +952,8 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
         balloon.reset()
         numTimesWrongPitch = 0
         numTimesNoSound = 0
-        AudioKitManager.sharedInstance.start()
+        //AudioKitManager.sharedInstance.start(forRecordToo:false)
+        _ = AVAudioSessionManager.sharedInstance.setupAudioSession(sessionMode: .usingMicMode)
         firstTimeAfterAKRestart = true // AK_ISSUE  added
         
         print("\n    In startExercise, startTime == \(startTime)\n")
@@ -983,9 +961,36 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
         if targetTime > 5.0 {
             additionalTime += targetTime/3.0
         }
-        longToneEndTime =
-            Date().timeIntervalSince(startTime) + targetTime + additionalTime // 2.0
+        longToneEndTime = Date().timeIntervalSince(startTime) + targetTime + additionalTime
+        if doingPersonalRecord {
+            longToneEndTime += 30.0
+        }
         timer = Timer.scheduledTimer(timeInterval: pitchSampleRate, target: self, selector: #selector(LongToneViewController.updateTracking), userInfo: nil, repeats: true)
+    }
+    
+    func setTargetTimeIfDoingPersonalBest(setLabels: Bool) {
+        currPersBest =
+            LessonScheduler.instance.getPersonalBestTime(forNoteID: targetNoteID)
+        timerLbl.text = String(format: "Current Record: %.2f", currPersBest)
+        
+        if currPersBest > 0.0 {
+            if currPersBest <= 10.0 {
+                targetTime = 2 * currPersBest
+            } else {
+                targetTime = 1.5 * currPersBest
+            }
+            if setLabels {
+                self.feedbackLbl.text =
+                    String(format: "See if you can beat your current record",
+                           currPersBest)
+            }
+        } else {
+            targetTime = 5.0
+            if setLabels {
+                self.feedbackLbl.text = "See how long you can play the note"
+            }
+        }
+        self.feedbackLbl.isHidden = false
     }
     
     func stopExercise(){
@@ -1008,6 +1013,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
                 LessonScheduler.instance.setPersonalBestTime(forNoteID: targetNoteID,
                                                              newPersBest: elapsed)
                 _ = LessonScheduler.instance.saveScoreFile()
+                setTargetTimeIfDoingPersonalBest(setLabels: false)
                 feedbackLbl.text = "Great!!!   Best Ever!!!"
                 feedbackLbl.isHidden = false
                 switchExerState(newState: kLTExerState_TryAgain)
@@ -1110,8 +1116,12 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
         
         print("frequencyTracker == \(AudioKitManager.sharedInstance.frequencyTracker)")
 
-        let amplitude = AudioKitManager.sharedInstance.frequencyTracker.amplitude
-        let frequency = AudioKitManager.sharedInstance.frequencyTracker.frequency
+        var amplitude = 0.0
+        var frequency = 0.0
+        if AudioKitManager.sharedInstance.frequencyTracker != nil {
+            amplitude = AudioKitManager.sharedInstance.frequencyTracker.amplitude
+            frequency = AudioKitManager.sharedInstance.frequencyTracker.frequency
+        }
         
         // AK_ISSUE  -- just printing data, nos real audio changes
         if firstTimeAfterAKRestart {
@@ -1128,7 +1138,6 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
         print ("----> Current Frequency: \(frequency)")
         print ("----> Current Amplitude: \(amplitude)")
 
-
         if amplitude > kAmplitudeThresholdForIsSound {
             if minPitch...maxPitch ~= frequency {
                 if lowPitchThreshold...highPitchThreshold ~= frequency {
@@ -1138,7 +1147,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
                     clearArrowAndPrompt()
                     hasNoteStarted = true
                     currentTime += pitchSampleRate
-                    if currentTime >= targetTime {
+                    if currentTime >= targetTime && !doingPersonalRecord {
                         isExerciseSuccess = true
                         stopExercise()
                         return
@@ -1320,19 +1329,30 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
         ac.addAction(UIAlertAction(title: "Exit Anyway",
                                    style: .default,
                                    handler: exitWithoutSaveHandler))
-        ac.addAction(UIAlertAction(title: "(Fake Score)",
-                                   style: .default,
-                                   handler: fakeScoreHandler))
+        if gMKDebugOpt_ShowFakeScoreInLTAlert {
+            ac.addAction(UIAlertAction(title: "(Fake Score)",
+                                       style: .default,
+                                       handler: fakeScoreHandler))
+        }
+        ac.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = kDefault_AlertBackgroundColor
 
-//        func handler(_ act: UIAlertAction) {
-//            playTuneBtn.setTitle("Play \(selectedTuneName)", for: UIControlState())
-//        }
-        
- //       ac.setValue(vc, forKey: "contentViewController")
- 
         self.present(ac, animated: true, completion: nil)
         
         print("After alert presenting")
     }
+ 
+    @objc func handleAVAudioInterruption(_ n: Notification) {
+        print("In LongTones::handleAVAudioInterruption")
+        guard let why = n.userInfo?[AVAudioSessionInterruptionTypeKey] as? UInt else { return }
+        guard let type = AVAudioSessionInterruptionType(rawValue: why) else { return }
+        if type == .began {
+            if synth != nil && (synth?.isPlaying)! {
+                synth?.reset()
+            }
+        }
+    }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 }

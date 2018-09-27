@@ -61,6 +61,7 @@ class PerformanceTrackingMgr {
     let rhythmAnalyzer = NoteRhythmPerformanceAnalyzer.init()
     let pitchAnalyzer  = TrumpetPitchPerformanceAnalyzer.init()
     let restAnalyzer   = RestPerformanceAnalyzer.init()
+    let sampleAmplitudeTrkr = PerfSampleAmplitudeTracker()
 
     
     init() {
@@ -68,18 +69,22 @@ class PerformanceTrackingMgr {
             UserDefaults.standard.double(forKey: Constants.Settings.TimingThreshold)
         if UIDevice.current.modelName == "Simulator" {
             print("In Simulator")
+            kRunningInSim = true
             kAmplitudeThresholdForIsSound = kAmpThresholdForIsSound_Sim
             kSoundStartAdjustment = kSoundStartAdjustment_Sim
+            kMetronomeTimingAdjustment = kMetronomeTimingAdjustment_Sim
         } else {
             print("In Real Device")
+            kRunningInSim = false
             kAmplitudeThresholdForIsSound = kAmpThresholdForIsSound_HW
             kSoundStartAdjustment = kSoundStartAdjustment_HW
+            kMetronomeTimingAdjustment = kMetronomeTimingAdjustment_HW
         }
     }
-    
+
     ///////////////////////////////////////////////////////////////////////////
     //
-    //  MARK:      PerformanceNote and PerformanceRest related
+    //  MARK: -     PerformanceNote and PerformanceRest related
     //
     ///////////////////////////////////////////////////////////////////////////
     
@@ -101,7 +106,7 @@ class PerformanceTrackingMgr {
 
     ///////////////////////////////////////////////////////////////////////////
     //
-    //  MARK:      PerformanceSound related
+    //  MARK: -    PerformanceSound related
     //
     ///////////////////////////////////////////////////////////////////////////
     
@@ -147,7 +152,7 @@ class PerformanceTrackingMgr {
         if let soundsNote = currSound.linkedNoteObject {
             soundsNote.setActualEndTimeAbs( endTimeAbs: soundEndTime )
         }
-        
+        print("\n\nSound #\(currSound.soundID) stopped bc sound stopped at (comp) \(currSound._endTime_comp)\n\n")
         currSound.printSoundResults()
         currentSound = nil
         currentlyTrackingSound = false
@@ -173,8 +178,47 @@ class PerformanceTrackingMgr {
     }
     
     ///////////////////////////////////////////////////////////////////////////
+    // MARK: - Amplitude tracking
+    
+    func addAmplitudeValue( ampVal: tSoundAmpVal, absTime: TimeInterval ) {
+        sampleAmplitudeTrkr.enqueue(ampVal, absTime)
+    }
+    
+    // returns true if should stop the current sound, and create a new one
+    func isANewNoteBCofAmpChange() -> Bool {
+        //return sampleAmplitudeTrkr.isDiffNoteBCofAmpChange()
+        return sampleAmplitudeTrkr.doCreateNewSound
+    }
+    
+    // returns true if should stop the current sound, and signal is
+    // not strong enough for new sound
+    func isDeadSound() -> Bool {
+        return sampleAmplitudeTrkr.isDiffNoteBCofAmpChange()
+    }
+    
+    func resetAmpTracker() {
+        sampleAmplitudeTrkr.reset()
+    }
+    
+    func currentSoundWillEnd() -> Bool {
+        return sampleAmplitudeTrkr.currSoundIsDead
+    }
+    
+    func currentSoundFinished() -> Bool {
+        return sampleAmplitudeTrkr.finished
+    }
+    
+    var pitchForNewSound: Double = 0.0
+    
+    var absTimeForNewSound: Double {
+        return sampleAmplitudeTrkr.killSoundTime
+    }
+    
+    ///////////////////////////////////////////////////////////////////////////
     //
-    // Vars/settings relating to the beginning of analysis, and the start of 
+    // MARK: - Misc Vars, Settings for determining begin/end of sound, etc.
+    //
+    // Vars/settings relating to the beginning of analysis, and the start of
     // song playback (slightly different times). These are used for determining
     // beginning and end of a Sound, and therefore, if a Note is linked to a
     // Sound, the beginning and suration of a Note.
@@ -217,7 +261,7 @@ class PerformanceTrackingMgr {
     
     ///////////////////////////////////////////////////////////////////////////
     //
-    //  MARK:      Miscellaneous funcs . . .
+    //  MARK: -      Miscellaneous funcs . . .
     //
     ///////////////////////////////////////////////////////////////////////////
     
@@ -450,8 +494,8 @@ class PerformanceTrackingMgr {
 
     ///////////////////////////////////////////////////////////////////////////
     //
-    //  MARK:      Funcs for finding a Sound or a Note in arrays, 
-    //             using various criteria
+    //  MARK: -      Funcs for finding a Sound or a Note in arrays,
+    //               using various criteria
     //
     ///////////////////////////////////////////////////////////////////////////
     
@@ -547,8 +591,8 @@ func currentSongTime() -> TimeInterval {
 
 /////////////////////////////////////////////////////////////////////////
 //
-//  MARK:   Helper functions for working with Pitch change detection, 
-//          and MusicXML and Time Intervals
+//  MARK: -  Helper functions for working with Pitch change detection,
+//           and MusicXML and Time Intervals
 //
 /////////////////////////////////////////////////////////////////////////
 

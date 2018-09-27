@@ -263,8 +263,9 @@ class LessonScheduler
         guard exerNum < exercisesData.count else { return "No Entries in exercisesData" }
         let exerEntry = exercisesData[exerNum]
         
-        retStr = getTextForExerciseType(exerType: exerEntry.exerType)
-        retStr += " - "
+        retStr = ""
+//        retStr = getTextForExerciseType(exerType: exerEntry.exerType)
+//        retStr += " - "
         if  exerEntry.exerType == .rhythmPartyExer   ||
             exerEntry.exerType == .rhythmPrepExer    ||
             exerEntry.exerType == .lipSlurExer       ||
@@ -273,9 +274,11 @@ class LessonScheduler
             exerEntry.exerType == .tuneExer
         {
             let tuneFI = getTuneFileInfo(forFileCode: exerEntry.exerCodeStr)
-            retStr += "\"" + tuneFI.title + "\""
+            //retStr += "\"" + tuneFI.title + "\""
+            retStr += tuneFI.title
         } else if exerEntry.exerType == .longtoneExer {
             let ltInfo:longtoneExerciseInfo = getLongtoneInfo(forLTCode: exerEntry.exerCodeStr)
+            //retStr = "Long Tone - Play a \(ltInfo.note) for \(ltInfo.durationSecs) Seconds"
             retStr = "Long Tone - Play a \(ltInfo.note) for \(ltInfo.durationSecs) Seconds"
         } else if exerEntry.exerType ==  .longtoneRecordExer {
             let ltInfo:longtoneExerciseInfo = getLongtoneRecordInfo(forLTCode: exerEntry.exerCodeStr)

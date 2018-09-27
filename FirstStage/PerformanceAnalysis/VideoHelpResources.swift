@@ -149,10 +149,10 @@ func getVeryHighIdx() -> Int {
     let retIdx = gVeryHighIdx
     switch gVeryHighIdx {
     case vidIDs.kVid_Pitch_VeryHigh_DoubleCheckFingering:
-        gUpperPartialIdx = vidIDs.kVid_Pitch_VeryHigh_RelaxEembouchure
+        gVeryHighIdx = vidIDs.kVid_Pitch_VeryHigh_RelaxEembouchure
     case vidIDs.kVid_Pitch_VeryHigh_RelaxEembouchure: fallthrough
     default:
-        gUpperPartialIdx = vidIDs.kVid_Pitch_VeryHigh_DoubleCheckFingering
+        gVeryHighIdx = vidIDs.kVid_Pitch_VeryHigh_DoubleCheckFingering
     }
     return retIdx
 }
@@ -162,12 +162,12 @@ func getVeryLowIdx() -> Int {
     let retIdx = gVeryLowIdx
     switch gVeryLowIdx {
     case vidIDs.kVid_Pitch_VeryLow_SpeedUpAir:
-        gUpperPartialIdx = vidIDs.kVid_Pitch_VeryLow_CurveLipsIn
+        gVeryLowIdx = vidIDs.kVid_Pitch_VeryLow_CurveLipsIn
     case vidIDs.kVid_Pitch_VeryLow_CurveLipsIn:
-        gUpperPartialIdx = vidIDs.kVid_Pitch_VeryLow_ResetWithBEmb_Mirror
+        gVeryLowIdx = vidIDs.kVid_Pitch_VeryLow_ResetWithBEmb_Mirror
     case vidIDs.kVid_Pitch_VeryLow_ResetWithBEmb_Mirror: fallthrough
     default:
-        gUpperPartialIdx = vidIDs.kVid_Pitch_VeryLow_SpeedUpAir
+        gVeryLowIdx = vidIDs.kVid_Pitch_VeryLow_SpeedUpAir
     }
     return retIdx
 }
@@ -274,6 +274,11 @@ let kVidURL_Sound_SoundDuringRest
 // Called by the video popup.
 func getURLForVideoID(_ vidID: Int ) -> URL? {
     var retURL: URL? = nil
+    
+    // For debugging, always reutrns a specific video file.
+    //    retURL = Bundle.main.url( forResource:   kVidURL_Dur_TooShort.0,
+    //                              withExtension: kVidURL_Dur_TooShort.1 )
+    //    return retURL
     
     switch vidID {
     case vidIDs.kVid_Attack_Early_WaitABit:
