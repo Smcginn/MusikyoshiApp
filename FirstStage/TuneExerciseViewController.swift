@@ -251,16 +251,19 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
         self.view.backgroundColor = kTuneExer_BackgroundColor
         coverSeeScoreBtnView.backgroundColor = kTuneExer_BackgroundColor
         
-        // orientation BS
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.orientationLock = .landscape
- 
+        // Orientation BS - TuneExeciseVC --> viewDidLoad
+        let appDel = UIApplication.shared.delegate as! AppDelegate
+        appDel.orientationLock = .landscapeRight
+        AppDelegate.AppUtility.lockOrientationToLandscape()
+//        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight,
+//                                               andRotateTo: UIInterfaceOrientation.landscapeRight)
+
         if exerciseType == .rhythmPartyExer {
             title = "Rhythm Party!"
             infoLabel.text = "Clap at the beginning of each note and count the beats"
         } else if exerciseType == .rhythmPrepExer {
             title = "Rhythm Prep"
-            infoLabel.text = "Play along, choose any note; ignore pitch"
+            infoLabel.text = "Play the notes"
         } else {
             title = "Tune"
             infoLabel.text = "Play the notes"
@@ -319,7 +322,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
         case .rhythmPartyExer:
             setPerfIssueSortCriteria( sortCrit: .byAttackRating )
         case .rhythmPrepExer:
-            setPerfIssueSortCriteria( sortCrit: .byAttackAndDurationRating )
+            setPerfIssueSortCriteria( sortCrit: .byIndividualRating )
         default:
             setPerfIssueSortCriteria( sortCrit: .byIndividualRating )
         }
@@ -402,8 +405,24 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
         }
     }
     
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        // return .landscapeRight
+        
+        // override func supportedInterfaceOrientations() -> Int {
+        return UIInterfaceOrientationMask.landscapeRight // .rawValue
+    }
+    override var shouldAutorotate: Bool {
+        return false
+    }
+
     override func viewWillAppear(_ animated: Bool) {
-        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight)
+        // Orientation BS - LongToneVC --> viewWillAppear
+        let appDel = UIApplication.shared.delegate as! AppDelegate
+        appDel.orientationLock = .landscapeRight
+        AppDelegate.AppUtility.lockOrientationToLandscape()
+//        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight,
+//                                               andRotateTo: UIInterfaceOrientation.landscapeRight)
+
         PerfScoreObjScheduler.instance.setVC(vc: self)
         setAnalysisCriteria( exerType: self.exerciseType )
 
@@ -425,7 +444,14 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
             vhView = nil
         }
         super.viewWillDisappear(animated)
-        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
+        
+        // Orientation BS - TuneExeciseVC --> viewWillDisappear
+        //AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
+        let appDel = UIApplication.shared.delegate as! AppDelegate
+        appDel.orientationLock = .landscapeRight
+        AppDelegate.AppUtility.lockOrientationToLandscape()
+//       AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight,
+//                                               andRotateTo: UIInterfaceOrientation.landscapeRight)
     }
 
     override func didReceiveMemoryWarning() {
@@ -672,7 +698,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
 //                forVidPlayback = true
             }
             
-            sessionMode = .usingMicMode // .playbackMode
+            //sessionMode = .usingMicMode // .playbackMode
             if AVAudioSessionManager.sharedInstance.setupAudioSession(sessionMode: sessionMode) {
 //                if !playingSynth {
 //                    _ = AVAudioSessionManager.sharedInstance.extraSetupForCountdown(turnSpeakerOn: true)
@@ -724,7 +750,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
 
                 var err = synth?.setup(playData)
                 if err == sscore_NoError {
-                    let delayInSeconds = 2.0
+                    let delayInSeconds = 3.0 // 9/29/18 SCF tried this, hoping reason 6/8 not working . . .
                     let startTime = DispatchTime.now() + DispatchTimeInterval.milliseconds(Int(delayInSeconds * 1000.0))
 //                    let startTime = DispatchTime.now() + Double(Int64(delayInSeconds * NSEC_PER_SEC)) / Double(NSEC_PER_SEC)
                     err = synth?.start(at: startTime.rawValue, bar: cursorBarIndex, countIn: true)
@@ -1163,6 +1189,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
                 currSound.addPitchSample(pitchSample: currFreq) // Just update, no qualifying
 
             } else { // sound with stable pitch exists
+                var soundStopped = false
                 if perfTrkgMgr.currentSoundWillEnd() { // one way or the other
                     print ("   !!   Sound finished at: \(timeSinceSongStart)   !!")
                     if perfTrkgMgr.currentSoundFinished() &&
@@ -1171,6 +1198,8 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
                         print ("\n !!   Stopping Sound, creating new bc of amplitude drop at: \(timeSinceSongStart)   !!\n")
                         stopCurrentSound( soundEndTime: soundStartTIme )
                     }
+                    soundStopped = true
+                    
 //                } else
 //
 //               // First, test for new note either bc of amp or pitch change
@@ -1179,7 +1208,9 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
 //                    print ("\n   !!   New Note bc of amplitude drop   !!\n")
                 }
                 
-                /* else { // not a new note bc of Amp change
+                // Not a new note bc of Amp change (if soundStopped remains false).
+                // Check for a new note because of a pitch change during legato playing.
+                if !soundStopped && gScanForPitchDuringLegatoPlaying {
                     let oldFreq = currSound.averagePitchRunning
                     if areDifferentNotes( pitch1: oldFreq, pitch2: currFreq ) {
                         // The student could be playing legato, transitioning to diff note.
@@ -1254,8 +1285,8 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
                     else { // pitch is same as current sound a verage, so just update.
                         currSound.addPitchSample(pitchSample: currFreq)
                     }
-                } // not a new note bc of Amp change
- */
+                } // not a new note bc of Amp change; Check pitch change during legato playing
+
             } // else - sound with stable pitch exists
         } // signalDetected &&  currentlyTrackingSound
 
@@ -2480,11 +2511,23 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
         }
         */
         
+        let scrnW    = ScreenSize.SCREEN_WIDTH
+        let scrnH    = ScreenSize.SCREEN_HEIGHT
+        let scrnMaxL = ScreenSize.SCREEN_MAX_LENGTH
+        let scrnMinL = ScreenSize.SCREEN_MIN_LENGTH
+        
+        // 6s: 667, 375
+        // SE: 568, 320
+        
         if self.vhView == nil {
             let sz = VideoHelpView.getSize()
             let horzSpacing = (self.view.frame.width - sz.width) / 2
             let x = horzSpacing * 1.75
-            let frm = CGRect( x: x, y:40, width: sz.width, height: sz.height )
+            var y = CGFloat(40.0)
+            if DeviceType.IS_IPHONE_5orSE {
+                y = 25.0
+            }
+            let frm = CGRect( x: x, y:y, width: sz.width, height: sz.height )
             self.vhView = VideoHelpView.init(frame: frm)
             self.vhView?.tag = vhViewTag
             self.view.addSubview(self.vhView!)
@@ -2597,6 +2640,9 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
     }
 
     func animateMonkeyImageView() {
+        return;
+        
+        
         if monkeyImageView == nil {
             buildMonkeyImageView()
         }

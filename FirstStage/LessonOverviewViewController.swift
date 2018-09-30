@@ -162,7 +162,7 @@ class LessonOverviewViewController: UIViewController, UIPickerViewDelegate, UIPi
         picker.dataSource = self
         vc.view.addSubview(picker)
         
-        let ac = UIAlertController(title: "Choose a tune for Rhythm", message: "", preferredStyle: .alert)
+        let ac = MyUIAlertController(title: "Choose a tune for Rhythm", message: "", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         func handler(_ act: UIAlertAction) {
@@ -188,7 +188,7 @@ class LessonOverviewViewController: UIViewController, UIPickerViewDelegate, UIPi
         picker.dataSource = self
         vc.view.addSubview(picker)
         
-        let ac = UIAlertController(title: "Choose a Tune", message: "", preferredStyle: .alert)
+        let ac = MyUIAlertController(title: "Choose a Tune", message: "", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         func handler(_ act: UIAlertAction) {

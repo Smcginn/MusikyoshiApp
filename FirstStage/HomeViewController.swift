@@ -130,7 +130,7 @@ class HomeViewController: UIViewController {
         ChallengeBtn.isEnabled = false
         ChallengeBtn.roundedButton()
         ChallengeBtn.backgroundColor = kDefault_ButtonBckgrndColor
-        let challengeTxt = createAttributedText(str: "Challenge",
+        let challengeTxt = createAttributedText(str: "Challenge Another Player!",
                                               fontSize: 16)
         ChallengeBtn.titleLabel?.attributedText = challengeTxt
         ChallengeBtn.setTitleColor(UIColor.lightText, for: .disabled)

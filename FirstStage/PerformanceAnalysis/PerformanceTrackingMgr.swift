@@ -462,7 +462,7 @@ class PerformanceTrackingMgr {
         }
         scoreObj.constructSummaryMsgString( msgString: &msgStr )
         
-        let alert = UIAlertController( title: titleStr,
+        let alert = MyUIAlertController( title: titleStr,
                                        message: msgStr,
                                        preferredStyle: .alert )
         

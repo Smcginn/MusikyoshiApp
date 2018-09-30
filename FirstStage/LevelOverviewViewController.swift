@@ -20,6 +20,7 @@ protocol ExerciseResults {
 
 class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ViewFinished, ExerciseResults {
 
+    var allDoneAlert: MyUIAlertController? = nil
     var launchingNextView: LaunchingNextView?
     var firstExer = true
     var exercisesDone = false
@@ -77,16 +78,28 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
     var actionNotes = [Note]()
     var selectedNote : Note?
     
-    // orientation BS
-    let appDel = UIApplication.shared.delegate as! AppDelegate
+    // MARK: - View load, show, hide, etc.
     
-    
+    override func viewWillDisappear(_ animated : Bool) {
+        super.viewWillDisappear(animated)
+        
+        // Orientation BS - LevelOverviewVC --> viewWillDisappear
+        let appDel = UIApplication.shared.delegate as! AppDelegate
+        appDel.orientationLock = .landscapeRight
+        AppDelegate.AppUtility.lockOrientationToLandscape()
+        //        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight,
+        //                                               andRotateTo: UIInterfaceOrientation.landscapeRight)
+    }
     
     override func viewDidLoad() {
-        // orientation BS
         super.viewDidLoad()
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.orientationLock = .landscape
+        
+        // Orientation BS - LevelOverviewVC --> viewDidLoad
+        let appDel = UIApplication.shared.delegate as! AppDelegate
+        appDel.orientationLock = .landscapeRight
+        AppDelegate.AppUtility.lockOrientationToLandscape()
+//        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight,
+//                                               andRotateTo: UIInterfaceOrientation.landscapeRight)
 
         thisViewsLD = (level: thisViewsLevel, day: thisViewsLevelDay)
         _ = verifyThisViewsLDSet()
@@ -130,37 +143,21 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
                                              ejectorSeatThreshold: singleEventThreshold)
     }
     
-//    override var shouldAutorotate: Bool {
-//        return true
-//    }
-//
-//    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-//       // return .landscapeRight // | .landscapeLeft
-//
-//       // override func supportedInterfaceOrientations() -> Int {
-//        return UIInterfaceOrientationMask.landscapeRight // .rawValue
-//
-////        supported
-////            return Int(supported)
-//        //}
-//
-//    }
-
     var firstTimeInView = true
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         navigationBar.topItem?.title = dayTitle
-        delay(0.2) {
-                self.setupForViewWillAppear()
-        }
+  //      delay(0.2) {
+            self.setupForViewWillAppear()
+  //      }
         
         if firstTimeInView {
             firstTimeInView = false
             self.launchingNextView?.isHidden =  true
             var titleStr = "Press 'GO' to go through a guided practice session"
             titleStr +=    "\n\nPress 'Choose' to pick individual exercises"
-            let ac = UIAlertController(title: titleStr,
+            let ac = MyUIAlertController(title: titleStr,
                                        message: "",
                                        preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "GO",
@@ -179,6 +176,8 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
        PerformanceAnalysisMgr.instance.printThresholdsInUse()
     }
     
+    // DELME
+    /*
     func thisorthat()
     {
         if firstTimeInView {
@@ -188,7 +187,7 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
             titleStr +=    "\n\nPress 'Choose' to select exercises"
             // if !firstTimeInView
             titleStr +=    "(or Exit)"
-            let ac = UIAlertController(title: "Press 'Go' to automatically go through exercises in order\n\nPress 'Choose' to select exercises",
+            let ac = MyUIAlertController(title: "Press 'Go' to automatically go through exercises in order\n\nPress 'Choose' to select exercises",
                                        message: "",
                                        preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "Go",
@@ -200,6 +199,7 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
             self.present(ac, animated: true, completion: nil)
         }
     }
+    */
     
     func startAutoSchedHandler(_ act: UIAlertAction) {
         print("startAutoSchedHandler  called")
@@ -240,8 +240,11 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
             self.launchingNextView?.mode = kViewFinishedMode_Ready
         } else if self.firstExer {
             self.launchingNextView?.mode = kViewFinishedMode_First
-        } else if self.exercisesDone {
-            self.launchingNextView?.mode = kViewFinishedMode_AllDone
+//        } else if self.exercisesDone {
+//            delay(2.0) {
+//                self.showAllDoneAlerts()
+//            }
+//            // self.launchingNextView?.mode = kViewFinishedMode_AllDone
         } else {
             self.launchingNextView?.mode = kViewFinishedMode_Loading
         }
@@ -253,18 +256,152 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
         }
     }
 
-    
-    
-    override func viewWillDisappear(_ animated : Bool) {
-        super.viewWillDisappear(animated)
-        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        if self.exercisesDone {
+ //           delay(2.0) {
+                self.showAllDoneAlert()
+//            }
+        }
     }
     
+    /*
+    func showAllDoneAlert() {
+        guard allDoneFirstTime else { return }
+        
+        let titleStr = "! Way to Go !"
+        let msgStr = "You have finished all the exercises for the day. Next time, you'll do the next day"
+        let ac = MyUIAlertController(title: titleStr,
+                                     message: msgStr,
+                                     preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK!",
+                                   style: .default,
+                                   handler: doneWithDayHandler))
+        ac.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = kDefault_AlertBackgroundColor
+        self.present(ac, animated: true, completion: nil)
+    }
+    */
+    
+    func showAllDoneAlert() {
+        guard allDoneFirstTime else { return }
+        allDoneFirstTime = false
+        
+        let titleStr = "! Way to Go !"
+        
+        if !allDoneWithLevelAlso {
+            var msgStr = "\nYou have finished all the exercises for this Day!"
+            msgStr +=    "\n\nPress 'Done' to go back to Level Overview"
+            msgStr +=    "\n\nPress 'Choose' if you want to redo selected exercises (for a better score)"
+            let ac = MyUIAlertController(title: titleStr,
+                                         message: msgStr,
+                                         preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Done",
+                                       style: .default,
+                                       handler: doneWithDayHandler))
+            ac.addAction(UIAlertAction(title: "Choose",
+                                       style: .default,
+                                       handler: nil))
+            ac.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = kDefault_AlertBackgroundColor
+            self.present(ac, animated: true, completion: nil)
+            
+        } else { // Done with not only this Day, but the entire Level, too
+            var msgStr = "\nYou have finished all the exercises for this day, "
+            msgStr +=    "and all of the days in this Level, too!"
+            msgStr +=    "\n\nPress 'Done' to go back to Level Overview"
+            msgStr +=    "\n\nPress 'Choose' if you want to redo selected exercises (for a better score)"
+            let ac = MyUIAlertController(title: titleStr,
+                                         message: msgStr,
+                                         preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Done",
+                                       style: .default,
+                                       handler: doneWithDayHandler))
+            ac.addAction(UIAlertAction(title: "Choose",
+                                       style: .default,
+                                       handler: nil))
+            ac.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = kDefault_AlertBackgroundColor
+            self.present(ac, animated: true, completion: nil)
+        }
+    }
+    
+    func showAllDoneAlerts() {
+        guard allDoneFirstTime else { return }
+        
+        let titleStr = "! Way to Go !"
+        let msgStr = "You have finished all the exercises for the day. Next time, you'll do the next day"
+        let allDoneAlert = MyUIAlertController(title: titleStr,
+                                     message: msgStr,
+                                     preferredStyle: .alert)
+        allDoneAlert.addAction(UIAlertAction(title: "OK!",
+                                   style: .default,
+                                   handler: doneWithDayHandler))
+        allDoneAlert.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = kDefault_AlertBackgroundColor
+        self.present(allDoneAlert, animated: true, completion: nil)
+//        if let rootVC = UIApplication.shared.delegate?.window??.rootViewController {
+//            rootVC.present(allDoneAlert, animated: true, completion: nil)
+//        } else {
+//            print("Root view controller is not set.")
+//        }
+        return;
+        
+        allDoneFirstTime = false
+        
+        //////////////////
+        
+        if allDoneWithLevelAlso {
+            let titleStr = "! Way to Go !"
+            var msgStr = "You can redo exercises you've completed (for a btter score)"
+            msgStr +=    "\n\nOr Exit to the Levels Screen"
+            let ac = MyUIAlertController(title: titleStr,
+                                         message: msgStr,
+                                         preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Redo Selected Exercises",
+                                       style: .default,
+                                       handler: doneWithLevelHandler))
+            ac.addAction(UIAlertAction(title: "Exit to Levels",
+                                       style: .default,
+                                       handler: doneWithLevelHandler))
+            ac.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = kDefault_AlertBackgroundColor
+            self.present(ac, animated: true, completion: nil)
+
+        }
+    }
+    
+    func doneWithLevelHandler(_ act: UIAlertAction) {
+        print("Done With Level!")
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func doneWithDayHandler(_ act: UIAlertAction) {
+        self.dismiss(animated: true, completion: nil)
+
+//        if allDoneWithLevelAlso {
+//            let titleStr = "! Way to Go !"
+//            var msgStr = "You can redo exercises you've completed (for a btter score)"
+//            msgStr +=    "\n\nOr Exit to the Levels Screen"
+//            let ac = MyUIAlertController(title: titleStr,
+//                                         message: msgStr,
+//                                         preferredStyle: .alert)
+//            ac.addAction(UIAlertAction(title: "Redo Selected Exercises",
+//                                       style: .default,
+//                                       handler: doneWithLevelHandler))
+//            ac.addAction(UIAlertAction(title: "Exit to Levels",
+//                                       style: .default,
+//                                       handler: doneWithLevelHandler))
+//            ac.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = kDefault_AlertBackgroundColor
+//            self.present(ac, animated: true, completion: nil)
+//            
+//        } else {
+//            self.dismiss(animated: true, completion: nil)
+//        }
+    }
+    
+    // MARK: - Navigation
+
     let tuneSegueIdentifier = "ShowTuneSegue"
     let longToneSegueIdentifier = "ShowLongToneSegue"
     let rhythmSegueIdentifier = "ShowRhythmSegue"
     
-    // MARK: - Navigation
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         guard identifier != longToneSegueIdentifier else { return false }
         return true
@@ -308,6 +445,35 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
            }
         }
     }
+    
+    // MARK: - Orientation
+    
+    override var shouldAutorotate: Bool {
+        return false
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        // return .landscapeRight
+        
+        // override func supportedInterfaceOrientations() -> Int {
+        return UIInterfaceOrientationMask.landscapeRight // .rawValue
+    }
+    
+    //    override var shouldAutorotate: Bool {
+    //        return true
+    //    }
+    //
+    //    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+    //       // return .landscapeRight // | .landscapeLeft
+    //
+    //       // override func supportedInterfaceOrientations() -> Int {
+    //        return UIInterfaceOrientationMask.landscapeRight // .rawValue
+    //
+    ////        supported
+    ////            return Int(supported)
+    //        //}
+    //
+    //    }
     
     // MARK: - Table View Delegate, DataSource Calls
 
@@ -449,6 +615,9 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
         exerResultsScore  = 0
     }
     
+    var allDoneFirstTime        = false
+    var allDoneWithLevelAlso    = false
+
     // Longtones or TuneExercise VC calls this with results
     func setExerciseResults( exerNumber: Int,
                              exerStatus: Int,
@@ -481,6 +650,8 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
     
         // In any case, move on to next exer . . .
         if !LessonScheduler.instance.incrementCurrentLDE() {
+            launchingNextView?.isHidden = true
+            
             // Student has gone through all exercises.  See if they completed all,
             // or skipped some
             let dayState = LsnSchdlr.instance.calcAllExersInDayState(dayLD: thisViewsLD)
@@ -488,6 +659,7 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
                 if dayState == kLDEState_Completed { // just transistioned to this
                     LessonScheduler.instance.setDayState(forLD: thisViewsLD,
                                                          newState: dayState)
+                    allDoneFirstTime        = true
  
                     // it's possible they just finished a level, too
                     let lvl = thisViewsLD.level
@@ -495,26 +667,44 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
                     let nowLevelState =
                         LsnSchdlr.instance.calcAllDaysInLevelState(level: lvl)
                     if currLevelState != nowLevelState &&
-                       nowLevelState == kLDEState_Completed  {
+                        nowLevelState == kLDEState_Completed  {
+                        allDoneWithLevelAlso = true
                         LsnSchdlr.instance.setLevelState(level: lvl,
                                                          newState: nowLevelState)
                     }
                     _ = LessonScheduler.instance.saveScoreFile()
                     
-                    let titleStr = "! Way to Go !"
-                    let msgStr = "You have finished all the exercises for the day. Next time, you'll do the next day"
-                    let ac = UIAlertController(title: titleStr,
-                                               message: msgStr,
-                                               preferredStyle: .alert)
-                    ac.addAction(UIAlertAction(title: "OK!",
-                                               style: .default,
-                                               handler: nil))
-                ac.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = kDefault_AlertBackgroundColor
-                    self.present(ac, animated: true, completion: nil)
+//                    let titleStr = "! Way to Go !"
+//                    let msgStr = "You have finished all the exercises for the day. Next time, you'll do the next day"
+//                    let ac = MyUIAlertController(title: titleStr,
+//                                               message: msgStr,
+//                                               preferredStyle: .alert)
+//                    ac.addAction(UIAlertAction(title: "OK!",
+//                                               style: .default,
+//                                               handler: nil))
+//                    ac.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = kDefault_AlertBackgroundColor
+//                    self.present(ac, animated: true, completion: nil)
                 }
             }
             exercisesDone = true
-            launchingNextView?.mode = kViewFinishedMode_AllDone
+            
+//            let titleStr = "! Way to Go !"
+//            let msgStr = "You can redo exercises you've completed (for a btter score)\n\nOr Exit to the Levels Screen"
+//            let ac = MyUIAlertController(title: titleStr,
+//                                         message: msgStr,
+//                                         preferredStyle: .alert)
+//            ac.addAction(UIAlertAction(title: "Redo Exercises",
+//                                       style: .default,
+//                                       handler: nil))
+//            ac.addAction(UIAlertAction(title: "Exit to Levels",
+//                                       style: .default,
+//                                       handler: nil))
+//            ac.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = kDefault_AlertBackgroundColor
+//            self.present(ac, animated: true, completion: nil)
+            
+
+            
+ //           launchingNextView?.mode = kViewFinishedMode_AllDone
         }
     }
     
@@ -526,7 +716,7 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
                 self.launchingNextView?.mode = kViewFinishedMode_First
             } else if exercisesDone {
                 // NOTE update superview of status?
-                self.dismiss(animated: true, completion: nil)
+  //              self.dismiss(animated: true, completion: nil)
             } else if paused {
                 print ("Yo! Pausededed!")
             } else {

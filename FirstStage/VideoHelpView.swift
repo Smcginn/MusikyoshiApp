@@ -103,15 +103,16 @@ class VideoHelpView: UIView {
     }
     
     func addButtons() {
-        let btnWd: CGFloat     = 80.0
-        let btnHt: CGFloat     = 35.0
-        let leftBtnX: CGFloat = 50.0
-        let rightBtnX: CGFloat  = frame.size.width - (leftBtnX + btnWd)
-        let btnY: CGFloat      = frame.size.height - (btnHt + 2)
+        let doneBtnWd: CGFloat  =  80.0
+        let againBtnWd: CGFloat = 160.0
+        let btnHt: CGFloat      =  35.0
+        let leftBtnX: CGFloat   =  50.0
+        let rightBtnX: CGFloat  = frame.size.width - (leftBtnX + againBtnWd)
+        let btnY: CGFloat       = frame.size.height - (btnHt + 2)
         
         ////////////////////////////////////////////////////////////////////////
         // Done button
-        var btnFrame = CGRect( x: leftBtnX , y: btnY, width: btnWd, height: btnHt )
+        var btnFrame = CGRect( x: leftBtnX , y: btnY, width: doneBtnWd, height: btnHt )
         doneBtn = UIButton(frame: btnFrame)
         doneBtn?.roundedButton()
         doneBtn?.backgroundColor = UIColor.blue
@@ -132,6 +133,7 @@ class VideoHelpView: UIView {
         
         ////////////////////////////////////////////////////////////////////////
         // Again button
+        btnFrame.size.width = againBtnWd
         btnFrame.origin.x = rightBtnX
         againBtn = UIButton(frame: btnFrame)
         againBtn?.roundedButton()
@@ -141,7 +143,7 @@ class VideoHelpView: UIView {
                             for: .touchUpInside )
         againBtn?.isEnabled = true
         
-        let str = "Again"
+        let str = "Watch Again"
         let againMutableString =
             NSMutableAttributedString( string: str,
                                        attributes: [NSAttributedStringKey.font:UIFont(
@@ -149,7 +151,7 @@ class VideoHelpView: UIView {
                                         size: 24.0)!])
         againBtn?.titleLabel?.attributedText = againMutableString
         againBtn?.titleLabel?.textColor = UIColor.yellow
-        againBtn?.setTitle("Again", for: .normal)
+        againBtn?.setTitle("Watch Again", for: .normal)
         self.addSubview(againBtn!)
     }
     
@@ -325,9 +327,6 @@ class PopoverVC: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    // orientation BS
-    let appDel = UIApplication.shared.delegate as! AppDelegate
     
     override func loadView() {
         self.vhView = VideoHelpView(frame: boundsRect)

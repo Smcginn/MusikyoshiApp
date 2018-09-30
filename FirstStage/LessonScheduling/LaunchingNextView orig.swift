@@ -23,7 +23,7 @@ protocol ViewFinished {
 
 class LaunchingNextView: UIView {
     
-    static let kDlgWd:         CGFloat = 350.0 //300.0
+    static let kDlgWd:         CGFloat = 200.0 //300.0
     static let kDlgHt:         CGFloat = 275.0
     
     let kBackgroundColor = (UIColor.brown).withAlphaComponent(0.6)
@@ -32,7 +32,7 @@ class LaunchingNextView: UIView {
     let kHugeTextFontSz         : CGFloat = 36.0 // 48.0
     let kLargeTextFontSz        : CGFloat = 24.0 // 36.0
     let kMediumTextFontSz       : CGFloat = 18.0 // 24.0
-    let kBtnTextFontSz          : CGFloat = 18.0 // 18.0
+    let kBtnTextFontSz          : CGFloat = 14.0 // 18.0
     
     
     let kGoodJob_Y:     CGFloat =  10.0
@@ -43,19 +43,19 @@ class LaunchingNextView: UIView {
     let kLoadingNext_Y: CGFloat =  70.0
     var kMonkey_Y:      CGFloat = 130.0
     
-    let kProgBar_Y:     CGFloat = 150.0
-    let kProgBar_Ht:    CGFloat =  25.0
+    let kProgBar_Y:     CGFloat = 205.0
+    let kProgBar_Ht:    CGFloat =  15.0
     
     
-    let kPauseBtn_Y:    CGFloat = 220.0
-    let kPauseBtn_Ht:   CGFloat =  40.0
+    let kPauseBtn_Y:    CGFloat = 230.0
+    let kPauseBtn_Ht:   CGFloat =  30.0
     let kPauseBtn_Wd:   CGFloat = 130.0
     
     
     let kBeginMonkeyAnimCenterX:        CGFloat =  -50.0
     let kAddForEndMonkeyAnimCenterX:    CGFloat =  300.0 // 400.0
     
-    let kAnimDuration = 0.6
+    let kAnimDuration = 2.0
     
     var waitingToBegin = true
     var exercisesDone = false
@@ -414,44 +414,14 @@ class LaunchingNextView: UIView {
     }
     
     func animateMonkeyImageView() {
- //       self.whichImgView = randommonkeyImage()
-        
- //       self.whichImgView?.center.x = self.kBeginMonkeyAnimCenterX
- //       self.whichImgView?.startAnimating()
-        progBar?.backgroundColor = UIColor.clear
-
-        progBar?.isHidden = true
-        self.progBar?.frame.size.width = 1
-        self.progBar?.setNeedsDisplay()
-        self.setNeedsDisplay()
-
- //       self.whichImgView?.isHidden = false
-        
-        delay(0.1) {}
-        progBar?.backgroundColor = UIColor.purple
-        progBar?.isHidden = false
-        
-        UIView.animate(withDuration: kAnimDuration, delay: 0.0, options: .curveLinear, animations: {
- //           self.whichImgView?.center.x += self.kAddForEndMonkeyAnimCenterX
-            let superFrm = self.frame
-            self.progBar?.frame.size.width = superFrm.size.width - 20
-        }) { (_) in
-            if !self.exercisesDone { // don't auto-return to caller if all done
-                self.viewFinishedDelegate?.viewFinished(result: kViewFinished_Proceed)
-            }
-        }
-    }
-    
-    /*
-    func animateMonkeyImageView() {
-        self.whichImgView = randommonkeyImage()
+        self.whichImgView = randommonkeyImage() 
         
         self.whichImgView?.center.x = self.kBeginMonkeyAnimCenterX
         self.whichImgView?.startAnimating()
         self.progBar?.frame.size.width = 1
         self.whichImgView?.isHidden = false
         progBar?.isHidden = false
-        
+
         UIView.animate(withDuration: kAnimDuration, delay: 0.0, options: .curveLinear, animations: {
             self.whichImgView?.center.x += self.kAddForEndMonkeyAnimCenterX
             let superFrm = self.frame
@@ -461,6 +431,5 @@ class LaunchingNextView: UIView {
                 self.viewFinishedDelegate?.viewFinished(result: kViewFinished_Proceed)
             }
         }
-     }
-     */
+    }
 }

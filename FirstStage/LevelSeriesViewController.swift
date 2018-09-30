@@ -39,6 +39,16 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Orientation BS - LevelSeriesVC --> viewDidLoad
+        let appDel = UIApplication.shared.delegate as! AppDelegate
+        appDel.orientationLock = .landscapeRight
+        AppDelegate.AppUtility.lockOrientationToLandscape()
+//        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight,
+//                                               andRotateTo: UIInterfaceOrientation.landscapeRight)
+        
+        // let currOrien =
+        AppDelegate.AppUtility.currOrientation()
+        
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
         if let file = Bundle.main.path(forResource: "TrumpetLessons", ofType: "json"){
@@ -65,6 +75,16 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
         self.tableView.reloadData()
     }
     
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        // return .landscapeRight
+        
+        // override func supportedInterfaceOrientations() -> Int {
+        return UIInterfaceOrientationMask.landscapeRight // .rawValue
+    }
+    override var shouldAutorotate: Bool {
+        return false
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
@@ -72,6 +92,17 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
         navigationBar.topItem?.title = "Levels"
         
         testBPM()
+    }
+    
+    override func viewWillDisappear(_ animated : Bool) {
+        super.viewWillDisappear(animated)
+        
+        // Orientation BS - LevelSeriesVC --> viewWillDisappear
+        let appDel = UIApplication.shared.delegate as! AppDelegate
+        appDel.orientationLock = .portrait
+        //AppDelegate.AppUtility.unlockOrientation()
+        AppDelegate.AppUtility.lockOrientationToPortrait()
+        //AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.all)
     }
     
     func testBPM() {
@@ -114,15 +145,29 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard levelsJson != nil else { return 0 }
         
-        var count = 0
         if section != currLevel { return 0 }
 
+        return numDaysInLevel(level: section)
+        
+//        var count = 0
+//        var daysJson:JSON?
+//        daysJson = levelsJson![section]["days"]
+//        if ( daysJson != nil ) {
+//            count = daysJson!.count
+//        }
+//
+//        return count
+    }
+    
+    func numDaysInLevel(level: Int) -> Int {
+        var count = 0
+        
         var daysJson:JSON?
-        daysJson = levelsJson![section]["days"]
+        daysJson = levelsJson![level]["days"]
         if ( daysJson != nil ) {
             count = daysJson!.count
         }
-
+        
         return count
     }
     
@@ -150,20 +195,45 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
         return header
     }
 
+    var handlingSectionTap = false
+    
     @objc func headerTapped(_ g: UIGestureRecognizer) {
+        if self.handlingSectionTap { return }
+        
+        self.handlingSectionTap = true
         let vw = g.view as! LevelSeriesTableViewHeaderFooterView
         let section = vw.section
-        guard section != self.currLevel else { return }
+        //guard section != self.currLevel else { return }
         
         let oldSection = self.currLevel
         self.currLevel = kNoSectionSelected
-        let indexSet = IndexSet(integer:oldSection)
-        tableView.reloadSections(indexSet, with: .automatic)
         
+        // collapse current section
+        if oldSection != kNoSectionSelected { // all were already collapsed
+            let indexSet = IndexSet(integer:oldSection)
+            tableView.reloadSections(indexSet, with: .automatic)
+        }
+        
+        if oldSection == section { // They presumably just want to collapse current section.
+            self.handlingSectionTap = false
+            return
+       }
+        
+        // Otherwise, expand new section
         self.currLevel = section
         delay( 0.25) {
             let indexSetNew = IndexSet(integer: section)
             self.tableView.reloadSections(indexSetNew, with: .automatic)
+            if self.numDaysInLevel(level: section) > 0 {
+                delay( 0.25) {
+                    let idxPath = IndexPath(row:0, section: section)
+                    self.tableView.scrollToRow(at: idxPath, at: .top, animated: true)
+                    self.handlingSectionTap = false
+                }
+            }
+            else {
+                self.handlingSectionTap = false
+            }
         }
     }
     
@@ -378,6 +448,15 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
                     }
                     if let singEvtThersh = levels[indexPath.section]["singleEventThreshold"].string {
                         destination.singleEventThreshold = singEvtThersh
+                    }
+                    if let scanForPitchChange = levels[indexPath.section]["scanForPitchLegatoChange"].string {
+                        if scanForPitchChange == "Y" {
+                            gScanForPitchDuringLegatoPlaying = true
+                        } else {
+                            gScanForPitchDuringLegatoPlaying = false
+                        }
+                    } else {
+                        //   ?????
                     }
                 }
             }

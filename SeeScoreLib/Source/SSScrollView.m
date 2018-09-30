@@ -32,8 +32,6 @@ static const float kMaxMagnification = 2.5;
 static const float kMagnificationReductionScreenWidthThreshold = 768;
 static const float kMagnificationProportionToScreenWidth = 0.8F;// this is 0 for constant magnification at different screen widths, 1.0 for magnification proportional to screen width/768.
 
-
-
 @interface SSScrollView ()
 {
 
@@ -129,6 +127,8 @@ static const float kMagnificationProportionToScreenWidth = 0.8F;// this is 0 for
     useSeeScoreCursor = YES;
     
     [self addOverlayView];
+    
+	[self setCursorColour: [UIColor redColor]];
 }
 
 -(void)setBackgroundColor:(UIColor *)backgroundColor

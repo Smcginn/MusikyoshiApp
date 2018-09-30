@@ -26,6 +26,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     struct AppUtility {
+        static func currOrientation() {
+            var currO = UIDevice.current.orientation
+            print("\(currO)")
+        }
+        
         static func lockOrientation(_ orientation: UIInterfaceOrientationMask) {
             if let delegate = UIApplication.shared.delegate as? AppDelegate {
                 delegate.orientationLock = orientation
@@ -35,6 +40,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         static func lockOrientation(_ orientation: UIInterfaceOrientationMask, andRotateTo rotateOrientation:UIInterfaceOrientation) {
             self.lockOrientation(orientation)
             UIDevice.current.setValue(rotateOrientation.rawValue, forKey: "orientation")
+        }
+        
+        /*
+        static func lockOrientationToLandscape() {
+            let currOrient = UIDevice.current.orientation
+            self.lockOrientation(.landscape)
+            if !(currOrient == .landscapeLeft || currOrient != .landscapeRight)
+                //                {
+                ////                self.lockOrientation(.landscape)
+                //                UIDevice.current.setValue(UIInterfaceOrientation.landscapeLeft.rawValue,
+                //                                          forKey: "orientation")
+                //            } else
+                
+            { // either support Right Landscape or force it
+                //                self.lockOrientation(.landscape)
+                UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue,
+                                          forKey: "orientation")
+            }
+        }
+        */
+        
+        static func lockOrientationToLandscape() {
+            let currOrient = UIDevice.current.orientation
+            self.lockOrientation(.landscape)
+            UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue,
+                                          forKey: "orientation")
+        }
+        
+        static func lockOrientationToPortrait() {
+            self.lockOrientation(.portrait)
+            UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue,
+                                      forKey: "orientation")
+        }
+        
+        static func unlockOrientation() {
+            self.lockOrientation(.all)
+            UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue,
+                                      forKey: "orientation")
         }
     }
 

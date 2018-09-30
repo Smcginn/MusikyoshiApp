@@ -32,7 +32,8 @@ static const struct {float r,g,b,a;} kDefaultBackgroundColour = {1.0F,1.0F,0.95F
 {
 	self = [super init];
 	self.borderWidth = CursorLineWidth;
-	self.borderColor = [UIColor orangeColor].CGColor;
+	//self.borderColor = [UIColor rColor].CGColor;
+    self.borderColor = [UIColor redColor].CGColor;    // CursorColor, CursorColour
 	self.opacity = 0.0;
 	return self;
 }

@@ -123,6 +123,9 @@ let kSamplesNeededToDeterminePitch = 10  // SLIDERABLE ?
 // common, so must have a certain number in a row before commmiting to a new note.)
 let kDifferentPitchSampleThreshold  = 10 // SLIDERABLE ?
 
+// Turn on/off use of scanning for pitch change during legato playing
+var gScanForPitchDuringLegatoPlaying = true 
+
 //////   Sound Start Adjustment   ////////////////////////////
 //
 // This is the apparent delay between a sound and the acquisition of the sound

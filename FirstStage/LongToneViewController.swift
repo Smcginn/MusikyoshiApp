@@ -384,15 +384,26 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
         }
     }
     
-    // orientation BS
-    let appDel = UIApplication.shared.delegate as! AppDelegate
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        // return .landscapeRight
+        
+        // override func supportedInterfaceOrientations() -> Int {
+        return UIInterfaceOrientationMask.landscapeRight // .rawValue
+    }
+    override var shouldAutorotate: Bool {
+        return false
+    }
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // orientation BS
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.orientationLock = .landscape
+        // Orientation BS - LongToneVC --> viewDidLoad
+        let appDel = UIApplication.shared.delegate as! AppDelegate
+        appDel.orientationLock = .landscapeRight
+        AppDelegate.AppUtility.lockOrientationToLandscape()
+//        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight,
+//                                               andRotateTo: UIInterfaceOrientation.landscapeRight)
 
         playBtn.layer.cornerRadius = 10
         playBtn.clipsToBounds = true
@@ -540,13 +551,25 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight)
+        // Orientation BS - LongToneVC --> viewWillAppear
+        let appDel = UIApplication.shared.delegate as! AppDelegate
+        appDel.orientationLock = .landscapeRight
+        AppDelegate.AppUtility.lockOrientationToLandscape()
+//       AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight,
+//                                               andRotateTo: UIInterfaceOrientation.landscapeRight)
+
         ssScrollView.useSeeScoreCursor(false)
     }
     
     override func viewWillDisappear(_ animated : Bool) {
         super.viewWillDisappear(animated)
-        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
+        
+        // Orientation BS - LongToneVC --> viewWillDisappear
+        let appDel = UIApplication.shared.delegate as! AppDelegate
+        appDel.orientationLock = .landscapeRight
+        AppDelegate.AppUtility.lockOrientationToLandscape()
+//        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight,
+//                                               andRotateTo: UIInterfaceOrientation.landscapeRight)
     }
     
     override func viewDidLayoutSubviews() {
@@ -1019,7 +1042,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
                 switchExerState(newState: kLTExerState_TryAgain)
                 timerLbl.text = String(format: "New Best Time: %.1f", currPersBest)
            } else {
-                feedbackLbl.text = "Good Job, but not better than before . . ."
+                feedbackLbl.text = "Good Job, but not your best"
                 feedbackLbl.isHidden = false
                 switchExerState(newState: kLTExerState_TryAgain)
                 timerLbl.text = String(format: "This Time: %.2f, Best: %.2f", elapsed, currPersBest)
@@ -1322,7 +1345,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
 //        picker.dataSource = self
 //        vc.view.addSubview(picker)
         
-        let ac = UIAlertController(title: "You haven't actually done anything",
+        let ac = MyUIAlertController(title: "You haven't actually done anything",
                                    message: "\nIf you exit now, no score will be saved",
                                    preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Cancel",  style: .cancel, handler: nil))
