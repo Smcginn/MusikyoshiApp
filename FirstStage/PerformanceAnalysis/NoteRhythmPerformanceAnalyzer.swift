@@ -20,6 +20,74 @@ let kRhythmDurationVariance_OK : Double           = 0.05
 let kRhythmDurationVariance_Acceptable : Double   = 0.25
 let kRhythmDurationVariance_Unacceptable : Double = 0.5  
 
+var gLastRunMinAttackDiff: TimeInterval = 0.0
+var gLastRunMaxAttackDiff: TimeInterval = 0.0
+var gLastRunAvgAttackDiff: TimeInterval = 0.0
+
+var gBPMAttackWindowMultiplier: Double = 1.0
+let kBPMAttackWindow_Numerator: Double = 60.0
+
+var gAdjustAttackVar_Correct: Double = 0.05
+var gAdjustAttackVar_ABitOff: Double = DefaultTolerancePCs.defaultRhythmTolerance/2.0
+var gAdjustAttackVar_VeryOff: Double = DefaultTolerancePCs.defaultRhythmTolerance
+
+// Set by slider
+var gAdjustAttackVar_VeryOffOverride: Double = DefaultTolerancePCs.defaultRhythmTolerance
+var gAdjustAttackVar_VeryOff_DoOverride = false
+
+var gAdjustDur_OK : Double           = 0.05
+var gAdjustDur_Acceptable : Double   = 0.25
+var gAdjustDur_Unacceptable : Double = 0.5
+
+func calcAndSetAdjustedRhythmTolerances(bpm: Double) {
+    guard bpm > 0.0 else {
+        itsBad()
+        return
+    }
+    
+    gBPMAttackWindowMultiplier = kBPMAttackWindow_Numerator / bpm
+    
+    gAdjustAttackVar_Correct = attackVariance_Correct // * gBPMAttackWindowMultiplier
+    gAdjustAttackVar_ABitOff = attackVariance_ABitOff * gBPMAttackWindowMultiplier
+    if gAdjustAttackVar_VeryOff_DoOverride {
+        gAdjustAttackVar_Correct = gAdjustAttackVar_VeryOffOverride
+    } else {
+        gAdjustAttackVar_VeryOff = attackVariance_VeryOff * gBPMAttackWindowMultiplier
+    }
+    print("\n\nAt \(bpm) BPM:")
+    print("   attackVariance_Correct == \(gAdjustAttackVar_Correct)")
+    print("   attackVariance_ABitOff == \(gAdjustAttackVar_ABitOff)")
+    print("   attackVariance_VeryOff == \(gAdjustAttackVar_VeryOff)")
+
+    gAdjustDur_OK
+        = kRhythmDurationVariance_OK     // * gBPMAttackWindowMultiplier
+    gAdjustDur_Acceptable   =
+        kRhythmDurationVariance_Acceptable * gBPMAttackWindowMultiplier
+    gAdjustDur_Unacceptable
+        = kRhythmDurationVariance_Unacceptable * gBPMAttackWindowMultiplier
+    print("   kRhythmDurationVariance_OK           == \(gAdjustDur_OK)")
+    print("   kRhythmDurationVariance_Acceptable   == \(gAdjustDur_Acceptable)")
+    print("   kRhythmDurationVariance_Unacceptable == \(gAdjustDur_Unacceptable)")
+}
+
+
+func resetAttackDiffs() {
+    gLastRunMinAttackDiff = 0.0
+    gLastRunMaxAttackDiff = 0.0
+    gLastRunAvgAttackDiff = 0.0
+}
+
+func setAttackDiffs(currDiff: TimeInterval, currAvg: TimeInterval) {
+    if currDiff < gLastRunMinAttackDiff {
+        gLastRunMinAttackDiff = currDiff
+    }
+    
+    if currDiff > gLastRunMaxAttackDiff {
+        gLastRunMaxAttackDiff = currDiff
+    }
+    gLastRunAvgAttackDiff = currAvg
+}
+
 class NoteRhythmPerformanceAnalyzer : NotePerformanceAnalyzer {
     
     var runningDiffSum: Double = 0.0
@@ -66,26 +134,28 @@ class NoteRhythmPerformanceAnalyzer : NotePerformanceAnalyzer {
                 runningDiffSum += startTimeDelta
                 numDifs += 1
                 let currAverage = runningDiffSum/Double(numDifs)
+                
+                setAttackDiffs(currDiff: startTimeDelta, currAvg: currAverage)
                 print("In Note Analysis; note #\(perfNote.perfNoteOrRestID) attack off by:\t\(startTimeDelta), \tcurr avg: \(currAverage)")
             }
         }
         
-        if startTimeDeltaABS <= attackVariance_Correct {
+        if startTimeDeltaABS <= gAdjustAttackVar_Correct {
             perfNote.attackRating = .timingOrRestGood
         }
-        else if startTimeDeltaABS <= attackVariance_ABitOff {
+        else if startTimeDeltaABS <= gAdjustAttackVar_ABitOff {
             if startTimeDelta > 0.0 {
                 perfNote.attackRating = .slightlyEarly
             } else {
                 perfNote.attackRating = .slightlyLate
             }
-        } else if startTimeDeltaABS <= attackVariance_VeryOff {
+        } else if startTimeDeltaABS <= gAdjustAttackVar_VeryOff {
             if startTimeDelta > 0.0 {
                 perfNote.attackRating = .veryEarly
             } else {
                 perfNote.attackRating = .veryLate
             }
-        } else {   // > attackVariance_VeryOff
+        } else {   // > gAdjustAttackVar_VeryOff
             if kIgnoreMissedNotes { // for debugging . . .
                 perfNote.attackRating = .timingOrRestGood
             } else {
@@ -102,16 +172,16 @@ class NoteRhythmPerformanceAnalyzer : NotePerformanceAnalyzer {
         let actualDurDelta =
             perfNote.expectedDurAdjusted - perfNote.actualDuration // pos == short
         let durationDeltaABS = abs(actualDurDelta)
-        if durationDeltaABS <= kRhythmDurationVariance_OK {
+        if durationDeltaABS <= gAdjustDur_OK {
             perfNote.durationRating = .durationGood
         }
-        else if durationDeltaABS <= kRhythmDurationVariance_Acceptable {
+        else if durationDeltaABS <= gAdjustDur_Acceptable {
             if actualDurDelta > 0.0 {
                 perfNote.durationRating = .slightlyShort
             } else {
                 perfNote.durationRating = .slightlyLong
             }
-        } else if durationDeltaABS <= kRhythmDurationVariance_Unacceptable {
+        } else if durationDeltaABS <= gAdjustDur_Unacceptable {
             if actualDurDelta > 0.0 {
                 perfNote.durationRating = .veryShort
             } else {

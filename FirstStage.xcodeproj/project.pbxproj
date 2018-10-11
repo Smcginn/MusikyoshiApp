@@ -334,6 +334,8 @@
 		63D5E88C1EA37C1B007AE8D4 /* LongToneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6381294F1CF05BF800A40C8E /* LongToneViewController.swift */; };
 		63EB90171CF1C4EB00F09B05 /* AVAudioSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EB90161CF1C4EB00F09B05 /* AVAudioSessionManager.swift */; };
 		63EB90181CF1C4EC00F09B05 /* AVAudioSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EB90161CF1C4EB00F09B05 /* AVAudioSessionManager.swift */; };
+		6D0018CD2162C03500B7B498 /* InternalSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0018CC2162C03500B7B498 /* InternalSettingsViewController.swift */; };
+		6D0018CE2162C03500B7B498 /* InternalSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0018CC2162C03500B7B498 /* InternalSettingsViewController.swift */; };
 		6D01C40021238C75004B8440 /* LessonScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D01C3FF21238C75004B8440 /* LessonScheduler.swift */; };
 		6D01C40121238C75004B8440 /* LessonScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D01C3FF21238C75004B8440 /* LessonScheduler.swift */; };
 		6D01C40321238CAC004B8440 /* TuneFileMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D01C40221238CAC004B8440 /* TuneFileMapper.swift */; };
@@ -498,6 +500,8 @@
 		6DCDFF212118AFAB000E8E38 /* Monkey_Ballon_Explode.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DCDFF102118AF9F000E8E38 /* Monkey_Ballon_Explode.png */; };
 		6DDE849E2135A61B00A81875 /* LongtonePersonalBestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDE849D2135A61B00A81875 /* LongtonePersonalBestSupport.swift */; };
 		6DDE849F2135A61B00A81875 /* LongtonePersonalBestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDE849D2135A61B00A81875 /* LongtonePersonalBestSupport.swift */; };
+		6DEBD420216E3F4B0037C935 /* PlayTunes at 120.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DEBD410216E3F4B0037C935 /* PlayTunes at 120.png */; };
+		6DEBD422216E40E30037C935 /* PlayTunes at 210.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DEBD421216E40E30037C935 /* PlayTunes at 210.png */; };
 		6DF608D12131C666007D69A5 /* star_icon 16x16.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DF608C02131C665007D69A5 /* star_icon 16x16.jpg */; };
 		6DF608D22131C666007D69A5 /* star_icon 16x16.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DF608C02131C665007D69A5 /* star_icon 16x16.jpg */; };
 		6DF608D32131C666007D69A5 /* star_icon 64x64.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DF608D02131C666007D69A5 /* star_icon 64x64.jpg */; };
@@ -996,6 +1000,7 @@
 		63B4275B1E5057BB000E35AA /* SSSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSSettingsViewController.swift; sourceTree = "<group>"; };
 		63BF9E061EBFFF07002BB5C1 /* MusicXMLModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicXMLModifier.swift; sourceTree = "<group>"; };
 		63EB90161CF1C4EB00F09B05 /* AVAudioSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAudioSessionManager.swift; sourceTree = "<group>"; };
+		6D0018CC2162C03500B7B498 /* InternalSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalSettingsViewController.swift; sourceTree = "<group>"; };
 		6D01C3FF21238C75004B8440 /* LessonScheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LessonScheduler.swift; path = LessonScheduling/LessonScheduler.swift; sourceTree = "<group>"; };
 		6D01C40221238CAC004B8440 /* TuneFileMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TuneFileMapper.swift; path = LessonScheduling/TuneFileMapper.swift; sourceTree = "<group>"; };
 		6D34A17C2139F9E10071BAB6 /* AppDefs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDefs.swift; sourceTree = "<group>"; };
@@ -1077,6 +1082,8 @@
 		6DC834C62135136400AAA613 /* OneStarNew 64x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "OneStarNew 64x64.png"; path = "Images/OneStarNew 64x64.png"; sourceTree = "<group>"; };
 		6DCDFF102118AF9F000E8E38 /* Monkey_Ballon_Explode.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Monkey_Ballon_Explode.png; path = Images/Monkey_Ballon_Explode.png; sourceTree = "<group>"; };
 		6DDE849D2135A61B00A81875 /* LongtonePersonalBestSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LongtonePersonalBestSupport.swift; path = LessonScheduling/LongtonePersonalBestSupport.swift; sourceTree = "<group>"; };
+		6DEBD410216E3F4B0037C935 /* PlayTunes at 120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PlayTunes at 120.png"; path = "Images/PlayTunes at 120.png"; sourceTree = "<group>"; };
+		6DEBD421216E40E30037C935 /* PlayTunes at 210.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PlayTunes at 210.png"; path = "Images/PlayTunes at 210.png"; sourceTree = "<group>"; };
 		6DF608C02131C665007D69A5 /* star_icon 16x16.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "star_icon 16x16.jpg"; path = "Images/star_icon 16x16.jpg"; sourceTree = "<group>"; };
 		6DF608D02131C666007D69A5 /* star_icon 64x64.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "star_icon 64x64.jpg"; path = "Images/star_icon 64x64.jpg"; sourceTree = "<group>"; };
 		6DFA9BE4212A7CC0002BD4AB /* Stars-3 64x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Stars-3 64x16.png"; path = "Images/Stars-3 64x16.png"; sourceTree = "<group>"; };
@@ -1511,6 +1518,7 @@
 		633C2AD81CE80D80001C5C16 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				6D0018CC2162C03500B7B498 /* InternalSettingsViewController.swift */,
 				1C33BB332016DCDC00CD83A6 /* LevelSeriesViewController.swift */,
 				1C87C0A72016F0030038784E /* LevelOverviewViewController.swift */,
 				6381294F1CF05BF800A40C8E /* LongToneViewController.swift */,
@@ -1818,51 +1826,53 @@
 		E9CFE60D201A6D9200C69C43 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				6DBF1F0B213ED8D50052AD57 /* Stars-4 Even 256x64.png */,
-				6DC834C62135136400AAA613 /* OneStarNew 64x64.png */,
-				6DF608C02131C665007D69A5 /* star_icon 16x16.jpg */,
-				6DF608D02131C666007D69A5 /* star_icon 64x64.jpg */,
-				6D8E104E213103DA00B1B3B8 /* Current Arrow 30x16.png */,
-				6D8E104B2131031C00B1B3B8 /* Current Arrow 36x16.png */,
-				6D63167F212D0670004F2DE4 /* blank 64x64.png */,
-				6D631680212D0670004F2DE4 /* blank 256x64.png */,
-				6D63166A212D060F004F2DE4 /* SingleStar - 32.png */,
-				6D63167A212D0610004F2DE4 /* SingleStar - 64.png */,
-				6D72491A2128FD6000378131 /* MonkeyPlaneWithProp large.png */,
-				6D7249172128A8B100378131 /* Monkey_Ballon-Face02@2x.png */,
-				6D7249102128991F00378131 /* Blank 64x16.png */,
-				6D8E10482130E77200B1B3B8 /* Current Arrow 22x16.png */,
-				6D8E10362130DD6F00B1B3B8 /* Current Arrow 40x16.png */,
-				6D72490F2128991E00378131 /* Current Arrow 64x16.png */,
-				6D7249082128807600378131 /* Stars-4 128x32.png */,
-				6D7249052128775000378131 /* Stars-0 256x64.png */,
-				6D7248FB2128771500378131 /* Stars-1 256x64.png */,
-				6D7248EA2128771500378131 /* Stars-2 256x64.png */,
-				6D7248FC2128771600378131 /* Stars-3 256x64.png */,
-				6D7248FA2128771500378131 /* Stars-4 256x64.png */,
-				6DB853412127A87500F999C3 /* Monkey_Skiing_01@2x.png */,
-				6DB853402127A87500F999C3 /* Monkey_Skiing_02@2x.png */,
-				6DB8533F2127A87500F999C3 /* Monkey_Skiing_03@2x.png */,
-				6DB853422127A87600F999C3 /* Monkey_Skiing_06@2x.png */,
-				6DC3FE8E2119628000168950 /* bananas_incomplete.png */,
-				6DC3FE8F2119628000168950 /* bananas_incomplete@2x.png */,
-				6DC3FE902119628000168950 /* bananas.png */,
-				6DC3FE8D2119628000168950 /* bananas@2x.png */,
 				6DC3FE7F2118DD1D00168950 /* Balloon_1.png */,
 				6DC3FE7D2118DD1D00168950 /* Balloon_2.png */,
 				6DC3FE7C2118DD1D00168950 /* Balloon_3.png */,
 				6DC3FE7B2118DD1D00168950 /* Balloon_4.png */,
 				6DC3FE7E2118DD1D00168950 /* Balloon_5.png */,
+				6DC3FE8E2119628000168950 /* bananas_incomplete.png */,
+				6DC3FE8F2119628000168950 /* bananas_incomplete@2x.png */,
+				6DC3FE902119628000168950 /* bananas.png */,
+				6DC3FE8D2119628000168950 /* bananas@2x.png */,
+				6D7249102128991F00378131 /* Blank 64x16.png */,
+				6D63167F212D0670004F2DE4 /* blank 64x64.png */,
+				6D631680212D0670004F2DE4 /* blank 256x64.png */,
+				6D8E10482130E77200B1B3B8 /* Current Arrow 22x16.png */,
+				6D8E104E213103DA00B1B3B8 /* Current Arrow 30x16.png */,
+				6D8E104B2131031C00B1B3B8 /* Current Arrow 36x16.png */,
+				6D8E10362130DD6F00B1B3B8 /* Current Arrow 40x16.png */,
+				6D72490F2128991E00378131 /* Current Arrow 64x16.png */,
 				6DCDFF102118AF9F000E8E38 /* Monkey_Ballon_Explode.png */,
+				6D7249172128A8B100378131 /* Monkey_Ballon-Face02@2x.png */,
 				E9CFE62020263C0700C69C43 /* Monkey_Jumping Temples_monkey 02@2x.png */,
 				E9CFE62120263C0700C69C43 /* Monkey_Jumping Temples_monkey 03@2x.png */,
 				E9CFE62220263C0700C69C43 /* Monkey_Jumping Temples_monkey 04@2x.png */,
 				E9CFE62320263C0700C69C43 /* Monkey_Jumping Temples_monkey 06@2x.png */,
+				6DB853412127A87500F999C3 /* Monkey_Skiing_01@2x.png */,
+				6DB853402127A87500F999C3 /* Monkey_Skiing_02@2x.png */,
+				6DB8533F2127A87500F999C3 /* Monkey_Skiing_03@2x.png */,
+				6DB853422127A87600F999C3 /* Monkey_Skiing_06@2x.png */,
+				6D72491A2128FD6000378131 /* MonkeyPlaneWithProp large.png */,
+				6DC834C62135136400AAA613 /* OneStarNew 64x64.png */,
+				6DEBD410216E3F4B0037C935 /* PlayTunes at 120.png */,
+				6DEBD421216E40E30037C935 /* PlayTunes at 210.png */,
+				6D63166A212D060F004F2DE4 /* SingleStar - 32.png */,
+				6D63167A212D0610004F2DE4 /* SingleStar - 64.png */,
+				6DF608C02131C665007D69A5 /* star_icon 16x16.jpg */,
+				6DF608D02131C666007D69A5 /* star_icon 64x64.jpg */,
 				6D72490E2128991E00378131 /* Stars-0 64x16.png */,
+				6D7249052128775000378131 /* Stars-0 256x64.png */,
 				6DFA9BF5212A7CC0002BD4AB /* Stars-1 64x16.png */,
+				6D7248FB2128771500378131 /* Stars-1 256x64.png */,
 				6DFA9BF4212A7CC0002BD4AB /* Stars-2 64x16.png */,
+				6D7248EA2128771500378131 /* Stars-2 256x64.png */,
 				6DFA9BE4212A7CC0002BD4AB /* Stars-3 64x16.png */,
+				6D7248FC2128771600378131 /* Stars-3 256x64.png */,
 				6D72490B2128817100378131 /* Stars-4 64x16.png */,
+				6D7249082128807600378131 /* Stars-4 128x32.png */,
+				6D7248FA2128771500378131 /* Stars-4 256x64.png */,
+				6DBF1F0B213ED8D50052AD57 /* Stars-4 Even 256x64.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -2408,6 +2418,7 @@
 				6D7249112128991F00378131 /* Stars-0 64x16.png in Resources */,
 				633D1B741CF9588700B5C4FD /* FeedbackImage.png in Resources */,
 				6336B1B31EA32B0200A78D02 /* Piano.mf.23.m4a in Resources */,
+				6DEBD420216E3F4B0037C935 /* PlayTunes at 120.png in Resources */,
 				6336B19B1EA32AF000A78D02 /* Trumpet.novib.mf.63.m4a in Resources */,
 				6336B1C81EA32B0200A78D02 /* Piano.mf.44.m4a in Resources */,
 				6336B1E81EA32B0200A78D02 /* Piano.mf.76.m4a in Resources */,
@@ -2497,6 +2508,7 @@
 				6DBF1F45213EEB850052AD57 /* Pitch - Very High - Double Check fingering.mp4 in Resources */,
 				6336B1DD1EA32B0200A78D02 /* Piano.mf.65.m4a in Resources */,
 				6336B1FB1EA32B0200A78D02 /* Piano.mf.95.m4a in Resources */,
+				6DEBD422216E40E30037C935 /* PlayTunes at 210.png in Resources */,
 				6336B1C31EA32B0200A78D02 /* Piano.mf.39.m4a in Resources */,
 				6336B1B81EA32B0200A78D02 /* Piano.mf.28.m4a in Resources */,
 				6336B1E11EA32B0200A78D02 /* Piano.mf.69.m4a in Resources */,
@@ -2690,6 +2702,7 @@
 				6D01C40121238C75004B8440 /* LessonScheduler.swift in Sources */,
 				63B427591E5016AB000E35AA /* Intonation.swift in Sources */,
 				6D6093B52114F66D00874A40 /* PerformanceScoreObject.swift in Sources */,
+				6D0018CE2162C03500B7B498 /* InternalSettingsViewController.swift in Sources */,
 				6DC834B62134B94B00AAA613 /* IconImageMgr.swift in Sources */,
 				63EB90181CF1C4EC00F09B05 /* AVAudioSessionManager.swift in Sources */,
 				BD7C17501F861755002AF462 /* SettingsTableViewController.swift in Sources */,
@@ -2779,6 +2792,7 @@
 				6D01C40021238C75004B8440 /* LessonScheduler.swift in Sources */,
 				BD7C17511F861759002AF462 /* SettingsTableViewController.swift in Sources */,
 				63D5E8851EA37BDA007AE8D4 /* Note.swift in Sources */,
+				6D0018CD2162C03500B7B498 /* InternalSettingsViewController.swift in Sources */,
 				6DC834B52134B94B00AAA613 /* IconImageMgr.swift in Sources */,
 				E9AD0CC81FD9BEFA006472CE /* NoteIDs.swift in Sources */,
 				63D5E8841EA37BCD007AE8D4 /* NoteService.swift in Sources */,

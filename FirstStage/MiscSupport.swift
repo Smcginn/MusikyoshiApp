@@ -59,7 +59,42 @@ func createAttributedText(str: String, fontSize: CGFloat, color: UIColor) -> NSM
 
 // NSForegroundColorAttributeName : color
 
+let kPrefixForNote  =   "    "
+//                       12345678911234567892123456789312345678941234567895123456789012345
+let kPrefixForLinking = "                              "
+let kPrefixForSound   = "                                                                 "
 
+func printNoteRelatedMsg(msg: String) {
+    var outmsg = kPrefixForNote
+    outmsg += msg
+    print(outmsg)
+}
+
+func printSoundRelatedMsg(msg: String) {
+    var outmsg: String = kPrefixForSound
+    outmsg += msg
+    print(outmsg)
+}
+
+func printLinkingRelatedMsg(msg: String) {
+    var outmsg: String = kPrefixForLinking
+    outmsg += msg
+    print(outmsg)
+}
+
+let kDoPrintAmplitude = true
+func printAmplitude(currAmp: Double, at: Double, atComp: Double) {
+    guard kDoPrintAmplitude else { return }
+    let ampValStr   = String(format: "%.3f", currAmp)
+    let timeStr     = String(format: "%.3f", at)
+    let compTimeStr = String(format: "%.3f", atComp)
+
+    
+    let times10 = Int(currAmp * 200.0)
+    let ampStr = String(repeating:"-", count:times10)
+    let outStr = "At " + timeStr + ", (comp: \(compTimeStr)), Amp= " + ampValStr + " " + ampStr
+    print( outStr)
+}
 
 // MARK: - for debugging and robustness
 
@@ -67,6 +102,7 @@ func itsBad() {
     print ("It's Bad")
 }
 
+// An "ASSERT" to be able to set a breakpoint for
 func ASSUME(_ testThis: Bool) -> Bool {
     if testThis {
         return true

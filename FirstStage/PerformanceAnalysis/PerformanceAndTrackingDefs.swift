@@ -85,7 +85,8 @@ struct IssueWeight {
     static let kVeryLongOrShort:      Int  =  4     // 20 // 4
     static let kTooLongOrShort:       Int  =  8     // 30 // 6
     
-    
+    static let kNoSound:              Int  =  20    // 30 // 6
+
     // Question: Does a missed note also get weighted score in pitch category?
     // E.g., if rating by pitch alone, is a missed note worse than very low? Or 
     // just ignored? (It will be rated as Missed if rating by attack score)
@@ -121,7 +122,7 @@ let kSamplesNeededToDeterminePitch = 10  // SLIDERABLE ?
 // In legato playing: Number of consecutive samples consistantly not equal to established
 // pitch before considered a different note. (One or two variants in a stable pitch is
 // common, so must have a certain number in a row before commmiting to a new note.)
-let kDifferentPitchSampleThreshold  = 10 // SLIDERABLE ?
+let kDifferentPitchSampleThreshold  = 4 // 10   // SLIDERABLE ?
 
 // Turn on/off use of scanning for pitch change during legato playing
 var gScanForPitchDuringLegatoPlaying = true 
@@ -205,6 +206,8 @@ enum performanceRating { // for attack, duration, and pitch
     case isUpperPartial
     case isLowerPartial
     
+    case noSound
+    
     static func displayStringForRating( _ rating : performanceRating,
                                         ratingText: inout String ) {
         switch( rating ) {
@@ -237,6 +240,7 @@ enum performanceRating { // for attack, duration, and pitch
         case .wrongNoteSharp: ratingText = "Very High"
         case .isUpperPartial: ratingText = "Upper Partial"
         case .isLowerPartial: ratingText = "Lower Partial"
+        case .noSound:        ratingText = "No Sound"
         }
     }
 }
@@ -261,6 +265,7 @@ let kStopPerformanceThresholdDefault: UInt = 5
 let kStopPerformanceThresholdMax: UInt = 100
 let kStopPerformanceThresholdNoStop = kStopPerformanceThresholdMax
 var kStopPerformanceThreshold: UInt = kStopPerformanceThresholdDefault
+var doEjectorSeat = true
 // SLIDERABLE ^
 
 // Severity -  How bad is the issue. Used to determine color of pulsing circle,
@@ -286,6 +291,7 @@ let kSeverityRed      = 2
 //      kMKDebugOpt_ShowSoundsAnalysis          // Display on AnalysisOverlayView
 //
 var gMKDebugOpt_ShowDebugSettingsBtn = false
+var gMKDebugOpt_ShowSlidersBtn = false
 var gMKDebugOpt_ShowFakeScoreInLTAlert = false
 var gMKDebugOpt_TestVideoViewInLessonOverview = false
 

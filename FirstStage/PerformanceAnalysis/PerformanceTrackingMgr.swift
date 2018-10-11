@@ -73,12 +73,14 @@ class PerformanceTrackingMgr {
             kAmplitudeThresholdForIsSound = kAmpThresholdForIsSound_Sim
             kSoundStartAdjustment = kSoundStartAdjustment_Sim
             kMetronomeTimingAdjustment = kMetronomeTimingAdjustment_Sim
+            kRunningInSim = true
         } else {
             print("In Real Device")
             kRunningInSim = false
             kAmplitudeThresholdForIsSound = kAmpThresholdForIsSound_HW
             kSoundStartAdjustment = kSoundStartAdjustment_HW
             kMetronomeTimingAdjustment = kMetronomeTimingAdjustment_HW
+            kRunningInSim = false
         }
     }
 
@@ -109,6 +111,11 @@ class PerformanceTrackingMgr {
     //  MARK: -    PerformanceSound related
     //
     ///////////////////////////////////////////////////////////////////////////
+    
+    // To be able to trigger one of the "No Sound" videos
+    var doDetectedDuringPerformance = false
+    var signalDetectedDuringPerformance = false
+    var perfLongEnoughToDetectNoSound = false
     
     // Container of Sounds as they occured in real time. (A Sound may or may not be
     // linked to Note.)
@@ -152,7 +159,8 @@ class PerformanceTrackingMgr {
         if let soundsNote = currSound.linkedNoteObject {
             soundsNote.setActualEndTimeAbs( endTimeAbs: soundEndTime )
         }
-        print("\n\nSound #\(currSound.soundID) stopped bc sound stopped at (comp) \(currSound._endTime_comp)\n\n")
+        print("\n")
+        printSoundRelatedMsg(msg: "Sound #\(currSound.soundID) stopped bc sound stopped at (comp) \(currSound._endTime_comp)\n")
         currSound.printSoundResults()
         currentSound = nil
         currentlyTrackingSound = false
@@ -304,66 +312,68 @@ class PerformanceTrackingMgr {
     // called when either a new note or rest begins in the score, or new sound is detected
     func linkCurrSoundToCurrScoreObject(isNewScoreObject: Bool) {
         
+        print("\n")
         if isNewScoreObject {
-            print ("   SO to SC Linking: New Note or Rest, looking for Sound")
+            printLinkingRelatedMsg(msg: "SO to SC Linking: New Note or Rest, looking for Sound")
         } else {
-            print ("   SO to SC Linking: New Sound, looking for Note or Rest")
+            printLinkingRelatedMsg(msg: "SO to SC Linking: New Sound, looking for Note or Rest")
         }
         
         // Confirm in A Sound, we can get it, and it is not already linked
         guard currentlyTrackingSound   else {
-            print("       - rejecting; not currently Tracking Sound");     return
+            printLinkingRelatedMsg(msg: "    - rejecting; not currently Tracking Sound\n");     return
         }
         guard let currSound : PerformanceSound = currentSound   else {
-            print("       - rejecting; cannot get currSound");       return
+            printLinkingRelatedMsg(msg: "    - rejecting; cannot get currSound\n");       return
         }
         guard !(currSound.isLinkedToNote || currSound.isLinkedToRest)   else {
-            print("       - rejecting; currSound already Linked to Note or Rest");  return
+            printLinkingRelatedMsg(msg: "    - rejecting; currSound already Linked to Note or Rest\n");  return
         }
         
         // Confirm in a Note or Rest
         guard (currentlyInAScoreNote || currentlyInAScoreRest) else {
-            print("       - rejecting; not in a current Note or Rest");  return
+            printLinkingRelatedMsg(msg: "    - rejecting; not in a current Note or Rest\n");  return
         }
 
         if currentlyInAScoreNote {
             guard let currPerfNote : PerformanceNote = currentPerfNote else {
-                print("       - rejecting; cannot get current Note");   return
+                printLinkingRelatedMsg(msg: "    - rejecting; cannot get current Note\n");   return
             }
             guard !currPerfNote.isLinkedToSound   else {
-                print("       - rejecting; currPerfNote already Linked to Sound");  return
+                printLinkingRelatedMsg(msg: "    - rejecting; currPerfNote already Linked to Sound\n");  return
             }
             
             let diff = abs( currSound.startTime_comp - currPerfNote.expectedStartTime  )
             let attackTol = PerformanceAnalysisMgr.instance.currTolerances.rhythmTolerance
-            print("   SO to SC Linking: For Sound \(currSound.soundID), StartTime_song =  \(currSound.startTime_comp)")
-            print("   SO to SC Linking: For Note  \(currPerfNote.perfNoteOrRestID), exp/act start diff = \(diff), attackTol = \(attackTol)")
+            printLinkingRelatedMsg(msg: "SO to SC Linking: For Sound \(currSound.soundID), StartTime_song =  \(currSound.startTime_comp)")
+            printLinkingRelatedMsg(msg: "SO to SC Linking: For Note  \(currPerfNote.perfNoteOrRestID), exp/act start diff = \(diff), attackTol = \(attackTol)")
 
             if (diff <= attackTol) {
-                print("   SO to SC Linking: -> Note LINKED !\n.")
+                printLinkingRelatedMsg(msg: "SO to SC Linking: -> Note LINKED !\n")
                 currPerfNote.linkToSound(soundID: currSound.soundID, sound: currSound)
                 currSound.linkToNote(noteID: currPerfNote.perfNoteOrRestID, note: currPerfNote)
                 currPerfNote.actualStartTime_song = currSound.startTime_song
                 currPerfNote.actualFrequency = currSound.averagePitchRunning
             } else {
-                print("   SO to SC Linking:   -> Rejecting, bc (diff <= attackTol)")
+                printLinkingRelatedMsg(msg: "SO to SC Linking:   -> Rejecting, bc (diff <= attackTol)")
             }
         }
         
         else if currentlyInAScoreRest {
             guard let currPerfRest: PerformanceRest = currentPerfRest else {
-                print("       - rejecting; cannot get current Rest");   return
+                printLinkingRelatedMsg(msg: "    - rejecting; cannot get current Rest\n");   return
             }
             guard !currPerfRest.isLinkedToSound   else {
-                print("       - rejecting; currPerfRest already Linked to Sound");  return
+                printLinkingRelatedMsg(msg: "    - rejecting; currPerfRest already Linked to Sound\n");  return
             }
-            print("   SO to SC Linking: rest's expectedEndTime: \(currPerfRest.expectedEndTimeMinusTolerance)")
-            print("   SO to SC Linking: rest's  deactivateTime_comp: \(currPerfRest._deactivateTime_comp)")
-            print("   SO to SC Linking: sound's cpmensated start time: \(currSound.startTime_comp)")
+            printLinkingRelatedMsg(msg: "SO to SC Linking: rest's expectedEndTime: \(currPerfRest.expectedEndTimeMinusTolerance)")
+            printLinkingRelatedMsg(msg: "SO to SC Linking: rest's  deactivateTime_comp: \(currPerfRest._deactivateTime_comp)")
+            printLinkingRelatedMsg(msg: "SO to SC Linking: sound's cpmensated start time: \(currSound.startTime_comp)")
             
             currPerfRest.linkToSound(soundID: currSound.soundID, sound: currSound)
-            print("   SO to SC Linking: -> Rest LINKED !  (not good)\n.")
+            printLinkingRelatedMsg(msg: "SO to SC Linking: -> Rest LINKED !  (not good)\n")
         }
+        print("\n")
 	}
     
     // called periodically to update sound with current average pitch, etc. Also, 
@@ -405,12 +415,22 @@ class PerformanceTrackingMgr {
     // Do post-performance analysis and grading: Pitch and Rhythm accuracy
     func analyzePerformance() {
 
+        if doDetectedDuringPerformance && !signalDetectedDuringPerformance {
+            PerformanceIssueMgr.instance.createNoSoundIssue()
+            print ( "\n--------------------------")
+            print ( "  No Signal was detected . . . ")
+            print ( "--------------------------\n")
+            return
+        }
+        
+        
         // Uncomment this to test Partial lookup
 //        runPreAnalysisPartialTestingSetup()
         
         // Visit each Note, have analyzers grade and rate performance of that
         // Note compared with expectations
         rhythmAnalyzer.resetAverages()
+        resetAttackDiffs()
         for onePerfScoreObj in perfNotesAndRests {
             onePerfScoreObj.weightedScore = 0
             if onePerfScoreObj.isNote() {
@@ -440,6 +460,49 @@ class PerformanceTrackingMgr {
                 }
                 // else RESTCHANGE
             }
+        }
+        
+        let kMKDebugOpt_PrintNoteAndRestSummary = true
+        if kMKDebugOpt_PrintNoteAndRestSummary {
+            print ( "==================================================")
+            print ( "\nNote and Rest Performance Summary:\n")
+            for onePerfScoreObj in perfNotesAndRests {
+                let isLinked = onePerfScoreObj.isLinkedToSound
+                let isLinkedStr = isLinked
+                    ?    "   Is Linked To Sound:              YES"
+                    :    "   Is Linked To Sound:              NO"
+                print ( "\n==================================================")
+                if onePerfScoreObj.isNote() {
+                    guard let onePerfNote: PerformanceNote = onePerfScoreObj as? PerformanceNote
+                        else { continue }
+                    print ( " Note #\(onePerfNote.perfNoteOrRestID):" )
+                    print ( "   Expected StartTime:   \(onePerfNote.expectedStartTime)" )
+                    if isLinked {
+                        let formattedActTime = String(format: "%.4f", onePerfNote._actualStartTime_comp)
+                        print ( "   Act, Comp StartTime:  \(formattedActTime)" )
+                    }
+                    print ( "   Expected EndTime:     \(onePerfNote.expectedEndTime)" )
+                    print ( "   Expected Duration:    \(onePerfNote._expectedDuration)" )
+                    print ( "   Comp Deactivate Time: \(onePerfNote._deactivateTime_comp)" )
+                    print (isLinkedStr)
+                    if isLinked {
+                        print ( "     Attack rating:   \(onePerfNote.attackRating)" )
+                        print ( "     Duration rating: \(onePerfNote.durationRating)" )
+                        print ( "     Pitch rating:    \(onePerfNote.pitchRating)" )
+                        print ( "     Weighted rating: \(onePerfNote.weightedScore)" )
+                    }
+                } else { // is Rest
+                    guard let onePerfRest: PerformanceRest = onePerfScoreObj as? PerformanceRest
+                        else { continue }
+                    print ( " Rest #\(onePerfRest.perfNoteOrRestID):" )
+                    print ( "   Expected StartTime:   \(onePerfRest.expectedStartTime)" )
+                    print ( "   Expected EndTime:     \(onePerfRest.expectedEndTime)" )
+                    print ( "   Exp End Time w/Tol:   \(onePerfRest._expectedEndTimeMinusTolerance)" )
+                    print ( "   Comp Deactivate Time: \(onePerfRest._deactivateTime_comp)" )
+                    print ( isLinkedStr )
+                }
+            }
+            print ( "==================================================\n\n")
         }
     }
     

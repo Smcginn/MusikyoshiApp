@@ -111,12 +111,27 @@ func mapPerfIssueToVideoID( _ issueCode: performanceRating ) -> Int {
         
     case .isUpperPartial:       return getUpperPartialIdx()
     case .isLowerPartial:       return getLowPartialIdx()
+        
+    case .noSound:              return getNoSoundIdx() // vidIDs.kVid_NoSound_AreYouPlaying
 
     default:                    return vidIDs.kVid_NoVideoAvailable
     }
 }
 
 // MARK: - Funcs for cycling through different videos for the same problem.
+
+var gNoSoundIdx = vidIDs.kVid_NoSound_AreYouPlaying
+func getNoSoundIdx() -> Int {
+    let retIdx = gNoSoundIdx
+    switch gNoSoundIdx {
+    case vidIDs.kVid_NoSound_AreYouPlaying:
+        gNoSoundIdx = vidIDs.kVid_NoSound_CheckMicSettings
+    case vidIDs.kVid_NoSound_CheckMicSettings: fallthrough
+    default:
+        gNoSoundIdx = vidIDs.kVid_NoSound_AreYouPlaying
+    }
+    return retIdx
+}
 
 var gLowPartialIdx = vidIDs.kVid_Pitch_LowPartial_ChangeTongueArch
 func getLowPartialIdx() -> Int {
@@ -268,6 +283,13 @@ let kVidURL_PossUpPart2_SlowAir
 let kVidURL_Sound_SoundDuringRest
     = ("Sound during rest - _512Kbps_288p", "mp4")
 
+// No Sound
+
+let kVidURL_NoSound_AreYouPlaying
+    = ("No Sound - Are You Playing_512Kbps_288p", "mp4")
+let kVidURL_NoSound_CheckMicSettings
+    = ("No Sound - Check Mic Settings", "mp4")
+
 // MARK: - Called by the Video Popup, to map an ID to the actual video file
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -364,7 +386,15 @@ func getURLForVideoID(_ vidID: Int ) -> URL? {
     case vidIDs.kVid_Sound_SoundDuringRest:
         retURL = Bundle.main.url( forResource:   kVidURL_Sound_SoundDuringRest.0,
                                   withExtension: kVidURL_Sound_SoundDuringRest.1 )
+        
+    case vidIDs.kVid_NoSound_AreYouPlaying:
+        retURL = Bundle.main.url( forResource:   kVidURL_NoSound_AreYouPlaying.0,
+                                  withExtension: kVidURL_NoSound_AreYouPlaying.1 )
+    case vidIDs.kVid_NoSound_CheckMicSettings:
+        retURL = Bundle.main.url( forResource:   kVidURL_NoSound_CheckMicSettings.0,
+                                  withExtension: kVidURL_NoSound_CheckMicSettings.1 )
 
+        
     default: retURL = nil
     }
     

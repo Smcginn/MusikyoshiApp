@@ -62,6 +62,7 @@ class HomeViewController: UIViewController {
             debugStuffOnBtn.setTitleColor(UIColor.blue, for: .normal)
             gMKDebugOpt_ShowDebugSettingsBtn = true
             gMKDebugOpt_ShowFakeScoreInLTAlert = true
+            gMKDebugOpt_ShowSlidersBtn = true
         }
     }
     

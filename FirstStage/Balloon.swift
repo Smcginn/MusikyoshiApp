@@ -101,7 +101,7 @@ class Balloon: UIView {
         imgView.frame.origin.y = y
     }
     
-    func explodeBalloon()
+    func explodeBalloon(hideMonkeyFace: Bool = true)
     {
         imgView.image = balloonExplodeImg
         
@@ -122,7 +122,9 @@ class Balloon: UIView {
             // by 1 every time you press button
             self.imgView.center.y += 300
             self.imgView.alpha = 0.0
-            self.monkeyFaceImgVw.alpha = 0.0
+            if hideMonkeyFace {
+                self.monkeyFaceImgVw.alpha = 0.0
+            }
         } )
         }
     }
@@ -191,6 +193,8 @@ class Balloon: UIView {
         
         imgView.frame.origin.x = x
         imgView.frame.origin.y = y
+        
+        imgView.alpha = 1.0
    }
     
     override func awakeFromNib() {

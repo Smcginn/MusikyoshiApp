@@ -176,6 +176,27 @@ class PerformanceIssueMgr {
         return retVal
     }
     
+    func createNoSoundIssue() {
+        clearExisitingIssues()
+        let perfIssue = PerfIssue(perfScoreObjID: 0)
+        perfIssue.issueCode   = .noSound
+        perfIssue.issueType   = .attack
+        perfIssue.issueScore  = IssueWeight.kNoSound
+        perfIssue.videoID     = mapPerfIssueToVideoID(perfIssue.issueCode)
+        
+        perfIssues.append(perfIssue)
+        justNotesPerfIssues.append(perfIssue)
+        
+        sortedPerfIssues = perfIssues.sorted {
+            let er0 = $0.issueScore, er1 = $1.issueScore
+            return er0 > er1 ? true : false
+        }
+        sortedJustNotesPerfIssues = justNotesPerfIssues.sorted {
+            let er0 = $0.issueScore, er1 = $1.issueScore
+            return er0 > er1 ? true : false
+        }
+    }
+    
     ///////////////////////////////////////////////////////////////////////////
     // This func is the whole point of this file. Called after post-performance
     // grading has occured, to capture the issues (using the specified criteria) 

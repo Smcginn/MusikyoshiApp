@@ -98,7 +98,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
     var callingVCDelegate: ExerciseResults? = nil
     var exerciseType: ExerciseType = .longtoneExer
 
-    
+    var targetTimeAndStarScoreMgr = LT_TargetTimeAndStarScoreMgr()
     var doingPersonalRecord = false
     var currPersBest: Double = 0.0
     
@@ -450,11 +450,15 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
         
         feedbackLbl.isHidden = true
         
+        targetTimeAndStarScoreMgr.nonPB_TargetTime = targetTime
+        
         if exerciseType == .longtoneRecordExer {
             doingPersonalRecord = true
+            targetTimeAndStarScoreMgr.isPersonalBest = true
             currPersBest =
                 LessonScheduler.instance.getPersonalBestTime(forNoteID: targetNoteID)
-            targetTime = 60.0
+            targetTimeAndStarScoreMgr.pb_CurrPersonalBest = currPersBest
+            targetTime = targetTimeAndStarScoreMgr.targetTime //    60.0
             timerLbl.text = String(format: "Current Record: %.2f", currPersBest)
 
             setTargetTimeIfDoingPersonalBest(setLabels: true)
@@ -889,6 +893,10 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
 //        starScoreLbl?.isHidden = false
 //        showStarScore()
         
+        
+        balloon.monkeyFaceImgVw.alpha = 1.0
+        balloon.monkeyFaceImgVw.isHidden = false
+
         switchExerState(newState: kLTExerState_Countdown)
         timer.invalidate()
         feedbackLbl.isHidden = true
@@ -991,28 +999,22 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
         timer = Timer.scheduledTimer(timeInterval: pitchSampleRate, target: self, selector: #selector(LongToneViewController.updateTracking), userInfo: nil, repeats: true)
     }
     
-    func setTargetTimeIfDoingPersonalBest(setLabels: Bool) {
+    func setTargetTimeIfDoingPersonalBest(setLabels: Bool) { // SHAWN
         currPersBest =
             LessonScheduler.instance.getPersonalBestTime(forNoteID: targetNoteID)
         timerLbl.text = String(format: "Current Record: %.2f", currPersBest)
         
-        if currPersBest > 0.0 {
-            if currPersBest <= 10.0 {
-                targetTime = 2 * currPersBest
-            } else {
-                targetTime = 1.5 * currPersBest
-            }
-            if setLabels {
+        targetTime = targetTimeAndStarScoreMgr.targetTime
+        if setLabels {
+            if currPersBest > 0.0  {
                 self.feedbackLbl.text =
                     String(format: "See if you can beat your current record",
                            currPersBest)
-            }
-        } else {
-            targetTime = 5.0
-            if setLabels {
+            } else {
                 self.feedbackLbl.text = "See how long you can play the note"
             }
         }
+     
         self.feedbackLbl.isHidden = false
     }
     
@@ -1032,7 +1034,10 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
 //            let currBest =
 //                LessonScheduler.instance.getPersonalBestTime(forNoteID: targetNoteID)
             if elapsed > currPersBest {
+                balloon.explodeBalloon()
                 currPersBest = elapsed
+                targetTimeAndStarScoreMgr.pb_CurrPersonalBest = currPersBest
+                targetTime = targetTimeAndStarScoreMgr.targetTime
                 LessonScheduler.instance.setPersonalBestTime(forNoteID: targetNoteID,
                                                              newPersBest: elapsed)
                 _ = LessonScheduler.instance.saveScoreFile()
@@ -1042,13 +1047,15 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
                 switchExerState(newState: kLTExerState_TryAgain)
                 timerLbl.text = String(format: "New Best Time: %.1f", currPersBest)
            } else {
+                balloon.deflateBallon()
                 feedbackLbl.text = "Good Job, but not your best"
                 feedbackLbl.isHidden = false
                 switchExerState(newState: kLTExerState_TryAgain)
                 timerLbl.text = String(format: "This Time: %.2f, Best: %.2f", elapsed, currPersBest)
            }
         } else if isExerciseSuccess {
-            balloon.explodeBalloon()
+            let doHide = !doingPersonalRecord
+            balloon.explodeBalloon(hideMonkeyFace: doHide)
             balloon.fillColor = UIColor.green.cgColor
             feedbackLbl.text = "You did it!"
             //smileImageView.isHidden = false
@@ -1060,6 +1067,10 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
             updateTimerText()
             //timerLbl.text = String(format: "%.2f/%.2f", targetTime, targetTime)
             switchExerState(newState: kLTExerState_Done)
+            
+            delay(2.0) {
+                self.returnToCallingVC(doSaveScore: true)
+            }
         }
         else
         {
@@ -1179,16 +1190,25 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
                             actualStartTime = Date()
                             actualTimeNotSet = false
                         }
-
+                        
                         let elapsed = Date().timeIntervalSince(actualStartTime)
+                        targetTimeAndStarScoreMgr.elapsedTime = elapsed
+                        let currPerc = targetTimeAndStarScoreMgr.percentageCompleted()
                         let timeLen = TimeInterval(targetTime)
                         print ("elapsed == \(elapsed)")
                         print ("timeLen == \(timeLen)")
                         //let percent:CGFloat = CGFloat(elapsed/timeLen)
-                        let percent:CGFloat = CGFloat(currentTime/timeLen)
-                        let percentInt = Int(percent*100)
-                        print ("\n ****   percent == \(percent) \n")
-                        balloon.increaseBalloonSize(toPercentage: percent)
+ 
+//                        let percent:CGFloat = CGFloat(currentTime/timeLen)
+//                        let percentInt = Int(percent*100)
+                        
+                        //let percentInt = Int(currPerc*100)
+                        
+
+                        print ("\n ****   percent == \(currPerc) \n")
+                        balloon.increaseBalloonSize(toPercentage: CGFloat(currPerc))
+                        
+                        /*
                         if percentInt > kPerCentThreshold_FourStar {
                             currStarScore = 4
                         } else if percentInt > kPerCentThreshold_ThreeStar {
@@ -1200,6 +1220,8 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
                         else  {
                             currStarScore = 0
                         }
+                        */
+                        currStarScore = targetTimeAndStarScoreMgr.currentStarScore()
                         
                         starScoreView.setStarCount(numStars: currStarScore)
                         starScoreLbl?.text = "This time:"
@@ -1377,5 +1399,104 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+}
+
+/*
+ 
+ What is current Star score?
+ What is the current percentage of target?
+ Should the balloon explode?
+ 
+ 
+ pbPersonalBest
+ nonPBTargetTime
+ elapsed
+ 
+ get -
+   TargetTime
+   Percentage
+   StarScore
+ 
+ 
+*/
+
+
+class LT_TargetTimeAndStarScoreMgr {
+    
+    var isPersonalBest = false
+    
+    // Only call of this is a Personal Best exercise
+    var pb_CurrPersonalBest: TimeInterval  = 0.0 {
+        didSet {
+            if pb_CurrPersonalBest > 0.0 {
+                if pb_CurrPersonalBest <= 5.0 {
+                    _targetTime = 2 * pb_CurrPersonalBest
+                } else if pb_CurrPersonalBest <= 10.0 {
+                    _targetTime = 1.5 * pb_CurrPersonalBest
+                } else { // > 10
+                    _targetTime = pb_CurrPersonalBest + 5.0
+                }
+            } else {
+                _targetTime = 5.0
+            }
+        }
+    }
+    
+    // Only call of this is NOT a Personal Best exercise
+    var nonPB_TargetTime: TimeInterval  = 0.0 {
+        didSet {
+            _targetTime = nonPB_TargetTime
+        }
+    }
+    
+    private var _targetTime: TimeInterval = 0.0
+    
+    var targetTime: TimeInterval {
+        get {
+            return _targetTime
+        }
+    }
+
+    var elapsedTime: TimeInterval = 0.0
+    
+    func percentageCompleted() -> Double {
+        guard _targetTime > 0.0   else { return 0.0 }
+        
+        let percent: Double = Double(elapsedTime/_targetTime)
+        return percent
+    }
+    
+    func currentStarScore() -> Int {
+        var targetTimeToUse: TimeInterval = 0.0
+        if isPersonalBest {
+            targetTimeToUse = pb_CurrPersonalBest
+        } else {
+            targetTimeToUse = nonPB_TargetTime
+        }
+        
+        // guard against dividing by 0
+        guard targetTimeToUse > 0.0   else {
+            return 0 }
+        
+        var currStarScore = 0
+        
+        let percent:CGFloat = CGFloat(elapsedTime/targetTimeToUse)
+        let percentInt = Int(percent*100)
+        
+        print ("\n ****   percent == \(percent) \n")
+        if percentInt > kPerCentThreshold_FourStar {
+            currStarScore = 4
+        } else if percentInt > kPerCentThreshold_ThreeStar {
+            currStarScore = 3
+        } else if percentInt > kPerCentThreshold_TwoStar {
+            currStarScore = 2
+        } else if percentInt > kPerCentThreshold_OneStar {
+            currStarScore = 1 }
+        else  {
+            currStarScore = 0
+        }
+        
+        return currStarScore
     }
 }

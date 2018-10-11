@@ -145,8 +145,8 @@
         "helpCode2":""
         },{
         "fileCode":"TUN017",
-        "xmlFile":"17 Tpt. Sweetly Sings the Donkey.xml",
-        "title":"",
+        "xmlFile":"17 Tpt Sweetly Sings the Donkey.xml",
+        "title":"17 . Sweetly Sings the Donkey",
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
@@ -184,7 +184,7 @@
         "helpCode1":"",
         "helpCode2":""
         },{
-        "fileCode":"TUN0222",
+        "fileCode":"TUN022",
         "xmlFile":"22 The Twinkle Twinkle In Mozar_ts Eyes - Tpt.xml",
         "title":"22. The Twinkle Twinkle In Mozart's Eyes",
         "commentStr1":"",
@@ -1024,6 +1024,39 @@
         "helpCode1":"",
         "helpCode2":""
         },{
+        "fileCode":"SLR001",
+        "xmlFile":"Lip Slur 1 Trumpet in Bb.xml",
+        "title":"Lip Slur 1",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"SLR002",
+        "xmlFile":"Lip Slur 2 - Trumpet in Bb.xml",
+        "title":"Lip Slur 2",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"SLR003",
+        "xmlFile":"Lip Slur 3 - Trumpet in Bb bak.xml",
+        "title":"Lip Slur 3",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+
+        },{
+        "fileCode":"SLR004",
+        "xmlFile":"Lip Slur 4 - Trumpet in Bb.xml",
+        "title":"Lip Slur 4",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
         "fileCode":"SLR005",
         "xmlFile":"Lip Slur 5 - Trumpet in Bb.xml",
         "title":"Lip Slur 5 ",
@@ -1168,6 +1201,78 @@
         "helpCode1":"",
         "helpCode2":""
         },{
+        "fileCode":"PTY011",
+        "xmlFile":"Rhythm Party 11.xml",
+        "title":"Rhythm Party 11",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY012",
+        "xmlFile":"Rhythm Party 12.xml",
+        "title":"Rhythm Party 12",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+         "fileCode":"PTY013",
+        "xmlFile":"Rhythm Party 13.xml",
+        "title":"Rhythm Party 13",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY014",
+        "xmlFile":"Rhythm Party 14.xml",
+        "title":"Rhythm Party 14",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY015",
+        "xmlFile":"Rhythm Party 15.xml",
+        "title":"Rhythm Party 15",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY016",
+        "xmlFile":"Rhythm Party 16.xml",
+        "title":"Rhythm Party 16",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+         "fileCode":"PTY017",
+        "xmlFile":"Rhythm Party 17.xml",
+        "title":"Rhythm Party 17",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY018",
+        "xmlFile":"Rhythm Party 18.xml",
+        "title":"Rhythm Party 18",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY019",
+        "xmlFile":"Rhythm Party 19.xml",
+        "title":"Rhythm Party 19",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
         "fileCode":"PTY020",
         "xmlFile":"Rhythm Party 20.xml",
         "title":"Rhythm Party 20",
@@ -1187,6 +1292,142 @@
         "fileCode":"PTY022",
         "xmlFile":"Rhythm Party 22.xml",
         "title":"Rhythm Party 22",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY023",
+        "xmlFile":"Rhythm Party 23 - tpt.xml",
+        "title":"Rhythm Party 23",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+          "fileCode":"PTY024",
+        "xmlFile":"Rhythm Party 24.xml",
+        "title":"Rhythm Party 24",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+         "fileCode":"PTY025",
+        "xmlFile":"Rhythm Party 25 tpt.xml",
+        "title":"Rhythm Party 25",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY026",
+        "xmlFile":"Rhythm Party 26.xml",
+        "title":"Rhythm Party 26",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY027",
+        "xmlFile":"Rhythm Party 27.xml",
+        "title":"Rhythm Party 27",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY028",
+        "xmlFile":"Rhythm Party 28.xml",
+        "title":"Rhythm Party 28",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY029",
+        "xmlFile":"Rhythm Party 29.xml",
+        "title":"Rhythm Party 29",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY030",
+        "xmlFile":"Rhythm Party 30.xml",
+        "title":"Rhythm Party 30",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY031",
+        "xmlFile":"Rhythm Party 31.xml",
+        "title":"Rhythm Party 31",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY032",
+        "xmlFile":"Rhythm Party 32.xml",
+        "title":"Rhythm Party 32",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY033",
+        "xmlFile":"Rhythm Party 33.xml",
+        "title":"Rhythm Party 33",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY034",
+        "xmlFile":"Rhythm Party 34.xml",
+        "title":"Rhythm Party 34",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY035",
+        "xmlFile":"Rhythm Party 35 - tpt.xml",
+        "title":"Rhythm Party 35",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+         "fileCode":"PTY036",
+        "xmlFile":"Rhythm Party 36 - tpt.xml",
+        "title":"Rhythm Party 36",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY037",
+        "xmlFile":"Rhythm Party 37 - tpt.xml",
+        "title":"Rhythm Party 37",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY038",
+        "xmlFile":"Rhythm Party 38 - tpt.xml",
+        "title":"Rhythm Party 38",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY039",
+        "xmlFile":"Rhythm Party 39 - tpt.xml",
+        "title":"Rhythm Party 39",
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
@@ -1216,6 +1457,134 @@
         "helpCode1":"",
         "helpCode2":""
         },{
+         "fileCode":"PTY043",
+        "xmlFile":"Rhythm Party 43 tpt.xml",
+        "title":"Rhythm Party 43",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY044",
+        "xmlFile":"Rhythm Party 44 - tpt.xml",
+        "title":"Rhythm Party 44",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY045",
+        "xmlFile":"Rhythm Party 45 - tpt.xml",
+        "title":"Rhythm Party 45",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY046",
+        "xmlFile":"Rhythm Party 46 - tpt.xml",
+        "title":"Rhythm Party 46",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY047",
+        "xmlFile":"Rhythm Party 47 - tpt.xml",
+        "title":"Rhythm Party 47",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY048",
+        "xmlFile":"Rhythm Party 48 - tpt.xml",
+        "title":"Rhythm Party 48",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY049",
+        "xmlFile":"Rhythm Party 49 - tpt.xml",
+        "title":"Rhythm Party 49",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY050",
+        "xmlFile":"Rhythm Party 50- tpt.xml",
+        "title":"Rhythm Party 50",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY051",
+        "xmlFile":"Rhythm Party 51- tpt.xml",
+        "title":"Rhythm Party 51",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY052",
+        "xmlFile":"Rhythm Party 52- tpt.xml",
+        "title":"Rhythm Party 52",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY053",
+        "xmlFile":"Rhythm Party 53- tpt.xml",
+        "title":"Rhythm Party 53",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY054",
+        "xmlFile":"Rhythm Party 54- tpt.xml",
+        "title":"Rhythm Party 54",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY055",
+        "xmlFile":"Rhythm Party 55- tpt.xml",
+        "title":"Rhythm Party 55",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+         "fileCode":"PTY056",
+        "xmlFile":"Rhythm Party 56- tpt.xml",
+        "title":"Rhythm Party 56",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+         "fileCode":"PTY057",
+        "xmlFile":"Rhythm Party 57- tpt.xml",
+        "title":"Rhythm Party 57",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY058",
+        "xmlFile":"Rhythm Party 58- tpt.xml",
+        "title":"Rhythm Party 58",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
         "fileCode":"PTY059",
         "xmlFile":"Rhythm Party 59- tpt.xml",
         "title":"Rhythm Party 59",
@@ -1227,6 +1596,22 @@
         "fileCode":"PTY060",
         "xmlFile":"Rhythm Party 60- tpt.xml",
         "title":"Rhythm Party 60",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY061",
+        "xmlFile":"Rhythm Party 61- tpt.xml",
+        "title":"Rhythm Party 61",
+        "commentStr1":"",
+        "commentStr2":"Clap this exercise",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PTY062",
+        "xmlFile":"Rhythm Party 62- tpt.xml",
+        "title":"Rhythm Party 62",
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
@@ -1288,7 +1673,119 @@
         "helpCode1":"",
         "helpCode2":""
         },{
-        "fileCode":"PRP037",
+        "fileCode":"PRP013",
+        "xmlFile":"Rhythm Prep for Tune 13- Trumpet in Bb.xml",
+        "title":"Rhythm Prep for Tune 13",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP016",
+        "xmlFile":"Rhythm Prep Tune 16.xml",
+        "title":"Rhythm Prep for Tune 16",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP017",
+        "xmlFile":"Rhythm Tune Prep #17 Trumpet.xml",
+        "title":"Rhythm Prep for Tune 17",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP018",
+        "xmlFile":"Rhythm Prep for Tune 18 - Tpt.xml",
+        "title":"Rhythm Prep for Tune 18",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP020",
+        "xmlFile":"Rhythm Prep Tune 20 tpt.xml",
+        "title":"Rhythm Prep for Tune 20",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP021",
+        "xmlFile":"Rhythm Prep for Tune 21 - Tpt.xml",
+        "title":"Rhythm Prep for Tune 21",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP022",
+        "xmlFile":"Rhythm Prep tune 22 - tpt.xml",
+        "title":"Rhythm Prep for Tune 22",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP024",
+        "xmlFile":"Rhythm Prep for Tune 24 - tpt.xml",
+        "title":"Rhythm Prep for Tune 24",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP025",
+        "xmlFile":"Rhythm Prep Tune 25 tpt.xml",
+        "title":"Rhythm Prep for Tune 25",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+         "fileCode":"PRP026",
+        "xmlFile":"Rhythm Prep Tune 26 Tpt.xml",
+        "title":"Rhythm Prep for Tune 26",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP028",
+        "xmlFile":"Rhythm Prep Tune 28 tpt.xml",
+        "title":"Rhythm Prep for Tune 28",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP029",
+        "xmlFile":"Rhythm Prep for Tune 29.xml",
+        "title":"Rhythm Prep for Tune 29",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP030",
+        "xmlFile":"Rhythm Prep Tune 30 - tpt.xml",
+        "title":"Rhythm Prep for Tune 30",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP032",
+        "xmlFile":"Rhythm prep tune 32 tpt.xml",
+        "title":"Rhythm Prep for Tune 32",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+         "fileCode":"PRP037",
         "xmlFile":"Rhythm Prep for Tune 37 Tpt.xml",
         "title":"Rhythm Prep for Tune 37",
         "commentStr1":"",
@@ -1312,9 +1809,169 @@
         "helpCode1":"",
         "helpCode2":""
         },{
+         "fileCode":"PRP041",
+        "xmlFile":"Rhythm Prep for Tune 41 - tpt.xml",
+        "title":"Rhythm Prep for Tune 41",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP042",
+        "xmlFile":"Rhythm Prep for Tune 42.xml",
+        "title":"Rhythm Prep for Tune 42",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP044",
+        "xmlFile":"Rhythm Prep for Tune 44 - tpt.xml",
+        "title":"Rhythm Prep for Tune 44",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP045",
+        "xmlFile":"Rhythm Prep for Tune 45 - tpt.xml",
+        "title":"Rhythm Prep for Tune 45",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP046",
+        "xmlFile":"Rhythm Prep for Tune 46 - Trumpet in Bb.xml",
+        "title":"Rhythm Prep for Tune 46",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+         "fileCode":"PRP049",
+        "xmlFile":"Rhythm Prep for Tune 49.xml",
+        "title":"Rhythm Prep for Tune 49",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP050",
+        "xmlFile":"Rhythm Prep for Tune 50 - tpt.xml",
+        "title":"Rhythm Prep for Tune 50",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP054",
+        "xmlFile":"Rhythm Prep for Tune 54.xml",
+        "title":"Rhythm Prep for Tune 54",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP055",
+        "xmlFile":"Rhythm Prep For Tune 55 Trumpet in Bb.xml",
+        "title":"Rhythm Prep for Tune 55",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP056",
+        "xmlFile":"Rhythm Prep for Tune 56 - tpt.xml",
+        "title":"Rhythm Prep for Tune 56",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+         "fileCode":"PRP059",
+        "xmlFile":"Rhythm Prep for Tune 59- Trumpet in Bb.xml",
+        "title":"Rhythm Prep for Tune 59",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+         "fileCode":"PRP060",
+        "xmlFile":"Rhythm Prep for Tune 60- Trumpet in Bb.xml",
+        "title":"Rhythm Prep for Tune 60",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP064",
+        "xmlFile":"Rhythm Prep for Tune 64 - tpt.xml",
+        "title":"Rhythm Prep for Tune 64",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP065",
+        "xmlFile":"Rhythm Prep for Tune 65 - tpt.xml",
+        "title":"Rhythm Prep for Tune 65",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP067",
+        "xmlFile":"Rhythm Prep for Tune 67.xml",
+        "title":"Rhythm Prep for Tune 67",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP068",
+        "xmlFile":"Rhythm Prep for Tune 68 - Tpt.xml",
+        "title":"Rhythm Prep for Tune 68",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP069",
+        "xmlFile":"Rhythm Prep for Tune 69 - tpt.xml",
+        "title":"Rhythm Prep for Tune 69",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP071",
+        "xmlFile":"Rhythm Prep for Tune 71 - tpt.xml",
+        "title":"Rhythm Prep for Tune 71",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP072",
+        "xmlFile":"Rhythm Prep for Tune 72- Trumpet in Bb.xml",
+        "title":"Rhythm Prep for Tune 72",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP073",
+        "xmlFile":"Rhythm Prep for Tune 73 - tpt.xml",
+        "title":"Rhythm Prep for Tune 73",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
         "fileCode":"PRP075",
         "xmlFile":"Rhythm Prep for Tune 75 - tpt.xml",
-        "title":"Rhythm Prep for Tune 75",
+        "title":"Rhythm Prep for Tune ",
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
@@ -1330,7 +1987,7 @@
         },{
         "fileCode":"PRP077",
         "xmlFile":"Rhythm Prep for Tune 77 Sleep My Baby - Trumpet.xml",
-        "title":"Rhythm Prep for Tune 77 ",
+        "title":"Rhythm Prep for Tune 77",
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
@@ -1339,6 +1996,86 @@
         "fileCode":"PRP079",
         "xmlFile":"Rhythm Prep for Tune 79 man on the flying trapeze.xml",
         "title":"Rhythm Prep for Tune 79",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP081",
+        "xmlFile":"Rhythm Prep for Tune 81 - Tpt.xml",
+        "title":"Rhythm Prep for Tune 81",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP083",
+        "xmlFile":"Rhythm Prep for Tune 83 - Tpt.xml",
+        "title":"Rhythm Prep for Tune 83",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+         "fileCode":"PRP085",
+        "xmlFile":"Rhythm Prep for Tune 85 - Trumpet in Bb.xml",
+        "title":"Rhythm Prep for Tune 85",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP093",
+        "xmlFile":"Rhythm Prep for Tune 93.xml",
+        "title":"Rhythm Prep for Tune 93",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP097",
+        "xmlFile":"Rhythm Prep for Tune 97.xml",
+        "title":"Rhythm Prep for Tune 97",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP099",
+        "xmlFile":"Rhythm Prep for Tune 99 - tpt.xml",
+        "title":"Rhythm Prep for Tune 99",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+         "fileCode":"PRP101",
+        "xmlFile":"Rhythm Prep for Tune 101.xml",
+        "title":"Rhythm Prep for Tune 101",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP103",
+        "xmlFile":"Rhythm Prep for Tune 103.xml",
+        "title":"Rhythm Prep for Tune 103",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP105",
+        "xmlFile":"Rhythm Prep for Tune 105.xml",
+        "title":"Rhythm Prep for Tune 105",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP110",
+        "xmlFile":"Rhythm Prep for Tune 110.xml",
+        "title":"Rhythm Prep for Tune 114",
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
@@ -1360,9 +2097,97 @@
         "helpCode1":"",
         "helpCode2":""
         },{
+        "fileCode":"PRP119",
+        "xmlFile":"Rhythm Prep for Tune 119.xml",
+        "title":"Rhythm Prep for Tune 119",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"SCP001",
+        "xmlFile":"Scale Power 1 - tpt .xml",
+        "title":"Scale Power 1",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"SCP002",
+        "xmlFile":"Scale Power 2 - tpt .xml",
+        "title":"Scale Power",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"SCP003",
+        "xmlFile":"Scale Power 3 - G major - Trumpet in Bb.xml",
+        "title":"Scale Power 3 - G major",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"SCP004",
+        "xmlFile":"Scale Power 4 - Eb major - Trumpet in Bb.xml",
+        "title":"Scale Power 4 - Eb major",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"SCP005",
+        "xmlFile":"Scale Power 5 - Eb Scale - tpt .xml",
+        "title":"Scale Power 5 - Eb Scale",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"SCP006",
+        "xmlFile":"Scale Power 6 Chromatic Scale - Trumpet in Bb.xml",
+        "title":"Scale Power 6 - Chromatic Scale",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"SCP007",
+        "xmlFile":"Scale Power 7 -C minor - Trumpet in Bb.xml",
+        "title":"Scale Power 7 - C minor",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"SCP008",
+        "xmlFile":"Scale Power 8 - E minor - Trumpet in Bb.xml",
+        "title":"Scale Power 8 - E minor",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
         "fileCode":"SCP009",
         "xmlFile":"Scale Power 9 D minor - Trumpet in Bb.xml",
-        "title":"Scale Power 9 - D minor",
+        "title":"Scale Power 9 - D minor ",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"SCP010",
+        "xmlFile":"Scale Power 10 - F Major - Trumpet in Bb.xml",
+        "title":"Scale Power 10 - F Major ",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"SCP011",
+        "xmlFile":"Scale Power 11 - G major - Trumpet in Bb.xml",
+        "title":"Scale Power 11 - G major ",
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",

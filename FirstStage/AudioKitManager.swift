@@ -14,6 +14,7 @@ class AudioKitManager: NSObject {
     static var minimumFrequency = AudioKitManager.minTrackingFrequency
     static var maximumFrequency = AudioKitManager.maxTrackingFrequency
 
+    var amplitudeTracker: AKAmplitudeTracker!  ///   AMPLEAMPLE
     var frequencyTracker: AKFrequencyTracker!
 	var microphone: AKMicrophone!
 
@@ -27,13 +28,13 @@ class AudioKitManager: NSObject {
             print("AK:init() - In Simulator")
             kAmplitudeThresholdForIsSound = kAmpThresholdForIsSound_Sim
             kPlaybackVolume = kPlaybackVolume_Sim
-            kAmpDropForNewSound = kAmpDropForNewSound_Sim
+            gAmpDropForNewSound = kAmpDropForNewSound_Sim
 
         } else {
             print("AK:init() - In Real Device")
             kAmplitudeThresholdForIsSound = kAmpThresholdForIsSound_HW
             kPlaybackVolume = kPlaybackVolume_HW
-            kAmpDropForNewSound = kAmpDropForNewSound_HW
+            gAmpDropForNewSound = kAmpDropForNewSound_HW
         }
     }
 
@@ -51,13 +52,43 @@ class AudioKitManager: NSObject {
         print("\n\n          In AudioKitManager.setup, rebuilding everything, recreating Mic, Tracker, etc.\n\n")
 
         microphone = AKMicrophone()
-        frequencyTracker = AKFrequencyTracker(microphone, hopSize: 200, peakCount: 300)
+
+//======================================================
+        // defaultd for below:
+        //      hopSize: Int = 4_096,
+        //      peakCount: Int = 20)
+        // original David's
+        //      hopSize: 200,
+        //      peakCount: 300)
+//        frequencyTracker = AKFrequencyTracker(microphone,
+//                                              hopSize: 200,
+//                                              peakCount: 1000)
+//======================================================
+        
+        amplitudeTracker =
+            AKAmplitudeTracker(microphone ) //,
+//                               halfPowerPoint: <#T##Double#>,
+//                               threshold: <#T##Double#>,
+//                               thresholdCallback: nil) //<#T##AKThresholdCallback##AKThresholdCallback##(Bool) -> Void#>)
+
+        print("amplitudeTracker == \(amplitudeTracker)")
+
+        frequencyTracker = AKFrequencyTracker(amplitudeTracker,
+                                              hopSize: 200,
+                                              peakCount: 1000)
+
+//======================================================
+
          print("frequencyTracker == \(frequencyTracker)")
+        
+        
+        
         
         let ampedFTrack = AKBooster(frequencyTracker, gain: 0.0 )
         AudioKit.output = ampedFTrack  // so there is no putput while using the mic
 
         AudioKit.start()
+        amplitudeTracker?.start()   ///   AMPLEAMPLE
         frequencyTracker?.start()
         microphone.start()
 
@@ -88,12 +119,16 @@ class AudioKitManager: NSObject {
         if frequencyTracker != nil {
             frequencyTracker.stop()
         }
+        if amplitudeTracker != nil { ///   AMPLEAMPLE
+            amplitudeTracker.stop()
+        }
         if microphone != nil {
             microphone.stop()
         }
         
         AudioKit.stop()
         frequencyTracker = nil
+        amplitudeTracker = nil ///   AMPLEAMPLE
         microphone       = nil
         
         

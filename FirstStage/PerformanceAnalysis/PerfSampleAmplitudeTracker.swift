@@ -10,21 +10,21 @@ import Foundation
 
 // The amplitude drop required to consider end of current sound
 let kAmpDropForNewSound_Sim: tSoundAmpVal = 0.20
-let kAmpDropForNewSound_HW:  tSoundAmpVal = 0.20
-var kAmpDropForNewSound:     tSoundAmpVal = kAmpDropForNewSound_HW
+let kAmpDropForNewSound_HW:  tSoundAmpVal = 0.05 //0.20
+var gAmpDropForNewSound:     tSoundAmpVal = kAmpDropForNewSound_HW
 
 
 
 // The number of samples AFTER the amplitude drop required to say:
 //   "the signal after the amplitude drop is still a sound; so create a new sound"
 let kNumSamplesForStillSound = 8
+var gNumTolAmpSamples   =  4    // num in tolerance zone
 
 
 typealias tSoundAmpVal = Double
 
 class PerfSampleAmplitudeTracker {
     
-    let kNumTolAmpSamples   =  4    // num in tolerance zone
     let kMaxAmpSamples      = 25    // max stored in Queue
     let kMinReqdAmpSamples  = 10    // min number reqired to calc in/out tolerance
     
@@ -60,7 +60,7 @@ class PerfSampleAmplitudeTracker {
             noSignal         = true // should stop tracking sound . . .
             finished         = true
             doCreateNewSound = false
-            print("\nAmpTracker: declaring sound dead bc dropped below 'is sound' threshold")
+            printSoundRelatedMsg(msg: "\nAmpTracker: declaring sound dead bc dropped below 'is sound' threshold")
         } else if currSoundIsDead {
             noSignal = false
             numSamplesSinceSoundIsDead += 1
@@ -88,9 +88,9 @@ class PerfSampleAmplitudeTracker {
         var sumInTolRng: tSoundAmpVal = 0.0
         var numElemsInTolRng = 1
         //var elemsInTolRngSlice:[tSoundAmpVal] = []
-        if numElems >= kNumTolAmpSamples {
+        if numElems >= gNumTolAmpSamples {
             // .prefix(upTo: Idx) does not include elem at index "Idx"
-            let elemsInTolRngSlice = queue.prefix(upTo:kNumTolAmpSamples)
+            let elemsInTolRngSlice = queue.prefix(upTo:gNumTolAmpSamples)
             numElemsInTolRng = elemsInTolRngSlice.count
             sumInTolRng   = elemsInTolRngSlice.reduce(0, +)
 //            print ("      Elems In Tol Rng: \(elemsInTolRngSlice), Sum In Tol Rng: \(sumInTolRng)")
@@ -104,9 +104,9 @@ class PerfSampleAmplitudeTracker {
 
         // calc avg after tolerance range
         var sumAfterTolRng: tSoundAmpVal = 0.0
-        if numElems > kNumTolAmpSamples {
+        if numElems > gNumTolAmpSamples {
             // .suffix(from: Idx) // includes elem at index Idx
-            let elemsAfterTolRng = queue.suffix(from: kNumTolAmpSamples)
+            let elemsAfterTolRng = queue.suffix(from: gNumTolAmpSamples)
             sumAfterTolRng   = elemsAfterTolRng.reduce(0, +)
 //            print ("      Elems After Tol Rng: \(elemsAfterTolRng), Sum After Tol Rng: \(sumAfterTolRng)")
             runningAvgAfterTolRng = sumAfterTolRng/tSoundAmpVal(elemsAfterTolRng.count)
@@ -152,11 +152,11 @@ class PerfSampleAmplitudeTracker {
             let ampDiff:tSoundAmpVal = runningAvgAfterTolRng - runningAvgInTolRng
             let runAvgInTR = runningAvgInTolRng
             let runAvgAftrTR = runningAvgAfterTolRng
-            print("\nAAAAA Amp Diff: \(ampDiff), runningAvgInTolRng: \(runAvgInTR),runningAvgAfterTolRng: \(runAvgAftrTR)\n")
-            if ampDiff > kAmpDropForNewSound {
+//            print("\nAAAAA Amp Diff: \(ampDiff), runningAvgInTolRng: \(runAvgInTR),runningAvgAfterTolRng: \(runAvgAftrTR)\n")
+            if ampDiff > gAmpDropForNewSound {
                 if !currSoundIsDead {
                     let currSongzTime = currentSongTime()
-                    print("  CURRENT SOUND DONE  BC of AMP Drop! At: \(currSongzTime)   Amp Diff: \(ampDiff)")
+                    printSoundRelatedMsg(msg: "  CURRENT SOUND DONE  BC of AMP Drop! At: \(currSongzTime)   Amp Diff: \(ampDiff)")
                 }
                 currSoundIsDead = true
                 ampAtKillPoint  = queue[0]

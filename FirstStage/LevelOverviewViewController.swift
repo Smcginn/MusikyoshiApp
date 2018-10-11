@@ -141,6 +141,9 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
 
         ThresholdsMgr.instance.setThresholds(thresholdsID: thresholdsID,
                                              ejectorSeatThreshold: singleEventThreshold)
+        
+        let currBPM: Double = UserDefaults.standard.double(forKey: Constants.Settings.BPM)
+        calcAndSetAdjustedRhythmTolerances(bpm: currBPM) 
     }
     
     var firstTimeInView = true
@@ -207,7 +210,15 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
         self.launchingNextView?.animateMonkeyImageView()
         self.launchingNextView?.mode = kViewFinishedMode_First
     }
-
+    
+    func resumeAutoSchedHandler(_ act: UIAlertAction) {
+        print("resumeAutoSchedHandler  called")
+        self.paused = false
+        self.launchingNextView?.isHidden =  false
+        self.launchingNextView?.animateMonkeyImageView()
+        self.launchingNextView?.mode = kViewFinishedMode_Loading
+    }
+    
     // may be called in a closure
     func setupForViewWillAppear() {
         if self.launchingNextView == nil {
@@ -596,9 +607,10 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
             
             if selectedTuneId != kFieldDataNotDefined {
                 performSegue(withIdentifier: tuneSegueIdentifier, sender: self)
+            } else {
+                itsBad()
             }
         }
-        
     }
 
     var currExerNumber:Int = 0 // for sanity check - compare against reported results
@@ -724,9 +736,15 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
                 goToNextExercise()
             }
         } else if result == kViewFinished_Pause  {
+            
+            self.launchingNextView?.isHidden =  true
+            launchPausedDlg()
+            
+            // ----> Pause button lands here
+            
             paused = true
-            self.launchingNextView?.isPaused = true
-            self.launchingNextView?.mode = kViewFinishedMode_Ready
+            //self.launchingNextView?.isPaused = true
+            //self.launchingNextView?.mode = kViewFinishedMode_Ready
             print ("Yo! Pausededed!")
         } else if result == kViewFinished_UnPause  {
             paused = false
@@ -739,6 +757,25 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
         } else {
             print ("Yo! I don't know what to do!")
         }
+    }
+    
+    func launchPausedDlg() {
+        var titleStr = "Press 'Resume' to continue guided practice session"
+        titleStr +=    "\n\nPress 'Choose' to exit guided practice session\n(and pick individual exercises)"
+        let ac = MyUIAlertController(title: titleStr,
+                                     message: "",
+                                     preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Resume",
+                                   style: .default,
+                                   handler: resumeAutoSchedHandler))
+        ac.addAction(UIAlertAction(title: "Choose",
+                                   style: .default,
+                                   handler: nil))
+        //ac.view.backgroundColor =  kLightGold
+        //            ac.view.tintColor = UIColor.green
+        ac.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = kDefault_AlertBackgroundColor
+        
+        self.present(ac, animated: true, completion: nil)
     }
     
     func goToNextExercise() {

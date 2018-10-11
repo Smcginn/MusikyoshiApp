@@ -55,7 +55,7 @@ class LaunchingNextView: UIView {
     let kBeginMonkeyAnimCenterX:        CGFloat =  -50.0
     let kAddForEndMonkeyAnimCenterX:    CGFloat =  300.0 // 400.0
     
-    let kAnimDuration = 0.6
+    let kAnimDuration = 1.0 // 0.6
     
     var waitingToBegin = true
     var exercisesDone = false
@@ -427,17 +427,19 @@ class LaunchingNextView: UIView {
 
  //       self.whichImgView?.isHidden = false
         
-        delay(0.1) {}
-        progBar?.backgroundColor = UIColor.purple
-        progBar?.isHidden = false
-        
-        UIView.animate(withDuration: kAnimDuration, delay: 0.0, options: .curveLinear, animations: {
- //           self.whichImgView?.center.x += self.kAddForEndMonkeyAnimCenterX
-            let superFrm = self.frame
-            self.progBar?.frame.size.width = superFrm.size.width - 20
-        }) { (_) in
-            if !self.exercisesDone { // don't auto-return to caller if all done
-                self.viewFinishedDelegate?.viewFinished(result: kViewFinished_Proceed)
+        if !isPaused {
+            delay(0.1) {}
+            progBar?.backgroundColor = UIColor.purple
+            progBar?.isHidden = false
+            
+            UIView.animate(withDuration: kAnimDuration, delay: 0.0, options: .curveLinear, animations: {
+     //           self.whichImgView?.center.x += self.kAddForEndMonkeyAnimCenterX
+                let superFrm = self.frame
+                self.progBar?.frame.size.width = superFrm.size.width - 20
+            }) { (_) in
+                if !self.exercisesDone { // don't auto-return to caller if all done
+                    self.viewFinishedDelegate?.viewFinished(result: kViewFinished_Proceed)
+                }
             }
         }
     }

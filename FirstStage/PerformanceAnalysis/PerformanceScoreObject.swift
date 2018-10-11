@@ -76,10 +76,19 @@ public class PerformanceScoreObject
         _expectedEndTimeMinusTolerance =
             _expectedEndTime - PerformanceAnalysisMgr.instance.currTolerances.rhythmTolerance
         
+//        _deactivateTime
+//            = self.isNote() ? _expectedEndTimeMinusTolerance
+//                            : _expectedStartTime + _expectedDurAdjusted
         _deactivateTime
-            = self.isNote() ? _expectedEndTimeMinusTolerance
-                            : _expectedStartTime + _expectedDurAdjusted
-        _deactivateTime_comp   = _deactivateTime // removed: - kSoundStartAdjustment 
+            = self.isNote() ? (_expectedStartTime + _expectedDuration) - gAdjustAttackVar_VeryOff
+                            : (_expectedStartTime + _expectedDuration) - gAdjustAttackVar_VeryOff
+
+        
+        //_deactivateTime_comp   = _deactivateTime // removed: - kSoundStartAdjustment
+        
+        _deactivateTime_comp
+            = self.isNote() ? (_expectedStartTime + _expectedDuration) - gAdjustAttackVar_ABitOff
+                            : (_expectedStartTime + _expectedDuration) - gAdjustAttackVar_VeryOff
     }
     
     var expectedStartTime   : TimeInterval {

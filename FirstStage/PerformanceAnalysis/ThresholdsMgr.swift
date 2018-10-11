@@ -77,7 +77,7 @@ class ThresholdsMgr {
                             pitchVeryBoundaryPC:    0.05 )
     
     let Thresh_Intermediate_1: AnalysisThresholds =
-        AnalysisThresholds( rhythmTolerance:        0.2,
+        AnalysisThresholds( rhythmTolerance:        0.25,
                             correctPitchPC:         0.97,
                             pitchABitToVeryPC:      0.915,
                             pitchVeryBoundaryPC:    0.05 )

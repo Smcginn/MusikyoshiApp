@@ -14,7 +14,7 @@ enum soundType {
 }
 
 public class PerformanceSound
-{
+{    
     init ( start: TimeInterval, mode : soundType, noteOffset: TimeInterval )
     {
         soundID = PerformanceSound.getUniqueSoundID()
