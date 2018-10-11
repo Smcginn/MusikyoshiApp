@@ -113,9 +113,9 @@ class PerformanceTrackingMgr {
     ///////////////////////////////////////////////////////////////////////////
     
     // To be able to trigger one of the "No Sound" videos
-    var doDetectedDuringPerformance = false
+    var doDetectedDuringPerformance     = true
     var signalDetectedDuringPerformance = false
-    var perfLongEnoughToDetectNoSound = false
+    var perfLongEnoughToDetectNoSound   = false
     
     // Container of Sounds as they occured in real time. (A Sound may or may not be
     // linked to Note.)
