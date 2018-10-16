@@ -82,7 +82,6 @@ func printLinkingRelatedMsg(msg: String) {
     print(outmsg)
 }
 
-let kDoPrintAmplitude = true
 func printAmplitude(currAmp: Double, at: Double, atComp: Double) {
     guard kDoPrintAmplitude else { return }
     let ampValStr   = String(format: "%.3f", currAmp)
@@ -90,7 +89,7 @@ func printAmplitude(currAmp: Double, at: Double, atComp: Double) {
     let compTimeStr = String(format: "%.3f", atComp)
 
     
-    let times10 = Int(currAmp * 200.0)
+    let times10 = Int(currAmp * gAmplitudePrintoutMultiplier)
     let ampStr = String(repeating:"-", count:times10)
     let outStr = "At " + timeStr + ", (comp: \(compTimeStr)), Amp= " + ampValStr + " " + ampStr
     print( outStr)

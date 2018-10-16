@@ -1785,7 +1785,31 @@
         "helpCode1":"",
         "helpCode2":""
         },{
-         "fileCode":"PRP037",
+        "fileCode":"PRP033",
+        "xmlFile":"Rhythm Prep for Tune 33 - Tpt.xml",
+        "title":"Rhythm Prep for Tune 33",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP034",
+        "xmlFile":"Rhythm Prep for Tune 34 - Trumpet in Bb.xml",
+        "title":"Rhythm Prep for Tune 34",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP036",
+        "xmlFile":"Rhythm Prep for Tune 36 - Trumpet in Bb.xml",
+        "title":"Rhythm Prep for Tune 36",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"PRP037",
         "xmlFile":"Rhythm Prep for Tune 37 Tpt.xml",
         "title":"Rhythm Prep for Tune 37",
         "commentStr1":"",

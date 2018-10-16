@@ -10,7 +10,7 @@ import Foundation
 
 // The amplitude drop required to consider end of current sound
 let kAmpDropForNewSound_Sim: tSoundAmpVal = 0.20
-let kAmpDropForNewSound_HW:  tSoundAmpVal = 0.05 //0.20
+let kAmpDropForNewSound_HW:  tSoundAmpVal = 0.025 //0.20
 var gAmpDropForNewSound:     tSoundAmpVal = kAmpDropForNewSound_HW
 
 

@@ -55,7 +55,7 @@ class LaunchingNextView: UIView {
     let kBeginMonkeyAnimCenterX:        CGFloat =  -50.0
     let kAddForEndMonkeyAnimCenterX:    CGFloat =  300.0 // 400.0
     
-    let kAnimDuration = 1.0 // 0.6
+    let kAnimDuration = 2.0 // 0.6
     
     var waitingToBegin = true
     var exercisesDone = false

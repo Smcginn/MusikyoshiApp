@@ -101,7 +101,7 @@ class PerformanceScoreObjectScheduler {
                  return }
         
         let currSongTime = currentSongTime()
-        let deactivateTime = perfScObj.isNote() ? perfScObj._deactivateTime
+        let deactivateTime = perfScObj.isNote() ? perfScObj._deactivateTime_comp
                                                 : perfScObj._deactivateTime_comp
         if currSongTime > deactivateTime {    // perfScObj._deactivateTime_comp {
             var isGood = true

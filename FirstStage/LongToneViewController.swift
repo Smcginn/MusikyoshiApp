@@ -1048,7 +1048,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
                 timerLbl.text = String(format: "New Best Time: %.1f", currPersBest)
            } else {
                 balloon.deflateBallon()
-                feedbackLbl.text = "Good Job, but not your best"
+                feedbackLbl.text = "Good Job, almost your best!"
                 feedbackLbl.isHidden = false
                 switchExerState(newState: kLTExerState_TryAgain)
                 timerLbl.text = String(format: "This Time: %.2f, Best: %.2f", elapsed, currPersBest)

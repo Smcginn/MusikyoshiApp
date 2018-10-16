@@ -93,6 +93,9 @@ struct IssueWeight {
     // static let kPitchMissed:       Int  =  9
 }
 
+
+let kLaunchVideoThreshold = Int(IssueWeight.kVeryEarlyOrLate)
+
 // matched against average scores to determine start score
 let kDefaultMaxScore_FourStars:  Int = 5
 let kDefaultMaxScore_ThreeStars: Int = 8
@@ -300,4 +303,9 @@ let kMKDebugOpt_PrintStudentPerformanceDataDebugSamplesOutput = false
 let kMKDebugOpt_PrintPerfAnalysisResults = false
 let kMKDebugOpt_PrintMinimalNoteAndSoundResults = true
 var kMKDebugOpt_PrintMinimalNoteAnalysis        = true
+
+let kDoPrintAmplitude = true
+let kAmplitudePrintoutMultiplier_Sim =  200.0
+let kAmplitudePrintoutMultiplier_HW  =  900.0
+var gAmplitudePrintoutMultiplier = kAmplitudePrintoutMultiplier_Sim
 

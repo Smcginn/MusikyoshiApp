@@ -73,6 +73,7 @@ class PerformanceTrackingMgr {
             kAmplitudeThresholdForIsSound = kAmpThresholdForIsSound_Sim
             kSoundStartAdjustment = kSoundStartAdjustment_Sim
             kMetronomeTimingAdjustment = kMetronomeTimingAdjustment_Sim
+            gAmplitudePrintoutMultiplier = kAmplitudePrintoutMultiplier_Sim
             kRunningInSim = true
         } else {
             print("In Real Device")
@@ -80,6 +81,7 @@ class PerformanceTrackingMgr {
             kAmplitudeThresholdForIsSound = kAmpThresholdForIsSound_HW
             kSoundStartAdjustment = kSoundStartAdjustment_HW
             kMetronomeTimingAdjustment = kMetronomeTimingAdjustment_HW
+            gAmplitudePrintoutMultiplier = kAmplitudePrintoutMultiplier_HW
             kRunningInSim = false
         }
     }

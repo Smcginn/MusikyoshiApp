@@ -13,7 +13,10 @@
 import UIKit
 import Foundation
 import SwiftyJSON
+import AudioKit
 
+let doLimitLevels = false
+let kNumberOfLevelsToShow: Int = 10
 
 let levelHeaderSpacingStr = "       " // leaves room at front for checkbox icon
 
@@ -36,6 +39,29 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
     var currLevel:Int = 0
     var currDay = 0
 
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        var permissionGranted = false
+        switch AVAudioSession.sharedInstance().recordPermission() {
+        case AVAudioSessionRecordPermission.granted:
+            permissionGranted = true
+        case AVAudioSessionRecordPermission.denied:
+            permissionGranted = false
+        case AVAudioSessionRecordPermission.undetermined:
+            AVAudioSession.sharedInstance().requestRecordPermission {
+                [weak self] granted in
+                if granted {
+                   permissionGranted = true
+                }
+            }
+        default:
+            permissionGranted = false
+            break
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -126,6 +152,10 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        if doLimitLevels {
+            return kNumberOfLevelsToShow
+        }
+        
         if let count = instrumentJson?["levels"].count {
             return count
         }
@@ -134,6 +164,12 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         var retStr = ""
+        
+        if doLimitLevels && section > kNumberOfLevelsToShow {
+            itsBad()
+            return retStr
+        }
+        
         let titleStr = levelsJson?[section]["title"].string
         if titleStr != nil {
             retStr = levelHeaderSpacingStr + titleStr! // leave room at front for checkbox icon
@@ -144,7 +180,11 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard levelsJson != nil else { return 0 }
-        
+        if doLimitLevels && section > kNumberOfLevelsToShow {
+            itsBad()
+            return 0
+        }
+    
         if section != currLevel { return 0 }
 
         return numDaysInLevel(level: section)
@@ -172,6 +212,11 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if doLimitLevels && section > kNumberOfLevelsToShow {
+            itsBad()
+            return nil
+        }
+        
         let header =
             tableView.dequeueReusableHeaderFooterView(withIdentifier: "header")
                 as? LevelSeriesTableViewHeaderFooterView
@@ -267,7 +312,13 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
         cell.textLabel?.text = ""
         
         let section = indexPath.section
-        let row = indexPath.row
+//        let row = indexPath.row
+        
+        if doLimitLevels && section > kNumberOfLevelsToShow {
+            itsBad()
+            return cell
+        }
+
  //       print ("in cellForRowAt;  section = \(section),  row = \(row)")
         if isSelectedCell(indexPath:indexPath) {
         // if cell.isSelected {

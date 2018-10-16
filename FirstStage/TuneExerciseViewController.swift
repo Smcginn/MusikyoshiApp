@@ -1010,20 +1010,23 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
 //                //self.testVideoMappsings(perfIssue: worstPerfIssue)
 //            }
             if worstPerfIssue != nil {
-                let issScore = worstPerfIssue!.issueScore
-                let severity =
-                    PerformanceIssueMgr.instance.getSeverity(issueScore: issScore)
-                let perfNoteID:Int32 = worstPerfIssue!.perfScoreObjectID
-//                worstPerfIssue!.videoID  = vidIDs.kVid_Pitch_VeryLow_SpeedUpAir // YYYYYOOOOO
-                if worstPerfIssue!.videoID != vidIDs.kVid_NoVideoAvailable {
-                    self.scrollToNoteAndLaunchVideo(perfNoteID: perfNoteID,
-                                                    videoID: worstPerfIssue!.videoID,
-                                                    severity: severity)
-                }
-                else if worstPerfIssue!.alertID != alertIDs.kAlt_NoAlertMsgAvailable {
-                    self.scrollToNoteAndLaunchAlert(perfNoteID: perfNoteID,
-                                                    alertID: worstPerfIssue!.alertID,
-                                                    severity: severity)
+                if (worstPerfIssue?.issueScore)! >= kLaunchVideoThreshold {
+                    
+                    let issScore = worstPerfIssue!.issueScore
+                    let severity =
+                        PerformanceIssueMgr.instance.getSeverity(issueScore: issScore)
+                    let perfNoteID:Int32 = worstPerfIssue!.perfScoreObjectID
+    //                worstPerfIssue!.videoID  = vidIDs.kVid_Pitch_VeryLow_SpeedUpAir // YYYYYOOOOO
+                    if worstPerfIssue!.videoID != vidIDs.kVid_NoVideoAvailable {
+                        self.scrollToNoteAndLaunchVideo(perfNoteID: perfNoteID,
+                                                        videoID: worstPerfIssue!.videoID,
+                                                        severity: severity)
+                    }
+                    else if worstPerfIssue!.alertID != alertIDs.kAlt_NoAlertMsgAvailable {
+                        self.scrollToNoteAndLaunchAlert(perfNoteID: perfNoteID,
+                                                        alertID: worstPerfIssue!.alertID,
+                                                        severity: severity)
+                    }
                 }
             }
         }
