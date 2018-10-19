@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import StoreKit
 
 func delay(_ delay:Double, closure:@escaping ()->()){
     DispatchQueue.main.asyncAfter(
@@ -18,6 +19,7 @@ func delay(_ delay:Double, closure:@escaping ()->()){
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    let iapHelper = IAPHelper(prodIds: Set([SubScript2]))  // IAPH
 
     var orientationLock = UIInterfaceOrientationMask.portrait
         
@@ -135,6 +137,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PerformanceAnalysisMgr.instance.rebuildAllAnalysisTables( tolerances )
         
   //      AVAudioSessionManager.sharedInstance.setupAudioSession()
+        
+        /*   Restore when really doing IAP
+        iapHelper.requestProducts {
+            [weak self] success, products in
+            guard let products = products else { return }
+            
+            print(products.map {$0.productIdentifier})
+            
+            if let prod1 = products.first  as SKProduct? {
+                print("\n-----------------------------------------------")
+                print("Product Description:   \(prod1.localizedDescription)")
+                print("Product TItle:         \(prod1.localizedTitle)")
+                print("Product Price:         \(prod1.price)")
+                print("Product Price Locale:  \(prod1.priceLocale)")
+                print("Product Identifier:    \(prod1.productIdentifier)")
+                print("-----------------------------------------------\n")
+
+            }
+            print(products.map {$0.productIdentifier})
+
+        }
+        */
         
         return true
     }
