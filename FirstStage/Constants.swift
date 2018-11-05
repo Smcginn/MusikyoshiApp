@@ -19,6 +19,7 @@ struct Constants
         static let yOffset = 75.0
     }
     
+    // SFUserDefs
     struct Settings
     {
         static let BPM = "bpm"
@@ -32,5 +33,12 @@ struct Constants
         static let SmallestNoteWidth = "smallestnotewidth"
         static let SignatureWidth = "signaturewidth"
         static let ScoreMagnification = "scoremagnification"
+        static let MaxPlayingVolume = "maxPlayingVolume"
+        static let PlayingVolumeSoundThreshold = "playingVolumeSoundThreshold"
+        static let LastPlayingVolumeCheckDate = "lastPlayingVolumeCheckDate"
+        static let UserNoteThresholdOverride = "userNoteThresholdOverride"
+        static let UserHopSizeOverride = "userHopSizeOverride"
+        static let UserPeakCountOverride = "userPeakCountOverride"
+        static let UserLatencyOffsetThresholdOverride = "userLatencyOffsetThresholdOverride"
     }
 }

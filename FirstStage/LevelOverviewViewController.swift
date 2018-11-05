@@ -18,7 +18,9 @@ protocol ExerciseResults {
     func setExerciseResults( exerNumber: Int, exerStatus: Int, exerScore: Int)
 }
 
-class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ViewFinished, ExerciseResults {
+class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ViewFinished, ExerciseResults, PresentingMicCalibVC {
+    
+    var needToCalibrateMic = true
 
     var allDoneAlert: MyUIAlertController? = nil
     var launchingNextView: LaunchingNextView?
@@ -143,7 +145,9 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
                                              ejectorSeatThreshold: singleEventThreshold)
         
         let currBPM: Double = UserDefaults.standard.double(forKey: Constants.Settings.BPM)
-        calcAndSetAdjustedRhythmTolerances(bpm: currBPM) 
+        calcAndSetAdjustedRhythmTolerances(bpm: currBPM)
+        
+        needToCalibrateMic = true
     }
     
     var firstTimeInView = true
@@ -154,6 +158,10 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
   //      delay(0.2) {
             self.setupForViewWillAppear()
   //      }
+        /*
+        if needToCalibrateMic {
+            
+        }
         
         if firstTimeInView {
             firstTimeInView = false
@@ -175,7 +183,7 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
 
             self.present(ac, animated: true, completion: nil)
        }
-        
+        */
        PerformanceAnalysisMgr.instance.printThresholdsInUse()
     }
     
@@ -225,12 +233,20 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
             let lnvSz = LaunchingNextView.getSize()
             let selfWd = self.view.frame.size.width
             let selfHt = self.view.frame.size.height
-            let valToUse = max(selfHt, selfWd)
-            let lnvX   = valToUse - (lnvSz.width + 10.0)
-             let lnFrame = CGRect( x: lnvX, y: 35,
-                                   width: lnvSz.width, height: lnvSz.height )
+            let wdToUse = max(selfHt, selfWd)
+            let htToUse = min(selfHt, selfWd)
+            //let lnvX   = valToUse - (lnvSz.width + 10.0)
+            let lnvX   = wdToUse/2.0 - lnvSz.width/2.0
+            var y = CGFloat(41.0)
+            if htToUse <= 320 {
+                y = 41.0
+            } else {
+                y = 35.0 + ((htToUse-40.0)/2.0 - lnvSz.height/2.0)
+            }
+            let lnFrame = CGRect( x: lnvX, y: y, // 47,
+                                  width: lnvSz.width, height: lnvSz.height )
             self.launchingNextView = LaunchingNextView.init(frame: lnFrame)
-             self.view.addSubview(self.launchingNextView!)
+            self.view.addSubview(self.launchingNextView!)
             self.launchingNextView?.setViewFinishedDelegate(del: self)
             self.self.launchingNextView?.isHidden =  true
         }
@@ -270,11 +286,39 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        if self.exercisesDone {
- //           delay(2.0) {
-                self.showAllDoneAlert()
-//            }
-        }
+        
+//        if needToCalibrateMic {
+//            goToCalibrateMicVCIfAppropriate()
+//        }
+        
+//        else {
+            if firstTimeInView {
+                firstTimeInView = false
+                self.launchingNextView?.isHidden =  true
+                var titleStr = "Press 'GO' to go through a guided practice session"
+                titleStr +=    "\n\nPress 'Choose' to pick individual exercises"
+                let ac = MyUIAlertController(title: titleStr,
+                                             message: "",
+                                             preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "GO",
+                                           style: .default,
+                                           handler: startAutoSchedHandler))
+                ac.addAction(UIAlertAction(title: "Choose",
+                                           style: .default,
+                                           handler: nil))
+                //ac.view.backgroundColor =  kLightGold
+                //            ac.view.tintColor = UIColor.green
+                ac.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = kDefault_AlertBackgroundColor
+                
+                self.present(ac, animated: true, completion: nil)
+            }
+            
+            if self.exercisesDone {
+     //           delay(2.0) {
+                    self.showAllDoneAlert()
+    //            }
+            }
+ //       }  //  else,  of if needToCalibrateMic
     }
     
     /*
@@ -454,8 +498,34 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
                 destination.exerciseType = exerType
                 destination.bestStarScore = currStarScore
            }
+        } else if segue.identifier == presentMicCalibVCSegueID {
+            if let destination = segue.destination as? MicCalibrationViewController {
+                destination.presentingVC = self
+            }
         }
     }
+    
+    @IBAction func unwindToLevelOverviewVC(unwindSegue: UIStoryboardSegue) {
+        print("here in unwindToLevelOverviewVC")
+    }
+    
+    func goToCalibrateMicVCIfAppropriate() {
+        let mustCalibrate = MicCalibrationViewController.mustCalibrate()
+        let calibProblyGood = MicCalibrationViewController.currCalibrationProbablyGood()
+        
+        if mustCalibrate || !calibProblyGood {
+            delay(0.5) {
+                self.performSegue(withIdentifier: presentMicCalibVCSegueID,
+                                  sender: self)
+            }
+        }
+    }
+    
+    func returningFromMicCalibVC(didCalibrate: Bool) {
+        needToCalibrateMic = false
+        print("yoo hoo")
+    }
+
     
     // MARK: - Orientation
     
@@ -506,6 +576,9 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
         let thisLDE = makeLDEForViewsLevelDay( andThisExer: indexPath.row )
         let cellText = LessonScheduler.instance.getPrettyNameForExercise( forLDE: thisLDE )
 
+        
+        
+        
         let currLDE = LsnSchdlr.instance.getCurrentLDE()
         let currExerNum = currLDE.exer
         

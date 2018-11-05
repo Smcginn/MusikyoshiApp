@@ -45,6 +45,14 @@ class InternalSettingsTableViewController : UITableViewController {
     @IBAction func UseTolForAllLevelsSwitch_Changed(_ sender: Any) {
         gAdjustAttackVar_VeryOff_DoOverride = UseTolForAllLevelsSwitch.isOn
     }
+ 
+    // Correct Rhythm Sens Setting Slider
+    @IBOutlet weak var correctRhythmSensSetting_Slider: UISlider!
+    @IBOutlet weak var correctRhythmSensSetting_ValueLabel: UILabel!
+    
+    // Legato Pitch Slider
+    @IBOutlet weak var numSampsForLegatoPtichSplit_Slider: UISlider!
+    @IBOutlet weak var numSampsForLegatoPtichSplit_ValueLabel: UILabel!
     
     // Ejector Seat switch
     @IBOutlet weak var EjectorSeatSwitch: UISwitch!
@@ -88,6 +96,7 @@ class InternalSettingsTableViewController : UITableViewController {
         let valStr = getTextForFloat(val: Float(kSoundStartAdjustment))
         Slider3_ValueLabel.text = valStr
         print ("\(valStr)")
+        clearGlobalRunningAttackDiffs()
     }
     
     ////////////////////////////////////////////////////////////
@@ -100,11 +109,40 @@ class InternalSettingsTableViewController : UITableViewController {
         print ("\(valStr)")
     }
     
+    ////////////////////////////////////////////////////////////
+    // Correct Rhythm Sens Setting Slider
+    @IBAction func correctRhythmSensSetting_Changed(_ sender: Any) {
+        gCalcedRhthymTolSetting = Int(correctRhythmSensSetting_Slider.value)
+        correctRhythmSensSetting_ValueLabel.text = "\(gCalcedRhthymTolSetting)"
+        print("\(gCalcedRhthymTolSetting)")
+    }
+
+    func setupCorrectRhythmSensSettingSlider() {
+        correctRhythmSensSetting_Slider.minimumValue = Float(kMinCalcedRhthymTolSetting)
+        correctRhythmSensSetting_Slider.maximumValue = Float(kMaxCalcedRhthymTolSetting)
+        correctRhythmSensSetting_Slider.value = Float(gCalcedRhthymTolSetting)
+
+        correctRhythmSensSetting_ValueLabel.text = "\(gCalcedRhthymTolSetting)"
+    }
+    
+    
+    ////////////////////////////////////////////////////////////
+    // Legato Pitch Split slider
+    @IBAction func numSampsForLegatoPtichSplit_SliderChanged(_ sender: Any) {
+        gDifferentPitchSampleThreshold =
+            Int(numSampsForLegatoPtichSplit_Slider.value)
+        let valStr = "\(gDifferentPitchSampleThreshold)"
+        numSampsForLegatoPtichSplit_ValueLabel.text = valStr
+        print ("\(valStr)")
+    }
+    
     override func viewDidLoad() {
         setupSlider1()
         setupSlider2()
         setupSlider3()
         setupSlider4()
+        setupCorrectRhythmSensSettingSlider()
+        setupLegatoSplitCOntrols()
         //Slider4_Label.text = "(This one does nothing for now)"
         
         UseTolForAllLevelsSwitch.isOn = gAdjustAttackVar_VeryOff_DoOverride
@@ -127,7 +165,7 @@ class InternalSettingsTableViewController : UITableViewController {
                         sliderMaxVal: sliderMaxVal,
                         sliderCurrentVal: Float(gAmpDropForNewSound),
                         label: Slider1_Label,
-                        labelText: "Amplitude Drop for new note",
+                        labelText: "Amplitude Rise > new Note (0.3)",
                         valueLabel: Slider1_ValueLabel)
     }
     
@@ -145,13 +183,13 @@ class InternalSettingsTableViewController : UITableViewController {
                         valueLabel: Slider2_ValueLabel)
         let valInt = Int(gNumTolAmpSamples)
         Slider2_ValueLabel.text = String(valInt)
-   }
+    }
     
     
     func setupSlider3() { // kSoundStartAdjustment
         // assume hardware
-        let sliderMinVal: Float = 0.0
-        let sliderMaxVal: Float = 0.3
+        let sliderMinVal: Float = 0.1
+        let sliderMaxVal: Float = 0.275
         
         let currentVal = kSoundStartAdjustment
         let currFloat  = Float(kSoundStartAdjustment)
@@ -190,7 +228,16 @@ class InternalSettingsTableViewController : UITableViewController {
         print("\(curVal)")
     }
     
-   func getTextForFloat(val: Float) -> String {
+    func setupLegatoSplitCOntrols() {
+        numSampsForLegatoPtichSplit_Slider.minimumValue = Float(3)
+        numSampsForLegatoPtichSplit_Slider.maximumValue = Float(12)
+        numSampsForLegatoPtichSplit_Slider.value =
+                    Float(gDifferentPitchSampleThreshold)
+        let valStr = "\(gDifferentPitchSampleThreshold)"
+        numSampsForLegatoPtichSplit_ValueLabel.text = valStr
+    }
+    
+	func getTextForFloat(val: Float) -> String {
         var retStr = "4.3"
         
         retStr = String(format: "%.3f", val)

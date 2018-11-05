@@ -206,7 +206,7 @@ var gABitLowIdx = vidIDs.kVid_Pitch_ABitLow_SpeedUpAir
 func getABitLowIdx() -> Int {
     let retIdx = gABitLowIdx
     switch gABitLowIdx {
-    case vidIDs.kVid_Pitch_ABitHigh_SlowAirspeed:
+    case vidIDs.kVid_Pitch_ABitLow_SpeedUpAir:
         gABitLowIdx = vidIDs.kVid_Pitch_ABitlow_CheckFingering
     case vidIDs.kVid_Pitch_ABitlow_CheckFingering:
         gABitLowIdx = vidIDs.kVid_Pitch_ABitLow_FirmUpEmbouchure
@@ -348,8 +348,8 @@ func getURLForVideoID(_ vidID: Int ) -> URL? {
         retURL = Bundle.main.url( forResource:   kVidURL_Pitch_ABitLow_FirmUpEmbouchure.0,
                                   withExtension: kVidURL_Pitch_ABitLow_FirmUpEmbouchure.1 )
     case vidIDs.kVid_Pitch_ABitLow_SpeedUpAir:
-        retURL = Bundle.main.url( forResource:   kVidURL_Pitch_ABitHigh_SlowAirspeed.0,
-                                  withExtension: kVidURL_Pitch_ABitHigh_SlowAirspeed.1 )
+        retURL = Bundle.main.url( forResource:   kVidURL_Pitch_ABitLow_SpeedUpAir.0,
+                                  withExtension: kVidURL_Pitch_ABitLow_SpeedUpAir.1 )
         
     case vidIDs.kVid_Pitch_LowPartial_ChangeTongueArch:
         retURL = Bundle.main.url( forResource:   kVidURL_PossLowPart2_TongueArch.0,

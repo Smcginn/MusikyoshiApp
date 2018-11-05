@@ -94,7 +94,7 @@ struct IssueWeight {
 }
 
 
-let kLaunchVideoThreshold = Int(IssueWeight.kVeryEarlyOrLate)
+let kLaunchVideoThreshold = Int(0) // (IssueWeight.kVeryEarlyOrLate)
 
 // matched against average scores to determine start score
 let kDefaultMaxScore_FourStars:  Int = 5
@@ -105,7 +105,7 @@ let kDefaultMaxScore_OneStars:   Int = 16
 
 // Save samples into a collection in the sound object? (useful for debugging)
 // If no, a running sum is used to determine average. (Performance improvement)
-let kSavePitchSamples = false
+let kSavePitchSamples = true
 let kNumSamplesToCollect = 300
 
 //////   Signal Amplitude   ////////////////////////////
@@ -115,17 +115,19 @@ let kNumSamplesToCollect = 300
 // iOS device vs when using the simulator - which uses the Mac's mic. So this is
 // set dynamically in PerformanceTrackingMgr.init, depending on the device.)
 let kAmpThresholdForIsSound_Sim = 0.05 // 0.15  // before MicTracker: 0.07
-let kAmpThresholdForIsSound_HW  = 0.02 // before MicTracker: 0.02 ;  Mic Tracker: 0.12 
+let kAmpThresholdForIsSound_HW  = 0.100  // 0.02 before MicTracker: 0.02 ;  Mic Tracker: 0.12
 var kAmplitudeThresholdForIsSound = kAmpThresholdForIsSound_HW
+
+let kUseDefaultHopSizeAndPeakCount = true
 
 // Number of samples to let pass before before beginning to average the pitch, to
 // consider it "stable". Without a little time to settle, pitch average is inaccurate
-let kSamplesNeededToDeterminePitch = 10  // SLIDERABLE ?
+let kSamplesNeededToDeterminePitch = 16  // SLIDERABLE ?
 
 // In legato playing: Number of consecutive samples consistantly not equal to established
 // pitch before considered a different note. (One or two variants in a stable pitch is
 // common, so must have a certain number in a row before commmiting to a new note.)
-let kDifferentPitchSampleThreshold  = 4 // 10   // SLIDERABLE ?
+var gDifferentPitchSampleThreshold: Int  = 16 // 10   // SLIDERABLE ?
 
 // Turn on/off use of scanning for pitch change during legato playing
 var gScanForPitchDuringLegatoPlaying = true 
@@ -140,13 +142,15 @@ var gScanForPitchDuringLegatoPlaying = true
 // (This timing may be different for an actual iOS device vs when using the
 // simulator - which uses the Mac's mic and is running in a virtual machine, etc. So
 // this is set dynamically in PerformanceTrackingMgr.init, depending on the device.)
+let kSoundStartAdjustment_MinValue: Float = 0.080
+let kSoundStartAdjustment_MaxValue: Float = 0.220
 let kSoundStartAdjustment_Sim = TimeInterval(0.180) // (0.130) // (0.080) // (0.180)// (0.120)
-let kSoundStartAdjustment_HW  = TimeInterval(0.175) // (0.075)
+let kSoundStartAdjustment_HW  = TimeInterval(0.116) // (0.175) // (0.075)
 var kSoundStartAdjustment = kSoundStartAdjustment_HW
 
 //////   Metronome Adjustment   ////////////////////////////
 let kMetronomeTimingAdjustment_Sim: Int32  = -175 // -175!!!!! // -170
-let kMetronomeTimingAdjustment_HW:  Int32  = -175
+let kMetronomeTimingAdjustment_HW:  Int32  = -100 // -175
 var kMetronomeTimingAdjustment:     Int32  = kMetronomeTimingAdjustment_Sim
 
 //////   Playback Volume   ////////////////////////////
@@ -293,9 +297,15 @@ let kSeverityRed      = 2
 //      kMKDebugOpt_ShowNotesAnalysis           // Display on AnalysisOverlayView
 //      kMKDebugOpt_ShowSoundsAnalysis          // Display on AnalysisOverlayView
 //
+
+// Debug buttons on Home Screen
+var gMKDebugOpt_IsSoundAndLatencySettingsEnabled = false
+var gMKDebugOpt_HomeScreenDebugOptionsEnabled = false
+
 var gMKDebugOpt_ShowDebugSettingsBtn = false
 var gMKDebugOpt_ShowSlidersBtn = false
 var gMKDebugOpt_ShowFakeScoreInLTAlert = false
+var gMKDebugOpt_ShowResetBtnInMicCalibScene = false
 var gMKDebugOpt_TestVideoViewInLessonOverview = false
 
 let kMKDebugOpt_PrintStudentPerformanceDataDebugOutput = false

@@ -8,6 +8,10 @@
 
 import Foundation
 
+let kMinCalcedRhthymTolSetting: Int = 0
+let kMaxCalcedRhthymTolSetting: Int = 10
+var gCalcedRhthymTolSetting:    Int = 0
+
 ///////////////////////////////////////////////////////////////////////////////
 //  TODO: eventually . . .
 //      enum of instruments, includes transpose offsets, etc.
@@ -81,8 +85,13 @@ struct pitchAndRhythmTolerances {
                        aBitToVeryPercentage: Double,
                        veryBoundaryPercentage: Double ) {
         self.rhythmTolerance   = rhythmTolerance
-        attackVariance_Correct = 0.05
-        attackVariance_ABitOff = rhythmTolerance / 2.0
+        
+//        attackVariance_Correct = 0.05
+//        attackVariance_ABitOff = rhythmTolerance / 2.0
+        
+        calcTolerancesBySetting(baseRhythmTol: rhythmTolerance)
+        attackVariance_Correct = calculatedCorrectBoundary
+        attackVariance_ABitOff = calculatedABitLateBoundary
         attackVariance_VeryOff = rhythmTolerance
 
         self.correctPitchPC    = correctPitchPercentage
@@ -100,14 +109,65 @@ struct pitchAndRhythmTolerances {
                                   aBitToVeryPercentage: Double,
                                   veryBoundaryPercentage: Double ) {
         self.rhythmTolerance   = rhythmTolerance
-        attackVariance_Correct = 0.05
-        attackVariance_ABitOff = rhythmTolerance / 2.0
+        
+//        attackVariance_Correct = 0.05
+//        attackVariance_ABitOff = rhythmTolerance / 2.0
+        
+        calcTolerancesBySetting(baseRhythmTol: rhythmTolerance)
+        attackVariance_Correct = calculatedCorrectBoundary
+        attackVariance_ABitOff = calculatedABitLateBoundary
         attackVariance_VeryOff = rhythmTolerance
 
         self.correctPitchPC    = 1.0 - correctPitchPercentage
         self.aBitToVeryPC      = 1.0 - aBitToVeryPercentage
         self.veryBoundaryPC    = 1.0 - veryBoundaryPercentage
     }
+    
+    var calculatedCorrectBoundary: Double  = 0.0
+    var calculatedABitLateBoundary: Double = 0.0
+    
+    // FRIDAYNIGHT
+    mutating func calcTolerancesBySetting(baseRhythmTol: Double) {
+        switch gCalcedRhthymTolSetting {
+        case 10:
+            calculatedCorrectBoundary  = 0.1
+            calculatedABitLateBoundary = baseRhythmTol / 2.0
+        case 9:
+            calculatedCorrectBoundary  = 0.095
+            calculatedABitLateBoundary = baseRhythmTol / 2.0
+        case 8:
+            calculatedCorrectBoundary  = 0.09
+            calculatedABitLateBoundary = baseRhythmTol / 2.0
+        case 7:
+            calculatedCorrectBoundary  = 0.085
+            calculatedABitLateBoundary = baseRhythmTol / 2.0
+        case 6:
+            calculatedCorrectBoundary  = 0.08
+            calculatedABitLateBoundary = baseRhythmTol / 2.0
+        case 5:
+            calculatedCorrectBoundary  = 0.075
+            calculatedABitLateBoundary = baseRhythmTol / 2.0
+        case 4:
+            calculatedCorrectBoundary  = 0.07
+            calculatedABitLateBoundary = baseRhythmTol / 2.0
+        case 3:
+            calculatedCorrectBoundary  = 0.065
+            calculatedABitLateBoundary = baseRhythmTol / 2.0
+        case 2:
+            calculatedCorrectBoundary  = 0.06
+            calculatedABitLateBoundary = baseRhythmTol / 2.0
+        case 1:
+            calculatedCorrectBoundary  = 0.055
+            calculatedABitLateBoundary = baseRhythmTol / 2.0
+        default: // case 0
+            calculatedCorrectBoundary  = 0.05
+            calculatedABitLateBoundary = baseRhythmTol / 2.0
+        }
+    }
+    
+    
+    
+    
 }
 
 struct PerfAnalysisDefs {
@@ -164,10 +224,13 @@ class PerformanceAnalysisMgr {
     func printThresholdsInUse() {
         print("\n--------------------------------------------")
         print("Tolerances in use by PerformanceAnalysisMgr:")
-        print("  correctPitchPC:    \(currTolerances.correctPitchPC)")
-        print("  aBitToVeryPC:      \(currTolerances.aBitToVeryPC)")
-        print("  veryBoundaryPC:    \(currTolerances.veryBoundaryPC)")
-        print("  rhythmTolerance:   \(currTolerances.rhythmTolerance)")
+        print("  correctPitchPC:            \(currTolerances.correctPitchPC)")
+        print("  aBitToVeryPC:              \(currTolerances.aBitToVeryPC)")
+        print("  veryBoundaryPC:            \(currTolerances.veryBoundaryPC)")
+        print("  rhythmTolerance - correct: \(attackVariance_Correct)")
+        print("  rhythmTolerance - a bit:   \(attackVariance_ABitOff)")
+        print("  rhythmTolerance - very:    \(attackVariance_VeryOff)")
+        print("  rhythmTolerance - base:    \(currTolerances.rhythmTolerance)")
         print("  Ejector Seat:      \(kStopPerformanceThreshold)")
         print("--------------------------------------------\n")
     }

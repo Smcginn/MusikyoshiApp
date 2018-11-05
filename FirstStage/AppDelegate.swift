@@ -100,7 +100,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Constants.Settings.ScoreMagnification: Int(14)
             ])
         
+        UserDefaults.standard.register(defaults: [
+            Constants.Settings.UserHopSizeOverride: Int(-12),
+            Constants.Settings.UserPeakCountOverride: Int(-12),
+            Constants.Settings.UserNoteThresholdOverride: Double(0.0),
+            Constants.Settings.UserLatencyOffsetThresholdOverride: Double(0.0)
+            ])
+        
 
+        
+/*
+         Constants.Settings.MaxPlayingVolume: Double(0.0),
+         Constants.Settings.PlayingVolumeSoundThreshold: Double(0.03),
+         Constants.Settings.LastPlayingVolumeCheckDate: Double(0.0),
+*/
+        
+        
+        
         // hyarhyar   SFAUDIO
         //initialize data
         

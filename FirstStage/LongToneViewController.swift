@@ -52,14 +52,14 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
             currStarScore = 0
             starScoreView.setStarCount(numStars: currStarScore)
             starScoreView.isHidden = false
-            starScoreLbl?.text = "This time:"
+            starScoreLbl?.text = "This Try:"
             starScoreLbl?.isHidden = false
             // hide button, switch text to congrats lable, show Monkey
             
         case kLTExerState_TryAgain:
             starScoreView.setStarCount(numStars: currStarScore)
             starScoreView.isHidden = false
-            starScoreLbl?.text = "This time:"
+            starScoreLbl?.text = "This Try:"
             starScoreLbl?.isHidden = false
             var playBtnAttrStr: NSMutableAttributedString
             if doingPersonalRecord {
@@ -92,6 +92,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
     
     // Invoking VC sets these
     var noteName = ""           // "C#4", "Db4", etc.
+    var useAn = false
     var targetTime = 3.0        // duration of exercise
     var exerNumber: Int    = -1
     var secondaryText:String = ""
@@ -345,6 +346,15 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
         self.dismiss(animated: true, completion: nil)
     }
     
+    func setUseAn() {
+        let noteUp = noteName.uppercased()
+        if noteUp.contains("E") || noteUp.contains("A") {
+            useAn = true
+        } else {
+            useAn = false
+        }
+    }
+    
     func setNoteID() {
         switch noteName {
         case "G3":          targetNoteID = 55
@@ -439,6 +449,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
 //        }
         
         setNoteID()
+        setUseAn()
         absoluteTargetNote = NoteService.getNote(targetNoteID + transpositionOffset)
         targetNote = NoteService.getNote(targetNoteID)
         if targetNote != nil {
@@ -486,19 +497,31 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
         loadFile(notesMusicXMLFileName)
 
         let targtTimeInt = Int(targetTime)
-        navigationItem.title = "Long Toney - Play A \(noteName) for \(targtTimeInt) Seconds"
+//        navigationItem.title = "Long Toney - Play A \(noteName) for \(targtTimeInt) Seconds"
         
         // this one is it:
         if doingPersonalRecord {
-            navigationBar.topItem?.title =
-                "Long Tone Personal Record - Play a \(noteName) for as long as you can"
+            if useAn {
+                navigationBar.topItem?.title =
+                    "Long Tone Personal Record - Play an \(noteName) for as long as you can"
+            } else {
+                navigationBar.topItem?.title =
+                    "Long Tone Personal Record - Play a \(noteName) for as long as you can"
+            }
             instructionLbl.text  = ""
         } else {
-            navigationBar.topItem?.title =
-                "Long Tone - Play a \(noteName) for \(targtTimeInt) Seconds"
+            if useAn {
+                navigationBar.topItem?.title =
+                    "Long Tone - Play an \(noteName) for \(targtTimeInt) Seconds"
+            } else {
+                navigationBar.topItem?.title =
+                    "Long Tone - Play a \(noteName) for \(targtTimeInt) Seconds"
+            }
             instructionLbl.text  =
                 "Play a long \(noteName) note and fill up the balloon until it bursts!"
         }
+        
+        
         
         frequencyThresholdPercent = 1.0 + frequencyThreshold
         farFrequencyThresholdPercent = frequencyThresholdPercent + (frequencyThreshold * 1.5)
@@ -689,6 +712,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
         
         ////////////
         // New, from TuneExer
+        // SFUserDefs
         guard let xmlData = MusicXMLModifier.modifyXMLToData(musicXMLUrl: URL(fileURLWithPath: filePath), smallestWidth: UserDefaults.standard.double(forKey: Constants.Settings.SmallestNoteWidth), signatureWidth: UserDefaults.standard.double(forKey: Constants.Settings.SignatureWidth)) else {
             print("Cannot get modified xmlData from \(filePath)!")
             return
@@ -1008,10 +1032,10 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
         if setLabels {
             if currPersBest > 0.0  {
                 self.feedbackLbl.text =
-                    String(format: "See if you can beat your current record",
+                    String(format: "Beat your record!",
                            currPersBest)
             } else {
-                self.feedbackLbl.text = "See how long you can play the note"
+                self.feedbackLbl.text = ""
             }
         }
      
@@ -1051,7 +1075,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
                 feedbackLbl.text = "Good Job, almost your best!"
                 feedbackLbl.isHidden = false
                 switchExerState(newState: kLTExerState_TryAgain)
-                timerLbl.text = String(format: "This Time: %.2f, Best: %.2f", elapsed, currPersBest)
+                timerLbl.text = String(format: "This Try: %.2f, Best: %.2f", elapsed, currPersBest)
            }
         } else if isExerciseSuccess {
             let doHide = !doingPersonalRecord
@@ -1079,7 +1103,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
             feedbackLbl.text = "Almost..."
             starScoreView.setStarCount(numStars: currStarScore)
             starScoreView.isHidden = true
-            starScoreLbl?.text = "This time:"
+            starScoreLbl?.text = "This Try:"
             starScoreLbl?.isHidden = false
        // }
         
@@ -1224,7 +1248,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
                         currStarScore = targetTimeAndStarScoreMgr.currentStarScore()
                         
                         starScoreView.setStarCount(numStars: currStarScore)
-                        starScoreLbl?.text = "This time:"
+                        starScoreLbl?.text = "This Try:"
                         starScoreLbl?.isHidden = false
 
                         updateTimerText()
@@ -1367,7 +1391,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
 //        picker.dataSource = self
 //        vc.view.addSubview(picker)
         
-        let ac = MyUIAlertController(title: "You haven't actually done anything",
+        let ac = MyUIAlertController(title: "I didn't hear you play",
                                    message: "\nIf you exit now, no score will be saved",
                                    preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Cancel",  style: .cancel, handler: nil))

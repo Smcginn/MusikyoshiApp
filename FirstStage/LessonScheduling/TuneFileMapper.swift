@@ -134,11 +134,17 @@ class TuneFileMapper {
     func getTuneFileInfo(forFileCode: String) -> tuneFileInfo {
         var retInfo = kNoTuneFileEntry
         
-        guard fileMappingData != nil else { return retInfo }
+        guard fileMappingData != nil else {
+            // itsBad()
+            return retInfo
+        }
         
         for oneEntry in fileMappingData!.tuneFileEntries {
             if oneEntry.fileCode == forFileCode {
                 retInfo = oneEntry
+                if retInfo.title == kFieldDataNotDefined {
+                    retInfo.title = kFieldDataNotDefined
+                }
                 break
             }
         }

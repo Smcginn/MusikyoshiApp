@@ -8,9 +8,11 @@
 //  Copyright © 2015 Musikyoshi. All rights reserved.
 //
 
+let kSettingsPresentMicCalibSegueID = "SettingsPresentMicCalibVCSegue"
+
 import UIKit
 
-class SettingsTableViewController: UITableViewController {
+class SettingsTableViewController: UITableViewController, PresentingMicCalibVC {
     
     @IBOutlet weak var showMarkersControl: UISwitch!
     @IBOutlet weak var showAnalysisControl: UISwitch!
@@ -23,6 +25,25 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var noteWidthStepper: UIStepper!
     @IBOutlet weak var signatureWidthLabel: UILabel!
     @IBOutlet weak var signatureWidthStepper: UIStepper!
+    
+    @IBOutlet weak var IsASound_Label: UILabel!
+    @IBOutlet weak var IsASound_Btn: UIButton!
+    
+    @IBOutlet weak var calibrateBtn: UIButton!
+    @IBAction func calibrateMicBtnPressed(_ sender: Any) {
+        self.performSegue(withIdentifier: kSettingsPresentMicCalibSegueID,
+                          sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        self.title = ""
+        if segue.identifier == kSettingsPresentMicCalibSegueID {
+            if let destination = segue.destination as? MicCalibrationViewController {
+                destination.presentingVC = self
+                destination.forceCalibration = true
+            }
+        }
+    }
     
     @IBAction func showAnalysisControlChanged(_ sender: UISwitch) {
     }
@@ -49,7 +70,11 @@ class SettingsTableViewController: UITableViewController {
         signatureWidthLabel.text = String(Int(signatureWidthStepper.value))
     }
     
-    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        calibrateBtn.frame.origin.x   -= 8
+        calibrateBtn.frame.size.width += 8
+    }
     
     //    @IBAction func showNoteMarkerSwitchChanged(_ sender: UISwitch) {
     //        if showNoteMarkersSwitch.isOn {
@@ -75,6 +100,7 @@ class SettingsTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // SFUserDefs
         showAnalysisControl.isSelected = UserDefaults.standard.bool(forKey: Constants.Settings.ShowAnalysis) ? true : false
         showMarkersControl.isSelected = UserDefaults.standard.bool(forKey: Constants.Settings.ShowNoteMarkers) ? true : false
         synthInstrumentControl.selectedSegmentIndex = UserDefaults.standard.bool(forKey: Constants.Settings.PlayTrumpet) ? 0 : 1
@@ -90,9 +116,22 @@ class SettingsTableViewController: UITableViewController {
         
         signatureWidthStepper.value = UserDefaults.standard.double(forKey: Constants.Settings.SignatureWidth)
         signatureWidthLabel.text = String(Int(signatureWidthStepper.value))
+        
+        if gMKDebugOpt_IsSoundAndLatencySettingsEnabled {
+            IsASound_Label.isHidden  = false
+            IsASound_Btn.isHidden    = false
+            IsASound_Label.isEnabled = true
+            IsASound_Btn.isEnabled   = true
+         } else {
+            IsASound_Label.isHidden  = true
+            IsASound_Btn.isHidden    = true
+            IsASound_Label.isEnabled = false
+            IsASound_Btn.isEnabled   = false
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        // SFUserDefs
         UserDefaults.standard.set(showMarkersControl.isSelected == true, forKey: Constants.Settings.ShowNoteMarkers)
         UserDefaults.standard.set(showAnalysisControl.isSelected == true, forKey: Constants.Settings.ShowAnalysis)
         UserDefaults.standard.set(synthInstrumentControl.selectedSegmentIndex != 1, forKey: Constants.Settings.PlayTrumpet)
@@ -102,6 +141,10 @@ class SettingsTableViewController: UITableViewController {
         UserDefaults.standard.set(signatureWidthStepper.value, forKey: Constants.Settings.SignatureWidth)
         
         super.viewWillDisappear(animated)
+    }
+    
+    func returningFromMicCalibVC(didCalibrate: Bool) {
+        print("in Setup::returningFromMicCalibVC()")
     }
 }
 

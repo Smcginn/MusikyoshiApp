@@ -15,7 +15,7 @@ import Foundation
 import SwiftyJSON
 import AudioKit
 
-let doLimitLevels = false
+let doLimitLevels = true
 let kNumberOfLevelsToShow: Int = 10
 
 let levelHeaderSpacingStr = "       " // leaves room at front for checkbox icon
@@ -94,8 +94,8 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
             print("Invalid TrumpetLessons filename/path.")
         }
         
-        self.view.backgroundColor = kTanBackgroundColor
-        self.tableView.backgroundColor = kTanBackgroundColor
+        self.view.backgroundColor = kDefaultViewBackgroundColor
+        self.tableView.backgroundColor = kDefaultViewBackgroundColor
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.reloadData()

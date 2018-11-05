@@ -84,6 +84,12 @@ class PerformanceTrackingMgr {
             gAmplitudePrintoutMultiplier = kAmplitudePrintoutMultiplier_HW
             kRunningInSim = false
         }
+        
+        let storedIsASoundThreshold =
+            UserDefaults.standard.double(forKey: Constants.Settings.UserNoteThresholdOverride)
+        if storedIsASoundThreshold > 0.01 {  // it's been set if not == 0.0
+            kAmplitudeThresholdForIsSound = storedIsASoundThreshold
+        }
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -444,7 +450,9 @@ class PerformanceTrackingMgr {
                 restAnalyzer.analyzeScoreObject( perfScoreObject: onePerfScoreObj )
              }
         }
+        addCurrAttackDiffAvgToRunningAvg()
         
+        // VIDREDO
         PerformanceIssueMgr.instance.scanPerfNotesForIssues( gPerfIssueSortCriteria )
 
         if kMKDebugOpt_PrintPerfAnalysisResults {
@@ -508,14 +516,27 @@ class PerformanceTrackingMgr {
         }
     }
     
+    func printSoundSamplesForNote(_ act: UIAlertAction) {
+        let possibleScoreObj: PerformanceScoreObject? =
+            findPerformanceScoreObjByID(perfScoreObjID: storedNoteID)
+        guard let scoreObj = possibleScoreObj else { return }
+        
+        if scoreObj.isNote() {
+            let noteObj = scoreObj as! PerformanceNote
+            noteObj.printSoundsSamplesDetailed()
+        }
+    }
+    
+    var storedNoteID: Int32 = 0
+    
     // Pops up an Alert with the details of the Performed Note's accuracy.
     //   This is intended for debugging, or to show what can potentially be 
     //   displayed. Not for user consumption.
     func displayPerfInfoAlert( perfNoteID: Int32,
                                parentVC: UIViewController ) {
+        storedNoteID = 0
         let possibleScoreObj: PerformanceScoreObject? =
             findPerformanceScoreObjByID(perfScoreObjID: perfNoteID)
-            // findPerformanceNoteByID(perfNoteID: perfNoteID)
         guard let scoreObj = possibleScoreObj else { return }
         
         var msgStr: String = ""
@@ -551,9 +572,16 @@ class PerformanceTrackingMgr {
         
         // Add the OK button
         let action = UIAlertAction( title: "OK",
-                                    style: .default,
+                                    style: .cancel,
                                     handler: nil )
         alert.addAction(action)
+        if scoreObj.isNote() {
+            storedNoteID = perfNoteID
+            let action2 = UIAlertAction( title: "Print Samples",
+                                        style: .default,
+                                        handler: printSoundSamplesForNote )
+            alert.addAction(action2)
+        }
         parentVC.present( alert, animated:true, completion: nil)
     }
 

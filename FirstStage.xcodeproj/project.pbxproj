@@ -340,6 +340,8 @@
 		6D01C40121238C75004B8440 /* LessonScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D01C3FF21238C75004B8440 /* LessonScheduler.swift */; };
 		6D01C40321238CAC004B8440 /* TuneFileMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D01C40221238CAC004B8440 /* TuneFileMapper.swift */; };
 		6D01C40421238CAC004B8440 /* TuneFileMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D01C40221238CAC004B8440 /* TuneFileMapper.swift */; };
+		6D0C5F02217E33D500273E93 /* IsASoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0C5F01217E33D400273E93 /* IsASoundViewController.swift */; };
+		6D0C5F03217E33D500273E93 /* IsASoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0C5F01217E33D400273E93 /* IsASoundViewController.swift */; };
 		6D22AEC620D06E8200ACEC81 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633D1B6C1CF94BEC00B5C4FD /* FeedbackView.swift */; };
 		6D34A17D2139F9E10071BAB6 /* AppDefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D34A17C2139F9E10071BAB6 /* AppDefs.swift */; };
 		6D34A17E2139F9E10071BAB6 /* AppDefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D34A17C2139F9E10071BAB6 /* AppDefs.swift */; };
@@ -349,6 +351,8 @@
 		6D3AE14721779F2A005ECC60 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D3AE1412176846A005ECC60 /* StoreKit.framework */; };
 		6D3AE14C217931A9005ECC60 /* IAPAlerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3AE14B217931A9005ECC60 /* IAPAlerts.swift */; };
 		6D3AE14D217931A9005ECC60 /* IAPAlerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3AE14B217931A9005ECC60 /* IAPAlerts.swift */; };
+		6D3AE14F217A2C7D005ECC60 /* MicCalibrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3AE14E217A2C7D005ECC60 /* MicCalibrationViewController.swift */; };
+		6D3AE150217A2C7D005ECC60 /* MicCalibrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3AE14E217A2C7D005ECC60 /* MicCalibrationViewController.swift */; };
 		6D5A266E2138C2BD00D2B637 /* MiscSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5A266D2138C2BD00D2B637 /* MiscSupport.swift */; };
 		6D5A266F2138C2BD00D2B637 /* MiscSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5A266D2138C2BD00D2B637 /* MiscSupport.swift */; };
 		6D6093B22114F66D00874A40 /* ScoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6093AE2114F66C00874A40 /* ScoreData.swift */; };
@@ -397,6 +401,8 @@
 		6D7249192128A8B100378131 /* Monkey_Ballon-Face02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7249172128A8B100378131 /* Monkey_Ballon-Face02@2x.png */; };
 		6D72491B2128FD6100378131 /* MonkeyPlaneWithProp large.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D72491A2128FD6000378131 /* MonkeyPlaneWithProp large.png */; };
 		6D72491C2128FD6100378131 /* MonkeyPlaneWithProp large.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D72491A2128FD6000378131 /* MonkeyPlaneWithProp large.png */; };
+		6D817BE02186042A00258980 /* PATest_FreqAndPitchSampleSim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D817BDF2186042A00258980 /* PATest_FreqAndPitchSampleSim.swift */; };
+		6D817BE12186042A00258980 /* PATest_FreqAndPitchSampleSim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D817BDF2186042A00258980 /* PATest_FreqAndPitchSampleSim.swift */; };
 		6D8E10462130DD6F00B1B3B8 /* Current Arrow 40x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D8E10362130DD6F00B1B3B8 /* Current Arrow 40x16.png */; };
 		6D8E10472130E55100B1B3B8 /* Current Arrow 40x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D8E10362130DD6F00B1B3B8 /* Current Arrow 40x16.png */; };
 		6D8E10492130E77200B1B3B8 /* Current Arrow 22x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D8E10482130E77200B1B3B8 /* Current Arrow 22x16.png */; };
@@ -1009,10 +1015,12 @@
 		6D0018CC2162C03500B7B498 /* InternalSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalSettingsViewController.swift; sourceTree = "<group>"; };
 		6D01C3FF21238C75004B8440 /* LessonScheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LessonScheduler.swift; path = LessonScheduling/LessonScheduler.swift; sourceTree = "<group>"; };
 		6D01C40221238CAC004B8440 /* TuneFileMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TuneFileMapper.swift; path = LessonScheduling/TuneFileMapper.swift; sourceTree = "<group>"; };
+		6D0C5F01217E33D400273E93 /* IsASoundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsASoundViewController.swift; sourceTree = "<group>"; };
 		6D34A17C2139F9E10071BAB6 /* AppDefs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDefs.swift; sourceTree = "<group>"; };
 		6D3AE1412176846A005ECC60 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		6D3AE14421768504005ECC60 /* IAPHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IAPHelper.swift; path = InAppPurchases/IAPHelper.swift; sourceTree = "<group>"; };
 		6D3AE14B217931A9005ECC60 /* IAPAlerts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IAPAlerts.swift; path = InAppPurchases/IAPAlerts.swift; sourceTree = "<group>"; };
+		6D3AE14E217A2C7D005ECC60 /* MicCalibrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicCalibrationViewController.swift; sourceTree = "<group>"; };
 		6D5A266D2138C2BD00D2B637 /* MiscSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscSupport.swift; sourceTree = "<group>"; };
 		6D6093AE2114F66C00874A40 /* ScoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScoreData.swift; path = PerformanceAnalysis/ScoreData.swift; sourceTree = "<group>"; };
 		6D6093AF2114F66D00874A40 /* PerformanceRest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PerformanceRest.swift; path = PerformanceAnalysis/PerformanceRest.swift; sourceTree = "<group>"; };
@@ -1037,6 +1045,7 @@
 		6D7249102128991F00378131 /* Blank 64x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Blank 64x16.png"; path = "Images/Blank 64x16.png"; sourceTree = "<group>"; };
 		6D7249172128A8B100378131 /* Monkey_Ballon-Face02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Monkey_Ballon-Face02@2x.png"; path = "Images/Monkey_Ballon-Face02@2x.png"; sourceTree = "<group>"; };
 		6D72491A2128FD6000378131 /* MonkeyPlaneWithProp large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "MonkeyPlaneWithProp large.png"; path = "Images/MonkeyPlaneWithProp large.png"; sourceTree = "<group>"; };
+		6D817BDF2186042A00258980 /* PATest_FreqAndPitchSampleSim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PATest_FreqAndPitchSampleSim.swift; path = PerformanceAnalysis/PerfAnalysisTesting/PATest_FreqAndPitchSampleSim.swift; sourceTree = "<group>"; };
 		6D8E10362130DD6F00B1B3B8 /* Current Arrow 40x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Current Arrow 40x16.png"; path = "Images/Current Arrow 40x16.png"; sourceTree = "<group>"; };
 		6D8E10482130E77200B1B3B8 /* Current Arrow 22x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Current Arrow 22x16.png"; path = "Images/Current Arrow 22x16.png"; sourceTree = "<group>"; };
 		6D8E104B2131031C00B1B3B8 /* Current Arrow 36x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Current Arrow 36x16.png"; path = "Images/Current Arrow 36x16.png"; sourceTree = "<group>"; };
@@ -1539,6 +1548,8 @@
 				BD7C17461F860E3B002AF462 /* HomeViewController.swift */,
 				BD7C174F1F861755002AF462 /* SettingsTableViewController.swift */,
 				BD8B79041F95BF75005B31CB /* PracticeViewController.swift */,
+				6D3AE14E217A2C7D005ECC60 /* MicCalibrationViewController.swift */,
+				6D0C5F01217E33D400273E93 /* IsASoundViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -1775,6 +1786,14 @@
 			name = "InApp Purchases";
 			sourceTree = "<group>";
 		};
+		6D817BDE2186033F00258980 /* PerfAnalysisTesting */ = {
+			isa = PBXGroup;
+			children = (
+				6D817BDF2186042A00258980 /* PATest_FreqAndPitchSampleSim.swift */,
+			);
+			name = PerfAnalysisTesting;
+			sourceTree = "<group>";
+		};
 		E9794BAB1FFDB36200CDC7FD /* Videos */ = {
 			isa = PBXGroup;
 			children = (
@@ -1819,6 +1838,7 @@
 		E9AD0C991FD115F1006472CE /* PerformanceAnalysis */ = {
 			isa = PBXGroup;
 			children = (
+				6D817BDE2186033F00258980 /* PerfAnalysisTesting */,
 				E9AD0CB81FD9BCDF006472CE /* NoteFreqRangeTable.swift */,
 				E9AD0CB91FD9BCDF006472CE /* NoteIDs.swift */,
 				E9AD0CE21FE09B77006472CE /* NotePerformanceAnalyzer.swift */,
@@ -2715,6 +2735,7 @@
 				1C87C0AD2016F3F70038784E /* LessonOverviewViewController.swift in Sources */,
 				6324D2DB1CE71B1A001934A5 /* FirstStage.xcdatamodeld in Sources */,
 				E9AD0CC11FD9BCDF006472CE /* PerformanceNote.swift in Sources */,
+				6D817BE12186042A00258980 /* PATest_FreqAndPitchSampleSim.swift in Sources */,
 				E9815A392005124D0046445B /* VideoHelpResources.swift in Sources */,
 				E9815A37200511430046445B /* VideoHelpView.swift in Sources */,
 				E9AD0CE71FE09D32006472CE /* NotePitchPerformanceAnalyzer.swift in Sources */,
@@ -2743,6 +2764,7 @@
 				63D5E8831EA37BCC007AE8D4 /* NoteService.swift in Sources */,
 				6324D3041CE72E5D001934A5 /* TuneExerciseViewController.swift in Sources */,
 				E9AD0CC01FD9BCDF006472CE /* PerformanceAnalysisMgr.swift in Sources */,
+				6D3AE150217A2C7D005ECC60 /* MicCalibrationViewController.swift in Sources */,
 				63B4275C1E5057BB000E35AA /* SSSettingsViewController.swift in Sources */,
 				639A2E551CF5E6CA004F7B1A /* VisualMetronomeView.swift in Sources */,
 				1C33BB342016DCDC00CD83A6 /* LevelSeriesViewController.swift in Sources */,
@@ -2761,6 +2783,7 @@
 				6DB8533E2126438E00F999C3 /* LaunchingNextView.swift in Sources */,
 				E9AD0CDE1FDF4180006472CE /* PerformanceTrackingMgr.swift in Sources */,
 				6D5A266F2138C2BD00D2B637 /* MiscSupport.swift in Sources */,
+				6D0C5F03217E33D500273E93 /* IsASoundViewController.swift in Sources */,
 				6D01C40421238CAC004B8440 /* TuneFileMapper.swift in Sources */,
 				633C2AE21CE86915001C5C16 /* Constants.swift in Sources */,
 				E940183F1FA998CF00FC6271 /* FSAnalysisOverlayView.m in Sources */,
@@ -2807,6 +2830,7 @@
 				E9AD0CC71FD9BEF6006472CE /* NoteFreqRangeTable.swift in Sources */,
 				6D6093B92114F6CE00874A40 /* ScoreData.swift in Sources */,
 				6324D3071CE72F8D001934A5 /* FirstStage.xcdatamodeld in Sources */,
+				6D817BE02186042A00258980 /* PATest_FreqAndPitchSampleSim.swift in Sources */,
 				639A2E451CF5AB09004F7B1A /* DotView.swift in Sources */,
 				E9815A3B200512810046445B /* VideoHelpView.swift in Sources */,
 				E9AD0CE61FE09D32006472CE /* NotePitchPerformanceAnalyzer.swift in Sources */,
@@ -2835,6 +2859,7 @@
 				63B4275D1E5057C2000E35AA /* SSSettingsViewController.swift in Sources */,
 				639A2E541CF5E6CA004F7B1A /* VisualMetronomeView.swift in Sources */,
 				6D6093B62114F6C000874A40 /* PerformanceScoreObject.swift in Sources */,
+				6D3AE14F217A2C7D005ECC60 /* MicCalibrationViewController.swift in Sources */,
 				6324D3641CE73C47001934A5 /* SSPlayLoopGraphics.m in Sources */,
 				6324D35E1CE73C47001934A5 /* SSScrollView.m in Sources */,
 				1C87C0A82016F0030038784E /* LevelOverviewViewController.swift in Sources */,
@@ -2853,6 +2878,7 @@
 				6DB8533D2126438E00F999C3 /* LaunchingNextView.swift in Sources */,
 				6324D30A1CE72F8D001934A5 /* AppDelegate.swift in Sources */,
 				6D5A266E2138C2BD00D2B637 /* MiscSupport.swift in Sources */,
+				6D0C5F02217E33D500273E93 /* IsASoundViewController.swift in Sources */,
 				6D01C40321238CAC004B8440 /* TuneFileMapper.swift in Sources */,
 				E9AD0CDD1FDF4180006472CE /* PerformanceTrackingMgr.swift in Sources */,
 				633C2AE11CE86915001C5C16 /* Constants.swift in Sources */,

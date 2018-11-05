@@ -177,8 +177,8 @@
         "helpCode2":""
         },{
         "fileCode":"TUN021",
-        "xmlFile":"21 Feels Like Home - Tpt.musicxml",
-        "title":"21. Feels Like Home",
+        "xmlFile":"21 Go Tell Aunt Rhodie - Tpt.xml",
+        "title":"21 Go Tell Aunt Rhodie",
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
@@ -1081,6 +1081,62 @@
         "helpCode1":"",
         "helpCode2":""
         },{
+        "fileCode":"SLR008",
+        "xmlFile":"Lip Slur 8 Trumpet.xml",
+        "title":"Lip Slur 8",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"SLR009",
+        "xmlFile":"Lip Slur 9 Trumpet.xml",
+        "title":"Lip Slur 9",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"SLR010",
+        "xmlFile":"Lip Slur 10 Trumpet.xml",
+        "title":"Lip Slur 10",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"SLR011",
+        "xmlFile":"Lip Slur 11 Trumpet.xml",
+        "title":"Lip Slur 11",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"SLR012",
+        "xmlFile":"Lip Slur 12 Trumpet.xml",
+        "title":"Lip Slur 12",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"SLR013",
+        "xmlFile":"Lip Slur 13 Trumpet.xml",
+        "title":"Lip Slur 13",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"SLR014",
+        "xmlFile":"Lip Slur 14 Trumpet.xml",
+        "title":"Lip Slur 14",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
         "fileCode":"SLR015",
         "xmlFile":"Lip Slur 15 Trumpet.xml",
         "title":"Lip Slur 15",
@@ -1100,6 +1156,62 @@
         "fileCode":"SLR017",
         "xmlFile":"Lip Slur 17 Trumpet.xml",
         "title":"Lip Slur 17",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"SLR018",
+        "xmlFile":"Lip Slur 18 Trumpet.xml",
+        "title":"Lip Slur 18",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"SLR019",
+        "xmlFile":"Lip Slur 19 Trumpet.xml",
+        "title":"Lip Slur 19",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"SLR020",
+        "xmlFile":"Lip Slur 20 Trumpet.xml",
+        "title":"Lip Slur 20",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"SLR021",
+        "xmlFile":"Lip Slur 21.xml",
+        "title":"Lip Slur 21",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"SLR022",
+        "xmlFile":"Lip Slur 22 Trumpet.xml",
+        "title":"Lip Slur 22",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"SLR023",
+        "xmlFile":"Lip Slur 23.xml",
+        "title":"Lip Slur 23",
+        "commentStr1":"",
+        "commentStr2":"",
+        "helpCode1":"",
+        "helpCode2":""
+        },{
+        "fileCode":"SLR024",
+        "xmlFile":"Lip Slur 24 Trumpet.xml",
+        "title":"Lip Slur 24",
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",

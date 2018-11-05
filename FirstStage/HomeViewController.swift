@@ -53,6 +53,7 @@ class HomeViewController: UIViewController {
     @IBAction func debugStuffOnPressed(_ sender: Any) {
         numTimesDebugStuffOnTapped += 1
         if numTimesDebugStuffOnTapped >= 5 {
+            gMKDebugOpt_HomeScreenDebugOptionsEnabled = true
             debugStuffOnBtn.isHidden = false
             debugStuffOnBtn.isOpaque = true
             debugStuffOnBtn.titleLabel?.isHidden = false
@@ -63,27 +64,107 @@ class HomeViewController: UIViewController {
             gMKDebugOpt_ShowDebugSettingsBtn = true
             gMKDebugOpt_ShowFakeScoreInLTAlert = true
             gMKDebugOpt_ShowSlidersBtn = true
+            gMKDebugOpt_ShowResetBtnInMicCalibScene = true
+            gMKDebugOpt_IsSoundAndLatencySettingsEnabled = true
+        }
+    }
+    
+    @IBOutlet weak var settingEnabledBtn: UIButton!
+    var numTimesSettingsEnabledTapped = 0
+    @IBAction func settingEnabledBtnPressed(_ sender: Any) {
+        numTimesSettingsEnabledTapped += 1
+        if numTimesSettingsEnabledTapped >= 5 {
+            settingEnabledBtn.isOpaque = true
+            settingEnabledBtn.titleLabel?.textColor = UIColor.green
+            settingEnabledBtn.backgroundColor =
+                (UIColor.lightGray).withAlphaComponent(1.0)
+            settingEnabledBtn.setTitleColor(UIColor.blue, for: .normal)
+            gMKDebugOpt_IsSoundAndLatencySettingsEnabled = true
         }
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        if numTimesDebugStuffOnTapped >= 5 { return }
-
-        debugStuffOnBtn.isEnabled = true
-        debugStuffOnBtn.isOpaque = false
-        debugStuffOnBtn.titleLabel?.textColor = UIColor.clear
-        debugStuffOnBtn.titleLabel?.textColor = UIColor.green
-        debugStuffOnBtn.titleLabel?.isHidden = true
-        debugStuffOnBtn.setTitleColor(UIColor.clear, for: .normal)
-        debugStuffOnBtn.backgroundColor =
-            (UIColor.lightGray).withAlphaComponent(0.0)
+        if gMKDebugOpt_HomeScreenDebugOptionsEnabled {
+            debugStuffOnBtn.isHidden = false
+            debugStuffOnBtn.isEnabled = true
+            debugStuffOnBtn.isOpaque = true
+            debugStuffOnBtn.titleLabel?.textColor = UIColor.green
+            debugStuffOnBtn.titleLabel?.isHidden = false
+            debugStuffOnBtn.setTitleColor(UIColor.blue, for: .normal)
+            debugStuffOnBtn.backgroundColor =
+                (UIColor.lightGray).withAlphaComponent(1.0)
+        } else {
+            debugStuffOnBtn.isHidden = false
+            debugStuffOnBtn.isEnabled = true
+            debugStuffOnBtn.isOpaque = false
+            debugStuffOnBtn.titleLabel?.isHidden = true
+            debugStuffOnBtn.titleLabel?.textColor = UIColor.clear
+            debugStuffOnBtn.setTitleColor(UIColor.clear, for: .normal)
+            debugStuffOnBtn.backgroundColor =
+                (UIColor.lightGray).withAlphaComponent(0.0)
+        }
+        
+        if gMKDebugOpt_IsSoundAndLatencySettingsEnabled {
+            settingEnabledBtn.isHidden = false
+            settingEnabledBtn.isEnabled = true
+            settingEnabledBtn.isOpaque = true
+            settingEnabledBtn.titleLabel?.textColor = UIColor.green
+            settingEnabledBtn.titleLabel?.isHidden = false
+            settingEnabledBtn.setTitleColor(UIColor.blue, for: .normal)
+            settingEnabledBtn.backgroundColor =
+                (UIColor.lightGray).withAlphaComponent(1.0)
+        } else {
+            settingEnabledBtn.isHidden = false
+            settingEnabledBtn.isEnabled = true
+            settingEnabledBtn.isOpaque = false
+            settingEnabledBtn.titleLabel?.isHidden = true
+            settingEnabledBtn.titleLabel?.textColor = UIColor.clear
+            settingEnabledBtn.setTitleColor(UIColor.clear, for: .normal)
+            settingEnabledBtn.backgroundColor =
+                (UIColor.lightGray).withAlphaComponent(0.0)
+       }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         numTimesDebugStuffOnTapped = 0
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let appJsonDataVersion =
+            LsnSchdlr.instance.scoreMgr.getInstrumentJsonVersion()
+        let versionsEqual =
+            LsnSchdlr.instance.scoreMgr.isJsonVersionEqual(versionTuple: appJsonDataVersion)
+        if (!versionsEqual) {
+            displayDBCompatibilityAlert()
+        }
+    }
+    
+    func deleteCurrentDBAndRebuild(_ act: UIAlertAction) {
+        let fileIsGone = LsnSchdlr.instance.scoreMgr.deleteCurrentScoreFile()
+        
+        if fileIsGone {
+            // This will create an empty file using the levels/exercises JSON  as the template.
+            _ = LessonScheduler.instance.loadScoreFile()
+        }
+    }
+
+    func displayDBCompatibilityAlert() {
+        let titleStr = "Sorry, but your current Score File must be overwritten"
+        let msgStr = "\nYou are upgrading from an older (Beta) version of PlayTunes, and your current Score File is incompatible with this version. \n\nUnfortunately, your previous scores will be lost."
+        let ac = MyUIAlertController(title: titleStr,
+                                     message: msgStr,
+                                     preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK",
+                                   style: .default,
+                                   handler: deleteCurrentDBAndRebuild))
+        ac.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = kDefault_AlertBackgroundColor
+        
+        self.present(ac, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {

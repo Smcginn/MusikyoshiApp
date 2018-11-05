@@ -82,6 +82,21 @@ public class PerformanceNote : PerformanceScoreObject
         }
     }
 
+    func printSoundsSamplesDetailed() {
+        guard isLinkedToSound else {
+            print("\n  Not Linked to Sound")
+            return
+        }
+        
+        guard let linkedSound =
+            PerformanceTrackingMgr.instance.findSoundBySoundID(soundID: linkedToSoundID) else {
+            print("\n  Unable to find Linked Sound")
+            return
+        }
+
+        linkedSound.printSamplesDetailed()
+    }
+    
     // Used by an Alert to populate the messageString with data about this Note.
     //  (The Alert is a debug feature. It is not visible in release mode.)
     override func constructSummaryMsgString( msgString: inout String )
@@ -126,9 +141,9 @@ public class PerformanceNote : PerformanceScoreObject
         let timingDiff = _actualStartTime_comp - _expectedStartTime
         var timDiffStr = ""
         if timingDiff > 0 {
-            timDiffStr = String(format: "+%.2f", timingDiff)
+            timDiffStr = String(format: "+%.3f", timingDiff)
         } else {
-            timDiffStr = String(format: "%.2f", timingDiff) // auto includes "-"
+            timDiffStr = String(format: "%.3f", timingDiff) // auto includes "-"
         }
        
         var timingRatingStr = ""
@@ -171,10 +186,7 @@ public class PerformanceNote : PerformanceScoreObject
             {
                 msgString += "\n"
                 msgString += "Possible Pitch Issues:\n"
-                msgString += "  Your fingering is wrong\n"
-                msgString += "  Your embouchure is off\n"
-                msgString += "  Your breath is too fast\n"
-                msgString += "    or too slow\n"
+                msgString += "  fingering, embouchure, breath\n"
             }
         }
         

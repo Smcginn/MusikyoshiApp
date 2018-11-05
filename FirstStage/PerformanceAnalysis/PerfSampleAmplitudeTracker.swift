@@ -10,7 +10,7 @@ import Foundation
 
 // The amplitude drop required to consider end of current sound
 let kAmpDropForNewSound_Sim: tSoundAmpVal = 0.20
-let kAmpDropForNewSound_HW:  tSoundAmpVal = 0.025 //0.20
+let kAmpDropForNewSound_HW:  tSoundAmpVal = 0.156 // 0.25 //0.20
 var gAmpDropForNewSound:     tSoundAmpVal = kAmpDropForNewSound_HW
 
 
@@ -18,7 +18,7 @@ var gAmpDropForNewSound:     tSoundAmpVal = kAmpDropForNewSound_HW
 // The number of samples AFTER the amplitude drop required to say:
 //   "the signal after the amplitude drop is still a sound; so create a new sound"
 let kNumSamplesForStillSound = 8
-var gNumTolAmpSamples   =  4    // num in tolerance zone
+var gNumTolAmpSamples   =  2    // num in tolerance zone
 
 
 typealias tSoundAmpVal = Double
@@ -39,6 +39,8 @@ class PerfSampleAmplitudeTracker {
     var canCalcAmpChange    = false
 
     
+    var lastAmpSample: tSoundAmpVal = 0.0
+    
     var ampAtKillPoint: tSoundAmpVal = 0.0
     
     var runningAvg:             tSoundAmpVal = 0.0
@@ -55,6 +57,8 @@ class PerfSampleAmplitudeTracker {
 //        print ("--------------------------------------------------------------------------")
 //        print ("    Enqueuing:  \(newAmp)")
 //        print ("    Queue before append:  \(queue)")
+        
+        lastAmpSample = newAmp
         
         if newAmp < kAmplitudeThresholdForIsSound {
             noSignal         = true // should stop tracking sound . . .
@@ -149,14 +153,16 @@ class PerfSampleAmplitudeTracker {
         if !canCalcAmpChange { // no enough data to attempt calc
             return false
         } else {
-            let ampDiff:tSoundAmpVal = runningAvgAfterTolRng - runningAvgInTolRng
+            // was: let ampDiff:tSoundAmpVal = runningAvgAfterTolRng - runningAvgInTolRng
+            let ampDiff:tSoundAmpVal =  lastAmpSample - runningAvgInTolRng //  - runningAvgAfterTolRng
             let runAvgInTR = runningAvgInTolRng
             let runAvgAftrTR = runningAvgAfterTolRng
-//            print("\nAAAAA Amp Diff: \(ampDiff), runningAvgInTolRng: \(runAvgInTR),runningAvgAfterTolRng: \(runAvgAftrTR)\n")
+            print("\nAAAAA Amp Diff: \(ampDiff), runningAvgInTolRng: \(runAvgInTR),runningAvgAfterTolRng: \(runAvgAftrTR)\n")
             if ampDiff > gAmpDropForNewSound {
                 if !currSoundIsDead {
                     let currSongzTime = currentSongTime()
-                    printSoundRelatedMsg(msg: "  CURRENT SOUND DONE  BC of AMP Drop! At: \(currSongzTime)   Amp Diff: \(ampDiff)")
+                    //printSoundRelatedMsg(msg: "  CURRENT SOUND DONE  BC of AMP Drop! At: \(currSongzTime)   Amp Diff: \(ampDiff)")
+                    printSoundRelatedMsg(msg: "  CURRENT SOUND DONE  BC of AMP Rise! At: \(currSongzTime)   Amp Diff: \(ampDiff)")
                 }
                 currSoundIsDead = true
                 ampAtKillPoint  = queue[0]

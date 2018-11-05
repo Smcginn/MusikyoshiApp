@@ -26,7 +26,7 @@ class LaunchingNextView: UIView {
     static let kDlgWd:         CGFloat = 350.0 //300.0
     static let kDlgHt:         CGFloat = 275.0
     
-    let kBackgroundColor = (UIColor.brown).withAlphaComponent(0.6)
+    let kBackgroundColor = kDefault_LaunchingViewBackgroundColor
     //let bkcolr = [UIColor colorWithRed:1.0 green:0.675 blue:0.156 alpha:0.4]
     
     let kHugeTextFontSz         : CGFloat = 36.0 // 48.0

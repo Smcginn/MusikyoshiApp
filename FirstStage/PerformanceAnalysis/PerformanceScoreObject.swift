@@ -87,7 +87,7 @@ public class PerformanceScoreObject
         //_deactivateTime_comp   = _deactivateTime // removed: - kSoundStartAdjustment
         
         _deactivateTime_comp
-            = self.isNote() ? (_expectedStartTime + _expectedDuration) - gAdjustAttackVar_ABitOff
+            = self.isNote() ? (_expectedStartTime + _expectedDuration) - (gAdjustAttackVar_ABitOff*0.33)
                             : (_expectedStartTime + _expectedDuration) - gAdjustAttackVar_VeryOff
     }
     

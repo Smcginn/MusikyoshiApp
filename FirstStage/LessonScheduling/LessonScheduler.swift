@@ -253,6 +253,15 @@ class LessonScheduler
         }
     }
     
+    func useAn(noteName: String) -> Bool {
+        let noteUp = noteName.uppercased()
+        if noteUp.contains("E") || noteUp.contains("A") {
+            return true
+        } else {
+            return false
+        }
+    }
+
     func getPrettyNameForExercise( forLDE: tLDE_code ) -> String {
         var retStr = "SOMETHING WRONG"
         let thisLD: tLD_code = (forLDE.level, forLDE.day)
@@ -279,10 +288,19 @@ class LessonScheduler
         } else if exerEntry.exerType == .longtoneExer {
             let ltInfo:longtoneExerciseInfo = getLongtoneInfo(forLTCode: exerEntry.exerCodeStr)
             //retStr = "Long Tone - Play a \(ltInfo.note) for \(ltInfo.durationSecs) Seconds"
-            retStr = "Long Tone - Play a \(ltInfo.note) for \(ltInfo.durationSecs) Seconds"
+            if useAn(noteName: ltInfo.note) {
+                retStr = "Long Tone - Play an \(ltInfo.note) for \(ltInfo.durationSecs) Seconds"
+            } else {
+                retStr = "Long Tone - Play a \(ltInfo.note) for \(ltInfo.durationSecs) Seconds"
+            }
         } else if exerEntry.exerType ==  .longtoneRecordExer {
             let ltInfo:longtoneExerciseInfo = getLongtoneRecordInfo(forLTCode: exerEntry.exerCodeStr)
-            retStr = "Long Tone Record - Play a \(ltInfo.note) for as long as you can"
+            //retStr = "Long Tone Record - Play a \(ltInfo.note) for as long as you can"
+            if useAn(noteName: ltInfo.note) {
+                retStr = "Long Tone Record - Play an \(ltInfo.note) for as long as you can"
+            } else {
+                retStr = "Long Tone Record - Play a \(ltInfo.note) for as long as you can"
+            }
         }
         return retStr
     }

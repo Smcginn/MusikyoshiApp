@@ -28,6 +28,8 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
     var secondaryText:String = ""
     var callingVCDelegate: ExerciseResults? = nil
 
+    let testFreqAndPitchSampleSim = PATestFreqAndPitchSampleSim()
+    
     var perfStarScore = 0
     var numberOfAttempts = 0
 
@@ -228,6 +230,11 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
             PerfTrkMgr.instance.songStarted = true
             PerfTrkMgr.instance.repairCurrentSoundIfNeeded()
             soundDetectedDuringSession = false
+            if kDoingPitchAmplitudePitchSimTest {
+                testFreqAndPitchSampleSim.canBeginTesting = true
+                testFreqAndPitchSampleSim.lastSampleIndex = 0
+            }
+            
 //            PerfTrkMgr.instance.signalDetectedDuringPerformance = false
 //            PerfTrkMgr.instance.perfLongEnoughToDetectNoSound = false
        }
@@ -252,7 +259,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
     // of the music. But . . . I want others to try this out.
     // So leaving it at 0.
     // GLOBALITY
-    let beatMillisecOffset:Int32 = kMetronomeTimingAdjustment
+    let beatMillisecOffset:Int32 = kMetronomeTimingAdjustment // METROMETRO
     var trackingAudioAndNotes = false
 
     override func viewDidLoad() {
@@ -270,10 +277,13 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
 
         if exerciseType == .rhythmPartyExer {
             title = "Rhythm Party!"
-            infoLabel.text = "Clap at the beginning of each note and count the beats"
+            infoLabel.text = "Clap the notes"
         } else if exerciseType == .rhythmPrepExer {
             title = "Rhythm Prep"
             infoLabel.text = "Play the notes"
+//        } else if exerciseType == .lipSlurExer {
+//            title = "Play without tonguing"
+//            infoLabel.text = "Play without tonguing"
         } else {
             title = "Tune"
             infoLabel.text = "Play the notes"
@@ -321,20 +331,44 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
                 selector: #selector(handleAVAudioInterruption(_:)),
                 name: NSNotification.Name.AVAudioSessionInterruption,
                 object: self)
+        if kDoingPitchAmplitudePitchSimTest {
+            testFreqAndPitchSampleSim.SetupLegatoPitchTest1()
+        }
+        testFreqAndPitchSampleSim.canBeginTesting = false
+        testFreqAndPitchSampleSim.lastSampleIndex = 0
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
 
-    func setAnalysisCriteria( exerType: ExerciseType ) {
-        switch exerType {
-        case .rhythmPartyExer:
-            setPerfIssueSortCriteria( sortCrit: .byAttackRating )
-        case .rhythmPrepExer:
-            setPerfIssueSortCriteria( sortCrit: .byIndividualRating )
-        default:
-            setPerfIssueSortCriteria( sortCrit: .byIndividualRating )
+    // VIDREDO
+    // byAttackAndDurationRating // for Rhythm Prep
+    // byPitchRating
+    
+    enum sortCriteriaPass {
+        case starScoreGrading
+        case videoSelection
+    }
+    func setAnalysisCriteria( exerType: ExerciseType, forPass: sortCriteriaPass ) {
+        if forPass == .starScoreGrading {
+            switch exerType {
+            case .rhythmPartyExer:
+                setPerfIssueSortCriteria( sortCrit: .byAttackRating )
+            case .rhythmPrepExer:
+                setPerfIssueSortCriteria( sortCrit: .byIndividualRating )
+            default:
+                setPerfIssueSortCriteria( sortCrit: .byIndividualRating )
+            }
+        } else { // videoSelection
+            switch exerType {
+            case .rhythmPartyExer:
+                setPerfIssueSortCriteria( sortCrit: .byAttackRating )
+            case .rhythmPrepExer:
+                setPerfIssueSortCriteria( sortCrit: .byAttackAndDurationRating )
+            default:
+                setPerfIssueSortCriteria( sortCrit: .byPitchRating )
+            }
         }
     }
     
@@ -397,7 +431,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
             metronomeView.frame.size.width = (metronomeView.frame.size.height*6)
             layoutStarScoreForiPad = true
         } else if UIDevice.current.is_iPhoneX {
-            var ssFrame = ssScrollView.frame
+            let ssFrame = ssScrollView.frame
             ssScrollView.frame = ssFrame
             let leftOffset:  CGFloat = 40.0
             let rightOffset: CGFloat = 30.0
@@ -435,8 +469,10 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
 //        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight,
 //                                               andRotateTo: UIInterfaceOrientation.landscapeRight)
 
-        PerfScoreObjScheduler.instance.setVC(vc: self)
-        setAnalysisCriteria( exerType: self.exerciseType )
+        PerfScoreObjScheduler.instance.setVC(vc:  self)
+        
+        // VIDREDO
+//        setAnalysisCriteria( exerType: self.exerciseType )
 
         // this one is it:
         navigationBar.topItem?.title = navBarTitle
@@ -493,6 +529,8 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
 //            playButton.isEnabled = false
             playScore()
             trackingAudioAndNotes = true
+            testFreqAndPitchSampleSim.canBeginTesting = false
+            testFreqAndPitchSampleSim.lastSampleIndex = 0
         } else if playButton.currentTitle == "Next Exercise" {
             //TODO: goto Next Exercise
             _ = navigationController?.popViewController(animated: true)
@@ -561,6 +599,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
 
 
         ////////////
+        // SFUserDefs
         guard let xmlData = MusicXMLModifier.modifyXMLToData(musicXMLUrl: URL(fileURLWithPath: filePath), smallestWidth: UserDefaults.standard.double(forKey: Constants.Settings.SmallestNoteWidth), signatureWidth: UserDefaults.standard.double(forKey: Constants.Settings.SignatureWidth)) else {
             print("Cannot get modified xmlData from \(filePath)!")
             return
@@ -758,7 +797,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
                 //                synth?.setBarChangeHandler(BarChangeHandler(vc: self), delay: -cursorAnimationTime_ms)
                 //                synth?.setBarChangeHandler(BarChangeHandler(vc: self, anim: anim), delay: 0)
                 synth?.setEnd(EndHandler(vc: self), delay: 0)
-                synth?.setBeat(BeatHandler(vc: self), delay: beatMillisecOffset)
+                synth?.setBeat(BeatHandler(vc: self), delay: beatMillisecOffset) // METROMETRO
 
                 var err = synth?.setup(playData)
                 if err == sscore_NoError {
@@ -853,6 +892,8 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
                                                 soundDetectedDuringSession
         // PerfTrkMgr.instance.perfLongEnoughToDetectNoSound = ??
 
+        // VIDREDO
+        setAnalysisCriteria( exerType: self.exerciseType, forPass: .starScoreGrading )
         PerformanceTrackingMgr.instance.analyzePerformance()
         if soundDetectedDuringSession || !PerfTrkMgr.instance.doDetectedDuringPerformance {
         
@@ -953,9 +994,9 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
         if  gMKDebugOpt_ShowDebugSettingsBtn {
             let titleStr = "Note Attack Summary\n('-' is early; otherwise late)"
             
-            let minDiffStr = String(format: "%.3f", gLastRunMinAttackDiff)
-            let maxDiffStr = String(format: "%.3f", gLastRunMaxAttackDiff)
-            let avgDiffStr = String(format: "%.3f", gLastRunAvgAttackDiff)
+            let minDiffStr = String(format: "%.4f", gLastRunMinAttackDiff)
+            let maxDiffStr = String(format: "%.4f", gLastRunMaxAttackDiff)
+            let avgDiffStr = String(format: "%.4f", gLastRunAvgAttackDiff)
 
             var msgStr = "\nAVERAGE Difference: \t"
             msgStr += avgDiffStr
@@ -968,22 +1009,30 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
             msgStr += "Largest Difference: \t"
             msgStr += maxDiffStr
             
-            msgStr += "\n\n--- (Non-Compensated) ---\n"
-            
-            let minNonCompDiffStr = String(format: "%.3f", gLastRunMinAttackDiff+kSoundStartAdjustment)
-            let maxNonCompDiffStr = String(format: "%.3f", gLastRunMaxAttackDiff+kSoundStartAdjustment)
-            let avgNonCompDiffStr = String(format: "%.3f", gLastRunAvgAttackDiff+kSoundStartAdjustment)
+            msgStr += "\n\n------------------------\n"
 
-            msgStr += "\nAVERAGE Difference: \t"
-            msgStr += avgNonCompDiffStr
-            msgStr += ("\n\n")
+            let runningAvgDiffStr = String(format: "%.3f", gRunningAvgAttackDiff)
+            msgStr += "Running Average Diff: \t"
+            msgStr += runningAvgDiffStr
+
             
-            msgStr += "Smallest Difference: \t"
-            msgStr += minNonCompDiffStr
-            msgStr += ("\n")
-            
-            msgStr += "Largest Difference: \t"
-            msgStr += maxNonCompDiffStr
+            // START_TIME_CHANGE
+//            msgStr += "\n\n--- (Non-Compensated) ---\n"
+//
+//            let minNonCompDiffStr = String(format: "%.3f", gLastRunMinAttackDiff-kSoundStartAdjustment)
+//            let maxNonCompDiffStr = String(format: "%.3f", gLastRunMaxAttackDiff-kSoundStartAdjustment)
+//            let avgNonCompDiffStr = String(format: "%.3f", gLastRunAvgAttackDiff-kSoundStartAdjustment)
+//
+//            msgStr += "\nAVERAGE Difference: \t"
+//            msgStr += avgNonCompDiffStr
+//            msgStr += ("\n\n")
+//
+//            msgStr += "Smallest Difference: \t"
+//            msgStr += minNonCompDiffStr
+//            msgStr += ("\n")
+//
+//            msgStr += "Largest Difference: \t"
+//            msgStr += maxNonCompDiffStr
             
             let ac = MyUIAlertController(title: titleStr,
                                          message: msgStr,
@@ -996,36 +1045,41 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
         }
         
         
-        
-        
+        // VIDREDO - Redo Performance criteria here?
+        setAnalysisCriteria( exerType: self.exerciseType, forPass: .videoSelection )
+
+        PerformanceTrackingMgr.instance.analyzePerformance()
+ 
         // delme
 //        var doTestVideos = true
 //        var videoTestCode = vidIDs.kVid_NoVideoAvailable
         
         // Reacting to worst issue must be delayed slightly
-        delay(0.1) {
-            let worstPerfIssue = PerformanceIssueMgr.instance.getFirstPerfIssue()
-// delme            if doTestVideos && worstPerfIssue != nil {
-//                worstPerfIssue!.videoID = vidIDs.kVid_Duration_TooShort
-//                //self.testVideoMappsings(perfIssue: worstPerfIssue)
-//            }
-            if worstPerfIssue != nil {
-                if (worstPerfIssue?.issueScore)! >= kLaunchVideoThreshold {
-                    
-                    let issScore = worstPerfIssue!.issueScore
-                    let severity =
-                        PerformanceIssueMgr.instance.getSeverity(issueScore: issScore)
-                    let perfNoteID:Int32 = worstPerfIssue!.perfScoreObjectID
-    //                worstPerfIssue!.videoID  = vidIDs.kVid_Pitch_VeryLow_SpeedUpAir // YYYYYOOOOO
-                    if worstPerfIssue!.videoID != vidIDs.kVid_NoVideoAvailable {
-                        self.scrollToNoteAndLaunchVideo(perfNoteID: perfNoteID,
-                                                        videoID: worstPerfIssue!.videoID,
-                                                        severity: severity)
-                    }
-                    else if worstPerfIssue!.alertID != alertIDs.kAlt_NoAlertMsgAvailable {
-                        self.scrollToNoteAndLaunchAlert(perfNoteID: perfNoteID,
-                                                        alertID: worstPerfIssue!.alertID,
-                                                        severity: severity)
+        if soundDetectedDuringSession || !PerfTrkMgr.instance.doDetectedDuringPerformance {
+            delay(0.1) {
+                let worstPerfIssue = PerformanceIssueMgr.instance.getFirstPerfIssue()
+    // delme            if doTestVideos && worstPerfIssue != nil {
+    //                worstPerfIssue!.videoID = vidIDs.kVid_Duration_TooShort
+    //                //self.testVideoMappsings(perfIssue: worstPerfIssue)
+    //            }
+                if worstPerfIssue != nil {
+                    if (worstPerfIssue?.issueScore)! >= kLaunchVideoThreshold {
+                        
+                        let issScore = worstPerfIssue!.issueScore
+                        let severity =
+                            PerformanceIssueMgr.instance.getSeverity(issueScore: issScore)
+                        let perfNoteID:Int32 = worstPerfIssue!.perfScoreObjectID
+        //                worstPerfIssue!.videoID  = vidIDs.kVid_Pitch_VeryLow_SpeedUpAir // YYYYYOOOOO
+                        if worstPerfIssue!.videoID != vidIDs.kVid_NoVideoAvailable {
+                            self.scrollToNoteAndLaunchVideo(perfNoteID: perfNoteID,
+                                                            videoID: worstPerfIssue!.videoID,
+                                                            severity: severity)
+                        }
+                        else if worstPerfIssue!.alertID != alertIDs.kAlt_NoAlertMsgAvailable {
+                            self.scrollToNoteAndLaunchAlert(perfNoteID: perfNoteID,
+                                                            alertID: worstPerfIssue!.alertID,
+                                                            severity: severity)
+                        }
                     }
                 }
             }
@@ -1253,27 +1307,38 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
         // SFAUDIO
         var currAmpltd = 0.0
         var currFreq   = 0.0
-        if AudioKitManager.sharedInstance.amplitudeTracker != nil {
-            currAmpltd = AudioKitManager.sharedInstance.amplitudeTracker.amplitude
-        }
-        if AudioKitManager.sharedInstance.frequencyTracker != nil {
-            ///   AMPLEAMPLE
-            //currAmpltd = AudioKitManager.sharedInstance.frequencyTracker.amplitude
-//            print("&&&&&& Amp = \(currAmpltd)")
-            currFreq = AudioKitManager.sharedInstance.frequencyTracker.frequency
-        }
         
- //       let currAmpltd = AudioKitManager.sharedInstance.frequencyTracker.amplitude
+        
+        let lastTestSampleIdx = testFreqAndPitchSampleSim.lastSampleIndex
+        if kDoingPitchAmplitudePitchSimTest &&
+           testFreqAndPitchSampleSim.canBeginTesting &&
+           lastTestSampleIdx < testFreqAndPitchSampleSim.numSamples() {
+            currAmpltd = testFreqAndPitchSampleSim.amplitudeSamples[lastTestSampleIdx]
+            currFreq   = testFreqAndPitchSampleSim.getPitchAt(index: lastTestSampleIdx)
+            testFreqAndPitchSampleSim.lastSampleIndex += 1
+        } else { // get actual live sample and pitch data
+            if AudioKitManager.sharedInstance.amplitudeTracker != nil {
+                currAmpltd = AudioKitManager.sharedInstance.amplitudeTracker.amplitude
+            }
+            if AudioKitManager.sharedInstance.frequencyTracker != nil {
+                ///   AMPLEAMPLE
+                //currAmpltd = AudioKitManager.sharedInstance.frequencyTracker.amplitude
+    //            print("&&&&&& Amp = \(currAmpltd)")
+                currFreq = AudioKitManager.sharedInstance.frequencyTracker.frequency
+            }
+            
+     //       let currAmpltd = AudioKitManager.sharedInstance.frequencyTracker.amplitude
+        }
         let signalDetected : Bool = currAmpltd > kAmplitudeThresholdForIsSound
         if signalDetected {
             soundDetectedDuringSession = true
         }
-        
+
  //       let currFreq = AudioKitManager.sharedInstance.frequencyTracker.frequency
         let timeSinceAnalysisStart : TimeInterval = Date().timeIntervalSince(startTime)
         let timeSinceSongStart =
             timeSinceAnalysisStart - PerformanceTrackingMgr.instance.songStartTimeOffset
-        let timeSinceSSComp = timeSinceSongStart - kSoundStartAdjustment
+        let timeSinceSSComp = timeSinceSongStart - kSoundStartAdjustment // START_TIME_CHANGE
 
         printAmplitude(currAmp: currAmpltd, at: timeSinceSongStart, atComp: timeSinceSSComp)
 
@@ -1338,6 +1403,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
                                 currSound.xOffsetEnd = firstNoteOrRestXOffset + currXOffset
                             }
 
+                            currSound.stoppedBecauseOfLegatoPitchChange = true
                             var splitTime: TimeInterval = 0.0
                             perfTrkgMgr.endCurrSoundAsNewPitchDetected(
                                 noteOffset: perfTrkgMgr.songStartTimeOffset,
@@ -1389,7 +1455,8 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
     //                                print (" \n  SS1 - Creating new sound \(newSound.soundID) (legato split), abs time: \(newSound.startTime_abs), song time: \(newSound.startTime_song)")
     //                                print("    (initial amplitude = \(currAmpltd)")
     //                            }
-                                perfTrkgMgr.linkCurrSoundToCurrScoreObject(isNewScoreObject: false) // linkCurrSoundToCurrNote()
+                                perfTrkgMgr.linkCurrSoundToCurrScoreObject(isNewScoreObject: false)
+                                currSound.createdBecauseOfLegatoPitchChange = true
                             } // if let newSound
                         } // isDefinitelyADifferentNote()
                     }  // if areDifferentNotes
@@ -2451,7 +2518,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
 //                svc.playTickSound()
             }
             else if svc.shouldSetSongStartTime {
-                let msOffset = TimeInterval(abs(svc.beatMillisecOffset/1000))
+                let msOffset = TimeInterval(abs(svc.beatMillisecOffset/1000)) // METROMETRO
                 let nowPlus = Date().addingTimeInterval(msOffset)
                 svc.songStartTm = nowPlus
                 svc.songStartTmOffset = svc.songStartTm.timeIntervalSince(svc.startTime)

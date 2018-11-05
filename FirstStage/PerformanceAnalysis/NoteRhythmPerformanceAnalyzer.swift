@@ -20,6 +20,28 @@ let kRhythmDurationVariance_OK : Double           = 0.05
 let kRhythmDurationVariance_Acceptable : Double   = 0.25
 let kRhythmDurationVariance_Unacceptable : Double = 0.5  
 
+private var gRunningAttackDiffs: [TimeInterval] = []
+var gRunningAvgAttackDiff: TimeInterval {
+    guard gRunningAttackDiffs.count > 0 else { return 0.0 }
+    
+    let total = gRunningAttackDiffs.reduce(0, +)
+    let avg = total/TimeInterval(gRunningAttackDiffs.count)
+    return avg
+}
+func clearGlobalRunningAttackDiffs() {
+    gRunningAttackDiffs.removeAll()
+}
+func addCurrAttackDiffAvgToRunningAvg() {
+    gRunningAttackDiffs.append(gLastRunAvgAttackDiff)
+}
+var gRunningAvgAttackDiffAvailable: Bool {
+    if gRunningAttackDiffs.count > 0 {
+        return true
+    } else {
+        return false
+    }
+}
+
 var gLastRunMinAttackDiff: TimeInterval = 0.0
 var gLastRunMaxAttackDiff: TimeInterval = 0.0
 var gLastRunAvgAttackDiff: TimeInterval = 0.0
@@ -72,8 +94,8 @@ func calcAndSetAdjustedRhythmTolerances(bpm: Double) {
 
 
 func resetAttackDiffs() {
-    gLastRunMinAttackDiff = 0.0
-    gLastRunMaxAttackDiff = 0.0
+    gLastRunMinAttackDiff = 10.0
+    gLastRunMaxAttackDiff = -10.0
     gLastRunAvgAttackDiff = 0.0
 }
 
@@ -126,31 +148,33 @@ class NoteRhythmPerformanceAnalyzer : NotePerformanceAnalyzer {
     
     func rateAttack( perfNote: PerformanceNote )
     {
-        let startTimeDelta     = perfNote.expectedStartTime - perfNote.actualStartTime_comp
+        let startTimeDelta     = perfNote.actualStartTime_comp - perfNote.expectedStartTime
         let startTimeDeltaABS  = abs(startTimeDelta)
         
-        if kMKDebugOpt_PrintMinimalNoteAnalysis {
+//        if kMKDebugOpt_PrintMinimalNoteAnalysis {
             if perfNote.isLinkedToSound {
                 runningDiffSum += startTimeDelta
                 numDifs += 1
                 let currAverage = runningDiffSum/Double(numDifs)
                 
                 setAttackDiffs(currDiff: startTimeDelta, currAvg: currAverage)
-                print("In Note Analysis; note #\(perfNote.perfNoteOrRestID) attack off by:\t\(startTimeDelta), \tcurr avg: \(currAverage)")
+                if kMKDebugOpt_PrintMinimalNoteAnalysis {
+                    print("In Note Analysis; note #\(perfNote.perfNoteOrRestID) attack off by:\t\(startTimeDelta), \tcurr avg: \(currAverage)")
+                }
             }
-        }
+//        }
         
         if startTimeDeltaABS <= gAdjustAttackVar_Correct {
             perfNote.attackRating = .timingOrRestGood
         }
         else if startTimeDeltaABS <= gAdjustAttackVar_ABitOff {
-            if startTimeDelta > 0.0 {
+            if startTimeDelta < 0.0 {
                 perfNote.attackRating = .slightlyEarly
             } else {
                 perfNote.attackRating = .slightlyLate
             }
         } else if startTimeDeltaABS <= gAdjustAttackVar_VeryOff {
-            if startTimeDelta > 0.0 {
+            if startTimeDelta < 0.0 {
                 perfNote.attackRating = .veryEarly
             } else {
                 perfNote.attackRating = .veryLate

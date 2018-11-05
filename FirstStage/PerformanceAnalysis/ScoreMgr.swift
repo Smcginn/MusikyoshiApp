@@ -14,6 +14,9 @@ import SwiftyJSON
 
 let kPrintJsonBeforeWritingToDisk = true
 
+typealias tDB_Version = (major: Int, mid: Int, minor: Int)
+let kBadDBVersion: tDB_Version = (major: -1, mid: -1, minor: -1)
+
 class ScoreMgr {
     
     var currUserScore: studentScore? = nil
@@ -527,6 +530,35 @@ class ScoreMgr {
         return mkDataURL
     }
     
+    func deleteCurrentScoreFile() -> Bool {
+        guard let mkDataDirUrl = getMKDataDir() else { return false }
+        
+        let fm = FileManager.default
+        let mkScoreFileURL = mkDataDirUrl.appendingPathComponent(MKUserDataFileName)
+        let mkScoreFilePath = mkScoreFileURL.path
+        
+        do {
+            if !fm.fileExists(atPath: mkScoreFilePath) {
+                print("\n In deleteCurrentScoreFile;  File does not exist\n")
+                return true // it's not there, so . . .
+            } else {
+                try fm.removeItem(atPath: mkScoreFilePath)
+            }
+        }
+        catch let error as NSError {
+            print("An error took place In deleteCurrentScoreFile: \(error)")
+            return false
+        }
+    
+        if fm.fileExists(atPath: mkScoreFilePath) {
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    
+    
     // MARK: - -- Methods for initial data structs and file creation
 
     ////////////////////////////////////////////////////////////////////////
@@ -565,6 +597,35 @@ class ScoreMgr {
         return succeeded
     }
 
+    func getInstrumentJsonVersion() -> tDB_Version {
+        var dbVersion: tDB_Version = kBadDBVersion
+        
+        guard let file = Bundle.main.path(forResource: "TrumpetLessons",
+                                          ofType: "json")    else {
+                                            print("In getJsonDBVersion, Invalid filename/path for TrumpetLessons.JSON")
+                                            return dbVersion
+        }
+        
+        guard let jsonData = try? Data(contentsOf: URL(fileURLWithPath: file))  else {
+            print("In getJsonDBVersion, Could not create JSON data from TrumpetLessons.JSON")
+            return dbVersion
+        }
+        
+        let instrumentJson = try? JSON(data: jsonData)
+        guard instrumentJson != nil  else {
+            print("in getJsonDBVersion, Could not create JSON data from TrumpetLessons.JSON")
+            return dbVersion
+        }
+        
+        let jsonverMajInt: Int = Int((instrumentJson?["jsonVersionMajor"].string)!)!
+        let jsonverMidInt: Int = Int((instrumentJson?["jsonVersionMid"].string)!)!
+        let jsonverMinInt: Int = Int((instrumentJson?["jsonVersionMinor"].string)!)!
+        
+        dbVersion = (major: jsonverMajInt, mid: jsonverMidInt, minor: jsonverMinInt)
+        
+        return dbVersion
+    }
+    
     ////////////////////////////////////////////////////////////////////////
     // If first time in App, this method is called to create the
     // initial in-memory StudentScoreData
@@ -642,6 +703,49 @@ class ScoreMgr {
         
         print("Succesfully created empty StudentScore data in memory from JSON")
         return true
+    }
+    
+    func getDBMajorVersion() -> Int {
+        if currUserScore == nil {
+            return -1
+        }
+        
+        return (currUserScore?.jsonVersionMajor)! as Int
+    }
+    
+    func getDBMidVersion() -> Int {
+        if currUserScore == nil {
+            return -1
+        }
+        
+        return (currUserScore?.jsonVersionMid)!  as Int
+    }
+    
+    func getDBMinorVersion() -> Int {
+        if currUserScore == nil {
+            return -1
+        }
+        
+        return (currUserScore?.jsonVersionMinor)!  as Int
+    }
+    
+    func isJsonVersionEqual(versionTuple: tDB_Version) -> Bool {
+        let dbMajor = getDBMajorVersion()
+        let dbMid   = getDBMidVersion()
+        let dbMinor = getDBMinorVersion()
+
+        if dbMajor == versionTuple.major  &&
+           dbMid   == versionTuple.mid    &&
+           dbMinor == versionTuple.minor      {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    // Instrument json will have this to be stored in future.  For now, return 1 for Trumpet
+    func getInstrumentCode() -> Int {
+        return 1; // Trumpet
     }
 }
 
