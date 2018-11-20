@@ -44,7 +44,12 @@ let kDarkSkyBlue  = UIColor(red:   0.407,  green:  0.667,
 // light sky
 let kLightSkyBlue = UIColor(red:   0.521,  green:  0.813,
                             blue:  1.0,    alpha:  1.0 )
-
+    
+// very light sky
+//let kVeryLightSkyBlue = UIColor(red:   0.847,  green:  0.966,
+//                                blue:  1.0,    alpha:  1.0 )
+let kVeryLightSkyBlue = UIColor(red:   0.9,  green:  1.0,
+                                blue:  1.0,    alpha:  1.0 )
 
 /////////////////////////////////////////////////////////////
 // App-wide defaults
@@ -69,7 +74,8 @@ let kDefault_LaunchingViewBackgroundColor = (kDarkSkyBlue).withAlphaComponent(0.
 
 ////////////////////////////////////////////////////////////
 // Section/Cell colors
-let kDefault_SectionBkgrndColor         =  (kBlueButton).withAlphaComponent(0.55)
+let kDefault_SectionBkgrndColor         =  (kBlueButton).withAlphaComponent(0.75)
+let kDefault_DisabledSectionBkgrndColor =  (kBlueButton).withAlphaComponent(0.65)
 let kDefault_SelectCellBkgrndColor      =  kDarkSkyBlue
 let kDefault_CellBkgrndColor            =  kLightSkyBlue
 

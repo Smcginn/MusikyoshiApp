@@ -5,6 +5,10 @@
 //  Created by Scott Freshour on 10/18/18.
 //
 
+
+// NOT USED, but possibly handy later?
+
+
 import Foundation
 
 /*
@@ -37,7 +41,7 @@ import Foundation
      ------------------------
 
 */
-
+/*
 let kSubsState_NoSubs_NoAllAccessEval   : Int  = 0
 let kSubsState_NoSubs_InAllAccessEval   : Int  = 1
 let kSubsState_NoSubs_AllAccessEvalExp  : Int  = 2
@@ -100,3 +104,4 @@ func displayAlertsBasedOnSubscriptionStatus() {
 func displayNoSubNoAllAccessAlert() {
     
 }
+*/

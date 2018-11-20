@@ -214,16 +214,6 @@ class LaunchingNextView: UIView {
         monkeyImageEntries = [monkeyImageView, monkeyImageView2, monkeyImageView3]
      }
     
-    func roundedView(){
-        let maskPAth1 = UIBezierPath(roundedRect: self.bounds,
-                                     byRoundingCorners: .allCorners,
-                                     cornerRadii:CGSize(width:18.0, height:12.0))
-        let maskLayer1 = CAShapeLayer()
-        maskLayer1.frame = self.bounds
-        maskLayer1.path = maskPAth1.cgPath
-        self.layer.mask = maskLayer1
-    }
-    
     func addPauseBtn() {
         self.monkeyImageView?.center.x  = -50
         self.monkeyImageView2?.center.x = -50

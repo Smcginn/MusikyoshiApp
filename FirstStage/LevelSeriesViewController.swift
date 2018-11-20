@@ -15,8 +15,10 @@ import Foundation
 import SwiftyJSON
 import AudioKit
 
+let doOverrideSubsPresent = false
 let doLimitLevels = true
 let kNumberOfLevelsToShow: Int = 10
+
 
 let levelHeaderSpacingStr = "       " // leaves room at front for checkbox icon
 
@@ -39,6 +41,7 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
     var currLevel:Int = 0
     var currDay = 0
 
+    var allowAllLevelAccess = false
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -111,8 +114,58 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
         return false
     }
 
+    func assessPurchaseStatus() {
+        if doOverrideSubsPresent {
+            allowAllLevelAccess = true
+            return
+        }
+        
+        allowAllLevelAccess = PlayTunesIAPProducts.store.subscriptionGood()
+        if !allowAllLevelAccess &&
+           !PlayTunesIAPProducts.store.userDefsStoredSubscStatusIsKnown() {
+            // see if just waiting for update
+            while PlayTunesIAPProducts.store.confirmedAttempts < 10 {
+                if PlayTunesIAPProducts.store.userDefsStoredSubscStatusIsKnown() {
+    //                print("\n\n        Receipt Data repsonse acquired!   \n\n")
+                    // if PlayTunesIAPProducts.store.purchaseStatus.state == .purchaseGood {
+     //               if PlayTunesIAPProducts.store.purchaseStatus.subscriptionGood() {
+                    if PlayTunesIAPProducts.store.subscriptionGood() {
+                       allowAllLevelAccess = true
+                    } else {
+                        allowAllLevelAccess = false
+                    }
+                    break
+                }
+                PlayTunesIAPProducts.store.confirmedAttempts += 1
+                print("\n\n        Waiting on Receipt Data repsonse . . . \n\n")
+                delay(0.5) {}
+            }
+        }
+    
+        PlayTunesIAPProducts.store.confirmedAttempts = 0
+//        if PlayTunesIAPProducts.store.purchaseStatus.confirmed {
+//            if PlayTunesIAPProducts.store.purchaseStatus.state == .purchaseGood {
+//                allowAllLevelAccess = true
+//            }
+//        } else {
+//            accessPurchaseStatusRetry()
+//        }
+    }
+    
+//    func accessPurchaseStatusRetry() {
+//        if PlayTunesIAPProducts.store.purchaseStatus.confirmedAttempts < 10 {
+//            delay(0.5) {
+//                PlayTunesIAPProducts.store.purchaseStatus.confirmedAttempts += 1
+//                self.assessPurchaseStatus()
+//            }
+//        }
+//    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        assessPurchaseStatus()
+        
         tableView.reloadData()
         
         navigationBar.topItem?.title = "Levels"
@@ -221,7 +274,15 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
             tableView.dequeueReusableHeaderFooterView(withIdentifier: "header")
                 as? LevelSeriesTableViewHeaderFooterView
                 ?? LevelSeriesTableViewHeaderFooterView(reuseIdentifier: "header")
-        header.contentView.backgroundColor = kDefault_SectionBkgrndColor
+        
+//        if !allowAllLevelAccess && section >= 2 {
+//            header.contentView.backgroundColor = kDefault_DisabledSectionBkgrndColor
+////            header.contentView.tintColor = UIColor.gray
+//            header.textLabel?.textColor = .lightGray
+//        } else {
+//            header.contentView.backgroundColor = kDefault_SectionBkgrndColor
+//            header.textLabel?.textColor = .black
+//        }
         header.section = section
         if header.gestureRecognizers == nil {
             let tap = UITapGestureRecognizer( target: self, action: #selector(headerTapped))
@@ -240,14 +301,52 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
         return header
     }
 
+    func displayMustPurchaseAlert() {
+        let titleStr = "For access to all levels, you must purchase PlayTunes"
+        var msgStr = "\nLevels 1 & 2 are always free!\n\n"
+        msgStr += "To explore PlayTunes' upper Levels, go to 'Purchase Options' "
+        msgStr += "on the Home screen\n\n"
+        msgStr += "(If you have a valid Subscription from another device, use the Restore button)"
+        let ac = MyUIAlertController(title: titleStr, message: msgStr, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        
+        self.present(ac, animated: true, completion: nil)
+    }
+    
+    func displaySubsExpiredAlert() {
+        let titleStr = "Something is wrong with your Subscription"
+        var msgStr = "\nYour subscription to PlayTunes has Expired or was Cancelled.\n\n"
+        msgStr += "To continue using PlayTunes, go to 'Purchase Options' "
+        msgStr += "on the Home screen to extend your subscription\n\n"
+        let ac = MyUIAlertController(title: titleStr, message: msgStr, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        
+        self.present(ac, animated: true, completion: nil)
+    }
+    
     var handlingSectionTap = false
     
     @objc func headerTapped(_ g: UIGestureRecognizer) {
         if self.handlingSectionTap { return }
         
         self.handlingSectionTap = true
+        
         let vw = g.view as! LevelSeriesTableViewHeaderFooterView
         let section = vw.section
+        
+        if !allowAllLevelAccess && section >= 2 {
+//            if PlayTunesIAPProducts.store.purchaseStatus.confirmed &&
+//               PlayTunesIAPProducts.store.purchaseStatus.state == .expired {
+            if PlayTunesIAPProducts.store.userDefsStoredSubscStatusIsKnown() &&
+               PlayTunesIAPProducts.store.userDefsStoredSubscHasBeenPurchased() {
+                displaySubsExpiredAlert()
+            } else {
+                displayMustPurchaseAlert()
+            }
+            self.handlingSectionTap = false
+            return
+        }
+        
         //guard section != self.currLevel else { return }
         
         let oldSection = self.currLevel
@@ -285,7 +384,18 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header = view as! LevelSeriesTableViewHeaderFooterView // UITableViewHeaderFooterView
         //header.textLabel?.font = UIFont.(name: "Futura", size: 13)!
-        header.backgroundView?.backgroundColor = kDefaultViewBackgroundColor //BkgrndColor //UIColor.yellow
+//        if allowAllLevelAccess {
+//            header.backgroundView?.backgroundColor = kDefaultViewBackgroundColor
+//        } else {
+//            header.backgroundView?.backgroundColor = kDefaultViewBackgroundColor
+//        }
+        if !allowAllLevelAccess && section >= 2 {
+            header.contentView.backgroundColor = kDefault_DisabledSectionBkgrndColor
+            header.textLabel?.textColor = .darkGray
+        } else {
+            header.contentView.backgroundColor = kDefault_SectionBkgrndColor
+            header.textLabel?.textColor = .black
+        }
     }
     
     func isSelectedCell(indexPath: IndexPath) -> Bool {

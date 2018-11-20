@@ -5,3 +5,4 @@
 # the current Xcode environment.
 github "audiokit/AudioKit" == 4.0.4
 github "SwiftyJSON/SwiftyJSON" == 4.0.0
+github "bizz84/SwiftyStoreKit" == 0.13.3

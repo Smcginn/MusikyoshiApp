@@ -60,7 +60,7 @@ class VideoHelpView: UIView {
     override init(frame: CGRect) {
         
         super.init(frame: frame)
-        self.roundedView()
+        self.roundedVideoView()
         
         self.backgroundColor = (UIColor.lightGray).withAlphaComponent(0.85)
         addMsgLabels()
@@ -155,7 +155,7 @@ class VideoHelpView: UIView {
         self.addSubview(againBtn!)
     }
     
-    func roundedView(){
+    func roundedVideoView(){
         let maskPAth1 = UIBezierPath(roundedRect: self.bounds,
                                      byRoundingCorners: .allCorners,
                                      cornerRadii:CGSize(width:18.0, height:12.0))

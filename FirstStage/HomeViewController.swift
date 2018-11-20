@@ -38,6 +38,14 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var OverviewBtn: UIButton!
     @IBOutlet weak var MyProfileBtn: UIButton!
     @IBOutlet weak var ChallengeBtn: UIButton!
+    @IBOutlet weak var purchaseOptionsBtn: UIButton!
+    
+    @IBAction func purchaseOptionsBtn_Pressed(_ sender: Any) {
+        
+        
+        
+        
+    }
     
     @IBAction func LessonsBtnPressed(_ sender: Any) {
     }
@@ -176,10 +184,21 @@ class HomeViewController: UIViewController {
         // Lessons Button
         LessonsBtn.roundedButton()
         LessonsBtn.backgroundColor = kDefault_ButtonBckgrndColor
-        let lessonsTxt = createAttributedText(str: "Lessons",
-                                              fontSize: 18)
+        let lessonsTxt = createAttributedText(str: "Levels",
+                                              fontSize: 30)
         LessonsBtn.titleLabel?.attributedText = lessonsTxt
         LessonsBtn.setTitleColor(kDefault_ButtonTextColor, for: .normal)
+        
+        
+        
+        // Lessons Button
+        purchaseOptionsBtn.roundedButton()
+        purchaseOptionsBtn.backgroundColor = kDefault_ButtonBckgrndColor
+        let purchaseOptionsTxt = createAttributedText(str: "Purchase Options",
+                                                      fontSize: 20)
+        purchaseOptionsBtn.titleLabel?.attributedText = purchaseOptionsTxt
+        purchaseOptionsBtn.setTitleColor(kDefault_ButtonTextColor, for: .normal)
+
         
         // Resume Practice Session Button
         ResumePracticeSessionBtn.isEnabled = false
@@ -217,4 +236,11 @@ class HomeViewController: UIViewController {
         ChallengeBtn.titleLabel?.attributedText = challengeTxt
         ChallengeBtn.setTitleColor(UIColor.lightText, for: .disabled)
     }
+    
+    @IBAction func unwindToHomeVC(unwindSegue: UIStoryboardSegue) {
+        print("here in unwindToHomeVC")
+    }
+
+    
+    
 }

@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import StoreKit
+import SwiftyStoreKit
 
 func delay(_ delay:Double, closure:@escaping ()->()){
     DispatchQueue.main.asyncAfter(
@@ -19,7 +20,6 @@ func delay(_ delay:Double, closure:@escaping ()->()){
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    let iapHelper = IAPHelper(prodIds: Set([SubScript2]))  // IAPH
 
     var orientationLock = UIInterfaceOrientationMask.portrait
         
@@ -86,6 +86,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         //initialize Settings
+        
+        SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
+            for purchase in purchases {
+                switch purchase.transaction.transactionState {
+                case .purchased, .restored:
+                    if purchase.needsFinishTransaction {
+                        // Deliver content from server, then:
+                        SwiftyStoreKit.finishTransaction(purchase.transaction)
+                    }
+                // Unlock content
+                case .failed, .purchasing, .deferred:
+                    break // do nothing
+                }
+            }
+        }
+        
         UserDefaults.standard.register(defaults: [
             Constants.Settings.BPM: 60.0,
             Constants.Settings.AmplitudeThreshold: Float(0.1),
@@ -104,18 +120,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Constants.Settings.UserHopSizeOverride: Int(-12),
             Constants.Settings.UserPeakCountOverride: Int(-12),
             Constants.Settings.UserNoteThresholdOverride: Double(0.0),
-            Constants.Settings.UserLatencyOffsetThresholdOverride: Double(0.0)
-            ])
-        
-
+            Constants.Settings.UserLatencyOffsetThresholdOverride: Double(0.0),
+            Constants.Settings.SubsriptionStatusConfirmed: false,
+            Constants.Settings.SubsriptionHasBeenPurchased: false,
+            Constants.Settings.ConfirmedSubsExpiryDateAfter1970: Double(0.0)
+           ])
         
 /*
          Constants.Settings.MaxPlayingVolume: Double(0.0),
          Constants.Settings.PlayingVolumeSoundThreshold: Double(0.03),
          Constants.Settings.LastPlayingVolumeCheckDate: Double(0.0),
 */
-        
-        
         
         // hyarhyar   SFAUDIO
         //initialize data
@@ -154,27 +169,56 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
   //      AVAudioSessionManager.sharedInstance.setupAudioSession()
         
-        /*   Restore when really doing IAP
-        iapHelper.requestProducts {
+        //   Restore when really doing IAP
+        PlayTunesIAPProducts.store.requestProducts {
             [weak self] success, products in
             guard let products = products else { return }
             
+            PlayTunesIAPProducts.store.products = products
+            
             print(products.map {$0.productIdentifier})
+            
+            for oneSkProd in products {
+                if let oneSkProd = oneSkProd as SKProduct? {
+                    let currCode = oneSkProd.priceLocale.currencyCode
+                    var prodPriceString = ""
+                    if oneSkProd.localizedPrice != nil {
+                        prodPriceString = oneSkProd.localizedPrice!
+                    }
+                    let availIapPurchData =
+                        AvailableInAppPurchaseData(
+                            prodIdentifier:     oneSkProd.productIdentifier,
+                            prodDescription:    oneSkProd.localizedDescription,
+                            prodTitle:          oneSkProd.localizedTitle,
+                            prodPrice:          oneSkProd.price,
+                            prodPriceLocale:    oneSkProd.priceLocale,
+                            prodPriceStr:       prodPriceString)
+                    
+                    AvailIapPurchsMgr.sharedInstance.addOneInAppPurchaseData(data: availIapPurchData)
+                }
+            }
+    
+            AvailIapPurchsMgr.sharedInstance.printAvailableIAPPurcahasesData()
+            
+            // SwiftyStoreKit.completeTransactions() should be
+            // called once when the app launches.
+            
+//            SwiftyStoreKit.completeTransactions()
+            
+            PlayTunesIAPProducts.store.verifySubscription()
             
             if let prod1 = products.first  as SKProduct? {
                 print("\n-----------------------------------------------")
+                print("Product Title:         \(prod1.localizedTitle)")
                 print("Product Description:   \(prod1.localizedDescription)")
-                print("Product TItle:         \(prod1.localizedTitle)")
                 print("Product Price:         \(prod1.price)")
                 print("Product Price Locale:  \(prod1.priceLocale)")
                 print("Product Identifier:    \(prod1.productIdentifier)")
                 print("-----------------------------------------------\n")
-
             }
             print(products.map {$0.productIdentifier})
 
         }
-        */
         
         return true
     }
@@ -286,3 +330,57 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+extension AppDelegate: SKPaymentTransactionObserver {
+    
+    func paymentQueue(_ queue: SKPaymentQueue,
+                      updatedTransactions transactions: [SKPaymentTransaction]) {
+        
+        for transaction in transactions {
+            switch transaction.transactionState {
+            case .purchasing:
+                handlePurchasingState(for: transaction, in: queue)
+            case .purchased:
+                handlePurchasedState(for: transaction, in: queue)
+            case .restored:
+                handleRestoredState(for: transaction, in: queue)
+            case .failed:
+                handleFailedState(for: transaction, in: queue)
+            case .deferred:
+                handleDeferredState(for: transaction, in: queue)
+            }
+        }
+    }
+    
+    func handlePurchasingState(for transaction: SKPaymentTransaction, in queue: SKPaymentQueue) {
+        print("User is attempting to purchase product id: \(transaction.payment.productIdentifier)")
+    }
+    
+    func handlePurchasedState(for transaction: SKPaymentTransaction, in queue: SKPaymentQueue) {
+        print("User purchased product id: \(transaction.payment.productIdentifier)")
+        
+        queue.finishTransaction(transaction)
+//        SubscriptionService.shared.uploadReceipt { (success) in
+//            DispatchQueue.main.async {
+//                NotificationCenter.default.post(name: SubscriptionService.purchaseSuccessfulNotification, object: nil)
+//            }
+//        }
+    }
+    
+    func handleRestoredState(for transaction: SKPaymentTransaction, in queue: SKPaymentQueue) {
+        print("Purchase restored for product id: \(transaction.payment.productIdentifier)")
+        queue.finishTransaction(transaction)
+//        SubscriptionService.shared.uploadReceipt { (success) in
+//            DispatchQueue.main.async {
+//                NotificationCenter.default.post(name: SubscriptionService.restoreSuccessfulNotification, object: nil)
+//            }
+//        }
+    }
+    
+    func handleFailedState(for transaction: SKPaymentTransaction, in queue: SKPaymentQueue) {
+        print("Purchase failed for product id: \(transaction.payment.productIdentifier)")
+    }
+    
+    func handleDeferredState(for transaction: SKPaymentTransaction, in queue: SKPaymentQueue) {
+        print("Purchase deferred for product id: \(transaction.payment.productIdentifier)")
+    }
+}

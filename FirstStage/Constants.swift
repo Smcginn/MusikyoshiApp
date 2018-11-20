@@ -40,5 +40,8 @@ struct Constants
         static let UserHopSizeOverride = "userHopSizeOverride"
         static let UserPeakCountOverride = "userPeakCountOverride"
         static let UserLatencyOffsetThresholdOverride = "userLatencyOffsetThresholdOverride"
+        static let SubsriptionStatusConfirmed = "subsriptionStatusConfirmed"
+        static let SubsriptionHasBeenPurchased = "subsriptionHasBeenPurchased"
+        static let ConfirmedSubsExpiryDateAfter1970 = "confirmedSubsExpiryDateAfter1970"
     }
 }
