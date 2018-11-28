@@ -357,7 +357,6 @@
 		6D3AE150217A2C7D005ECC60 /* MicCalibrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3AE14E217A2C7D005ECC60 /* MicCalibrationViewController.swift */; };
 		6D431C1F21975EC4009DBBE9 /* PlayTunesIAPProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D431C1E21975EC4009DBBE9 /* PlayTunesIAPProducts.swift */; };
 		6D431C2021975EC4009DBBE9 /* PlayTunesIAPProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D431C1E21975EC4009DBBE9 /* PlayTunesIAPProducts.swift */; };
-		6D431C332198EA33009DBBE9 /* SwiftyStoreKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6D431C322198EA33009DBBE9 /* SwiftyStoreKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6D431C342198EA67009DBBE9 /* SwiftyStoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D431C322198EA33009DBBE9 /* SwiftyStoreKit.framework */; };
 		6D56674821A30C2600603DCD /* SKProduct+LocalizedPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D56673821A30C2600603DCD /* SKProduct+LocalizedPrice.swift */; };
 		6D56674921A30C4200603DCD /* SKProduct+LocalizedPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D56673821A30C2600603DCD /* SKProduct+LocalizedPrice.swift */; };
@@ -423,6 +422,7 @@
 		6D8E104D2131031D00B1B3B8 /* Current Arrow 36x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D8E104B2131031C00B1B3B8 /* Current Arrow 36x16.png */; };
 		6D8E104F213103DA00B1B3B8 /* Current Arrow 30x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D8E104E213103DA00B1B3B8 /* Current Arrow 30x16.png */; };
 		6D8E1050213103DA00B1B3B8 /* Current Arrow 30x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D8E104E213103DA00B1B3B8 /* Current Arrow 30x16.png */; };
+		6D9A93E121A5FFC000BB69B9 /* SwiftyStoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D431C322198EA33009DBBE9 /* SwiftyStoreKit.framework */; };
 		6DA1EA0E219377610069942D /* OneAvailableInAppPurchaseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA1EA0C219377600069942D /* OneAvailableInAppPurchaseView.xib */; };
 		6DA1EA0F219377610069942D /* OneAvailableInAppPurchaseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA1EA0C219377600069942D /* OneAvailableInAppPurchaseView.xib */; };
 		6DA1EA10219377610069942D /* OneAvailableInAppPurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA1EA0D219377610069942D /* OneAvailableInAppPurchaseView.swift */; };
@@ -741,7 +741,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6D431C332198EA33009DBBE9 /* SwiftyStoreKit.framework in Embed Frameworks */,
 				635A60A91EC6BADD0099154A /* AEXML.framework in Embed Frameworks */,
 				BDF308FB1F630AF500F0A819 /* SeeScoreLib.framework in Embed Frameworks */,
 			);
@@ -1172,6 +1171,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D9A93E121A5FFC000BB69B9 /* SwiftyStoreKit.framework in Frameworks */,
 				6DBF1F0A213E23D10052AD57 /* SwiftyJSON.framework in Frameworks */,
 				638FECC21EC70A1100976340 /* AEXML.framework in Frameworks */,
 				6D3AE14721779F2A005ECC60 /* StoreKit.framework in Frameworks */,
@@ -2721,7 +2721,7 @@
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/AudioKit.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftyJSON.framework",
-				"$(DERIVED_FILE_DIR)/$(SRCROOT)/Carthage/Build/iOS/SwiftyStoreKit.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftyStoreKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2751,10 +2751,13 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/AudioKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyStoreKit.framework",
 			);
 			name = "Copy Carthage Frameworks";
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/AudioKit.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftyJSON.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftyStoreKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -3140,6 +3143,7 @@
 				INFOPLIST_FILE = FirstStage/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.musikyoshi.playtunes;
 				PRODUCT_NAME = PlayTunes;
@@ -3173,6 +3177,7 @@
 				INFOPLIST_FILE = FirstStage/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.musikyoshi.playtunes;
 				PRODUCT_NAME = PlayTunes;
@@ -3253,10 +3258,7 @@
 				INFOPLIST_FILE = FirstStage/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS/SwiftyStoreKit.framework",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.musikyoshi.playtunes;
 				PRODUCT_NAME = PlayTunes;
@@ -3289,10 +3291,7 @@
 				INFOPLIST_FILE = FirstStage/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS/SwiftyStoreKit.framework",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.musikyoshi.playtunes;
 				PRODUCT_NAME = PlayTunes;

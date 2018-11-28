@@ -249,7 +249,7 @@ class InAppPurchasesViewController: UIViewController {
     var durationText = ""
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        self.title = ""
+        //self.title = ""
         
         if segue.identifier == kshowAUtoRenewDetailsSegueID {
             if let destination = segue.destination as? AutoRenewNotificationViewController {
@@ -345,9 +345,38 @@ class InAppPurchasesViewController: UIViewController {
         ac.addAction(UIAlertAction(title: "OK", style: .default,
                                    handler: alreadyPurchasedHandler))
         self.present(ac, animated: true, completion: nil)
+        
+        let when = DispatchTime.now() + 2
+        DispatchQueue.main.asyncAfter(deadline: when){
+            // your code with delay
+            ac.dismiss(animated: true, completion: nil)
+        }
+//        close(alert: ac, after: 2.0)
     }
     
+//    @IBAction func aBasicMessageAlert(sender: AnyObject) {
+//        let sweetAlert = SweetAlert().showAlert("Here's a message!")
+//
+//        close(sweetAlert, after: 2.0)
+//    }
     
+    
+//    func close(alert: MyUIAlertController, after seconds: Double) {
+//        Timer.scheduledTimerWithTimeInterval(seconds,
+//                                               target: self,
+//                                               selector: #selector(closeAlert),
+//                                               userInfo: ["alert": alert],
+//                                               repeats: true)
+//    }
+//
+//    func closeAlert(timer: Timer) {
+//        if let alert = timer.userInfo!["alert"] as? MyUIAlertController
+//        {
+//            let dummyCloseButton = UIButton()
+//            dummyCloseButton.tag = 0
+//            alert.pressed(dummyCloseButton)
+//        }
+//    }
     
     
     @objc func iapRestoreBtnPressed(sender: iapPurchaseButton) {

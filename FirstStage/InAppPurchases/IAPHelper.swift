@@ -505,7 +505,7 @@ let kSharedSecret = "514965e34b3d45d3ae8bb32398ea0782"
 
 extension IAPHelper {
     
-    func verifySubscription() {
+    func verifySubscription(showAlerts: Bool = true) {
         let appleValidator = AppleReceiptValidator(service: .production,
                                                    sharedSecret: kSharedSecret)
 //        backupPurchStatus()
@@ -651,20 +651,38 @@ extension IAPHelper {
                 self.restorePurchStatusFromBackup()
 //                self.purchaseStatus.state = .errorGettingReceipts
                 print("Receipt verification failed: \(error)")
-                let titleString = "Unable to get Subscription Data from iTunes"
                 
-                // FIXME - figure out how to get the text I'm looking for, localized
-                var errString = "\(error)"
-                if errString.contains("annot connect to iTunes") {
-                    errString = "Cannot connect to iTunes Store"
-                } else {
-                    errString = "Network error"
+                if showAlerts {
+    //                let titleString = "Unable to get Subscription Data from iTunes"
+                    
+                    // FIXME - figure out how to get the text I'm looking for, localized
+//                    var errString = "\(error)"
+//                    if errString.contains("annot connect to iTunes") {
+//                        errString = "Cannot connect to iTunes Store"
+//                    } else {
+//                        errString = "Network error"
+//                    }
+//
+                    let errString = "\(error)"
+                    var titleString = ""
+                    if errString.contains("annot connect to iTunes") {
+                        titleString = "Cannot connect to iTunes Store"
+                    } else {
+                        titleString = "Network error"
+                    }
+                    
+                    var msgStr = "\nPlayTunes cannot verify if you have a valid subscription, "
+                    msgStr += "because we are unable to get Subscription Data from iTunes.\n\n"
+                    msgStr += "You can always access the first two Levels in PlayTunes for free! And you are not required to be signed in to iTunes.\n\n"
+                    msgStr += "If you want to explore the upper Levels, you will need a verifiable subscription to Playtunes."
+                    
+                    
+    //                if let err = error as NSError?,
+    //                    let localizedDescription = error.localizedDescription {
+    //                    errString = localizedDescription
+    //                }
+                    displayErrorAlert(titleStr: titleString, errStr: msgStr)
                 }
-//                if let err = error as NSError?,
-//                    let localizedDescription = error.localizedDescription {
-//                    errString = localizedDescription
-//                }
-                displayErrorAlert(titleStr: titleString, errStr: errString)
                 
                 if self.respondingToRestoreRequest {
                     displayRestoreStatusAlert(result: .networkError)
@@ -803,7 +821,7 @@ extension IAPHelper: SKPaymentTransactionObserver {
         }
         msg = "\nTry Again in a while.\n"
 
-        let alertController = UIAlertController(title: "Failed Transaction", message: "msg", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Failed Transaction", message: "\n\nUnable to complete the transaction.", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
           alertController.show(animated: true, completion: nil )
         

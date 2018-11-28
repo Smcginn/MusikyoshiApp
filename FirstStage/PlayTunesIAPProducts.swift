@@ -13,8 +13,8 @@ import Foundation
 let kUsingSubScript_1W_toss = false
 
 let SubScript_1W_toss: ProductIdentifier = "com.musikyoshi.playtunes.PT001_EN_1W_SUB_toss"
-let SubScript_1M: ProductIdentifier = "com.musikyoshi.playtunes.PT001_EN_1M_SUB"
-let SubScript_6M: ProductIdentifier = "com.musikyoshi.playtunes.PT001_EN_6M_SUB"
+let SubScript_1M: ProductIdentifier = "com.musikyoshi.playtunes.PTB01_EN_1M_SUB"
+let SubScript_6M: ProductIdentifier = "com.musikyoshi.playtunes.PTB01_EN_6M_SUB"
 
 public struct PlayTunesIAPProducts {
     

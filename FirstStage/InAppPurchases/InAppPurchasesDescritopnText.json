@@ -5,7 +5,7 @@
   "knownIapPurchaseOptions":[
   {
      "One IAP Comment":"Trumpet, English, One Month, $9.99 per month",
-     "ProductID":"com.musikyoshi.playtunes.PT001_EN_1M_SUB",
+     "ProductID":"com.musikyoshi.playtunes.PTB01_EN_1M_SUB",
      "Title":"One Month Subscription",
      "Language":"English",
      "Instrument":"Trumpet",
@@ -21,13 +21,15 @@
         },{
              "oneLine":"- Access to all Levels\n"
         },{
-             "oneLine":"- Auto-renewing\n"
+             "oneLine":"- Auto-renewing\n\n"
         },{
-             "oneLine":"  (You may cancel at any time)"
+             "oneLine":"    (Full Subscription details\n"
+        },{
+             "oneLine":"     on Confirm Purchase Page)"
         }]
   },{
      "One IAP Comment":"Trumpet, English, Six Month, $49.99",
-     "ProductID":"com.musikyoshi.playtunes.PT001_EN_6M_SUB",
+     "ProductID":"com.musikyoshi.playtunes.PTB01_EN_6M_SUB",
      "Title":"Six Month Subscription",
      "Language":"English",
      "Instrument":"Trumpet",
@@ -43,32 +45,12 @@
         },{
             "oneLine":"- Access to all Levels\n"
         },{
-            "oneLine":"- Auto-renewing\n"
+            "oneLine":"- Auto-renewing\n\n"
         },{
-            "oneLine":"  (You may cancel at any time)"
+             "oneLine":"    (Full Subscription details\n"
+        },{
+             "oneLine":"     on Confirm Purchase Page)"
         }]
- },{
-     "One IAP Comment":"Trumpet, English, One Week, $2.99",
-     "ProductID":"com.musikyoshi.playtunes.PT001_EN_1W_SUB_toss",
-     "Title":"One Week Subscription",
-     "Language":"English",
-     "Instrument":"Trumpet",
-     "PurchaseType1":"One Week Subscription",
-     "PurchaseType2":"",
-     "OverviewText":[
-                     {
-                     "oneLine":"Playtunes for Trumpet\n\n"
-                     },{
-                     "oneLine":"- One Week subscription\n"
-                     },{
-                     "oneLine":"- Video Help in English\n"
-                     },{
-                     "oneLine":"- Access to all Levels\n"
-                     },{
-                     "oneLine":"- Auto-renewing\n"
-                     },{
-                     "oneLine":"  (You may cancel at any time)"
-                     }]
-  }                             
+  }
   ]
 }

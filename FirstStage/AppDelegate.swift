@@ -200,12 +200,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
             AvailIapPurchsMgr.sharedInstance.printAvailableIAPPurcahasesData()
             
-            // SwiftyStoreKit.completeTransactions() should be
-            // called once when the app launches.
-            
-//            SwiftyStoreKit.completeTransactions()
-            
-            PlayTunesIAPProducts.store.verifySubscription()
+            // If they have previously purchased, and the subs seems to have expired,
+            // then we should try to see if the subscription has been updated.
+            // But if they've never purchased, then don't scare them off with an
+            // insistance to log into iTunes - this might seem suspicious.
+            if PlayTunesIAPProducts.store.userDefsStoredSubscStatusIsKnown()    &&
+               PlayTunesIAPProducts.store.userDefsStoredSubscHasBeenPurchased() &&
+               !PlayTunesIAPProducts.store.subscriptionGood() {
+                  // If here, then stored info shows previous purchase has expired.
+                  // Need to see if it's been updated since last call to verify.
+                  PlayTunesIAPProducts.store.verifySubscription() // showAlerts: false)
+            }
             
             if let prod1 = products.first  as SKProduct? {
                 print("\n-----------------------------------------------")

@@ -75,12 +75,12 @@ class VideoHelpView: UIView {
         
         let comingSoonX  = 100.0
         let comingSoonY  =  50.0
-        let comingSoonHt =  35.0
+        let comingSoonHt =  70.0
         let comingSoonWd = 300.0
         let cmngSoonFrame = CGRect( x: comingSoonX , y: comingSoonY,
                                     width: comingSoonWd, height: comingSoonHt )
         comingSoonLabel = UILabel(frame: cmngSoonFrame)
-        let comingSoonStr = "Coming Soon, a Video About:"
+        let comingSoonStr = "There was an issue with that Note:"
         let comingSoonAttrStr =
             NSMutableAttributedString( string: comingSoonStr,
                                        attributes: [NSAttributedStringKey.font:UIFont(
@@ -88,6 +88,7 @@ class VideoHelpView: UIView {
                                        size: 24.0)!])
         comingSoonLabel?.attributedText  = comingSoonAttrStr
         comingSoonLabel?.textColor = UIColor.yellow
+        comingSoonLabel?.numberOfLines = 2
         self.addSubview(comingSoonLabel!)
         
         /////////////////////////////////////////////////////////////////
