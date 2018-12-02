@@ -40,6 +40,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var ChallengeBtn: UIButton!
     @IBOutlet weak var purchaseOptionsBtn: UIButton!
     
+    var didDisplayOverview = false
+    
     @IBAction func purchaseOptionsBtn_Pressed(_ sender: Any) {
         
         
@@ -54,6 +56,7 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func OverviewBtnPressed(_ sender: Any) {
+        displayWellcomeVC()
     }
     
     @IBOutlet weak var debugStuffOnBtn: UIButton!
@@ -150,6 +153,16 @@ class HomeViewController: UIViewController {
         if (!versionsEqual) {
             displayDBCompatibilityAlert()
         }
+        
+        if !didDisplayOverview {
+            displayWellcomeVC()
+            didDisplayOverview = true
+        }
+    }
+    
+    let showWellcomeVCSegueID = "showWellcomeVCSegue"
+    func displayWellcomeVC() {
+        performSegue(withIdentifier: showWellcomeVCSegueID, sender: nil)
     }
     
     func deleteCurrentDBAndRebuild(_ act: UIAlertAction) {
@@ -189,9 +202,7 @@ class HomeViewController: UIViewController {
         LessonsBtn.titleLabel?.attributedText = lessonsTxt
         LessonsBtn.setTitleColor(kDefault_ButtonTextColor, for: .normal)
         
-        
-        
-        // Lessons Button
+        // Purchase Options Button
         purchaseOptionsBtn.roundedButton()
         purchaseOptionsBtn.backgroundColor = kDefault_ButtonBckgrndColor
         let purchaseOptionsTxt = createAttributedText(str: "Purchase Options",
@@ -210,13 +221,13 @@ class HomeViewController: UIViewController {
         ResumePracticeSessionBtn.setTitleColor(UIColor.lightText, for: .disabled)
         
         // Overview Button
-        OverviewBtn.isEnabled = false
+        OverviewBtn.isEnabled = true
         OverviewBtn.roundedButton()
         OverviewBtn.backgroundColor = kDefault_ButtonBckgrndColor
         let overviewTxt = createAttributedText(str: "Overview",
-                                               fontSize: 16)
+                                               fontSize: 20)
         OverviewBtn.titleLabel?.attributedText = overviewTxt
-        OverviewBtn.setTitleColor(UIColor.lightText, for: .disabled)
+        OverviewBtn.setTitleColor(kDefault_ButtonTextColor, for: .normal)
         
         // My Profile Button
         MyProfileBtn.isEnabled = false

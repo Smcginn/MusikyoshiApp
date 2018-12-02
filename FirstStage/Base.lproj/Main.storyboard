@@ -56,7 +56,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="hOC-AT-tf6">
-                                <rect key="frame" x="112" y="62" width="96" height="96.5"/>
+                                <rect key="frame" x="112" y="62" width="96" height="96"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="hOC-AT-tf6" secondAttribute="height" multiplier="1:1" id="D6f-4T-dPb"/>
                                 </constraints>
@@ -382,7 +382,7 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NTD-Xt-YYd">
-                                <rect key="frame" x="50" y="400" width="220" height="30"/>
+                                <rect key="frame" x="50" y="423" width="220" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="LAq-6v-GFQ"/>
                                     <constraint firstAttribute="width" constant="220" id="do4-Ac-Oqh"/>
@@ -390,18 +390,18 @@
                                 <state key="normal" title="My Profile"/>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BDb-dZ-vVo">
-                                <rect key="frame" x="50" y="438" width="220" height="30"/>
+                                <rect key="frame" x="50" y="461" width="220" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="VXz-Q1-jFv"/>
                                     <constraint firstAttribute="width" constant="220" id="Vih-7w-ks0" userLabel="width = 220"/>
                                 </constraints>
                                 <state key="normal" title="Challenge Another Player!"/>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LrS-pT-5FI">
-                                <rect key="frame" x="50" y="361" width="220" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LrS-pT-5FI">
+                                <rect key="frame" x="50" y="361" width="220" height="53"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="53" id="1vw-nO-gda"/>
                                     <constraint firstAttribute="width" constant="220" id="8fe-k5-nGy" userLabel="width = 220"/>
-                                    <constraint firstAttribute="height" constant="30" id="N1f-Vn-I91"/>
                                 </constraints>
                                 <state key="normal" title="Overview"/>
                                 <connections>
@@ -444,7 +444,7 @@
                                 </connections>
                             </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Gray buttons are options coming soon)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sIz-GN-DzK">
-                                <rect key="frame" x="31.5" y="529" width="257" height="17"/>
+                                <rect key="frame" x="31.5" y="552" width="257" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -526,11 +526,12 @@
                         <outlet property="settingEnabledBtn" destination="hGT-le-EpP" id="BM1-7L-wfd"/>
                         <outlet property="shareButton" destination="afw-eA-b0d" id="oPB-I3-7xL"/>
                         <outlet property="startLessonBtn" destination="jE4-qC-R85" id="elm-Lp-l8t"/>
+                        <segue destination="Kwm-gV-5F0" kind="presentation" identifier="showWellcomeVCSegue" id="0Cu-ys-7Ou"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5ro-iP-5WA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2004.375" y="789.08450704225356"/>
+            <point key="canvasLocation" x="2003.90625" y="788.671875"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jfZ-bl-Xfu">
@@ -724,7 +725,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s9d-2x-Uuk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2439.1999999999998" y="2504.7976011994006"/>
+            <point key="canvasLocation" x="1650" y="2899"/>
         </scene>
         <!--Mic Calibration View Controller-->
         <scene sceneID="atM-J3-l6K">
@@ -876,7 +877,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qOj-zB-ghu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3435" y="2118"/>
+            <point key="canvasLocation" x="3150" y="2707"/>
         </scene>
         <!--IsA Sound View Controller-->
         <scene sceneID="buK-CN-gLu">
@@ -1133,7 +1134,132 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9fV-iR-K5R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1384" y="2882"/>
+            <point key="canvasLocation" x="122" y="2592"/>
+        </scene>
+        <!--Welcome View Controller-->
+        <scene sceneID="OTD-h9-6n2">
+            <objects>
+                <viewController id="Kwm-gV-5F0" customClass="WelcomeViewController" customModule="PlayTunes" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="KQV-pU-fZ3"/>
+                        <viewControllerLayoutGuide type="bottom" id="btt-6A-a9V"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xDr-a7-tUQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome To PlayTunes!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yAo-1o-zC8">
+                                <rect key="frame" x="0.0" y="39" width="320" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dnm-TC-sOh">
+                                <rect key="frame" x="0.0" y="79" width="320" height="324"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="How To Use PlayTunes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z5Z-Ia-oeh">
+                                        <rect key="frame" x="14" y="7" width="205" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zbu-Ej-XFN">
+                                        <rect key="frame" x="20" y="34" width="300" height="227"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Try Out PlayTunes For Free!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SHo-S8-1M0">
+                                        <rect key="frame" x="14" y="283" width="288" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RYl-Lj-dcb">
+                                        <rect key="frame" x="20" y="306" width="292" height="117"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="To Access PlayTunes' Upper Levels" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mdn-Aj-fap">
+                                        <rect key="frame" x="14" y="443" width="328" height="65"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QKi-Vi-q9F">
+                                        <rect key="frame" x="20" y="506" width="292" height="277"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.92493986964849662" green="0.9574704449156225" blue="0.96620899438858032" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4LQ-Id-f0c">
+                                <rect key="frame" x="16" y="504" width="108" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="108" id="FCn-ag-t63"/>
+                                    <constraint firstAttribute="height" constant="30" id="YbQ-1I-vIK"/>
+                                </constraints>
+                                <state key="normal" title="Privacy Policy"/>
+                                <connections>
+                                    <action selector="privacyPolicyBtnPressed:" destination="Kwm-gV-5F0" eventType="touchUpInside" id="Mma-GD-rR9"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IOQ-Fl-ps3">
+                                <rect key="frame" x="213" y="504" width="91" height="30"/>
+                                <state key="normal" title="Terms of Use"/>
+                                <connections>
+                                    <action selector="termsOfUseBtnPressed:" destination="Kwm-gV-5F0" eventType="touchUpInside" id="DiC-WU-SFG"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cCq-He-4UW">
+                                <rect key="frame" x="124" y="526" width="72" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="2nU-gm-YNl"/>
+                                    <constraint firstAttribute="width" constant="72" id="FpE-Uy-sfe"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="OK"/>
+                                <connections>
+                                    <action selector="okayBtnPressed:" destination="Kwm-gV-5F0" eventType="touchUpInside" id="tM8-FC-miX"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.7944735585829904" green="0.92304615121458511" blue="0.98226100206375122" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="btt-6A-a9V" firstAttribute="top" secondItem="4LQ-Id-f0c" secondAttribute="bottom" constant="34" id="CXe-8m-e6b"/>
+                            <constraint firstItem="btt-6A-a9V" firstAttribute="top" secondItem="cCq-He-4UW" secondAttribute="bottom" constant="8" id="ZhR-9v-D2e"/>
+                            <constraint firstItem="IOQ-Fl-ps3" firstAttribute="leading" secondItem="cCq-He-4UW" secondAttribute="trailing" constant="17" id="lBZ-nM-tem"/>
+                            <constraint firstItem="4LQ-Id-f0c" firstAttribute="leading" secondItem="xDr-a7-tUQ" secondAttribute="leadingMargin" id="rf9-bs-Wwf"/>
+                            <constraint firstItem="cCq-He-4UW" firstAttribute="leading" secondItem="4LQ-Id-f0c" secondAttribute="trailing" id="sVb-hd-l8d"/>
+                            <constraint firstItem="btt-6A-a9V" firstAttribute="top" secondItem="IOQ-Fl-ps3" secondAttribute="bottom" constant="34" id="ywF-gG-ItL"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="WelcomeTitleLabel" destination="yAo-1o-zC8" id="G2J-c5-hMA"/>
+                        <outlet property="accessUpperLevelsDetailLabel" destination="QKi-Vi-q9F" id="ZjF-Bt-hwj"/>
+                        <outlet property="accessUpperLevelsLabel" destination="Mdn-Aj-fap" id="G4x-s2-Mt7"/>
+                        <outlet property="howToUseDetailsLabel" destination="Zbu-Ej-XFN" id="mZN-xk-PCn"/>
+                        <outlet property="howToUsePTLabel" destination="z5Z-Ia-oeh" id="VuP-Nb-Y1V"/>
+                        <outlet property="privacyPolicyBtn" destination="4LQ-Id-f0c" id="BTr-Kl-eSm"/>
+                        <outlet property="scrollView" destination="Dnm-TC-sOh" id="jcX-Nr-RIj"/>
+                        <outlet property="tryOutPTForFreeDetailsLabel" destination="RYl-Lj-dcb" id="MmT-QQ-g4j"/>
+                        <outlet property="tryOutPTForFreeLabel" destination="SHo-S8-1M0" id="BtN-vp-Pnw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hSt-9S-AxZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="983.59375" y="1704.4921875"/>
         </scene>
         <!--In App Purchases View Controller-->
         <scene sceneID="te3-BD-DPB">
@@ -1181,7 +1307,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8mK-ad-bk0" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="okp-kc-7QU" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2036.25" y="1530.6338028169014"/>
+            <point key="canvasLocation" x="2004" y="1728"/>
         </scene>
         <!--Auto Renew Notification View Controller-->
         <scene sceneID="eoz-dc-pd9">
@@ -1329,7 +1455,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cld-1o-IyT" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="wuX-uU-oVr" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2715" y="1523.2394366197184"/>
+            <point key="canvasLocation" x="2704" y="1727"/>
         </scene>
         <!--Long Tone-->
         <scene sceneID="Vqe-FU-GXQ">
@@ -1373,14 +1499,14 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HW3-S8-AdL" userLabel="Note View">
-                                        <rect key="frame" x="8" y="48" width="93" height="319.5"/>
+                                        <rect key="frame" x="8" y="48" width="93" height="320"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yVn-Ix-Nrl" userLabel="SSScroll View" customClass="SSScrollView">
-                                                <rect key="frame" x="0.0" y="0.0" width="93" height="319.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="93" height="320"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </view>
                                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4f6-qK-973" customClass="SparkLine" customModule="PlayTunes" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="93" height="319.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="93" height="320"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to hear the note" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UjT-HK-DSS">
                                                         <rect key="frame" x="0.0" y="0.0" width="93" height="21"/>
@@ -2074,7 +2200,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PSh-mK-rpA" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="LJd-3b-TSz" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4885.5633802816901" y="648.75"/>
+            <point key="canvasLocation" x="4948" y="792"/>
         </scene>
         <!--Settings-->
         <scene sceneID="RD1-cj-oyy">
@@ -2386,7 +2512,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4cq-Nn-Kg0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1384" y="2084"/>
+            <point key="canvasLocation" x="313" y="1705"/>
         </scene>
     </scenes>
     <resources>
