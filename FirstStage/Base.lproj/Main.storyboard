@@ -1156,7 +1156,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dnm-TC-sOh">
-                                <rect key="frame" x="0.0" y="79" width="320" height="324"/>
+                                <rect key="frame" x="0.0" y="79" width="320" height="1215"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="How To Use PlayTunes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z5Z-Ia-oeh">
@@ -1195,9 +1195,16 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QKi-Vi-q9F">
-                                        <rect key="frame" x="20" y="506" width="292" height="277"/>
+                                        <rect key="frame" x="20" y="506" width="292" height="298"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rxb-ZA-m2g">
+                                        <rect key="frame" x="20" y="812" width="292" height="433"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -1253,13 +1260,14 @@
                         <outlet property="howToUsePTLabel" destination="z5Z-Ia-oeh" id="VuP-Nb-Y1V"/>
                         <outlet property="privacyPolicyBtn" destination="4LQ-Id-f0c" id="BTr-Kl-eSm"/>
                         <outlet property="scrollView" destination="Dnm-TC-sOh" id="jcX-Nr-RIj"/>
+                        <outlet property="subsDetailLabel" destination="rxb-ZA-m2g" id="Hud-hg-VWz"/>
                         <outlet property="tryOutPTForFreeDetailsLabel" destination="RYl-Lj-dcb" id="MmT-QQ-g4j"/>
                         <outlet property="tryOutPTForFreeLabel" destination="SHo-S8-1M0" id="BtN-vp-Pnw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hSt-9S-AxZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="983.59375" y="1704.4921875"/>
+            <point key="canvasLocation" x="983.20312499999989" y="1703.8067349926791"/>
         </scene>
         <!--In App Purchases View Controller-->
         <scene sceneID="te3-BD-DPB">
