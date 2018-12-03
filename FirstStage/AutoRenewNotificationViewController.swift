@@ -22,18 +22,21 @@ class AutoRenewNotificationViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     
     @IBAction func privacyPolicyBtnPressed(_ sender: Any) {
-        
-        if let url = URL(string: "https:www.musikyoshi.com/privacy-policy") {
+        if let url = URL(string: kMKPrivacyPolicyURL) {
             UIApplication.shared.open(url, options:[:])
         }
     }
     
     @IBAction func termsAndConditionsBtnPressed(_ sender: Any) {
-        showTermsAndConditionsAlert()
+        if let url = URL(string: kMKTermsOfUseURL) {
+            UIApplication.shared.open(url, options:[:])
+        }
+        
+        // showTermsAndConditionsAlert()
     }
     
     func showApplesEULAHandler(_ act: UIAlertAction) {
-        if let url = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/") {
+        if let url = URL(string: kMKTermsOfUseURL) {
             UIApplication.shared.open(url, options:[:])
         }
     }

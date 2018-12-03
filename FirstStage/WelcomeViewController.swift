@@ -27,11 +27,20 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var accessUpperLevelsDetailLabel: UILabel!
     @IBOutlet weak var subsDetailLabel: UILabel!
     
+    // OK, Privacy Policy, and Terms of Use buttons are in this view
+    @IBOutlet weak var bottomButtonsEnclosingView: UIView!
+    
     @IBOutlet weak var privacyPolicyBtn: UIButton!
     @IBAction func privacyPolicyBtnPressed(_ sender: Any) {
+        if let privPolicyURL = URL(string: kMKPrivacyPolicyURL) {
+            UIApplication.shared.open(privPolicyURL, options:[:])
+        }
     }
     
     @IBAction func termsOfUseBtnPressed(_ sender: Any) {
+        if let termsURL = URL(string: kMKTermsOfUseURL) {
+            UIApplication.shared.open(termsURL, options:[:])
+        }
     }
     
     @IBAction func okayBtnPressed(_ sender: Any) {
@@ -64,7 +73,7 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
         
         tryOutPTForFreeDetailsLabel.text = tryOutDetText
 
-        var subDetailText = "When you see how amazing PlayTunes is, if you want to use the upper levels, you will need to purchase a PlayTunes All-Level Access Subscription through iTunes.\n\n"
+        var subDetailText = "In order to get access to the 500 exercises in the upper levels, you will need to purchase a PlayTunes All-Level Access Subscription through iTunes.\n\n"
         subDetailText += "PlayTunes offers 1-month ($9.99 per month) and 6-month ($49.99 for 6 months) Auto-Renewing Subscriptions.\n\n"
         subDetailText += "Select 'Purchase Options' to choose and purchase an available Subscription."
 
@@ -110,7 +119,7 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLayoutSubviews()
         
         // Had some issues trying to set ScrollView dims unless doing it here
-        let bottomOfScrollView = privacyPolicyBtn.frame.origin.y - 10
+        let bottomOfScrollView = bottomButtonsEnclosingView.frame.origin.y - 10
         let topOfScrollView = scrollView.frame.origin.y
         let scrollViewHt = bottomOfScrollView - topOfScrollView
         scrollView.frame.size.height = scrollViewHt

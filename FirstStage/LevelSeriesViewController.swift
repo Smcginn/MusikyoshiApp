@@ -15,8 +15,8 @@ import Foundation
 import SwiftyJSON
 import AudioKit
 
-let doOverrideSubsPresent = false
-let doLimitLevels = true
+var gDoOverrideSubsPresent = false
+var gDoLimitLevels = true
 let kNumberOfLevelsToShow: Int = 10
 
 
@@ -115,7 +115,7 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
     }
 
     func assessPurchaseStatus() {
-        if doOverrideSubsPresent {
+        if gDoOverrideSubsPresent {
             allowAllLevelAccess = true
             return
         }
@@ -205,7 +205,7 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if doLimitLevels {
+        if gDoLimitLevels {
             return kNumberOfLevelsToShow
         }
         
@@ -218,7 +218,7 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         var retStr = ""
         
-        if doLimitLevels && section > kNumberOfLevelsToShow {
+        if gDoLimitLevels && section > kNumberOfLevelsToShow {
             itsBad()
             return retStr
         }
@@ -233,7 +233,7 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard levelsJson != nil else { return 0 }
-        if doLimitLevels && section > kNumberOfLevelsToShow {
+        if gDoLimitLevels && section > kNumberOfLevelsToShow {
             itsBad()
             return 0
         }
@@ -265,7 +265,7 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if doLimitLevels && section > kNumberOfLevelsToShow {
+        if gDoLimitLevels && section > kNumberOfLevelsToShow {
             itsBad()
             return nil
         }
@@ -424,7 +424,7 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
         let section = indexPath.section
 //        let row = indexPath.row
         
-        if doLimitLevels && section > kNumberOfLevelsToShow {
+        if gDoLimitLevels && section > kNumberOfLevelsToShow {
             itsBad()
             return cell
         }

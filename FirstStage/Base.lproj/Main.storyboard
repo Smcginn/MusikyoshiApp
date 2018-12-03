@@ -474,6 +474,16 @@
                                     <segue destination="I2J-hZ-Jjc" kind="show" id="9h1-U6-YxL"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pFq-V2-wfo">
+                                <rect key="frame" x="105" y="223" width="110" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="hRS-xn-ImG"/>
+                                    <constraint firstAttribute="width" constant="110" id="lyJ-2A-IOg"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -481,6 +491,7 @@
                             <constraint firstItem="YPO-No-xbE" firstAttribute="centerX" secondItem="z9N-t8-Sk5" secondAttribute="centerX" id="1Mb-CF-IIK"/>
                             <constraint firstItem="z9N-t8-Sk5" firstAttribute="top" secondItem="CLD-az-kyB" secondAttribute="bottom" constant="70" id="2aM-mv-Ocn"/>
                             <constraint firstItem="BDb-dZ-vVo" firstAttribute="top" secondItem="NTD-Xt-YYd" secondAttribute="bottom" constant="8" id="5yc-Ry-ttq"/>
+                            <constraint firstItem="pFq-V2-wfo" firstAttribute="top" secondItem="jE4-qC-R85" secondAttribute="bottom" constant="5" id="7Go-w0-sse"/>
                             <constraint firstItem="CLD-az-kyB" firstAttribute="leading" secondItem="5p2-vT-b29" secondAttribute="leadingMargin" id="7f4-QM-ACO"/>
                             <constraint firstItem="CLD-az-kyB" firstAttribute="top" secondItem="BXm-im-uHx" secondAttribute="bottom" constant="8" id="8Tu-wD-2Hp"/>
                             <constraint firstItem="zZ0-6y-VII" firstAttribute="top" secondItem="goz-4Z-8U1" secondAttribute="bottom" id="Aox-V4-Cm2"/>
@@ -521,6 +532,7 @@
                         <outlet property="OverviewBtn" destination="LrS-pT-5FI" id="ms0-vM-ea9"/>
                         <outlet property="ResumePracticeSessionBtn" destination="YPO-No-xbE" id="zBR-Bo-nWP"/>
                         <outlet property="debugStuffOnBtn" destination="goz-4Z-8U1" id="c7r-GR-3Wt"/>
+                        <outlet property="hiddenPswdTextField" destination="pFq-V2-wfo" id="jVI-LT-xdY"/>
                         <outlet property="progressPanelView" destination="CLD-az-kyB" id="h1Z-qM-K18"/>
                         <outlet property="purchaseOptionsBtn" destination="MXO-Ew-d3v" id="VGI-Gd-KOH"/>
                         <outlet property="settingEnabledBtn" destination="hGT-le-EpP" id="BM1-7L-wfd"/>
@@ -531,7 +543,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5ro-iP-5WA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2003.90625" y="788.671875"/>
+            <point key="canvasLocation" x="2002.5" y="788.02816901408448"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jfZ-bl-Xfu">
@@ -1148,16 +1160,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome To PlayTunes!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yAo-1o-zC8">
-                                <rect key="frame" x="0.0" y="39" width="320" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome To PlayTunes!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yAo-1o-zC8">
+                                <rect key="frame" x="39" y="39" width="242" height="27"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dnm-TC-sOh">
-                                <rect key="frame" x="0.0" y="79" width="320" height="1215"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dnm-TC-sOh">
+                                <rect key="frame" x="352" y="81" width="320" height="1215"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="How To Use PlayTunes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z5Z-Ia-oeh">
                                         <rect key="frame" x="14" y="7" width="205" height="21"/>
@@ -1210,52 +1220,61 @@
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.92493986964849662" green="0.9574704449156225" blue="0.96620899438858032" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="8wC-2h-avA"/>
+                                </constraints>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4LQ-Id-f0c">
-                                <rect key="frame" x="16" y="504" width="108" height="30"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZKQ-G7-1hP">
+                                <rect key="frame" x="0.0" y="499" width="320" height="69"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IOQ-Fl-ps3">
+                                        <rect key="frame" x="221" y="0.0" width="91" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Terms of Use"/>
+                                        <connections>
+                                            <action selector="termsOfUseBtnPressed:" destination="Kwm-gV-5F0" eventType="touchUpInside" id="DiC-WU-SFG"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4LQ-Id-f0c">
+                                        <rect key="frame" x="8" y="0.0" width="108" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Privacy Policy"/>
+                                        <connections>
+                                            <action selector="privacyPolicyBtnPressed:" destination="Kwm-gV-5F0" eventType="touchUpInside" id="Mma-GD-rR9"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cCq-He-4UW">
+                                        <rect key="frame" x="124" y="24" width="72" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="OK"/>
+                                        <connections>
+                                            <action selector="okayBtnPressed:" destination="Kwm-gV-5F0" eventType="touchUpInside" id="tM8-FC-miX"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="108" id="FCn-ag-t63"/>
-                                    <constraint firstAttribute="height" constant="30" id="YbQ-1I-vIK"/>
+                                    <constraint firstAttribute="height" constant="69" id="fGd-2j-ttz"/>
+                                    <constraint firstAttribute="width" constant="320" id="uY4-jo-vHG"/>
                                 </constraints>
-                                <state key="normal" title="Privacy Policy"/>
-                                <connections>
-                                    <action selector="privacyPolicyBtnPressed:" destination="Kwm-gV-5F0" eventType="touchUpInside" id="Mma-GD-rR9"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IOQ-Fl-ps3">
-                                <rect key="frame" x="213" y="504" width="91" height="30"/>
-                                <state key="normal" title="Terms of Use"/>
-                                <connections>
-                                    <action selector="termsOfUseBtnPressed:" destination="Kwm-gV-5F0" eventType="touchUpInside" id="DiC-WU-SFG"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cCq-He-4UW">
-                                <rect key="frame" x="124" y="526" width="72" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="2nU-gm-YNl"/>
-                                    <constraint firstAttribute="width" constant="72" id="FpE-Uy-sfe"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="OK"/>
-                                <connections>
-                                    <action selector="okayBtnPressed:" destination="Kwm-gV-5F0" eventType="touchUpInside" id="tM8-FC-miX"/>
-                                </connections>
-                            </button>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.7944735585829904" green="0.92304615121458511" blue="0.98226100206375122" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="btt-6A-a9V" firstAttribute="top" secondItem="4LQ-Id-f0c" secondAttribute="bottom" constant="34" id="CXe-8m-e6b"/>
-                            <constraint firstItem="btt-6A-a9V" firstAttribute="top" secondItem="cCq-He-4UW" secondAttribute="bottom" constant="8" id="ZhR-9v-D2e"/>
-                            <constraint firstItem="IOQ-Fl-ps3" firstAttribute="leading" secondItem="cCq-He-4UW" secondAttribute="trailing" constant="17" id="lBZ-nM-tem"/>
-                            <constraint firstItem="4LQ-Id-f0c" firstAttribute="leading" secondItem="xDr-a7-tUQ" secondAttribute="leadingMargin" id="rf9-bs-Wwf"/>
-                            <constraint firstItem="cCq-He-4UW" firstAttribute="leading" secondItem="4LQ-Id-f0c" secondAttribute="trailing" id="sVb-hd-l8d"/>
-                            <constraint firstItem="btt-6A-a9V" firstAttribute="top" secondItem="IOQ-Fl-ps3" secondAttribute="bottom" constant="34" id="ywF-gG-ItL"/>
+                            <constraint firstItem="yAo-1o-zC8" firstAttribute="top" secondItem="KQV-pU-fZ3" secondAttribute="bottom" constant="19" id="Avt-gK-a1a"/>
+                            <constraint firstItem="Dnm-TC-sOh" firstAttribute="top" secondItem="yAo-1o-zC8" secondAttribute="bottom" constant="15" id="GaJ-iF-m6w"/>
+                            <constraint firstItem="Dnm-TC-sOh" firstAttribute="centerX" secondItem="xDr-a7-tUQ" secondAttribute="centerX" id="Moz-gY-upE"/>
+                            <constraint firstItem="ZKQ-G7-1hP" firstAttribute="centerX" secondItem="xDr-a7-tUQ" secondAttribute="centerX" id="OSs-eX-1PZ"/>
+                            <constraint firstItem="yAo-1o-zC8" firstAttribute="centerX" secondItem="xDr-a7-tUQ" secondAttribute="centerX" id="g5F-a7-szF"/>
+                            <constraint firstItem="btt-6A-a9V" firstAttribute="top" secondItem="ZKQ-G7-1hP" secondAttribute="bottom" id="zPD-wu-dEk"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="WelcomeTitleLabel" destination="yAo-1o-zC8" id="G2J-c5-hMA"/>
                         <outlet property="accessUpperLevelsDetailLabel" destination="QKi-Vi-q9F" id="ZjF-Bt-hwj"/>
                         <outlet property="accessUpperLevelsLabel" destination="Mdn-Aj-fap" id="G4x-s2-Mt7"/>
+                        <outlet property="bottomButtonsEnclosingView" destination="ZKQ-G7-1hP" id="xwU-4I-LlC"/>
                         <outlet property="howToUseDetailsLabel" destination="Zbu-Ej-XFN" id="mZN-xk-PCn"/>
                         <outlet property="howToUsePTLabel" destination="z5Z-Ia-oeh" id="VuP-Nb-Y1V"/>
                         <outlet property="privacyPolicyBtn" destination="4LQ-Id-f0c" id="BTr-Kl-eSm"/>

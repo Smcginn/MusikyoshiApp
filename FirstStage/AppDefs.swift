@@ -10,6 +10,10 @@
 
 import Foundation
 
+let kMKPrivacyPolicyURL = "https://www.musikyoshi.com/privacy-policy/"
+let kMKTermsOfUseURL    = "https://www.musikyoshi.com/terms-of-use/"
+
+
 ////////////////////////////////////////////////////////////
 // Colors, or possible colors
 

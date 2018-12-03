@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, UITextFieldDelegate {
         
     @IBOutlet weak var startLessonBtn: UIButton!
     
@@ -40,13 +40,12 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var ChallengeBtn: UIButton!
     @IBOutlet weak var purchaseOptionsBtn: UIButton!
     
+    @IBOutlet weak var hiddenPswdTextField: UITextField!
+    
+    
     var didDisplayOverview = false
     
     @IBAction func purchaseOptionsBtn_Pressed(_ sender: Any) {
-        
-        
-        
-        
     }
     
     @IBAction func LessonsBtnPressed(_ sender: Any) {
@@ -80,18 +79,49 @@ class HomeViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var settingEnabledBtn: UIButton!
     var numTimesSettingsEnabledTapped = 0
+    var settingsEnblBtnBckgrndColor = UIColor.clear
+    @IBOutlet weak var settingEnabledBtn: UIButton!
     @IBAction func settingEnabledBtnPressed(_ sender: Any) {
         numTimesSettingsEnabledTapped += 1
-        if numTimesSettingsEnabledTapped >= 5 {
+        if numTimesSettingsEnabledTapped >= 10 {
             settingEnabledBtn.isOpaque = true
             settingEnabledBtn.titleLabel?.textColor = UIColor.green
-            settingEnabledBtn.backgroundColor =
-                (UIColor.lightGray).withAlphaComponent(1.0)
+            settingsEnblBtnBckgrndColor = .lightGray
+            settingEnabledBtn.backgroundColor = settingsEnblBtnBckgrndColor
             settingEnabledBtn.setTitleColor(UIColor.blue, for: .normal)
             gMKDebugOpt_IsSoundAndLatencySettingsEnabled = true
         }
+        if numTimesSettingsEnabledTapped >= 15 {
+            hiddenPswdTextField.isHidden = false
+            hiddenPswdTextField.isEnabled = true
+            hiddenPswdTextField.keyboardType = .default
+            hiddenPswdTextField.becomeFirstResponder()
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        print ("yo")
+        let response = hiddenPswdTextField.text
+        
+        // must match the dev password
+        if response == "EULA" {
+            settingEnabledBtn.isOpaque = true
+            settingEnabledBtn.titleLabel?.textColor = UIColor.green
+            settingsEnblBtnBckgrndColor = .magenta
+            settingEnabledBtn.backgroundColor = settingsEnblBtnBckgrndColor
+            settingEnabledBtn.setTitleColor(UIColor.blue, for: .normal)
+            gDoOverrideSubsPresent = true
+            gDoLimitLevels = false
+        }
+        
+        hiddenPswdTextField.isHidden = true
+        hiddenPswdTextField.isEnabled = false
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
     override func viewDidLayoutSubviews() {
@@ -117,6 +147,7 @@ class HomeViewController: UIViewController {
                 (UIColor.lightGray).withAlphaComponent(0.0)
         }
         
+        settingEnabledBtn.backgroundColor = settingsEnblBtnBckgrndColor
         if gMKDebugOpt_IsSoundAndLatencySettingsEnabled {
             settingEnabledBtn.isHidden = false
             settingEnabledBtn.isEnabled = true
@@ -124,8 +155,8 @@ class HomeViewController: UIViewController {
             settingEnabledBtn.titleLabel?.textColor = UIColor.green
             settingEnabledBtn.titleLabel?.isHidden = false
             settingEnabledBtn.setTitleColor(UIColor.blue, for: .normal)
-            settingEnabledBtn.backgroundColor =
-                (UIColor.lightGray).withAlphaComponent(1.0)
+//            settingEnabledBtn.backgroundColor =
+//                (UIColor.lightGray).withAlphaComponent(1.0)
         } else {
             settingEnabledBtn.isHidden = false
             settingEnabledBtn.isEnabled = true
@@ -133,14 +164,15 @@ class HomeViewController: UIViewController {
             settingEnabledBtn.titleLabel?.isHidden = true
             settingEnabledBtn.titleLabel?.textColor = UIColor.clear
             settingEnabledBtn.setTitleColor(UIColor.clear, for: .normal)
-            settingEnabledBtn.backgroundColor =
-                (UIColor.lightGray).withAlphaComponent(0.0)
+//            settingEnabledBtn.backgroundColor =
+//                (UIColor.lightGray).withAlphaComponent(0.0)
        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         numTimesDebugStuffOnTapped = 0
+        numTimesSettingsEnabledTapped = 0
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -158,6 +190,9 @@ class HomeViewController: UIViewController {
             displayWellcomeVC()
             didDisplayOverview = true
         }
+        
+        settingEnabledBtn.backgroundColor = settingsEnblBtnBckgrndColor
+        hiddenPswdTextField.isHidden = true
     }
     
     let showWellcomeVCSegueID = "showWellcomeVCSegue"
@@ -190,6 +225,8 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        hiddenPswdTextField.delegate = self
         
         self.view.backgroundColor = kDefaultViewBackgroundColor
         progressPanelView.isHidden = true
