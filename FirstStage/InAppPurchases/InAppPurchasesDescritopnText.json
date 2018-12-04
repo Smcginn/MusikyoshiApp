@@ -5,7 +5,7 @@
   "knownIapPurchaseOptions":[
   {
      "One IAP Comment":"Trumpet, English, One Month, $9.99 per month",
-     "ProductID":"com.musikyoshi.playtunes.PTB01_EN_1M_SUB",
+     "ProductID":"com.musikyoshi.playtunes.PTB01_EN_1MSUB",
      "Title":"One Month Subscription",
      "Language":"English",
      "Instrument":"Trumpet",
@@ -21,6 +21,8 @@
         },{
              "oneLine":"- Access to all Levels\n"
         },{
+             "oneLine":"- New Levels added on regular basis\n"
+        },{
              "oneLine":"- Auto-renewing\n\n"
         },{
              "oneLine":"    (Full Subscription details\n"
@@ -29,7 +31,7 @@
         }]
   },{
      "One IAP Comment":"Trumpet, English, Six Month, $49.99",
-     "ProductID":"com.musikyoshi.playtunes.PTB01_EN_6M_SUB",
+     "ProductID":"com.musikyoshi.playtunes.PTB01_EN_6MSUB",
      "Title":"Six Month Subscription",
      "Language":"English",
      "Instrument":"Trumpet",
@@ -44,6 +46,8 @@
             "oneLine":"- Video Help in English\n"
         },{
             "oneLine":"- Access to all Levels\n"
+        },{
+            "oneLine":"- New Levels added on regular basis\n"
         },{
             "oneLine":"- Auto-renewing\n\n"
         },{

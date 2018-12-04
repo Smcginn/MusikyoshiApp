@@ -11,7 +11,7 @@ import Foundation
 class WelcomeViewController: UIViewController, UIScrollViewDelegate {
     
     // Ultimately want to calc this dynamically, at runtime . . .
-    let kScrollContentHt = CGFloat(1260.0)
+    let kScrollContentHt = CGFloat(1340.0)
     
     @IBOutlet weak var scrollView: UIScrollView!
     
@@ -64,7 +64,8 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
         howToUseDetText += "       through a guided practice\n"
         howToUseDetText += "       session,            or\n"
         howToUseDetText += "   > Select 'Choose' to pick\n"
-        howToUseDetText += "       individual exercises"
+        howToUseDetText += "       individual exercises\n\n"
+        howToUseDetText += "Tip: It's best to use earbuds or headphones so you can hear the metronome."
 
         howToUseDetailsLabel.text = howToUseDetText
         

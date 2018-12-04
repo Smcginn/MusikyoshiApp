@@ -302,11 +302,12 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
     }
 
     func displayMustPurchaseAlert() {
-        let titleStr = "For access to all levels, you must purchase PlayTunes"
+        let titleStr = "For access to all levels, you must purchase a PlayTunes Subscription"
         var msgStr = "\nLevels 1 & 2 are always free!\n\n"
         msgStr += "To explore PlayTunes' upper Levels, go to 'Purchase Options' "
         msgStr += "on the Home screen\n\n"
-        msgStr += "(If you have a valid Subscription from another device, use the Restore button)"
+        msgStr += "(If you have a valid Subscription from another device, use the Restore button)\n\n"
+        msgStr += "(If you have just completed a purchase, verification can take a while. Try again in a bit.)"
         let ac = MyUIAlertController(title: titleStr, message: msgStr, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         
