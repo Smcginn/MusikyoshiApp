@@ -116,6 +116,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Constants.Settings.ScoreMagnification: Int(14)
             ])
         
+        let timeIntvls = MK_TimeIntervals()
         UserDefaults.standard.register(defaults: [
             Constants.Settings.UserHopSizeOverride: Int(-12),
             Constants.Settings.UserPeakCountOverride: Int(-12),
@@ -123,8 +124,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Constants.Settings.UserLatencyOffsetThresholdOverride: Double(0.0),
             Constants.Settings.SubsriptionStatusConfirmed: false,
             Constants.Settings.SubsriptionHasBeenPurchased: false,
-            Constants.Settings.ConfirmedSubsExpiryDateAfter1970: Double(0.0)
+            Constants.Settings.ConfirmedSubsExpiryDateAfter1970: Double(0.0),
+            Constants.Settings.CheckForAppUpdateInterval: Int(timeIntvls.kMK_1_Month),
+            Constants.Settings.LastCheckForAppUpdate: Double(0.0)
            ])
+        
+        setCheckForAppUpdateTimeIfFirstRun()
         
 /*
          Constants.Settings.MaxPlayingVolume: Double(0.0),

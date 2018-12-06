@@ -684,6 +684,10 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
         ssScrollView.turnHighlightOff()
 
         guard score != nil else { return }
+        
+        // TRANTRANTRAN  transpose here     - see SSScore.h
+        // let serr = score?.setTranspose(-12)
+        
         playData = SSPData.createPlay(from: score, tempo: self)
         guard playData != nil else { return }
 

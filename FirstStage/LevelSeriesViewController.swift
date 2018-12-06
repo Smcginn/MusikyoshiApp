@@ -63,6 +63,11 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
             permissionGranted = false
             break
         }
+        
+        if shouldCheckForAppUpdate() {
+            //presentWannaCheckForNewVersionAlert()
+            presentCheckForNewVersionAlert()
+        }
     }
     
     override func viewDidLoad() {

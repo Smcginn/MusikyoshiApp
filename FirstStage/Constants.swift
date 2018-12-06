@@ -43,5 +43,7 @@ struct Constants
         static let SubsriptionStatusConfirmed = "subsriptionStatusConfirmed"
         static let SubsriptionHasBeenPurchased = "subsriptionHasBeenPurchased"
         static let ConfirmedSubsExpiryDateAfter1970 = "confirmedSubsExpiryDateAfter1970"
+        static let CheckForAppUpdateInterval = "checkForAppUpdateInterval"
+        static let LastCheckForAppUpdate = "lastCheckForAppUpdate"
     }
 }

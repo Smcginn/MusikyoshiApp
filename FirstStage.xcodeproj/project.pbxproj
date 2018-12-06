@@ -433,6 +433,12 @@
 		6DA54C48210BC8FA004BECB2 /* ScoreMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA54C46210BC8F9004BECB2 /* ScoreMgr.swift */; };
 		6DA5763C21473C26002D1D58 /* PerfSampleAmplitudeTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA5763B21473C26002D1D58 /* PerfSampleAmplitudeTracker.swift */; };
 		6DA5763D21473C26002D1D58 /* PerfSampleAmplitudeTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA5763B21473C26002D1D58 /* PerfSampleAmplitudeTracker.swift */; };
+		6DA7F6A421B7440500800099 /* AppVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA7F6A221B7440500800099 /* AppVersion.swift */; };
+		6DA7F6A521B7440500800099 /* AppVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA7F6A221B7440500800099 /* AppVersion.swift */; };
+		6DA7F6A621B7440500800099 /* AppVersionMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA7F6A321B7440500800099 /* AppVersionMonitor.swift */; };
+		6DA7F6A721B7440500800099 /* AppVersionMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA7F6A321B7440500800099 /* AppVersionMonitor.swift */; };
+		6DA7F6AC21B74A3200800099 /* AppVersionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA7F6AB21B74A3200800099 /* AppVersionHelper.swift */; };
+		6DA7F6AD21B74A3200800099 /* AppVersionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA7F6AB21B74A3200800099 /* AppVersionHelper.swift */; };
 		6DB19E6921B318C8009940E5 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB19E6821B318C8009940E5 /* WelcomeViewController.swift */; };
 		6DB19E6A21B318C8009940E5 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB19E6821B318C8009940E5 /* WelcomeViewController.swift */; };
 		6DB8533A21248EF600F999C3 /* XMLFileMapping.json in Resources */ = {isa = PBXBuildFile; fileRef = 6DB8532A21248EF500F999C3 /* XMLFileMapping.json */; };
@@ -1082,6 +1088,9 @@
 		6DA1EA122193789D0069942D /* InAppPurchasesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPurchasesViewController.swift; sourceTree = "<group>"; };
 		6DA54C46210BC8F9004BECB2 /* ScoreMgr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ScoreMgr.swift; path = PerformanceAnalysis/ScoreMgr.swift; sourceTree = "<group>"; };
 		6DA5763B21473C26002D1D58 /* PerfSampleAmplitudeTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PerfSampleAmplitudeTracker.swift; path = PerformanceAnalysis/PerfSampleAmplitudeTracker.swift; sourceTree = "<group>"; };
+		6DA7F6A221B7440500800099 /* AppVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppVersion.swift; path = AppVersionMonitor/AppVersion.swift; sourceTree = "<group>"; };
+		6DA7F6A321B7440500800099 /* AppVersionMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppVersionMonitor.swift; path = AppVersionMonitor/AppVersionMonitor.swift; sourceTree = "<group>"; };
+		6DA7F6AB21B74A3200800099 /* AppVersionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppVersionHelper.swift; path = AppVersionMonitor/AppVersionHelper.swift; sourceTree = "<group>"; };
 		6DB19E6821B318C8009940E5 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		6DB8532A21248EF500F999C3 /* XMLFileMapping.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = XMLFileMapping.json; path = LessonScheduling/XMLFileMapping.json; sourceTree = "<group>"; };
 		6DB8533C2126438E00F999C3 /* LaunchingNextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LaunchingNextView.swift; path = LessonScheduling/LaunchingNextView.swift; sourceTree = "<group>"; };
@@ -1475,6 +1484,7 @@
 		6324D2D11CE71B19001934A5 /* FirstStage */ = {
 			isa = PBXGroup;
 			children = (
+				6DA7F69221B743CF00800099 /* AppVersionMonitor */,
 				6D3AE143217684B5005ECC60 /* InApp Purchases */,
 				1C87C0AB2016F3D00038784E /* Not Used View Controllers */,
 				6324D3661CE73ECB001934A5 /* Brain */,
@@ -1836,6 +1846,16 @@
 				6D817BDF2186042A00258980 /* PATest_FreqAndPitchSampleSim.swift */,
 			);
 			name = PerfAnalysisTesting;
+			sourceTree = "<group>";
+		};
+		6DA7F69221B743CF00800099 /* AppVersionMonitor */ = {
+			isa = PBXGroup;
+			children = (
+				6DA7F6A221B7440500800099 /* AppVersion.swift */,
+				6DA7F6A321B7440500800099 /* AppVersionMonitor.swift */,
+				6DA7F6AB21B74A3200800099 /* AppVersionHelper.swift */,
+			);
+			name = AppVersionMonitor;
 			sourceTree = "<group>";
 		};
 		E9794BAB1FFDB36200CDC7FD /* Videos */ = {
@@ -2777,8 +2797,10 @@
 			files = (
 				E9AD0CC31FD9BCDF006472CE /* TrumpetPartials.swift in Sources */,
 				6DA1EA11219377610069942D /* OneAvailableInAppPurchaseView.swift in Sources */,
+				6DA7F6A521B7440500800099 /* AppVersion.swift in Sources */,
 				E9794BAA1FFD45EA00CDC7FD /* PerformanceIssueMgr.swift in Sources */,
 				E9AD0CC21FD9BCDF006472CE /* PerformanceSound.swift in Sources */,
+				6DA7F6A721B7440500800099 /* AppVersionMonitor.swift in Sources */,
 				633D1B6D1CF94BEC00B5C4FD /* FeedbackView.swift in Sources */,
 				6D6093B32114F66D00874A40 /* PerformanceRest.swift in Sources */,
 				E9AD0CE41FE09B77006472CE /* NotePerformanceAnalyzer.swift in Sources */,
@@ -2787,6 +2809,7 @@
 				6D34A17E2139F9E10071BAB6 /* AppDefs.swift in Sources */,
 				638129591CF05C7900A40C8E /* Balloon.swift in Sources */,
 				1C87C0AD2016F3F70038784E /* LessonOverviewViewController.swift in Sources */,
+				6DA7F6AD21B74A3200800099 /* AppVersionHelper.swift in Sources */,
 				6324D2DB1CE71B1A001934A5 /* FirstStage.xcdatamodeld in Sources */,
 				E9AD0CC11FD9BCDF006472CE /* PerformanceNote.swift in Sources */,
 				6D817BE12186042A00258980 /* PATest_FreqAndPitchSampleSim.swift in Sources */,
@@ -2879,8 +2902,10 @@
 			files = (
 				1C33BB352016DF6500CD83A6 /* LevelSeriesViewController.swift in Sources */,
 				6DA1EA10219377610069942D /* OneAvailableInAppPurchaseView.swift in Sources */,
+				6DA7F6A421B7440500800099 /* AppVersion.swift in Sources */,
 				E9AD0CCB1FD9BF08006472CE /* PerformanceSound.swift in Sources */,
 				E9794BA91FFD45EA00CDC7FD /* PerformanceIssueMgr.swift in Sources */,
+				6DA7F6A621B7440500800099 /* AppVersionMonitor.swift in Sources */,
 				E9AD0CE31FE09B77006472CE /* NotePerformanceAnalyzer.swift in Sources */,
 				6D6093B72114F6C300874A40 /* PerformanceRest.swift in Sources */,
 				6324D3621CE73C47001934A5 /* First Stage_key.m in Sources */,
@@ -2889,6 +2914,7 @@
 				6D34A17D2139F9E10071BAB6 /* AppDefs.swift in Sources */,
 				638129581CF05C7900A40C8E /* Balloon.swift in Sources */,
 				E9AD0CC71FD9BEF6006472CE /* NoteFreqRangeTable.swift in Sources */,
+				6DA7F6AC21B74A3200800099 /* AppVersionHelper.swift in Sources */,
 				6D6093B92114F6CE00874A40 /* ScoreData.swift in Sources */,
 				6324D3071CE72F8D001934A5 /* FirstStage.xcdatamodeld in Sources */,
 				6D817BE02186042A00258980 /* PATest_FreqAndPitchSampleSim.swift in Sources */,
