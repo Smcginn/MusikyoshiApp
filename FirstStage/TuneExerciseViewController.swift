@@ -294,7 +294,9 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
         showingSinglePart = false // is set when a single part is being displayed
         cursorBarIndex = 0
 
-        loadFile("XML Tunes/" + exerciseName)
+        let instSubpath = getXMLInstrDirString()
+        let subpath = "XML Tunes/" + instSubpath + exerciseName
+        loadFile(subpath)
         countOffLabel.text = ""
 
         frequencyThresholdPercent = 1.0 + frequencyThreshold
@@ -600,7 +602,17 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
 
         ////////////
         // SFUserDefs
-        guard let xmlData = MusicXMLModifier.modifyXMLToData(musicXMLUrl: URL(fileURLWithPath: filePath), smallestWidth: UserDefaults.standard.double(forKey: Constants.Settings.SmallestNoteWidth), signatureWidth: UserDefaults.standard.double(forKey: Constants.Settings.SignatureWidth)) else {
+        
+        // Part of first pass, trying things out. Might not keep this approach.
+        var instrMods = MusicXMLInstrumentModifiers()
+        instrMods.setForTrombone()
+        //instrMods.setForTrumpet()
+
+        guard let xmlData = MusicXMLModifier.modifyXMLToData(
+                musicXMLUrl: URL(fileURLWithPath: filePath),
+                smallestWidth: UserDefaults.standard.double(forKey: Constants.Settings.SmallestNoteWidth),
+                signatureWidth: UserDefaults.standard.double(forKey: Constants.Settings.SignatureWidth),
+                InstrMods: instrMods) else {
             print("Cannot get modified xmlData from \(filePath)!")
             return
         }
@@ -610,6 +622,9 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
 //        if let score0 = SSScore(xmlFile: filePath, options: loadOptions, error: &err) {
         if let score0 = SSScore(xmlData: xmlData, options: loadOptions, error: &err) {
             score = score0
+            
+  //          let serr = score?.setTranspose(-14)
+            
             //				titleLabel.text = [filePath lastPathComponent];
             let numParts = score!.numParts
             for _ in 0..<numParts {
@@ -686,7 +701,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
         guard score != nil else { return }
         
         // TRANTRANTRAN  transpose here     - see SSScore.h
-        // let serr = score?.setTranspose(-12)
+//        let serr = score?.setTranspose(-2)
         
         playData = SSPData.createPlay(from: score, tempo: self)
         guard playData != nil else { return }

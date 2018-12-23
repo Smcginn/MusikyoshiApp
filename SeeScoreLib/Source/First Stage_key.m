@@ -19,12 +19,12 @@
 // // TRANTRANTRAN
 // New key, as of 12/4/18:    (now includes transpose)
 // licence keys: draw, contents, transpose, play_data, synth, ios, id1, embed_id
-//static const sscore_libkeytype skey = {"PlayTunes", {0Xa1235,0X0}, {0X69ce74c7,0X7154eb15,0Xc1aa6527,0X7e15e9d3,0X50aa5c50,0Xf4f13dca,0X6092b18f,0X3ec754d1,0X5c0618a6,0X1091858a,0X41d62f85,0X9151034c,0X54c9e687,0X133dd48e,0X1f5a9d4b}};
+static const sscore_libkeytype skey = {"PlayTunes", {0Xa1235,0X0}, {0X69ce74c7,0X7154eb15,0Xc1aa6527,0X7e15e9d3,0X50aa5c50,0Xf4f13dca,0X6092b18f,0X3ec754d1,0X5c0618a6,0X1091858a,0X41d62f85,0X9151034c,0X54c9e687,0X133dd48e,0X1f5a9d4b}};
 
 
 // New key, as of 9/20/18:
 // licence keys: draw, contents, play_data, synth, ios, id1, embed_id
-static const sscore_libkeytype skey = {"PlayTunes", {0Xa1225,0X0}, {0X3f8f742a,0X631391ff,0Xca155687,0X19d62f2a,0X3cb27ba6,0X355fcc6a,0X69d3ee6b,0X58c9e914,0X45261f36,0X2fe54d96,0X7748cb6a,0X24fdd9dc,0X4c22d954,0X3ea40d9,0Xade51e8b}};
+//static const sscore_libkeytype skey = {"PlayTunes", {0Xa1225,0X0}, {0X3f8f742a,0X631391ff,0Xca155687,0X19d62f2a,0X3cb27ba6,0X355fcc6a,0X69d3ee6b,0X58c9e914,0X45261f36,0X2fe54d96,0X7748cb6a,0X24fdd9dc,0X4c22d954,0X3ea40d9,0Xade51e8b}};
 
 
 // New key, as of 9/12/18:

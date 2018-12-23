@@ -17,7 +17,7 @@
  "tuneFileEntries":[
         {
         "fileCode":"TUN001",
-        "xmlFile":"1 Whole Lotta Wholes-tpt.xml",
+        "xmlFile":"TUN001.xml",
         "title":"Whole Lotta Wholes",
         "commentStr1":"",
         "commentStr2":"Take a deep breath!",
@@ -25,7 +25,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN002",
-        "xmlFile":"2 Stepping Up -tpt.xml",
+        "xmlFile":"TUN002.xml",
         "title":"2. Stepping Up",
         "commentStr1":"",
         "commentStr2":"New Note D, 1st and 3rd Valve",
@@ -33,7 +33,7 @@
         "helpCode2":""
          },{
         "fileCode":"TUN003",
-        "xmlFile":"3 Gimme Three tpt.xml",
+        "xmlFile":"TUN003.xml",
         "title":"3. Gimme Three",
         "commentStr1":"",
         "commentStr2":"New Note E, 1st and 2nd Valve",
@@ -41,7 +41,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN004",
-        "xmlFile":"4 Leaping Down-tpt.xml",
+        "xmlFile":"TUN004.xml",
         "title":"4. Leaping Down",
         "commentStr1":"",
         "commentStr2":"Use your tongue to make the note sound. Say 'taaaaa'",
@@ -49,7 +49,7 @@
         "helpCode2":""
          },{
         "fileCode":"TUN005",
-        "xmlFile":"5 One More Makes Four-tpt.xml",
+        "xmlFile":"TUN005.xml",
         "title":"5. One More Makes Four",
         "commentStr1":"",
         "commentStr2":"New Note F, 1st Valve",
@@ -57,7 +57,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN006",
-        "xmlFile":"6 Trumpet Half Notes Float Boats.xml",
+        "xmlFile":"TUN006.xml",
         "title":"6. Half Notes Float Boats",
         "commentStr1":"",
         "commentStr2":"Half Notes and Half Rests get 2 beats",
@@ -65,7 +65,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN007",
-        "xmlFile":"7 Trumpet Half and Half.xml",
+        "xmlFile":"TUN007.xml",
         "title":"7. Half and Half",
         "commentStr1":"",
         "commentStr2":"",
@@ -73,7 +73,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN008",
-        "xmlFile":"8 Tpt. Half Up, Half Down - Trumpet in Bb.xml",
+        "xmlFile":"TUN008.xml",
         "title":"8. Half Up, Half Down",
         "commentStr1":"",
         "commentStr2":"",
@@ -81,7 +81,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN009",
-        "xmlFile":"9 A New Note Down Under - Trumpet in Bb.xml",
+        "xmlFile":"TUN009.xml",
         "title":"9. A New Note Down Under",
         "commentStr1":"",
         "commentStr2":"Remember, B is 2nd Valve",
@@ -89,7 +89,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN010",
-        "xmlFile":"10 Tpt Counting Halves with My Whole Head.xml",
+        "xmlFile":"TUN010.xml",
         "title":"10. Counting Halves with My Whole Head",
         "commentStr1":"",
         "commentStr2":"",
@@ -97,7 +97,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN011",
-        "xmlFile":"11 Mix and Match - Trumpet in Bb.xml",
+        "xmlFile":"TUN011.xml",
         "title":"11. Mix and Match",
         "commentStr1":"",
         "commentStr2":"",
@@ -105,7 +105,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN012",
-        "xmlFile":"12 Tpt-  The Fifth Note! Beethoven_s 9th.xml",
+        "xmlFile":"TUN012.xml",
         "title":"12. The Fifth Note! Beethoven's 9th",
         "commentStr1":"",
         "commentStr2":"New Note G, open, no valves down",
@@ -113,7 +113,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN013",
-        "xmlFile":"13 Tpt. Four Quarters.xml",
+        "xmlFile":"TUN013.xml",
         "title":"13. Four Quarters",
         "commentStr1":"",
         "commentStr2":"A quarter note and a quarter rest get one beat",
@@ -121,7 +121,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN014",
-        "xmlFile":"14 Tpt. Sliding Down.xml",
+        "xmlFile":"TUN014.xml",
         "title":"14. Sliding Down",
         "commentStr1":"",
         "commentStr2":"",
@@ -129,7 +129,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN015",
-        "xmlFile":"15 Leaps and Bounds.xml",
+        "xmlFile":"TUN015.xml",
         "title":"15. Leaps and Bounds",
         "commentStr1":"",
         "commentStr2":"",
@@ -137,7 +137,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN016",
-        "xmlFile":"16 Tpt Hot Cross Buns.xml",
+        "xmlFile":"TUN016.xml",
         "title":"16. Hot Cross Buns",
         "commentStr1":"",
         "commentStr2":"",
@@ -145,7 +145,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN017",
-        "xmlFile":"17 Tpt Sweetly Sings the Donkey.xml",
+        "xmlFile":"TUN017.xml",
         "title":"17 . Sweetly Sings the Donkey",
         "commentStr1":"",
         "commentStr2":"",
@@ -153,7 +153,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN018",
-        "xmlFile":"18 Like a Boss -Tpt.xml",
+        "xmlFile":"TUN018.xml",
         "title":"18. Like a Boss",
         "commentStr1":"",
         "commentStr2":"",
@@ -161,7 +161,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN019",
-        "xmlFile":"19 Up the Down Staircase - Tpt.xml",
+        "xmlFile":"TUN019.xml",
         "title":"19. Up the Down Staircase",
         "commentStr1":"",
         "commentStr2":"",
@@ -169,7 +169,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN020",
-        "xmlFile":"20 Moving Up - Tpt.xml",
+        "xmlFile":"TUN020.xml",
         "title":"20. Moving Up",
         "commentStr1":"",
         "commentStr2":"",
@@ -177,7 +177,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN021",
-        "xmlFile":"21 Go Tell Aunt Rhodie - Tpt.xml",
+        "xmlFile":"TUN021.xml",
         "title":"21 Go Tell Aunt Rhodie",
         "commentStr1":"",
         "commentStr2":"",
@@ -185,7 +185,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN022",
-        "xmlFile":"22 The Twinkle Twinkle In Mozar_ts Eyes - Tpt.xml",
+        "xmlFile":"TUN022.xml",
         "title":"22. The Twinkle Twinkle In Mozart's Eyes",
         "commentStr1":"",
         "commentStr2":"",
@@ -193,7 +193,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN023",
-        "xmlFile":"23 Lightly Row Tpt.xml",
+        "xmlFile":"TUN023.xml",
         "title":"23. Lightly Row ",
         "commentStr1":"",
         "commentStr2":"",
@@ -201,7 +201,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN024",
-        "xmlFile":"24 London Bridge - Tpt.xml",
+        "xmlFile":"TUN024.xml",
         "title":"24. London Bridge",
         "commentStr1":"",
         "commentStr2":"English Folk Song",
@@ -209,7 +209,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN025",
-        "xmlFile":"25 Old MacDonald - Trumpet.xml",
+        "xmlFile":"TUN025.xml",
         "title":"25. Old MacDonald  ",
         "commentStr1":"",
         "commentStr2":"Traditional",
@@ -217,7 +217,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN026",
-        "xmlFile":"26 Good King Wenceslas - Trumpet in Bb.xml",
+        "xmlFile":"TUN026.xml",
         "title":"26. Good King Wenceslas",
         "commentStr1":"",
         "commentStr2":"Traditional English Carol",
@@ -225,7 +225,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN027",
-        "xmlFile":"27 Jumping up, Leaping down - Trumpet in Bb.xml",
+        "xmlFile":"TUN027.xml",
         "title":"27. Jumping up, Leaping down",
         "commentStr1":"",
         "commentStr2":"",
@@ -233,7 +233,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN028",
-        "xmlFile":"28 Recess Trumpet.xml",
+        "xmlFile":"TUN028.xml",
         "title":"28. Recess",
         "commentStr1":"",
         "commentStr2":"",
@@ -241,7 +241,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN029",
-        "xmlFile":"29 - Climb and Return -Trumpet in Bb.xml",
+        "xmlFile":"TUN029.xml",
         "title":"29. Climb and Return",
         "commentStr1":"",
         "commentStr2":"",
@@ -249,7 +249,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN030",
-        "xmlFile":"30 Connect the Dots - Trumpet in Bb.xml",
+        "xmlFile":"TUN030.xml",
         "title":"30. Connect the Dots",
         "commentStr1":"",
         "commentStr2":"Dotted Half Note - 3 beats!",

@@ -3,7 +3,7 @@
   "title": "Beginner and Intermidiate level",
   "jsonVersionMajor":"0",
   "jsonVersionMid":"0",
-  "jsonVersionMinor":"1",
+  "jsonVersionMinor":"2",
   "levels":[{
             "Level Comment":"=================== LEVEL 1 ============================",
             "title":"Level 1",
@@ -309,6 +309,27 @@
                     "exercises":"LT_B3_4, LT_C4_4, LT_D4_4, LT_E4_4, LT_F4_4, LT_G4_4, LT_A4_4, SLR005, SLR006, SLR007, PRP037, TUN037, PTY021, PRP038, TUN038, PTY022, LTR_A4, TUN039, PRP040, TUN040, TUN041, TUN042, PTY023, TUN043"
                     }],
            "infoNode":[{"title": "Hand Placement",
+                        "type":"informationNode",
+                        "resource":"Media/hand-placement.html"
+                        }
+                        ],
+            "exercises":[]
+            },{
+            "Level Comment":"=================== LEVEL 15 ============================",
+            "title":"Level 15",
+            "levelTag":"L15",
+            "levelIdx":"14",
+            "thresholdsID":"beginner1",
+            "singleEventThreshold":"100",
+            "scanForPitchLegatoChange":"N",
+            "days":[{
+                    "title":"Day 1",
+                    "exercises":"TUN001, TUN002, TUN003, TUN004, TUN005, TUN006, TUN007, TUN008, TUN009, TUN010, TUN011, TUN012, TUN013, TUN014, TUN015"
+                    },{
+                    "title":"Day 2",
+                    "exercises":"TUN016, TUN017, TUN018, TUN019, TUN020, TUN021, TUN022, TUN023, TUN024, TUN025, TUN026, TUN027, TUN028, TUN029, TUN030"
+                    }],
+            "infoNode":[{"title": "Hand Placement",
                         "type":"informationNode",
                         "resource":"Media/hand-placement.html"
                         }

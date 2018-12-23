@@ -15,8 +15,8 @@ import Foundation
 import SwiftyJSON
 import AudioKit
 
-var gDoOverrideSubsPresent = false
-var gDoLimitLevels = true
+var gDoOverrideSubsPresent = true       // CHECK_THIS_FOR_SUBMIT
+var gDoLimitLevels = false              // CHECK_THIS_FOR_SUBMIT
 let kNumberOfLevelsToShow: Int = 10
 
 

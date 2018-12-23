@@ -45,5 +45,6 @@ struct Constants
         static let ConfirmedSubsExpiryDateAfter1970 = "confirmedSubsExpiryDateAfter1970"
         static let CheckForAppUpdateInterval = "checkForAppUpdateInterval"
         static let LastCheckForAppUpdate = "lastCheckForAppUpdate"
+        static let StudentInstrument = "studentInstrument"
     }
 }

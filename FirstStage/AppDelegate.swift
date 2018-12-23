@@ -112,7 +112,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Constants.Settings.ShowAnalysis: false,
             Constants.Settings.PlayTrumpet: true,
             Constants.Settings.SmallestNoteWidth: Int(30),
-            Constants.Settings.SignatureWidth: Int(60),
+            Constants.Settings.SignatureWidth: Int(120),
             Constants.Settings.ScoreMagnification: Int(14)
             ])
         
@@ -126,11 +126,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Constants.Settings.SubsriptionHasBeenPurchased: false,
             Constants.Settings.ConfirmedSubsExpiryDateAfter1970: Double(0.0),
             Constants.Settings.CheckForAppUpdateInterval: Int(timeIntvls.kMK_1_Month),
-            Constants.Settings.LastCheckForAppUpdate: Double(0.0)
+            Constants.Settings.LastCheckForAppUpdate: Double(0.0),
+            Constants.Settings.StudentInstrument: Int(kInst_Trumpet)
            ])
         
         setCheckForAppUpdateTimeIfFirstRun()
         
+        var studentInstrument =
+            UserDefaults.standard.integer(forKey: Constants.Settings.StudentInstrument)
+        if studentInstrument < kInst_Trumpet || studentInstrument > kInst_Tuba {
+            studentInstrument = kInst_Trumpet
+        }
+        setCurrentInstrument(instrument: studentInstrument)
+
 /*
          Constants.Settings.MaxPlayingVolume: Double(0.0),
          Constants.Settings.PlayingVolumeSoundThreshold: Double(0.03),

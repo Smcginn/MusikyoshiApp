@@ -347,6 +347,8 @@
 		6D0C5F02217E33D500273E93 /* IsASoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0C5F01217E33D400273E93 /* IsASoundViewController.swift */; };
 		6D0C5F03217E33D500273E93 /* IsASoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0C5F01217E33D400273E93 /* IsASoundViewController.swift */; };
 		6D22AEC620D06E8200ACEC81 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633D1B6C1CF94BEC00B5C4FD /* FeedbackView.swift */; };
+		6D268BEB21CD3C12002DA293 /* InstrumentSelectionDefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D268BEA21CD3C12002DA293 /* InstrumentSelectionDefs.swift */; };
+		6D268BEC21CD3C12002DA293 /* InstrumentSelectionDefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D268BEA21CD3C12002DA293 /* InstrumentSelectionDefs.swift */; };
 		6D34A17D2139F9E10071BAB6 /* AppDefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D34A17C2139F9E10071BAB6 /* AppDefs.swift */; };
 		6D34A17E2139F9E10071BAB6 /* AppDefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D34A17C2139F9E10071BAB6 /* AppDefs.swift */; };
 		6D3AE1422176846A005ECC60 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D3AE1412176846A005ECC60 /* StoreKit.framework */; };
@@ -1044,6 +1046,7 @@
 		6D08D73C219DDB0300928463 /* NetworkActivityIndicatorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkActivityIndicatorManager.swift; path = InAppPurchases/NetworkActivityIndicatorManager.swift; sourceTree = "<group>"; };
 		6D08D757219E4E7500928463 /* AutoRenewNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoRenewNotificationViewController.swift; sourceTree = "<group>"; };
 		6D0C5F01217E33D400273E93 /* IsASoundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsASoundViewController.swift; sourceTree = "<group>"; };
+		6D268BEA21CD3C12002DA293 /* InstrumentSelectionDefs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InstrumentSelectionDefs.swift; path = InstrumentSelection/InstrumentSelectionDefs.swift; sourceTree = "<group>"; };
 		6D34A17C2139F9E10071BAB6 /* AppDefs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDefs.swift; sourceTree = "<group>"; };
 		6D3AE1412176846A005ECC60 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		6D3AE14421768504005ECC60 /* IAPHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IAPHelper.swift; path = InAppPurchases/IAPHelper.swift; sourceTree = "<group>"; };
@@ -1484,6 +1487,7 @@
 		6324D2D11CE71B19001934A5 /* FirstStage */ = {
 			isa = PBXGroup;
 			children = (
+				6D268BDA21CD3ACC002DA293 /* InstrumentSelection */,
 				6DA7F69221B743CF00800099 /* AppVersionMonitor */,
 				6D3AE143217684B5005ECC60 /* InApp Purchases */,
 				1C87C0AB2016F3D00038784E /* Not Used View Controllers */,
@@ -1822,6 +1826,14 @@
 				6DDE849D2135A61B00A81875 /* LongtonePersonalBestSupport.swift */,
 			);
 			name = LessonScheduling;
+			sourceTree = "<group>";
+		};
+		6D268BDA21CD3ACC002DA293 /* InstrumentSelection */ = {
+			isa = PBXGroup;
+			children = (
+				6D268BEA21CD3C12002DA293 /* InstrumentSelectionDefs.swift */,
+			);
+			name = InstrumentSelection;
 			sourceTree = "<group>";
 		};
 		6D3AE143217684B5005ECC60 /* InApp Purchases */ = {
@@ -2860,6 +2872,7 @@
 				E9AD0CEA1FE09E63006472CE /* NoteRhythmPerformanceAnalyzer.swift in Sources */,
 				6324D3731CE73ED9001934A5 /* Enums.swift in Sources */,
 				63D5E88A1EA37BF7007AE8D4 /* MusicFont.swift in Sources */,
+				6D268BEC21CD3C12002DA293 /* InstrumentSelectionDefs.swift in Sources */,
 				6324D2D31CE71B19001934A5 /* AppDelegate.swift in Sources */,
 				6DB8533E2126438E00F999C3 /* LaunchingNextView.swift in Sources */,
 				E9AD0CDE1FDF4180006472CE /* PerformanceTrackingMgr.swift in Sources */,
@@ -2965,6 +2978,7 @@
 				E9AD0CE91FE09E63006472CE /* NoteRhythmPerformanceAnalyzer.swift in Sources */,
 				6324D3721CE73ED9001934A5 /* Enums.swift in Sources */,
 				63D5E8891EA37BF6007AE8D4 /* MusicFont.swift in Sources */,
+				6D268BEB21CD3C12002DA293 /* InstrumentSelectionDefs.swift in Sources */,
 				6D22AEC620D06E8200ACEC81 /* FeedbackView.swift in Sources */,
 				6DB8533D2126438E00F999C3 /* LaunchingNextView.swift in Sources */,
 				6324D30A1CE72F8D001934A5 /* AppDelegate.swift in Sources */,

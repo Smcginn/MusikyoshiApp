@@ -713,7 +713,16 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
         ////////////
         // New, from TuneExer
         // SFUserDefs
-        guard let xmlData = MusicXMLModifier.modifyXMLToData(musicXMLUrl: URL(fileURLWithPath: filePath), smallestWidth: UserDefaults.standard.double(forKey: Constants.Settings.SmallestNoteWidth), signatureWidth: UserDefaults.standard.double(forKey: Constants.Settings.SignatureWidth)) else {
+        
+        // Part of first pass, trying things out. Might not keep this approach.
+        var instrMods = MusicXMLInstrumentModifiers()
+        instrMods.setForTrumpet()
+        
+        guard let xmlData = MusicXMLModifier.modifyXMLToData(
+                musicXMLUrl: URL(fileURLWithPath: filePath),
+                smallestWidth: UserDefaults.standard.double(forKey: Constants.Settings.SmallestNoteWidth),
+                signatureWidth: UserDefaults.standard.double(forKey: Constants.Settings.SignatureWidth),
+                InstrMods: instrMods) else {
             print("Cannot get modified xmlData from \(filePath)!")
             return
         }

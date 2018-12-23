@@ -278,3 +278,156 @@ struct NoteService {
     }
     
 }
+
+// This stuff isn't used as of the first multi-instrument pass checkin, but might
+// be by LongTone exercises for translating notes from lesson json exercise code.
+
+// POAS == "PitchOctaveAlterStep"
+// octave:  The int part of C4, A5, etc.
+// alter:   For flats (-) or sharps (+). E.g., step = "B", alter= -1 == Bb. Optional in the XML file
+// step:    "C", "D", etc.
+typealias tPOAS = (octave: NoteID, alter: Int, step: String)
+
+func getShiftedPOAS(currPOAS: tPOAS, shift: Int) -> tPOAS {
+    var retPOAS = tPOAS(octave: 4, alter: 0, step: "C")
+    
+    // Get MIDI note for current POAS
+    //let currPOAS = tPOAS(octave: 4, alter: 0, step: "C")
+    let currMidiNote = getMIDINoteFromPOAS(poas: currPOAS)
+    
+    // shift MIDI note
+    var newMidiNote: NoteID = 0
+    if shift >= 0 {
+        newMidiNote = currMidiNote + NoteID(shift)
+    } else {
+        let negShift = NoteID(abs(shift))
+        newMidiNote = currMidiNote - negShift
+    }
+    
+    // Get POAS for shifted MIDI note
+    retPOAS = getPOASFromMIDINote(midiNote: newMidiNote)
+    
+    return retPOAS
+}
+
+func getMIDINoteFromPOAS(poas: tPOAS) -> NoteID {
+    var midiNote: NoteID =  12 * (poas.octave + 1)
+
+    let noteInOctave = getOctaveNoteForNoteChar(noteChar: poas.step)
+    midiNote += noteInOctave
+    if poas.alter >= 0 {
+        midiNote += NoteID(poas.alter)
+    } else {
+        let negShift = NoteID(abs(poas.alter))
+        midiNote = midiNote - negShift
+    }
+
+    // midiNote += poas.alter
+    
+    return midiNote
+}
+
+func getPOASFromMIDINote(midiNote: NoteID) -> tPOAS  {
+    let midiNoteInOct = midiNote % 12
+    let midiOct = (midiNote/12)  - 1//////   BLAR
+
+    // typealias tStepAndAlter = (step: String, alter: Int)
+    let newStepAndAlter = getNoteCharAndALterFromOctaveNote(octaveNote: midiNoteInOct, goSharp:false)
+
+    let retPOAS = tPOAS(octave: midiOct, alter: newStepAndAlter.alter, step: newStepAndAlter.step)
+
+    return retPOAS
+}
+
+// "OctaveNote" means NoteID within a single octave, 1-11.
+// returns 0 for "C", 4 for "E", 11 for "B", etc.
+func getOctaveNoteForNoteChar(noteChar: String) -> NoteID {
+    switch noteChar {
+    case "D":   return 2
+    case "E":   return 4
+    case "F":   return 5
+    case "G":   return 7
+    case "A":   return 9
+    case "B":   return 11
+
+    case "C":   fallthrough
+    default:    return 0
+    }
+}
+
+typealias tStepAndAlter = (step: String, alter: Int)
+func getNoteCharAndALterFromOctaveNote(octaveNote: NoteID, goSharp:Bool) -> tStepAndAlter {
+    var noteChar = ""
+    var alt = 0
+    
+    switch octaveNote {
+    case 1:
+        if goSharp {
+            noteChar = "C"
+            alt      =  1
+        } else {
+            noteChar = "D"
+            alt      =  -1
+        }
+    case 2:
+        noteChar = "D"
+        alt      =  0
+    case 3:
+        if goSharp {
+            noteChar = "D"
+            alt      =  1
+        } else {
+            noteChar = "E"
+            alt      =  -1
+        }
+    case 4:
+        noteChar = "E"
+        alt      =  0
+    case 5:
+        noteChar = "F"
+        alt      =  0
+    case 6:
+        if goSharp {
+            noteChar = "F"
+            alt      =  1
+        } else {
+            noteChar = "G"
+            alt      =  -1
+        }
+    case 7:
+        noteChar = "G"
+        alt      =  0
+    case 8:
+        if goSharp {
+            noteChar = "G"
+            alt      =  1
+        } else {
+            noteChar = "A"
+            alt      =  -1
+        }
+    case 9:
+        noteChar = "A"
+        alt      =  0
+    case 10:
+        if goSharp {
+            noteChar = "A"
+            alt      =  1
+        } else {
+            noteChar = "B"
+            alt      =  -1
+        }
+    case 11:
+        noteChar = "B"
+        alt      =  0
+
+    case 0:  fallthrough
+    default:
+        noteChar = "C"
+        alt      =  0
+    }
+    
+    let retSA = tStepAndAlter(step: noteChar, alter: alt)
+
+    return retSA
+}
+

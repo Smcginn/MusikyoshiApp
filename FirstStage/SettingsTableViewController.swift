@@ -26,6 +26,9 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC {
     @IBOutlet weak var signatureWidthLabel: UILabel!
     @IBOutlet weak var signatureWidthStepper: UIStepper!
     
+    
+    @IBOutlet weak var selectStudentInstrumentSegControl: MySegmentedControl!
+    
     @IBOutlet weak var IsASound_Label: UILabel!
     @IBOutlet weak var IsASound_Btn: UIButton!
     
@@ -68,6 +71,11 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC {
     
     @IBAction func signatureWidthStepperChanged(_ sender: UIStepper) {
         signatureWidthLabel.text = String(Int(signatureWidthStepper.value))
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        selectStudentInstrumentSegControl.multilinesMode = true
     }
     
     override func viewDidLayoutSubviews() {
@@ -128,6 +136,38 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC {
             IsASound_Label.isEnabled = false
             IsASound_Btn.isEnabled   = false
         }
+        
+//        for segmentViews in selectStudentInstrumentSegControl.subviews {
+//            for segmentLabel in segmentViews.subviews {
+//                if segmentLabel is UILabel {
+//                    (segmentLabel as! UILabel).numberOfLines = 0
+//                }
+//            }
+//        }
+        
+        var segTitle = "Trombone"
+        selectStudentInstrumentSegControl.setTitle(segTitle,
+                                                   forSegmentAt: 1)
+        
+        segTitle = "Euphonium"
+        selectStudentInstrumentSegControl.setTitle(segTitle,
+                                                   forSegmentAt: 2)
+        
+        segTitle = "French\nHorn"
+        selectStudentInstrumentSegControl.setTitle(segTitle,
+                                                   forSegmentAt: 3)
+        
+        segTitle = "Tuba"
+        selectStudentInstrumentSegControl.setTitle(segTitle,
+                                                   forSegmentAt: 4)
+        
+        var studentInstrument =
+            UserDefaults.standard.integer(forKey: Constants.Settings.StudentInstrument)
+        
+        if studentInstrument < kInst_Trumpet || studentInstrument > kInst_Tuba {
+            studentInstrument = kInst_Trumpet
+        }
+        selectStudentInstrumentSegControl.selectedSegmentIndex = studentInstrument
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -139,6 +179,11 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC {
         UserDefaults.standard.set(magnificationStepper.value, forKey: Constants.Settings.ScoreMagnification)
         UserDefaults.standard.set(noteWidthStepper.value, forKey: Constants.Settings.SmallestNoteWidth)
         UserDefaults.standard.set(signatureWidthStepper.value, forKey: Constants.Settings.SignatureWidth)
+        
+        let studentInstrument = selectStudentInstrumentSegControl.selectedSegmentIndex
+        UserDefaults.standard.set(studentInstrument,
+                                  forKey: Constants.Settings.StudentInstrument)
+        setCurrentInstrument(instrument: studentInstrument)
         
         super.viewWillDisappear(animated)
     }
@@ -168,4 +213,38 @@ extension UITextField {
     // Default actions:
     @objc func doneButtonTapped() { self.resignFirstResponder() }
     @objc func cancelButtonTapped() { self.resignFirstResponder() }
+}
+
+
+@IBDesignable class MySegmentedControl: UISegmentedControl {
+    
+    @IBInspectable var height: CGFloat = 29 {
+        didSet {
+            let centerSave = center
+            frame = CGRect(x: frame.minX, y: frame.minY, width: frame.width, height: height)
+            center = centerSave
+        }
+    }
+    
+    @IBInspectable var multilinesMode: Bool = false
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        for segment in self.subviews {
+            for subview in segment.subviews {
+                if let segmentLabel = subview as? UILabel {
+                    segmentLabel.frame = CGRect(x: 0, y: 0, width: segmentLabel.frame.size.width, height: segmentLabel.frame.size.height * 1.6)
+                    if (multilinesMode == true)
+                    {
+                        segmentLabel.numberOfLines = 0
+                    }
+                    else
+                    {
+                        segmentLabel.numberOfLines = 1
+                    }
+                }
+            }
+        }
+    }
+    
 }
