@@ -1,0 +1,2022 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 3.1 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
+<score-partwise version="3.1">
+  <movement-title>Long_Tone_25G3G5</movement-title>
+  <identification>
+    <encoding>
+      <software>Finale v25 for Mac</software>
+      <encoding-date>2019-01-01</encoding-date>
+      <supports attribute="new-system" element="print" type="yes" value="yes"/>
+      <supports attribute="new-page" element="print" type="yes" value="yes"/>
+      <supports element="accidental" type="yes"/>
+      <supports element="beam" type="yes"/>
+      <supports element="stem" type="yes"/>
+    </encoding>
+  </identification>
+  <defaults>
+    <scaling>
+      <millimeters>7.0273</millimeters>
+      <tenths>40</tenths>
+    </scaling>
+    <page-layout>
+      <page-height>1691</page-height>
+      <page-width>1195</page-width>
+      <page-margins type="even">
+        <left-margin>57</left-margin>
+        <right-margin>57</right-margin>
+        <top-margin>57</top-margin>
+        <bottom-margin>114</bottom-margin>
+      </page-margins>
+      <page-margins type="odd">
+        <left-margin>57</left-margin>
+        <right-margin>57</right-margin>
+        <top-margin>57</top-margin>
+        <bottom-margin>114</bottom-margin>
+      </page-margins>
+    </page-layout>
+    <system-layout>
+      <system-margins>
+        <left-margin>0</left-margin>
+        <right-margin>0</right-margin>
+      </system-margins>
+      <system-distance>103</system-distance>
+      <top-system-distance>60</top-system-distance>
+    </system-layout>
+    <staff-layout>
+      <staff-distance>80</staff-distance>
+    </staff-layout>
+    <appearance>
+      <line-width type="stem">0.7487</line-width>
+      <line-width type="beam">5</line-width>
+      <line-width type="staff">0.7487</line-width>
+      <line-width type="light barline">0.7487</line-width>
+      <line-width type="heavy barline">5</line-width>
+      <line-width type="leger">0.7487</line-width>
+      <line-width type="ending">0.7487</line-width>
+      <line-width type="wedge">0.7487</line-width>
+      <line-width type="enclosure">0.7487</line-width>
+      <line-width type="tuplet bracket">0.7487</line-width>
+      <note-size type="grace">60</note-size>
+      <note-size type="cue">60</note-size>
+      <distance type="hyphen">120</distance>
+      <distance type="beam">8</distance>
+    </appearance>
+    <music-font font-family="Maestro,engraved" font-size="19.9"/>
+    <word-font font-family="Times New Roman" font-size="10"/>
+  </defaults>
+  <part-list>
+    <score-part id="P1">
+      <part-name>C Trumpet</part-name>
+      <part-name-display>
+        <display-text font-family="FreeSerif">C Trumpet</display-text>
+      </part-name-display>
+      <part-abbreviation>C Tpt.</part-abbreviation>
+      <part-abbreviation-display>
+        <display-text font-family="FreeSerif">C Tpt.</display-text>
+      </part-abbreviation-display>
+      <score-instrument id="P1-I1">
+        <instrument-name>C Trumpet</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P1-I1">
+        <midi-channel>1</midi-channel>
+        <midi-program>57</midi-program>
+        <volume>79</volume>
+        <pan>0</pan>
+      </midi-instrument>
+    </score-part>
+    <score-part id="P2">
+      <part-name>C Trumpet</part-name>
+      <part-name-display>
+        <display-text font-family="FreeSerif">C Trumpet</display-text>
+      </part-name-display>
+      <part-abbreviation>C Tpt.</part-abbreviation>
+      <part-abbreviation-display>
+        <display-text font-family="FreeSerif">C Tpt.</display-text>
+      </part-abbreviation-display>
+      <score-instrument id="P2-I2">
+        <instrument-name>C Trumpet</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P2-I2">
+        <midi-channel>3</midi-channel>
+        <midi-program>57</midi-program>
+        <volume>79</volume>
+        <pan>0</pan>
+      </midi-instrument>
+    </score-part>
+    <score-part id="P3">
+      <part-name>C Trumpet</part-name>
+      <part-name-display>
+        <display-text font-family="FreeSerif">C Trumpet</display-text>
+      </part-name-display>
+      <part-abbreviation>C Tpt.</part-abbreviation>
+      <part-abbreviation-display>
+        <display-text font-family="FreeSerif">C Tpt.</display-text>
+      </part-abbreviation-display>
+      <score-instrument id="P3-I3">
+        <instrument-name>C Trumpet</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P3-I3">
+        <midi-channel>5</midi-channel>
+        <midi-program>57</midi-program>
+        <volume>79</volume>
+        <pan>0</pan>
+      </midi-instrument>
+    </score-part>
+    <score-part id="P4">
+      <part-name>C Trumpet</part-name>
+      <part-name-display>
+        <display-text font-family="FreeSerif">C Trumpet</display-text>
+      </part-name-display>
+      <part-abbreviation>C Tpt.</part-abbreviation>
+      <part-abbreviation-display>
+        <display-text font-family="FreeSerif">C Tpt.</display-text>
+      </part-abbreviation-display>
+      <score-instrument id="P4-I4">
+        <instrument-name>C Trumpet</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P4-I4">
+        <midi-channel>7</midi-channel>
+        <midi-program>57</midi-program>
+        <volume>79</volume>
+        <pan>0</pan>
+      </midi-instrument>
+    </score-part>
+    <score-part id="P5">
+      <part-name>C Trumpet</part-name>
+      <part-name-display>
+        <display-text font-family="FreeSerif">C Trumpet</display-text>
+      </part-name-display>
+      <part-abbreviation>C Tpt.</part-abbreviation>
+      <part-abbreviation-display>
+        <display-text font-family="FreeSerif">C Tpt.</display-text>
+      </part-abbreviation-display>
+      <score-instrument id="P5-I5">
+        <instrument-name>C Trumpet</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P5-I5">
+        <midi-channel>9</midi-channel>
+        <midi-program>57</midi-program>
+        <volume>79</volume>
+        <pan>0</pan>
+      </midi-instrument>
+    </score-part>
+    <score-part id="P6">
+      <part-name>C Trumpet</part-name>
+      <part-name-display>
+        <display-text font-family="FreeSerif">C Trumpet</display-text>
+      </part-name-display>
+      <part-abbreviation>C Tpt.</part-abbreviation>
+      <part-abbreviation-display>
+        <display-text font-family="FreeSerif">C Tpt.</display-text>
+      </part-abbreviation-display>
+      <score-instrument id="P6-I6">
+        <instrument-name>C Trumpet</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P6-I6">
+        <midi-channel>12</midi-channel>
+        <midi-program>57</midi-program>
+        <volume>79</volume>
+        <pan>0</pan>
+      </midi-instrument>
+    </score-part>
+    <score-part id="P7">
+      <part-name>C Trumpet</part-name>
+      <part-name-display>
+        <display-text font-family="FreeSerif">C Trumpet</display-text>
+      </part-name-display>
+      <part-abbreviation>C Tpt.</part-abbreviation>
+      <part-abbreviation-display>
+        <display-text font-family="FreeSerif">C Tpt.</display-text>
+      </part-abbreviation-display>
+      <score-instrument id="P7-I7">
+        <instrument-name>C Trumpet</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P7-I7">
+        <midi-channel>14</midi-channel>
+        <midi-program>57</midi-program>
+        <volume>79</volume>
+        <pan>0</pan>
+      </midi-instrument>
+    </score-part>
+    <score-part id="P8">
+      <part-name>C Trumpet</part-name>
+      <part-name-display>
+        <display-text font-family="FreeSerif">C Trumpet</display-text>
+      </part-name-display>
+      <part-abbreviation>C Tpt.</part-abbreviation>
+      <part-abbreviation-display>
+        <display-text font-family="FreeSerif">C Tpt.</display-text>
+      </part-abbreviation-display>
+      <score-instrument id="P8-I8">
+        <instrument-name>C Trumpet</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P8-I8">
+        <midi-channel>16</midi-channel>
+        <midi-program>57</midi-program>
+        <volume>79</volume>
+        <pan>0</pan>
+      </midi-instrument>
+    </score-part>
+    <score-part id="P9">
+      <part-name>C Trumpet</part-name>
+      <part-name-display>
+        <display-text font-family="FreeSerif">C Trumpet</display-text>
+      </part-name-display>
+      <part-abbreviation>C Tpt.</part-abbreviation>
+      <part-abbreviation-display>
+        <display-text font-family="FreeSerif">C Tpt.</display-text>
+      </part-abbreviation-display>
+      <score-instrument id="P9-I9">
+        <instrument-name>C Trumpet</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P9-I9">
+        <midi-channel>2</midi-channel>
+        <midi-program>57</midi-program>
+        <volume>79</volume>
+        <pan>0</pan>
+      </midi-instrument>
+    </score-part>
+    <score-part id="P10">
+      <part-name>C Trumpet</part-name>
+      <part-name-display>
+        <display-text font-family="FreeSerif">C Trumpet</display-text>
+      </part-name-display>
+      <part-abbreviation>C Tpt.</part-abbreviation>
+      <part-abbreviation-display>
+        <display-text font-family="FreeSerif">C Tpt.</display-text>
+      </part-abbreviation-display>
+      <score-instrument id="P10-I10">
+        <instrument-name>C Trumpet</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P10-I10">
+        <midi-channel>4</midi-channel>
+        <midi-program>57</midi-program>
+        <volume>79</volume>
+        <pan>0</pan>
+      </midi-instrument>
+    </score-part>
+    <score-part id="P11">
+      <part-name>C Trumpet</part-name>
+      <part-name-display>
+        <display-text font-family="FreeSerif">C Trumpet</display-text>
+      </part-name-display>
+      <part-abbreviation>C Tpt.</part-abbreviation>
+      <part-abbreviation-display>
+        <display-text font-family="FreeSerif">C Tpt.</display-text>
+      </part-abbreviation-display>
+      <score-instrument id="P11-I11">
+        <instrument-name>C Trumpet</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P11-I11">
+        <midi-channel>6</midi-channel>
+        <midi-program>57</midi-program>
+        <volume>79</volume>
+        <pan>0</pan>
+      </midi-instrument>
+    </score-part>
+    <score-part id="P12">
+      <part-name>C Trumpet</part-name>
+      <part-name-display>
+        <display-text font-family="FreeSerif">C Trumpet</display-text>
+      </part-name-display>
+      <part-abbreviation>C Tpt.</part-abbreviation>
+      <part-abbreviation-display>
+        <display-text font-family="FreeSerif">C Tpt.</display-text>
+      </part-abbreviation-display>
+      <score-instrument id="P12-I12">
+        <instrument-name>C Trumpet</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P12-I12">
+        <midi-channel>8</midi-channel>
+        <midi-program>57</midi-program>
+        <volume>79</volume>
+        <pan>0</pan>
+      </midi-instrument>
+    </score-part>
+    <score-part id="P13">
+      <part-name>C Trumpet</part-name>
+      <part-name-display>
+        <display-text font-family="FreeSerif">C Trumpet</display-text>
+      </part-name-display>
+      <part-abbreviation>C Tpt.</part-abbreviation>
+      <part-abbreviation-display>
+        <display-text font-family="FreeSerif">C Tpt.</display-text>
+      </part-abbreviation-display>
+      <score-instrument id="P13-I13">
+        <instrument-name>C Trumpet</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P13-I13">
+        <midi-channel>11</midi-channel>
+        <midi-program>57</midi-program>
+        <volume>79</volume>
+        <pan>0</pan>
+      </midi-instrument>
+    </score-part>
+    <score-part id="P14">
+      <part-name>C Trumpet</part-name>
+      <part-name-display>
+        <display-text font-family="FreeSerif">C Trumpet</display-text>
+      </part-name-display>
+      <part-abbreviation>C Tpt.</part-abbreviation>
+      <part-abbreviation-display>
+        <display-text font-family="FreeSerif">C Tpt.</display-text>
+      </part-abbreviation-display>
+      <score-instrument id="P14-I14">
+        <instrument-name>C Trumpet</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P14-I14">
+        <midi-channel>13</midi-channel>
+        <midi-program>57</midi-program>
+        <volume>79</volume>
+        <pan>0</pan>
+      </midi-instrument>
+    </score-part>
+    <score-part id="P15">
+      <part-name>C Trumpet</part-name>
+      <part-name-display>
+        <display-text font-family="FreeSerif">C Trumpet</display-text>
+      </part-name-display>
+      <part-abbreviation>C Tpt.</part-abbreviation>
+      <part-abbreviation-display>
+        <display-text font-family="FreeSerif">C Tpt.</display-text>
+      </part-abbreviation-display>
+      <score-instrument id="P15-I15">
+        <instrument-name>C Trumpet</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P15-I15">
+        <midi-channel>15</midi-channel>
+        <midi-program>57</midi-program>
+        <volume>79</volume>
+        <pan>0</pan>
+      </midi-instrument>
+    </score-part>
+    <score-part id="P16">
+      <part-name>C Trumpet</part-name>
+      <part-name-display>
+        <display-text font-family="FreeSerif">C Trumpet</display-text>
+      </part-name-display>
+      <part-abbreviation>C Tpt.</part-abbreviation>
+      <part-abbreviation-display>
+        <display-text font-family="FreeSerif">C Tpt.</display-text>
+      </part-abbreviation-display>
+      <score-instrument id="P16-I16">
+        <instrument-name>C Trumpet</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P16-I16">
+        <midi-channel>1</midi-channel>
+        <midi-program>57</midi-program>
+        <volume>79</volume>
+        <pan>0</pan>
+      </midi-instrument>
+    </score-part>
+    <score-part id="P17">
+      <part-name>C Trumpet</part-name>
+      <part-name-display>
+        <display-text font-family="FreeSerif">C Trumpet</display-text>
+      </part-name-display>
+      <part-abbreviation>C Tpt.</part-abbreviation>
+      <part-abbreviation-display>
+        <display-text font-family="FreeSerif">C Tpt.</display-text>
+      </part-abbreviation-display>
+      <score-instrument id="P17-I17">
+        <instrument-name>C Trumpet</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P17-I17">
+        <midi-channel>3</midi-channel>
+        <midi-program>57</midi-program>
+        <volume>79</volume>
+        <pan>0</pan>
+      </midi-instrument>
+    </score-part>
+    <score-part id="P18">
+      <part-name>C Trumpet</part-name>
+      <part-name-display>
+        <display-text font-family="FreeSerif">C Trumpet</display-text>
+      </part-name-display>
+      <part-abbreviation>C Tpt.</part-abbreviation>
+      <part-abbreviation-display>
+        <display-text font-family="FreeSerif">C Tpt.</display-text>
+      </part-abbreviation-display>
+      <score-instrument id="P18-I18">
+        <instrument-name>C Trumpet</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P18-I18">
+        <midi-channel>5</midi-channel>
+        <midi-program>57</midi-program>
+        <volume>79</volume>
+        <pan>0</pan>
+      </midi-instrument>
+    </score-part>
+    <score-part id="P19">
+      <part-name>C Trumpet</part-name>
+      <part-name-display>
+        <display-text font-family="FreeSerif">C Trumpet</display-text>
+      </part-name-display>
+      <part-abbreviation>C Tpt.</part-abbreviation>
+      <part-abbreviation-display>
+        <display-text font-family="FreeSerif">C Tpt.</display-text>
+      </part-abbreviation-display>
+      <score-instrument id="P19-I19">
+        <instrument-name>C Trumpet</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P19-I19">
+        <midi-channel>7</midi-channel>
+        <midi-program>57</midi-program>
+        <volume>79</volume>
+        <pan>0</pan>
+      </midi-instrument>
+    </score-part>
+    <score-part id="P20">
+      <part-name>C Trumpet</part-name>
+      <part-name-display>
+        <display-text font-family="FreeSerif">C Trumpet</display-text>
+      </part-name-display>
+      <part-abbreviation>C Tpt.</part-abbreviation>
+      <part-abbreviation-display>
+        <display-text font-family="FreeSerif">C Tpt.</display-text>
+      </part-abbreviation-display>
+      <score-instrument id="P20-I20">
+        <instrument-name>C Trumpet</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P20-I20">
+        <midi-channel>9</midi-channel>
+        <midi-program>57</midi-program>
+        <volume>79</volume>
+        <pan>0</pan>
+      </midi-instrument>
+    </score-part>
+    <score-part id="P21">
+      <part-name>C Trumpet</part-name>
+      <part-name-display>
+        <display-text font-family="FreeSerif">C Trumpet</display-text>
+      </part-name-display>
+      <part-abbreviation>C Tpt.</part-abbreviation>
+      <part-abbreviation-display>
+        <display-text font-family="FreeSerif">C Tpt.</display-text>
+      </part-abbreviation-display>
+      <score-instrument id="P21-I21">
+        <instrument-name>C Trumpet</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P21-I21">
+        <midi-channel>12</midi-channel>
+        <midi-program>57</midi-program>
+        <volume>79</volume>
+        <pan>0</pan>
+      </midi-instrument>
+    </score-part>
+    <score-part id="P22">
+      <part-name>C Trumpet</part-name>
+      <part-name-display>
+        <display-text font-family="FreeSerif">C Trumpet</display-text>
+      </part-name-display>
+      <part-abbreviation>C Tpt.</part-abbreviation>
+      <part-abbreviation-display>
+        <display-text font-family="FreeSerif">C Tpt.</display-text>
+      </part-abbreviation-display>
+      <score-instrument id="P22-I22">
+        <instrument-name>C Trumpet</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P22-I22">
+        <midi-channel>14</midi-channel>
+        <midi-program>57</midi-program>
+        <volume>79</volume>
+        <pan>0</pan>
+      </midi-instrument>
+    </score-part>
+    <score-part id="P23">
+      <part-name>C Trumpet</part-name>
+      <part-name-display>
+        <display-text font-family="FreeSerif">C Trumpet</display-text>
+      </part-name-display>
+      <part-abbreviation>C Tpt.</part-abbreviation>
+      <part-abbreviation-display>
+        <display-text font-family="FreeSerif">C Tpt.</display-text>
+      </part-abbreviation-display>
+      <score-instrument id="P23-I23">
+        <instrument-name>C Trumpet</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P23-I23">
+        <midi-channel>16</midi-channel>
+        <midi-program>57</midi-program>
+        <volume>79</volume>
+        <pan>0</pan>
+      </midi-instrument>
+    </score-part>
+    <score-part id="P24">
+      <part-name>C Trumpet</part-name>
+      <part-name-display>
+        <display-text font-family="FreeSerif">C Trumpet</display-text>
+      </part-name-display>
+      <part-abbreviation>C Tpt.</part-abbreviation>
+      <part-abbreviation-display>
+        <display-text font-family="FreeSerif">C Tpt.</display-text>
+      </part-abbreviation-display>
+      <score-instrument id="P24-I24">
+        <instrument-name>C Trumpet</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P24-I24">
+        <midi-channel>2</midi-channel>
+        <midi-program>57</midi-program>
+        <volume>79</volume>
+        <pan>0</pan>
+      </midi-instrument>
+    </score-part>
+    <score-part id="P25">
+      <part-name>C Trumpet</part-name>
+      <part-name-display>
+        <display-text font-family="FreeSerif">C Trumpet</display-text>
+      </part-name-display>
+      <part-abbreviation>C Tpt.</part-abbreviation>
+      <part-abbreviation-display>
+        <display-text font-family="FreeSerif">C Tpt.</display-text>
+      </part-abbreviation-display>
+      <score-instrument id="P25-I25">
+        <instrument-name>C Trumpet</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P25-I25">
+        <midi-channel>4</midi-channel>
+        <midi-program>57</midi-program>
+        <volume>79</volume>
+        <pan>0</pan>
+      </midi-instrument>
+    </score-part>
+    <score-part id="P26">
+        <part-name>C Trumpet</part-name>
+        <part-name-display>
+            <display-text font-family="FreeSerif">C Trumpet</display-text>
+        </part-name-display>
+        <part-abbreviation>C Tpt.</part-abbreviation>
+        <part-abbreviation-display>
+            <display-text font-family="FreeSerif">C Tpt.</display-text>
+        </part-abbreviation-display>
+        <score-instrument id="P26-I26">
+            <instrument-name>C Trumpet</instrument-name>
+        </score-instrument>
+        <midi-instrument id="P26-I26">
+            <midi-channel>4</midi-channel>
+            <midi-program>57</midi-program>
+            <volume>79</volume>
+            <pan>0</pan>
+        </midi-instrument>
+    </score-part>
+    <score-part id="P27">
+        <part-name>C Trumpet</part-name>
+        <part-name-display>
+            <display-text font-family="FreeSerif">C Trumpet</display-text>
+        </part-name-display>
+        <part-abbreviation>C Tpt.</part-abbreviation>
+        <part-abbreviation-display>
+            <display-text font-family="FreeSerif">C Tpt.</display-text>
+        </part-abbreviation-display>
+        <score-instrument id="P27-I27">
+            <instrument-name>C Trumpet</instrument-name>
+        </score-instrument>
+        <midi-instrument id="P27-I27">
+            <midi-channel>4</midi-channel>
+            <midi-program>57</midi-program>
+            <volume>79</volume>
+            <pan>0</pan>
+        </midi-instrument>
+    </score-part>
+    <score-part id="P28">
+        <part-name>C Trumpet</part-name>
+        <part-name-display>
+            <display-text font-family="FreeSerif">C Trumpet</display-text>
+        </part-name-display>
+        <part-abbreviation>C Tpt.</part-abbreviation>
+        <part-abbreviation-display>
+            <display-text font-family="FreeSerif">C Tpt.</display-text>
+        </part-abbreviation-display>
+        <score-instrument id="P28-I28">
+            <instrument-name>C Trumpet</instrument-name>
+        </score-instrument>
+        <midi-instrument id="P28-I28">
+            <midi-channel>4</midi-channel>
+            <midi-program>57</midi-program>
+            <volume>79</volume>
+            <pan>0</pan>
+        </midi-instrument>
+    </score-part>
+    <score-part id="P29">
+        <part-name>C Trumpet</part-name>
+        <part-name-display>
+            <display-text font-family="FreeSerif">C Trumpet</display-text>
+        </part-name-display>
+        <part-abbreviation>C Tpt.</part-abbreviation>
+        <part-abbreviation-display>
+            <display-text font-family="FreeSerif">C Tpt.</display-text>
+        </part-abbreviation-display>
+        <score-instrument id="P29-I29">
+            <instrument-name>C Trumpet</instrument-name>
+        </score-instrument>
+        <midi-instrument id="P29-I29">
+            <midi-channel>4</midi-channel>
+            <midi-program>57</midi-program>
+            <volume>79</volume>
+            <pan>0</pan>
+        </midi-instrument>
+    </score-part>
+    <score-part id="P30">
+        <part-name>C Trumpet</part-name>
+        <part-name-display>
+            <display-text font-family="FreeSerif">C Trumpet</display-text>
+        </part-name-display>
+        <part-abbreviation>C Tpt.</part-abbreviation>
+        <part-abbreviation-display>
+            <display-text font-family="FreeSerif">C Tpt.</display-text>
+        </part-abbreviation-display>
+        <score-instrument id="P30-I30">
+            <instrument-name>C Trumpet</instrument-name>
+        </score-instrument>
+        <midi-instrument id="P30-I30">
+            <midi-channel>4</midi-channel>
+            <midi-program>57</midi-program>
+            <volume>79</volume>
+            <pan>0</pan>
+        </midi-instrument>
+    </score-part>
+    <score-part id="P31">
+        <part-name>C Trumpet</part-name>
+        <part-name-display>
+            <display-text font-family="FreeSerif">C Trumpet</display-text>
+        </part-name-display>
+        <part-abbreviation>C Tpt.</part-abbreviation>
+        <part-abbreviation-display>
+            <display-text font-family="FreeSerif">C Tpt.</display-text>
+        </part-abbreviation-display>
+        <score-instrument id="P31-I31">
+            <instrument-name>C Trumpet</instrument-name>
+        </score-instrument>
+        <midi-instrument id="P31-I31">
+            <midi-channel>4</midi-channel>
+            <midi-program>57</midi-program>
+            <volume>79</volume>
+            <pan>0</pan>
+        </midi-instrument>
+    </score-part>
+  </part-list>
+  <!--=========================================================-->
+  <part id="P1">
+      <measure number="1" width="216">
+          <print>
+              <staff-layout number="1">
+                  <staff-distance>65</staff-distance>
+              </staff-layout>
+              <measure-numbering>none</measure-numbering>
+          </print>
+          <attributes>
+              <divisions>2</divisions>
+              <key>
+                  <fifths>0</fifths>
+                  <mode>major</mode>
+              </key>
+              <time>
+                  <beats>4</beats>
+                  <beat-type>4</beat-type>
+              </time>
+              <clef>
+                  <sign>G</sign>
+                  <line>2</line>
+              </clef>
+              <transpose>
+                  <diatonic>-4</diatonic>
+                  <chromatic>-7</chromatic>
+              </transpose>
+          </attributes>
+          <sound tempo="120"/>
+          <note default-x="97">
+              <pitch>
+                  <step>B</step>
+                  <octave>2</octave>
+              </pitch>
+              <duration>8</duration>
+              <voice>1</voice>
+              <type>whole</type>
+          </note>
+          <barline location="right">
+              <bar-style>light-heavy</bar-style>
+          </barline>
+      </measure>
+  </part>
+  <!--=========================================================-->
+  <part id="P2">
+    <measure number="1" width="216">
+      <print>
+        <system-layout>
+          <system-margins>
+            <left-margin>58</left-margin>
+            <right-margin>808</right-margin>
+          </system-margins>
+          <top-system-distance>43</top-system-distance>
+        </system-layout>
+        <measure-numbering>system</measure-numbering>
+      </print>
+      <attributes>
+        <divisions>2</divisions>
+        <key>
+          <fifths>0</fifths>
+          <mode>major</mode>
+        </key>
+        <time>
+          <beats>4</beats>
+          <beat-type>4</beat-type>
+        </time>
+        <clef>
+          <sign>G</sign>
+          <line>2</line>
+        </clef>
+        <transpose>
+            <diatonic>-4</diatonic>
+            <chromatic>-7</chromatic>
+        </transpose>
+      </attributes>
+      <sound tempo="120"/>
+      <note default-x="97">
+        <pitch>
+          <step>C</step>
+          <octave>3</octave>
+        </pitch>
+        <duration>8</duration>
+        <voice>1</voice>
+        <type>whole</type>
+      </note>
+      <barline location="right">
+        <bar-style>light-heavy</bar-style>
+      </barline>
+    </measure>
+  </part>
+  <!--=========================================================-->
+  <part id="P3">
+    <measure number="1" width="216">
+      <print>
+        <staff-layout number="1">
+          <staff-distance>65</staff-distance>
+        </staff-layout>
+        <measure-numbering>none</measure-numbering>
+      </print>
+      <attributes>
+        <divisions>2</divisions>
+        <key>
+          <fifths>0</fifths>
+          <mode>major</mode>
+        </key>
+        <time>
+          <beats>4</beats>
+          <beat-type>4</beat-type>
+        </time>
+        <clef>
+          <sign>G</sign>
+          <line>2</line>
+        </clef>
+        <transpose>
+            <diatonic>-4</diatonic>
+            <chromatic>-7</chromatic>
+        </transpose>
+      </attributes>
+      <sound tempo="120"/>
+      <note default-x="97">
+        <pitch>
+          <step>D</step>
+          <alter>-1</alter>
+          <octave>3</octave>
+        </pitch>
+        <duration>8</duration>
+        <voice>1</voice>
+        <type>whole</type>
+        <accidental>flat</accidental>
+      </note>
+      <barline location="right">
+        <bar-style>light-heavy</bar-style>
+      </barline>
+    </measure>
+  </part>
+  <!--=========================================================-->
+  <part id="P4">
+    <measure number="1" width="216">
+      <print>
+        <staff-layout number="1">
+          <staff-distance>65</staff-distance>
+        </staff-layout>
+        <measure-numbering>none</measure-numbering>
+      </print>
+      <attributes>
+        <divisions>2</divisions>
+        <key>
+          <fifths>0</fifths>
+          <mode>major</mode>
+        </key>
+        <time>
+          <beats>4</beats>
+          <beat-type>4</beat-type>
+        </time>
+        <clef>
+          <sign>G</sign>
+          <line>2</line>
+        </clef>
+        <transpose>
+            <diatonic>-4</diatonic>
+            <chromatic>-7</chromatic>
+        </transpose>
+      </attributes>
+      <sound tempo="120"/>
+      <note default-x="97">
+        <pitch>
+          <step>D</step>
+          <octave>3</octave>
+        </pitch>
+        <duration>8</duration>
+        <voice>1</voice>
+        <type>whole</type>
+      </note>
+      <barline location="right">
+        <bar-style>light-heavy</bar-style>
+      </barline>
+    </measure>
+  </part>
+  <!--=========================================================-->
+  <part id="P5">
+    <measure number="1" width="216">
+      <print>
+        <staff-layout number="1">
+          <staff-distance>65</staff-distance>
+        </staff-layout>
+        <measure-numbering>none</measure-numbering>
+      </print>
+      <attributes>
+        <divisions>2</divisions>
+        <key>
+          <fifths>0</fifths>
+          <mode>major</mode>
+        </key>
+        <time>
+          <beats>4</beats>
+          <beat-type>4</beat-type>
+        </time>
+        <clef>
+          <sign>G</sign>
+          <line>2</line>
+        </clef>
+        <transpose>
+            <diatonic>-4</diatonic>
+            <chromatic>-7</chromatic>
+        </transpose>
+      </attributes>
+      <sound tempo="120"/>
+      <note default-x="97">
+        <pitch>
+          <step>E</step>
+          <alter>-1</alter>
+          <octave>3</octave>
+        </pitch>
+        <duration>8</duration>
+        <voice>1</voice>
+        <type>whole</type>
+        <accidental>flat</accidental>
+      </note>
+      <barline location="right">
+        <bar-style>light-heavy</bar-style>
+      </barline>
+    </measure>
+  </part>
+  <!--=========================================================-->
+  <part id="P6">
+    <measure number="1" width="216">
+      <print>
+        <staff-layout number="1">
+          <staff-distance>65</staff-distance>
+        </staff-layout>
+        <measure-numbering>none</measure-numbering>
+      </print>
+      <attributes>
+        <divisions>2</divisions>
+        <key>
+          <fifths>0</fifths>
+          <mode>major</mode>
+        </key>
+        <time>
+          <beats>4</beats>
+          <beat-type>4</beat-type>
+        </time>
+        <clef>
+          <sign>G</sign>
+          <line>2</line>
+        </clef>
+        <transpose>
+            <diatonic>-4</diatonic>
+            <chromatic>-7</chromatic>
+        </transpose>
+      </attributes>
+      <sound tempo="120"/>
+      <note default-x="97">
+        <pitch>
+          <step>E</step>
+          <octave>3</octave>
+        </pitch>
+        <duration>8</duration>
+        <voice>1</voice>
+        <type>whole</type>
+      </note>
+      <barline location="right">
+        <bar-style>light-heavy</bar-style>
+      </barline>
+    </measure>
+  </part>
+  <!--=========================================================-->
+  <part id="P7">
+    <measure number="1" width="216">
+      <print>
+        <staff-layout number="1">
+          <staff-distance>65</staff-distance>
+        </staff-layout>
+        <measure-numbering>none</measure-numbering>
+      </print>
+      <attributes>
+        <divisions>2</divisions>
+        <key>
+          <fifths>0</fifths>
+          <mode>major</mode>
+        </key>
+        <time>
+          <beats>4</beats>
+          <beat-type>4</beat-type>
+        </time>
+        <clef>
+          <sign>G</sign>
+          <line>2</line>
+        </clef>
+        <transpose>
+            <diatonic>-4</diatonic>
+            <chromatic>-7</chromatic>
+        </transpose>
+      </attributes>
+      <sound tempo="120"/>
+      <note default-x="97">
+        <pitch>
+          <step>F</step>
+          <octave>3</octave>
+        </pitch>
+        <duration>8</duration>
+        <voice>1</voice>
+        <type>whole</type>
+      </note>
+      <barline location="right">
+        <bar-style>light-heavy</bar-style>
+      </barline>
+    </measure>
+  </part>
+  <!--=========================================================-->
+  <part id="P8">
+    <measure number="1" width="216">
+      <print>
+        <staff-layout number="1">
+          <staff-distance>65</staff-distance>
+        </staff-layout>
+        <measure-numbering>none</measure-numbering>
+      </print>
+      <attributes>
+        <divisions>2</divisions>
+        <key>
+          <fifths>0</fifths>
+          <mode>major</mode>
+        </key>
+        <time>
+          <beats>4</beats>
+          <beat-type>4</beat-type>
+        </time>
+        <clef>
+          <sign>G</sign>
+          <line>2</line>
+        </clef>
+        <transpose>
+            <diatonic>-4</diatonic>
+            <chromatic>-7</chromatic>
+        </transpose>
+      </attributes>
+      <sound tempo="120"/>
+      <note default-x="97">
+        <pitch>
+          <step>G</step>
+          <alter>-1</alter>
+          <octave>3</octave>
+        </pitch>
+        <duration>8</duration>
+        <voice>1</voice>
+        <type>whole</type>
+        <accidental>flat</accidental>
+      </note>
+      <barline location="right">
+        <bar-style>light-heavy</bar-style>
+      </barline>
+    </measure>
+  </part>
+  <!--=========================================================-->
+  <part id="P9">
+    <measure number="1" width="216">
+      <print>
+        <staff-layout number="1">
+          <staff-distance>65</staff-distance>
+        </staff-layout>
+        <measure-numbering>none</measure-numbering>
+      </print>
+      <attributes>
+        <divisions>2</divisions>
+        <key>
+          <fifths>0</fifths>
+          <mode>major</mode>
+        </key>
+        <time>
+          <beats>4</beats>
+          <beat-type>4</beat-type>
+        </time>
+        <clef>
+          <sign>G</sign>
+          <line>2</line>
+        </clef>
+        <transpose>
+            <diatonic>-4</diatonic>
+            <chromatic>-7</chromatic>
+        </transpose>
+      </attributes>
+      <sound tempo="120"/>
+      <note default-x="97">
+        <pitch>
+          <step>G</step>
+          <octave>3</octave>
+        </pitch>
+        <duration>8</duration>
+        <voice>1</voice>
+        <type>whole</type>
+      </note>
+      <barline location="right">
+        <bar-style>light-heavy</bar-style>
+      </barline>
+    </measure>
+  </part>
+  <!--=========================================================-->
+  <part id="P10">
+    <measure number="1" width="216">
+      <print>
+        <staff-layout number="1">
+          <staff-distance>65</staff-distance>
+        </staff-layout>
+        <measure-numbering>none</measure-numbering>
+      </print>
+      <attributes>
+        <divisions>2</divisions>
+        <key>
+          <fifths>0</fifths>
+          <mode>major</mode>
+        </key>
+        <time>
+          <beats>4</beats>
+          <beat-type>4</beat-type>
+        </time>
+        <clef>
+          <sign>G</sign>
+          <line>2</line>
+        </clef>
+        <transpose>
+            <diatonic>-4</diatonic>
+            <chromatic>-7</chromatic>
+        </transpose>
+      </attributes>
+      <sound tempo="120"/>
+      <note default-x="97">
+        <pitch>
+          <step>A</step>
+          <alter>-1</alter>
+          <octave>3</octave>
+        </pitch>
+        <duration>8</duration>
+        <voice>1</voice>
+        <type>whole</type>
+        <accidental>flat</accidental>
+      </note>
+      <barline location="right">
+        <bar-style>light-heavy</bar-style>
+      </barline>
+    </measure>
+  </part>
+  <!--=========================================================-->
+  <part id="P11">
+    <measure number="1" width="216">
+      <print>
+        <staff-layout number="1">
+          <staff-distance>65</staff-distance>
+        </staff-layout>
+        <measure-numbering>none</measure-numbering>
+      </print>
+      <attributes>
+        <divisions>2</divisions>
+        <key>
+          <fifths>0</fifths>
+          <mode>major</mode>
+        </key>
+        <time>
+          <beats>4</beats>
+          <beat-type>4</beat-type>
+        </time>
+        <clef>
+          <sign>G</sign>
+          <line>2</line>
+        </clef>
+        <transpose>
+            <diatonic>-4</diatonic>
+            <chromatic>-7</chromatic>
+        </transpose>
+      </attributes>
+      <sound tempo="120"/>
+      <note default-x="97">
+        <pitch>
+          <step>A</step>
+          <octave>3</octave>
+        </pitch>
+        <duration>8</duration>
+        <voice>1</voice>
+        <type>whole</type>
+      </note>
+      <barline location="right">
+        <bar-style>light-heavy</bar-style>
+      </barline>
+    </measure>
+  </part>
+  <!--=========================================================-->
+  <part id="P12">
+    <measure number="1" width="216">
+      <print>
+        <staff-layout number="1">
+          <staff-distance>65</staff-distance>
+        </staff-layout>
+        <measure-numbering>none</measure-numbering>
+      </print>
+      <attributes>
+        <divisions>2</divisions>
+        <key>
+          <fifths>0</fifths>
+          <mode>major</mode>
+        </key>
+        <time>
+          <beats>4</beats>
+          <beat-type>4</beat-type>
+        </time>
+        <clef>
+          <sign>G</sign>
+          <line>2</line>
+        </clef>
+        <transpose>
+            <diatonic>-4</diatonic>
+            <chromatic>-7</chromatic>
+        </transpose>
+      </attributes>
+      <sound tempo="120"/>
+      <note default-x="97">
+        <pitch>
+          <step>B</step>
+          <alter>-1</alter>
+          <octave>3</octave>
+        </pitch>
+        <duration>8</duration>
+        <voice>1</voice>
+        <type>whole</type>
+        <accidental>flat</accidental>
+      </note>
+      <barline location="right">
+        <bar-style>light-heavy</bar-style>
+      </barline>
+    </measure>
+  </part>
+  <!--=========================================================-->
+  <part id="P13">
+    <measure number="1" width="216">
+      <print>
+        <staff-layout number="1">
+          <staff-distance>65</staff-distance>
+        </staff-layout>
+        <measure-numbering>none</measure-numbering>
+      </print>
+      <attributes>
+        <divisions>2</divisions>
+        <key>
+          <fifths>0</fifths>
+          <mode>major</mode>
+        </key>
+        <time>
+          <beats>4</beats>
+          <beat-type>4</beat-type>
+        </time>
+        <clef>
+          <sign>G</sign>
+          <line>2</line>
+        </clef>
+        <transpose>
+            <diatonic>-4</diatonic>
+            <chromatic>-7</chromatic>
+        </transpose>
+      </attributes>
+      <sound tempo="120"/>
+      <note default-x="97">
+        <pitch>
+          <step>B</step>
+          <octave>3</octave>
+        </pitch>
+        <duration>8</duration>
+        <voice>1</voice>
+        <type>whole</type>
+      </note>
+      <barline location="right">
+        <bar-style>light-heavy</bar-style>
+      </barline>
+    </measure>
+  </part>
+  <!--=========================================================-->
+  <part id="P14">
+    <measure number="1" width="216">
+      <print>
+        <staff-layout number="1">
+          <staff-distance>65</staff-distance>
+        </staff-layout>
+        <measure-numbering>none</measure-numbering>
+      </print>
+      <attributes>
+        <divisions>2</divisions>
+        <key>
+          <fifths>0</fifths>
+          <mode>major</mode>
+        </key>
+        <time>
+          <beats>4</beats>
+          <beat-type>4</beat-type>
+        </time>
+        <clef>
+          <sign>G</sign>
+          <line>2</line>
+        </clef>
+        <transpose>
+            <diatonic>-4</diatonic>
+            <chromatic>-7</chromatic>
+        </transpose>
+      </attributes>
+      <sound tempo="120"/>
+      <note default-x="97">
+        <pitch>
+          <step>C</step>
+          <octave>4</octave>
+        </pitch>
+        <duration>8</duration>
+        <voice>1</voice>
+        <type>whole</type>
+      </note>
+      <barline location="right">
+        <bar-style>light-heavy</bar-style>
+      </barline>
+    </measure>
+  </part>
+  <!--=========================================================-->
+  <part id="P15">
+    <measure number="1" width="216">
+      <print>
+        <staff-layout number="1">
+          <staff-distance>65</staff-distance>
+        </staff-layout>
+        <measure-numbering>none</measure-numbering>
+      </print>
+      <attributes>
+        <divisions>2</divisions>
+        <key>
+          <fifths>0</fifths>
+          <mode>major</mode>
+        </key>
+        <time>
+          <beats>4</beats>
+          <beat-type>4</beat-type>
+        </time>
+        <clef>
+          <sign>G</sign>
+          <line>2</line>
+        </clef>
+        <transpose>
+            <diatonic>-4</diatonic>
+            <chromatic>-7</chromatic>
+        </transpose>
+      </attributes>
+      <sound tempo="120"/>
+      <note default-x="97">
+        <pitch>
+          <step>D</step>
+          <alter>-1</alter>
+          <octave>4</octave>
+        </pitch>
+        <duration>8</duration>
+        <voice>1</voice>
+        <type>whole</type>
+        <accidental>flat</accidental>
+      </note>
+      <barline location="right">
+        <bar-style>light-heavy</bar-style>
+      </barline>
+    </measure>
+  </part>
+  <!--=========================================================-->
+  <part id="P16">
+    <measure number="1" width="216">
+      <print>
+        <staff-layout number="1">
+          <staff-distance>65</staff-distance>
+        </staff-layout>
+        <measure-numbering>none</measure-numbering>
+      </print>
+      <attributes>
+        <divisions>2</divisions>
+        <key>
+          <fifths>0</fifths>
+          <mode>major</mode>
+        </key>
+        <time>
+          <beats>4</beats>
+          <beat-type>4</beat-type>
+        </time>
+        <clef>
+          <sign>G</sign>
+          <line>2</line>
+        </clef>
+        <transpose>
+            <diatonic>-4</diatonic>
+            <chromatic>-7</chromatic>
+        </transpose>
+      </attributes>
+      <sound tempo="120"/>
+      <note default-x="97">
+        <pitch>
+          <step>D</step>
+          <octave>4</octave>
+        </pitch>
+        <duration>8</duration>
+        <voice>1</voice>
+        <type>whole</type>
+      </note>
+      <barline location="right">
+        <bar-style>light-heavy</bar-style>
+      </barline>
+    </measure>
+  </part>
+  <!--=========================================================-->
+  <part id="P17">
+    <measure number="1" width="216">
+      <print>
+        <staff-layout number="1">
+          <staff-distance>65</staff-distance>
+        </staff-layout>
+        <measure-numbering>none</measure-numbering>
+      </print>
+      <attributes>
+        <divisions>2</divisions>
+        <key>
+          <fifths>0</fifths>
+          <mode>major</mode>
+        </key>
+        <time>
+          <beats>4</beats>
+          <beat-type>4</beat-type>
+        </time>
+        <clef>
+          <sign>G</sign>
+          <line>2</line>
+        </clef>
+        <transpose>
+            <diatonic>-4</diatonic>
+            <chromatic>-7</chromatic>
+        </transpose>
+      </attributes>
+      <sound tempo="120"/>
+      <note default-x="97">
+        <pitch>
+          <step>E</step>
+          <alter>-1</alter>
+          <octave>4</octave>
+        </pitch>
+        <duration>8</duration>
+        <voice>1</voice>
+        <type>whole</type>
+        <accidental>flat</accidental>
+      </note>
+      <barline location="right">
+        <bar-style>light-heavy</bar-style>
+      </barline>
+    </measure>
+  </part>
+  <!--=========================================================-->
+  <part id="P18">
+    <measure number="1" width="216">
+      <print>
+        <staff-layout number="1">
+          <staff-distance>65</staff-distance>
+        </staff-layout>
+        <measure-numbering>none</measure-numbering>
+      </print>
+      <attributes>
+        <divisions>2</divisions>
+        <key>
+          <fifths>0</fifths>
+          <mode>major</mode>
+        </key>
+        <time>
+          <beats>4</beats>
+          <beat-type>4</beat-type>
+        </time>
+        <clef>
+          <sign>G</sign>
+          <line>2</line>
+        </clef>
+        <transpose>
+            <diatonic>-4</diatonic>
+            <chromatic>-7</chromatic>
+        </transpose>
+      </attributes>
+      <sound tempo="120"/>
+      <note default-x="97">
+        <pitch>
+          <step>E</step>
+          <octave>4</octave>
+        </pitch>
+        <duration>8</duration>
+        <voice>1</voice>
+        <type>whole</type>
+      </note>
+      <barline location="right">
+        <bar-style>light-heavy</bar-style>
+      </barline>
+    </measure>
+  </part>
+  <!--=========================================================-->
+  <part id="P19">
+    <measure number="1" width="216">
+      <print>
+        <staff-layout number="1">
+          <staff-distance>65</staff-distance>
+        </staff-layout>
+        <measure-numbering>none</measure-numbering>
+      </print>
+      <attributes>
+        <divisions>2</divisions>
+        <key>
+          <fifths>0</fifths>
+          <mode>major</mode>
+        </key>
+        <time>
+          <beats>4</beats>
+          <beat-type>4</beat-type>
+        </time>
+        <clef>
+          <sign>G</sign>
+          <line>2</line>
+        </clef>
+        <transpose>
+            <diatonic>-4</diatonic>
+            <chromatic>-7</chromatic>
+        </transpose>
+      </attributes>
+      <sound tempo="120"/>
+      <note default-x="97">
+        <pitch>
+          <step>F</step>
+          <octave>4</octave>
+        </pitch>
+        <duration>8</duration>
+        <voice>1</voice>
+        <type>whole</type>
+      </note>
+      <barline location="right">
+        <bar-style>light-heavy</bar-style>
+      </barline>
+    </measure>
+  </part>
+  <!--=========================================================-->
+  <part id="P20">
+    <measure number="1" width="216">
+      <print>
+        <staff-layout number="1">
+          <staff-distance>65</staff-distance>
+        </staff-layout>
+        <measure-numbering>none</measure-numbering>
+      </print>
+      <attributes>
+        <divisions>2</divisions>
+        <key>
+          <fifths>0</fifths>
+          <mode>major</mode>
+        </key>
+        <time>
+          <beats>4</beats>
+          <beat-type>4</beat-type>
+        </time>
+        <clef>
+          <sign>G</sign>
+          <line>2</line>
+        </clef>
+        <transpose>
+            <diatonic>-4</diatonic>
+            <chromatic>-7</chromatic>
+        </transpose>
+      </attributes>
+      <sound tempo="120"/>
+      <note default-x="97">
+        <pitch>
+          <step>G</step>
+          <alter>-1</alter>
+          <octave>4</octave>
+        </pitch>
+        <duration>8</duration>
+        <voice>1</voice>
+        <type>whole</type>
+        <accidental>flat</accidental>
+      </note>
+      <barline location="right">
+        <bar-style>light-heavy</bar-style>
+      </barline>
+    </measure>
+  </part>
+  <!--=========================================================-->
+  <part id="P21">
+    <measure number="1" width="216">
+      <print>
+        <staff-layout number="1">
+          <staff-distance>65</staff-distance>
+        </staff-layout>
+        <measure-numbering>none</measure-numbering>
+      </print>
+      <attributes>
+        <divisions>2</divisions>
+        <key>
+          <fifths>0</fifths>
+          <mode>major</mode>
+        </key>
+        <time>
+          <beats>4</beats>
+          <beat-type>4</beat-type>
+        </time>
+        <clef>
+          <sign>G</sign>
+          <line>2</line>
+        </clef>
+        <transpose>
+            <diatonic>-4</diatonic>
+            <chromatic>-7</chromatic>
+        </transpose>
+      </attributes>
+      <sound tempo="120"/>
+      <note default-x="97">
+        <pitch>
+          <step>G</step>
+          <octave>4</octave>
+        </pitch>
+        <duration>8</duration>
+        <voice>1</voice>
+        <type>whole</type>
+      </note>
+      <barline location="right">
+        <bar-style>light-heavy</bar-style>
+      </barline>
+    </measure>
+  </part>
+  <!--=========================================================-->
+  <part id="P22">
+    <measure number="1" width="216">
+      <print>
+        <staff-layout number="1">
+          <staff-distance>65</staff-distance>
+        </staff-layout>
+        <measure-numbering>none</measure-numbering>
+      </print>
+      <attributes>
+        <divisions>2</divisions>
+        <key>
+          <fifths>0</fifths>
+          <mode>major</mode>
+        </key>
+        <time>
+          <beats>4</beats>
+          <beat-type>4</beat-type>
+        </time>
+        <clef>
+          <sign>G</sign>
+          <line>2</line>
+        </clef>
+        <transpose>
+            <diatonic>-4</diatonic>
+            <chromatic>-7</chromatic>
+        </transpose>
+      </attributes>
+      <sound tempo="120"/>
+      <note default-x="97">
+        <pitch>
+          <step>A</step>
+          <alter>-1</alter>
+          <octave>4</octave>
+        </pitch>
+        <duration>8</duration>
+        <voice>1</voice>
+        <type>whole</type>
+        <accidental>flat</accidental>
+      </note>
+      <barline location="right">
+        <bar-style>light-heavy</bar-style>
+      </barline>
+    </measure>
+  </part>
+  <!--=========================================================-->
+  <part id="P23">
+    <measure number="1" width="216">
+      <print>
+        <staff-layout number="1">
+          <staff-distance>65</staff-distance>
+        </staff-layout>
+        <measure-numbering>none</measure-numbering>
+      </print>
+      <attributes>
+        <divisions>2</divisions>
+        <key>
+          <fifths>0</fifths>
+          <mode>major</mode>
+        </key>
+        <time>
+          <beats>4</beats>
+          <beat-type>4</beat-type>
+        </time>
+        <clef>
+          <sign>G</sign>
+          <line>2</line>
+        </clef>
+        <transpose>
+            <diatonic>-4</diatonic>
+            <chromatic>-7</chromatic>
+        </transpose>
+      </attributes>
+      <sound tempo="120"/>
+      <note default-x="97">
+        <pitch>
+          <step>A</step>
+          <octave>4</octave>
+        </pitch>
+        <duration>8</duration>
+        <voice>1</voice>
+        <type>whole</type>
+      </note>
+      <barline location="right">
+        <bar-style>light-heavy</bar-style>
+      </barline>
+    </measure>
+  </part>
+  <!--=========================================================-->
+  <part id="P24">
+    <measure number="1" width="216">
+      <print>
+        <staff-layout number="1">
+          <staff-distance>65</staff-distance>
+        </staff-layout>
+        <measure-numbering>none</measure-numbering>
+      </print>
+      <attributes>
+        <divisions>2</divisions>
+        <key>
+          <fifths>0</fifths>
+          <mode>major</mode>
+        </key>
+        <time>
+          <beats>4</beats>
+          <beat-type>4</beat-type>
+        </time>
+        <clef>
+          <sign>G</sign>
+          <line>2</line>
+        </clef>
+        <transpose>
+            <diatonic>-4</diatonic>
+            <chromatic>-7</chromatic>
+        </transpose>
+      </attributes>
+      <sound tempo="120"/>
+      <note default-x="97">
+        <pitch>
+          <step>B</step>
+          <alter>-1</alter>
+          <octave>4</octave>
+        </pitch>
+        <duration>8</duration>
+        <voice>1</voice>
+        <type>whole</type>
+        <accidental>flat</accidental>
+      </note>
+      <barline location="right">
+        <bar-style>light-heavy</bar-style>
+      </barline>
+    </measure>
+  </part>
+  <!--=========================================================-->
+  <part id="P25">
+    <measure number="1" width="216">
+      <print>
+        <staff-layout number="1">
+          <staff-distance>65</staff-distance>
+        </staff-layout>
+        <measure-numbering>none</measure-numbering>
+      </print>
+      <attributes>
+        <divisions>2</divisions>
+        <key>
+          <fifths>0</fifths>
+          <mode>major</mode>
+        </key>
+        <time>
+          <beats>4</beats>
+          <beat-type>4</beat-type>
+        </time>
+        <clef>
+          <sign>G</sign>
+          <line>2</line>
+        </clef>
+        <transpose>
+            <diatonic>-4</diatonic>
+            <chromatic>-7</chromatic>
+        </transpose>
+      </attributes>
+      <sound tempo="120"/>
+      <note default-x="97">
+        <pitch>
+          <step>B</step>
+          <octave>4</octave>
+        </pitch>
+        <duration>8</duration>
+        <voice>1</voice>
+        <type>whole</type>
+       </note>
+      <barline location="right">
+        <bar-style>light-heavy</bar-style>
+      </barline>
+    </measure>
+  </part>
+  <!--=========================================================-->
+  <part id="P26">
+    <measure number="1" width="216">
+      <print>
+        <staff-layout number="1">
+          <staff-distance>65</staff-distance>
+        </staff-layout>
+        <measure-numbering>none</measure-numbering>
+      </print>
+      <attributes>
+        <divisions>2</divisions>
+        <key>
+          <fifths>0</fifths>
+          <mode>major</mode>
+        </key>
+        <time>
+          <beats>4</beats>
+          <beat-type>4</beat-type>
+        </time>
+        <clef>
+          <sign>G</sign>
+          <line>2</line>
+        </clef>
+        <transpose>
+            <diatonic>-4</diatonic>
+            <chromatic>-7</chromatic>
+        </transpose>
+      </attributes>
+      <sound tempo="120"/>
+      <note default-x="97">
+        <pitch>
+          <step>C</step>
+          <octave>5</octave>
+        </pitch>
+        <duration>8</duration>
+        <voice>1</voice>
+        <type>whole</type>
+      </note>
+      <barline location="right">
+        <bar-style>light-heavy</bar-style>
+      </barline>
+    </measure>
+  </part>
+<!--=========================================================-->
+<!--========= SCF Added The Ones below this line ============-->
+<!--=========================================================-->
+<part id="P27">
+    <measure number="1" width="216">
+        <print>
+            <staff-layout number="1">
+                <staff-distance>65</staff-distance>
+            </staff-layout>
+            <measure-numbering>none</measure-numbering>
+        </print>
+        <attributes>
+            <divisions>2</divisions>
+            <key>
+                <fifths>0</fifths>
+                <mode>major</mode>
+            </key>
+            <time>
+                <beats>4</beats>
+                <beat-type>4</beat-type>
+            </time>
+            <clef>
+                <sign>G</sign>
+                <line>2</line>
+            </clef>
+            <transpose>
+                <diatonic>-4</diatonic>
+                <chromatic>-7</chromatic>
+            </transpose>
+        </attributes>
+        <sound tempo="120"/>
+        <note default-x="97">
+            <pitch>
+                <step>D</step>
+                <alter>-1</alter>
+                <octave>5</octave>
+            </pitch>
+            <duration>8</duration>
+            <voice>1</voice>
+            <type>whole</type>
+            <accidental>flat</accidental>
+        </note>
+        <barline location="right">
+            <bar-style>light-heavy</bar-style>
+        </barline>
+    </measure>
+</part>
+<!--=========================================================-->
+<part id="P28">
+    <measure number="1" width="216">
+        <print>
+            <staff-layout number="1">
+                <staff-distance>65</staff-distance>
+            </staff-layout>
+            <measure-numbering>none</measure-numbering>
+        </print>
+        <attributes>
+            <divisions>2</divisions>
+            <key>
+                <fifths>0</fifths>
+                <mode>major</mode>
+            </key>
+            <time>
+                <beats>4</beats>
+                <beat-type>4</beat-type>
+            </time>
+            <clef>
+                <sign>G</sign>
+                <line>2</line>
+            </clef>
+            <transpose>
+                <diatonic>-4</diatonic>
+                <chromatic>-7</chromatic>
+            </transpose>
+        </attributes>
+        <sound tempo="120"/>
+        <note default-x="97">
+            <pitch>
+                <step>D</step>
+                <octave>5</octave>
+            </pitch>
+            <duration>8</duration>
+            <voice>1</voice>
+            <type>whole</type>
+        </note>
+        <barline location="right">
+            <bar-style>light-heavy</bar-style>
+        </barline>
+    </measure>
+</part>
+<!--=========================================================-->
+<part id="P29">
+    <measure number="1" width="216">
+        <print>
+            <staff-layout number="1">
+                <staff-distance>65</staff-distance>
+            </staff-layout>
+            <measure-numbering>none</measure-numbering>
+        </print>
+        <attributes>
+            <divisions>2</divisions>
+            <key>
+                <fifths>0</fifths>
+                <mode>major</mode>
+            </key>
+            <time>
+                <beats>4</beats>
+                <beat-type>4</beat-type>
+            </time>
+            <clef>
+                <sign>G</sign>
+                <line>2</line>
+            </clef>
+            <transpose>
+                <diatonic>-4</diatonic>
+                <chromatic>-7</chromatic>
+            </transpose>
+        </attributes>
+        <sound tempo="120"/>
+        <note default-x="97">
+            <pitch>
+                <step>E</step>
+                <alter>-1</alter>
+                <octave>5</octave>
+            </pitch>
+            <duration>8</duration>
+            <voice>1</voice>
+            <type>whole</type>
+            <accidental>flat</accidental>
+        </note>
+        <barline location="right">
+            <bar-style>light-heavy</bar-style>
+        </barline>
+    </measure>
+</part>
+<!--=========================================================-->
+<part id="P30">
+    <measure number="1" width="216">
+        <print>
+            <staff-layout number="1">
+                <staff-distance>65</staff-distance>
+            </staff-layout>
+            <measure-numbering>none</measure-numbering>
+        </print>
+        <attributes>
+            <divisions>2</divisions>
+            <key>
+                <fifths>0</fifths>
+                <mode>major</mode>
+            </key>
+            <time>
+                <beats>4</beats>
+                <beat-type>4</beat-type>
+            </time>
+            <clef>
+                <sign>G</sign>
+                <line>2</line>
+            </clef>
+            <transpose>
+                <diatonic>-4</diatonic>
+                <chromatic>-7</chromatic>
+            </transpose>
+        </attributes>
+        <sound tempo="120"/>
+        <note default-x="97">
+            <pitch>
+                <step>E</step>
+                <octave>5</octave>
+            </pitch>
+            <duration>8</duration>
+            <voice>1</voice>
+            <type>whole</type>
+        </note>
+        <barline location="right">
+            <bar-style>light-heavy</bar-style>
+        </barline>
+    </measure>
+</part>
+<!--=========================================================-->
+<part id="P31">
+    <measure number="1" width="216">
+        <print>
+            <staff-layout number="1">
+                <staff-distance>65</staff-distance>
+            </staff-layout>
+            <measure-numbering>none</measure-numbering>
+        </print>
+        <attributes>
+            <divisions>2</divisions>
+            <key>
+                <fifths>0</fifths>
+                <mode>major</mode>
+            </key>
+            <time>
+                <beats>4</beats>
+                <beat-type>4</beat-type>
+            </time>
+            <clef>
+                <sign>G</sign>
+                <line>2</line>
+            </clef>
+            <transpose>
+                <diatonic>-4</diatonic>
+                <chromatic>-7</chromatic>
+            </transpose>
+        </attributes>
+        <sound tempo="120"/>
+        <note default-x="97">
+            <pitch>
+                <step>F</step>
+                <octave>5</octave>
+            </pitch>
+            <duration>8</duration>
+            <voice>1</voice>
+            <type>whole</type>
+        </note>
+        <barline location="right">
+            <bar-style>light-heavy</bar-style>
+        </barline>
+    </measure>
+</part>
+<!--=========================================================-->
+</score-partwise>
