@@ -15,10 +15,11 @@ import Foundation
 import SwiftyJSON
 import AudioKit
 
-var gDoOverrideSubsPresent = true       // CHECK_THIS_FOR_SUBMIT
-var gDoLimitLevels = false              // CHECK_THIS_FOR_SUBMIT
-let kNumberOfLevelsToShow: Int = 10
+var gDoOverrideSubsPresent = false       // CHECK_THIS_FOR_SUBMIT
+var gDoLimitLevels = true              // CHECK_THIS_FOR_SUBMIT
+let kNumberOfLevelsToShow: Int = 11
 
+let kTryoutUpperExercisesLevel: Int = 10
 
 let levelHeaderSpacingStr = "       " // leaves room at front for checkbox icon
 
@@ -42,6 +43,9 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
     var currDay = 0
 
     var allowAllLevelAccess = false
+    
+    var timer = Timer()
+    var tryoutBackgroundColor = kSeaFoamBlue
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -68,6 +72,13 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
             //presentWannaCheckForNewVersionAlert()
             presentCheckForNewVersionAlert()
         }
+        
+//        timer = Timer.scheduledTimer(
+//            timeInterval: 1.5,
+//            target: self,
+//            selector: #selector(LevelSeriesViewController.changeTryputHeaderColor),
+//            userInfo: nil,
+//            repeats: true)
     }
     
     override func viewDidLoad() {
@@ -107,6 +118,21 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.reloadData()
+    }
+    
+    @objc func changeTryputHeaderColor() {
+        if tryoutBackgroundColor == kSeaFoamBlue {
+            tryoutBackgroundColor = kLightSkyBlue
+        } else {
+            tryoutBackgroundColor = kSeaFoamBlue
+        }
+        
+        delay( 0.25) {
+            let indexSet = IndexSet(integer:kTryoutUpperExercisesLevel)
+//        self.tableView.beginUpdates()
+            self.tableView.reloadSections(indexSet, with: .automatic)
+//        self.tableView.endUpdates()
+        }
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -340,7 +366,7 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
         let vw = g.view as! LevelSeriesTableViewHeaderFooterView
         let section = vw.section
         
-        if !allowAllLevelAccess && section >= 2 {
+        if !allowAllLevelAccess && (section >= 2 && section != kTryoutUpperExercisesLevel) {
 //            if PlayTunesIAPProducts.store.purchaseStatus.confirmed &&
 //               PlayTunesIAPProducts.store.purchaseStatus.state == .expired {
             if PlayTunesIAPProducts.store.userDefsStoredSubscStatusIsKnown() &&
@@ -378,6 +404,12 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
                 delay( 0.25) {
                     let idxPath = IndexPath(row:0, section: section)
                     self.tableView.scrollToRow(at: idxPath, at: .top, animated: true)
+                    if kTryoutUpperExercisesLevel == section {
+                        self.timer.invalidate()
+                        delay( 0.5) {
+                            self.displayTryoutAlert()
+                        }
+                    }
                     self.handlingSectionTap = false
                 }
             }
@@ -385,6 +417,18 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
                 self.handlingSectionTap = false
             }
         }
+    }
+    
+    func displayTryoutAlert() {
+        let titleStr = "Are you a more advanced student?"
+        var msgStr = "\n\nWant to see what the upper \nlevels are like?\n\n"
+        msgStr += "These are examples of what you'll be able to enjoy if you subscribe to PlayTunes.\n\n"
+        msgStr += "More levels coming on a regular basis!\n"
+        let ac = MyUIAlertController(title: titleStr, message: msgStr, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK",
+                                   style: .default,
+                                   handler: nil))
+        ac.show(animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -395,7 +439,11 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
 //        } else {
 //            header.backgroundView?.backgroundColor = kDefaultViewBackgroundColor
 //        }
-        if !allowAllLevelAccess && section >= 2 {
+        
+        if kTryoutUpperExercisesLevel == section {
+            header.contentView.backgroundColor = tryoutBackgroundColor
+            header.textLabel?.textColor = .darkGray
+        } else if !allowAllLevelAccess && section >= 2 {
             header.contentView.backgroundColor = kDefault_DisabledSectionBkgrndColor
             header.textLabel?.textColor = .darkGray
         } else {

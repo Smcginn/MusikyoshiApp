@@ -14,7 +14,8 @@ protocol DoneShowingVideo : class {
     func VideoViewClosed()
 }
 
-class TuneExerciseViewController: UIViewController, SSSyControls, SSUTempo, SSNoteHandler, SSSynthParameterControls, SSFrequencyConverter,
+
+class TuneExerciseViewController: PlaybackInstrumentViewController, SSUTempo, SSNoteHandler,
 OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
 
    // @IBOutlet weak var orderStatusNavigationbar: UINavigationBar!
@@ -68,81 +69,10 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
         returnToCallingVC()
     }
 
-    // protocol SSFrequencyConverter
-
-    /*!
-     @method frequency:
-     @abstract convert a midi pitch to frequency
-     */
-    public func frequency(_ midiPitch: Int32) -> Float {
-        return intonation.frequency(midiPitch)
-    }
-
-    //protocol SSSynthParameterControls
-
-    /*!
-     @method waveform
-     @abstract return a waveform type for the waveform generator
-     @discussion called by the synthesizer while playing
-     */
-    func waveform() -> sscore_sy_synthesizedinstrument_waveform
-    {
-        switch synthVoice
-        {
-        case .Sine : return sscore_sy_sine
-        case .Square : return sscore_sy_square
-        case .Triangle : return sscore_sy_triangle
-        default: return sscore_sy_sine
-        }
-    }
-
-    /*!
-     @method waveformSymmetry
-     @abstract return a symmetry value for square and triangle waveforms
-     @discussion called by the synthesizer while playing
-     */
-    func waveformSymmetry() -> Float
-    {
-        return waveformSymmetryValue
-    }
-
-    /*!
-     @method waveformRiseFall
-     @abstract return a rise-fall value for the square waveform (in samples at 44100samples/s)
-     @discussion called by the synthesizer while playing
-     */
-    public func waveformRiseFall() -> Int32 {
-        return Int32(waveformRiseFallValue)
-    }
-
-    private var kSampledInstrumentsInfo : [SSSampledInstrumentInfo] {
-        get {
-            var rval = [SSSampledInstrumentInfo]()
-            rval.append(SSSampledInstrumentInfo("Piano", base_filename: "Piano.mf", extension: "m4a", base_midipitch: 23, numfiles: 86, volume: Float(1.0), attack_time_ms: 4, decay_time_ms: 10, overlap_time_ms: 10, alternativenames: "piano,pianoforte,klavier", pitch_offset: 0, family: sscore_sy_instrumentfamily_hammeredstring, flags: 0, samplesflags: 0))
-            //rval.append(SSSampledInstrumentInfo("MidiPercussion", base_filename: "Drum", extension: "mp3", base_midipitch: 35, numfiles: 47, volume: Float(1.0), attack_time_ms: 4, decay_time_ms: 10, overlap_time_ms: 10, alternativenames: "percussion,MidiPercussion", pitch_offset: 0, family: sscore_sy_instrumentfamily_midi_percussion, flags: sscore_sy_suppressrmscompensation_flag, samplesflags: 0))
-            rval.append(SSSampledInstrumentInfo("Trumpet", base_filename: "Trumpet.novib.mf", extension: "m4a", base_midipitch: 52, numfiles: 35, volume: Float(1.0), attack_time_ms: 2, decay_time_ms: 10, overlap_time_ms: 1, alternativenames: "trumpet", pitch_offset: 0, family: sscore_sy_instrumentfamily_hammeredstring, flags: 0, samplesflags: 0))
-            return rval
-        }
-    }
-
-    private let intonation = Intonation(temperament: Intonation.Temperament.Equal)
-
-    private var kSynthesizedInstrumentsInfo : [SSSynthesizedInstrumentInfo] {
-        get {
-            var rval = [SSSynthesizedInstrumentInfo]()
-            rval.append(SSSynthesizedInstrumentInfo("Tick", volume: Float(1.0), type:sscore_sy_tick1, attack_time_ms:4, decay_time_ms:20, flags:0, frequencyConv: nil, parameters: nil))
-            rval.append(SSSynthesizedInstrumentInfo("Waveform", volume: Float(1.0), type:sscore_sy_pitched_waveform_instrument, attack_time_ms:4, decay_time_ms:20, flags:0, frequencyConv: self, parameters: self))
-            return rval
-        }
-    }
-
-//    let feedbackView = FeedbackView()
-
-
-//    let mxmlService = MusicXMLService()
     let amplitudeThreshold = UserDefaults.standard.double(forKey: Constants.Settings.AmplitudeThreshold)
     let timingThreshold = UserDefaults.standard.double(forKey: Constants.Settings.TimingThreshold)
     let tempoBPM = UserDefaults.standard.integer(forKey: Constants.Settings.BPM)
+    // TRANSHYAR
     let transpositionOffset = UserDefaults.standard.integer(forKey: Constants.Settings.Transposition)
     let frequencyThreshold = UserDefaults.standard.double(forKey: Constants.Settings.FrequencyThreshold)
     var showNoteMarkers = UserDefaults.standard.bool(forKey: Constants.Settings.ShowNoteMarkers)
@@ -153,27 +83,12 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
     var	showingParts = [NSNumber]()
     var layOptions = SSLayoutOptions()  // set of options for layout
     var playData: SSPData?
-    var synth: SSSynth?
-//    var instrumentId = [UInt32]()
-//    var metronomeInstrumentId: UInt32 = 0
-
-    private static  let kDefaultRiseFallSamples = 4
-    private var synthVoice = SSSynthVoice.Sampled
-    private var waveformSymmetryValue = Float(0.5)
-    private var waveformRiseFallValue = kDefaultRiseFallSamples // samples in rise/fall of square waveform
-
-    private var sampledInstrumentIds = [UInt]()
-    private var synthesizedInstrumentIds = [UInt]()
-    private var metronomeInstrumentIds = [UInt]()
-    private static let kMaxInstruments = 10
-
+    
     var cursorBarIndex = Int32(0)
 //    let kDefaultMagnification: Float = 1.5
     let kDefaultMagnification: Float = UserDefaults.standard.float(forKey: Constants.Settings.ScoreMagnification) / 10.0
     var metronomeOn = false
     var beatsPerBar = 0
-
-    var playingSynth = false    //if !playingSynth then must be analysing
 
 //    var tickPlayer: AVAudioPlayer?
 
@@ -677,8 +592,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
             } else {
                 infoLabel.text = "Listen - and clap at the beginning of each note and count the beats"
             }
-        } else
-        if isTune {
+        } else if isTune {
             infoLabel.text = "Play the notes"
         } else {
             infoLabel.text = "Clap at the beginning of each note and count the beats"
@@ -722,6 +636,9 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
             synth?.reset()
         } else {
             if synth == nil {
+                
+                // Build Instrument   BINSTHERE
+                
                 if let synth0 = SSSynth.createSynth(self, score: score) {
                     synth = synth0
 /*
@@ -1922,120 +1839,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
             ssScrollView.colour(notes, colour: theColor)
         }
     }
-
-    //MARK: SSSyControls protocol
-    func partEnabled(_ partIndex: Int32) -> Bool {
-        return true;
-    }
-
-    func partInstrument(_ partIndex: Int32) -> UInt32 {
-        guard playingSynth else
-        {
-            return 0
-        }
-
-//        if (kNumSampledInstruments > 1) {
-//            return instrumentId[1]
-//        }
-//        return instrumentIds[0] // we can return any other instrument here
-        if synthVoice == SSSynthVoice.Sampled {
-            return UInt32(instrumentForPart(partIndex : Int(partIndex)))
-        } else if !synthesizedInstrumentIds.isEmpty {
-            return UInt32(synthesizedInstrumentIds[0])
-        }
-        return 0
-  }
-
-    func instrumentForPart(partIndex : Int) -> UInt
-    {
-        guard !sampledInstrumentIds.isEmpty else { return 0 }
-
-        var index = 0
-        if sampledInstrumentIds.count > 1 {
-            index = UserDefaults.standard.bool(forKey: Constants.Settings.PlayTrumpet) ? 1 : 0
-        }
-
-        return sampledInstrumentIds[index]
-
-//        if let iid = instrumentToPart_cache[partIndex]
-//        {
-//            return iid
-//        }
-//        else
-//        {
-//            if let score = score
-//            {
-//                // try matching part name to library instrument
-//                let partName = score.header.parts[partIndex]
-//                if let full_name = partName.full_name
-//                {
-//                    if full_name.characters.count > 0
-//                    {
-//                        let matchingIndex = indexOfInstrumentMatchingName(name: partName.full_name)
-//                        if matchingIndex >= 0 && matchingIndex < SSSampleViewController.kMaxInstruments
-//                        {
-//                            let iid = sampledInstrumentIds[matchingIndex]
-//                            instrumentToPart_cache[partIndex] = iid
-//                            return iid
-//                        }
-//                    }
-//                }
-//                // try matching instrument name to library instrument
-//                if let instrumentNameForPart = score.instrumentName(forPart: Int32(partIndex))
-//                {
-//                    if instrumentNameForPart.characters.count > 0
-//                    {
-//                        let matchingIndex = indexOfInstrumentMatchingName(name: instrumentNameForPart)
-//                        if matchingIndex >= 0 && matchingIndex < SSSampleViewController.kMaxInstruments
-//                        {
-//                            let iid = sampledInstrumentIds[matchingIndex]
-//                            instrumentToPart_cache[partIndex] = iid
-//                            return iid
-//                        }
-//                    }
-//                }
-//            }
-//            let iid = sampledInstrumentIds[0] // default is first in list (piano) if no name match
-//            instrumentToPart_cache[partIndex] = iid
-//            return iid
-//        }
-    }
-
-    func partVolume(_ partIndex: Int32) -> Float {
-        if playingSynth {
-            return 1.0
-        } else {
-            return 0.0
-        }
-    }
-
-    func metronomeEnabled() -> Bool {
-        return metronomeOn
-    }
-
-    func metronomeInstrument() -> UInt32 {
-        if !metronomeOn {
-            return 0
-        }
-
-        if metronomeInstrumentIds.isEmpty {
-            return 0
-        }
-
-        return UInt32(metronomeInstrumentIds[0])
-    }
-
-    func metronomeVolume() -> Float {
-        if !metronomeOn {
-            return 0
-        }
-        return 1.5
-//        return 1.0
-//        return 0.50
-    }
-
-    //@end
-
+    
     //MARK: SSUTempo protocol
     func bpm() -> Int32 {
 //        print("tempoBPM = \(tempoBPM)")
@@ -2895,10 +2699,10 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
                                    veryBoundaryPercentage:  0.60 )
         perfAnalysisMgr.rebuildAllAnalysisTables( tolerances )
 
-        perfAnalysisMgr.trumpetPartialsTable.printAllPartials()
+        perfAnalysisMgr.brassPartialsTable.printAllPartials()
         print ("===================================================================")
         print ("\nAll Partials by Note\n")
-        perfAnalysisMgr.trumpetPartialsTable.printAllPartialsByNote()
+        perfAnalysisMgr.brassPartialsTable.printAllPartialsByNote()
         print ("\n")
 
         ////////////////////////////////////////////////

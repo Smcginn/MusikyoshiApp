@@ -28,8 +28,7 @@ let kPerCentThreshold_ThreeStar: Int =  55
 let kPerCentThreshold_TwoStar:   Int =  35
 let kPerCentThreshold_OneStar:   Int =  10
 
-class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthParameterControls, SSFrequencyConverter {
-    
+class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
     
     func switchExerState( newState: Int ) {
         // let oldState = currLTExerState
@@ -86,9 +85,6 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
             playBtn.isHidden = false
         }
     }
-     
-    
-    
     
     // Invoking VC sets these
     var noteName = ""           // "C#4", "Db4", etc.
@@ -136,19 +132,6 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
         playScore()
     }
     
-    // protocol SSFrequencyConverter
-    
-    /*!
-     @method frequency:
-     @abstract convert a midi pitch to frequency
-     */
-    public func frequency(_ midiPitch: Int32) -> Float {
-        return intonation.frequency(midiPitch)
-    }
-    
-    private let intonation = Intonation(temperament: Intonation.Temperament.Equal)
-
-
     var targetNoteID = 0
     let kFirstLongTone25Note = 55
     let kLastLongTone25Note = 79
@@ -163,6 +146,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
 
     let amplitudeThreshold = UserDefaults.standard.double(forKey: Constants.Settings.AmplitudeThreshold)
     let tempoBPM = 60
+    // TRANSHYAR
     let transpositionOffset = UserDefaults.standard.integer(forKey: Constants.Settings.Transposition)
     let frequencyThreshold = UserDefaults.standard.double(forKey: Constants.Settings.FrequencyThreshold)
     var frequencyThresholdPercent = Double(0.0)
@@ -186,10 +170,8 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
     var actualTimeNotSet = true
     
     var score: SSScore?
-    var partIndex: Int32 = 0
     var layOptions = SSLayoutOptions()  // set of options for layout
     var playData: SSPData?
-    var synth: SSSynth?
     var instrumentId = UInt32(0)
     var cursorBarIndex = Int32(0)
     let kDefaultMagnification : Float = 2.85
@@ -224,72 +206,6 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
     var bestStarScore: Int = 0
     var currStarScore: Int = 0
     
-    
-    ///////////////////////////////////////////////
-    // New SF
-    private var sampledInstrumentIds = [UInt]()
-    private var synthesizedInstrumentIds = [UInt]()
-    private var metronomeInstrumentIds = [UInt]()
-    private static let kMaxInstruments = 10
-    private var synthVoice = SSSynthVoice.Sampled
-    private static  let kDefaultRiseFallSamples = 4
-    private var waveformSymmetryValue = Float(0.5)
-    private var waveformRiseFallValue = kDefaultRiseFallSamples // samples in rise/fall of square waveform
-    
-    /*!
-     @method waveform
-     @abstract return a waveform type for the waveform generator
-     @discussion called by the synthesizer while playing
-     */
-    func waveform() -> sscore_sy_synthesizedinstrument_waveform
-    {
-        switch synthVoice
-        {
-        case .Sine : return sscore_sy_sine
-        case .Square : return sscore_sy_square
-        case .Triangle : return sscore_sy_triangle
-        default: return sscore_sy_sine
-        }
-    }
-    
-    /*!
-     @method waveformSymmetry
-     @abstract return a symmetry value for square and triangle waveforms
-     @discussion called by the synthesizer while playing
-     */
-    func waveformSymmetry() -> Float
-    {
-        return waveformSymmetryValue
-    }
-    
-    /*!
-     @method waveformRiseFall
-     @abstract return a rise-fall value for the square waveform (in samples at 44100samples/s)
-     @discussion called by the synthesizer while playing
-     */
-    public func waveformRiseFall() -> Int32 {
-        return Int32(waveformRiseFallValue)
-    }
-
-    private var kSampledInstrumentsInfo : [SSSampledInstrumentInfo] {
-        get {
-            var rval = [SSSampledInstrumentInfo]()
-            rval.append(SSSampledInstrumentInfo("Piano", base_filename: "Piano.mf", extension: "m4a", base_midipitch: 23, numfiles: 86, volume: Float(1.0), attack_time_ms: 4, decay_time_ms: 10, overlap_time_ms: 10, alternativenames: "piano,pianoforte,klavier", pitch_offset: 0, family: sscore_sy_instrumentfamily_hammeredstring, flags: 0, samplesflags: 0))
-            //rval.append(SSSampledInstrumentInfo("MidiPercussion", base_filename: "Drum", extension: "mp3", base_midipitch: 35, numfiles: 47, volume: Float(1.0), attack_time_ms: 4, decay_time_ms: 10, overlap_time_ms: 10, alternativenames: "percussion,MidiPercussion", pitch_offset: 0, family: sscore_sy_instrumentfamily_midi_percussion, flags: sscore_sy_suppressrmscompensation_flag, samplesflags: 0))
-            rval.append(SSSampledInstrumentInfo("Trumpet", base_filename: "Trumpet.novib.mf", extension: "m4a", base_midipitch: 52, numfiles: 35, volume: Float(1.0), attack_time_ms: 2, decay_time_ms: 10, overlap_time_ms: 1, alternativenames: "trumpet", pitch_offset: 0, family: sscore_sy_instrumentfamily_hammeredstring, flags: 0, samplesflags: 0))
-            return rval
-        }
-    }
-    
-    private var kSynthesizedInstrumentsInfo : [SSSynthesizedInstrumentInfo] {
-        get {
-            var rval = [SSSynthesizedInstrumentInfo]()
-            rval.append(SSSynthesizedInstrumentInfo("Tick", volume: Float(1.0), type:sscore_sy_tick1, attack_time_ms:4, decay_time_ms:20, flags:0, frequencyConv: nil, parameters: nil))
-            rval.append(SSSynthesizedInstrumentInfo("Waveform", volume: Float(1.0), type:sscore_sy_pitched_waveform_instrument, attack_time_ms:4, decay_time_ms:20, flags:0, frequencyConv: self, parameters: self))
-            return rval
-        }
-    }
-
     // New SF
     ///////////////////////////////
     
@@ -348,7 +264,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
     
     func setUseAn() {
         let noteUp = noteName.uppercased()
-        if noteUp.contains("E") || noteUp.contains("A") {
+        if noteUp.contains("E") || noteUp.contains("A") || noteUp.contains("F") {
             useAn = true
         } else {
             useAn = false
@@ -357,6 +273,37 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
     
     func setNoteID() {
         switch noteName {
+
+        case "D#1", "Eb1":  targetNoteID = 27
+        case "E1" :         targetNoteID = 28
+        case "F1" :         targetNoteID = 29
+        case "F#1", "Gb1":  targetNoteID = 30
+        case "G1":          targetNoteID = 31
+        case "G#1", "Ab1":  targetNoteID = 32
+        case "A1":          targetNoteID = 33
+        case "A#1", "Bb1":  targetNoteID = 34
+        case "B1",  "Cb2":  targetNoteID = 35
+            
+        case "C2",  "B#1":  targetNoteID = 36
+        case "C#2", "Db2":  targetNoteID = 37
+        case "D2":          targetNoteID = 38
+        case "D#2", "Eb2":  targetNoteID = 39
+        case "E2" :         targetNoteID = 40
+        case "F2" :         targetNoteID = 41
+        case "F#2", "Gb2":  targetNoteID = 42
+        case "G2":          targetNoteID = 43
+        case "G#2", "Ab2":  targetNoteID = 44
+        case "A2":          targetNoteID = 45
+        case "A#2", "Bb2":  targetNoteID = 46
+        case "B2",  "Cb3":  targetNoteID = 47
+            
+        case "C3",  "B#2":  targetNoteID = 48
+        case "C#3", "Db3":  targetNoteID = 49
+        case "D3":          targetNoteID = 50
+        case "D#3", "Eb3":  targetNoteID = 51
+        case "E3" :         targetNoteID = 52
+        case "F3" :         targetNoteID = 53
+        case "F#3", "Gb3":  targetNoteID = 54
         case "G3":          targetNoteID = 55
         case "G#3", "Ab3":  targetNoteID = 56
         case "A3":          targetNoteID = 57
@@ -377,6 +324,12 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
         case "B4",  "Cb5":  targetNoteID = 71
             
         case "C5":          targetNoteID = 72
+        case "C#5", "Db5":  targetNoteID = 73
+        case "D5":          targetNoteID = 74
+        case "D#5", "Eb5":  targetNoteID = 75
+        case "E5" :         targetNoteID = 76
+        case "F5" :         targetNoteID = 77
+            
         default:            targetNoteID = 60 // C4
         }
     }
@@ -407,7 +360,9 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        playingSynth = true
+
         // Orientation BS - LongToneVC --> viewDidLoad
         let appDel = UIApplication.shared.delegate as! AppDelegate
         appDel.orientationLock = .landscapeRight
@@ -450,7 +405,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
         
         setNoteID()
         setUseAn()
-        absoluteTargetNote = NoteService.getNote(targetNoteID + transpositionOffset)
+        absoluteTargetNote = NoteService.getNote(targetNoteID) // + transpositionOffset)
         targetNote = NoteService.getNote(targetNoteID)
         if targetNote != nil {
             print("targetNote: \(String(describing: targetNote))")
@@ -482,7 +437,7 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
         // Long_Tone_25G3G5, it will display as sharp on the SeeScore view.
         // If note is flat, must use the flatName and Long_Tone_25G3G5_flat file,
         // and then it will display as flat on the SeeScore view.
-        var notesMusicXMLFileName = "XML Tunes/Long_Tone_25G3G5"
+        var notesMusicXMLFileName = "Long_Tone_25G3G5"
         if targetNote != nil {
             switch enharmonicDisplay {
             case .displayAsNatural:
@@ -490,11 +445,14 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
             case .displayAsSharp:
                 noteName = targetNote!.name
             case .displayAsFlat:
-                notesMusicXMLFileName = "XML Tunes/Long_Tone_25G3G5_flat"
+                notesMusicXMLFileName = "Long_Tone_25G3G5_flat"
                 noteName = targetNote!.flatName
              }
         }
-        loadFile(notesMusicXMLFileName)
+        let instSubpath = getXMLInstrDirString()
+        let fileSubpath = "XML Tunes/" + instSubpath + notesMusicXMLFileName
+
+        loadFile(fileSubpath)
 
         let targtTimeInt = Int(targetTime)
 //        navigationItem.title = "Long Toney - Play A \(noteName) for \(targtTimeInt) Seconds"
@@ -732,20 +690,40 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
 
             score = score0
 
+            // don't understand use of kC4 below. Once I understand this, must
+            // obtain this for exh instrument.
+            
             //figure out which part#
-            partIndex = Int32(kC4 - kFirstLongTone25Note)   //default to C4
-            let partNumber = Int32(targetNoteID - kFirstLongTone25Note)
+            let currInstFirstNote  = getFirstNoteForCurrentInstrument()
+            let currInstNoteOffset = getNoteOffsetForCurrentInstrument()
+
+            // partIndex = Int32(kC4 - kFirstLongTone25Note)   //default to C4
+            // partIndex = Int32(kC4 - currInstFirstNote)   //default to C4
+            partIndex = Int32(currInstNoteOffset - currInstFirstNote) //default to C4
+            // let partNumber = Int32(targetNoteID - kFirstLongTone25Note)
+            var partNumber = Int32(targetNoteID - currInstFirstNote)
+            //partNumber += 1
+            //let partNumber = Int32(1) // Int32(targetNoteID - currInstFirstNote)
             if 0..<score!.numParts ~= partNumber {
                 partIndex = partNumber
             }
 
             var    showingParts = [NSNumber]()
             showingParts.removeAll()
+//            showingParts.append(NSNumber(value: false))  
             let numParts = Int(score!.numParts)
             for i in 0..<numParts {
-                showingParts.append(NSNumber(value: (Int32(i) == partNumber) as Bool)) // display the selected part
+                //showingParts.append(NSNumber(value: (Int32(i+1) == partNumber) as Bool)) // display the selected part
+                showingParts.append(NSNumber(value: (Int32(i) == partNumber) as Bool))
             }
             
+            print("\n\n  Showing parts:")
+            for i in 0..<numParts {
+                let val = showingParts[i] as! Bool
+                print("     for \(i): \(val)")
+            }
+            print("\n\n")
+
             layOptions.hidePartNames = true
             layOptions.hideBarNumbers = true
             ssScrollView.optimalSingleSystem = false
@@ -1320,51 +1298,6 @@ class LongToneViewController: UIViewController, SSSyControls, SSUTempo, SSSynthP
             clearArrowAndPrompt()
         }
     }
-    
-    //MARK: SSSyControls protocol
-    func partEnabled(_ partIndex: Int32) -> Bool {
-        return partIndex == self.partIndex
-    }
-    
-    func partInstrument(_ partIndex: Int32) -> UInt32 {
-        if synthVoice == SSSynthVoice.Sampled {
-            return UInt32(instrumentForPart(partIndex : Int(partIndex)))
-        } else if !synthesizedInstrumentIds.isEmpty {
-            return UInt32(synthesizedInstrumentIds[0])
-        }
-
-        return 0 // instrumentId
-    }
-    
-    func instrumentForPart(partIndex : Int) -> UInt
-    {
-        guard !sampledInstrumentIds.isEmpty else { return 0 }
-        
-        var index = 0
-        if sampledInstrumentIds.count > 1 {
-            index = UserDefaults.standard.bool(forKey: Constants.Settings.PlayTrumpet) ? 1 : 0
-        }
-        
-        return sampledInstrumentIds[index]
-    }
-    
-    func partVolume(_ partIndex: Int32) -> Float {
-        return 1.0
-    }
-    
-    func metronomeEnabled() -> Bool {
-        return false
-    }
-    
-    func metronomeInstrument() -> UInt32 {
-        return 0
-    }
-    
-    func metronomeVolume() -> Float {
-        return 0.0
-    }
-    
-    //@end
     
     //MARK: SSUTempo protocol
     func bpm() -> Int32 {

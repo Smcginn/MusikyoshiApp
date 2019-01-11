@@ -14,6 +14,8 @@ import UIKit
 
 class SettingsTableViewController: UITableViewController, PresentingMicCalibVC {
     
+    var currInstrumentSetting: Int = 0
+    
     @IBOutlet weak var showMarkersControl: UISwitch!
     @IBOutlet weak var showAnalysisControl: UISwitch!
     @IBOutlet weak var synthInstrumentControl: UISegmentedControl!
@@ -163,6 +165,7 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC {
         
         var studentInstrument =
             UserDefaults.standard.integer(forKey: Constants.Settings.StudentInstrument)
+        currInstrumentSetting = studentInstrument
         
         if studentInstrument < kInst_Trumpet || studentInstrument > kInst_Tuba {
             studentInstrument = kInst_Trumpet
@@ -180,10 +183,12 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC {
         UserDefaults.standard.set(noteWidthStepper.value, forKey: Constants.Settings.SmallestNoteWidth)
         UserDefaults.standard.set(signatureWidthStepper.value, forKey: Constants.Settings.SignatureWidth)
         
-        let studentInstrument = selectStudentInstrumentSegControl.selectedSegmentIndex
-        UserDefaults.standard.set(studentInstrument,
-                                  forKey: Constants.Settings.StudentInstrument)
-        setCurrentInstrument(instrument: studentInstrument)
+        let instrument = selectStudentInstrumentSegControl.selectedSegmentIndex
+        if currInstrumentSetting != instrument {
+            UserDefaults.standard.set(instrument,
+                                      forKey: Constants.Settings.StudentInstrument)
+            setCurrentStudentInstrument(instrument: instrument)
+        }
         
         super.viewWillDisappear(animated)
     }

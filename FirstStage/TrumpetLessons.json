@@ -3,7 +3,7 @@
   "title": "Beginner and Intermidiate level",
   "jsonVersionMajor":"0",
   "jsonVersionMid":"0",
-  "jsonVersionMinor":"2",
+  "jsonVersionMinor":"6",
   "levels":[{
             "Level Comment":"=================== LEVEL 1 ============================",
             "title":"Level 1",
@@ -68,6 +68,7 @@
                         ],
             "exercises":[]
             },{
+            
             "Level Comment":"=================== LEVEL 3 ============================",
             "title":"Level 3",
             "intro":"This Level has longer Long Tone exercises",
@@ -315,6 +316,39 @@
                         ],
             "exercises":[]
             },{
+            
+            
+            "Level Comment":"================= Sampler LEVEL ========================",
+            "title":"--> Try out some Upper Level Exercises For Free!",
+            "intro":"Examples of Exercises in Levels 3 through 10",
+            "levelTag":"L11",
+            "levelIdx":"10",
+            "thresholdsID":"beginner2",
+            "singleEventThreshold":"100",
+            "scanForPitchLegatoChange":"N",
+            "days":[{
+                    "title":"Examples from Levels 3 & 4",
+                    "exercises":"LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, PTY009, TUN009, PRP010, TUN010, TUN015"
+                    },{
+                    "title":"Examples from Levels 5 & 6",
+                    "exercises":"LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, PTY017, TUN017, PRP018, TUN018, PTY016, TUN016, PTY019, TUN019, PTY024, TUN024"
+                    },{
+                    "title":"Examples from Levels 7 & 8",
+                    "exercises":"LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, PRP022, TUN022, TUN027, TUN031"
+                    },{
+                    "title":"Examples from Levels 9 & 10",
+                    "exercises":"LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, PTY037, TUN037, PTY026, TUN026, PRP028, TUN028, TUN041"
+                    }],
+            "infoNode":[{"title": "Hand Placement",
+                        "type":"informationNode",
+                        "resource":"Media/hand-placement.html"
+                        }
+                        ],
+            "exercises":[]
+            
+            },{
+
+            
             "Level Comment":"=================== LEVEL 15 ============================",
             "title":"Level 15",
             "levelTag":"L15",
@@ -324,10 +358,10 @@
             "scanForPitchLegatoChange":"N",
             "days":[{
                     "title":"Day 1",
-                    "exercises":"TUN001, TUN002, TUN003, TUN004, TUN005, TUN006, TUN007, TUN008, TUN009, TUN010, TUN011, TUN012, TUN013, TUN014, TUN015"
+                    "exercises":"LT_C4_2, LT_Bb3_2, LT_D4_2, TUN001, TUN002, TUN003, TUN004, TUN005, TUN006, TUN007, TUN008, TUN009, TUN010, TUN011, TUN012, TUN013, TUN014, TUN015"
                     },{
                     "title":"Day 2",
-                    "exercises":"TUN016, TUN017, TUN018, TUN019, TUN020, TUN021, TUN022, TUN023, TUN024, TUN025, TUN026, TUN027, TUN028, TUN029, TUN030"
+                    "exercises":"LT_C4_2, LT_C4_2, LTR_C#4, LTR_Db4, LTR_E4, LTR_F4, TUN016, TUN017, TUN018, TUN019, TUN020, TUN021, TUN022, TUN023, TUN024, TUN025, TUN026, TUN027, TUN028, TUN029, TUN030"
                     }],
             "infoNode":[{"title": "Hand Placement",
                         "type":"informationNode",

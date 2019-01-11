@@ -128,7 +128,7 @@ public class PerformanceNote : PerformanceScoreObject
         // Need to distinguish the transposed note (seen on the score) from the
         // concert pitch we expect to hear.
         let actualNoteIDTransposed =
-            concertNoteIdToInstrumentNoteID( noteID: actualMidiNote)
+            concertNoteIdToInstrumentNoteID( noteID: actualMidiNote) // TRANSHYAR
         var actualNoteName = ""
         let actNote = NoteService.getNote(Int(actualNoteIDTransposed))
         if actNote != nil {

@@ -107,7 +107,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Constants.Settings.AmplitudeThreshold: Float(0.1),
             Constants.Settings.TimingThreshold: 0.2,
             Constants.Settings.FrequencyThreshold: Double(0.03),
-            Constants.Settings.Transposition: -2,
+            Constants.Settings.Transposition: kTransposeFor_Trumpet,
             Constants.Settings.ShowNoteMarkers: false,
             Constants.Settings.ShowAnalysis: false,
             Constants.Settings.PlayTrumpet: true,
@@ -137,7 +137,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if studentInstrument < kInst_Trumpet || studentInstrument > kInst_Tuba {
             studentInstrument = kInst_Trumpet
         }
-        setCurrentInstrument(instrument: studentInstrument)
+        setCurrentStudentInstrument(instrument: studentInstrument)
+        PerformanceAnalysisMgr.instance.resetPartialsTable(forInstrument: studentInstrument )
 
 /*
          Constants.Settings.MaxPlayingVolume: Double(0.0),

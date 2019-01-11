@@ -334,7 +334,7 @@ public class PerformanceSound
         }
         
         let midiNoteTransposed =
-            concertNoteIdToInstrumentNoteID( noteID: midiNote)
+            concertNoteIdToInstrumentNoteID( noteID: midiNote) // TRANSHYAR
         
         let transposedNote = NoteService.getNote(Int(midiNoteTransposed))
         if transposedNote != nil {
