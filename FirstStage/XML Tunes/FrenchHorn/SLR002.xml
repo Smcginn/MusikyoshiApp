@@ -5,7 +5,7 @@
     <rights>©</rights>
     <encoding>
       <software>Finale v25 for Mac</software>
-      <encoding-date>2019-01-07</encoding-date>
+      <encoding-date>2019-01-23</encoding-date>
       <supports attribute="new-system" element="print" type="yes" value="yes"/>
       <supports attribute="new-page" element="print" type="yes" value="yes"/>
       <supports element="accidental" type="yes"/>
@@ -266,9 +266,6 @@
         <voice>1</voice>
         <type>half</type>
         <stem default-y="-5">up</stem>
-        <notations>
-          <slur number="1" type="stop"/>
-        </notations>
       </note>
     </measure>
     <!--=======================================================-->
@@ -286,6 +283,9 @@
         <duration>8</duration>
         <voice>1</voice>
         <type>whole</type>
+        <notations>
+          <slur number="1" type="stop"/>
+        </notations>
       </note>
     </measure>
     <!--=======================================================-->

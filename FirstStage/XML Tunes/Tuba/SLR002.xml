@@ -5,7 +5,7 @@
     <rights>©</rights>
     <encoding>
       <software>Finale v25 for Mac</software>
-      <encoding-date>2018-12-30</encoding-date>
+      <encoding-date>2019-01-23</encoding-date>
       <supports attribute="new-system" element="print" type="yes" value="yes"/>
       <supports attribute="new-page" element="print" type="yes" value="yes"/>
       <supports element="accidental" type="yes"/>
@@ -66,23 +66,23 @@
     <score-part id="P1">
       <part-name print-object="no">Tuba</part-name>
       <part-abbreviation print-object="no">Tuba</part-abbreviation>
-      <score-instrument id="P1-I3">
+      <score-instrument id="P1-I7">
         <instrument-name>ARIA Player</instrument-name>
         <instrument-sound>brass.tuba</instrument-sound>
         <virtual-instrument/>
       </score-instrument>
       <midi-device>ARIA Player</midi-device>
-      <midi-instrument id="P1-I3">
-        <midi-channel>3</midi-channel>
+      <midi-instrument id="P1-I7">
+        <midi-channel>7</midi-channel>
         <midi-program>1</midi-program>
         <volume>80</volume>
-        <pan>80</pan>
+        <pan>44</pan>
       </midi-instrument>
     </score-part>
   </part-list>
   <!--=========================================================-->
   <part id="P1">
-    <measure number="1" width="234">
+    <measure number="1" width="203">
       <print>
         <system-layout>
           <system-margins>
@@ -95,7 +95,7 @@
       </print>
       <attributes>
         <divisions>2</divisions>
-        <key>
+        <key print-object="no">
           <fifths>-2</fifths>
           <mode>major</mode>
         </key>
@@ -109,7 +109,7 @@
         </clef>
       </attributes>
       <sound tempo="120"/>
-      <note default-x="119">
+      <note default-x="84">
         <pitch>
           <step>F</step>
           <octave>2</octave>
@@ -122,7 +122,7 @@
           <slur number="1" placement="below" type="start"/>
         </notations>
       </note>
-      <note default-x="176">
+      <note default-x="143">
         <pitch>
           <step>B</step>
           <alter>-1</alter>
@@ -131,11 +131,12 @@
         <duration>4</duration>
         <voice>1</voice>
         <type>half</type>
+        <accidental>flat</accidental>
         <stem default-y="-20">up</stem>
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="2" width="129">
+    <measure number="2" width="133">
       <note default-x="13">
         <pitch>
           <step>F</step>
@@ -146,7 +147,7 @@
         <type>half</type>
         <stem default-y="-9.5">up</stem>
       </note>
-      <note default-x="71">
+      <note default-x="73">
         <pitch>
           <step>B</step>
           <alter>-1</alter>
@@ -155,6 +156,7 @@
         <duration>4</duration>
         <voice>1</voice>
         <type>half</type>
+        <accidental>flat</accidental>
         <stem default-y="-20">up</stem>
         <notations>
           <slur number="1" type="stop"/>
@@ -162,7 +164,7 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="3" width="107">
+    <measure number="3" width="110">
       <note>
         <rest measure="yes"/>
         <duration>8</duration>
@@ -170,8 +172,8 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="4" width="132">
-      <note default-x="16">
+    <measure number="4" width="145">
+      <note default-x="25">
         <pitch>
           <step>B</step>
           <alter>-1</alter>
@@ -180,12 +182,13 @@
         <duration>4</duration>
         <voice>1</voice>
         <type>half</type>
+        <accidental>flat</accidental>
         <stem default-y="-20">up</stem>
         <notations>
           <slur number="1" placement="below" type="start"/>
         </notations>
       </note>
-      <note default-x="74">
+      <note default-x="85">
         <pitch>
           <step>F</step>
           <octave>2</octave>
@@ -197,8 +200,8 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="5" width="132">
-      <note default-x="16">
+    <measure number="5" width="145">
+      <note default-x="25">
         <pitch>
           <step>B</step>
           <alter>-1</alter>
@@ -207,9 +210,10 @@
         <duration>4</duration>
         <voice>1</voice>
         <type>half</type>
+        <accidental>flat</accidental>
         <stem default-y="-20">up</stem>
       </note>
-      <note default-x="74">
+      <note default-x="85">
         <pitch>
           <step>F</step>
           <octave>2</octave>
@@ -224,7 +228,7 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="6" width="107">
+    <measure number="6" width="110">
       <note>
         <rest measure="yes"/>
         <duration>8</duration>
@@ -232,8 +236,8 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="7" width="141">
-      <note default-x="25">
+    <measure number="7" width="136">
+      <note default-x="16">
         <pitch>
           <step>E</step>
           <octave>2</octave>
@@ -241,13 +245,12 @@
         <duration>4</duration>
         <voice>1</voice>
         <type>half</type>
-        <accidental>natural</accidental>
         <stem default-y="-14.5">up</stem>
         <notations>
           <slur number="1" placement="below" type="start"/>
         </notations>
       </note>
-      <note default-x="82">
+      <note default-x="76">
         <pitch>
           <step>A</step>
           <octave>1</octave>
@@ -259,13 +262,13 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="8" width="341">
+    <measure number="8" width="303">
       <print new-system="yes">
         <system-layout>
           <system-distance>114</system-distance>
         </system-layout>
       </print>
-      <note default-x="99">
+      <note default-x="55">
         <pitch>
           <step>E</step>
           <octave>2</octave>
@@ -273,10 +276,9 @@
         <duration>4</duration>
         <voice>1</voice>
         <type>half</type>
-        <accidental>natural</accidental>
         <stem default-y="-15">up</stem>
       </note>
-      <note default-x="220">
+      <note default-x="179">
         <pitch>
           <step>A</step>
           <octave>1</octave>
@@ -291,7 +293,7 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="9" width="203">
+    <measure number="9" width="214">
       <note>
         <rest measure="yes"/>
         <duration>8</duration>
@@ -299,8 +301,8 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="10" width="250">
-      <note default-x="17">
+    <measure number="10" width="264">
+      <note default-x="16">
         <pitch>
           <step>A</step>
           <octave>1</octave>
@@ -313,7 +315,7 @@
           <slur number="1" placement="below" type="start"/>
         </notations>
       </note>
-      <note default-x="133">
+      <note default-x="140">
         <pitch>
           <step>E</step>
           <octave>2</octave>
@@ -321,12 +323,11 @@
         <duration>4</duration>
         <voice>1</voice>
         <type>half</type>
-        <accidental>natural</accidental>
         <stem default-y="-15">up</stem>
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="11" width="260">
+    <measure number="11" width="274">
       <note default-x="16">
         <pitch>
           <step>A</step>
@@ -337,7 +338,7 @@
         <type>half</type>
         <stem default-y="-19.5">up</stem>
       </note>
-      <note default-x="133">
+      <note default-x="140">
         <pitch>
           <step>E</step>
           <octave>2</octave>
@@ -345,7 +346,6 @@
         <duration>4</duration>
         <voice>1</voice>
         <type>half</type>
-        <accidental>natural</accidental>
         <stem default-y="-15">up</stem>
         <notations>
           <slur number="1" type="stop"/>

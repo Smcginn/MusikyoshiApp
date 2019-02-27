@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 3.1 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise version="3.1">
-  <movement-title>Tune 002 Brass</movement-title>
+  <movement-title>PlayTunes Tune 5</movement-title>
   <identification>
     <rights>©</rights>
     <encoding>
       <software>Finale v25 for Mac</software>
-      <encoding-date>2018-12-18</encoding-date>
+      <encoding-date>2019-01-23</encoding-date>
       <supports attribute="new-system" element="print" type="yes" value="yes"/>
       <supports attribute="new-page" element="print" type="yes" value="yes"/>
       <supports element="accidental" type="yes"/>
@@ -57,6 +57,10 @@
     <word-font font-family="Times New Roman" font-size="10.25"/>
   </defaults>
   <credit page="1">
+    <credit-type>title</credit-type>
+    <credit-words default-x="597" default-y="1475" font-size="24" justify="center" valign="top">PlayTunes Tune 5</credit-words>
+  </credit>
+  <credit page="1">
     <credit-type>rights</credit-type>
     <credit-words default-x="597" default-y="53" font-size="10" justify="center" valign="bottom">©</credit-words>
   </credit>
@@ -67,23 +71,23 @@
     <score-part id="P1">
       <part-name print-object="no">Horn in F</part-name>
       <part-abbreviation print-object="no">Hn.</part-abbreviation>
-      <score-instrument id="P1-I1">
+      <score-instrument id="P1-I9">
         <instrument-name>ARIA Player</instrument-name>
         <instrument-sound>brass.french-horn</instrument-sound>
         <virtual-instrument/>
       </score-instrument>
       <midi-device>ARIA Player</midi-device>
-      <midi-instrument id="P1-I1">
-        <midi-channel>1</midi-channel>
+      <midi-instrument id="P1-I9">
+        <midi-channel>9</midi-channel>
         <midi-program>1</midi-program>
         <volume>80</volume>
-        <pan>-70</pan>
+        <pan>-27</pan>
       </midi-instrument>
     </score-part>
   </part-list>
   <!--=========================================================-->
   <part id="P1">
-    <measure number="1" width="205">
+    <measure number="1" width="182">
       <print>
         <system-layout>
           <system-margins>
@@ -96,7 +100,7 @@
       </print>
       <attributes>
         <divisions>2</divisions>
-        <key>
+        <key print-object="no">
           <fifths>-1</fifths>
           <mode>major</mode>
         </key>
@@ -114,7 +118,7 @@
         </transpose>
       </attributes>
       <sound tempo="120"/>
-      <note default-x="108">
+      <note default-x="83">
         <pitch>
           <step>F</step>
           <octave>4</octave>
@@ -125,7 +129,7 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="2" width="110">
+    <measure number="2" width="112">
       <note>
         <rest measure="yes"/>
         <duration>8</duration>
@@ -133,7 +137,7 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="3" width="110">
+    <measure number="3" width="112">
       <note default-x="13">
         <pitch>
           <step>G</step>
@@ -145,7 +149,7 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="4" width="110">
+    <measure number="4" width="112">
       <note>
         <rest measure="yes"/>
         <duration>8</duration>
@@ -153,7 +157,7 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="5" width="110">
+    <measure number="5" width="112">
       <note default-x="13">
         <pitch>
           <step>A</step>
@@ -165,7 +169,7 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="6" width="110">
+    <measure number="6" width="112">
       <note>
         <rest measure="yes"/>
         <duration>8</duration>
@@ -173,8 +177,8 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="7" width="110">
-      <note default-x="13">
+    <measure number="7" width="124">
+      <note default-x="25">
         <pitch>
           <step>B</step>
           <alter>-1</alter>
@@ -183,10 +187,11 @@
         <duration>8</duration>
         <voice>1</voice>
         <type>whole</type>
+        <accidental>flat</accidental>
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="8" width="119">
+    <measure number="8" width="120">
       <note>
         <rest measure="yes"/>
         <duration>8</duration>
