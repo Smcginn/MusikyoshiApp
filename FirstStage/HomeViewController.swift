@@ -178,12 +178,15 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        let _ = LsnSchdlr.instance.scoreMgr.getAvailableDiscSpace()
+        let _ = LsnSchdlr.instance.scoreMgr.getScoreFileSize()
+        
         let appJsonDataVersion =
             LsnSchdlr.instance.scoreMgr.getInstrumentJsonVersion()
         let versionsEqual =
             LsnSchdlr.instance.scoreMgr.isJsonVersionEqual(versionTuple: appJsonDataVersion)
         if (!versionsEqual) {
-            displayDBCompatibilityAlert()
+// HEY !!!!            displayDBCompatibilityAlert()
         }
         
         if !didDisplayOverview {

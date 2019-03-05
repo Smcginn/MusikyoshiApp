@@ -205,6 +205,7 @@ class PerformanceAnalysisMgr {
     //
     var brassPartialsTable: BrassNotePartialsTable = TrumpetNotePartialsTable()
     func resetPartialsTable(forInstrument: Int) {
+//        print(Unmanaged.passUnretained(brassPartialsTable).toOpaque())
         switch forInstrument {
         case kInst_Trombone:    brassPartialsTable = TromboneNotePartialsTable()
         case kInst_Euphonium:   brassPartialsTable = TromboneNotePartialsTable()
@@ -214,6 +215,7 @@ class PerformanceAnalysisMgr {
         case kInst_Trumpet: fallthrough
         default:                brassPartialsTable = TrumpetNotePartialsTable()
         }
+//        print(Unmanaged.passUnretained(brassPartialsTable).toOpaque())
     }
     
     var tablesBuilt = false;

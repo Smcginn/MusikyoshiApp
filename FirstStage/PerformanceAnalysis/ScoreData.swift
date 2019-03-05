@@ -67,7 +67,34 @@ struct dayScore: Codable {
     }
 }
 
-struct level: Codable {
+struct levelV2: Codable {
+    var title:      String
+    var canDiscard: Int         // diff between V1 and V2
+    var state:      Int
+    var levelID:    String
+    var days:       [dayScore]
+    
+    init( title:      String,
+          canDiscard: Int,
+          state:      Int,
+          levelID:    String,
+          days:       [dayScore] )  {
+        self.title      = title
+        self.canDiscard = canDiscard
+        self.state      = state
+        self.levelID    = levelID
+        self.days       = days
+    }
+    init() {
+        self.title      = "NOTSET"
+        self.canDiscard = 1
+        self.state      = kLDEState_NotStarted
+        self.levelID    = "NOTSET"
+        self.days       = []
+    }
+}
+
+struct level: Codable { // V1
     var title:     String
     var state:     Int
     var levelID:   String
@@ -90,7 +117,7 @@ struct level: Codable {
     }
 }
 
-struct studentScore: Codable {
+struct studentScore: Codable {     // V1
     var name: String
     var title: String
     var jsonVersionString: String
@@ -118,7 +145,7 @@ struct studentScore: Codable {
         self.levels            = levels
         
         self.longtonePersRecords = Array( repeating: kLT_NotAttemptedYet,
-                                          count: kLTPersBestKey_NumKeys )
+                                          count: kLTPersBestKey_NumEntries )
 
         let versMajStr = String(jsonVersionMajor)
         let versMidStr = String(jsonVersionMid)
@@ -126,6 +153,94 @@ struct studentScore: Codable {
 
         self.jsonVersionString = versMajStr + "." + versMidStr + "." + versMinStr
     }
+}
+
+struct studentScoreV2: Codable {
+    var name: String
+    var title: String
+    var jsonVersionString: String
+    var jsonVersionMajor:  Int
+    var jsonVersionMid:    Int
+    var jsonVersionMinor:  Int
+    var managedLevel:      Int
+    var managedDay:        Int
+    var longtonePersRecords: [Double]
+    var levels: [levelV2]
+    
+    init( name: String,
+          title: String,
+          jsonVersionMajor:  Int,
+          jsonVersionMid:    Int,
+          jsonVersionMinor:  Int,
+          levels: [levelV2] )  {
+        self.name              = name
+        self.title             = title
+        self.managedLevel      = 0
+        self.managedDay        = 0
+        self.jsonVersionMajor  = jsonVersionMajor
+        self.jsonVersionMid    = jsonVersionMid
+        self.jsonVersionMinor  = jsonVersionMinor
+        self.levels            = levels
+        
+        self.longtonePersRecords = Array( repeating: kLT_NotAttemptedYet,
+                                          count: 128 )
+        
+        let versMajStr = String(jsonVersionMajor)
+        let versMidStr = String(jsonVersionMid)
+        let versMinStr = String(jsonVersionMinor)
+        
+        self.jsonVersionString = versMajStr + "." + versMidStr + "." + versMinStr
+    }
+}
+
+func create_LevelV2_FromLevelV1(currLevelV1:level,
+                                discardable: Bool = false) -> levelV2 {
+    let canDiscardInt = discardable ? 1 : 0
+    let levV2 = levelV2(title:      currLevelV1.title,
+                        canDiscard: canDiscardInt,
+                        state:      currLevelV1.state,
+                        levelID:    currLevelV1.levelID,
+                        days:       currLevelV1.days)
+    
+    return levV2
+}
+
+func create_ScoreV2_FromScoreV1(currScoreV1: studentScore,
+                                includingUpToLevel: Int) ->studentScoreV2 {
+    
+    let currJsonVers = LsnSchdlr.instance.scoreMgr.getInstrumentJsonVersion()
+    
+    var newScoreV2 = studentScoreV2( name: currScoreV1.name,
+                                     title: currScoreV1.title,
+                                     jsonVersionMajor:  currJsonVers.major,
+                                     jsonVersionMid:    currJsonVers.mid,
+                                     jsonVersionMinor:  currJsonVers.minor,
+                                     levels: [] )
+    newScoreV2.managedLevel         = currScoreV1.managedLevel
+    newScoreV2.managedDay           = currScoreV1.managedDay
+    
+    //  ARRRR   LTPR !!!!!
+    for i in kLTPersBestKey_First..<kLTPersBestKey_NumKeys {
+        let oldLTRScore = currScoreV1.longtonePersRecords[i]
+        newScoreV2.longtonePersRecords[Int(NoteIDs.G5)+i] = oldLTRScore
+    }
+    
+    newScoreV2.longtonePersRecords  = currScoreV1.longtonePersRecords
+
+    // Add the old levels, but only if they are in the range we want to keep
+    var idx = 0
+    for oldLev in currScoreV1.levels {
+        if let oldLevIdx = Int(oldLev.levelID) {
+            if oldLevIdx <= includingUpToLevel {
+                let levV2 = create_LevelV2_FromLevelV1(currLevelV1: oldLev,
+                                                       discardable: false)
+                newScoreV2.levels.append(levV2)
+            }
+        }
+        idx += 1
+    }
+    
+    return newScoreV2
 }
 
 struct exerciseIDs
@@ -169,5 +284,74 @@ func testThis() {
     
 }
 
+//import UIKit
 
+class DiskStatus {
+    
+    //MARK: Formatter MB only
+    class func MBFormatter(_ bytes: Int64) -> String {
+        let formatter = ByteCountFormatter()
+        formatter.allowedUnits = ByteCountFormatter.Units.useMB
+        formatter.countStyle = ByteCountFormatter.CountStyle.decimal
+        formatter.includesUnit = false
+        return formatter.string(fromByteCount: bytes) as String
+    }
+    
+    
+    //MARK: Get String Value
+    class var totalDiskSpace:String {
+        get {
+            return ByteCountFormatter.string(fromByteCount: totalDiskSpaceInBytes,
+                                             countStyle: ByteCountFormatter.CountStyle.file)
+        }
+    }
+    
+    class var freeDiskSpace:String {
+        get {
+            return ByteCountFormatter.string(fromByteCount: freeDiskSpaceInBytes,
+                                             countStyle: ByteCountFormatter.CountStyle.file)
+        }
+    }
+    
+    class var usedDiskSpace:String {
+        get {
+            return ByteCountFormatter.string(fromByteCount: usedDiskSpaceInBytes,
+                                             countStyle: ByteCountFormatter.CountStyle.file)
+        }
+    }
+    
+    
+    //MARK: Get raw value
+    class var totalDiskSpaceInBytes:Int64 {
+        get {
+            do {
+                let systemAttributes = try FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory() as String)
+                let space = (systemAttributes[FileAttributeKey.systemSize] as? NSNumber)?.int64Value
+                return space!
+            } catch {
+                return 0
+            }
+        }
+    }
+    
+    class var freeDiskSpaceInBytes:Int64 {
+        get {
+            do {
+                let systemAttributes = try FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory() as String)
+                let freeSpace = (systemAttributes[FileAttributeKey.systemFreeSize] as? NSNumber)?.int64Value
+                return freeSpace!
+            } catch {
+                return 0
+            }
+        }
+    }
+    
+    class var usedDiskSpaceInBytes:Int64 {
+        get {
+            let usedSpace = totalDiskSpaceInBytes - freeDiskSpaceInBytes
+            return usedSpace
+        }
+    }
+    
+}
 

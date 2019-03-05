@@ -15,15 +15,85 @@ import Foundation
 import SwiftyJSON
 import AudioKit
 
-var gDoOverrideSubsPresent = false       // CHECK_THIS_FOR_SUBMIT
+var gDoOverrideSubsPresent = false      // CHECK_THIS_FOR_SUBMIT
 var gDoLimitLevels = true              // CHECK_THIS_FOR_SUBMIT
 let kNumberOfLevelsToShow: Int = 11
 
-let kTryoutUpperExercisesLevel: Int = 10
+// This is the artificial level number to display the tryput section at (it is not
+// the order in the json file). We show this if they don't have a subscription.
+let kSectionToDisplayTryoutAt: Int = 2
+
+// In the JSON file, this is the number of Tryout Level
+let kTryoutUpperValInJson: Int = 1000
 
 let levelHeaderSpacingStr = "       " // leaves room at front for checkbox icon
 
 class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    let sectionTitlesIfNoSubsriptions = ["Level 1",
+                                         "Level 2",
+                                         "--> Try out some Upper Level Exercises For Free!",
+                                         "Level 3",
+                                         "Level 4",
+                                         "Level 5",
+                                         "Level 6",
+                                         "Level 7",
+                                         "Level 8",
+                                         "Level 9",
+                                         "Level 10",
+                                         ]
+    
+
+    // is there a subscription?
+    //   - this affects Tryout AND showing upper levels
+    var subscriptionGood   = false
+
+    var showingTryoutLevel = true
+    
+    func numLevelsToShow() -> Int {
+        var retNumToShow = 1
+
+        var jsonCount = 0
+        if let rawJsonCount = instrumentJson?["levels"].count {
+            jsonCount = rawJsonCount
+        }
+        retNumToShow = jsonCount
+        
+        if gDoLimitLevels {
+            retNumToShow = kNumberOfLevelsToShow
+        }
+        
+        if !showingTryoutLevel {
+            retNumToShow -= 1
+        }
+        
+        if retNumToShow < 0 {
+            retNumToShow = 0
+        }
+        
+        if retNumToShow == 0 {
+            itsBad()
+        }
+        
+        return retNumToShow
+    }
+    
+    func jsonIndexForSection(_ section: Int) -> Int {
+        var retJsonIdx = section
+        
+        if showingTryoutLevel {
+            if section == kSectionToDisplayTryoutAt {
+                if let rawJsonCount = instrumentJson?["levels"].count {
+                    retJsonIdx = rawJsonCount-1
+                }
+            }
+            if section > kSectionToDisplayTryoutAt {
+                retJsonIdx = section - 1
+            }
+        }
+        
+        return retJsonIdx
+    }
     
     var checkImage: UIImage? = nil
     var nocheckImage: UIImage? = nil
@@ -84,6 +154,11 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        subscriptionGood = PlayTunesIAPProducts.store.subscriptionGood()
+        if subscriptionGood || gDoOverrideSubsPresent || !gDoLimitLevels {
+            showingTryoutLevel = false
+        }
+        
         // Orientation BS - LevelSeriesVC --> viewDidLoad
         let appDel = UIApplication.shared.delegate as! AppDelegate
         appDel.orientationLock = .landscapeRight
@@ -120,20 +195,20 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
         self.tableView.reloadData()
     }
     
-    @objc func changeTryputHeaderColor() {
-        if tryoutBackgroundColor == kSeaFoamBlue {
-            tryoutBackgroundColor = kLightSkyBlue
-        } else {
-            tryoutBackgroundColor = kSeaFoamBlue
-        }
-        
-        delay( 0.25) {
-            let indexSet = IndexSet(integer:kTryoutUpperExercisesLevel)
-//        self.tableView.beginUpdates()
-            self.tableView.reloadSections(indexSet, with: .automatic)
-//        self.tableView.endUpdates()
-        }
-    }
+//    @objc func changeTryputHeaderColor() {
+//        if tryoutBackgroundColor == kSeaFoamBlue {
+//            tryoutBackgroundColor = kLightSkyBlue
+//        } else {
+//            tryoutBackgroundColor = kSeaFoamBlue
+//        }
+//
+//        delay( 0.25) {
+//            let indexSet = IndexSet(integer:kTryoutUpperExercisesLevel)
+////        self.tableView.beginUpdates()
+//            self.tableView.reloadSections(indexSet, with: .automatic)
+////        self.tableView.endUpdates()
+//        }
+//    }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         // return .landscapeRight
@@ -236,29 +311,26 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if gDoLimitLevels {
-            return kNumberOfLevelsToShow
-        }
-        
-        if let count = instrumentJson?["levels"].count {
-            return count
-        }
-        return 0
+        return numLevelsToShow()
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        var retStr = ""
+        var retStr = "Level 1"
         
         if gDoLimitLevels && section > kNumberOfLevelsToShow {
             itsBad()
             return retStr
         }
         
-        let titleStr = levelsJson?[section]["title"].string
-        if titleStr != nil {
-            retStr = levelHeaderSpacingStr + titleStr! // leave room at front for checkbox icon
+        if showingTryoutLevel {
+            if section < sectionTitlesIfNoSubsriptions.count {
+                retStr = sectionTitlesIfNoSubsriptions[section]
+            }
+        } else {
+            if let titleStr = levelsJson?[section]["title"].string {
+                retStr = levelHeaderSpacingStr + titleStr // leave room at front for checkbox icon
+            }
         }
-        
         return retStr
     }
 
@@ -271,7 +343,8 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
     
         if section != currLevel { return 0 }
 
-        return numDaysInLevel(level: section)
+        let jsonIdx = jsonIndexForSection(section)
+        return numDaysInLevel(level: jsonIdx)
         
 //        var count = 0
 //        var daysJson:JSON?
@@ -366,7 +439,7 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
         let vw = g.view as! LevelSeriesTableViewHeaderFooterView
         let section = vw.section
         
-        if !allowAllLevelAccess && (section >= 2 && section != kTryoutUpperExercisesLevel) {
+        if !allowAllLevelAccess && (showingTryoutLevel && section > kSectionToDisplayTryoutAt) {
 //            if PlayTunesIAPProducts.store.purchaseStatus.confirmed &&
 //               PlayTunesIAPProducts.store.purchaseStatus.state == .expired {
             if PlayTunesIAPProducts.store.userDefsStoredSubscStatusIsKnown() &&
@@ -404,10 +477,10 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
                 delay( 0.25) {
                     let idxPath = IndexPath(row:0, section: section)
                     self.tableView.scrollToRow(at: idxPath, at: .top, animated: true)
-                    if kTryoutUpperExercisesLevel == section {
+                    if kSectionToDisplayTryoutAt == section && self.showingTryoutLevel {
                         self.timer.invalidate()
                         delay( 0.5) {
-                            self.displayTryoutAlert()
+                          self.displayTryoutAlert()
                         }
                     }
                     self.handlingSectionTap = false
@@ -440,7 +513,7 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
 //            header.backgroundView?.backgroundColor = kDefaultViewBackgroundColor
 //        }
         
-        if kTryoutUpperExercisesLevel == section {
+        if showingTryoutLevel && kSectionToDisplayTryoutAt == section {
             header.contentView.backgroundColor = tryoutBackgroundColor
             header.textLabel?.textColor = .darkGray
         } else if !allowAllLevelAccess && section >= 2 {
@@ -493,8 +566,10 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
         
         guard levelsJson != nil  else { return cell }
 
+        let jsonIdx = jsonIndexForSection(indexPath.section)
+        
         var daysJson:JSON?
-        daysJson = levelsJson![indexPath.section]["days"]
+        daysJson = levelsJson![jsonIdx]["days"]
         if ( daysJson != nil ) {
             var titleStr = ""
             if let rowTitle = daysJson![indexPath.row]["title"].string {
@@ -503,7 +578,7 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
             cell.textLabel?.text = titleStr
         }
         
-        let thisLD: tLD_code = ( indexPath.section, indexPath.row )
+        let thisLD: tLD_code = ( jsonIdx, indexPath.row )
         let dayState = LessonScheduler.instance.getDayState(forLD: thisLD)
         
         makeCheckboxIconImage()
@@ -596,7 +671,10 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
         selectedCell?.contentView.backgroundColor = kDefault_SelectCellBkgrndColor
         currLevel = indexPath.section
         currDay = indexPath.row
-        performSegue(withIdentifier: "LessonSegue", sender: indexPath)  // PPPproblem!!!!!
+        
+        let jsonIdx = jsonIndexForSection(indexPath.section)
+        let convertedIndexPath = IndexPath(row: indexPath.row, section: jsonIdx)
+        performSegue(withIdentifier: "LessonSegue", sender: convertedIndexPath)  // PPPproblem!!!!!
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {

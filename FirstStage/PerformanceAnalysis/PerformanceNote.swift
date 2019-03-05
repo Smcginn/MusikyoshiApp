@@ -52,6 +52,39 @@ public class PerformanceNote : PerformanceScoreObject
         return pitchVal
     }
     
+    // calculated in pitch snalysis phase, *if* a Sound is linked
+    private var weightedPercentageCorrect: Double = 0.0
+    func getWeightedPercentageCorrect() -> Double {
+        weightedPercentageCorrect = 0.0
+        guard isLinkedToSound else { return 0.0 }
+        
+        if let linkedSound = PerformanceTrackingMgr.instance.findSoundBySoundID(soundID: linkedToSoundID) {
+            weightedPercentageCorrect =
+                    linkedSound.calcWeightedPercentageCorrect(targetNoteID: expectedMidiNote )
+//            linkedSound.calcMostCommonPitchPlayed()
+//            let mostCommonPerc = linkedSound.getMostPlayedNotePercentage()
+//            let mostCommonPitchNoteID = linkedSound.getMostPlayedNoteID()
+//            let mostCommonCount = linkedSound.getMostPlayedNoteCount()
+        }
+        return weightedPercentageCorrect
+    }
+    
+    var mostCommonPlayedNote: NoteID = NoteIDs.A1
+    var mostCommonPlayedNotePercentage: Double = 0.0
+    var mostCommonPlayedNoteCount: Int = 0
+    func determineMostCommonPlayedNote() {
+        guard isLinkedToSound else {
+            return }
+        
+        if let linkedSound = PerformanceTrackingMgr.instance.findSoundBySoundID(soundID: linkedToSoundID) {
+
+            linkedSound.calcMostCommonPitchPlayed()
+            mostCommonPlayedNotePercentage = linkedSound.getMostPlayedNotePercentage()
+            mostCommonPlayedNote = linkedSound.getMostPlayedNoteID()
+            mostCommonPlayedNoteCount = linkedSound.getMostPlayedNoteCount()
+        }
+    }
+    
     var pitchVariance = noPitchValueSet
 
     //////////////////////////////////////////////////////////////////////////

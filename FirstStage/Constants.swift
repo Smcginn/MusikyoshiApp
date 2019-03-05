@@ -46,5 +46,22 @@ struct Constants
         static let CheckForAppUpdateInterval = "checkForAppUpdateInterval"
         static let LastCheckForAppUpdate = "lastCheckForAppUpdate"
         static let StudentInstrument = "studentInstrument"
+        
+        // Amplitude Rise vars, for each instrument
+        static let Trumpet_AmpRiseForNewSound        = "trumpet_AmpRiseForNewSound"
+        static let Trumpet_SkipBeginningSamples      = "trumpet_SkipBeginningSamples"
+        static let Trumpet_SamplesInAnalysisWindow   = "trumpet_SamplesInAnalysisWindow"
+        static let Trombone_AmpRiseForNewSound       = "trombone_AmpRiseForNewSound"
+        static let Trombone_SkipBeginningSamples     = "trombone_SkipBeginningSamples"
+        static let Trombone_SamplesInAnalysisWindow  = "trombone_SamplesInAnalysisWindow"
+        static let Euphonium_AmpRiseForNewSound      = "euphonium_AmpRiseForNewSound"
+        static let Euphonium_SkipBeginningSamples    = "euphonium_SkipBeginningSamples"
+        static let Euphonium_SamplesInAnalysisWindow = "euphonium_SamplesInAnalysisWindow"
+        static let Horn_AmpRiseForNewSound           = "horn_AmpRiseForNewSound"
+        static let Horn_SkipBeginningSamples         = "horn_SkipBeginningSamples"
+        static let Horn_SamplesInAnalysisWindow      = "horn_SamplesInAnalysisWindow"
+        static let Tuba_AmpRiseForNewSound           = "tuba_AmpRiseForNewSound"
+        static let Tuba_SkipBeginningSamples         = "tuba_SkipBeginningSamples"
+        static let Tuba_SamplesInAnalysisWindow      = "tuba_SamplesInAnalysisWindow"
     }
 }

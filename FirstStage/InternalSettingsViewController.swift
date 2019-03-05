@@ -72,10 +72,10 @@ class InternalSettingsTableViewController : UITableViewController {
     // Slider 1 - gAmpDropForNewSound
     @IBAction func Slider1_SliderChanged(_ sender: Any) {
  
-        gAmpDropForNewSound = tSoundAmpVal(Slider1_Slider.value)
-        let valStr = getTextForFloat(val: Float(gAmpDropForNewSound))
-        Slider1_ValueLabel.text = valStr
-        print ("\(valStr)")
+//        gAmpDropForNewSound = tSoundAmpVal(Slider1_Slider.value)
+//        let valStr = getTextForFloat(val: Float(gAmpDropForNewSound))
+//        Slider1_ValueLabel.text = valStr
+//        print ("\(valStr)")
     }
     
     ////////////////////////////////////////////////////////////
@@ -83,7 +83,7 @@ class InternalSettingsTableViewController : UITableViewController {
     @IBAction func Slider2_SliderChanged(_ sender: Any) {
         let newVal = tSoundAmpVal(Slider2_Slider.value)
         let newValInt = Int(newVal)
-        gNumTolAmpSamples = newValInt
+//        gNumTolAmpSamples = newValInt
         let valStr = String(newValInt)
         Slider2_ValueLabel.text = valStr
         print ("\(valStr)")
@@ -160,13 +160,13 @@ class InternalSettingsTableViewController : UITableViewController {
             
         }
         
-        setupSliderRow( slider: Slider1_Slider,
-                        sliderMinVal: sliderMinVal,
-                        sliderMaxVal: sliderMaxVal,
-                        sliderCurrentVal: Float(gAmpDropForNewSound),
-                        label: Slider1_Label,
-                        labelText: "Amplitude Rise > new Note (0.3)",
-                        valueLabel: Slider1_ValueLabel)
+//        setupSliderRow( slider: Slider1_Slider,
+//                        sliderMinVal: sliderMinVal,
+//                        sliderMaxVal: sliderMaxVal,
+//                        sliderCurrentVal: Float(gAmpDropForNewSound),
+//                        label: Slider1_Label,
+//                        labelText: "Amplitude Rise > new Note (0.3)",
+//                        valueLabel: Slider1_ValueLabel)
     }
     
     func setupSlider2() { // gNumTolAmpSamples
@@ -174,15 +174,15 @@ class InternalSettingsTableViewController : UITableViewController {
         let sliderMinVal: Float = 2.0
         let sliderMaxVal: Float = 8.0
         
-        setupSliderRow( slider: Slider2_Slider,
-                        sliderMinVal: sliderMinVal,
-                        sliderMaxVal: sliderMaxVal,
-                        sliderCurrentVal: Float(gNumTolAmpSamples),
-                        label: Slider2_Label,
-                        labelText: "Num samples Ampl Tol Zone",
-                        valueLabel: Slider2_ValueLabel)
-        let valInt = Int(gNumTolAmpSamples)
-        Slider2_ValueLabel.text = String(valInt)
+//        setupSliderRow( slider: Slider2_Slider,
+//                        sliderMinVal: sliderMinVal,
+//                        sliderMaxVal: sliderMaxVal,
+//                        sliderCurrentVal: Float(gNumTolAmpSamples),
+//                        label: Slider2_Label,
+//                        labelText: "Num samples Ampl Tol Zone",
+//                        valueLabel: Slider2_ValueLabel)
+//        let valInt = Int(gNumTolAmpSamples)
+//        Slider2_ValueLabel.text = String(valInt)
     }
     
     

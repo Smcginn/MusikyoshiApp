@@ -16,6 +16,8 @@
 
 import Foundation
 
+let kTuneExerciseVC = 0
+let kLongTonesVC    = 1
 
 class PlaybackInstrumentViewController: UIViewController, SSSyControls,  SSSynthParameterControls, SSFrequencyConverter {
     
@@ -23,6 +25,12 @@ class PlaybackInstrumentViewController: UIViewController, SSSyControls,  SSSynth
     // For TuneExerciseVC: set true for "Play For Me", false for "Listening"
     var playingSynth = false
 
+    var whichVC = kTuneExerciseVC
+    
+    
+    // Metronome support
+    var metronomeOn = false
+    
     ///////////////////////////////////////////////
     // New SF
     var sampledInstrumentIds = [UInt]()
@@ -176,13 +184,22 @@ class PlaybackInstrumentViewController: UIViewController, SSSyControls,  SSSynth
     func instrumentForPart(partIndex : Int) -> UInt
     {
         guard !sampledInstrumentIds.isEmpty else { return 0 }
-        
         var index = 0
-        if sampledInstrumentIds.count > 1 {
-            let currInstIdx = getCurrentStudentInstrument()
-            if currInstIdx >= 0 && currInstIdx < sampledInstrumentIds.count {
-                // index = UserDefaults.standard.bool(forKey: Constants.Settings.PlayTrumpet) ? 1 : 0
-                index = currInstIdx
+
+        if whichVC == kTuneExerciseVC {
+            if getCurrentStudentInstrument() == kInst_Trumpet &&
+               sampledInstrumentIds.count > 0 {
+                index = kInst_Trumpet
+            } else if sampledInstrumentIds.count >= kInst_Piano+1 {
+                index  = kInst_Piano
+            }
+        } else {  // whichVC == kLongTonesVC
+            if sampledInstrumentIds.count > 1 {
+                let currInstIdx = getCurrentStudentInstrument()
+                if currInstIdx >= 0 && currInstIdx < sampledInstrumentIds.count {
+                    // index = UserDefaults.standard.bool(forKey: Constants.Settings.PlayTrumpet) ? 1 : 0
+                    index = currInstIdx
+                }
             }
         }
         
@@ -199,15 +216,27 @@ class PlaybackInstrumentViewController: UIViewController, SSSyControls,  SSSynth
     }
     
     func metronomeEnabled() -> Bool {
-        return false
+        return metronomeOn
     }
     
     func metronomeInstrument() -> UInt32 {
-        return 0
+        if !metronomeOn {
+            return 0
+        }
+        
+        if metronomeInstrumentIds.isEmpty {
+            return 0
+        }
+        
+        return  UInt32(metronomeInstrumentIds[0])
     }
     
     func metronomeVolume() -> Float {
-        return 0.0
+        if !metronomeOn {
+            return 0
+        } else {
+            return 1.5
+        }
     }
     
     //@end

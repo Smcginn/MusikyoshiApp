@@ -362,7 +362,8 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
         super.viewDidLoad()
 
         playingSynth = true
-
+        whichVC = kLongTonesVC
+        
         // Orientation BS - LongToneVC --> viewDidLoad
         let appDel = UIApplication.shared.delegate as! AppDelegate
         appDel.orientationLock = .landscapeRight
@@ -405,7 +406,7 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
         
         setNoteID()
         setUseAn()
-        absoluteTargetNote = NoteService.getNote(targetNoteID) // + transpositionOffset)
+        absoluteTargetNote = NoteService.getNote(targetNoteID + transpositionOffset)
         targetNote = NoteService.getNote(targetNoteID)
         if targetNote != nil {
             print("targetNote: \(String(describing: targetNote))")

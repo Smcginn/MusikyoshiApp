@@ -11,6 +11,8 @@ import Foundation
 // TODO: define a UInt8 type that safely checks and converts Int, Int32, etc.
 typealias NoteID = UInt8
 
+let kOneOctaveInSemitones = UInt8(12)
+
 // These correspond to the MIDI Standard for note IDs, 0-127.
 
 struct NoteIDs {
@@ -47,7 +49,7 @@ struct NoteIDs {
     static let BSharp1: NoteID  = 36
 
     // Octave 2
-    static let C2: NoteID       = BSharp2
+    static let C2: NoteID       = BSharp1
     static let CSharp2: NoteID  = 37
     static let Db2: NoteID      = CSharp2
     static let D2: NoteID       = 38
@@ -136,7 +138,7 @@ struct NoteIDs {
     static let C6: NoteID       = BSharp5
     
     // Current valid Range consts for use within App (Alpha) (Just add more if needed)
-    static let firstNoteID      = G1 // for V1.0.0, was C3
+    static let firstNoteID      = E1 // most recently was G1, for V1.0.0, was C3
     static let lastNoteID       = C6
     static let validNoteIDRange = firstNoteID...lastNoteID
 }

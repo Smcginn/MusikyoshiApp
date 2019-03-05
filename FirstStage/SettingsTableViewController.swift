@@ -5,6 +5,7 @@
 //  Created by Adam Kinney on 12/2/15.
 //  Changed by David S Reich - 2016.
 //  Changed by John Cook - 2017.
+//  Changed by Scott Freshour - 2017, 2018, 2019.
 //  Copyright © 2015 Musikyoshi. All rights reserved.
 //
 
@@ -28,8 +29,16 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC {
     @IBOutlet weak var signatureWidthLabel: UILabel!
     @IBOutlet weak var signatureWidthStepper: UIStepper!
     
-    
     @IBOutlet weak var selectStudentInstrumentSegControl: MySegmentedControl!
+    
+    @IBAction func selectStudentInstrumentSegControl_Changed(_ sender: Any) {
+        let instrument = selectStudentInstrumentSegControl.selectedSegmentIndex
+        UserDefaults.standard.set(instrument,
+                                  forKey: Constants.Settings.StudentInstrument)
+        setCurrentStudentInstrument(instrument: instrument)
+
+        loadAmpRiseValuesForCurrentInst()
+    }
     
     @IBOutlet weak var IsASound_Label: UILabel!
     @IBOutlet weak var IsASound_Btn: UIButton!
@@ -38,6 +47,97 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC {
     @IBAction func calibrateMicBtnPressed(_ sender: Any) {
         self.performSegue(withIdentifier: kSettingsPresentMicCalibSegueID,
                           sender: self)
+    }
+    
+    // Amp Rise settings related
+    @IBOutlet weak var ampRiseValuesTableViewCell: UITableViewCell!
+    @IBOutlet weak var ampRiseSettingsHeaderLabel: UILabel!
+    @IBOutlet weak var ampRiseChangeSlider: UISlider!
+    @IBOutlet weak var ampRiseChangeValueLabel: UILabel!
+    @IBOutlet weak var ampRiseWindowSizeSlider: UISlider!
+    @IBOutlet weak var ampRiseWindowSizeLabel: UILabel!
+    @IBOutlet weak var ampRiseNumToSkipSlider: UISlider!
+    @IBOutlet weak var ampRiseNumToSkipLabel: UILabel!
+    @IBOutlet weak var resetAllToDefaultsLabel: UILabel!
+    
+    @IBAction func ampRiseChangeSlider_Changed(_ sender: Any) {
+        let newVal = ampRiseChangeSlider.value
+        let ampRiseChangeValueStr = String(format: "%.2f", newVal)
+        ampRiseChangeValueLabel.text = ampRiseChangeValueStr
+
+        let currInst = getCurrentStudentInstrument()
+        changeAmpRiseForNewSound(forInstr: currInst, rise: Double(newVal))
+    }
+    
+    @IBAction func ampRiseWindowSizeSlider_Changed(_ sender: Any) {
+        let newVal = Int(ampRiseWindowSizeSlider.value)
+        let ampRiseWindowSizeStr = String(newVal)
+        ampRiseWindowSizeLabel.text = ampRiseWindowSizeStr
+
+        let currInst = getCurrentStudentInstrument()
+        changeNumSamplesInAnalysisWindow(forInstr: currInst, numSamples: UInt(newVal))
+    }
+    
+    @IBAction func ampRiseNumToSkipSlider_Changed(_ sender: Any) {
+        let newVal = Int(ampRiseNumToSkipSlider.value)
+        let ampRiseNumToSkipStr = String(newVal)
+        ampRiseNumToSkipLabel.text = ampRiseNumToSkipStr
+        
+        let currInst = getCurrentStudentInstrument()
+        changeAmpRiseSamplesToSkip(forInstr: currInst, numSamples: UInt(newVal))
+    }
+    
+    @IBAction func ResetAllBtnPressed(_ sender: Any) {
+        let currInst = getCurrentStudentInstrument()
+        resetAmpRiseValesToDefaults(forInstr: currInst)
+    }
+    
+    func initAmpRiseSliders() {
+        ampRiseChangeSlider.minimumValue = Float(kAmpRiseForNewSound_min)
+        ampRiseChangeSlider.maximumValue = Float(kAmpRiseForNewSound_max)
+        
+        ampRiseWindowSizeSlider.minimumValue = Float(kSamplesInAnalysisWindow_min)
+        ampRiseWindowSizeSlider.maximumValue = Float(kSamplesInAnalysisWindow_max)
+        
+        ampRiseNumToSkipSlider.minimumValue = Float(kSkipBeginningSamples_min)
+        ampRiseNumToSkipSlider.maximumValue = Float(kSkipBeginningSamples_max)
+    }
+    
+    func loadAmpRiseValuesForCurrentInst() {
+        let currInst = getCurrentStudentInstrument()
+
+        var instStr = ""
+        switch currInst {
+        case kInst_Trombone:    instStr += "Trombone"
+        case kInst_Euphonium:   instStr += "Euphonium"
+        case kInst_FrenchHorn:  instStr += "Horn"
+        case kInst_Tuba:        instStr += "Tuba"
+        case kInst_Trumpet:  fallthrough
+        default:                instStr += "Trumpet"
+        }
+        var titleStr = "Amplitude Rise Values for: "
+        titleStr += instStr
+        ampRiseSettingsHeaderLabel.text = titleStr
+        var resetStr = "Reset All Above to "
+        resetStr += instStr
+        resetStr += "'s Defaults"
+        resetAllToDefaultsLabel.text = resetStr
+        
+        let ampRiseChangeValue     = getAmpRiseForNewSound(forInstr: currInst)
+        let ampRiseWindowSizeValue = getNumSamplesInAnalysisWindow(forInstr: currInst)
+        let ampRiseNumToSkipValue  = getAmpRiseSamplesToSkip(forInstr: currInst)
+
+        ampRiseChangeSlider.value = Float(ampRiseChangeValue)
+        let ampRiseChangeValueStr = String(format: "%.3f", ampRiseChangeValue)
+        ampRiseChangeValueLabel.text = ampRiseChangeValueStr
+
+        ampRiseWindowSizeSlider.value = Float(ampRiseWindowSizeValue)
+        let ampRiseWindowSizeStr = String(ampRiseWindowSizeValue)
+        ampRiseWindowSizeLabel.text = ampRiseWindowSizeStr
+
+        ampRiseNumToSkipSlider.value = Float(ampRiseNumToSkipValue)
+        let ampRiseNumToSkipStr = String(ampRiseNumToSkipValue)
+        ampRiseNumToSkipLabel.text = ampRiseNumToSkipStr
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -78,6 +178,8 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         selectStudentInstrumentSegControl.multilinesMode = true
+        
+        initAmpRiseSliders()
     }
     
     override func viewDidLayoutSubviews() {
@@ -127,6 +229,12 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC {
         signatureWidthStepper.value = UserDefaults.standard.double(forKey: Constants.Settings.SignatureWidth)
         signatureWidthLabel.text = String(Int(signatureWidthStepper.value))
         
+        if gMKDebugOpt_ShowDebugSettingsBtn {
+            ampRiseValuesTableViewCell.isHidden  = false
+        } else {
+            ampRiseValuesTableViewCell.isHidden  = true
+        }
+        
         if gMKDebugOpt_IsSoundAndLatencySettingsEnabled {
             IsASound_Label.isHidden  = false
             IsASound_Btn.isHidden    = false
@@ -171,6 +279,9 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC {
             studentInstrument = kInst_Trumpet
         }
         selectStudentInstrumentSegControl.selectedSegmentIndex = studentInstrument
+    
+    
+        loadAmpRiseValuesForCurrentInst()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

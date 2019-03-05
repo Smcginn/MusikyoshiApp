@@ -102,6 +102,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
+        // Note: These register calls must be broken into checnks of 10 or so.
+        //   Otherwise, the compiler can't handle them. msg: "Statement too complex ..."
         UserDefaults.standard.register(defaults: [
             Constants.Settings.BPM: 60.0,
             Constants.Settings.AmplitudeThreshold: Float(0.1),
@@ -130,15 +132,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Constants.Settings.StudentInstrument: Int(kInst_Trumpet)
            ])
         
+        UserDefaults.standard.register(defaults: [
+            Constants.Settings.Trumpet_AmpRiseForNewSound:        Double(kTrumpet_defAmpRiseForNewSound),
+            Constants.Settings.Trumpet_SkipBeginningSamples:      Int(kTrumpet_defSkipBeginningSamples),
+            Constants.Settings.Trumpet_SamplesInAnalysisWindow:   Int(kTrumpet_defSamplesInAnalysisWindow),
+            
+            Constants.Settings.Trombone_AmpRiseForNewSound:       Double(kTrombone_defAmpRiseForNewSound),
+            Constants.Settings.Trombone_SkipBeginningSamples:     Int(kTrombone_defSkipBeginningSamples),
+            Constants.Settings.Trombone_SamplesInAnalysisWindow:  Int(kTrombone_defSamplesInAnalysisWindow),
+            
+            Constants.Settings.Euphonium_AmpRiseForNewSound:      Double(kEuphonium_defAmpRiseForNewSound),
+            Constants.Settings.Euphonium_SkipBeginningSamples:    Int(kEuphonium_defSkipBeginningSamples),
+            Constants.Settings.Euphonium_SamplesInAnalysisWindow: Int(kEuphonium_defSamplesInAnalysisWindow),
+            ])
+
+        UserDefaults.standard.register(defaults: [
+            Constants.Settings.Horn_AmpRiseForNewSound:      Double(kHorn_defAmpRiseForNewSound),
+            Constants.Settings.Horn_SkipBeginningSamples:    Int(kHorn_defSkipBeginningSamples),
+            Constants.Settings.Horn_SamplesInAnalysisWindow: Int(kHorn_defSamplesInAnalysisWindow),
+            
+            Constants.Settings.Tuba_AmpRiseForNewSound:      Double(kTuba_defAmpRiseForNewSound),
+            Constants.Settings.Tuba_SkipBeginningSamples:    Int(kTuba_defSkipBeginningSamples),
+            Constants.Settings.Tuba_SamplesInAnalysisWindow: Int(kTuba_defSamplesInAnalysisWindow),
+            ])
+
         setCheckForAppUpdateTimeIfFirstRun()
         
+        NoteService.initNotes()
+
         var studentInstrument =
             UserDefaults.standard.integer(forKey: Constants.Settings.StudentInstrument)
         if studentInstrument < kInst_Trumpet || studentInstrument > kInst_Tuba {
             studentInstrument = kInst_Trumpet
         }
         setCurrentStudentInstrument(instrument: studentInstrument)
-        PerformanceAnalysisMgr.instance.resetPartialsTable(forInstrument: studentInstrument )
+//        PerformanceAnalysisMgr.instance.resetPartialsTable(forInstrument: studentInstrument )
 
 /*
          Constants.Settings.MaxPlayingVolume: Double(0.0),
@@ -153,7 +181,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  //       _ = AVAudioSessionManager.sharedInstance.setupAudioSession()
         
         
-        NoteService.initNotes()
         
         let entityName = String(describing: UserAttributes.self)
         let request = NSFetchRequest<UserAttributes>(entityName: entityName)

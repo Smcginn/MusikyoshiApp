@@ -8,6 +8,7 @@
 
 import Foundation
 
+/*
 // The amplitude drop required to consider end of current sound
 let kAmpDropForNewSound_Sim: tSoundAmpVal = 0.20
 let kAmpDropForNewSound_HW:  tSoundAmpVal = 0.156 // 0.25 //0.20
@@ -25,9 +26,77 @@ typealias tSoundAmpVal = Double
 
 class PerfSampleAmplitudeTracker {
     
-    let kMaxAmpSamples      = 25    // max stored in Queue
-    let kMinReqdAmpSamples  = 10    // min number reqired to calc in/out tolerance
+    let bufferSz = 30
+    let windowSz = 10
+    var circDuBuffer = sortOfCirularBuffer(bufferSize: 30, windowSize: 10)
     
+    func testBuffer() {
+        var i = 0
+        var val: Double = 0.01
+        while i < 200 {
+            val = 1.1 * val
+            circDuBuffer.addSample(sample: val)
+            let rng = circDuBuffer.getMaxRangeForWindow()
+            print ("Range == \(rng)")
+            i += 1
+            var diddly = 0
+            if i == 28 {
+                diddly = 2
+            }
+        }
+        
+        circDuBuffer.reset()
+        circDuBuffer.setWindowSize(newSize: 5)
+        
+        i = 0
+        val = 0.01
+        while i < 200 {
+            val = 1.1 * val
+            circDuBuffer.addSample(sample: val)
+            let rng = circDuBuffer.getMaxRangeForWindow()
+            print ("Range == \(rng)")
+            i += 1
+            var diddly = 0
+            if i == 28 {
+                diddly = 2
+            }
+        }
+        
+        circDuBuffer.reset()
+        circDuBuffer.setWindowSize(newSize: 2)
+        
+        i = 0
+        val = 0.01
+        while i < 100 {
+            val = 1.1 * val
+            circDuBuffer.addSample(sample: val)
+            let rng = circDuBuffer.getMaxRangeForWindow()
+            print ("Range == \(rng)")
+            i += 1
+            var diddly = 0
+            if i == 28 {
+                diddly = 2
+            }
+        }
+ 
+    }
+    
+    
+    let kMaxAmpSamples       = 25 // max stored in Queue
+    let kMinReqdAmpSamples   = 10 // min number in queue reqired to calc in/out tolerance
+
+    // kSkipBeginningSamplesThreshold  explanation:
+    //   This class determines that a new sound is occurring by sensing if the
+    //   amplitude rises quickly. (E.g., When notes are tongued, the amplitude
+    //   drops and then rise quickly.)
+    //   If we don't ignore the first rise, *it* will trigger the detection. So we
+    //   have to let so many samples go before beginning to look for another rise.
+    let kSkipBeginningSamplesThreshold: UInt = 15 // don't start tracking until after this
+    var numRunningSamples: UInt = 0
+    
+    // 10 * 10 ms = .1 second
+    // 30 * 10 ms = .3 second
+
     typealias tAmpAndTime = ( amp: tSoundAmpVal, absTime: TimeInterval )
     
     var killSoundTime: TimeInterval = 0.0
@@ -59,7 +128,6 @@ class PerfSampleAmplitudeTracker {
 //        print ("    Queue before append:  \(queue)")
         
         lastAmpSample = newAmp
-        
         if newAmp < kAmplitudeThresholdForIsSound {
             noSignal         = true // should stop tracking sound . . .
             finished         = true
@@ -77,6 +145,9 @@ class PerfSampleAmplitudeTracker {
             }
         }
         
+        numRunningSamples += 1
+        if numRunningSamples < kSkipBeginningSamplesThreshold { return } // then skip this one
+
         timeQueue.insert(newTime, at: 0)
         queue.insert(newAmp, at: 0)
         if queue.count > kMaxAmpSamples {
@@ -86,7 +157,8 @@ class PerfSampleAmplitudeTracker {
         let numElems = queue.count
 //        print ("    Queue after append:  \(queue)")
 
-        canCalcAmpChange = numElems >= kMinReqdAmpSamples
+        canCalcAmpChange = numElems >= kMinReqdAmpSamples  // &&
+                           // numRunningSamples > kSkipBeginningSamplesThreshold
         
         // calc avg in tolerance range
         var sumInTolRng: tSoundAmpVal = 0.0
@@ -151,13 +223,15 @@ class PerfSampleAmplitudeTracker {
     
     func isDiffNoteBCofAmpChange() -> Bool {
         if !canCalcAmpChange { // no enough data to attempt calc
+            print ("isDiffNoteBCofAmpChange: returning false b/c !canCalcAmpChange")
             return false
         } else {
             // was: let ampDiff:tSoundAmpVal = runningAvgAfterTolRng - runningAvgInTolRng
-            let ampDiff:tSoundAmpVal =  lastAmpSample - runningAvgInTolRng //  - runningAvgAfterTolRng
+            var ampDiff:tSoundAmpVal =  lastAmpSample - runningAvgInTolRng //  - runningAvgAfterTolRng
+            ampDiff = abs(ampDiff)
             let runAvgInTR = runningAvgInTolRng
             let runAvgAftrTR = runningAvgAfterTolRng
-            print("\nAAAAA Amp Diff: \(ampDiff), runningAvgInTolRng: \(runAvgInTR),runningAvgAfterTolRng: \(runAvgAftrTR)\n")
+//            print("\nAAAAA Amp Diff: \(ampDiff), runningAvgInTolRng: \(runAvgInTR),runningAvgAfterTolRng: \(runAvgAftrTR)\n")
             if ampDiff > gAmpDropForNewSound {
                 if !currSoundIsDead {
                     let currSongzTime = currentSongTime()
@@ -169,7 +243,7 @@ class PerfSampleAmplitudeTracker {
                 killSoundTime   = timeQueue[0]
                 return true
             } else {
-//                print("  Is NOT new note:  Amp Diff: \(ampDiff)")
+                print("  Is NOT new note:  Amp Diff: \(ampDiff)")
                 return false
             }
         }
@@ -273,7 +347,7 @@ class PerfSampleAmplitudeTracker {
  */
 }
 
-
+*/
 
 
 

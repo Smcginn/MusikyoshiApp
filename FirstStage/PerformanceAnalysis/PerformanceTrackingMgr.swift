@@ -61,10 +61,13 @@ class PerformanceTrackingMgr {
     let rhythmAnalyzer = NoteRhythmPerformanceAnalyzer.init()
     let pitchAnalyzer  = TrumpetPitchPerformanceAnalyzer.init()
     let restAnalyzer   = RestPerformanceAnalyzer.init()
-    let sampleAmplitudeTrkr = PerfSampleAmplitudeTracker()
+    var sampleAmplitudeTrkr: PerfSampleAmplitudeTrackerV2
 
-    
     init() {
+        let currInst = getCurrentStudentInstrument()
+        setCurrentAmpRiseValsForInstrument(forInstr: currInst)
+        sampleAmplitudeTrkr = PerfSampleAmplitudeTrackerV2()
+
         userDefsTimingThreshold =
             UserDefaults.standard.double(forKey: Constants.Settings.TimingThreshold)
         if UIDevice.current.modelName == "Simulator" {
@@ -90,6 +93,8 @@ class PerformanceTrackingMgr {
         if storedIsASoundThreshold > 0.01 {  // it's been set if not == 0.0
             kAmplitudeThresholdForIsSound = storedIsASoundThreshold
         }
+        
+        // sampleAmplitudeTrkr.testBuffer()
     }
 
     ///////////////////////////////////////////////////////////////////////////

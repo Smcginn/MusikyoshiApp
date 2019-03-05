@@ -349,6 +349,7 @@
 		6D22AEC620D06E8200ACEC81 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633D1B6C1CF94BEC00B5C4FD /* FeedbackView.swift */; };
 		6D268BEB21CD3C12002DA293 /* InstrumentSelectionDefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D268BEA21CD3C12002DA293 /* InstrumentSelectionDefs.swift */; };
 		6D268BEC21CD3C12002DA293 /* InstrumentSelectionDefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D268BEA21CD3C12002DA293 /* InstrumentSelectionDefs.swift */; };
+		6D277EBD220A9DFF00247359 /* PerfSampleAmplitudeTrackerV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D277EBC220A9DFF00247359 /* PerfSampleAmplitudeTrackerV2.swift */; };
 		6D34A17D2139F9E10071BAB6 /* AppDefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D34A17C2139F9E10071BAB6 /* AppDefs.swift */; };
 		6D34A17E2139F9E10071BAB6 /* AppDefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D34A17C2139F9E10071BAB6 /* AppDefs.swift */; };
 		6D3AE1422176846A005ECC60 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D3AE1412176846A005ECC60 /* StoreKit.framework */; };
@@ -384,6 +385,8 @@
 		6D6093B92114F6CE00874A40 /* ScoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6093AE2114F66C00874A40 /* ScoreData.swift */; };
 		6D6093BB21163E1800874A40 /* ThresholdsMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6093BA21163E1800874A40 /* ThresholdsMgr.swift */; };
 		6D6093BC21163E1800874A40 /* ThresholdsMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6093BA21163E1800874A40 /* ThresholdsMgr.swift */; };
+		6D62460021F6455E00451400 /* DiscFileSystermSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6245FF21F6455E00451400 /* DiscFileSystermSupport.swift */; };
+		6D62460121F6455E00451400 /* DiscFileSystermSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6245FF21F6455E00451400 /* DiscFileSystermSupport.swift */; };
 		6D63167B212D0610004F2DE4 /* SingleStar - 32.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D63166A212D060F004F2DE4 /* SingleStar - 32.png */; };
 		6D63167C212D0610004F2DE4 /* SingleStar - 32.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D63166A212D060F004F2DE4 /* SingleStar - 32.png */; };
 		6D63167D212D0610004F2DE4 /* SingleStar - 64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D63167A212D0610004F2DE4 /* SingleStar - 64.png */; };
@@ -396,6 +399,8 @@
 		6D631687212DF4D5004F2DE4 /* LevelSeriesTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D631685212DF4D5004F2DE4 /* LevelSeriesTableViewHeaderFooterView.swift */; };
 		6D6C8CED2123422B00874F86 /* PerformanceScoreObjectScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6C8CEC2123422B00874F86 /* PerformanceScoreObjectScheduler.swift */; };
 		6D6C8CEE2123422B00874F86 /* PerformanceScoreObjectScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6C8CEC2123422B00874F86 /* PerformanceScoreObjectScheduler.swift */; };
+		6D7220B02208B12500560930 /* instrumentAmplitudeRiseValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7220AF2208B12500560930 /* instrumentAmplitudeRiseValues.swift */; };
+		6D7220B12208B12500560930 /* instrumentAmplitudeRiseValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7220AF2208B12500560930 /* instrumentAmplitudeRiseValues.swift */; };
 		6D7248FD2128771600378131 /* Stars-2 256x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7248EA2128771500378131 /* Stars-2 256x64.png */; };
 		6D7248FE2128771600378131 /* Stars-2 256x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7248EA2128771500378131 /* Stars-2 256x64.png */; };
 		6D7248FF2128771600378131 /* Stars-4 256x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7248FA2128771500378131 /* Stars-4 256x64.png */; };
@@ -621,6 +626,8 @@
 		6DB853482127A87600F999C3 /* Monkey_Skiing_01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DB853412127A87500F999C3 /* Monkey_Skiing_01@2x.png */; };
 		6DB853492127A87600F999C3 /* Monkey_Skiing_06@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DB853422127A87600F999C3 /* Monkey_Skiing_06@2x.png */; };
 		6DB8534A2127A87600F999C3 /* Monkey_Skiing_06@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DB853422127A87600F999C3 /* Monkey_Skiing_06@2x.png */; };
+		6DB9A96F21FCC7E000719BBF /* ScoreFileVersionManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB9A96E21FCC7E000719BBF /* ScoreFileVersionManagement.swift */; };
+		6DB9A97021FCC7E000719BBF /* ScoreFileVersionManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB9A96E21FCC7E000719BBF /* ScoreFileVersionManagement.swift */; };
 		6DBF1F0A213E23D10052AD57 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C33BBA92016E80B00CD83A6 /* SwiftyJSON.framework */; };
 		6DBF1F0C213ED8D60052AD57 /* Stars-4 Even 256x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F0B213ED8D50052AD57 /* Stars-4 Even 256x64.png */; };
 		6DBF1F0D213ED8E30052AD57 /* Stars-4 Even 256x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F0B213ED8D50052AD57 /* Stars-4 Even 256x64.png */; };
@@ -702,6 +709,7 @@
 		6DC834B62134B94B00AAA613 /* IconImageMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC834B42134B94B00AAA613 /* IconImageMgr.swift */; };
 		6DC834C72135136400AAA613 /* OneStarNew 64x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DC834C62135136400AAA613 /* OneStarNew 64x64.png */; };
 		6DC834C82135136400AAA613 /* OneStarNew 64x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DC834C62135136400AAA613 /* OneStarNew 64x64.png */; };
+		6DCC640122173722001026F1 /* PerfSampleAmplitudeTrackerV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D277EBC220A9DFF00247359 /* PerfSampleAmplitudeTrackerV2.swift */; };
 		6DCDFF162118AF9F000E8E38 /* Monkey_Ballon_Explode.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DCDFF102118AF9F000E8E38 /* Monkey_Ballon_Explode.png */; };
 		6DCDFF212118AFAB000E8E38 /* Monkey_Ballon_Explode.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DCDFF102118AF9F000E8E38 /* Monkey_Ballon_Explode.png */; };
 		6DDE849E2135A61B00A81875 /* LongtonePersonalBestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDE849D2135A61B00A81875 /* LongtonePersonalBestSupport.swift */; };
@@ -1291,6 +1299,7 @@
 		6D08D757219E4E7500928463 /* AutoRenewNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoRenewNotificationViewController.swift; sourceTree = "<group>"; };
 		6D0C5F01217E33D400273E93 /* IsASoundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsASoundViewController.swift; sourceTree = "<group>"; };
 		6D268BEA21CD3C12002DA293 /* InstrumentSelectionDefs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InstrumentSelectionDefs.swift; path = InstrumentSelection/InstrumentSelectionDefs.swift; sourceTree = "<group>"; };
+		6D277EBC220A9DFF00247359 /* PerfSampleAmplitudeTrackerV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PerfSampleAmplitudeTrackerV2.swift; path = PerformanceAnalysis/PerfSampleAmplitudeTrackerV2.swift; sourceTree = "<group>"; };
 		6D34A17C2139F9E10071BAB6 /* AppDefs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDefs.swift; sourceTree = "<group>"; };
 		6D3AE1412176846A005ECC60 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		6D3AE14421768504005ECC60 /* IAPHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IAPHelper.swift; path = InAppPurchases/IAPHelper.swift; sourceTree = "<group>"; };
@@ -1310,12 +1319,14 @@
 		6D6093B02114F66D00874A40 /* RestPerformanceAnalyzer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RestPerformanceAnalyzer.swift; path = PerformanceAnalysis/RestPerformanceAnalyzer.swift; sourceTree = "<group>"; };
 		6D6093B12114F66D00874A40 /* PerformanceScoreObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PerformanceScoreObject.swift; path = PerformanceAnalysis/PerformanceScoreObject.swift; sourceTree = "<group>"; };
 		6D6093BA21163E1800874A40 /* ThresholdsMgr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ThresholdsMgr.swift; path = PerformanceAnalysis/ThresholdsMgr.swift; sourceTree = "<group>"; };
+		6D6245FF21F6455E00451400 /* DiscFileSystermSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscFileSystermSupport.swift; sourceTree = "<group>"; };
 		6D63166A212D060F004F2DE4 /* SingleStar - 32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "SingleStar - 32.png"; path = "Images/SingleStar - 32.png"; sourceTree = "<group>"; };
 		6D63167A212D0610004F2DE4 /* SingleStar - 64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "SingleStar - 64.png"; path = "Images/SingleStar - 64.png"; sourceTree = "<group>"; };
 		6D63167F212D0670004F2DE4 /* blank 64x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "blank 64x64.png"; path = "Images/blank 64x64.png"; sourceTree = "<group>"; };
 		6D631680212D0670004F2DE4 /* blank 256x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "blank 256x64.png"; path = "Images/blank 256x64.png"; sourceTree = "<group>"; };
 		6D631685212DF4D5004F2DE4 /* LevelSeriesTableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelSeriesTableViewHeaderFooterView.swift; sourceTree = "<group>"; };
 		6D6C8CEC2123422B00874F86 /* PerformanceScoreObjectScheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PerformanceScoreObjectScheduler.swift; path = PerformanceAnalysis/PerformanceScoreObjectScheduler.swift; sourceTree = "<group>"; };
+		6D7220AF2208B12500560930 /* instrumentAmplitudeRiseValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = instrumentAmplitudeRiseValues.swift; sourceTree = "<group>"; };
 		6D7248EA2128771500378131 /* Stars-2 256x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Stars-2 256x64.png"; path = "Images/Stars-2 256x64.png"; sourceTree = "<group>"; };
 		6D7248FA2128771500378131 /* Stars-4 256x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Stars-4 256x64.png"; path = "Images/Stars-4 256x64.png"; sourceTree = "<group>"; };
 		6D7248FB2128771500378131 /* Stars-1 256x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Stars-1 256x64.png"; path = "Images/Stars-1 256x64.png"; sourceTree = "<group>"; };
@@ -1428,6 +1439,7 @@
 		6DB853402127A87500F999C3 /* Monkey_Skiing_02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Monkey_Skiing_02@2x.png"; path = "Images/Monkey_Skiing_02@2x.png"; sourceTree = "<group>"; };
 		6DB853412127A87500F999C3 /* Monkey_Skiing_01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Monkey_Skiing_01@2x.png"; path = "Images/Monkey_Skiing_01@2x.png"; sourceTree = "<group>"; };
 		6DB853422127A87600F999C3 /* Monkey_Skiing_06@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Monkey_Skiing_06@2x.png"; path = "Images/Monkey_Skiing_06@2x.png"; sourceTree = "<group>"; };
+		6DB9A96E21FCC7E000719BBF /* ScoreFileVersionManagement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScoreFileVersionManagement.swift; path = PerformanceAnalysis/ScoreFileVersionManagement.swift; sourceTree = "<group>"; };
 		6DBF1F0B213ED8D50052AD57 /* Stars-4 Even 256x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Stars-4 Even 256x64.png"; path = "Images/Stars-4 Even 256x64.png"; sourceTree = "<group>"; };
 		6DBF1F0E213EEB820052AD57 /* Duration - A bit short.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Duration - A bit short.mp4"; path = "Videos/Duration - A bit short.mp4"; sourceTree = "<group>"; };
 		6DBF1F0F213EEB820052AD57 /* Duration - Too Long.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Duration - Too Long.mp4"; path = "Videos/Duration - Too Long.mp4"; sourceTree = "<group>"; };
@@ -2180,6 +2192,7 @@
 				6324D31E1CE73574001934A5 /* FirstStage-Bridging-Header.h */,
 				6D5A266D2138C2BD00D2B637 /* MiscSupport.swift */,
 				6D34A17C2139F9E10071BAB6 /* AppDefs.swift */,
+				6D6245FF21F6455E00451400 /* DiscFileSystermSupport.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -2202,6 +2215,7 @@
 			children = (
 				6D268BEA21CD3C12002DA293 /* InstrumentSelectionDefs.swift */,
 				6D9CFFDD21DA90560012A03B /* PlaybackInstrumentViewController.swift */,
+				6D7220AF2208B12500560930 /* instrumentAmplitudeRiseValues.swift */,
 			);
 			name = InstrumentSelection;
 			sourceTree = "<group>";
@@ -2449,14 +2463,16 @@
 				6D6093AF2114F66D00874A40 /* PerformanceRest.swift */,
 				6D6093B12114F66D00874A40 /* PerformanceScoreObject.swift */,
 				6D6C8CEC2123422B00874F86 /* PerformanceScoreObjectScheduler.swift */,
-				6DA5763B21473C26002D1D58 /* PerfSampleAmplitudeTracker.swift */,
 				E9AD0CBC1FD9BCDF006472CE /* PerformanceSound.swift */,
 				E9AD0CDC1FDF4180006472CE /* PerformanceTrackingMgr.swift */,
+				6DA5763B21473C26002D1D58 /* PerfSampleAmplitudeTracker.swift */,
 				6D6093B02114F66D00874A40 /* RestPerformanceAnalyzer.swift */,
 				6D6093AE2114F66C00874A40 /* ScoreData.swift */,
+				6DB9A96E21FCC7E000719BBF /* ScoreFileVersionManagement.swift */,
 				6DA54C46210BC8F9004BECB2 /* ScoreMgr.swift */,
 				6D6093BA21163E1800874A40 /* ThresholdsMgr.swift */,
 				E9815A382005124D0046445B /* VideoHelpResources.swift */,
+				6D277EBC220A9DFF00247359 /* PerfSampleAmplitudeTrackerV2.swift */,
 			);
 			name = PerformanceAnalysis;
 			sourceTree = "<group>";
@@ -3569,13 +3585,16 @@
 				633D1B6D1CF94BEC00B5C4FD /* FeedbackView.swift in Sources */,
 				6D6093B32114F66D00874A40 /* PerformanceRest.swift in Sources */,
 				E9AD0CE41FE09B77006472CE /* NotePerformanceAnalyzer.swift in Sources */,
+				6DB9A97021FCC7E000719BBF /* ScoreFileVersionManagement.swift in Sources */,
 				E9815A3E2009A0930046445B /* PerfAnalysisSettingsPopup.swift in Sources */,
 				6324D3631CE73C47001934A5 /* First Stage_key.m in Sources */,
+				6D7220B12208B12500560930 /* instrumentAmplitudeRiseValues.swift in Sources */,
 				6D34A17E2139F9E10071BAB6 /* AppDefs.swift in Sources */,
 				638129591CF05C7900A40C8E /* Balloon.swift in Sources */,
 				1C87C0AD2016F3F70038784E /* LessonOverviewViewController.swift in Sources */,
 				6DA7F6AD21B74A3200800099 /* AppVersionHelper.swift in Sources */,
 				6324D2DB1CE71B1A001934A5 /* FirstStage.xcdatamodeld in Sources */,
+				6DCC640122173722001026F1 /* PerfSampleAmplitudeTrackerV2.swift in Sources */,
 				E9AD0CC11FD9BCDF006472CE /* PerformanceNote.swift in Sources */,
 				6D817BE12186042A00258980 /* PATest_FreqAndPitchSampleSim.swift in Sources */,
 				E9815A392005124D0046445B /* VideoHelpResources.swift in Sources */,
@@ -3589,6 +3608,7 @@
 				6379EE921CE9C8ED00188A70 /* AudioKitManager.swift in Sources */,
 				6D40FC7D21D721F8006E1742 /* TrumpetPartials.swift in Sources */,
 				6D6C8CEE2123422B00874F86 /* PerformanceScoreObjectScheduler.swift in Sources */,
+				6D62460121F6455E00451400 /* DiscFileSystermSupport.swift in Sources */,
 				6D631687212DF4D5004F2DE4 /* LevelSeriesTableViewHeaderFooterView.swift in Sources */,
 				6324D3611CE73C47001934A5 /* SSSystemView.m in Sources */,
 				E9AD0CBF1FD9BCDF006472CE /* NoteIDs.swift in Sources */,
@@ -3680,13 +3700,16 @@
 				6DA7F6A621B7440500800099 /* AppVersionMonitor.swift in Sources */,
 				E9AD0CE31FE09B77006472CE /* NotePerformanceAnalyzer.swift in Sources */,
 				6D6093B72114F6C300874A40 /* PerformanceRest.swift in Sources */,
+				6DB9A96F21FCC7E000719BBF /* ScoreFileVersionManagement.swift in Sources */,
 				6324D3621CE73C47001934A5 /* First Stage_key.m in Sources */,
 				E9815A3D2009A0930046445B /* PerfAnalysisSettingsPopup.swift in Sources */,
+				6D7220B02208B12500560930 /* instrumentAmplitudeRiseValues.swift in Sources */,
 				E9815A3A2005127B0046445B /* VideoHelpResources.swift in Sources */,
 				6D34A17D2139F9E10071BAB6 /* AppDefs.swift in Sources */,
 				638129581CF05C7900A40C8E /* Balloon.swift in Sources */,
 				E9AD0CC71FD9BEF6006472CE /* NoteFreqRangeTable.swift in Sources */,
 				6DA7F6AC21B74A3200800099 /* AppVersionHelper.swift in Sources */,
+				6D277EBD220A9DFF00247359 /* PerfSampleAmplitudeTrackerV2.swift in Sources */,
 				6D6093B92114F6CE00874A40 /* ScoreData.swift in Sources */,
 				6324D3071CE72F8D001934A5 /* FirstStage.xcdatamodeld in Sources */,
 				6D817BE02186042A00258980 /* PATest_FreqAndPitchSampleSim.swift in Sources */,
@@ -3700,6 +3723,7 @@
 				6D56674821A30C2600603DCD /* SKProduct+LocalizedPrice.swift in Sources */,
 				6D40FC7A21D721F0006E1742 /* TrumpetPartials.swift in Sources */,
 				63B4275A1E505573000E35AA /* Intonation.swift in Sources */,
+				6D62460021F6455E00451400 /* DiscFileSystermSupport.swift in Sources */,
 				6D6C8CED2123422B00874F86 /* PerformanceScoreObjectScheduler.swift in Sources */,
 				6D631686212DF4D5004F2DE4 /* LevelSeriesTableViewHeaderFooterView.swift in Sources */,
 				635A60A71EC6B8060099154A /* MusicXMLModifier.swift in Sources */,

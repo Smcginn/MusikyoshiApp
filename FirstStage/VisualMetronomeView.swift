@@ -36,7 +36,9 @@ class VisualMetronomeView: UIView {
         var dotCenters = CGFloat(ceil(frame.height))
         let dotSize = CGFloat(ceil(dotCenters * 0.6))
         //var dotSpacing =  dotSize
-        if isiPhoneSE() {
+        if isiPhoneSE() ||
+           DeviceType.IS_IPHONE_5orSE ||
+           DeviceType.IS_IPHONE_4_OR_LESS {
             dotCenters *= 0.7
         }
          

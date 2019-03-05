@@ -87,7 +87,6 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
     var cursorBarIndex = Int32(0)
 //    let kDefaultMagnification: Float = 1.5
     let kDefaultMagnification: Float = UserDefaults.standard.float(forKey: Constants.Settings.ScoreMagnification) / 10.0
-    var metronomeOn = false
     var beatsPerBar = 0
 
 //    var tickPlayer: AVAudioPlayer?
@@ -177,11 +176,25 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
     let beatMillisecOffset:Int32 = kMetronomeTimingAdjustment // METROMETRO
     var trackingAudioAndNotes = false
 
+    func xmlFileExistsInInstrumentDir( filename: String ) -> Bool {
+        
+        if let filePath = Bundle.main.path(forResource: filename,
+                                           ofType: "xml") {
+            let fm = FileManager.default
+            if fm.fileExists(atPath: filePath) {
+                return true
+            }
+        }
+        return false
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         internalSettingsBtn.isHidden = !gMKDebugOpt_ShowSlidersBtn
         self.view.backgroundColor = kTuneExer_BackgroundColor
         coverSeeScoreBtnView.backgroundColor = kTuneExer_BackgroundColor
+        whichVC = kTuneExerciseVC
         
         // Orientation BS - TuneExeciseVC --> viewDidLoad
         let appDel = UIApplication.shared.delegate as! AppDelegate
@@ -210,7 +223,16 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
         cursorBarIndex = 0
 
         let instSubpath = getXMLInstrDirString()
-        let subpath = "XML Tunes/" + instSubpath + exerciseName
+        var subpath = "XML Tunes/" + instSubpath + exerciseName
+        
+        if !xmlFileExistsInInstrumentDir( filename: subpath ) {
+            // Then this is probably one of the original Trumpet files, one level up.
+            // This is temporary, until all musicXML files have been converted.
+            if getCurrentStudentInstrument() == kInst_Trumpet {
+                subpath = "XML Tunes/" + exerciseName
+            }
+        }
+        
         loadFile(subpath)
         countOffLabel.text = ""
 
@@ -242,7 +264,8 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
         playForMeButton.titleLabel?.attributedText = playForMeBtnAttrStr
         
         ssScrollView.contentSize.height = 1.0
-        
+        ssScrollView.isScrollEnabled = true
+
         NotificationCenter.default.addObserver(
                 self,
                 selector: #selector(handleAVAudioInterruption(_:)),
@@ -340,15 +363,14 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        var ssFrame = ssScrollView.frame
         if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
-            var ssFrame = ssScrollView.frame
             ssFrame.size.height += 100.0
             ssScrollView.frame = ssFrame
             metronomeView.frame.origin.y = ssFrame.origin.y + ssFrame.size.height + 10
             metronomeView.frame.size.width = (metronomeView.frame.size.height*6)
             layoutStarScoreForiPad = true
         } else if UIDevice.current.is_iPhoneX {
-            let ssFrame = ssScrollView.frame
             ssScrollView.frame = ssFrame
             let leftOffset:  CGFloat = 40.0
             let rightOffset: CGFloat = 30.0
@@ -357,11 +379,15 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
             ssScrollView.frame.origin.x  += leftOffset
             ssScrollView.clipsToBounds = true
             metronomeView.frame.origin.x += leftOffset
+        } else {
+            metronomeView.frame.origin.y += 23
+            coverSeeScoreBtnView.frame.size.height -= 20
+            coverSeeScoreBtnView.frame.origin.y    += 20
+            
+            playButton.frame.origin.y += 5
+            playForMeButton.frame.origin.y = playButton.frame.origin.y
         }
          
-        
-//        let metFr   = metronomeView.frame
-//        let metBnds = metronomeView.bounds
         if !starScoreViewIsSetup {
             setupStarScoreStuff()
             starScoreViewIsSetup = true
@@ -765,7 +791,8 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
 
     func stopPlaying() {
         clearCurrNoteLines()
-        
+        ssScrollView.isScrollEnabled = true
+
         elapsedPlayTime = Date().timeIntervalSince(songStartTm)
 
         let doPostPerfAnalysis = !playingSynth && trackingAudioAndNotes
@@ -1278,8 +1305,9 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
 
         printAmplitude(currAmp: currAmpltd, at: timeSinceSongStart, atComp: timeSinceSSComp)
 
- //       print("\n    In TuneExer::trackSounds, currAmpltd == \(currAmpltd)\n")
-        
+        //       print("\n    In TuneExer::trackSounds, currAmpltd == \(currAmpltd)\n")
+        print("    In TuneExer::trackSounds, currFreq == \(currFreq)")
+
         if signalDetected && PerformanceTrackingMgr.instance.currentlyTrackingSound {
             // Currently tracking a sound; update it
 
@@ -1396,10 +1424,10 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
                             } // if let newSound
                         } // isDefinitelyADifferentNote()
                     }  // if areDifferentNotes
-                    else { // pitch is same as current sound a verage, so just update.
-                        currSound.addPitchSample(pitchSample: currFreq)
-                    }
                 } // not a new note bc of Amp change; Check pitch change during legato playing
+                else { // pitch is same as current sound average, so just update.
+                    currSound.addPitchSample(pitchSample: currFreq)
+                }
 
             } // else - sound with stable pitch exists
         } // signalDetected &&  currentlyTrackingSound

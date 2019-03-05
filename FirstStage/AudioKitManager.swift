@@ -31,13 +31,15 @@ class AudioKitManager: NSObject {
             print("AK:init() - In Simulator")
             kAmplitudeThresholdForIsSound = kAmpThresholdForIsSound_Sim
             kPlaybackVolume = kPlaybackVolume_Sim
-            gAmpDropForNewSound = kAmpDropForNewSound_Sim
+            // FIXME: Need to make this work for per-instrument basis
+            // gAmpDropForNewSound = kAmpDropForNewSound_Sim
 
         } else {
             print("AK:init() - In Real Device")
             kAmplitudeThresholdForIsSound = kAmpThresholdForIsSound_HW
             kPlaybackVolume = kPlaybackVolume_HW
-            gAmpDropForNewSound = kAmpDropForNewSound_HW
+            // FIXME: Need to make this work for per-instrument basis
+            //gAmpDropForNewSound = kAmpDropForNewSound_HW
         }
     }
 

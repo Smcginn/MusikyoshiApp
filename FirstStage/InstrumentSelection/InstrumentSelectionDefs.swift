@@ -22,11 +22,17 @@ let kInst_Trombone:   Int = 1
 let kInst_Euphonium:  Int = 2
 let kInst_FrenchHorn: Int = 3
 let kInst_Tuba:       Int = 4
+let kInst_NumBrass:   Int = kInst_Tuba + 1
+let kInst_Piano:      Int = 5
+
+
+////////////////////////////////////////////////////////////////
+// MARK:- "Hard-Coded" per instument settings
 
 let kTransposeFor_Trumpet:    Int =  -2
 let kTransposeFor_Trombone:   Int =   0
 let kTransposeFor_Euphonium:  Int =   kTransposeFor_Trombone
-let kTransposeFor_FrenchHorn: Int =   0
+let kTransposeFor_FrenchHorn: Int =   -7
 let kTransposeFor_Tuba:       Int =   0
 
 // sub directories, of bundles paths, for each instrument
@@ -40,7 +46,7 @@ let kTubaSubDir         = "Tuba/"
 let kBrassVideos        = "/brass"
 let kNoSpecificVideos   = ""
 
-///////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 // InstrumentSettings struct
 //
 //   - pitchTranspose: as varies from note pitch in score, E.g., Bb Trumpet will
@@ -54,6 +60,7 @@ let kNoSpecificVideos   = ""
 // ToDo:
 //    Partials offset?
 //
+
 struct InstrumentSettings {
     var pitchTranspose:         Int
     var longToneTranspose:      Int
@@ -133,24 +140,28 @@ func setCurrentStudentInstrument( instrument: Int ) {
 
     switch instrument {
     case kInst_Trombone:
+        kUseWeightedPitchScore = false
         gInstrumentSettings = kTromboneInstrumentSettings
         UserDefaults.standard.set(kTransposeFor_Trombone,
                                   forKey: Constants.Settings.Transposition)
         PerformanceAnalysisMgr.instance.resetPartialsTable(forInstrument: kInst_Trombone )
         
     case kInst_Euphonium:
+        kUseWeightedPitchScore = false
         gInstrumentSettings = kEuphoniumInstrumentSettings
         UserDefaults.standard.set(kTransposeFor_Euphonium,
                                   forKey: Constants.Settings.Transposition)
         PerformanceAnalysisMgr.instance.resetPartialsTable(forInstrument: kInst_Euphonium )
         
     case kInst_FrenchHorn:
+        kUseWeightedPitchScore = false
         gInstrumentSettings = kFrenchHornInstrumentSettings
         UserDefaults.standard.set(kTransposeFor_FrenchHorn,
                                   forKey: Constants.Settings.Transposition)
         PerformanceAnalysisMgr.instance.resetPartialsTable(forInstrument: kInst_FrenchHorn )
         
     case kInst_Tuba:
+        kUseWeightedPitchScore = true
         gInstrumentSettings = kTubaInstrumentSettings
         UserDefaults.standard.set(kTransposeFor_Tuba,
                                   forKey: Constants.Settings.Transposition)
@@ -158,12 +169,16 @@ func setCurrentStudentInstrument( instrument: Int ) {
 
     case kInst_Trumpet:      fallthrough
     default:
+        kUseWeightedPitchScore = false
         gInstrumentSettings = kTrumpetInstrumentSettings
         UserDefaults.standard.set(kTransposeFor_Trumpet,
                                   forKey: Constants.Settings.Transposition)
         PerformanceAnalysisMgr.instance.resetPartialsTable(forInstrument: kInst_Trumpet )
     }
 }
+
+//////////////////////////////////////////////////////////////////////
+// MARK:- File-related funcs
 
 func getXMLInstrDirString() -> String {
     var retStr = kTrumpetSubDir
@@ -180,6 +195,32 @@ func getXMLInstrDirString() -> String {
     
     return retStr
 }
+
+// E.g., the "_Trumpet" part of "UserScore_Trumpet"
+func getScoreFileSubNameForInstr(instr: Int) -> String {
+    var retStr = "_Trumpet"
+    
+    switch instr {
+    case kInst_Trombone:     retStr = "_Trombone"
+    case kInst_Euphonium:    retStr = "_Euphonium"
+    case kInst_FrenchHorn:   retStr = "_FrenchHorn"
+    case kInst_Tuba:         retStr = "_Tuba"
+        
+    case kInst_Trumpet:      fallthrough
+    default:                retStr = "_Trumpet"
+    }
+    
+    return retStr
+}
+
+// E.g., the "_Trumpet" part of "UserScore_Trumpet"
+func getScoreFileSubNameForCurrInstr() -> String {
+    let retStr = getScoreFileSubNameForInstr(instr: gCurrentInstrument)
+    return retStr
+}
+
+//////////////////////////////////////////////////////////////////////
+// MARK:- Per-instrument LongTone related funcs
 
 func getLongToneExerNote(origNoteStr: String) -> String {
     var retStr = origNoteStr
@@ -207,7 +248,6 @@ func getLongToneExerNote(origNoteStr: String) -> String {
         if accidentalStr == "b" || accidentalStr == "B" {
             alter = -1
         } else if accidentalStr == "#" {
-//            shift = 1
             alter = 1
         } else {
             itsBad()
@@ -232,10 +272,12 @@ func getLongToneExerNote(origNoteStr: String) -> String {
     return retStr
 }
 
+//////////////////////////////////////////////////////////////////////
+// MARK:- Per-instrument Range-related funcs
+
 func getFirstNoteForCurrentInstrument() -> Int {
-    // trumpet is 55 - 79
-    
-    var retVal = 55
+
+    var retVal = 55  // G3 == 55
     
     switch gCurrentInstrument {
     case kInst_Trombone:     retVal = 39    // Eb2 == 39

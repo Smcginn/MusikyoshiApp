@@ -64,56 +64,63 @@ class FrenchHornPartialsTable: BrassNotePartialsTable {
         //---- firstPosition --------------------------------------------------
         var firstPosPartials = BrassPartialsForPosition()
         firstPosPartials.positionName = "First Position"
-        let notesIn1stPos = [NoteIDs.C4, NoteIDs.G4, NoteIDs.C5, NoteIDs.E5,
-                             NoteIDs.G5, NoteIDs.Bb5, NoteIDs.C6] // D6,too
+        let notesIn1stPos = [NoteIDs.C2, NoteIDs.C3, NoteIDs.G3, NoteIDs.C4,
+                             NoteIDs.E4, NoteIDs.G4, NoteIDs.Bb4, NoteIDs.C5,
+                             NoteIDs.D5]
         firstPosPartials.addPartialsForNotes(noteIDs: notesIn1stPos)
         self.partialsForPositionsTable.insert(firstPosPartials,
                                               at: brassPosition.first)
         //---- secondPosition -------------------------------------------------
         var secondPosPartials = BrassPartialsForPosition()
         secondPosPartials.positionName = "Second Position"
-        let notesIn2ndPos = [NoteIDs.B3,  NoteIDs.Gb4, NoteIDs.B4, NoteIDs.Eb5,
-                             NoteIDs.Gb5, NoteIDs.A5,  NoteIDs.B5] // Db6,too
+        let notesIn2ndPos = [NoteIDs.B1, NoteIDs.B2, NoteIDs.Gb3, NoteIDs.B3,
+                             NoteIDs.Eb4, NoteIDs.Gb4, NoteIDs.A4,  NoteIDs.B4,
+                             NoteIDs.Db4]
         secondPosPartials.addPartialsForNotes(noteIDs: notesIn2ndPos)
         self.partialsForPositionsTable.insert(secondPosPartials,
                                               at: brassPosition.second)
         //---- thirdPosition---------------------------------------------------
         var thirdPosPartials = BrassPartialsForPosition()
         thirdPosPartials.positionName = "Third Position"
-        let notesIn3rdPos = [NoteIDs.Bb3, NoteIDs.F4,  NoteIDs.Bb4, NoteIDs.D5,
-                             NoteIDs.F5,  NoteIDs.Ab5, NoteIDs.Bb5, NoteIDs.C6]
+        let notesIn3rdPos = [NoteIDs.Bb1, NoteIDs.Bb2, NoteIDs.F3,  NoteIDs.Bb3,
+                             NoteIDs.D4, NoteIDs.F4,  NoteIDs.Ab4, NoteIDs.Bb4,
+                             NoteIDs.C5]
         thirdPosPartials.addPartialsForNotes(noteIDs: notesIn3rdPos)
         self.partialsForPositionsTable.insert(thirdPosPartials,
                                               at: brassPosition.third)
         //---- fourthPosition -------------------------------------------------
         var fourthPosPartials = BrassPartialsForPosition()
         fourthPosPartials.positionName = "Fourth Position"
-        let notesIn4thPos = [NoteIDs.A3, NoteIDs.E4, NoteIDs.A4, NoteIDs.Db5,
-                             NoteIDs.E5, NoteIDs.G5, NoteIDs.A5, NoteIDs.B5]
+        let notesIn4thPos = [NoteIDs.A1,  NoteIDs.A2, NoteIDs.E3, NoteIDs.A3,
+                             NoteIDs.Db4, NoteIDs.E4, NoteIDs.G4, NoteIDs.A4,
+                             NoteIDs.B4]
         fourthPosPartials.addPartialsForNotes(noteIDs: notesIn4thPos)
         self.partialsForPositionsTable.insert(fourthPosPartials,
                                               at: brassPosition.fourth)
         //---- fifthPosition --------------------------------------------------
         var fifthPosPartials = BrassPartialsForPosition()
         fifthPosPartials.positionName = "Fifth Position"
-        let notesIn5thPos = [NoteIDs.Ab3, NoteIDs.Eb4, NoteIDs.Ab4, NoteIDs.C5,
-                             NoteIDs.Eb5, NoteIDs.Gb5, NoteIDs.Ab5,	NoteIDs.Bb5]
+        let notesIn5thPos = [NoteIDs.Ab1, NoteIDs.Ab2, NoteIDs.Eb3, NoteIDs.Ab3,
+                             NoteIDs.C4,  NoteIDs.Eb4, NoteIDs.Gb4, NoteIDs.Ab4,
+                             NoteIDs.Bb4]
         fifthPosPartials.addPartialsForNotes(noteIDs: notesIn5thPos)
         self.partialsForPositionsTable.insert(fifthPosPartials,
                                               at: brassPosition.fifth)
         //---- sixthPosition --------------------------------------------------
         var sixthPosPartials = BrassPartialsForPosition()
         sixthPosPartials.positionName = "Sixth Position"
-        let notesIn6thPos = [NoteIDs.G3, NoteIDs.D4, NoteIDs.G4, NoteIDs.B4,
-                             NoteIDs.D5, NoteIDs.F5, NoteIDs.G5, NoteIDs.A5]
+        let notesIn6thPos = [NoteIDs.G1, NoteIDs.G2, NoteIDs.D3, NoteIDs.G3,
+                             NoteIDs.B3, NoteIDs.D4, NoteIDs.F4, NoteIDs.G4,
+                             NoteIDs.A4]
         sixthPosPartials.addPartialsForNotes(noteIDs: notesIn6thPos)
         self.partialsForPositionsTable.insert(sixthPosPartials,
                                               at: brassPosition.sixth)
         //---- seventhPosition ------------------------------------------------
         var seventhPosPartials = BrassPartialsForPosition()
         seventhPosPartials.positionName = "Seventh Position"
-        let notesIn7thPos = [NoteIDs.Gb3, NoteIDs.Db4, NoteIDs.Gb4, NoteIDs.Bb4,
-                             NoteIDs.Db5, NoteIDs.E5,  NoteIDs.Gb5, NoteIDs.Ab5]
+        let notesIn7thPos = [NoteIDs.Gb1, NoteIDs.Gb2, NoteIDs.Db3, NoteIDs.Gb3,
+                             NoteIDs.Bb3, NoteIDs.Db4, NoteIDs.E4,  NoteIDs.Gb4,
+                             NoteIDs.Ab4]
         seventhPosPartials.addPartialsForNotes(noteIDs: notesIn7thPos)
         self.partialsForPositionsTable.insert(seventhPosPartials,
                                               at: brassPosition.seventh)
@@ -126,32 +133,58 @@ class FrenchHornPartialsTable: BrassNotePartialsTable {
         // fingering used to play the note). The position/fingering determines 
         // which overtones (partials) are possible for any note.
         
-        self.noteToPositionTable[NoteIDs.C3]  = brassPosition.sixth
-        self.noteToPositionTable[NoteIDs.Db3] = brassPosition.fifth
-        self.noteToPositionTable[NoteIDs.D3]  = brassPosition.fourth
-        self.noteToPositionTable[NoteIDs.Eb3] = brassPosition.third
-        self.noteToPositionTable[NoteIDs.E3]  = brassPosition.second
-        self.noteToPositionTable[NoteIDs.F3]  = brassPosition.first
-        self.noteToPositionTable[NoteIDs.Gb3] = brassPosition.seventh
-        self.noteToPositionTable[NoteIDs.G3]  = brassPosition.sixth
+//        self.noteToPositionTable[NoteIDs.C2]  = brassPosition.sixth
+//        self.noteToPositionTable[NoteIDs.Db2] = brassPosition.fifth
+//        self.noteToPositionTable[NoteIDs.D2]  = brassPosition.fourth
+//        self.noteToPositionTable[NoteIDs.Eb2] = brassPosition.third
+//        self.noteToPositionTable[NoteIDs.E2]  = brassPosition.second
+//        self.noteToPositionTable[NoteIDs.F2]  = brassPosition.first
+        
+        self.noteToPositionTable[NoteIDs.Gb2] = brassPosition.seventh
+        self.noteToPositionTable[NoteIDs.G2]  = brassPosition.sixth
+        self.noteToPositionTable[NoteIDs.Ab2] = brassPosition.fifth
+        self.noteToPositionTable[NoteIDs.A2]  = brassPosition.fourth
+        self.noteToPositionTable[NoteIDs.Bb2] = brassPosition.third
+        self.noteToPositionTable[NoteIDs.B2]  = brassPosition.second
+        
+        self.noteToPositionTable[NoteIDs.C3]  = brassPosition.first
+        self.noteToPositionTable[NoteIDs.Db3] = brassPosition.seventh
+        self.noteToPositionTable[NoteIDs.D3]  = brassPosition.sixth
+        self.noteToPositionTable[NoteIDs.Eb3] = brassPosition.fifth
+        self.noteToPositionTable[NoteIDs.E3]  = brassPosition.fourth
+        self.noteToPositionTable[NoteIDs.F3]  = brassPosition.third
+        self.noteToPositionTable[NoteIDs.Gb3] = brassPosition.second
+        self.noteToPositionTable[NoteIDs.G3]  = brassPosition.first
         self.noteToPositionTable[NoteIDs.Ab3] = brassPosition.fifth
         self.noteToPositionTable[NoteIDs.A3]  = brassPosition.fourth
         self.noteToPositionTable[NoteIDs.Bb3] = brassPosition.third
         self.noteToPositionTable[NoteIDs.B3]  = brassPosition.second
         
         self.noteToPositionTable[NoteIDs.C4]  = brassPosition.first
-        self.noteToPositionTable[NoteIDs.Db4] = brassPosition.fifth
-        self.noteToPositionTable[NoteIDs.D4]  = brassPosition.fourth
-        self.noteToPositionTable[NoteIDs.Eb4] = brassPosition.third
-        self.noteToPositionTable[NoteIDs.E4]  = brassPosition.second
-        self.noteToPositionTable[NoteIDs.F4]  = brassPosition.first
-        self.noteToPositionTable[NoteIDs.Gb4] = brassPosition.fourth
-        self.noteToPositionTable[NoteIDs.G4]  = brassPosition.third
-        self.noteToPositionTable[NoteIDs.Ab4] = brassPosition.second
-        self.noteToPositionTable[NoteIDs.A4]  = brassPosition.first
+        self.noteToPositionTable[NoteIDs.Db4] = brassPosition.fourth
+        self.noteToPositionTable[NoteIDs.D4]  = brassPosition.third
+        self.noteToPositionTable[NoteIDs.Eb4] = brassPosition.second
+        self.noteToPositionTable[NoteIDs.E4]  = brassPosition.first
+        self.noteToPositionTable[NoteIDs.F4]  = brassPosition.third
+        self.noteToPositionTable[NoteIDs.Gb4] = brassPosition.second
+        self.noteToPositionTable[NoteIDs.G4]  = brassPosition.first
+        self.noteToPositionTable[NoteIDs.Ab4] = brassPosition.fifth
+        self.noteToPositionTable[NoteIDs.A4]  = brassPosition.fourth
         self.noteToPositionTable[NoteIDs.Bb4] = brassPosition.third
         self.noteToPositionTable[NoteIDs.B4]  = brassPosition.second
         
+        self.noteToPositionTable[NoteIDs.C5]  = brassPosition.first
+        self.noteToPositionTable[NoteIDs.Db5] = brassPosition.fourth
+        self.noteToPositionTable[NoteIDs.D5]  = brassPosition.third
+        self.noteToPositionTable[NoteIDs.Eb5] = brassPosition.second
+        self.noteToPositionTable[NoteIDs.E5]  = brassPosition.first
+        self.noteToPositionTable[NoteIDs.F5]  = brassPosition.third
+        self.noteToPositionTable[NoteIDs.Gb5] = brassPosition.second
+        self.noteToPositionTable[NoteIDs.G5]  = brassPosition.first
+        self.noteToPositionTable[NoteIDs.Ab5] = brassPosition.fifth
+        self.noteToPositionTable[NoteIDs.A5]  = brassPosition.fourth
+        self.noteToPositionTable[NoteIDs.Bb5] = brassPosition.third
+        self.noteToPositionTable[NoteIDs.B5]  = brassPosition.second
         self.noteToPositionTable[NoteIDs.C6]  = brassPosition.first
     }
     

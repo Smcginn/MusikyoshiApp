@@ -95,6 +95,14 @@ struct NoteService {
         }
     }
     
+    static func getFreqForNoteID( noteID: NoteID ) -> Double {
+        // if let freq = NoteService.getNote( Int(nsNote.midiPitch) )?.frequency {
+        if let freq = NoteService.getNote( Int(noteID) )?.frequency {
+            return freq
+        }
+        return 0.0
+    }
+    
     static func getNote(_ orderId: Int) -> Note? {
         if(orderId > -1)
         {
@@ -340,6 +348,14 @@ func getShiftedPOAS(currPOAS: tPOAS, shift: Int) -> tPOAS {
         newMidiNote = currMidiNote - negShift
     }
     
+    // Special consideration for high notes if French Horn
+    if getCurrentStudentInstrument() == kInst_FrenchHorn {
+        // If the note is greater than C5, shift down an octave
+        if newMidiNote > NoteIDs.C5 {
+            newMidiNote -= kOneOctaveInSemitones
+        }
+    }
+    
     // Get POAS for shifted MIDI note
     retPOAS = getPOASFromMIDINote(midiNote: newMidiNote)
     
@@ -368,7 +384,11 @@ func getPOASFromMIDINote(midiNote: NoteID) -> tPOAS  {
     let midiOct = (midiNote/12)  - 1//////   BLAR
 
     // typealias tStepAndAlter = (step: String, alter: Int)
-    let newStepAndAlter = getNoteCharAndALterFromOctaveNote(octaveNote: midiNoteInOct, goSharp:false)
+    
+    // For now, always take the Flat enharmonic spelling
+    let useFlats = false
+    let newStepAndAlter = getNoteCharAndALterFromOctaveNote(octaveNote: midiNoteInOct,
+                                                            goSharp: useFlats)
 
     let retPOAS = tPOAS(octave: midiOct, alter: newStepAndAlter.alter, step: newStepAndAlter.step)
 
