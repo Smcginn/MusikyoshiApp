@@ -13,9 +13,11 @@
 #import "SSUpdateScrollProtocol.h"
 #import <SeeScoreLib/SeeScoreLib.h>
 #import "SSViewInterface.h"
-#import "FSAnalysisOverlayView.h"
+// MKMOD - removed import SSEditLayerProtocol.h
+#import "FSAnalysisOverlayView.h"   // MKMOD
 
 @class SSComponent;
+// MKMOD - removed class SSEditLayer
 
 /*!
  * @typedef handler_t
@@ -67,6 +69,9 @@ typedef NS_ENUM(NSInteger, ScrollType_e) {scroll_off, scroll_system, scroll_bar}
  * @interface SSScrollView
  * @abstract A scrollable view to display a MusicXML score as a vertical sequence of rectangular system views
  */
+// MKMOD - removed SSViewInterface from list
+// MKMOD - added OverlayViewDelegate to list
+// MKMOD - removed OverlayViewDelegate from list  - 12/12/17
 @interface SSScrollView : UIScrollView <SSBarControlProtocol, ScoreChangeHandler> {
 
 	IBOutlet UIView *containedView;
@@ -102,6 +107,7 @@ typedef NS_ENUM(NSInteger, ScrollType_e) {scroll_off, scroll_system, scroll_bar}
  */
 @property (nonatomic,assign) id<SSUpdateScrollProtocol> scrollDelegate;
 
+// MKMOD - added overlayViewDelegate  - 11/20/17
 /*!
  * @property overlayViewDelegate
  * @abstract for FSAnalysisOverlayView update
@@ -138,26 +144,32 @@ typedef NS_ENUM(NSInteger, ScrollType_e) {scroll_off, scroll_system, scroll_bar}
  */
 @property (readonly) int cursorBarIndex;
 
+// MKMOD - removed import SSEditLayerProtocol.h
+// removed property editLayer
+
 /*!
  * @property bottom
  * @abstract return y-coord of bottom of bottom system
  */
 @property (readonly) float bottom;
 
+// MKMOD - added isDisplayingStart
 /*!
  * @property isDisplayingStart
  * @abstract true if the first system is (fully) displayed on the screen
  */
 @property (readonly)  bool isDisplayingStart;
 
+// MKMOD - added isDisplayingEnd
 /*!
  * @property isDisplayingEnd
  * @abstract true if the last system is (fully) displayed on the screen
  */
 @property (readonly)  bool isDisplayingEnd;
 
+// MKMOD - added isDisplayingWhole
 /*!
- * @property isDisplayingStart
+ * @property isDisplayingWhole
  * @abstract true if the entire score is currently visible on the screen (not scrollable in this case)
  */
 @property (readonly)  bool isDisplayingWhole;
@@ -198,6 +210,10 @@ typedef NS_ENUM(NSInteger, ScrollType_e) {scroll_off, scroll_system, scroll_bar}
 			  opt:(SSLayoutOptions *)options
 	   completion:(handler_t)completionHandler;
 
+// MKMOD removed function def for setSinglePartDisplay
+
+// MKMOD removed function def for clearSinglePartDisplay
+
 /*!
  * @method displayParts
  * @abstract set which parts to display
@@ -218,17 +234,29 @@ typedef NS_ENUM(NSInteger, ScrollType_e) {scroll_off, scroll_system, scroll_bar}
  */
 -(void)abortBackgroundProcessing:(handler_t)completionHandler;
 
+// MKMOD removed id<SSEditLayerProtocol> (^ss_create_editlayer_t) ....
+
+// MKMOD removed method setEditMode ....
+
 /*!
  * @method clearDisplay
  * @abstract clear displayed systems but retain score
  */
 -(void)clearDisplay;
 
+// MKMOD removed method clearEditMode ....
+
 /*!
  * @method clearAll
  * @abstract clear everything - need to call setupScore after calling this
  */
 -(void)clearAll;
+
+// MKMOD removed -(BOOL)isDisplayingStart; ....
+
+// MKMOD removed -(BOOL)isDisplayingEnd; ....
+
+// MKMOD removed -(BOOL)isDisplayingWhole; ....
 
 /*!
  @method relayoutWithCompletion
@@ -289,12 +317,15 @@ typedef NS_ENUM(NSInteger, ScrollType_e) {scroll_off, scroll_system, scroll_bar}
  */
 -(CGRect)systemRect:(int)systemIndex;
 
+//  MKMOD - some changes to commented lines here
 ///*!
 // * @enum CursorType_e
 // * @abstract define the type of cursor, vertical line or rectangle around the bar
 // */
 //enum CursorType_e {cursor_line, cursor_rect};
 //
+
+//  MKMOD - some changes to commented lines here
 ///*!
 // * @enum ScrollType_e
 // * @abstract define the scroll required when setting the cursor
@@ -332,6 +363,7 @@ typedef NS_ENUM(NSInteger, ScrollType_e) {scroll_off, scroll_system, scroll_bar}
  */
 -(void)hideCursor;
 
+// MKMOD - added this
 /*!
  * @method setCursorColour:
  * @abstract set the cursor outline colour
@@ -432,6 +464,19 @@ typedef NS_ENUM(NSInteger, ScrollType_e) {scroll_off, scroll_system, scroll_bar}
  */
 -(NSArray<SSComponent*> *)componentsAt:(CGPoint)p maxDistance:(float)maxDistance;
 
+// MKMOD
+//  deleted -(void)tap: ...
+// MKMOD
+
+// MKMOD
+//  deleted -(void)pan: ...
+// MKMOD
+
+// MKMOD
+//  Deleted xmlScoreWidth   by David S Reich on 14/05/2016.
+// MKMOD
+
+// MKMOD
 //  Added by David S Reich on 14/05/2016.
 //  Modification Copyright © 2016 Musikyoshi. All rights reserved.
 /*!
@@ -441,7 +486,9 @@ typedef NS_ENUM(NSInteger, ScrollType_e) {scroll_off, scroll_system, scroll_bar}
  * Should NOT be set at the same time as optimalXMLxLayoutMagnification
  */
 @property (nonatomic) bool optimalSingleSystem;
+// MKMOD
 
+// MKMOD
 //  Added by David S Reich on 04/03/2017.
 //  Modification Copyright © 2017 Musikyoshi. All rights reserved.
 /*!
@@ -451,35 +498,49 @@ typedef NS_ENUM(NSInteger, ScrollType_e) {scroll_off, scroll_system, scroll_bar}
  * Should NOT be set at the same time as optimalSingleSystem
  */
 @property (nonatomic) bool optimalXMLxLayoutMagnification;
+// MKMOD
 
 
 // For displaying student performance results
 
+// MKMOD - changed third and fourth params - 11/20/17
+// MKMOD - added addNotePerformanceResultAtXPos - 12/12/17
+// MKMOD - changed to addScoreObjectPerformanceResultAtXPos - 7/26/18
 -(void) addScoreObjectPerformanceResultAtXPos:(CGFloat) iXPos
-                                       atYpos:(CGFloat) iYPos
+                                       atYpos:(CGFloat) iYPos // MKMOD - added param - 2/14/18
                            withWeightedRating:(int)  iWeightedRating
-                                       isNote:(bool)isNote
-                             withNoteOrRestID:(int) iNoteOrRestID
-                                scoreObjectID:(int) iScoreObjectID
+                                       isNote:(bool)isNote          // MKMOD - changed param - 7/26/18
+                             withNoteOrRestID:(int) iNoteOrRestID   // MKMOD - changed param - 7/26/18
+                                scoreObjectID:(int) iScoreObjectID  // MKMOD - changed param - 7/26/18
                                      isLinked:(bool) isLinked
                                 linkedSoundID:(int)  iLinkedSoundID;
 
+// MKMOD - added updateNotePerformanceResultAtXPos - 11/20/17
+// MKMOD - removded updateNotePerformanceResultAtXPos - 7/26/18
+
+// MKMOD - added addSoundPerformanceResultAtXPos - 12/12/17
 -(void) addSoundPerformanceResultAtXPos:(CGFloat) iXPos
                            withDuration:(int) iDuration
                                 soundID:(int) iSoundID
                                isLinked:(bool) isLinked
                            linkedNoteID:(int) iLinkedNoteID;
 
--(CGFloat) getCurrentXOffset;
+-(CGFloat) getCurrentXOffset;  // MKMOD - added - 12/12/17
 
+
+// MKMOD added highlightNote - 2/14/18
+// MKMOD changed to highlightScoreObject - 7/26/18
 // scroll to and highlight note or rest with this ScoreObject ID
 -(bool) highlightScoreObject:(int) iScoreObjectID
                     severity:(int) iSeverity;
 
--(void) turnHighlightOff;
 
+-(void) turnHighlightOff;   // MKMOD added - 2/14/18
+
+// MKMOD - added clearNotePerformanceResultAtXPos - 11/20/17
 -(void) clearNotePerformanceResultAtXPos:(CGFloat) iXPos;
 
+// MKMOD - added clearNotePerformanceResults - 11/20/17
 -(void) clearNotePerformanceResults;
 
 -(void) clearCurrNoteLines;

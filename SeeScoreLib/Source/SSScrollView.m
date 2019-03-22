@@ -11,11 +11,20 @@
 #import "SSScrollView.h"
 #import "SSSystemView.h"
 #import <QuartzCore/QuartzCore.h>
+// MKMOD - moved import dispatch.h
 #import "SSPlayLoopGraphics.h"
+// MKMOD - removed import SSEditLayerProtocol.h
+// MKMOD - added import FSAnalysisOverlayView.h    - 11/20/17
 #import "FSAnalysisOverlayView.h"
+
+// MKMOD - Added KNoteAnalysisRespondsToTouch - 12/12/17
+// MKMOD - removed KNoteAnalysisRespondsToTouch - 12/12/17
+// MKMOD - Added kMKDebugOpt_NoteAnalysisRespondsToTouch - 12/17/17
+// MKMOD - Removed kMKDebugOpt_NoteAnalysisRespondsToTouch - 2/14/18
 
 #include <dispatch/dispatch.h>
 
+// MKMOD - added kMargin
 static const CGSize kMargin = {0,0}; // L/R margins
 
 static const float kWindowPlayingCentreFractionFromTop = 0.333; // autoscroll centres the current playing system around here
@@ -32,10 +41,14 @@ static const float kMaxMagnification = 2.5;
 static const float kMagnificationReductionScreenWidthThreshold = 768;
 static const float kMagnificationProportionToScreenWidth = 0.8F;// this is 0 for constant magnification at different screen widths, 1.0 for magnification proportional to screen width/768.
 
+// MKMOD
+//  Commemnted out, then Deleted static BOOL kOptimalSingleSystem
+// MKMOD
+
+
 @interface SSScrollView ()
 {
-
-    FSAnalysisOverlayView  *analysisOverlayView;
+    FSAnalysisOverlayView  *analysisOverlayView; // MKMOD - added - 11/20/17
 
 	NSMutableArray *systemlist; // array of SSSystem
 
@@ -50,6 +63,7 @@ static const float kMagnificationProportionToScreenWidth = 0.8F;// this is 0 for
 	int cursorBarIndex;
 	BOOL showingCursor;
 
+    // MKMOD - added CursorType_e, cursor_xpos
     enum CursorType_e cursorType;
     float cursor_xpos;
 
@@ -75,9 +89,16 @@ static const float kMagnificationProportionToScreenWidth = 0.8F;// this is 0 for
 
 	NSMutableDictionary *colouringsForSystems;
 
+    // MKMOD - deleted singlePartDIsplay
+    // MKMOD - deleted startBarToDIsplay
+    // MKMOD - deleted partToDIsplay
+    
 	handler_t layoutCompletionHandler;
 
 	SSPlayLoopGraphics *playLoopGraphics;
+    
+    // MKMOD - deleted editMode
+    // MKMOD - deleted ensureVisiblewRect
 
 	sscore_changeHandler_id handlerId; // handler registered with SSScore is automatically notified of changes to the score when editing
     
@@ -94,6 +115,9 @@ static const float kMagnificationProportionToScreenWidth = 0.8F;// this is 0 for
 {
 	return score;
 }
+
+// MKMOD - deleted   -(float) systemUpperMargin
+// MKMOD - deleted   -(float) systemLowerMargin
 
 -(void)initAll
 {
@@ -117,19 +141,31 @@ static const float kMagnificationProportionToScreenWidth = 0.8F;// this is 0 for
 	background_layout_queue = dispatch_queue_create("uk.co.dolphin-com.seescore.background_layout", NULL);
 	background_draw_queue = dispatch_queue_create("uk.co.dolphin-com.seescore.scroller_background_draw", NULL);
 	pinchRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinch)];
+    // MKMOD - moved assign to pendingAddSystems   to below
 	[self addGestureRecognizer:pinchRecognizer];
 	isPinchEnabled = true;
 	colouringsForSystems = NSMutableDictionary.dictionary;
     pendingAddSystems = [NSMutableSet set];
 	layOptions = [[SSLayoutOptions alloc] init]; // default layout options
-    [self resetBarRectCursor];
+    
+    // MKMOD
+    //   Removed ref to _xmlScoreWidth
+    //   Removed ref to singlePartDisplay
+    //   Added, then removed ref to _optimalSingleSystem
+    // MKMOD
+    
+    [self resetBarRectCursor];  // MKMOD - added this
 
     useSeeScoreCursor = YES;
     
-    [self addOverlayView];
+    [self addOverlayView];  // MKMOD - added - 11/20/17
     
 	[self setCursorColour: [UIColor redColor]];
 }
+
+// MKMOD - removed -(bool) displaySinglePart
+// MKMOD - removed -(bool) setSinglePartDisplay
+// MKMOD - removed -(bool) clearSinglePartDisplay
 
 -(void)setBackgroundColor:(UIColor *)backgroundColor
 {
@@ -160,6 +196,8 @@ static const float kMagnificationProportionToScreenWidth = 0.8F;// this is 0 for
 	if (score)
 	{
 		[systemlist removeAllObjects];
+        // MKMOD - removed  if (score)
+        // MKMOD - removed      ssscore_edit_removechangehandler
 		[score removeChangeHandler:handlerId];
 		handlerId = 0;
 		score = nil;
@@ -203,6 +241,10 @@ static const float kMagnificationProportionToScreenWidth = 0.8F;// this is 0 for
 	return bottom;
 }
 
+// MKMOD - removed -(bool) setEditLayer
+// MKMOD - removed -(bool) setEditMode
+// MKMOD - removed -(bool) clearEditMode
+
 -(bool)displayingCursor
 {
 	return showingCursor;
@@ -219,6 +261,7 @@ static const float kMagnificationProportionToScreenWidth = 0.8F;// this is 0 for
 	return sysView ? sysView.drawScale : 1;
 }
 
+// MKMOD -  Added ClearDisplay, must have confused in merge with ClearAll below.
 -(void)clearDisplay
 {
 	[self clearPlayLoopGraphics];
@@ -242,6 +285,7 @@ static const float kMagnificationProportionToScreenWidth = 0.8F;// this is 0 for
 
 -(void)relayoutWithCompletion:(handler_t)completionHandler
 {
+    // MKMOD -  removed conditional    if (!editMode) {  around these two lines:
 	lastStartBarDisplayed = -1;
 	lastNumBarsDisplayed = -1;
 	[self removeAllSystems];
@@ -283,6 +327,7 @@ static float limit(float val, float mini, float maxi)
 	if (score && systemlist.count > 0 && ![self isProcessing])
 	{
 		_magnification = limit(mag, kMinMagnification, kMaxMagnification);
+        // MKMOD -  added second param mag below
 		[self setupScore:score openParts:displayingParts mag:self.magnification opt:layOptions];
 	}
 }
@@ -396,7 +441,8 @@ static float limit(float val, float mini, float maxi)
 	float maxSystemHeight = fmax(self.frame.size.height, 640.F); // don't allow any system higher than the screen else we run out of memory (but prevent 0 size)
 	SSSystem *system = [systemlist objectAtIndex:sysIndex];
 	// limit height of system
-	float systemHeight = min(system.bounds.height * zoom, maxSystemHeight);
+    // MKMOD - redefined declaration of systemHeight, prev used if editMode in assignment
+    float systemHeight = min(system.bounds.height * zoom, maxSystemHeight);
 	assert(systemHeight > 0);
 	return systemHeight;
 }
@@ -405,16 +451,17 @@ static float limit(float val, float mini, float maxi)
 {
 	NSMutableArray *mutSysRects = [[NSMutableArray alloc] init];
 	assert(systemlist);
-	float ypos = kMargin.height;
+	float ypos = kMargin.height;  // MKMOD - was     = 0
 	CGSize frameSize = self.frame.size;
 	assert(frameSize.width > 0);
 	int index = 0;
 	for (SSSystem *system in systemlist)
 	{
 		float systemHeight = [self systemHeight:index zoom:1]; // zoom is only needed for actual zooming
+        // MKMOD - removed += call to ypos
 		CGRect rect = CGRectMake(kMargin.width, ypos, frameSize.width, systemHeight);
 		[mutSysRects addObject:[NSValue valueWithCGRect:rect]];
-		ypos += systemHeight + system.defaultSpacing;
+		ypos += systemHeight + system.defaultSpacing;   // MKMOD - altered this assign
 		++index;
 	}
 	return mutSysRects;
@@ -438,9 +485,9 @@ static float limit(float val, float mini, float maxi)
 	   completion:(handler_t)completionHandler
 {
 	if (score)
-		[score removeChangeHandler:handlerId];
+		[score removeChangeHandler:handlerId];  // MKMOD - modified this line
 	handlerId = 0;
-    [self disablePinch];
+    [self disablePinch];  // MKMOD - added this
 	assert(sc);
 	assert(parts.count > 0);
 	// abort any existing layout/draw...
@@ -448,7 +495,7 @@ static float limit(float val, float mini, float maxi)
 		assert(!layoutProcessing);
 		[self clearAll];
 		displayingParts = parts;
-		layOptions = options;
+		layOptions = options; // MKMOD - added this
 		score = sc;
 		handlerId = [score addChangeHandler:self];
 
@@ -459,9 +506,12 @@ static float limit(float val, float mini, float maxi)
 		magnificationScalingForWidth = [self magnificationScaling:frame.size.width];
 		if (self.abortingBackground == 0)
 		{
+            // MKMOD - took out    if (singlePartDisplay) {
 				assert(!layoutProcessing);
 				layoutProcessing = true;
 				assert(systemlist.count == 0);
+            
+                // MKMOD -  added from here . . .
 				dispatch_async(background_layout_queue, ^{
 					assert(systemlist.count == 0);
 					if (self.abortingBackground == 0)
@@ -470,8 +520,13 @@ static float limit(float val, float mini, float maxi)
                             __block float systemMagnification = 0;
                             __block bool widthIsTruncated = NO;//YES;
                             do {
+                                // MKMOD - ... to here    (see "MKMOD added" above
+
                                 UIGraphicsBeginImageContextWithOptions(CGSizeMake(10,10), YES/*opaque*/, 0.0/* scale*/);
                                 CGContextRef ctx = UIGraphicsGetCurrentContext();
+                                // MKMOD - took out SSSystem* system = [score layoutSystemContext:  // 5-6 lines
+                                
+                                // MKMOD - Added this whole call to create sscore_error below
                                 enum sscore_error err = [score layoutWithContext:ctx
                                                                            width:frame.size.width - (2 * kMargin.width) maxheight:frame.size.height
                                                                            parts:parts magnification:self.magnification * magnificationScalingForWidth
@@ -481,38 +536,61 @@ static float limit(float val, float mini, float maxi)
                                                                             // return false if abort required
                                                                             if (self.abortingBackground == 0)
                                                                             {
+                                                                                // MKMOD -  deleted assign to widthIsTruncated - 5/28/17
                                                                                 systemMagnification = sys.magnification;
+                                                                                // MKMOD -  changed this log - 5/28/17
 //                                                                       NSLog(@"sys.magnification = %f, %i", sys.magnification, widthIsTruncated);
                                                                                 return true;
                                                                             }
                                                                             else
                                                                                 return false;}];
                                 UIGraphicsEndImageContext();
-                                if (err != sscore_NoError)
+                                
+                                // MKMOD - took out 5 lines here   4/1/17 DR commit
+                                
+                                // MKMOD - added lines 11 below   4/1/17 DR commit
+                               if (err != sscore_NoError)
                                     break;
                                 if ((systemMagnification < self.magnification) || widthIsTruncated) {
+                                    // MKMOD -  changed this log - 5/28/17
 //                                    NSLog(@"systemMagnification:%f - width=%f", systemMagnification, frame.size.width);
                                     frame.size.width += 100;
                                 }
                             } while ((systemMagnification < self.magnification) || widthIsTruncated);
 
+                            // MKMOD -  changed this log - 5/28/17
+                            // MKMOD -  commented out this log - 11/6/17
 //                            NSLog(@"+++systemMagnification:%f - width=%f", systemMagnification, frame.size.width);
 
+                            
+                            // MKMOD -  added the dispatch_async "wrapper" - 11/6/17
+                            // MKMOD - on 11/20/17, made a similar, if not identical change here.
                             // temp fix, from Matt's checkin
                             // was:  self.frame = frame;
                             dispatch_async(dispatch_get_main_queue(), ^{
                                 self.frame = frame;
                             });
                         }
+                        
+                        // MKMOD  took out "else {"  (tied to removed if above) and 7 lines  4/1/17 DR commit
+
                         else
+                        // MKMOD
+                        // changed from    if (kOptimalSingleSystem) {
+                        // MKMOD
                         if (_optimalSingleSystem) {
                             __block int numNewSystems = 0;
+                            // MKMOD
+                            //   removed    if (_xmlScoreWidth > 1 )
+                            //                  frame.size.width = .....
+                            // MKMOD
                             do {
                                 numNewSystems = 0;
 						UIGraphicsBeginImageContextWithOptions(CGSizeMake(10,10), YES/*opaque*/, 0.0/* scale*/);
 						CGContextRef ctx = UIGraphicsGetCurrentContext();
 						enum sscore_error err = [score layoutWithContext:ctx
-                                                            width:frame.size.width - (2 * kMargin.width) maxheight:frame.size.height
+                                                           // MKMOD - change values for this line:
+                                                           width:frame.size.width - (2 * kMargin.width) maxheight:frame.size.height
                                                             parts:parts magnification:self.magnification * magnificationScalingForWidth
                                                             options:options
                                                             callback:^bool (SSSystem *sys){
@@ -532,16 +610,20 @@ static float limit(float val, float mini, float maxi)
                                     NSLog(@"numNewSystems:%d - width=%f", numNewSystems, frame.size.width);
                                     frame.size.width += 100;
                                 }
-                                NSLog(@"SSScrollView.magnification = %f", self.magnification);
+                                NSLog(@"SSScrollView.magnification = %f", self.magnification); // MKMOD added this
                             } while (numNewSystems > 1);
 
                             self.frame = frame;
+                            // MKMOD
+                            // changed NSLog call
                             NSLog(@"one system: xmlScoreWidth = width=%f", frame.size.width);
+                            // MKMOD
                         }
 
                         UIGraphicsBeginImageContextWithOptions(CGSizeMake(10,10), YES/*opaque*/, 0.0/* scale*/);
 						CGContextRef ctx = UIGraphicsGetCurrentContext();
 						enum sscore_error err = [score layoutWithContext:ctx
+                                                                   // MKMOD - change values for this line:
 																   width:frame.size.width - 2 * kMargin.width maxheight:frame.size.height
 																   parts:parts magnification:self.magnification * magnificationScalingForWidth
 																 options:options
@@ -586,6 +668,7 @@ static float limit(float val, float mini, float maxi)
 						}
 						assert(err == sscore_NoError);
 					}
+                    // MKMOD - added from here . . .   4/1/17 DR commit
                     NSLog(@"SSScrollView.magnification = %f", self.magnification);
                     SSSystem *topSystem = [self systemAtIndex:0];
                     NSLog(@"topSystem.magnification = %f, %i", topSystem.magnification, topSystem.isTruncatedWidth);
@@ -602,15 +685,18 @@ static float limit(float val, float mini, float maxi)
                             completionHandler();
                     });
                 });
+                // MKMOD - to here . . .   (see "added from here" above) 4/1/17 DR commit
 		}
 	}];
 }
 
+// MKMOD - redid displayParts significantly   4/1/17 DR commit
 -(void)displayParts:(NSArray<NSNumber*>*)openParts
 {
 	[self setupScore:score openParts:openParts mag:self.magnification opt:layOptions completion:^{}];
 }
 
+// MKMOD - redid setLayoutOptions significantly    4/1/17 DR commit
 -(void)setLayoutOptions:(SSLayoutOptions*)layoutOptions
 {
 	[self disablePinch];
@@ -630,6 +716,7 @@ static float min(float a, float b)
 	return layoutProcessing;
 }
 
+// MKMOD - added   4/1/17 DR commit
 -(void)resetBarRectCursor
 {
     cursorType = cursor_rect;
@@ -638,7 +725,7 @@ static float min(float a, float b)
 
 -(void)removeAllSystems
 {
-    [self resetBarRectCursor];
+    [self resetBarRectCursor];  // MKMOD - added   4/1/17 DR commit
 	[colouringsForSystems removeAllObjects];
 	systemRects = [NSArray array]; // clear
 	[reusableViews removeAllObjects];
@@ -692,6 +779,7 @@ static float min(float a, float b)
 	assert(![self existsSysView:sysIndex]);
 	[containedView addSubview:sysView];
 
+     // MKMOD - added this if section - 11/20/17
     if (analysisOverlayView != nil)
     {
         CGSize sz = self.contentSize;
@@ -701,6 +789,7 @@ static float min(float a, float b)
 
         analysisOverlayView.layer.zPosition = 5;
 
+        // MKMOD - removed commented lines lines - 12/12/17
         [analysisOverlayView redrawMe];
     }
 }
@@ -728,6 +817,8 @@ static float min(float a, float b)
 		assert(sysIndex >= 0 && sysIndex < systemRects.count);
 		CGRect sysFrame = [[systemRects objectAtIndex:sysIndex] CGRectValue];
 		assert(sysFrame.size.height > 0 && sysFrame.size.width > 0);
+        // MKMOD - deleted call to setFrame   4/1/17 DR commit
+        // MKMOD - modified call to  sysView setSystem: below  4/1/17 DR commit
 		[sysView setSystem:system score:score topLeft:sysFrame.origin margin:CGSizeZero];
 		// restore any preserved colouring
 		NSNumber *sysIndexKey = [NSNumber numberWithInt:sysIndex];
@@ -773,7 +864,7 @@ static float min(float a, float b)
 
 -(CGSize)systemsSize
 {
-	CGSize sz = CGSizeZero;
+	CGSize sz = CGSizeZero; // MKMOD - changed this line
 	for (SSSystem *sys in systemlist)
 	{
 		sz.height += sys.bounds.height + sys.defaultSpacing;
@@ -785,10 +876,11 @@ static float min(float a, float b)
 
 - (void)layoutSubviews
 {
+     // MKMOD - added stuff that was deleted later - 11/20/17
 	[super layoutSubviews];
 	if (self.abortingBackground == 0 && score && systemlist.count > 0) // this is called on every scroll movement
 	{
-        [self resetBarRectCursor];
+        [self resetBarRectCursor];     // MKMOD - added
 		// adjust height of content to include all systems
 		self.contentSize = [self systemsSize];
 		CGRect containedFrame = containedView.frame;
@@ -796,6 +888,7 @@ static float min(float a, float b)
 		containedFrame.size = self.contentSize;
 		containedView.frame = containedFrame;
 
+        // MKMOD - removed editMode from calc
 		if (systemlist.count != systemRects.count) // don't normally need to recalc the system rects unless in edit mode
 			systemRects = [self getSystemRects];
 
@@ -843,7 +936,7 @@ static float min(float a, float b)
 		{
 			[self.updateDelegate newLayout];
 		}
-        if (showingCursor)
+        if (showingCursor)    // MKMOD - added this fragment
         {
             [self displayCursor];
         }
@@ -892,13 +985,15 @@ static float min(float a, float b)
 
 -(CGPoint)topLeftAtSystemIndex:(int)sysIndex
 {
+    // MKMOD - removed creating a CGRect from system Rects
 	if (sysIndex >= 0 && sysIndex < [systemRects count])
 	{
 		SSSystemView *sysView = [self systemViewForIndex:sysIndex];
 		if (sysView)
-			return sysView.topLeft;
+			return sysView.topLeft; // MKMOD - was making a point from above rect
 		else // we may not have a SystemView placed here
 		{
+            // MKMOD - tis was the call deleted above
 			CGRect rect = [[systemRects objectAtIndex:sysIndex] CGRectValue];
 			return CGPointMake(rect.origin.x, rect.origin.y);
 		}
@@ -952,6 +1047,7 @@ static float min(float a, float b)
 			rval.staffLocation = sscore_system_staffloc_undefined;
 		}
 		rval.posInSystem = [self convertPoint:pos toView:sysView];
+        // MKMOD - was modifying rval.posInSystem.y
 	}
 	else
 	{
@@ -1018,12 +1114,12 @@ static float min(float a, float b)
 	return rval > 0 ? rval : systemRects.count > 0 ? 1 : 0; // don't return 0 unless there really are no systems at all to display
 }
 
--(bool)isDisplayingStart
+-(bool)isDisplayingStart   // MKMOD - changed BOOL to bool
 {
 	return self.contentOffset.y <= 10;
 }
 
--(bool)isDisplayingEnd
+-(bool)isDisplayingEnd    // MKMOD - changed BOOL to bool
 {
 	if (systemlist.count > 0)
 	{
@@ -1038,7 +1134,7 @@ static float min(float a, float b)
 		return YES;
 }
 
--(bool)isDisplayingWhole
+-(bool)isDisplayingWhole   // MKMOD - changed BOOL to bool
 {
 	return [self isDisplayingStart] && [self isDisplayingEnd];
 }
@@ -1213,6 +1309,7 @@ static float min(float a, float b)
 	return [CATransaction animationDuration];
 }
 
+// MKMOD - added this method   4/1/17
 -(void)displayCursor
 {
     if (!useSeeScoreCursor)
@@ -1244,6 +1341,7 @@ static float min(float a, float b)
     }
 }
 
+// MKMOD - GitKraken compare very confused here. May not have changed anything
 -(void)setCursor:(int)barIndex
             xpos:(float)xpos
             type:(enum CursorType_e)type
@@ -1343,6 +1441,7 @@ static float min(float a, float b)
 -(void)colourComponents:(NSArray*)components colour:(UIColor *)colour elementTypes:(unsigned)elementTypes
 {
 	[colouringsForSystems removeAllObjects]; // clear all colourings in invisible systems
+    // MKMOD - added this entire for loop
     for (SSComponent *comp in components)
     {
         SSSystem *system = [self systemContainingBarIndex:comp.barIndex];
@@ -1361,6 +1460,9 @@ static float min(float a, float b)
 		if ([v isKindOfClass:[SSSystemView class]])
 		{
 			SSSystemView *sysView = (SSSystemView*)v;
+            // MKMOD - deleted 11 lines
+            
+            // MKMOD - added these 2 lines
             NSNumber *key = [NSNumber numberWithInt:sysView.systemIndex];
             SSColourRender *colourRender = [colouringsForSystems objectForKey:key];
 			[sysView setColourRender:colourRender];
@@ -1579,8 +1681,8 @@ static float min(float a, float b)
 	[self clearPlayLoopGraphics];
 	SSSystem *leftSystem = [self systemContainingBarIndex:leftLoopBarIndex];
 	SSSystem *rightSystem = [self systemContainingBarIndex:rightLoopBarIndex];
-	CGPoint leftSystemTopLeft = [self topLeftAtSystemIndex:leftSystem.index];
-	CGPoint rightSystemTopLeft = [self topLeftAtSystemIndex:rightSystem.index];
+	CGPoint leftSystemTopLeft = [self topLeftAtSystemIndex:leftSystem.index];   // MKMOD  changed
+	CGPoint rightSystemTopLeft = [self topLeftAtSystemIndex:rightSystem.index]; // MKMOD  changed
 	playLoopGraphics = [[SSPlayLoopGraphics alloc] initWithNumParts:score.numParts
 														 leftSystem:leftSystem leftSystemTopLeft:(CGPoint)leftSystemTopLeft leftBarIndex:leftLoopBarIndex
 														rightSystem:rightSystem rightSystemTopLeft:(CGPoint)rightSystemTopLeft rightBarIndex:rightLoopBarIndex
@@ -1601,6 +1703,10 @@ static float min(float a, float b)
 	}
 }
 
+// MKMOD  deleted method warnShowingKeyboardRect
+// MKMOD  deleted method warnHidingKeyboard
+// MKMOD  deleted method ensureVisible
+
 -(NSArray<SSComponent*> *)componentsAt:(CGPoint)p maxDistance:(float)maxDistance
 {
 	SSSystemPoint sysPt = [self systemAtPos:p];
@@ -1618,19 +1724,24 @@ static float min(float a, float b)
 	return NSArray.array;
 }
 
+// MKMOD  deleted method tap
+// MKMOD  deleted method pan
+
 #ifdef DrawOutline
 - (void)drawRect:(CGRect)rect
 {
-	[super drawRect:rect];
+	[super drawRect:rect];  // MKMOD - uncommeneted this - 11/20/17
 	CGContextRef ctx = UIGraphicsGetCurrentContext();
 	CGContextSetStrokeColorWithColor (ctx, UIColor.greenColor.CGColor);
 	CGContextStrokeRect(ctx, rect);
-	for (NSValue *val in systemRects)
+    // MKMOD  added this for loop   4/1/17
+    for (NSValue *val in systemRects)
 	{
 		CGContextSetStrokeColorWithColor (ctx, UIColor.blueColor.CGColor);
 		CGContextStrokeRect(ctx, CGRectInset(val.CGRectValue, 1,1));
 	}
 
+    // MKMOD - added from here to end of method - 11/20/17
     CGFloat red[4] = {1.0f, 0.0f, 0.0f, 1.0f};
     CGContextSetStrokeColor(ctx, red);
     CGContextBeginPath(ctx);
@@ -1724,6 +1835,7 @@ static float min(float a, float b)
 }
 //@end
 
+// MKMOD  added this method 4/1/17
 -(void)setCursorColour:(UIColor*)colour
 {
 	for (UIView *v in [containedView subviews])
@@ -1741,6 +1853,7 @@ static float min(float a, float b)
 //@protocol ScoreChangeHandler
 -(void)change:(sscore_state_container *)prevstate newstate:(sscore_state_container *)newstate reason:(int)reason
 {
+    // MKMOD  deleted a line here
 	NSMutableArray<SSSystemView *> *changedViews = NSMutableArray.array;
 	for (UIView *v in [containedView subviews])
 	{
@@ -1761,6 +1874,7 @@ static float min(float a, float b)
 	}
 	if (changedViews.count > 1)
 	{
+        // MKMOD  deleted 5 lines here   4/1/17
 		dispatch_async(dispatch_get_main_queue(), ^{ // get off this thread - relayout can remove ScoreChangeHandler listeners which upsets the caller
 			[self relayout]; // more than 1 system affected - complete relayout
 		});
@@ -1774,6 +1888,7 @@ static float min(float a, float b)
 	// else nothing changed
 }
 
+// MKMOD - added addOverlayView - 11/20/17
 -(void) addOverlayView
 {
     if (analysisOverlayView == nil )
@@ -1782,32 +1897,41 @@ static float min(float a, float b)
         analysisOverlayView = [[FSAnalysisOverlayView alloc] initWithFrame:frame];
         [analysisOverlayView setBackgroundColor:[UIColor clearColor]];
         [containedView addSubview:analysisOverlayView];
+        // MKMOD - removed setting delegate - 12/12/17
     }
 }
 
+// MKMOD - added addNotePerformanceResultAtXPos - 11/20/17
+// MKMOD - changed param list- 12/12/17
+// MKMOD - changed to addScoreObjectPerformanceResultAtXPos - 7/26/17
 // For displaying student performance results
 -(void) addScoreObjectPerformanceResultAtXPos:(CGFloat) iXPos
-                                       atYpos:(CGFloat) iYPos
+                                       atYpos:(CGFloat) iYPos // MKMOD - added 2/14/18
                            withWeightedRating:(int)  iWeightedRating
-                                       isNote:(bool)isNote
-                             withNoteOrRestID:(int) iNoteOrRestID
-                                scoreObjectID:(int) iScoreObjectID
+                                       isNote:(bool)isNote          // MKMOD - changed 7/26/17
+                             withNoteOrRestID:(int) iNoteOrRestID   // MKMOD - changed 7/26/17
+                                scoreObjectID:(int) iScoreObjectID  // MKMOD - changed 7/26/17
                                      isLinked:(bool) isLinked
                                 linkedSoundID:(int)  iLinkedSoundID
 {
     if (analysisOverlayView)
     {
-        [analysisOverlayView addScoreObjectAtXPos: iXPos
-                                           atYpos: iYPos
+        // MKMOD - changed param list- 12/12/17
+        [analysisOverlayView addScoreObjectAtXPos: iXPos    // MKMOD - changed 7/26/17
+                                           atYpos: iYPos  // MKMOD - added 2/14/18
                                withWeightedRating: iWeightedRating
-                                           isNote: isNote
-                                 withNoteOrRestID: iNoteOrRestID
-                                    scoreObjectID: iScoreObjectID
+                                           isNote: isNote           // MKMOD - changed 7/26/17
+                                 withNoteOrRestID: iNoteOrRestID    // MKMOD - changed 7/26/17
+                                    scoreObjectID: iScoreObjectID   // MKMOD - changed 7/26/17
                                          isLinked: isLinked
                                     linkedSoundID: iLinkedSoundID];
     }
 }
 
+// MKMOD - added updateNotePerformanceResultAtXPos - 11/20/17
+// MKMOD - removed updateNotePerformanceResultAtXPos - 7/26/18
+
+// MKMOD - added addSoundPerformanceResultAtXPos - 12/12/17
 -(void) addSoundPerformanceResultAtXPos:(CGFloat) iXPos
                            withDuration:(int) iDuration
                                 soundID:(int) iSoundID
@@ -1824,6 +1948,7 @@ static float min(float a, float b)
     }
 }
 
+// MKMOD - added getCurrentXOffset - 12/12/17
 -(CGFloat) getCurrentXOffset
 {
     CGPoint currOrg = [[self.layer presentationLayer] bounds].origin;
@@ -1831,12 +1956,15 @@ static float min(float a, float b)
     return pXPos;
 }
 
+// MKMOD - added 2/14/18
+// MKMOD - changed from highlightNote to highlightScoreObject - 7/26/18
 -(bool) highlightScoreObject:(int) iScoreObjectID
                     severity:(int) iSeverity
 {
     CGFloat xPos = 0.0;
     if (analysisOverlayView)
     {
+        // MKMOD - changed analysisOverlayView method call - 7/26/18
         bool found = [analysisOverlayView highlightScoreObject: iScoreObjectID
                                                        useXPos: &xPos
                                                       severity: iSeverity ];
@@ -1850,20 +1978,26 @@ static float min(float a, float b)
     return false;
 }
 
+// MKMOD - added 2/14/18
 -(void) turnHighlightOff
 {
     if (analysisOverlayView)
         [analysisOverlayView hideHighlight];
 }
 
+// MKMOD - added clearNotePerformanceResultAtXPos - 11/20/17
 -(void) clearNotePerformanceResultAtXPos:(CGFloat) iXPos
 {
 }
 
+// MKMOD - added clearNotePerformanceResults - 11/20/17
 -(void) clearNotePerformanceResults
 {
     [analysisOverlayView clearPerfNoteAndSoundData];
 }
+
+// MKMOD - added noteTappedAtXCoord - 11/20/17
+// MKMOD - deleted noteTappedAtXCoord - 12/12/17
 
 -(void) clearCurrNoteLines {
     [analysisOverlayView clearCurrNoteLines];
@@ -1877,6 +2011,10 @@ static float min(float a, float b)
     useSeeScoreCursor = iUseSSCursor;
 }
 
+// MKMOD - changed logic in method - 11/12/17
+// Added use of kMKDebugOpt_NoteAnalysisRespondsToTouch - 12/17/17
+// Added more use of kMKDebugOpt_NoteAnalysisRespondsToTouch ? - 2/14/18
+// Added if [FSAnalysisOverlayView  getShowNotesAnalysis] in method body - 2/14/18
 -(void)touchesBegan: (NSSet*) touches
           withEvent: (UIEvent*) event
 {
@@ -1884,10 +2022,12 @@ static float min(float a, float b)
     CGPoint _downLocation =[t locationInView:self];
 
     CGFloat touchX = _downLocation.x;
+    // MKMOD - changed these two lines - 7/26/18
     int scoreObjectID = [analysisOverlayView findScoreObjectIDFromXPos: touchX];
     if ( scoreObjectID >= 0 ) // -1 means not found
     {
          if ( self.overlayViewDelegate )
+            // MKMOD - changed this line - 7/26/18
             [self.overlayViewDelegate noteTappedWithThisID: scoreObjectID];
     }
 }

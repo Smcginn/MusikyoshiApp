@@ -18,6 +18,7 @@
 
 static const float CursorLineWidth = 2;
 
+// MKMOD - added this 4/1/17
 static const struct {float r,g,b,a;} kDefaultBackgroundColour = {1.0F,1.0F,0.95F,1.0F};
 
 @interface CursorLayer : CALayer
@@ -33,6 +34,7 @@ static const struct {float r,g,b,a;} kDefaultBackgroundColour = {1.0F,1.0F,0.95F
 	self = [super init];
 	self.borderWidth = CursorLineWidth;
 	//self.borderColor = [UIColor rColor].CGColor;
+    // MKMOD - changed borderColor from blue to orange  4/1/17
     self.borderColor = [UIColor redColor].CGColor;    // CursorColor, CursorColour
 	self.opacity = 0.0;
 	return self;
@@ -44,6 +46,7 @@ static const struct {float r,g,b,a;} kDefaultBackgroundColour = {1.0F,1.0F,0.95F
 	self.opacity = 1.0F;
 }
 
+// MKMOD - added this method 4/1/17
 -(void)setColour:(UIColor*)colour
 {
 	self.borderColor = colour.CGColor;
@@ -64,6 +67,8 @@ static const struct {float r,g,b,a;} kDefaultBackgroundColour = {1.0F,1.0F,0.95F
 	float zoom; // normally 1 except while pinch-zooming
 	bool isZooming;
 	CursorLayer *cursorLayer;
+    // MKMOD - deleted bgColor  4-1-17
+    // MKMOD - added 5 lines below  4-1-17
 	sscore_changeHandler_id changeHandlerId;
 	CGPoint topLeft;
 	CGSize margin;
@@ -74,6 +79,7 @@ static const struct {float r,g,b,a;} kDefaultBackgroundColour = {1.0F,1.0F,0.95F
 	
 @implementation SSSystemView
 
+// MKMOD - added this method  4-1-17
 -(id)initWithCoder:(NSCoder *)aDecoder
 {
 	if (self = [super initWithCoder:aDecoder])
@@ -90,18 +96,21 @@ static const struct {float r,g,b,a;} kDefaultBackgroundColour = {1.0F,1.0F,0.95F
 	return self;
 }
 
+// MKMOD - added this method  4-1-17
 -(id)initWithFrame:(CGRect)frame
 {
+    // MKMOD - condensed inf statement below from 2 lines   4-1-17
 	if (self = [super initWithFrame:frame])
 	{
 		score = nil;
 		system = nil;
+        // MKMOD - deleted one line ref'ing bgCol, added a different assignment to self.backgroundColor  4-1-17
 		self.backgroundColor = [[UIColor alloc] initWithRed:kDefaultBackgroundColour.r green:kDefaultBackgroundColour.g blue:kDefaultBackgroundColour.b alpha:kDefaultBackgroundColour.a] ;
 		zoom = 1.0;
 		isZooming = false;
 		cursorLayer = [[CursorLayer alloc] init];
 		[self.layer addSublayer:cursorLayer];
-		changeHandlerId = 0;
+		changeHandlerId = 0;  // MKMOD - added this line 4/1/17
 	}
 	return self;
 }
@@ -123,6 +132,7 @@ static const struct {float r,g,b,a;} kDefaultBackgroundColour = {1.0F,1.0F,0.95F
     return self;
 }
 
+// MKMOD - added this method 4/1/17
 -(void)dealloc
 {
 	if (changeHandlerId != 0)
@@ -140,6 +150,7 @@ static const struct {float r,g,b,a;} kDefaultBackgroundColour = {1.0F,1.0F,0.95F
 	return system.magnification;
 }
 
+// MKMOD - added this method 4/1/17
 -(CGPoint)topLeft
 {
 	CGRect f = self.frame;
@@ -158,12 +169,14 @@ static const struct {float r,g,b,a;} kDefaultBackgroundColour = {1.0F,1.0F,0.95F
 	return [system barIndexForXPos:xpos];
 }
 
+// MKMOD - added params tl, marg 4/1/17
 -(void)setSystem:(SSSystem*)sys
 		   score:(SSScore*)sc
 		 topLeft:(CGPoint)tl
 		  margin:(CGSize)marg
 {
 	assert(sys && sc);
+    // MKMOD - added this if fragment 4/1/17
 	if (score && changeHandlerId != 0)
 	{
 		[score removeChangeHandler:changeHandlerId];
@@ -171,14 +184,16 @@ static const struct {float r,g,b,a;} kDefaultBackgroundColour = {1.0F,1.0F,0.95F
 	}
 	score = sc;
 	system = sys;
-	topLeft = tl;
-	margin = marg;
+	topLeft = tl;   // MKMOD - added this  4/1/17
+	margin = marg;  // MKMOD - added this  4/1/17
 	_colourRender = nil;
 	zoom = 1.0F;
 	isZooming = false;
+    // MKMOD - deleted 2 lines setting frame  4/1/17
+    // MKMOD - added 2 lines below setting frame  4/1/17
 	CGSize sysBounds = sys.bounds;
 	self.frame = CGRectMake(topLeft.x,topLeft.y, sysBounds.width + 2 * margin.width, sysBounds.height + 2 * margin.height);
-	//_upperMargin = (frame.size.height - self.systemHeight) / 2;
+	//_upperMargin = (frame.size.height - self.systemHeight) / 2;  // MKMOD - cpmmented this out  4/1/17
 	[self hideCursor];
 	[self setNeedsDisplay];
 	changeHandlerId = [score addChangeHandler:self];
@@ -186,7 +201,8 @@ static const struct {float r,g,b,a;} kDefaultBackgroundColour = {1.0F,1.0F,0.95F
 
 -(void)clear
 {
-	if (score && changeHandlerId != 0)
+    // MKMOD - added this if code fragment  4/1/17
+    if (score && changeHandlerId != 0)
 	{
 		[score removeChangeHandler:changeHandlerId];
 		changeHandlerId = 0;
@@ -196,15 +212,18 @@ static const struct {float r,g,b,a;} kDefaultBackgroundColour = {1.0F,1.0F,0.95F
 	self.colourRender = nil;
 }
 
+// MKMOD - deleted method upperMargin  4/1/17
+
 -(float)systemHeight
 {
 	return system ? system.bounds.height : 0;
 }
 
+// MKMOD - changed param from single to array of SSColouredItem*  4/1/17
 -(CGRect)boundsForItems:(NSArray<SSColouredItem*> *)items
 {
 	CGRect uRect = CGRectMake(0, 0, 0, 0);
-	for (SSColouredItem *item in items)
+	for (SSColouredItem *item in items) // MKMOD - changed bc of param change  4/1/17
 	{
 		CGRect r = [system boundsForItem:item.item_h];
 		if (r.size.width > 0)
@@ -215,6 +234,7 @@ static const struct {float r,g,b,a;} kDefaultBackgroundColour = {1.0F,1.0F,0.95F
 	return uRect;
 }
 
+// MKMOD - added entrie changedColouringFrom method  4/1/17
 -(NSArray<SSColouredItem*> *)changedColouringFrom:(SSColourRender*)a to:(SSColourRender*)b
 {
 	NSMutableArray<SSColouredItem*> *rval = NSMutableArray.array;
@@ -267,10 +287,13 @@ static const struct {float r,g,b,a;} kDefaultBackgroundColour = {1.0F,1.0F,0.95F
 -(void)setColourRender:(SSColourRender*)render
 {
 	assert(render.colouredItems.count < 1000);
+    // MKMOD - changed 3 lines to the 3 lines below  4/1/17
 	// careful to optimise to detect minimum changes as this minimises the area to redraw and has a significant impact on the speed
 	NSArray<SSColouredItem*> *changedColourings = [self changedColouringFrom:_colourRender to:render];
 	if (changedColourings.count > 0)
 	{
+        // MKMOD - changed quite a bit in here. Consult commit on  4/1/17
+
 		CGRect r = [self boundsForItems:changedColourings];
 		_colourRender = render;
 		if (r.size.width > 0)
@@ -290,6 +313,7 @@ static const struct {float r,g,b,a;} kDefaultBackgroundColour = {1.0F,1.0F,0.95F
 	// add old items to bounds..
 	if (_colourRender) // get rect bounds of changing items to optimise the update
 	{
+        // MKMOD - changed line below  4/1/17
 		uRect = [self boundsForItems:_colourRender.colouredItems];
 	}
 	_colourRender = nil;
@@ -347,6 +371,7 @@ static const struct {float r,g,b,a;} kDefaultBackgroundColour = {1.0F,1.0F,0.95F
 	CGContextRef ctx = UIGraphicsGetCurrentContext();
 	SSCursorRect cursorRect = [system cursorRectForBar:barIndex context:ctx];
 	UIGraphicsEndImageContext();
+    // MKMOD - added 2 lines below  4/1/17
 	cursorRect.rect.origin.x += margin.width;
 	cursorRect.rect.origin.y += margin.height;
 	return cursorRect;
@@ -391,6 +416,7 @@ static const struct {float r,g,b,a;} kDefaultBackgroundColour = {1.0F,1.0F,0.95F
 	[cursorLayer hide];
 }
 
+// MKMOD - added this method  4/1/17
 -(void)setCursorColour:(UIColor*)colour
 {
 	[cursorLayer setColour:colour];
@@ -399,6 +425,7 @@ static const struct {float r,g,b,a;} kDefaultBackgroundColour = {1.0F,1.0F,0.95F
 -(void)zoomUpdate:(float)z
 {
 	zoom = z;
+    // MKMOD - added line below   4/1/17
 	self.bounds = CGRectMake(0,0,self.bounds.size.width, system.bounds.height*z);
 	isZooming = true;
 	self.colourRender = nil; // clear colouring on zoom
@@ -416,6 +443,7 @@ static const struct {float r,g,b,a;} kDefaultBackgroundColour = {1.0F,1.0F,0.95F
 -(void)drawInContext:(CGContextRef)ctx
 {
 	assert(ctx && system);
+    // MKMOD - changed line below 4/1/17
 	CGPoint tl = CGPointMake(margin.width, margin.height);
 	// draw system
 	if (_colourRender)
@@ -430,6 +458,7 @@ static const struct {float r,g,b,a;} kDefaultBackgroundColour = {1.0F,1.0F,0.95F
 	CGContextRef ctx = UIGraphicsGetCurrentContext();
 	// we need to clear the background even when we draw the background image which should fill the frame
 	// otherwise we get an intermittent faint horizontal line artifact between systems esp with retina display
+    // MKMOD - deleted assert, changed line below 4/1/17
 	CGContextSetFillColorWithColor (ctx, self.backgroundColor.CGColor);
 	CGContextFillRect (ctx, rect);
 	if (system)
@@ -455,6 +484,7 @@ static const struct {float r,g,b,a;} kDefaultBackgroundColour = {1.0F,1.0F,0.95F
 	[self setNeedsDisplay];
 }
 
+// MKMOD - added method updateLayout   4/1/17
 -(void)updateLayout:(CGContextRef)ctx newState:(const sscore_state_container *)newstate
 {
 	[system updateLayout:ctx newState:newstate];
@@ -465,6 +495,7 @@ static const struct {float r,g,b,a;} kDefaultBackgroundColour = {1.0F,1.0F,0.95F
 
 //@protocol SSViewInterface
 
+// MKMOD - added method systemAtPos   4/1/17
 -(SSSystemPoint)systemAtPos:(CGPoint)p
 {
 	SSSystemPoint rval;
@@ -480,21 +511,25 @@ static const struct {float r,g,b,a;} kDefaultBackgroundColour = {1.0F,1.0F,0.95F
 	return rval;
 }
 
+// MKMOD - added method systemAtIndex   4/1/17
 -(SSSystem*)systemAtIndex:(int)index
 {
 	return system;
 }
 
+// MKMOD - added method systemContainingBarIndex   4/1/17
 -(SSSystem*)systemContainingBarIndex:(int)barIndex
 {
 	return system;
 }
 
+// MKMOD - added method numSystems   4/1/17
 -(int)numSystems
 {
 	return 1;
 }
 
+// MKMOD - added method systemIndex   4/1/17
 // the frame of the system within the view
 -(CGRect)systemRect:(int)systemIndex
 {
@@ -502,6 +537,7 @@ static const struct {float r,g,b,a;} kDefaultBackgroundColour = {1.0F,1.0F,0.95F
 	return CGRectMake(topLeft.x+margin.width, topLeft.y+margin.height, sysBounds.width, sysBounds.height);
 }
 
+// MKMOD - added method componentsAt   4/1/17
 -(NSArray<SSComponent*> *)componentsAt:(CGPoint)p maxDistance:(float)maxDistance
 {
 	return [system closeFeatures:p distance:maxDistance];
@@ -513,8 +549,11 @@ static const struct {float r,g,b,a;} kDefaultBackgroundColour = {1.0F,1.0F,0.95F
 	[self setNeedsDisplay];
 }
 
+// MKMOD - deleted method updateLayout here  4/1/17
+// MKMOD - (actually, gitkraken confused, redefined it above)   4/1/17
 //@end
 
+// MKMOD - added method changedThis  4/1/17
 static bool changedThis(const sscore_barrange br, sscore_state_container *prevstate, sscore_state_container *newstate)
 {
 	for (int i = 0 ; i < br.numbars; ++i)
@@ -529,8 +568,10 @@ static bool changedThis(const sscore_barrange br, sscore_state_container *prevst
 }
 
 //@protocol ScoreChangeHandler
+// MKMOD - added method "change:"  4/1/17
 -(void)change:(sscore_state_container *)prevstate newstate:(sscore_state_container *)newstate reason:(int)reason
 {
+    // MKMOD - GitKraken confused - may show deleted lines that were part of method above 4/1/17
 	bool changed = changedThis(self.system.barRange, prevstate, newstate);
 	if (changed)
 	{

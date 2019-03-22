@@ -6,6 +6,7 @@
 //  Copyright © 2016 Musikyoshi. All rights reserved.
 //
 
+import UIKit
 import AudioKit
 
 let kUseSplitChaining = true
@@ -53,7 +54,19 @@ class AudioKitManager: NSObject {
     
 
     func setupForUsingMic() {
-        AudioKit.stop()
+        // AudioKit.stop()
+ 
+        do {
+            try AudioKit.stop()
+        } catch let error as NSError {
+            print(error.localizedDescription)
+            guard error.code == 0 else {
+                return }
+        } catch let error {
+            print(error)
+            return
+        }
+        
         print("\n\n          In AudioKitManager.setup, rebuilding everything, recreating Mic, Tracker, etc.\n\n")
 
         microphone = AKMicrophone()
@@ -80,14 +93,14 @@ class AudioKitManager: NSObject {
 
         //======================================================
         
-        let kDefault_HopSize: Double   = 4_096.0
-        let kDefault_PeakCount: Double =    20.0
+        let kDefault_HopSize: Int   = 4_096
+        let kDefault_PeakCount: Int =    20
         
-        let kDavids_HopSize: Double    =   200.0
-        let kDavids_PeakCount: Double  =  1000.0
+        let kDavids_HopSize: Int    =   200
+        let kDavids_PeakCount: Int  =  1000
         
-        var hopSizeToUse:   Double = kDavids_HopSize
-        var peakCountToUse: Double = kDavids_PeakCount
+        var hopSizeToUse:   Int = kDavids_HopSize
+        var peakCountToUse: Int = kDavids_PeakCount
         if kUseDefaultHopSizeAndPeakCount {
             hopSizeToUse   = kDefault_HopSize
             peakCountToUse = kDefault_PeakCount
@@ -96,12 +109,12 @@ class AudioKitManager: NSObject {
         let storedHopSizeOverride =
             UserDefaults.standard.integer(forKey: Constants.Settings.UserHopSizeOverride)
         if storedHopSizeOverride >= 0 {
-            hopSizeToUse = Double(storedHopSizeOverride)
+            hopSizeToUse = Int(storedHopSizeOverride)
         }
         let storedPeakCountOverride =
             UserDefaults.standard.integer(forKey: Constants.Settings.UserPeakCountOverride)
         if storedPeakCountOverride >= 0 {
-            peakCountToUse = Double(storedPeakCountOverride)
+            peakCountToUse = Int(storedPeakCountOverride)
         }
         
         print("\nFor AKFreqTracker, using  hop size: \(hopSizeToUse),   peak count: \(peakCountToUse)")
@@ -132,7 +145,17 @@ class AudioKitManager: NSObject {
             AudioKit.output = ampedFTrack  // so there is no putput while using the mic
         }
         
-        AudioKit.start()
+        // AudioKit.start()
+        do {
+            try AudioKit.start()
+        } catch let error as NSError {
+            print(error.localizedDescription)
+            guard error.code == 0 else {
+                return }
+        } catch let error {
+            print(error)
+            return
+        }
         
         if mixer != nil { // Frequency Tracker Version 2  FTVER
             mixer?.start()
@@ -184,7 +207,18 @@ class AudioKitManager: NSObject {
             microphone.stop()
         }
         
-        AudioKit.stop()
+        // AudioKit.stop()
+        do {
+            try AudioKit.stop()
+        } catch let error as NSError {
+            print(error.localizedDescription)
+            guard error.code == 0 else {
+                return }
+        } catch let error {
+            print(error)
+            return
+        }
+        
         frequencyTracker = nil
         amplitudeTracker = nil ///   AMPLEAMPLE
         microphone       = nil

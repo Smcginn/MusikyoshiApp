@@ -10,7 +10,7 @@
 
 #import <UIKit/UIKit.h>
 #include <SeeScoreLib/SeeScoreLib.h>
-#import "SSViewInterface.h"
+#import "SSViewInterface.h"   // MKMOD - added this line  - 4/1/17
 
 @class SSScore;
 @class SSSystem;
@@ -20,13 +20,15 @@
  * @interface SSSystemView
  * @abstract used by SSScrollView, manages and draws a single system of music using the SeeScoreLib framework
  */
-@interface SSSystemView : UIView <SSViewInterface, ScoreChangeHandler>
+@interface SSSystemView : UIView <SSViewInterface, ScoreChangeHandler> // MKMOD - added the 2 protocols - 4/1/17
 
 /*!
  * @property height
  * @abstract the height of the system within the UIView in CGContext units
  */
 @property (nonatomic,readonly) float systemHeight;
+
+// MKMOD - deleted property upperMargin - 4/1/17
 
 /*!
  * @property colourRender
@@ -56,7 +58,7 @@
  @property topLeft
  @abstract the top left of the SSSystem in superView coords
  */
-@property (nonatomic, readonly) CGPoint topLeft;
+@property (nonatomic, readonly) CGPoint topLeft;  // MKMOD added this property - 4/1/17
 
 /*!
  * @method initWithBackgroundColour
@@ -74,6 +76,7 @@
  * @param tl the top left of the system UIView in the superview
  * @param margin the extra width and height left, right and above, below
  */
+// MKMOD - added params tl and margin   4/1/17
 -(void)setSystem:(SSSystem*)system
 		   score:(SSScore*)score
 		 topLeft:(CGPoint)tl
@@ -127,6 +130,7 @@
  */
 -(void)setCursorColour:(UIColor*)colour;
 
+// MKMOD - added this method 4/1/17
 /*!
  * @method zoomUpdate
  * @abstract call for interactive zooming (magnifies backImage)

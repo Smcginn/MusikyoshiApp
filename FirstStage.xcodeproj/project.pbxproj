@@ -1033,7 +1033,6 @@
 		1C33BB3C2016E80900CD83A6 /* .swift-version */ = {isa = PBXFileReference; lastKnownFileType = text; path = ".swift-version"; sourceTree = "<group>"; };
 		1C33BB3D2016E80900CD83A6 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		1C33BB3E2016E80900CD83A6 /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
-		1C33BB412016E80900CD83A6 /* .AudioKit.version */ = {isa = PBXFileReference; lastKnownFileType = text; path = .AudioKit.version; sourceTree = "<group>"; };
 		1C33BB422016E80900CD83A6 /* .SwiftyJSON.version */ = {isa = PBXFileReference; lastKnownFileType = text; path = .SwiftyJSON.version; sourceTree = "<group>"; };
 		1C33BB442016E80900CD83A6 /* 112BA5BD-249A-3690-A8F2-7502A8AD9A47.bcsymbolmap */ = {isa = PBXFileReference; lastKnownFileType = text; path = "112BA5BD-249A-3690-A8F2-7502A8AD9A47.bcsymbolmap"; sourceTree = "<group>"; };
 		1C33BB452016E80900CD83A6 /* 145EBFD1-42D3-3792-96DC-19259EB1F889.bcsymbolmap */ = {isa = PBXFileReference; lastKnownFileType = text; path = "145EBFD1-42D3-3792-96DC-19259EB1F889.bcsymbolmap"; sourceTree = "<group>"; };
@@ -1043,22 +1042,14 @@
 		1C33BB492016E80900CD83A6 /* 65A803FF-4F52-3B12-906E-AAE1D2968807.bcsymbolmap */ = {isa = PBXFileReference; lastKnownFileType = text; path = "65A803FF-4F52-3B12-906E-AAE1D2968807.bcsymbolmap"; sourceTree = "<group>"; };
 		1C33BB4A2016E80900CD83A6 /* 6A5C82DF-16C5-37F6-A541-31E51FBE768D.bcsymbolmap */ = {isa = PBXFileReference; lastKnownFileType = text; path = "6A5C82DF-16C5-37F6-A541-31E51FBE768D.bcsymbolmap"; sourceTree = "<group>"; };
 		1C33BB4B2016E80900CD83A6 /* AB938FC7-2F32-35B9-B880-54024021C198.bcsymbolmap */ = {isa = PBXFileReference; lastKnownFileType = text; path = "AB938FC7-2F32-35B9-B880-54024021C198.bcsymbolmap"; sourceTree = "<group>"; };
-		1C33BB4C2016E80900CD83A6 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AudioKit.framework; sourceTree = "<group>"; };
-		1C33BB4D2016E80900CD83A6 /* AudioKit.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = AudioKit.framework.dSYM; sourceTree = "<group>"; };
-		1C33BB4E2016E80900CD83A6 /* AudioKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AudioKitUI.framework; sourceTree = "<group>"; };
-		1C33BB4F2016E80900CD83A6 /* AudioKitUI.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = AudioKitUI.framework.dSYM; sourceTree = "<group>"; };
 		1C33BB502016E80900CD83A6 /* C661BD2D-722C-36C3-A5DF-A5C51C34BB9A.bcsymbolmap */ = {isa = PBXFileReference; lastKnownFileType = text; path = "C661BD2D-722C-36C3-A5DF-A5C51C34BB9A.bcsymbolmap"; sourceTree = "<group>"; };
 		1C33BB512016E80900CD83A6 /* DropDown.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropDown.framework; sourceTree = "<group>"; };
 		1C33BB522016E80900CD83A6 /* DropDown.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = DropDown.framework.dSYM; sourceTree = "<group>"; };
 		1C33BB532016E80900CD83A6 /* F58FE054-85E5-3BDC-8B2F-F2CD5AC47CE2.bcsymbolmap */ = {isa = PBXFileReference; lastKnownFileType = text; path = "F58FE054-85E5-3BDC-8B2F-F2CD5AC47CE2.bcsymbolmap"; sourceTree = "<group>"; };
 		1C33BB542016E80900CD83A6 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftyJSON.framework; sourceTree = "<group>"; };
 		1C33BB552016E80900CD83A6 /* SwiftyJSON.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = SwiftyJSON.framework.dSYM; sourceTree = "<group>"; };
-		1C33BB572016E80900CD83A6 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AudioKit.framework; sourceTree = "<group>"; };
-		1C33BB582016E80900CD83A6 /* AudioKit.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = AudioKit.framework.dSYM; sourceTree = "<group>"; };
 		1C33BB592016E80900CD83A6 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftyJSON.framework; sourceTree = "<group>"; };
 		1C33BB5A2016E80900CD83A6 /* SwiftyJSON.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = SwiftyJSON.framework.dSYM; sourceTree = "<group>"; };
-		1C33BB5C2016E80900CD83A6 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AudioKit.framework; sourceTree = "<group>"; };
-		1C33BB5D2016E80900CD83A6 /* AudioKit.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = AudioKit.framework.dSYM; sourceTree = "<group>"; };
 		1C33BB5E2016E80900CD83A6 /* DE6E5B4C-B917-32F6-A72A-5033F9FEE63B.bcsymbolmap */ = {isa = PBXFileReference; lastKnownFileType = text; path = "DE6E5B4C-B917-32F6-A72A-5033F9FEE63B.bcsymbolmap"; sourceTree = "<group>"; };
 		1C33BB5F2016E80900CD83A6 /* E580020E-1313-35FC-B5A0-4F51E63D4DD7.bcsymbolmap */ = {isa = PBXFileReference; lastKnownFileType = text; path = "E580020E-1313-35FC-B5A0-4F51E63D4DD7.bcsymbolmap"; sourceTree = "<group>"; };
 		1C33BB602016E80900CD83A6 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftyJSON.framework; sourceTree = "<group>"; };
@@ -1112,7 +1103,7 @@
 		1C87C0A22016EA930038784E /* TrumpetLessons.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TrumpetLessons.json; sourceTree = "<group>"; };
 		1C87C0A72016F0030038784E /* LevelOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelOverviewViewController.swift; sourceTree = "<group>"; };
 		1C87C0AC2016F3F70038784E /* LessonOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonOverviewViewController.swift; sourceTree = "<group>"; };
-		6324D2CF1CE71B19001934A5 /* FirstStage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = FirstStage.app; path = PlayTunes.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6324D2CF1CE71B19001934A5 /* PlayTunes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlayTunes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6324D2D21CE71B19001934A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6324D2D71CE71B19001934A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6324D2DA1CE71B1A001934A5 /* FirstStage.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FirstStage.xcdatamodel; sourceTree = "<group>"; };
@@ -1657,7 +1648,6 @@
 		1C33BB402016E80900CD83A6 /* Build */ = {
 			isa = PBXGroup;
 			children = (
-				1C33BB412016E80900CD83A6 /* .AudioKit.version */,
 				1C33BB422016E80900CD83A6 /* .SwiftyJSON.version */,
 				1C33BB432016E80900CD83A6 /* iOS */,
 				1C33BB562016E80900CD83A6 /* Mac */,
@@ -1678,10 +1668,6 @@
 				1C33BB492016E80900CD83A6 /* 65A803FF-4F52-3B12-906E-AAE1D2968807.bcsymbolmap */,
 				1C33BB4A2016E80900CD83A6 /* 6A5C82DF-16C5-37F6-A541-31E51FBE768D.bcsymbolmap */,
 				1C33BB4B2016E80900CD83A6 /* AB938FC7-2F32-35B9-B880-54024021C198.bcsymbolmap */,
-				1C33BB4C2016E80900CD83A6 /* AudioKit.framework */,
-				1C33BB4D2016E80900CD83A6 /* AudioKit.framework.dSYM */,
-				1C33BB4E2016E80900CD83A6 /* AudioKitUI.framework */,
-				1C33BB4F2016E80900CD83A6 /* AudioKitUI.framework.dSYM */,
 				1C33BB502016E80900CD83A6 /* C661BD2D-722C-36C3-A5DF-A5C51C34BB9A.bcsymbolmap */,
 				1C33BB512016E80900CD83A6 /* DropDown.framework */,
 				1C33BB522016E80900CD83A6 /* DropDown.framework.dSYM */,
@@ -1695,8 +1681,6 @@
 		1C33BB562016E80900CD83A6 /* Mac */ = {
 			isa = PBXGroup;
 			children = (
-				1C33BB572016E80900CD83A6 /* AudioKit.framework */,
-				1C33BB582016E80900CD83A6 /* AudioKit.framework.dSYM */,
 				1C33BB592016E80900CD83A6 /* SwiftyJSON.framework */,
 				1C33BB5A2016E80900CD83A6 /* SwiftyJSON.framework.dSYM */,
 			);
@@ -1706,8 +1690,6 @@
 		1C33BB5B2016E80900CD83A6 /* tvOS */ = {
 			isa = PBXGroup;
 			children = (
-				1C33BB5C2016E80900CD83A6 /* AudioKit.framework */,
-				1C33BB5D2016E80900CD83A6 /* AudioKit.framework.dSYM */,
 				1C33BB5E2016E80900CD83A6 /* DE6E5B4C-B917-32F6-A72A-5033F9FEE63B.bcsymbolmap */,
 				1C33BB5F2016E80900CD83A6 /* E580020E-1313-35FC-B5A0-4F51E63D4DD7.bcsymbolmap */,
 				1C33BB602016E80900CD83A6 /* SwiftyJSON.framework */,
@@ -1855,7 +1837,7 @@
 			isa = PBXGroup;
 			children = (
 				6324D3131CE72F8D001934A5 /* PlayTunes.app */,
-				6324D2CF1CE71B19001934A5 /* FirstStage.app */,
+				6324D2CF1CE71B19001934A5 /* PlayTunes.app */,
 				6324D2E61CE71B1A001934A5 /* FirstStageTests.xctest */,
 				6324D2F11CE71B1A001934A5 /* FirstStageUITests.xctest */,
 			);
@@ -2541,7 +2523,6 @@
 				C9BCD15B1FB1434D00E3434F /* Carthage Outdated Dependencies */,
 				6324D2CB1CE71B19001934A5 /* Sources */,
 				6324D2CC1CE71B19001934A5 /* Frameworks */,
-				BDAAA9BF20089BD500C33B01 /* ShellScript */,
 				6324D2CD1CE71B19001934A5 /* Resources */,
 				C9BCD1621FB1437600E3434F /* Copy Carthage Frameworks */,
 				6324D31C1CE7327F001934A5 /* Embed Frameworks */,
@@ -2553,7 +2534,7 @@
 			);
 			name = PlayTunes;
 			productName = FirstStage;
-			productReference = 6324D2CF1CE71B19001934A5 /* FirstStage.app */;
+			productReference = 6324D2CF1CE71B19001934A5 /* PlayTunes.app */;
 			productType = "com.apple.product-type.application";
 		};
 		6324D2E51CE71B1A001934A5 /* FirstStageTests */ = {
@@ -3486,19 +3467,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		BDAAA9BF20089BD500C33B01 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
-		};
 		C90339341FB1265B005A9C7D /* Carthage Outdated Dependencies */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3978,7 +3946,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.musikyoshi.playtunes;
 				PRODUCT_NAME = PlayTunes;
 				PROVISIONING_PROFILE = "";
@@ -4012,7 +3983,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.musikyoshi.playtunes;
 				PRODUCT_NAME = PlayTunes;
 				PROVISIONING_PROFILE = "";
@@ -4093,7 +4067,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.musikyoshi.playtunes;
 				PRODUCT_NAME = PlayTunes;
 				PROVISIONING_PROFILE = "";
@@ -4126,7 +4103,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.musikyoshi.playtunes;
 				PRODUCT_NAME = PlayTunes;
 				PROVISIONING_PROFILE_SPECIFIER = "";
