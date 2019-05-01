@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     struct AppUtility {
         static func currOrientation() {
-            var currO = UIDevice.current.orientation
+            let currO = UIDevice.current.orientation
             print("\(currO)")
         }
         
@@ -65,6 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         static func lockOrientationToLandscape() {
             let currOrient = UIDevice.current.orientation
+            useThisToSuppressWarnings(str: "\(currOrient)")
             self.lockOrientation(.landscape)
             UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue,
                                           forKey: "orientation")
@@ -222,6 +223,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             for oneSkProd in products {
                 if let oneSkProd = oneSkProd as SKProduct? {
                     let currCode = oneSkProd.priceLocale.currencyCode
+                    useThisToSuppressWarnings(str: "\(String( describing: currCode))")
                     var prodPriceString = ""
                     if oneSkProd.localizedPrice != nil {
                         prodPriceString = oneSkProd.localizedPrice!

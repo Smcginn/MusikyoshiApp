@@ -269,13 +269,17 @@ class PerformanceTrackingMgr {
     // stuff; perhaps change to timing zones, similar to the pitch zones.)
     var userDefsTimingThreshold: Double
     
-    var currTempoBPM: Int = 60
+    var currTempoBPM:    Int = 60
     var currBeatsPerBar: Int = 4
+    var currOneBarLen:   Int = 4
     var qtrNoteTimeInterval: TimeInterval = 1.0
-    func setPlaybackVals( tempoInBPM: Int, beatsPerBar: Int )
+    
+    func setPlaybackVals( tempoInBPM: Int,   beatsPerBar: Int,
+                          lenOneBeat: Int,   lenOneBar:   Int )
     {
         currTempoBPM    = tempoInBPM
         currBeatsPerBar = beatsPerBar
+        currOneBarLen   = lenOneBar
         let bpmRatio: TimeInterval = secsPerMin / TimeInterval(tempoInBPM)
         qtrNoteTimeInterval = TimeInterval(1.0) * bpmRatio
     }
@@ -736,9 +740,31 @@ func musXMLNoteUnitToInterval( noteDur: Int32, bpm: Int32) -> TimeInterval {
 // time interval since song startTime (which is 0) for a given note
 func mXMLNoteStartInterval ( bpm: Int32,
                              beatsPerBar: Int32,
+                             beatType: Int32,
                              startBarIndex : Int32,
                              noteStartWithinBar: Int32 ) -> TimeInterval {
     let beatsToBeginningOfBar = startBarIndex * beatsPerBar
+    let numBeatsToBarBeginAsIntvl = TimeInterval(beatsToBeginningOfBar)
+    let intMult = beatType == 8 ? PerformanceTrackingMgr.instance.qtrNoteTimeInterval / 2.0
+        : PerformanceTrackingMgr.instance.qtrNoteTimeInterval
+    //    let intervalToBarBegin =
+    //        PerformanceTrackingMgr.instance.qtrNoteTimeInterval * numBeatsToBarBeginAsIntvl
+    let intervalToBarBegin = intMult * numBeatsToBarBeginAsIntvl
+    let noteStartInterval =
+        intervalToBarBegin + Double(noteStartWithinBar) / 1000.0
+    return noteStartInterval
+}
+
+/* was:       (this version screwed up tracking 6/8 badly
+func mXMLNoteStartInterval ( bpm: Int32,
+                             beatsPerBar: Int32,
+                             startBarIndex : Int32,
+                             noteStartWithinBar: Int32 ) -> TimeInterval {
+    let beatsToBeginningOfBar = startBarIndex * beatsPerBar
+    let intervalToBeginningOfBar = 
+    let intervalNoteStartWithinBar = Double(noteStartWithinBar) / 1000.0
+    
+    
     let numBeatsToBarBeginAsIntvl = TimeInterval(beatsToBeginningOfBar)
     let intervalToBarBegin =
         PerformanceTrackingMgr.instance.qtrNoteTimeInterval * numBeatsToBarBeginAsIntvl
@@ -746,6 +772,7 @@ func mXMLNoteStartInterval ( bpm: Int32,
         intervalToBarBegin + Double(noteStartWithinBar) / 1000.0
     return noteStartInterval
 }
+*/
 
 // Needed to determine if running in simulator or on actual device. Note: if needed,
 // this could be expanded to detect the actual model of the iOS hardware.

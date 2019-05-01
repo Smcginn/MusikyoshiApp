@@ -89,7 +89,7 @@ class AudioKitManager: NSObject {
 //                               threshold: <#T##Double#>,
 //                               thresholdCallback: nil) //<#T##AKThresholdCallback##AKThresholdCallback##(Bool) -> Void#>)
 
-        print("amplitudeTracker == \(amplitudeTracker)")
+        print("amplitudeTracker == \(String(describing: amplitudeTracker))")
 
         //======================================================
         
@@ -126,7 +126,8 @@ class AudioKitManager: NSObject {
             frequencyTracker = AKFrequencyTracker(microphone,
                                                   hopSize: hopSizeToUse, // 200,
                                                   peakCount: peakCountToUse) // 1000)
-            print("frequencyTracker == \(frequencyTracker)")
+            let freqTrackerStr = String(describing: frequencyTracker)
+            print("frequencyTracker == \(freqTrackerStr)")
             
             mixer = AKMixer(amplitudeTracker, frequencyTracker)
             let ampedFTrack2 = AKBooster(mixer, gain: 0.0 )
@@ -139,8 +140,9 @@ class AudioKitManager: NSObject {
             frequencyTracker = AKFrequencyTracker(amplitudeTracker,
                                                   hopSize: hopSizeToUse, // 200,
                                                   peakCount: peakCountToUse) // 1000)
-            print("frequencyTracker == \(frequencyTracker)")
-    
+            let freqTrackerStr = String(describing: frequencyTracker)
+            print("frequencyTracker == \(freqTrackerStr)")
+
             let ampedFTrack = AKBooster(frequencyTracker, gain: 0.0 )
             AudioKit.output = ampedFTrack  // so there is no putput while using the mic
         }
@@ -167,6 +169,7 @@ class AudioKitManager: NSObject {
         microphone.start()
 
         var outputVol = microphone.volume
+        if alwaysFalseToSuppressWarn() { print("\(outputVol)") }
         microphone.volume = 10
         outputVol = microphone.volume
 
@@ -183,12 +186,12 @@ class AudioKitManager: NSObject {
         return;
         
         
-        guard !isRunning
-            else { return }
-        print("\n@@@@@     About to call AudioKit.start, then mic, then freqT")
- //       AudioKit.start()
-        print("\n\n@@@@@     AudioKit started (in start method)\n")
-        isRunning = true
+//        guard !isRunning
+//            else { return }
+//        print("\n@@@@@     About to call AudioKit.start, then mic, then freqT")
+// //       AudioKit.start()
+//        print("\n\n@@@@@     AudioKit started (in start method)\n")
+//        isRunning = true
     }
 
     func stop() {

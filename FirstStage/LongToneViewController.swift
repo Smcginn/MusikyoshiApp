@@ -662,7 +662,7 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
         score = nil
         cursorBarIndex = 0
         let loadOptions = SSLoadOptions(key: sscore_libkey)
-        loadOptions?.checkxml = true
+        loadOptions.checkxml = true
         let errP = UnsafeMutablePointer<sscore_loaderror>.allocate(capacity: 1)
         
   //      print("filePath: \(filePath)")
@@ -685,11 +685,16 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
             print("Cannot get modified xmlData from \(filePath)!")
             return
         }
-        var err : SSLoadError?
-        
+        //var err : SSLoadError?
+        var err = SSLoadError() //  SSLoadError()
+
         if let score0 = SSScore(xmlData: xmlData, options: loadOptions, error: &err) {
 
             score = score0
+            guard score != nil else {
+                itsBad()
+                return
+            }
 
             // don't understand use of kC4 below. Once I understand this, must
             // obtain this for exh instrument.
@@ -702,7 +707,8 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
             // partIndex = Int32(kC4 - currInstFirstNote)   //default to C4
             partIndex = Int32(currInstNoteOffset - currInstFirstNote) //default to C4
             // let partNumber = Int32(targetNoteID - kFirstLongTone25Note)
-            var partNumber = Int32(targetNoteID - currInstFirstNote)
+            let partNumber = Int32(targetNoteID - currInstFirstNote)
+            useThisToSuppressWarnings(str: "\(partNumber)")
             //partNumber += 1
             //let partNumber = Int32(1) // Int32(targetNoteID - currInstFirstNote)
             if 0..<score!.numParts ~= partNumber {
@@ -728,7 +734,7 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
             layOptions.hidePartNames = true
             layOptions.hideBarNumbers = true
             ssScrollView.optimalSingleSystem = false
-            ssScrollView.setupScore(score, openParts: showingParts, mag: kDefaultMagnification, opt: layOptions, completion: getPlayData)
+            ssScrollView.setupScore(score!, openParts: showingParts, mag: kDefaultMagnification, opt: layOptions, completion: getPlayData)
         }
         else
         {
@@ -754,7 +760,7 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
     func getPlayData() {
         guard score != nil else { return }
         
-        playData = SSPData.createPlay(from: score, tempo: self)
+        playData = SSPData.createPlay(from: score!, tempo: self)
     }
     
     func playScore() {
@@ -762,14 +768,14 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
         ssScrollView.isScrollEnabled = false
 
         guard score != nil else { return }
-        playData = SSPData.createPlay(from: score, tempo: self)
+        playData = SSPData.createPlay(from: score!, tempo: self)
         guard playData != nil else { return }
         
         if synth != nil && (synth?.isPlaying)! {
             synth?.reset()
         } else {
             if synth == nil {
-                if let synth0 = SSSynth.createSynth(self, score: score) {
+                if let synth0 = SSSynth.createSynth(self, score: score!) {
                     synth = synth0
                 }
                 sampledInstrumentIds.removeAll()
@@ -809,7 +815,7 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
                     return
                 }
                 
-                var err = synth?.setup(playData)
+                var err = synth?.setup(playData!)
                 if err == sscore_NoError {
                     let delayInSeconds = 0.5
                     let startTime = DispatchTime.now() + DispatchTimeInterval.milliseconds(Int(delayInSeconds * 1000.0))
@@ -1160,7 +1166,7 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
 //        let frequency = AudioKitManager.sharedInstance.frequency()
         // SFAUDIO
         
-        print("frequencyTracker == \(AudioKitManager.sharedInstance.frequencyTracker)")
+        print("frequencyTracker == \(String( describing: AudioKitManager.sharedInstance.frequencyTracker))")
 
         var amplitude = 0.0
         var frequency = 0.0
@@ -1174,10 +1180,10 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
             firstTimeAfterAKRestart = false
             if frequency > 199.95 && frequency < 200.05 {
                 print("FrequencyTracker probably bad")
-                print("  frequencyTracker == \(AudioKitManager.sharedInstance.frequencyTracker)")
+                print("  frequencyTracker == \(String( describing: AudioKitManager.sharedInstance.frequencyTracker))")
             } else {
                 print("FrequencyTracker probably good")
-                print("  frequencyTracker == \(AudioKitManager.sharedInstance.frequencyTracker)")
+                print("  frequencyTracker == \(String( describing: AudioKitManager.sharedInstance.frequencyTracker))")
             }
         }
         

@@ -24,6 +24,10 @@ protocol SSChangeSettingsProtocol
 {
 	func showPartNames(_ pn : Bool)
 	func showBarNumbers(_ bn : Bool)
+}
+
+protocol SSChangeWaveformSettingsProtocol
+{
 	func changeSound(_ voice : SSSynthVoice)
 	func changeSymmetry(_ symmetry : Float) // 0.0 .. 1.0
 	func changeRiseFall(_ risefall : Float) // 0.0 .. 1.0
@@ -59,7 +63,8 @@ class SSSettingsViewController : UIViewController
 	private var risefall : Float
 	
 	var settingsChanger : SSChangeSettingsProtocol?
-	
+	var waveformSettingsChanger : SSChangeWaveformSettingsProtocol?
+
 	public required init?(coder aDecoder: NSCoder)
 	{
 		showPartNames = false
@@ -74,8 +79,8 @@ class SSSettingsViewController : UIViewController
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
-		partNamesSwitch.isOn = showPartNames;
-		barNumbersSwitch.isOn = showBarNumbers;
+		partNamesSwitch.isOn = showPartNames
+		barNumbersSwitch.isOn = showBarNumbers
 		switch synthVoice {
 		case .Sampled: soundSelector.selectedSegmentIndex = 0
 		case .Tick: soundSelector.selectedSegmentIndex = 0
@@ -90,26 +95,28 @@ class SSSettingsViewController : UIViewController
 		updateWaveformView()
 	}
 
-	func set(partNames : Bool, barNumbers: Bool, voice : SSSynthVoice, temper : SSTemperament, symm : Float, rise : Float, settingsProto: SSChangeSettingsProtocol)
+	func set(partNames : Bool, barNumbers: Bool, voice : SSSynthVoice, temper : SSTemperament, symm : Float, rise : Float,
+			 settingsProto: SSChangeSettingsProtocol, wSettingsProto: SSChangeWaveformSettingsProtocol?)
 	{
-		showPartNames = partNames;
-		showBarNumbers = barNumbers;
+		showPartNames = partNames
+		showBarNumbers = barNumbers
 		synthVoice = voice
 		temperament = temper
 		symmetry = symm
 		risefall = rise
-		settingsChanger = settingsProto;
+		settingsChanger = settingsProto
+		waveformSettingsChanger = wSettingsProto
 	}
 
 	func updateEnabled()
 	{
-		temperamentControl.isHidden = !(synthVoice == .Sine || synthVoice == .Square || synthVoice == .Triangle)
-		temperamentLabel.isHidden = temperamentControl.isHidden
-		waveformView.isHidden = !(synthVoice == .Sine || synthVoice == .Square || synthVoice == .Triangle)
-		symmetryControl.isHidden = !(synthVoice == .Square || synthVoice == .Triangle)
-		symmetryLabel.isHidden = symmetryControl.isHidden
-		risefallControl.isHidden = synthVoice != .Square
-		risefallLabel.isHidden = risefallControl.isHidden
+		temperamentControl.isHidden = waveformSettingsChanger == nil || !(synthVoice == .Sine || synthVoice == .Square || synthVoice == .Triangle)
+		temperamentLabel.isHidden = waveformSettingsChanger == nil || temperamentControl.isHidden
+		waveformView.isHidden = waveformSettingsChanger == nil || !(synthVoice == .Sine || synthVoice == .Square || synthVoice == .Triangle)
+		symmetryControl.isHidden = waveformSettingsChanger == nil || !(synthVoice == .Square || synthVoice == .Triangle)
+		symmetryLabel.isHidden = waveformSettingsChanger == nil || symmetryControl.isHidden
+		risefallControl.isHidden = waveformSettingsChanger == nil || synthVoice != .Square
+		risefallLabel.isHidden = waveformSettingsChanger == nil || risefallControl.isHidden
 	}
 	
 	@IBAction func changePartNames(_ sender: Any) {
@@ -133,7 +140,7 @@ class SSSettingsViewController : UIViewController
 
 		default:break
 		}
-		settingsChanger?.changeSound(synthVoice)
+		waveformSettingsChanger?.changeSound(synthVoice)
 		updateEnabled()
 		updateWaveformView()
 	}
@@ -163,18 +170,18 @@ class SSSettingsViewController : UIViewController
 	}
 	
 	@IBAction func changeSymmetrySlider(_ sender: Any) {
-		settingsChanger?.changeSymmetry(symmetryControl.value)
+		waveformSettingsChanger?.changeSymmetry(symmetryControl.value)
 		waveformView.symmetry = symmetryControl.value
 	}
 	
 	@IBAction func temperamentSelected(_ sender: Any) {
 		let control = sender as! UISegmentedControl
-		settingsChanger?.changeTemperament(control.selectedSegmentIndex == 0 ? SSTemperament.Equal : SSTemperament.JustC)
+		waveformSettingsChanger?.changeTemperament(control.selectedSegmentIndex == 0 ? SSTemperament.Equal : SSTemperament.JustC)
 	}
 	
 	@IBAction func changeRisefallControl(_ sender: Any) {
 		let control = sender as! UISlider
-		settingsChanger?.changeRiseFall(control.value)
+		waveformSettingsChanger?.changeRiseFall(control.value)
 		waveformView.risefall = control.value
 	}
 	

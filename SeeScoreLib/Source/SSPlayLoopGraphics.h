@@ -42,6 +42,7 @@
 -(instancetype)initWithNumParts:(int)numParts
 					 leftSystem:(SSSystem*)leftSystem leftSystemTopLeft:(CGPoint)leftSystemTopLeft leftBarIndex:(int)leftBarIndex
 					rightSystem:(SSSystem*)rightSystem rightSystemTopLeft:(CGPoint)rightSystemTopLeft rightBarIndex:(int)rightBarIndex
+						   zoom:(float)zoom
 						 colour:(UIColor*)colour;
 
 

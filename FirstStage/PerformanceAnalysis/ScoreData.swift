@@ -278,6 +278,7 @@ func testThis() {
     let x4: Float = 0.7
     
     var res = getIntStarCount(floatScore: x1)
+    if alwaysFalseToSuppressWarn() { print("\(res)") }
     res = getIntStarCount(floatScore: x2)
     res = getIntStarCount(floatScore: x3)
     res = getIntStarCount(floatScore: x4)

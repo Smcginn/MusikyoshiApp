@@ -94,7 +94,7 @@ class MusicXMLModifier {
         var firstBar = true
         var beatType = 0    //as in notation 2,4,8, or 16
         var shortestNoteDuration = 32    //in 16th notes
-        var numFifths = Int(0)
+        //var numFifths = Int(0)
 
         // number of sixteenths in note:
         //16 = whole, 8 = half, 4 = quarter, 2 = eighth, 12 = dotted half, etc.

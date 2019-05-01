@@ -87,6 +87,7 @@ class AutoRenewNotificationViewController: UIViewController {
                              height: frameHt)
         scrollView.frame.size = frameSz // superFrame.size
         let scrollFrame2 = scrollView.frame
+        useThisToSuppressWarnings(str: "\(scrollFrame2.size.width)")
 
         scrollView.contentSize = contentSz
 
@@ -103,12 +104,14 @@ class AutoRenewNotificationViewController: UIViewController {
         scrollView.frame.size.height = super.view.frame.size.height
         
         let contentSz = CGSize(width: scrollFrame.size.width, height: superFrame.size.height)
+        useThisToSuppressWarnings(str: "\(contentSz.width)")
         scrollView.contentSize = CGSize(width:300, height:1000) //320
         
         let scrollFrame2 = scrollView.frame
         
         let contentSz2 = scrollView.contentSize
-        
+        useThisToSuppressWarnings(str: "\(scrollFrame2.size.width),  \(contentSz2.width)")
+
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
         

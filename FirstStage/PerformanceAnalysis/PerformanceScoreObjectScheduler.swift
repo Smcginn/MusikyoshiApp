@@ -89,6 +89,8 @@ class PerformanceScoreObjectScheduler {
                 PerfTrkMgr.instance.linkCurrSoundToCurrScoreObject(isNewScoreObject: false)
             }
             if tuneExerVC != nil {
+                let perfID = perfScObj.perfScoreObjectID
+                print ("\n  CURSOR MOVE: At \(currSongTime), for PerfObj #\(perfID), moving cursor to \(perfScObj.xPos)\n")
                 tuneExerVC!.drawCurrNoteLineAt(xPos: CGFloat(perfScObj.xPos))
             }
         }

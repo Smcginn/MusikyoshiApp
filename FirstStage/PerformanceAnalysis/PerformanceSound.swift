@@ -346,6 +346,9 @@ public class PerformanceSound
             return 0.0  }
         
         let perc: Double = Double(mostPlayedNote.count) / Double(numPitchSamples)
+        // let perc: Double =
+        //    Double(mostPlayedNote.count) / Double(numPitchSamples+notesOutsideRange)
+        
         return perc
     }
 
@@ -355,16 +358,29 @@ public class PerformanceSound
             return
         }
         let index = Int(note) - freqsPlayedCountsIndexOffset
+        // FIXME: Code should inlcude pitches outside instrument range, for better
+        // tracking of incorrect notes.
+        //guard index < freqsPlayedCounts.count else {
+        guard index >= 0  && index < freqsPlayedCounts.count else {
+            notesOutsideRange += 1
+            return
+        }
+
         let noteInfoAtIndex = freqsPlayedCounts[index]
         _ = ASSUME(noteInfoAtIndex.noteID == note)
         
         freqsPlayedCounts[index].count += 1
     }
     
+    var notesOutsideRange = 0
     func initFreqsPlayedCounts() {
         freqsPlayedCountsIndexOffset =  Int(NoteIDs.firstNoteID)
+        notesOutsideRange = 0
+        
+        // FIXME: Code should inlcude pitches outside instrument range, for better
+        // tracking of incorrect notes.
         for noteID in NoteIDs.validNoteIDRange {
-        let oneFreqCount: freqCountForNote = (noteID: noteID, count: 0)
+            let oneFreqCount: freqCountForNote = (noteID: noteID, count: 0)
             freqsPlayedCounts.append(oneFreqCount)
         }
     }

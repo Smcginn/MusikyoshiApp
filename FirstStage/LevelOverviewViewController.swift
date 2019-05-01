@@ -124,7 +124,8 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
         } else {
             itsBad()
         }
-        
+        useThisToSuppressWarnings(str: "\(itWorked)")
+
         // now the data is setup, load the tables. . .
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.tableView.delegate = self
@@ -398,14 +399,14 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
 //            print("Root view controller is not set.")
 //        }
         return;
-        
+/*
         allDoneFirstTime = false
         
         //////////////////
         
         if allDoneWithLevelAlso {
             let titleStr = "! Way to Go !"
-            var msgStr = "You can redo exercises you've completed (for a btter score)"
+            var msgStr = "You can redo exercises you've completed (for a better score)"
             msgStr +=    "\n\nOr Exit to the Levels Screen"
             let ac = MyUIAlertController(title: titleStr,
                                          message: msgStr,
@@ -420,6 +421,7 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
             self.present(ac, animated: true, completion: nil)
 
         }
+*/
     }
     
     func doneWithLevelHandler(_ act: UIAlertAction) {
@@ -613,6 +615,8 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
             itsBad()
             // return // now what?
         }
+        useThisToSuppressWarnings(str: "\(itWorked)")
+
         exerType = LsnSchdlr.instance.getCurrExerType()
         loadAndRunCurrentExer()
     }

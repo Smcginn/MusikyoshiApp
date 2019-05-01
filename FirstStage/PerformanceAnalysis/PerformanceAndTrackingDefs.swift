@@ -346,7 +346,8 @@ let kMKDebugOpt_PrintPerfAnalysisResults = false
 let kMKDebugOpt_PrintMinimalNoteAndSoundResults = true
 var kMKDebugOpt_PrintMinimalNoteAnalysis        = true
 
-let kDoPrintAmplitude = true
+let kDoPrintAmplitude = false
+let kDoPrintFrequency = false
 let kAmplitudePrintoutMultiplier_Sim =  200.0
 let kAmplitudePrintoutMultiplier_HW  =  100.0
 var gAmplitudePrintoutMultiplier = kAmplitudePrintoutMultiplier_Sim

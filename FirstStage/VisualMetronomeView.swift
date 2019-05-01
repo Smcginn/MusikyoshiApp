@@ -44,6 +44,7 @@ class VisualMetronomeView: UIView {
          
         //let firstDotCenterXOffset = ceil(((CGFloat(numBeats) - 1.0) / 2.0) * dotCenters)
         let firstDotCenterXOffset = ceil(((CGFloat(numDots) - 1.0) / 2.0) * dotCenters)
+        useThisToSuppressWarnings(str: "\(firstDotCenterXOffset)")
         let firstDotCenterX = CGFloat(10.0) // CGFloat(ceil((frame.width / 2) - firstDotCenterXOffset))
         let dotCenterY = CGFloat(ceil(frame.height / 2))
 

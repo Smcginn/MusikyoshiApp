@@ -11,19 +11,19 @@ import Foundation
 
 
 func getCurrScoreFileSize() -> Int {
-    var retSize = 0
+    let retSize = 0
     
     return retSize
 }
 
 func getEstNewScoreFileSize() -> Int {
-    var retSize = 0
+    let retSize = 0
     
     return retSize
 }
 
 func getAvailableDiscSpace() -> Int {
-    var retSize = 0
+    let retSize = 0
     
     return retSize
 }

@@ -31,8 +31,6 @@
 		6324D30D1CE72F8D001934A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6324D2DE1CE71B1A001934A5 /* LaunchScreen.storyboard */; };
 		6324D30E1CE72F8D001934A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6324D2DC1CE71B1A001934A5 /* Assets.xcassets */; };
 		6324D30F1CE72F8D001934A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6324D2D61CE71B19001934A5 /* Main.storyboard */; };
-		6324D31A1CE7327F001934A5 /* SeeScoreLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6324D3191CE7327F001934A5 /* SeeScoreLib.framework */; };
-		6324D31B1CE7327F001934A5 /* SeeScoreLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6324D3191CE7327F001934A5 /* SeeScoreLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6324D35E1CE73C47001934A5 /* SSScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6324D3501CE73C47001934A5 /* SSScrollView.m */; };
 		6324D35F1CE73C47001934A5 /* SSScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6324D3501CE73C47001934A5 /* SSScrollView.m */; };
 		6324D3601CE73C47001934A5 /* SSSystemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6324D3511CE73C47001934A5 /* SSSystemView.m */; };
@@ -312,8 +310,7 @@
 		638129591CF05C7900A40C8E /* Balloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638129561CF05C7900A40C8E /* Balloon.swift */; };
 		6381295A1CF05C7900A40C8E /* SparkLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638129571CF05C7900A40C8E /* SparkLine.swift */; };
 		6381295B1CF05C7900A40C8E /* SparkLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638129571CF05C7900A40C8E /* SparkLine.swift */; };
-		638FECC21EC70A1100976340 /* AEXML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 635A60991EC6B7BA0099154A /* AEXML.framework */; };
-		638FECC31EC70A1100976340 /* AEXML.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 635A60991EC6B7BA0099154A /* AEXML.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		638FECC31EC70A1100976340 /* AEXML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 635A60991EC6B7BA0099154A /* AEXML.framework */; };
 		639A2E451CF5AB09004F7B1A /* DotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639A2E441CF5AB09004F7B1A /* DotView.swift */; };
 		639A2E461CF5AB09004F7B1A /* DotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639A2E441CF5AB09004F7B1A /* DotView.swift */; };
 		639A2E541CF5E6CA004F7B1A /* VisualMetronomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639A2E531CF5E6CA004F7B1A /* VisualMetronomeView.swift */; };
@@ -346,6 +343,7 @@
 		6D08D759219E4E7500928463 /* AutoRenewNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D08D757219E4E7500928463 /* AutoRenewNotificationViewController.swift */; };
 		6D0C5F02217E33D500273E93 /* IsASoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0C5F01217E33D400273E93 /* IsASoundViewController.swift */; };
 		6D0C5F03217E33D500273E93 /* IsASoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0C5F01217E33D400273E93 /* IsASoundViewController.swift */; };
+		6D1509F622722747008F0490 /* AEXML.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 635A60991EC6B7BA0099154A /* AEXML.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6D22AEC620D06E8200ACEC81 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633D1B6C1CF94BEC00B5C4FD /* FeedbackView.swift */; };
 		6D268BEB21CD3C12002DA293 /* InstrumentSelectionDefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D268BEA21CD3C12002DA293 /* InstrumentSelectionDefs.swift */; };
 		6D268BEC21CD3C12002DA293 /* InstrumentSelectionDefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D268BEA21CD3C12002DA293 /* InstrumentSelectionDefs.swift */; };
@@ -355,7 +353,6 @@
 		6D3AE1422176846A005ECC60 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D3AE1412176846A005ECC60 /* StoreKit.framework */; };
 		6D3AE14521768504005ECC60 /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3AE14421768504005ECC60 /* IAPHelper.swift */; };
 		6D3AE14621768504005ECC60 /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3AE14421768504005ECC60 /* IAPHelper.swift */; };
-		6D3AE14721779F2A005ECC60 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D3AE1412176846A005ECC60 /* StoreKit.framework */; };
 		6D3AE14F217A2C7D005ECC60 /* MicCalibrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3AE14E217A2C7D005ECC60 /* MicCalibrationViewController.swift */; };
 		6D3AE150217A2C7D005ECC60 /* MicCalibrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3AE14E217A2C7D005ECC60 /* MicCalibrationViewController.swift */; };
 		6D40FC7A21D721F0006E1742 /* TrumpetPartials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D40FC7821D721F0006E1742 /* TrumpetPartials.swift */; };
@@ -439,7 +436,6 @@
 		6D8E104D2131031D00B1B3B8 /* Current Arrow 36x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D8E104B2131031C00B1B3B8 /* Current Arrow 36x16.png */; };
 		6D8E104F213103DA00B1B3B8 /* Current Arrow 30x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D8E104E213103DA00B1B3B8 /* Current Arrow 30x16.png */; };
 		6D8E1050213103DA00B1B3B8 /* Current Arrow 30x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D8E104E213103DA00B1B3B8 /* Current Arrow 30x16.png */; };
-		6D9A93E121A5FFC000BB69B9 /* SwiftyStoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D431C322198EA33009DBBE9 /* SwiftyStoreKit.framework */; };
 		6D9C007421DBD0490012A03B /* TenorTrombone.46.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6D9C005321DBD0460012A03B /* TenorTrombone.46.m4a */; };
 		6D9C007521DBD0490012A03B /* TenorTrombone.46.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6D9C005321DBD0460012A03B /* TenorTrombone.46.m4a */; };
 		6D9C007621DBD0490012A03B /* TenorTrombone.70.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6D9C005421DBD0460012A03B /* TenorTrombone.70.m4a */; };
@@ -628,7 +624,6 @@
 		6DB8534A2127A87600F999C3 /* Monkey_Skiing_06@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DB853422127A87600F999C3 /* Monkey_Skiing_06@2x.png */; };
 		6DB9A96F21FCC7E000719BBF /* ScoreFileVersionManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB9A96E21FCC7E000719BBF /* ScoreFileVersionManagement.swift */; };
 		6DB9A97021FCC7E000719BBF /* ScoreFileVersionManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB9A96E21FCC7E000719BBF /* ScoreFileVersionManagement.swift */; };
-		6DBF1F0A213E23D10052AD57 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C33BBA92016E80B00CD83A6 /* SwiftyJSON.framework */; };
 		6DBF1F0C213ED8D60052AD57 /* Stars-4 Even 256x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F0B213ED8D50052AD57 /* Stars-4 Even 256x64.png */; };
 		6DBF1F0D213ED8E30052AD57 /* Stars-4 Even 256x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F0B213ED8D50052AD57 /* Stars-4 Even 256x64.png */; };
 		6DBF1F29213EEB850052AD57 /* Duration - A bit short.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F0E213EEB820052AD57 /* Duration - A bit short.mp4 */; };
@@ -712,6 +707,12 @@
 		6DCC640122173722001026F1 /* PerfSampleAmplitudeTrackerV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D277EBC220A9DFF00247359 /* PerfSampleAmplitudeTrackerV2.swift */; };
 		6DCDFF162118AF9F000E8E38 /* Monkey_Ballon_Explode.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DCDFF102118AF9F000E8E38 /* Monkey_Ballon_Explode.png */; };
 		6DCDFF212118AFAB000E8E38 /* Monkey_Ballon_Explode.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DCDFF102118AF9F000E8E38 /* Monkey_Ballon_Explode.png */; };
+		6DD52D782257A32400F1C668 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C33BBA92016E80B00CD83A6 /* SwiftyJSON.framework */; };
+		6DD52D792257ED5600F1C668 /* SwiftyStoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D431C322198EA33009DBBE9 /* SwiftyStoreKit.framework */; };
+		6DD52D7A2257ED8D00F1C668 /* SeeScoreLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6324D3191CE7327F001934A5 /* SeeScoreLib.framework */; };
+		6DD52D7B2257EE5C00F1C668 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C931B0EF1FB120B4003376F9 /* AudioKit.framework */; };
+		6DD52D7D2257EF9300F1C668 /* SeeScoreLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD52D7C2257EF9300F1C668 /* SeeScoreLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6DD52D7E2257F40100F1C668 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D3AE1412176846A005ECC60 /* StoreKit.framework */; };
 		6DDE849E2135A61B00A81875 /* LongtonePersonalBestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDE849D2135A61B00A81875 /* LongtonePersonalBestSupport.swift */; };
 		6DDE849F2135A61B00A81875 /* LongtonePersonalBestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDE849D2135A61B00A81875 /* LongtonePersonalBestSupport.swift */; };
 		6DEBD420216E3F4B0037C935 /* PlayTunes at 120.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DEBD410216E3F4B0037C935 /* PlayTunes at 120.png */; };
@@ -817,7 +818,6 @@
 		BDF308FA1F630AF500F0A819 /* SeeScoreLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6324D3151CE73234001934A5 /* SeeScoreLib.framework */; };
 		BDF308FB1F630AF500F0A819 /* SeeScoreLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6324D3151CE73234001934A5 /* SeeScoreLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C90339351FB126AA005A9C7D /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C931B0EF1FB120B4003376F9 /* AudioKit.framework */; };
-		C9BCD1671FB145C900E3434F /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C931B0EF1FB120B4003376F9 /* AudioKit.framework */; };
 		E940183E1FA998CF00FC6271 /* FSAnalysisOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = E940183D1FA998CF00FC6271 /* FSAnalysisOverlayView.m */; };
 		E940183F1FA998CF00FC6271 /* FSAnalysisOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = E940183D1FA998CF00FC6271 /* FSAnalysisOverlayView.m */; };
 		E9794BA91FFD45EA00CDC7FD /* PerformanceIssueMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9794BA81FFD45EA00CDC7FD /* PerformanceIssueMgr.swift */; };
@@ -1015,8 +1015,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				638FECC31EC70A1100976340 /* AEXML.framework in Embed Frameworks */,
-				6324D31B1CE7327F001934A5 /* SeeScoreLib.framework in Embed Frameworks */,
+				6DD52D7D2257EF9300F1C668 /* SeeScoreLib.framework in Embed Frameworks */,
+				6D1509F622722747008F0490 /* AEXML.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1472,6 +1472,8 @@
 		6DC834B42134B94B00AAA613 /* IconImageMgr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IconImageMgr.swift; path = LessonScheduling/IconImageMgr.swift; sourceTree = "<group>"; };
 		6DC834C62135136400AAA613 /* OneStarNew 64x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "OneStarNew 64x64.png"; path = "Images/OneStarNew 64x64.png"; sourceTree = "<group>"; };
 		6DCDFF102118AF9F000E8E38 /* Monkey_Ballon_Explode.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Monkey_Ballon_Explode.png; path = Images/Monkey_Ballon_Explode.png; sourceTree = "<group>"; };
+		6DD52D7C2257EF9300F1C668 /* SeeScoreLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SeeScoreLib.framework; path = "SeeScoreLib/AppStore-Release/SeeScoreLib.framework"; sourceTree = "<group>"; };
+		6DD52D7F2257F8B500F1C668 /* AEXML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AEXML.framework; sourceTree = "<group>"; };
 		6DDE849D2135A61B00A81875 /* LongtonePersonalBestSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LongtonePersonalBestSupport.swift; path = LessonScheduling/LongtonePersonalBestSupport.swift; sourceTree = "<group>"; };
 		6DEBD410216E3F4B0037C935 /* PlayTunes at 120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PlayTunes at 120.png"; path = "Images/PlayTunes at 120.png"; sourceTree = "<group>"; };
 		6DEBD421216E40E30037C935 /* PlayTunes at 210.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PlayTunes at 210.png"; path = "Images/PlayTunes at 210.png"; sourceTree = "<group>"; };
@@ -1555,12 +1557,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D9A93E121A5FFC000BB69B9 /* SwiftyStoreKit.framework in Frameworks */,
-				6DBF1F0A213E23D10052AD57 /* SwiftyJSON.framework in Frameworks */,
-				638FECC21EC70A1100976340 /* AEXML.framework in Frameworks */,
-				6D3AE14721779F2A005ECC60 /* StoreKit.framework in Frameworks */,
-				C9BCD1671FB145C900E3434F /* AudioKit.framework in Frameworks */,
-				6324D31A1CE7327F001934A5 /* SeeScoreLib.framework in Frameworks */,
+				6DD52D7E2257F40100F1C668 /* StoreKit.framework in Frameworks */,
+				6DD52D7B2257EE5C00F1C668 /* AudioKit.framework in Frameworks */,
+				6DD52D7A2257ED8D00F1C668 /* SeeScoreLib.framework in Frameworks */,
+				6DD52D792257ED5600F1C668 /* SwiftyStoreKit.framework in Frameworks */,
+				6DD52D782257A32400F1C668 /* SwiftyJSON.framework in Frameworks */,
+				638FECC31EC70A1100976340 /* AEXML.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1821,6 +1823,8 @@
 		6324D2C61CE71B19001934A5 = {
 			isa = PBXGroup;
 			children = (
+				6DD52D7F2257F8B500F1C668 /* AEXML.framework */,
+				6DD52D7C2257EF9300F1C668 /* SeeScoreLib.framework */,
 				6D431C322198EA33009DBBE9 /* SwiftyStoreKit.framework */,
 				C90339381FB13239005A9C7D /* Changelog.md */,
 				C90339361FB131D3005A9C7D /* README.md */,
@@ -3479,7 +3483,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n";
 		};
 		C931B0EE1FB11B81003376F9 /* Copy Carthage Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3487,19 +3491,17 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/AudioKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyStoreKit.framework",
 			);
 			name = "Copy Carthage Frameworks";
 			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/AudioKit.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftyJSON.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftyStoreKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 			showEnvVarsInLog = 0;
 		};
 		C9BCD15B1FB1434D00E3434F /* Carthage Outdated Dependencies */ = {
@@ -3514,7 +3516,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage outdated --xcode-warnings";
+			shellScript = "/usr/local/bin/carthage outdated --xcode-warnings\n";
 			showEnvVarsInLog = 0;
 		};
 		C9BCD1621FB1437600E3434F /* Copy Carthage Frameworks */ = {
@@ -3523,19 +3525,17 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/AudioKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyStoreKit.framework",
 			);
 			name = "Copy Carthage Frameworks";
 			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/AudioKit.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftyJSON.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftyStoreKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

@@ -10,7 +10,7 @@
 
 #import <UIKit/UIKit.h>
 #include <SeeScoreLib/SeeScoreLib.h>
-#import "SSViewInterface.h"   // MKMOD - added this line  - 4/1/17
+#import "ScoreViewInterface.h"
 
 @class SSScore;
 @class SSSystem;
@@ -20,7 +20,8 @@
  * @interface SSSystemView
  * @abstract used by SSScrollView, manages and draws a single system of music using the SeeScoreLib framework
  */
-@interface SSSystemView : UIView <SSViewInterface, ScoreChangeHandler> // MKMOD - added the 2 protocols - 4/1/17
+ // MKMODSS - removed SSViewInterface from protocol list
+@interface SSSystemView : UIView <ScoreChangeHandler> // MKMOD - added the 2 protocols - 4/1/17
 
 /*!
  * @property height
@@ -34,13 +35,13 @@
  * @property colourRender
  * @abstract any current colour rendering (used to define coloured items in the score)
  */
-@property (nonatomic) SSColourRender *colourRender;
+@property (nonatomic) SSColourRender * _Nullable colourRender;
 
 /*!
  * @property system
  * @abstract the SSSystem which this is displaying
  */
-@property (nonatomic,readonly) SSSystem *system;
+@property (nonatomic,readonly) SSSystem * _Nonnull system;
 
 /*!
  * @property systemIndex
@@ -55,10 +56,18 @@
 @property (nonatomic, readonly) float drawScale;
 
 /*!
+ @property drawFlags
+ @abstract bitset of sscore_dopt_flags_e
+ */
+@property (nonatomic, readonly) unsigned drawFlags;
+
+/*!
  @property topLeft
  @abstract the top left of the SSSystem in superView coords
  */
-@property (nonatomic, readonly) CGPoint topLeft;  // MKMOD added this property - 4/1/17
+@property (nonatomic, readonly) CGPoint topLeft;
+
+-(instancetype _Nonnull)init NS_UNAVAILABLE;
 
 /*!
  * @method initWithBackgroundColour
@@ -66,7 +75,7 @@
  * @param bgcol the background colour
  * @return the SSSystemView
  */
-- (instancetype)initWithBackgroundColour:(UIColor*)bgcol;
+- (instancetype _Nonnull)initWithBackgroundColour:(UIColor* _Nonnull)bgcol;
 
 /*!
  * @method setSystem
@@ -74,12 +83,14 @@
  * @param system the system
  * @param score the score
  * @param tl the top left of the system UIView in the superview
+ * @param zoomScale the zoom magnification to apply to the system layout
  * @param margin the extra width and height left, right and above, below
  */
 // MKMOD - added params tl and margin   4/1/17
--(void)setSystem:(SSSystem*)system
-		   score:(SSScore*)score
+-(void)setSystem:(SSSystem* _Nonnull)system
+		   score:(SSScore* _Nonnull)score
 		 topLeft:(CGPoint)tl
+	   zoomScale:(float)zoomScale
 		  margin:(CGSize)margin;
 
 /*!
@@ -99,7 +110,7 @@
  * @abstract clear any coloured rendering in the bar range
  * @param barrange the range of bars defined by a start index and number of bars
  */
--(void)clearColourRenderForBarRange:(const sscore_barrange*)barrange;
+-(void)clearColourRenderForBarRange:(const sscore_barrange* _Nonnull)barrange;
 
 /*!
  * @method showCursorAtBar
@@ -124,49 +135,96 @@
 -(void)hideCursor;
 
 /*!
+ * @method barRectangle
+ * @abstract get the rectangle around a bar suitable for a bar cursor
+ */
+-(SSCursorRect)barRectangle:(int)barIndex;
+
+/*!
  * @method setCursorColour:
  * @abstract set the cursor outline colour
  * @param colour the new colour
  */
--(void)setCursorColour:(UIColor*)colour;
-
-// MKMOD - added this method 4/1/17
-/*!
- * @method zoomUpdate
- * @abstract call for interactive zooming (magnifies backImage)
- * @param z the zoom magnification
- */
--(void)zoomUpdate:(float)z;
+-(void)setCursorColour:(UIColor* _Nonnull)colour;
 
 /*!
- * @method zoomComplete
- * @abstract finish interactive zooming - system is redrawn at new magnification
+ * @method showVoiceTracks
+ * @abstract show or hide coloured tracks between notes and rests on each voice in each part
  */
--(void)zoomComplete;
+-(void)showVoiceTracks:(bool)show;
 
 /*!
- * @method selectItem
- * @abstract show an item as selected in the layout by colouring
+ * @method pointInside:withEvent:
+ * @abstract detect if the point is within this UIView
+ * @param point the point
+ * @event the (tap) event or nil
+ * @return true if the point is within this system
  */
--(void)selectItem:(sscore_item_handle)item_h part:(int)partIndex bar:(int)barIndex
-	   foreground:(CGColorRef)fg background:(CGColorRef)bg;
+-(bool)pointInside:(CGPoint)point withEvent:(UIEvent * _Nullable)event;
 
 /*!
- * @method deselectItem
- * @abstract deselect a selected item
+ * @method drawItemOutline:ctx:topLeft:colour:margin:linewidth:
+ * @abstract draw a dashed outline around the given item
+ * @param editItem the item in the system
+ * @param ctx the graphics context
+ * @param topLeft the top left of the system
+ * @param colour the colour of the dashed line
+ * @param margin the margin from the item to the drawn outline
+ * @param lineWidth the width of the dashed line, 0 for default
  */
--(void)deselectItem:(sscore_item_handle)item_h;
+-(void)drawItemOutline:(SSEditItem* _Nonnull)editItem ctx:(CGContextRef _Nonnull)ctx topLeft:(CGPoint)topLeft
+				colour:(CGColorRef _Nonnull)colour margin:(CGFloat)margin linewidth:(CGFloat)lineWidth;
 
-/*!
- * @method deselectAll
- * @abstract deselect all selected items
- */
--(void)deselectAll;
+-(void)drawItemDrag:(SSEditItem* _Nonnull)editItem ctx:(CGContextRef _Nonnull)ctx topLeft:(CGPoint)topLeft dragPos:(CGPoint)dragPos showTargetDashedLine:(bool)showTargetDashedLine;
 
-/*!
- * @method updateLayout:newState
- * @abstract update the layout after edit
- */
--(void)updateLayout:(CGContextRef)ctx newState:(const sscore_state_container *)newstate;
+-(SSTargetLocation* _Nullable)nearestInsertTargetFor:(SSEditType* _Nonnull)editType at:(CGPoint)pos maxDistance:(CGFloat)maxDistance;
+
+-(SSNoteInsertPos)nearestNoteInsertPos:(CGPoint)pos editType:(SSEditType* _Nonnull)editType maxDistance:(CGFloat)maxDistance maxLedgers:(int)maxLedgers;
+
+-(SSNoteInsertPos)nearestNoteReinsertPos:(CGPoint)pos editItem:(SSEditItem* _Nonnull)editItem maxDistance:(CGFloat)maxDistance maxLedgers:(int)maxLedgers;
+
+// MKMODSS - all of the entries below were not in the 3/19 SeeScore code update
+
+///*
+//// MKMOD - added this method 4/1/17
+///*!
+// * @method zoomUpdate
+// * @abstract call for interactive zooming (magnifies backImage)
+// * @param z the zoom magnification
+// */
+//-(void)zoomUpdate:(float)z;
+//
+///*!
+// * @method zoomComplete
+// * @abstract finish interactive zooming - system is redrawn at new magnification
+// */
+//-(void)zoomComplete;
+//
+///*!
+// * @method selectItem
+// * @abstract show an item as selected in the layout by colouring
+// */
+//-(void)selectItem:(sscore_item_handle)item_h part:(int)partIndex bar:(int)barIndex
+//       foreground:(CGColorRef)fg background:(CGColorRef)bg;
+//
+///*!
+// * @method deselectItem
+// * @abstract deselect a selected item
+// */
+//-(void)deselectItem:(sscore_item_handle)item_h;
+//
+///*!
+// * @method deselectAll
+// * @abstract deselect all selected items
+// */
+//-(void)deselectAll;
+//
+///*!
+// * @method updateLayout:newState
+// * @abstract update the layout after edit
+// */
+//-(void)updateLayout:(CGContextRef)ctx newState:(const sscore_state_container *)newstate;
+//
+//*/
 
 @end

@@ -81,7 +81,7 @@ class MicCalibrationViewController: UIViewController {
     @IBOutlet weak var getSetupLabel2: UILabel!
     
     static func currCalibrationProbablyGood() -> Bool {
-        var calProbGood = true
+        let calProbGood = true
 /* need to restore
         let lastPlayingVolCheckDate =
             UserDefaults.standard.double(forKey: Constants.Settings.LastPlayingVolumeCheckDate)
@@ -96,7 +96,7 @@ class MicCalibrationViewController: UIViewController {
     }
 
     static func mustCalibrate() -> Bool {
-        var mustCalib = false
+        let mustCalib = false
 /* need to restore
         let lastPlayingVolCheckDate =
             UserDefaults.standard.double(forKey: Constants.Settings.LastPlayingVolumeCheckDate)

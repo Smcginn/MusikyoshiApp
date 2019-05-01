@@ -69,7 +69,7 @@ extension ScoreMgr {
         
         // RESTORE      FILEFILEFILEFILE
         // deleteCurrentScoreFile()  // this call deletes the older V1 file
-        saveScoreFile()
+        _ = saveScoreFile()
         return true
     }
     
@@ -79,6 +79,8 @@ extension ScoreMgr {
     func loadScoreFile() -> Bool {
         var succeeded = false
         guard let mkDataDirUrl = getMKDataDir() else { return succeeded }
+        let strVal = String(describing: mkDataDirUrl )
+        if alwaysFalseToSuppressWarn() { print("\(strVal)" ) }
         
         let fm = FileManager.default
         let currInstr = getCurrentStudentInstrument()
@@ -121,11 +123,12 @@ extension ScoreMgr {
             
             let jsonDecoder = JSONDecoder()
             let retreivedData = try? Data(contentsOf:mkScoreFileURL)
-            if let jsonString = String(data:retreivedData!, encoding: .utf8) {
-                               print("\nLoaded file:\n")
-                               print(jsonString)
-                              print("\n")
-            }
+            // Uncomment to print out contents of score file as JSON data
+//            if let jsonString = String(data:retreivedData!, encoding: .utf8) {
+//                               print("\nLoaded file:\n")
+//                               print(jsonString)
+//                              print("\n")
+//            }
             currUserScore = try? jsonDecoder.decode(studentScoreV2.self, from: retreivedData!)
             if currUserScore != nil {
                 print("Created currUserScore from disk file data")
@@ -200,11 +203,11 @@ extension ScoreMgr {
             tempV1UserScore = nil
             let jsonDecoder = JSONDecoder()
             let retreivedData = try? Data(contentsOf:mkV1ScoreFileURL)
-            if let jsonString = String(data:retreivedData!, encoding: .utf8) {
+            //if let jsonString = String(data:retreivedData!, encoding: .utf8) {
                 //               print("\nLoaded file:\n")
                 //               print(jsonString)
                 //              print("\n")
-            }
+            //}
             tempV1UserScore = try? jsonDecoder.decode(studentScore.self, from: retreivedData!)
             if tempV1UserScore != nil {
                 print("Created tempV1UserScore from V1 disk file data")
@@ -314,8 +317,9 @@ extension ScoreMgr {
         jsonEncoder.outputFormatting = .prettyPrinted
         let jsonData: Data? = try? jsonEncoder.encode(currUserScore)
         if jsonData != nil  {
-            if kPrintJsonBeforeWritingToDisk,
-                let jsonString = String(data:jsonData!, encoding: .utf8) {
+            if kPrintJsonBeforeWritingToDisk //,
+                //let jsonString = String(data:jsonData!, encoding: .utf8)
+            {
                 //                print("\nJSON when saving file:\n")
                 //               print(jsonString)
                 //                print("\n")
@@ -480,11 +484,11 @@ extension ScoreMgr {
         let jsonData: Data? = try? jsonEncoder.encode(currUserScore)
         if jsonData != nil  {
             try? jsonData!.write(to: mkScoreFileUrl!, options: .atomic)
-            if let jsonString = String(data:jsonData!, encoding: .utf8) {
+            //if let jsonString = String(data:jsonData!, encoding: .utf8) {
                 //                print("\nJSON when creating initial Student Score file:\n")
                 //                print(jsonString)
                 //                print("\n")
-            }
+            //}
         }
         if fm.fileExists(atPath: mkScoreFilePath) {
             succeeded = true
@@ -724,6 +728,10 @@ extension ScoreMgr {
         let freeDiskSpaceInt = DiskStatus.freeDiskSpaceInBytes
         let usedDiskSpaceInt = DiskStatus.usedDiskSpaceInBytes
         
+        if alwaysFalseToSuppressWarn() {
+            print("\(totalDiskSpace), \(freeDiskSpace), \(usedDiskSpace)")
+            print("\(totalDiskSpaceInt), \(freeDiskSpaceInt), \(usedDiskSpaceInt)")
+        }
         print ("Available Disc Space: \(freeDiskSpace)")
     }
 

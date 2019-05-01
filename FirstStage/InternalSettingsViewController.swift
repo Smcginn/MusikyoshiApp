@@ -152,14 +152,14 @@ class InternalSettingsTableViewController : UITableViewController {
 
     func setupSlider1() { // gAmpDropForNewSound
         // assume hardware
-        var sliderMinVal: Float = 0.01
-        var sliderMaxVal: Float = 0.3
-        if kRunningInSim {
-            sliderMinVal = 0.01
-            sliderMaxVal = 0.3
-            
-        }
-        
+//        var sliderMinVal: Float = 0.01
+//        var sliderMaxVal: Float = 0.3
+//        if kRunningInSim {
+//            sliderMinVal = 0.01
+//            sliderMaxVal = 0.3
+//            
+//        }
+//        
 //        setupSliderRow( slider: Slider1_Slider,
 //                        sliderMinVal: sliderMinVal,
 //                        sliderMaxVal: sliderMaxVal,
@@ -171,9 +171,9 @@ class InternalSettingsTableViewController : UITableViewController {
     
     func setupSlider2() { // gNumTolAmpSamples
         // assume hardware
-        let sliderMinVal: Float = 2.0
-        let sliderMaxVal: Float = 8.0
-        
+//        let sliderMinVal: Float = 2.0
+//        let sliderMaxVal: Float = 8.0
+//
 //        setupSliderRow( slider: Slider2_Slider,
 //                        sliderMinVal: sliderMinVal,
 //                        sliderMaxVal: sliderMaxVal,
@@ -191,7 +191,7 @@ class InternalSettingsTableViewController : UITableViewController {
         let sliderMinVal: Float = 0.1
         let sliderMaxVal: Float = 0.275
         
-        let currentVal = kSoundStartAdjustment
+//        let currentVal = kSoundStartAdjustment
         let currFloat  = Float(kSoundStartAdjustment)
         
         setupSliderRow( slider: Slider3_Slider,

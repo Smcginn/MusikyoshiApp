@@ -121,6 +121,7 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
         super.viewDidAppear(animated)
         
         var permissionGranted = false
+        if alwaysFalseToSuppressWarn() { print("\(permissionGranted)") }
         switch AVAudioSession.sharedInstance().recordPermission() {
         case AVAudioSessionRecordPermission.granted:
             permissionGranted = true

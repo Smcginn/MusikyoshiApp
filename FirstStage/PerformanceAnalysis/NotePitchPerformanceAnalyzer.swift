@@ -38,7 +38,8 @@ class NotePitchPerformanceAnalyzer : NotePerformanceAnalyzer {
         //   (Don't delete:  This generates a warning, but being able to quickly
         //   look at this is extremely useful when debugging.)
         let pitchDelta = note.expectedFrequency - note.actualFrequency
-        
+        useThisToSuppressWarnings(str: "\(pitchDelta)")
+
         // To establish amount of deviance from expected freq. "Low" means PC will
         // always be < 1.0. So . . . use this to check against low ranges, THEN check
         // to see if it's actually higher or lower than expected pitch.

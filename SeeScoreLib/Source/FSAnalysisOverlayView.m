@@ -402,6 +402,8 @@ static const int kSeverityRed     = 2;
 
 -(void) drawRect:(CGRect)rect
 {
+    NSLog(@"\n   ******** -> In FSAnalysisOverlayView::drawRect\n");
+    
     [super drawRect:rect];
     
     if ( !(kMKDebugOpt_ShowSoundsAnalysis ||

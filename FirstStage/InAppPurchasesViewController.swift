@@ -197,6 +197,8 @@ class InAppPurchasesViewController: UIViewController {
             contentHt += oneVwHt
             
             let prodIDStr = AvailIapPurchsMgr.sharedInstance.getProductIDForEntry(idx: index)
+            useThisToSuppressWarnings(str: "\(prodIDStr)")
+
             if !IAPHelper.canMakePayments() {
                 oneIAPPurchView!.chooseBtn.isHidden = true
                 oneIAPPurchView!.alreadyPurchasedLabel.isHidden = false
@@ -339,7 +341,7 @@ class InAppPurchasesViewController: UIViewController {
     
     func presentRestoreInProgressAlert() {
         let titleStr = "Restore In Progress"
-        var msgStr = "\n\nThis may take a few seconds . . .\n\n"
+        let msgStr = "\n\nThis may take a few seconds . . .\n\n"
         //msgStr += "\n\nYou Are Good To Go!\n\n"
         let ac = MyUIAlertController(title: titleStr, message: msgStr, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .default,
