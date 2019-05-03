@@ -23,8 +23,10 @@ profile
 xcodebuild
 Carthage/
 
-# Decompressed versions of our bundled frameworks
+# Compressed and decompressed versions of SeeScore frameworks
 SeeScoreLib.framework
+AppStore-Release-SeeScoreLib.framework.zip
+Universal-SeeScoreLib.framework.zip
 
 # vi temp files
 *~
