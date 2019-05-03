@@ -3,6 +3,6 @@
 # best for my current Swift/Xcode versions. (Current versions would not compile.)
 # It will probably be necessary to upgrade to newer versions to match 
 # the current Xcode environment.
-github "audiokit/AudioKit" == 4.5.3
-github "SwiftyJSON/SwiftyJSON"
-github "bizz84/SwiftyStoreKit"
+github "audiokit/AudioKit" == 4.6.4 
+github "SwiftyJSON/SwiftyJSON" == 4.2.0 
+github "bizz84/SwiftyStoreKit" == 0.14.2
