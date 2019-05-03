@@ -6,6 +6,11 @@
 //  Copyright © 2018 Musikyoshi. All rights reserved.
 //
 
+//
+// Actual disk file managment in ScoreMgr extension in file
+// ScoreFileVersionManagement.swift
+//
+
 import UIKit
 import Foundation
 import SwiftyJSON
@@ -19,7 +24,12 @@ let kBadDBVersion: tDB_Version = (major: -1, mid: -1, minor: -1)
 
 class ScoreMgr {
     
-    var currUserScore: studentScore? = nil
+    var currUserScore: studentScoreV2? = nil
+    
+    // This is only needed if we need to convert an exsiting V1 Score file to
+    // a V2 score file
+    var tempV1UserScore: studentScore? = nil
+    
     private var _currLevel: Int = 0
     private var _currDay: Int = 0
     private var _currExer: Int = 0
@@ -383,10 +393,58 @@ class ScoreMgr {
         print("In ScoreMgr.saveCurrentExercise(). Level:\(_currLevel), Day:\(_currDay), Exer:\(_currExer)")
     }
     
+    /*
     ////////////////////////////////////////////////////////////////////
     // Find Score file on disk, and and open it.
     //   If first time in App, will create.
     func loadScoreFile() -> Bool {
+        var succeeded = false
+        guard let mkDataDirUrl = getMKDataDir() else { return succeeded }
+        
+        let fm = FileManager.default
+        let currInstr = getCurrentStudentInstrument()
+        if !vers2ScoreFileExistsForInst(instr: currInstr) {
+            // Is there a version 1 file that needs to be converted?
+            if vers1ScoreFileExists() {
+                // Convert the file                     TODO
+            } else {
+                // create new version 2 ScoreFile       TODO
+            }
+        }
+        
+        
+        let mkScoreFileURL = mkDataDirUrl.appendingPathComponent(MKUserDataFileName)
+        let mkScoreFilePath = mkScoreFileURL.path
+        if !fm.fileExists(atPath: mkScoreFilePath) {
+            // first time in App. Try to create the Score file.
+            if !createScoreFile(mkScoreFileUrl: mkScoreFileURL) { return succeeded }
+        }
+        if fm.fileExists(atPath: mkScoreFilePath) {
+            currUserScore = nil
+            let jsonDecoder = JSONDecoder()
+            let retreivedData = try? Data(contentsOf:mkScoreFileURL)
+            if let jsonString = String(data:retreivedData!, encoding: .utf8) {
+                //               print("\nLoaded file:\n")
+                //               print(jsonString)
+                //              print("\n")
+            }
+            currUserScore = try? jsonDecoder.decode(studentScoreV2.self, from: retreivedData!)
+            if currUserScore != nil {
+                print("Created currUserScore from disk file data")
+                succeeded = true
+            } else {
+                itsBad()
+                print("Error - Unable to create currUserScore from disk file data")
+            }
+        }
+        
+        return succeeded
+    }
+    
+    ////////////////////////////////////////////////////////////////////
+    // Find Score file on disk, and and open it.
+    //   If first time in App, will create.
+    func loadV1ScoreFile() -> Bool {
         var succeeded = false
         guard let mkDataDirUrl = getMKDataDir() else { return succeeded }
         
@@ -402,11 +460,11 @@ class ScoreMgr {
             let jsonDecoder = JSONDecoder()
             let retreivedData = try? Data(contentsOf:mkScoreFileURL)
             if let jsonString = String(data:retreivedData!, encoding: .utf8) {
- //               print("\nLoaded file:\n")
- //               print(jsonString)
-  //              print("\n")
+                //               print("\nLoaded file:\n")
+                //               print(jsonString)
+                //              print("\n")
             }
-            currUserScore = try? jsonDecoder.decode(studentScore.self, from: retreivedData!)
+            currUserScore = try? jsonDecoder.decode(studentScoreV2.self, from: retreivedData!)
             if currUserScore != nil {
                 print("Created currUserScore from disk file data")
                 succeeded = true
@@ -418,16 +476,23 @@ class ScoreMgr {
         
         return succeeded
     }
+    */
     
+    /*
     ////////////////////////////////////////////////////////////////////
     // Save in-memory Score data to file on disk
+    //   As V2 file
     func saveScoreFile() -> Bool {
         var succeeded = false
         
-        guard let mkDataDirUrl = getMKDataDir() else { return succeeded }
+        let currInstr = getCurrentStudentInstrument()
+        guard let mkScoreFileURL = getURLForV2ScoreFile(instr: currInstr) else { return false }
+
+//        guard let mkDataDirUrl = getMKDataDir() else { return succeeded }
+//
+//        let fm = FileManager.default
+//        let mkScoreFileURL = mkDataDirUrl.appendingPathComponent(MKUserDataFileName)
         
-        let fm = FileManager.default
-        let mkScoreFileURL = mkDataDirUrl.appendingPathComponent(MKUserDataFileName)
         let mkScoreFilePath = mkScoreFileURL.path
         
         let jsonEncoder = JSONEncoder()
@@ -442,12 +507,14 @@ class ScoreMgr {
             }
             try? jsonData!.write(to: mkScoreFileURL, options: .atomic)
         }
+        let fm = FileManager.default
         if fm.fileExists(atPath: mkScoreFilePath) {
             succeeded = true
         }
         
         return succeeded
     }
+    */
     
     // MARK: - -- PersonalBest related
     
@@ -483,8 +550,9 @@ class ScoreMgr {
         
         currUserScore!.longtonePersRecords[pbKey] = newPersBest
     }
-    
+}
 
+/*
     /////////////////////////////////////////////////////////////
     // MARK: - -- Support methods for file opening and saving
     
@@ -530,13 +598,31 @@ class ScoreMgr {
         return mkDataURL
     }
     
-    func deleteCurrentScoreFile() -> Bool {
-        guard let mkDataDirUrl = getMKDataDir() else { return false }
+    func getURLForV1ScoreFile() -> URL? {
+        guard let mkDataDirUrl = getMKDataDir() else { return nil }
         
-        let fm = FileManager.default
-        let mkScoreFileURL = mkDataDirUrl.appendingPathComponent(MKUserDataFileName)
+        var mkDataURL: URL? = nil
+        mkDataURL = mkDataDirUrl.appendingPathComponent(MKUserDataFileName)
+
+        return mkDataURL
+    }
+    
+    func getURLForV2ScoreFile(instr: Int) -> URL? {
+        guard let mkDataDirUrl = getMKDataDir() else { return nil }
+        
+        var mkDataURL: URL? = nil
+        let scoreFilename = getScoreFilenameForInstr(instr: instr)
+        mkDataURL = mkDataDirUrl.appendingPathComponent(scoreFilename)
+        
+        return mkDataURL
+    }
+    
+    // For version 1 Score File
+    func deleteCurrentScoreFile() -> Bool {
+        guard let mkScoreFileURL = getURLForV1ScoreFile() else { return false }
         let mkScoreFilePath = mkScoreFileURL.path
         
+        let fm = FileManager.default
         do {
             if !fm.fileExists(atPath: mkScoreFilePath) {
                 print("\n In deleteCurrentScoreFile;  File does not exist\n")
@@ -549,7 +635,7 @@ class ScoreMgr {
             print("An error took place In deleteCurrentScoreFile: \(error)")
             return false
         }
-    
+        
         if fm.fileExists(atPath: mkScoreFilePath) {
             return false
         } else {
@@ -557,13 +643,66 @@ class ScoreMgr {
         }
     }
     
+    func getScoreFilenameForInstr(instr: Int) -> String {
+        let subname = getScoreFileSubNameForInstr(instr: instr)
+        let retStr = MKUserDataFileName + subname
+        return retStr
+    }
     
+    func vers1ScoreFileExists() -> Bool {
+        // fixme todo
+        return true
+    }
+    
+    func vers2ScoreFileExistsForInst(instr: Int) -> Bool {
+        // fixme todo
+        return true
+    }
+    
+    // For Version 2 (and up?) Score Files
+    func deleteScoreFileForInst(instr: Int) -> Bool {
+        guard let mkScoreFileURL = getURLForV2ScoreFile(instr: instr) else { return false }
+        let mkScoreFilePath = mkScoreFileURL.path
+        
+        let fm = FileManager.default
+//
+//
+//
+//        guard let mkDataDirUrl = getMKDataDir() else { return false }
+//
+//        let fm = FileManager.default
+//
+//        let scoreFilename = getScoreFilenameForInstr(instr: instr)
+//        let mkScoreFileURL = mkDataDirUrl.appendingPathComponent(scoreFilename)
+//        let mkScoreFilePath = mkScoreFileURL.path
+//
+        do {
+            if !fm.fileExists(atPath: mkScoreFilePath) {
+                print("\n In deleteCurrentScoreFile;  File does not exist\n")
+                return true // it's not there, so . . .
+            } else {
+                try fm.removeItem(atPath: mkScoreFilePath)
+            }
+        }
+        catch let error as NSError {
+            print("An error took place In deleteCurrentScoreFile: \(error)")
+            return false
+        }
+        
+        if fm.fileExists(atPath: mkScoreFilePath) {
+            return false
+        } else {
+            return true
+        }
+    }
+    
+
     
     // MARK: - -- Methods for initial data structs and file creation
 
     ////////////////////////////////////////////////////////////////////////
     // If first time in App, this method is called to create the
-    // initial Student Score file
+    // initial Student Score file    (Version 2 Score File)
     func createScoreFile(mkScoreFileUrl: URL?) -> Bool {
         var succeeded = false
         
@@ -597,6 +736,43 @@ class ScoreMgr {
         return succeeded
     }
 
+/ * original version
+    func createScoreFile(mkScoreFileUrl: URL?) -> Bool {
+        var succeeded = false
+        
+        // Create the in-memory ScoreData, in the form to be saved to disk
+        guard createStudentScoreDataFromJSON() else {
+            print ("Unable to create initial in-memory data storage from JSON")
+            return false
+        }
+        
+        guard mkScoreFileUrl != nil else { return succeeded }
+        
+        let mkScoreFilePath = mkScoreFileUrl!.path
+        let fm = FileManager.default
+        
+        // Sucessfully created in-memory data struct. Save to disk
+        let jsonEncoder = JSONEncoder()
+        jsonEncoder.outputFormatting = .prettyPrinted
+        let jsonData: Data? = try? jsonEncoder.encode(currUserScore)
+        if jsonData != nil  {
+            try? jsonData!.write(to: mkScoreFileUrl!, options: .atomic)
+            if let jsonString = String(data:jsonData!, encoding: .utf8) {
+                //                print("\nJSON when creating initial Student Score file:\n")
+                //                print(jsonString)
+                //                print("\n")
+            }
+        }
+        if fm.fileExists(atPath: mkScoreFilePath) {
+            succeeded = true
+        }
+        
+        return succeeded
+    }
+* /
+
+    
+    
     func getInstrumentJsonVersion() -> tDB_Version {
         var dbVersion: tDB_Version = kBadDBVersion
         
@@ -661,23 +837,32 @@ class ScoreMgr {
         let jsonverMajInt: Int = Int((instrumentJson?["jsonVersionMajor"].string)!)!
         let jsonverMidInt: Int = Int((instrumentJson?["jsonVersionMid"].string)!)!
         let jsonverMinInt: Int = Int((instrumentJson?["jsonVersionMinor"].string)!)!
-        currUserScore = studentScore( name:  (instrumentJson?["name"].string)!,
-                                      title: (instrumentJson?["title"].string)!,
-                                      jsonVersionMajor: jsonverMajInt,
-                                      jsonVersionMid:   jsonverMidInt,
-                                      jsonVersionMinor: jsonverMinInt,
-                                      levels: [] )
+        currUserScore = studentScoreV2( name:  (instrumentJson?["name"].string)!,
+                                        title: (instrumentJson?["title"].string)!,
+                                        jsonVersionMajor: jsonverMajInt,
+                                        jsonVersionMid:   jsonverMidInt,
+                                        jsonVersionMinor: jsonverMinInt,
+                                        levels: [] )
         
         // Populate the empty top level score struct with entries, using Levels
         // and Exercise entries in TrumpetLessons.JSON data
         for lvlIdx in 0...numLevels-1 {
             let oneJsonLevel = jsonLevels[lvlIdx]
-            let levelTag: String = oneJsonLevel["title"].string!
-            let levelIdx: String = oneJsonLevel["levelIdx"].string!
-            let oneLevel = level(title: levelTag,
-                                 state: kLDEState_NotStarted,
-                                 levelID: levelIdx,
-                                 days: [])
+            let levelTag:   String = oneJsonLevel["title"].string!
+            let levelIdx:   String = oneJsonLevel["levelIdx"].string!
+            var canDiscard: Int = 1
+            if let canDiscardStr = oneJsonLevel["canDiscardForMerge"].string {
+                if canDiscardStr == "Y" {
+                    canDiscard = 1
+                } else {
+                    canDiscard = 0
+                }
+            }
+            let oneLevel = levelV2(title: levelTag,
+                                   canDiscard: canDiscard,
+                                   state: kLDEState_NotStarted,
+                                   levelID: levelIdx,
+                                   days: [])
             currUserScore?.levels.append(oneLevel)
             
             // Days . . . populate this one level with the days in the level
@@ -747,5 +932,64 @@ class ScoreMgr {
     func getInstrumentCode() -> Int {
         return 1; // Trumpet
     }
+    
+    func getAvailableDiscSpace() {
+        
+        //let ds = DiskStatus()
+        let totalDiskSpace = DiskStatus.totalDiskSpace
+        let freeDiskSpace = DiskStatus.freeDiskSpace
+        let usedDiskSpace = DiskStatus.usedDiskSpace
+        
+        let totalDiskSpaceInt = DiskStatus.totalDiskSpaceInBytes
+        let freeDiskSpaceInt = DiskStatus.freeDiskSpaceInBytes
+        let usedDiskSpaceInt = DiskStatus.usedDiskSpaceInBytes
+
+        print ("Available Disc Space: \(freeDiskSpace)")
+    }
+    
+    func getScoreFileSize() -> UInt64 {
+        var fileSz = UInt64(0)
+        
+//        var succeeded = false
+        guard let mkDataDirUrl = getMKDataDir() else { return 0 }
+        
+        let fm = FileManager.default
+        let mkScoreFileURL = mkDataDirUrl.appendingPathComponent(MKUserDataFileName)
+        let mkScoreFilePath = mkScoreFileURL.path
+        if !fm.fileExists(atPath: mkScoreFilePath) {
+            return 0
+        }
+        if fm.fileExists(atPath: mkScoreFilePath) {
+            fileSz = mkScoreFileURL.fileSize
+            let fileSzStr = mkScoreFileURL.fileSizeString
+            print ("ScoreFileSize ==  \(fileSzStr)")
+        }
+        
+        return fileSz
+    }
 }
 
+// moveme
+extension URL {
+    var attributes: [FileAttributeKey : Any]? {
+        do {
+            return try FileManager.default.attributesOfItem(atPath: path)
+        } catch let error as NSError {
+            print("FileAttribute error: \(error)")
+        }
+        return nil
+    }
+    
+    var fileSize: UInt64 {
+        return attributes?[.size] as? UInt64 ?? UInt64(0)
+    }
+    
+    var fileSizeString: String {
+        return ByteCountFormatter.string(fromByteCount: Int64(fileSize), countStyle: .file)
+    }
+    
+    var creationDate: Date? {
+        return attributes?[.creationDate] as? Date
+    }
+}
+*/

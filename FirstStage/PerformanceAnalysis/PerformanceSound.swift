@@ -168,13 +168,19 @@ public class PerformanceSound
         
         // Are there enough samples to accurately determine pitch? If so, return
         //  revisit: don't want to thrash growing arrays, or overflow Double (unlikely)
-  //      guard Int(pitchSampleCount) < kNumSamplesToCollect else {return}
+        guard Int(pitchSampleCount) < kNumSamplesToCollect else {
+            print ("Returning from 'guard Int(pitchSampleCount) < kNumSamplesToCollect else' ")
+            return
+        }
+        
         pitchSampleCount += 1.0
         pitchSumRunning += pitchSample
         averagePitchRunning = pitchSumRunning / pitchSampleCount
         
         if kSavePitchSamples {
             pitchSamples.append(pitchSample)
+            let sampCount = pitchSamples.count
+            print ("Added pitch sample to pitchSamples array, count = \(sampCount)")
             let pitchSum = pitchSamples.reduce(0, +)
             averagePitch = pitchSum/Double(pitchSamples.count)
         } else {
@@ -244,8 +250,17 @@ public class PerformanceSound
             earlyPitchSampleCount += 1
             earlySamples.append(pitchSample)
             
+            // Fix for bug where realy short stacato notes didn't have a pitch.
+            averagePitchRunning = pitchSample
+            averagePitch = pitchSample
+
             // was adding that one enough?
-            if !initialPitchHasStablized() { return }
+            if !initialPitchHasStablized() {
+                print ("initial pitch not stable; returning")
+                return
+            } else {
+                print ("initial pitch stable; continuing")
+            }
             // else fall through
         }
         
@@ -274,19 +289,129 @@ public class PerformanceSound
     
     func updateCurrentNoteIfLinkedFinal()
     {
+        print ("   At top of updateCurrentNoteIfLinkedFinal, for sound  #\(soundID)")
         guard isLinkedToNote, let linkNote = linkedNoteObject else {return}
         guard linkNote.isNote() else {return}  // WHAT ??? !!! FIMEUP
         
         linkNote.setActualEndTimeAbs(endTimeAbs: self._endTime_abs)
         linkNote.actualFrequency = self.averagePitchRunning
+        print ("   Exiting bottom of updateCurrentNoteIfLinkedFinal, for sound  #\(soundID). Set actFreq to \(self.averagePitchRunning)")
     }
     
     func updateCurrentNoteIfLinkedPeriodic()
     {
+        print ("   At top of updateCurrentNoteIfLinkedPeriodic, for sound  #\(soundID)")
         guard isLinkedToNote, let linkNote = linkedNoteObject else {return}
         guard linkNote.isNote() else {return}
         
         linkNote.actualFrequency = self.averagePitchRunning
+        print ("   Exiting bottom of updateCurrentNoteIfLinkedPeriodic, for sound  #\(soundID). Set actFreq to \(self.averagePitchRunning)")
+    }
+    
+    func calcWeightedPercentageCorrect( targetNoteID: NoteID) -> Double {
+        guard isLinkedToNote, let linkNote = linkedNoteObject else { return 0.0 }
+        guard linkNote.isNote() else { return 0.0 }
+        guard pitchSamples.count > 0 else {
+            return 0.0
+        }
+
+        let pitchClusterAnalyzer =
+                        freqClusterAnalyzer(pitchSamples: pitchSamples,
+                                            expectedFreq: linkNote.expectedFrequency)
+        pitchClusterAnalyzer.calcPercentages()
+        
+        let weightedPCCorrect = pitchClusterAnalyzer.weightedPercentageCorrect
+        return weightedPCCorrect
+    }
+    
+    //////////////////////////////////////////////////////////////////////////
+    //  MARK:- For getting the most often played pitch
+    //////////////////////////////////////////////////////////////////////////
+    
+    typealias freqCountForNote = (noteID: NoteID, count: Int)
+    var freqsPlayedCounts: [freqCountForNote] = [freqCountForNote]()
+    var freqsPlayedCountsIndexOffset = 0
+    var mostPlayedNote: freqCountForNote = (noteID: 0, count: 0)
+    func getMostPlayedNoteID() -> NoteID {
+        return mostPlayedNote.noteID
+    }
+    
+    func getMostPlayedNoteCount() -> Int {
+        return mostPlayedNote.count
+    }
+    
+    func getMostPlayedNotePercentage() -> Double {
+        let numPitchSamples = pitchSamples.count
+        guard numPitchSamples > 0 else {
+            return 0.0  }
+        
+        let perc: Double = Double(mostPlayedNote.count) / Double(numPitchSamples)
+        // let perc: Double =
+        //    Double(mostPlayedNote.count) / Double(numPitchSamples+notesOutsideRange)
+        
+        return perc
+    }
+
+    func addNoteToFreqCount(note: NoteID) {
+        guard freqsPlayedCounts.count > 0 else {
+            itsBad()
+            return
+        }
+        let index = Int(note) - freqsPlayedCountsIndexOffset
+        // FIXME: Code should inlcude pitches outside instrument range, for better
+        // tracking of incorrect notes.
+        //guard index < freqsPlayedCounts.count else {
+        guard index >= 0  && index < freqsPlayedCounts.count else {
+            notesOutsideRange += 1
+            return
+        }
+
+        let noteInfoAtIndex = freqsPlayedCounts[index]
+        _ = ASSUME(noteInfoAtIndex.noteID == note)
+        
+        freqsPlayedCounts[index].count += 1
+    }
+    
+    var notesOutsideRange = 0
+    func initFreqsPlayedCounts() {
+        freqsPlayedCountsIndexOffset =  Int(NoteIDs.firstNoteID)
+        notesOutsideRange = 0
+        
+        // FIXME: Code should inlcude pitches outside instrument range, for better
+        // tracking of incorrect notes.
+        for noteID in NoteIDs.validNoteIDRange {
+            let oneFreqCount: freqCountForNote = (noteID: noteID, count: 0)
+            freqsPlayedCounts.append(oneFreqCount)
+        }
+    }
+
+    func calcMostCommonPitchPlayed() {
+        guard isLinkedToNote, let linkNote = linkedNoteObject else { return }
+        guard linkNote.isNote() else { return }
+        let numSamples = pitchSamples.count
+        guard numSamples > 0 else {
+            return
+        }
+        if freqsPlayedCounts.count == 0 {
+            initFreqsPlayedCounts()
+        }
+        
+        for oneSample in pitchSamples {
+            guard oneSample > 0.0 else { break }
+            let midiNote  = NoteID(oneSample.frequencyToRoundedMIDINote())
+            // might be needed:
+            //   actualMidiNoteTransposed =
+            //   concertNoteIdToInstrumentNoteID( noteID: actualMidiNote)
+            
+            addNoteToFreqCount(note: midiNote)
+        }
+        for oneEntryInCounts in freqsPlayedCounts {
+            if oneEntryInCounts.count > mostPlayedNote.count {
+                mostPlayedNote = oneEntryInCounts
+            }
+        }
+        
+        print ("Most played noteID: \(mostPlayedNote.noteID), count: \(mostPlayedNote.count)")
     }
     
     ///////////////////////////////////////////////////////////////////////////
@@ -334,7 +459,7 @@ public class PerformanceSound
         }
         
         let midiNoteTransposed =
-            concertNoteIdToInstrumentNoteID( noteID: midiNote)
+            concertNoteIdToInstrumentNoteID( noteID: midiNote) // TRANSHYAR
         
         let transposedNote = NoteService.getNote(Int(midiNoteTransposed))
         if transposedNote != nil {
@@ -415,3 +540,91 @@ public class PerformanceSound
     }
 }
 
+class freqClusterAnalyzer {
+    private var pitchSamples = [Double]()
+    var weightedPercentageCorrect: Double = 0.0
+    var mostPlayedNote: NoteID = 0
+    var mostPlayedNotePercentae: Double = 0.0
+
+    struct freqCluster {
+        private var freqRange = kEmptyNoteFreqRange
+        private var count: Int = 0
+        private var expFreq: Double = 0
+        var percentage: Double = 0.0
+        var weight: Double = 0.0
+
+
+        mutating func setup(expectedFreq: Double,
+                            tolerancePercent: Double,
+                            weight: Double) {
+            expFreq = expectedFreq
+            let inverseTol:Double = 1.0 - tolerancePercent
+            let freqLo = expectedFreq*inverseTol
+            let freqHi = expectedFreq/inverseTol
+            
+            freqRange = freqLo...freqHi
+            self.weight = weight
+        }
+        
+        mutating func addSample(sample: Double) -> Bool {
+            if freqRange.contains( sample ) {
+                count += 1
+                return true
+            } else {
+                return false
+            }
+        }
+        
+        func getCount() -> Int {
+            return count
+        }
+        
+        mutating func calcWeightedPercntage(ofTotal: Int) -> Double {
+            guard ofTotal > 0 else {
+                itsBad()
+                percentage = 0.0
+                return 0.0
+            }
+            percentage = Double(count) / Double(ofTotal)
+            percentage *= weight
+            return percentage
+        }
+    }
+    
+    var correctFreqCluster   = freqCluster()
+    var bitWideFreqCluster   = freqCluster()
+    var quiteWideFreqCluster = freqCluster()
+
+    init(pitchSamples: [Double], expectedFreq: Double) {
+        self.pitchSamples = pitchSamples
+        correctFreqCluster.setup(expectedFreq: expectedFreq,
+                                 tolerancePercent: kWeightedPitch_NoteMatch_TolRange,
+                                 weight: kWeightedPitch_NoteMatch_Weight)
+        bitWideFreqCluster.setup(expectedFreq: expectedFreq,
+                                 tolerancePercent: kWeightedPitch_NoteBitLowHigh_TolRange,
+                                 weight: kWeightedPitch_NoteBitLowHigh_Weight)
+        quiteWideFreqCluster.setup(expectedFreq: expectedFreq,
+                                   tolerancePercent: kWeightedPitch_NoteQuiteLowHigh_TolRange,
+                                   weight: kWeightedPitch_NoteQuiteLowHigh_Weight)
+        //            print ("yahoo")
+    }
+
+    func calcPercentages() {
+        let numSamples = pitchSamples.count
+        for oneSample in pitchSamples {
+            // try to add to each cluster;
+            if !correctFreqCluster.addSample(sample: oneSample) {
+                if !bitWideFreqCluster.addSample(sample: oneSample) {
+                    _ = quiteWideFreqCluster.addSample(sample: oneSample)
+                }
+            }
+        }
+        
+        let correctPC = correctFreqCluster.calcWeightedPercntage(ofTotal: numSamples)
+        let aBitPC    = bitWideFreqCluster.calcWeightedPercntage(ofTotal: numSamples)
+        let quitePC   = quiteWideFreqCluster.calcWeightedPercntage(ofTotal: numSamples)
+        
+        weightedPercentageCorrect = correctPC + aBitPC + quitePC
+    }
+
+}

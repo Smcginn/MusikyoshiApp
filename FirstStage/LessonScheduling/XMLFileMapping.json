@@ -17,7 +17,7 @@
  "tuneFileEntries":[
         {
         "fileCode":"TUN001",
-        "xmlFile":"1 Whole Lotta Wholes-tpt.xml",
+        "xmlFile":"TUN001.xml",
         "title":"Whole Lotta Wholes",
         "commentStr1":"",
         "commentStr2":"Take a deep breath!",
@@ -25,7 +25,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN002",
-        "xmlFile":"2 Stepping Up -tpt.xml",
+        "xmlFile":"TUN002.xml",
         "title":"2. Stepping Up",
         "commentStr1":"",
         "commentStr2":"New Note D, 1st and 3rd Valve",
@@ -33,7 +33,7 @@
         "helpCode2":""
          },{
         "fileCode":"TUN003",
-        "xmlFile":"3 Gimme Three tpt.xml",
+        "xmlFile":"TUN003.xml",
         "title":"3. Gimme Three",
         "commentStr1":"",
         "commentStr2":"New Note E, 1st and 2nd Valve",
@@ -41,7 +41,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN004",
-        "xmlFile":"4 Leaping Down-tpt.xml",
+        "xmlFile":"TUN004.xml",
         "title":"4. Leaping Down",
         "commentStr1":"",
         "commentStr2":"Use your tongue to make the note sound. Say 'taaaaa'",
@@ -49,7 +49,7 @@
         "helpCode2":""
          },{
         "fileCode":"TUN005",
-        "xmlFile":"5 One More Makes Four-tpt.xml",
+        "xmlFile":"TUN005.xml",
         "title":"5. One More Makes Four",
         "commentStr1":"",
         "commentStr2":"New Note F, 1st Valve",
@@ -57,7 +57,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN006",
-        "xmlFile":"6 Trumpet Half Notes Float Boats.xml",
+        "xmlFile":"TUN006.xml",
         "title":"6. Half Notes Float Boats",
         "commentStr1":"",
         "commentStr2":"Half Notes and Half Rests get 2 beats",
@@ -65,7 +65,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN007",
-        "xmlFile":"7 Trumpet Half and Half.xml",
+        "xmlFile":"TUN007.xml",
         "title":"7. Half and Half",
         "commentStr1":"",
         "commentStr2":"",
@@ -73,7 +73,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN008",
-        "xmlFile":"8 Tpt. Half Up, Half Down - Trumpet in Bb.xml",
+        "xmlFile":"TUN008.xml",
         "title":"8. Half Up, Half Down",
         "commentStr1":"",
         "commentStr2":"",
@@ -81,7 +81,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN009",
-        "xmlFile":"9 A New Note Down Under - Trumpet in Bb.xml",
+        "xmlFile":"TUN009.xml",
         "title":"9. A New Note Down Under",
         "commentStr1":"",
         "commentStr2":"Remember, B is 2nd Valve",
@@ -89,7 +89,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN010",
-        "xmlFile":"10 Tpt Counting Halves with My Whole Head.xml",
+        "xmlFile":"TUN010.xml",
         "title":"10. Counting Halves with My Whole Head",
         "commentStr1":"",
         "commentStr2":"",
@@ -97,7 +97,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN011",
-        "xmlFile":"11 Mix and Match - Trumpet in Bb.xml",
+        "xmlFile":"TUN011.xml",
         "title":"11. Mix and Match",
         "commentStr1":"",
         "commentStr2":"",
@@ -105,7 +105,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN012",
-        "xmlFile":"12 Tpt-  The Fifth Note! Beethoven_s 9th.xml",
+        "xmlFile":"TUN012.xml",
         "title":"12. The Fifth Note! Beethoven's 9th",
         "commentStr1":"",
         "commentStr2":"New Note G, open, no valves down",
@@ -113,7 +113,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN013",
-        "xmlFile":"13 Tpt. Four Quarters.xml",
+        "xmlFile":"TUN013.xml",
         "title":"13. Four Quarters",
         "commentStr1":"",
         "commentStr2":"A quarter note and a quarter rest get one beat",
@@ -121,7 +121,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN014",
-        "xmlFile":"14 Tpt. Sliding Down.xml",
+        "xmlFile":"TUN014.xml",
         "title":"14. Sliding Down",
         "commentStr1":"",
         "commentStr2":"",
@@ -129,7 +129,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN015",
-        "xmlFile":"15 Leaps and Bounds.xml",
+        "xmlFile":"TUN015.xml",
         "title":"15. Leaps and Bounds",
         "commentStr1":"",
         "commentStr2":"",
@@ -137,7 +137,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN016",
-        "xmlFile":"16 Tpt Hot Cross Buns.xml",
+        "xmlFile":"TUN016.xml",
         "title":"16. Hot Cross Buns",
         "commentStr1":"",
         "commentStr2":"",
@@ -145,7 +145,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN017",
-        "xmlFile":"17 Tpt Sweetly Sings the Donkey.xml",
+        "xmlFile":"TUN017.xml",
         "title":"17 . Sweetly Sings the Donkey",
         "commentStr1":"",
         "commentStr2":"",
@@ -153,7 +153,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN018",
-        "xmlFile":"18 Like a Boss -Tpt.xml",
+        "xmlFile":"TUN018.xml",
         "title":"18. Like a Boss",
         "commentStr1":"",
         "commentStr2":"",
@@ -161,7 +161,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN019",
-        "xmlFile":"19 Up the Down Staircase - Tpt.xml",
+        "xmlFile":"TUN019.xml",
         "title":"19. Up the Down Staircase",
         "commentStr1":"",
         "commentStr2":"",
@@ -169,7 +169,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN020",
-        "xmlFile":"20 Moving Up - Tpt.xml",
+        "xmlFile":"TUN020.xml",
         "title":"20. Moving Up",
         "commentStr1":"",
         "commentStr2":"",
@@ -177,7 +177,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN021",
-        "xmlFile":"21 Go Tell Aunt Rhodie - Tpt.xml",
+        "xmlFile":"TUN021.xml",
         "title":"21 Go Tell Aunt Rhodie",
         "commentStr1":"",
         "commentStr2":"",
@@ -185,7 +185,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN022",
-        "xmlFile":"22 The Twinkle Twinkle In Mozar_ts Eyes - Tpt.xml",
+        "xmlFile":"TUN022.xml",
         "title":"22. The Twinkle Twinkle In Mozart's Eyes",
         "commentStr1":"",
         "commentStr2":"",
@@ -193,7 +193,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN023",
-        "xmlFile":"23 Lightly Row Tpt.xml",
+        "xmlFile":"TUN023.xml",
         "title":"23. Lightly Row ",
         "commentStr1":"",
         "commentStr2":"",
@@ -201,7 +201,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN024",
-        "xmlFile":"24 London Bridge - Tpt.xml",
+        "xmlFile":"TUN024.xml",
         "title":"24. London Bridge",
         "commentStr1":"",
         "commentStr2":"English Folk Song",
@@ -209,7 +209,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN025",
-        "xmlFile":"25 Old MacDonald - Trumpet.xml",
+        "xmlFile":"TUN025.xml",
         "title":"25. Old MacDonald  ",
         "commentStr1":"",
         "commentStr2":"Traditional",
@@ -217,7 +217,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN026",
-        "xmlFile":"26 Good King Wenceslas - Trumpet in Bb.xml",
+        "xmlFile":"TUN026.xml",
         "title":"26. Good King Wenceslas",
         "commentStr1":"",
         "commentStr2":"Traditional English Carol",
@@ -225,7 +225,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN027",
-        "xmlFile":"27 Jumping up, Leaping down - Trumpet in Bb.xml",
+        "xmlFile":"TUN027.xml",
         "title":"27. Jumping up, Leaping down",
         "commentStr1":"",
         "commentStr2":"",
@@ -233,7 +233,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN028",
-        "xmlFile":"28 Recess Trumpet.xml",
+        "xmlFile":"TUN028.xml",
         "title":"28. Recess",
         "commentStr1":"",
         "commentStr2":"",
@@ -241,7 +241,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN029",
-        "xmlFile":"29 - Climb and Return -Trumpet in Bb.xml",
+        "xmlFile":"TUN029.xml",
         "title":"29. Climb and Return",
         "commentStr1":"",
         "commentStr2":"",
@@ -249,7 +249,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN030",
-        "xmlFile":"30 Connect the Dots - Trumpet in Bb.xml",
+        "xmlFile":"TUN030.xml",
         "title":"30. Connect the Dots",
         "commentStr1":"",
         "commentStr2":"Dotted Half Note - 3 beats!",
@@ -257,7 +257,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN031",
-        "xmlFile":"31 Au Claire De La Lune.xml",
+        "xmlFile":"TUN031.xml",
         "title":"31. Au Claire De La Lune",
         "commentStr1":"",
         "commentStr2":"French Folk Song",
@@ -265,7 +265,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN032",
-        "xmlFile":"32 Go Tell Aunt Rhodie - Trumpet in Bb.xml",
+        "xmlFile":"TUN032.xml",
         "title":"32. Go Tell Aunt Rhodie",
         "commentStr1":"",
         "commentStr2":"",
@@ -273,7 +273,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN033",
-        "xmlFile":"33 Skip Gets Air - Trumpet in Bb.xml",
+        "xmlFile":"TUN033.xml",
         "title":"33. Skip Gets Air   ",
         "commentStr1":"",
         "commentStr2":"",
@@ -281,7 +281,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN034",
-        "xmlFile":"34 Forge On - Trumpet in Bb.xml",
+        "xmlFile":"TUN034.xml",
         "title":"34. Forge On",
         "commentStr1":"",
         "commentStr2":"",
@@ -289,7 +289,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN035",
-        "xmlFile":"35 Lizard Town - Trumpet in Bb.xml",
+        "xmlFile":"TUN035.xml",
         "title":"35. Lizard Town",
         "commentStr1":"",
         "commentStr2":"",
@@ -297,7 +297,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN036",
-        "xmlFile":"36 Always Counting - Trumpet in Bb.xml",
+        "xmlFile":"TUN036.xml",
         "title":"36. Always Counting",
         "commentStr1":"",
         "commentStr2":"",
@@ -305,7 +305,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN037",
-        "xmlFile":"37 Unsure Footing - Trumpet in Bb.xml",
+        "xmlFile":"TUN037.xml",
         "title":"37. Unsure Footing",
         "commentStr1":"",
         "commentStr2":"",
@@ -313,7 +313,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN038",
-        "xmlFile":"38 Pop a Wheelie - Trumpet in Bb.xml",
+        "xmlFile":"TUN038.xml",
         "title":"38. Pop a Wheelie",
         "commentStr1":"",
         "commentStr2":"",
@@ -321,7 +321,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN039",
-        "xmlFile":"39 B-OOTIFUL - Trumpet in Bb.xml",
+        "xmlFile":"TUN039.xml",
         "title":"39. B-OOTIFUL",
         "commentStr1":"",
         "commentStr2":"",
@@ -329,7 +329,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN040",
-        "xmlFile":"40 Three Quarters, Please! - Trumpet in Bb.xml",
+        "xmlFile":"TUN040.xml",
         "title":"40. Three Quarters, Please!",
         "commentStr1":"",
         "commentStr2":"3/4 Time Signature - 3 Beats per measure!",
@@ -337,7 +337,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN041",
-        "xmlFile":"41 Mexican Hat Dance - Trumpet in Bb.xml",
+        "xmlFile":"TUN041.xml",
         "title":"41. Mexican Hat Dance",
         "commentStr1":"",
         "commentStr2":"Traditional Mexican Folk Song",
@@ -345,7 +345,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN042",
-        "xmlFile":"42 Blue Danube Waltz - Trumpet in Bb.xml",
+        "xmlFile":"TUN042.xml",
         "title":"42. Blue Danube Waltz",
         "commentStr1":"",
         "commentStr2":"Johann Strauss, Adapted",
@@ -353,7 +353,7 @@
         "helpCode2":""
         },{
         "fileCode":"TUN043",
-        "xmlFile":"43 Waltz Times Three - Trumpet in Bb.xml",
+        "xmlFile":"TUN043.xml",
         "title":"43. Waltz Times Three",
         "commentStr1":"",
         "commentStr2":"",
@@ -1025,7 +1025,7 @@
         "helpCode2":""
         },{
         "fileCode":"SLR001",
-        "xmlFile":"Lip Slur 1 Trumpet in Bb.xml",
+        "xmlFile":"SLR001.xml",
         "title":"Lip Slur 1",
         "commentStr1":"",
         "commentStr2":"",
@@ -1033,7 +1033,7 @@
         "helpCode2":""
         },{
         "fileCode":"SLR002",
-        "xmlFile":"Lip Slur 2 - Trumpet in Bb.xml",
+        "xmlFile":"SLR002.xml",
         "title":"Lip Slur 2",
         "commentStr1":"",
         "commentStr2":"",
@@ -1041,7 +1041,7 @@
         "helpCode2":""
         },{
         "fileCode":"SLR003",
-        "xmlFile":"Lip Slur 3 - Trumpet in Bb bak.xml",
+        "xmlFile":"SLR003.xml",
         "title":"Lip Slur 3",
         "commentStr1":"",
         "commentStr2":"",
@@ -1050,7 +1050,7 @@
 
         },{
         "fileCode":"SLR004",
-        "xmlFile":"Lip Slur 4 - Trumpet in Bb.xml",
+        "xmlFile":"SLR004.xml",
         "title":"Lip Slur 4",
         "commentStr1":"",
         "commentStr2":"",
@@ -1058,7 +1058,7 @@
         "helpCode2":""
         },{
         "fileCode":"SLR005",
-        "xmlFile":"Lip Slur 5 - Trumpet in Bb.xml",
+        "xmlFile":"SLR005.xml",
         "title":"Lip Slur 5 ",
         "commentStr1":"",
         "commentStr2":"",
@@ -1066,7 +1066,7 @@
         "helpCode2":""
         },{
         "fileCode":"SLR006",
-        "xmlFile":"Lip Slur 6 Trumpet.xml",
+        "xmlFile":"SLR006.xml",
         "title":"Lip Slur 6 ",
         "commentStr1":"",
         "commentStr2":"",
@@ -1074,7 +1074,7 @@
         "helpCode2":""
         },{
         "fileCode":"SLR007",
-        "xmlFile":"Lip Slur 7 Trumpet.xml",
+        "xmlFile":"SLR007.xml",
         "title":"Lip Slur 7 ",
         "commentStr1":"",
         "commentStr2":"",
@@ -1234,7 +1234,7 @@
         "helpCode2":""
         },{
         "fileCode":"PTY001",
-        "xmlFile":"Rhythm Party 1  Trumpet.xml",
+        "xmlFile":"PTY001.xml",
         "title":"Rhythm Party 1",
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
@@ -1242,7 +1242,7 @@
         "helpCode2":""
         },{
         "fileCode":"PTY002",
-        "xmlFile":"Rhythm Party 2 Trumpet.xml",
+        "xmlFile":"PTY002.xml",
         "title":"Rhythm Party 2",
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
@@ -1250,7 +1250,7 @@
         "helpCode2":""
         },{
         "fileCode":"PTY003",
-        "xmlFile":"Rhythm Party 3 Trumpet.xml",
+        "xmlFile":"PTY003.xml",
         "title":"Rhythm Party 3",
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
@@ -1258,7 +1258,7 @@
         "helpCode2":""
         },{
         "fileCode":"PTY004",
-        "xmlFile":"Rhythm Party 4 Trumpet.xml",
+        "xmlFile":"PTY004.xml",
         "title":"Rhythm Party 4",
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
@@ -1266,7 +1266,7 @@
         "helpCode2":""
         },{
         "fileCode":"PTY005",
-        "xmlFile":"Rhythm Party 5 Trumpet.xml",
+        "xmlFile":"PTY005.xml",
         "title":"Rhythm Party 5",
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
@@ -1274,7 +1274,7 @@
         "helpCode2":""
         },{
         "fileCode":"PTY006",
-        "xmlFile":"Rhythm Party 6 - tpt.xml",
+        "xmlFile":"PTY006.xml",
         "title":"Rhythm Party 6",
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
@@ -1282,7 +1282,7 @@
         "helpCode2":""
         },{
         "fileCode":"PTY007",
-        "xmlFile":"Rhythm Party 7 - tpt.xml",
+        "xmlFile":"PTY007.xml",
         "title":"Rhythm Party 7",
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
@@ -1290,7 +1290,7 @@
         "helpCode2":""
         },{
         "fileCode":"PTY008",
-        "xmlFile":"Rhythm Party 8 - tpt.xml",
+        "xmlFile":"PTY008.xml",
         "title":"Rhythm Party 8",
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
@@ -1298,7 +1298,7 @@
         "helpCode2":""
         },{
         "fileCode":"PTY009",
-        "xmlFile":"Rhythm Party 9 - tpt.xml",
+        "xmlFile":"PTY009.xml",
         "title":"Rhythm Party 9",
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
@@ -1306,7 +1306,7 @@
         "helpCode2":""
         },{
         "fileCode":"PTY010",
-        "xmlFile":"Rhythm Party 10.xml",
+        "xmlFile":"PTY010.xml",
         "title":"Rhythm Party 10",
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
@@ -1314,7 +1314,7 @@
         "helpCode2":""
         },{
         "fileCode":"PTY011",
-        "xmlFile":"Rhythm Party 11.xml",
+        "xmlFile":"PTY011.xml",
         "title":"Rhythm Party 11",
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
@@ -1322,7 +1322,7 @@
         "helpCode2":""
         },{
         "fileCode":"PTY012",
-        "xmlFile":"Rhythm Party 12.xml",
+        "xmlFile":"PTY012.xml",
         "title":"Rhythm Party 12",
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
@@ -1330,7 +1330,7 @@
         "helpCode2":""
         },{
          "fileCode":"PTY013",
-        "xmlFile":"Rhythm Party 13.xml",
+        "xmlFile":"PTY013.xml",
         "title":"Rhythm Party 13",
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
@@ -1338,7 +1338,7 @@
         "helpCode2":""
         },{
         "fileCode":"PTY014",
-        "xmlFile":"Rhythm Party 14.xml",
+        "xmlFile":"PTY014.xml",
         "title":"Rhythm Party 14",
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
@@ -1346,7 +1346,7 @@
         "helpCode2":""
         },{
         "fileCode":"PTY015",
-        "xmlFile":"Rhythm Party 15.xml",
+        "xmlFile":"PTY015.xml",
         "title":"Rhythm Party 15",
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
@@ -1354,7 +1354,7 @@
         "helpCode2":""
         },{
         "fileCode":"PTY016",
-        "xmlFile":"Rhythm Party 16.xml",
+        "xmlFile":"PTY016.xml",
         "title":"Rhythm Party 16",
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
@@ -1362,7 +1362,7 @@
         "helpCode2":""
         },{
          "fileCode":"PTY017",
-        "xmlFile":"Rhythm Party 17.xml",
+        "xmlFile":"PTY017.xml",
         "title":"Rhythm Party 17",
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
@@ -1370,7 +1370,7 @@
         "helpCode2":""
         },{
         "fileCode":"PTY018",
-        "xmlFile":"Rhythm Party 18.xml",
+        "xmlFile":"PTY018.xml",
         "title":"Rhythm Party 18",
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
@@ -1378,7 +1378,7 @@
         "helpCode2":""
         },{
         "fileCode":"PTY019",
-        "xmlFile":"Rhythm Party 19.xml",
+        "xmlFile":"PTY019.xml",
         "title":"Rhythm Party 19",
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
@@ -1386,7 +1386,7 @@
         "helpCode2":""
         },{
         "fileCode":"PTY020",
-        "xmlFile":"Rhythm Party 20.xml",
+        "xmlFile":"PTY020.xml",
         "title":"Rhythm Party 20",
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
@@ -1394,7 +1394,7 @@
         "helpCode2":""
         },{
         "fileCode":"PTY021",
-        "xmlFile":"Rhythm Party 21.xml",
+        "xmlFile":"PTY021.xml",
         "title":"Rhythm Party 21",
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
@@ -1402,7 +1402,7 @@
         "helpCode2":""
         },{
         "fileCode":"PTY022",
-        "xmlFile":"Rhythm Party 22.xml",
+        "xmlFile":"PTY022.xml",
         "title":"Rhythm Party 22",
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
@@ -1410,7 +1410,7 @@
         "helpCode2":""
         },{
         "fileCode":"PTY023",
-        "xmlFile":"Rhythm Party 23 - tpt.xml",
+        "xmlFile":"PTY023.xml",
         "title":"Rhythm Party 23",
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
@@ -1730,7 +1730,7 @@
         "helpCode2":""
         },{
         "fileCode":"PRP002",
-        "xmlFile":"Rhythm Prep Tune 2.xml",
+        "xmlFile":"PRP002.xml",
         "title":"Rhythm Prep for Tune 2",
         "commentStr1":"This exercise will prepare you for the next Tune",
         "commentStr2":"",
@@ -1738,7 +1738,7 @@
         "helpCode2":""
         },{
         "fileCode":"PRP003",
-        "xmlFile":"Rhythm Prep Tune 3.xml",
+        "xmlFile":"PRP003.xml",
         "title":"Rhythm Prep for Tune 3",
         "commentStr1":"This exercise will prepare you for the next Tune",
         "commentStr2":"",
@@ -1746,7 +1746,7 @@
         "helpCode2":""
         },{
         "fileCode":"PRP004",
-        "xmlFile":"Rhythm Prep Tune 4.xml",
+        "xmlFile":"PRP004.xml",
         "title":"Rhythm Prep for Tune 4",
         "commentStr1":"This exercise will prepare you for the next Tune",
         "commentStr2":"",
@@ -1754,7 +1754,7 @@
         "helpCode2":""
         },{
         "fileCode":"PRP006",
-        "xmlFile":"Rhythm Prep Tune 6 Trumpet.xml",
+        "xmlFile":"PRP006.xml",
         "title":"Rhythm Prep for Tune 6",
         "commentStr1":"",
         "commentStr2":"",
@@ -1762,7 +1762,7 @@
         "helpCode2":""
         },{
         "fileCode":"PRP007",
-        "xmlFile":"Rhythm Prep Tune 7 Trumpet.xml",
+        "xmlFile":"PRP007.xml",
         "title":"Rhythm Prep for Tune 7",
         "commentStr1":"",
         "commentStr2":"",
@@ -1770,7 +1770,7 @@
         "helpCode2":""
         },{
         "fileCode":"PRP009",
-        "xmlFile":"Rhythm Prep Tune 9 Trumpet.xml",
+        "xmlFile":"PRP009.xml",
         "title":"Rhythm Prep for Tune 9",
         "commentStr1":"",
         "commentStr2":"",
@@ -1778,7 +1778,7 @@
         "helpCode2":""
         },{
         "fileCode":"PRP010",
-        "xmlFile":"Rhythm Prep Tune 10 Trumpet.xml",
+        "xmlFile":"PRP010.xml",
         "title":"Rhythm Prep for Tune 10",
         "commentStr1":"",
         "commentStr2":"",
@@ -1786,7 +1786,7 @@
         "helpCode2":""
         },{
         "fileCode":"PRP013",
-        "xmlFile":"Rhythm Prep for Tune 13- Trumpet in Bb.xml",
+        "xmlFile":"PRP013.xml",
         "title":"Rhythm Prep for Tune 13",
         "commentStr1":"",
         "commentStr2":"",
@@ -1794,7 +1794,7 @@
         "helpCode2":""
         },{
         "fileCode":"PRP016",
-        "xmlFile":"Rhythm Prep Tune 16.xml",
+        "xmlFile":"PRP016.xml",
         "title":"Rhythm Prep for Tune 16",
         "commentStr1":"",
         "commentStr2":"",
@@ -1802,7 +1802,7 @@
         "helpCode2":""
         },{
         "fileCode":"PRP017",
-        "xmlFile":"Rhythm Tune Prep #17 Trumpet.xml",
+        "xmlFile":"PRP017.xml",
         "title":"Rhythm Prep for Tune 17",
         "commentStr1":"",
         "commentStr2":"",
@@ -1810,7 +1810,7 @@
         "helpCode2":""
         },{
         "fileCode":"PRP018",
-        "xmlFile":"Rhythm Prep for Tune 18 - Tpt.xml",
+        "xmlFile":"PRP018.xml",
         "title":"Rhythm Prep for Tune 18",
         "commentStr1":"",
         "commentStr2":"",
@@ -1818,7 +1818,7 @@
         "helpCode2":""
         },{
         "fileCode":"PRP020",
-        "xmlFile":"Rhythm Prep Tune 20 tpt.xml",
+        "xmlFile":"PRP020.xml",
         "title":"Rhythm Prep for Tune 20",
         "commentStr1":"",
         "commentStr2":"",
@@ -1826,7 +1826,7 @@
         "helpCode2":""
         },{
         "fileCode":"PRP021",
-        "xmlFile":"Rhythm Prep for Tune 21 - Tpt.xml",
+        "xmlFile":"PRP021.xml",
         "title":"Rhythm Prep for Tune 21",
         "commentStr1":"",
         "commentStr2":"",
@@ -1834,7 +1834,7 @@
         "helpCode2":""
         },{
         "fileCode":"PRP022",
-        "xmlFile":"Rhythm Prep tune 22 - tpt.xml",
+        "xmlFile":"PRP022.xml",
         "title":"Rhythm Prep for Tune 22",
         "commentStr1":"",
         "commentStr2":"",
@@ -1842,7 +1842,7 @@
         "helpCode2":""
         },{
         "fileCode":"PRP024",
-        "xmlFile":"Rhythm Prep for Tune 24 - tpt.xml",
+        "xmlFile":"PRP024.xml",
         "title":"Rhythm Prep for Tune 24",
         "commentStr1":"",
         "commentStr2":"",
@@ -1850,7 +1850,7 @@
         "helpCode2":""
         },{
         "fileCode":"PRP025",
-        "xmlFile":"Rhythm Prep Tune 25 tpt.xml",
+        "xmlFile":"PRP025.xml",
         "title":"Rhythm Prep for Tune 25",
         "commentStr1":"",
         "commentStr2":"",
@@ -1858,7 +1858,7 @@
         "helpCode2":""
         },{
          "fileCode":"PRP026",
-        "xmlFile":"Rhythm Prep Tune 26 Tpt.xml",
+        "xmlFile":"PRP026.xml",
         "title":"Rhythm Prep for Tune 26",
         "commentStr1":"",
         "commentStr2":"",
@@ -1866,7 +1866,7 @@
         "helpCode2":""
         },{
         "fileCode":"PRP028",
-        "xmlFile":"Rhythm Prep Tune 28 tpt.xml",
+        "xmlFile":"PRP028.xml",
         "title":"Rhythm Prep for Tune 28",
         "commentStr1":"",
         "commentStr2":"",
@@ -1874,7 +1874,7 @@
         "helpCode2":""
         },{
         "fileCode":"PRP029",
-        "xmlFile":"Rhythm Prep for Tune 29.xml",
+        "xmlFile":"PRP029.xml",
         "title":"Rhythm Prep for Tune 29",
         "commentStr1":"",
         "commentStr2":"",
@@ -1882,7 +1882,7 @@
         "helpCode2":""
         },{
         "fileCode":"PRP030",
-        "xmlFile":"Rhythm Prep Tune 30 - tpt.xml",
+        "xmlFile":"PRP030.xml",
         "title":"Rhythm Prep for Tune 30",
         "commentStr1":"",
         "commentStr2":"",
@@ -1890,7 +1890,7 @@
         "helpCode2":""
         },{
         "fileCode":"PRP032",
-        "xmlFile":"Rhythm prep tune 32 tpt.xml",
+        "xmlFile":"PRP032.xml",
         "title":"Rhythm Prep for Tune 32",
         "commentStr1":"",
         "commentStr2":"",
@@ -1898,7 +1898,7 @@
         "helpCode2":""
         },{
         "fileCode":"PRP033",
-        "xmlFile":"Rhythm Prep for Tune 33 - Tpt.xml",
+        "xmlFile":"PRP033.xml",
         "title":"Rhythm Prep for Tune 33",
         "commentStr1":"",
         "commentStr2":"",
@@ -1906,7 +1906,7 @@
         "helpCode2":""
         },{
         "fileCode":"PRP034",
-        "xmlFile":"Rhythm Prep for Tune 34 - Trumpet in Bb.xml",
+        "xmlFile":"PRP034.xml",
         "title":"Rhythm Prep for Tune 34",
         "commentStr1":"",
         "commentStr2":"",
@@ -1914,7 +1914,7 @@
         "helpCode2":""
         },{
         "fileCode":"PRP036",
-        "xmlFile":"Rhythm Prep for Tune 36 - Trumpet in Bb.xml",
+        "xmlFile":"PRP036.xml",
         "title":"Rhythm Prep for Tune 36",
         "commentStr1":"",
         "commentStr2":"",
@@ -1922,7 +1922,7 @@
         "helpCode2":""
         },{
         "fileCode":"PRP037",
-        "xmlFile":"Rhythm Prep for Tune 37 Tpt.xml",
+        "xmlFile":"PRP037.xml",
         "title":"Rhythm Prep for Tune 37",
         "commentStr1":"",
         "commentStr2":"",
@@ -1930,7 +1930,7 @@
         "helpCode2":""
         },{
         "fileCode":"PRP038",
-        "xmlFile":"Rhythm Prep Tune 38.xml",
+        "xmlFile":"PRP038.xml",
         "title":"Rhythm Prep for Tune 38",
         "commentStr1":"",
         "commentStr2":"",
@@ -1938,7 +1938,7 @@
         "helpCode2":""
         },{
         "fileCode":"PRP040",
-        "xmlFile":"Rhythm Prep for Tune 40 - tpt.xml",
+        "xmlFile":"PRP040.xml",
         "title":"Rhythm Prep for Tune 40",
         "commentStr1":"",
         "commentStr2":"",

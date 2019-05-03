@@ -3,7 +3,7 @@
   "title": "Beginner and Intermidiate level",
   "jsonVersionMajor":"0",
   "jsonVersionMid":"0",
-  "jsonVersionMinor":"1",
+  "jsonVersionMinor":"11",
   "levels":[{
             "Level Comment":"=================== LEVEL 1 ============================",
             "title":"Level 1",
@@ -12,20 +12,21 @@
             "thresholdsID":"beginner1",
             "singleEventThreshold":"100",
             "scanForPitchLegatoChange":"N",
+            "canDiscardForMerge":"N",
             "days":[{
-                    "title":"Day 1",
+                    "title":"L1 Day 1",
                     "exercises":"LT_C4_2, LT_C4_2, TUN001, PTY001, PRP002, TUN002, PTY002, TUN003, LT_D4_2, LT_D4_2, TUN004, PTY003, TUN005, LTR_C4, PRP006, TUN006"
                     },{
-                    "title":"Day 2",
+                    "title":"L1 Day 2",
                     "exercises":"LT_C4_2, LT_C4_2, TUN001, PTY001, PRP002, TUN002, PTY002, TUN003, LT_D4_2, LT_D4_2, TUN004, PTY003, TUN005, LTR_C4, PRP006, TUN006"
                     },{
-                    "title":"Day 3",
+                    "title":"L1 Day 3",
                     "exercises":"LT_C4_2, LT_D4_2, LT_E4_2, TUN001, PTY001, PRP002, TUN002, PTY002, TUN004, LT_D4_2, LT_E4_2, LT_F4_2, TUN003, PTY002, TUN005, LTR_D4, PRP006, TUN006"
                     },{
-                    "title":"Day 4",
+                    "title":"L1 Day 4",
                     "exercises":"LT_C4_2, LT_D4_2, LT_E4_2, TUN001, PTY001, PRP002, TUN002, PTY003, TUN003, LT_D4_2, LT_E4_2, LT_F4_2, TUN004, PTY003, TUN005, LTR_E4, PRP006, TUN006"
                     },{
-                    "title":"Day 5",
+                    "title":"L1 Day 5",
                     "exercises":"LT_C4_2, LT_D4_2, LT_E4_2, LT_F4_2, TUN001, PTY001, PRP002, TUN002, PTY003, TUN003, LT_D4_2, LT_E4_2, LT_F4_2, TUN004, PTY003, TUN005, LTR_E4, PRP006, TUN006"
                     }],
             "infoNode":[{"title": "Hand Placement",
@@ -35,8 +36,6 @@
                         ],
             "exercises":[]
             },{
-            
-            
             "Level Comment":"=================== LEVEL 2 ============================",
             "title":"Level 2",
             "intro":"This Level has longer Long Tone exercises",
@@ -45,20 +44,21 @@
             "thresholdsID":"beginner2",
             "singleEventThreshold":"100",
             "scanForPitchLegatoChange":"N",
+            "canDiscardForMerge":"N",
             "days":[{
-                    "title":"Day 1",
+                    "title":"L2 Day 1",
                     "exercises":"LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, PRP006, TUN006, PTY004, PRP007, TUN007, PTY005, TUN008, LTR_B3, PRP009, TUN009, PRP010, TUN010"
                     },{
-                    "title":"Day 2",
+                    "title":"L2 Day 2",
                     "exercises":"LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, PTY003, TUN004, TUN005, PRP006, TUN006, PTY004, TUN006, PTY005, TUN007, TUN008, LTR_B3, PRP009, TUN009"
                     },{
-                    "title":"Day 3",
+                    "title":"L2 Day 3",
                     "exercises":"LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, PRP006, TUN006, PTY004, PRP007, TUN007, PTY005, TUN008, LTR_B3, PRP009, TUN009, PRP010, TUN010"
                     },{
-                    "title":"Day 4",
+                    "title":"L2 Day 4",
                     "exercises":"LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, PTY003, TUN004, TUN005, PRP006, TUN006, PTY004, TUN006, PTY005, TUN007, TUN008, LTR_B3, PRP009, TUN009"
                     },{
-                    "title":"Day 5",
+                    "title":"L2 Day 5",
                     "exercises":"LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, PRP006, TUN006, PTY004, PRP007, TUN007, PTY005, TUN008, LTR_B3, PRP009, TUN009, PRP010, TUN010"
                     }],
             "infoNode":[{"title": "Hand Placement",
@@ -68,6 +68,7 @@
                         ],
             "exercises":[]
             },{
+            
             "Level Comment":"=================== LEVEL 3 ============================",
             "title":"Level 3",
             "intro":"This Level has longer Long Tone exercises",
@@ -76,6 +77,7 @@
             "thresholdsID":"beginner2",
             "singleEventThreshold":"100",
             "scanForPitchLegatoChange":"N",
+            "canDiscardForMerge":"N",
             "days":[{
                     "title":"Day 1",
                     "exercises":"LT_B3_3, LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, LT_G4_3, PRP010, TUN010, PTY006, TUN006, TUN011, PRP007, TUN007, TUN009, LTR_F4, PRP013, TUN013"
@@ -107,6 +109,7 @@
             "thresholdsID":"beginner2",
             "singleEventThreshold":"100",
             "scanForPitchLegatoChange":"Y",
+            "canDiscardForMerge":"N",
             "days":[{
                     "title":"Day 1",
                     "exercises":"LT_B3_3, LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, LT_G4_3, SLR001, SLR002, PRP013, TUN013, PTY009, TUN014, TUN015, PTY010, PRP016, TUN016, LTR_E4, TUN017"
@@ -138,6 +141,7 @@
             "thresholdsID":"beginner2",
             "singleEventThreshold":"100",
             "scanForPitchLegatoChange":"Y",
+            "canDiscardForMerge":"N",
             "days":[{
                     "title":"Day 1",
                     "exercises":"LT_B3_3, LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, LT_G4_3, LT_A4_3, SLR001, SLR002, PRP017, TUN017, PTY011, PRP018, TUN018, PTY012, LTR_G4, TUN019, PRP020, TUN020, TUN021"
@@ -169,6 +173,7 @@
             "thresholdsID":"beginner2",
             "singleEventThreshold":"100",
             "scanForPitchLegatoChange":"Y",
+            "canDiscardForMerge":"N",
             "days":[{
                     "title":"Day 1",
                     "exercises":"LT_B3_3, LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, LT_G4_3, LT_A4_3, SLR001, SLR002, SLR003, PRP021, TUN021, PTY013, PRP022, TUN022, PTY014, LTR_G4, TUN023, PRP024, TUN024, TUN025"
@@ -200,6 +205,7 @@
             "thresholdsID":"beginner2",
             "singleEventThreshold":"100",
             "scanForPitchLegatoChange":"Y",
+            "canDiscardForMerge":"N",
             "days":[{
                     "title":"Day 1",
                     "exercises":"LT_B3_3, LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, LT_G4_3, LT_A4_3, SLR002, SLR003, SLR004, PRP025, TUN025, PTY015, PRP026, TUN026, PTY016, LTR_A4, TUN027, PRP028, TUN028, TUN029"
@@ -231,20 +237,21 @@
             "thresholdsID":"beginner2",
             "singleEventThreshold":"100",
             "scanForPitchLegatoChange":"Y",
+            "canDiscardForMerge":"N",
             "days":[{
-                    "title":"Day 1 ",
+                    "title":"L8: Day 1 ",
                     "exercises":"LT_B3_3, LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, LT_G4_3, LT_A4_3, SLR003, SLR004, SLR005, PRP029, TUN029, PTY017, PRP030, TUN030, PTY018, LTR_A4, TUN031, PRP032, TUN032, TUN033"
                     },{
-                    "title":"Day 2",
+                    "title":"L8: Day 2",
                     "exercises":"LT_B3_3, LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, LT_G4_3, LT_A4_3, SLR003, SLR004, SLR005, PTY010, PRP018, TUN018, TUN020, PRP026, TUN026, LTR_E4, TUN025, PRP022, TUN022, TUN027, TUN028"
                     },{
-                    "title":"Day 3",
+                    "title":"L8: Day 3",
                     "exercises":"LT_B3_3, LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, LT_G4_3, LT_A4_3, SLR002, SLR003, SLR004, PTY014, PRP021, TUN021, TUN023, PTY016, LTR_F4, TUN025, PRP030, TUN030, TUN031, TUN032"
                     },{
-                    "title":"Day 4",
+                    "title":"L8: Day 4",
                     "exercises":"LT_B3_3, LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, LT_G4_3, LT_A4_3, SLR003, SLR004, SLR005, PRP025, TUN025, PTY015, PRP026, TUN026, PTY016, LTR_A4, TUN027, PRP028, TUN028, PTY014, TUN029"
                     },{
-                    "title":"Day 5",
+                    "title":"L8: Day 5",
                     "exercises":"LT_B3_3, LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, LT_G4_3, LT_A4_3, SLR003, SLR004, SLR005, PRP029, TUN029, PTY017, PRP030, TUN030, PTY018, LTR_A4, TUN031, PRP032, TUN032, TUN033"
                     }],
             "infoNode":[{"title": "Hand Placement",
@@ -262,6 +269,7 @@
             "thresholdsID":"beginner2",
             "singleEventThreshold":"100",
             "scanForPitchLegatoChange":"Y",
+            "canDiscardForMerge":"N",
             "days":[{
                     "title":"Day 1",
                     "exercises":"LT_B3_3, LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, LT_G4_3, LT_A4_3, SLR004, SLR005, SLR006, PRP033, TUN033, PTY019, PRP034, TUN034, PTY020, LTR_C4, TUN035, PRP036, TUN036, TUN037"
@@ -292,6 +300,7 @@
             "thresholdsID":"beginner2",
             "singleEventThreshold":"100",
             "scanForPitchLegatoChange":"Y",
+            "canDiscardForMerge":"N",
             "days":[{
                     "title":"Day 1",
                     "exercises":"LT_B3_4, LT_C4_4, LT_D4_4, LT_E4_4, LT_F4_4, LT_G4_4, LT_A4_4, SLR005, SLR006, SLR007, PRP037, TUN037, PTY021, PRP038, TUN038, PTY022, LTR_D4, TUN039, PRP040, TUN040, TUN041, TUN042, PTY023, TUN043"
@@ -315,6 +324,31 @@
                         ],
             "exercises":[]
             },{
+            
+            
+            
+            "Level Comment":"=================== LEVEL 15 ============================",
+            "title":"Level 15",
+            "levelTag":"L15",
+            "levelIdx":"14",
+            "thresholdsID":"beginner1",
+            "singleEventThreshold":"100",
+            "scanForPitchLegatoChange":"N",
+            "canDiscardForMerge":"Y",
+            "days":[{
+                    "title":"Day 1",
+                    "exercises":"LT_C4_2, LT_Bb3_2, LT_D4_2, TUN001, TUN002, TUN003, TUN004, TUN005, TUN006, TUN007, TUN008, TUN009, TUN010, TUN011, TUN012, TUN013, TUN014, TUN015"
+                    },{
+                    "title":"Day 2",
+                    "exercises":"LT_C4_2, LT_C4_2, LTR_C#4, LTR_Db4, LTR_E4, LTR_F4, TUN016, TUN017, TUN018, TUN019, TUN020, TUN021, TUN022, TUN023, TUN024, TUN025, TUN026, TUN027, TUN028, TUN029, TUN030"
+                    }],
+            "infoNode":[{"title": "Hand Placement",
+                        "type":"informationNode",
+                        "resource":"Media/hand-placement.html"
+                        }
+                        ],
+            "exercises":[]
+            },{
             "Level Comment":"=================== LEVEL 20 ============================",
             "title":"Level 20",
             "levelTag":"L20",
@@ -322,6 +356,7 @@
             "thresholdsID":"intermediate1",
             "singleEventThreshold":"100",
             "scanForPitchLegatoChange":"Y",
+            "canDiscardForMerge":"Y",
             "days":[{
                     "title":"Day 1",
                     "exercises":"LT_C4_5, LT_B3_5, LT_A3_5, LT_G3_5, LT_A3_5, LT_B3_5, LT_C4_5, LT_D4_5, LT_E4_5, LT_F4_5, LT_G4_5, LT_A4_5, SLR015, SLR016, SLR017, PRP076, TUN076, PTY041, LT_E4_10, LT_F4_10, LT_G4_10, PRP077, TUN077, PTY042, LTR_G3, TUN078, INT004, TUN079, TUN080"
@@ -352,6 +387,7 @@
             "thresholdsID":"beginner3",
             "singleEventThreshold":"100",
             "scanForPitchLegatoChange":"Y",
+            "canDiscardForMerge":"Y",
             "days":[{
                     "title":"Day 1",
                     "exercises":"LT_B3_7, LT_C4_7, LT_C#4_7, LT_D4_7, LT_D#4_7, LT_E4_7, LT_F4_7, LT_F#4_7, LT_G4_7, LT_G#4_7, LT_A4_7, LT_A#4_7, LT_B4_7, LT_C5_7, SCP009, SLR025, TUN113, PTY059, LT_C5_8, LT_C#5_8, LT_D5_8, PRP114, TUN114, PTY060, LTR_Eb5, TUN115, PRP116, TUN116, SLR026, TUN117"
@@ -362,6 +398,37 @@
                         }
                         ],
             "exercises":[]
-          }
+          },{
+            
+            
+            "Level Comment":"================= Sampler LEVEL ========================",
+            "title":"--> Try out some Upper Level Exercises For Free!",
+            "intro":"Examples of Exercises in Levels 3 through 10",
+            "levelTag":"L11000",
+            "levelIdx":"1000",
+            "thresholdsID":"beginner2",
+            "singleEventThreshold":"100",
+            "scanForPitchLegatoChange":"N",
+            "canDiscardForMerge":"Y",
+            "days":[{
+                    "title":"Examples from Levels 3 & 4",
+                    "exercises":"LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, PTY009, TUN009, PRP010, TUN010, TUN015"
+                    },{
+                    "title":"Examples from Levels 5 & 6",
+                    "exercises":"LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, PTY017, TUN017, PRP018, TUN018, PTY016, TUN016, PTY019, TUN019, PTY024, TUN024"
+                    },{
+                    "title":"Examples from Levels 7 & 8",
+                    "exercises":"LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, PRP022, TUN022, TUN027, TUN031"
+                    },{
+                    "title":"Examples from Levels 9 & 10",
+                    "exercises":"LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, PTY037, TUN037, PTY026, TUN026, PRP028, TUN028, TUN041"
+                    }],
+            "infoNode":[{"title": "Hand Placement",
+                        "type":"informationNode",
+                        "resource":"Media/hand-placement.html"
+                        }
+                        ],
+            "exercises":[]
+            }
       ]
   }

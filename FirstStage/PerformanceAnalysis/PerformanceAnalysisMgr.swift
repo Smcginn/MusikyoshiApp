@@ -176,7 +176,9 @@ struct PerfAnalysisDefs {
     // docs. In future, the tables should be built to include all possible notes for
     //    1) All possible instruments,    or
     //    2) Just the range for the current instrument
-    static let kFirstTableNoteId = NoteIDs.F3  // first noteID for building tables
+    
+    // kFirstTableNoteId was F3 for V1.0.0
+    static let kFirstTableNoteId = NoteIDs.B0  // first noteID for building tables
     static let kLastTableNoteId  = NoteIDs.C6  // last  noteID for building tables
     static let kTableNoteIdRange = kFirstTableNoteId...kLastTableNoteId
     static let kNumTableIDs =  // tables will have this many members
@@ -199,21 +201,22 @@ class PerformanceAnalysisMgr {
     var notePitchAnlsysCritTable = NotePitchAnalysisCriteriaTable()
 
     ///////////////////////////////////////////////////////////////////////////
-    // TODO: The trumpetPartialsTable below is Trumpet-specific.
+    //    The PartialsTable for brass instruments
     //
-    //  When there is time, there should be a scheme involving a base class (or
-    //  protocol extension)  for "Instrument Specific Criteria", with derived
-    //  classes (or protocol implementations, etc.) for each individual instrument.
-    //
-    //  Part of the problem is that doing the checks for each Instrument probably
-    //  involves completely different issues possibly to be invoked at different
-    //  times within the overall note pitch analysis, so having a specific slot
-    //  for "DoInstrumentSpecificChecks_Now" will be hard to define, as will
-    //  "TablesForInstrumentSpecificChecking".
-    //
-    //  So: TrumpetPartials is implemented directly here for Alpha, but needs
-    //  to be redesigned for Beta and onward.
-    var trumpetPartialsTable = TrumpetNotePartialsTable()
+    var brassPartialsTable: BrassNotePartialsTable = TrumpetNotePartialsTable()
+    func resetPartialsTable(forInstrument: Int) {
+//        print(Unmanaged.passUnretained(brassPartialsTable).toOpaque())
+        switch forInstrument {
+        case kInst_Trombone:    brassPartialsTable = TromboneNotePartialsTable()
+        case kInst_Euphonium:   brassPartialsTable = TromboneNotePartialsTable()
+        case kInst_Tuba:        brassPartialsTable = TubaNotePartialsTable()
+        case kInst_FrenchHorn:  brassPartialsTable = FrenchHornPartialsTable()
+
+        case kInst_Trumpet: fallthrough
+        default:                brassPartialsTable = TrumpetNotePartialsTable()
+        }
+//        print(Unmanaged.passUnretained(brassPartialsTable).toOpaque())
+    }
     
     var tablesBuilt = false;
     
@@ -286,10 +289,11 @@ class PerformanceAnalysisMgr {
             let tols = pitchAndRhythmTolerances() // use default vals
             rebuildAllAnalysisTables( tols )
         }
-        return trumpetPartialsTable.isThisFreqAPartialOfThisNote( freq: freq,
-                                                                  note: noteID )
+        return brassPartialsTable.isThisFreqAPartialOfThisNote( freq: freq,
+                                                                note: noteID )
     }
-    
+
+    /*
     // If working with a transposing instrument . . .
     var haveSetTransOffset = false
     private var transpositionOffset: Int = 0
@@ -308,9 +312,10 @@ class PerformanceAnalysisMgr {
         // back and forth from the Concert Pitch world and the Transposed Pitch world.
         // Maybe some sort of KVO observer calls this? 
         transpositionOffset =
-            UserDefaults.standard.integer(forKey: Constants.Settings.Transposition)
+            UserDefaults.standard.integer(forKey: Constants.Settings.Transposition) // TRANSHYAR
     }
-
+    */
+    
     ///////////////////////////////////////////////////////////////////////////
     //
     //    For Debugging and Testing from here to end of class
@@ -320,14 +325,14 @@ class PerformanceAnalysisMgr {
     func printPartialsForThisNote( noteID: NoteID )
     {
         if kMKDebugOpt_PrintPerfAnalysisValues {
-            trumpetPartialsTable.printPartialsForThisNote( noteID: noteID )
+            brassPartialsTable.printPartialsForThisNote( noteID: noteID )
         }
     }
     
     func testPartials() {
         var isPartRV =
-            trumpetPartialsTable.isThisFreqAPartialOfThisNote(freq: 196.0, // g3
-                                                              note: NoteIDs.E4)
+            brassPartialsTable.isThisFreqAPartialOfThisNote(freq: 196.0, // g3
+                                                            note: NoteIDs.E4)
         
         if kMKDebugOpt_PrintPerfAnalysisValues {
             if isPartRV.isPartial {
@@ -337,8 +342,8 @@ class PerformanceAnalysisMgr {
             }
         }
         
-        isPartRV = trumpetPartialsTable.isThisFreqAPartialOfThisNote(freq: 392.0, // g4
-                                                                     note: NoteIDs.E4)
+        isPartRV = brassPartialsTable.isThisFreqAPartialOfThisNote(freq: 392.0, // g4
+                                                                   note: NoteIDs.E4)
         if kMKDebugOpt_PrintPerfAnalysisValues {
             if isPartRV.isPartial {
                 print ("Partial Test: \(isPartRV.partial.noteFullName) is a partial of \(NoteIDs.E4)" )
@@ -347,8 +352,8 @@ class PerformanceAnalysisMgr {
             }
         }
         
-        isPartRV = trumpetPartialsTable.isThisFreqAPartialOfThisNote(freq: 233.0, // Bb3
-                                                                     note: NoteIDs.G5)
+        isPartRV = brassPartialsTable.isThisFreqAPartialOfThisNote(freq: 233.0, // Bb3
+                                                                   note: NoteIDs.G5)
         if kMKDebugOpt_PrintPerfAnalysisValues {
             if isPartRV.isPartial {
                 print ("Partial Test: \(isPartRV.partial.noteFullName) is a partial of \(NoteIDs.F5)" )

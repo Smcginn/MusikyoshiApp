@@ -8,6 +8,29 @@
 
 import Foundation
 
+// to get be able to have vars for debug sessions, and get rid of "unused" warning
+let shoudIPrintIt = false
+func dontPrint(toPrint: String)
+{
+    if shoudIPrintIt {
+        print ("\toPrint()")
+    }
+}
+
+// to  be able to have vars for debug sessions, and get rid of "unused" warning
+// can use this to supress warrnings as follows:
+//      let justToLookAt = someCalcOrOther()
+//      if alwaysFalseToSuppressWarn() { print(\(justToLookAt)") }
+func alwaysFalseToSuppressWarn() -> Bool {
+    return false
+}
+
+func useThisToSuppressWarnings(str: String) {
+    if alwaysFalseToSuppressWarn() {
+        print("\(str)")
+    }
+}
+
 extension UIButton {
     func roundedButton() {
         let maskPAth1 = UIBezierPath(roundedRect: self.bounds,

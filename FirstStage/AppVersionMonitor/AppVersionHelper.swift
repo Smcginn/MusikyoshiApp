@@ -82,7 +82,8 @@ func shouldCheckForAppUpdate() -> Bool {
 func isUpdateAvailable() -> Bool {
     
     let appMarketingVers = AppVersion.marketingVersion
-    
+    useThisToSuppressWarnings(str: "\(appMarketingVers)")
+
     NetworkActivityIndicatorManager.networkOperationStarted()
     guard
         let info = Bundle.main.infoDictionary,

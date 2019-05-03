@@ -8,6 +8,14 @@
 
 import Foundation
 
+// DATA_BASE_CONVERT
+//   was:
+//      let kLTPersBestKey_First: Int =  0
+//      let kLTPersBestKey_G3:    Int =  0
+//        . . .
+//      let kLTPersBestKey_Last:  Int = 24
+//      let kLTPersBestKey_NumKeys:  Int = 24
+
 // Ids for accessing fields in longtonePersonalRecords
 let kLTPersBestKey_First: Int =  0
 let kLTPersBestKey_G3:    Int =  0
@@ -38,6 +46,11 @@ let kLTPersBestKey_G5:    Int = 24
 let kLTPersBestKey_Last:  Int = 24
 let kLTPersBestKey_NumKeys:  Int = 24
 
+// NEW: Ids for accessing fields in longtonePersonalRecords are the full MIDI Range, 0-127
+let kLTPersBestKey_NumEntries: Int = 128
+
+
+// DATA_BASE_CONVERT
 func mapNoteIDToPBKey(noteID: Int) -> Int {
     var retKey = kLTPersBestKey_C4
     let noteID_Uint8 = NoteID(noteID)

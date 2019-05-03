@@ -10,6 +10,10 @@
 
 @protocol SSUpdateScrollProtocol
 
--(void)update;
+// called on (potential) scroll position change
+-(void)changedScroll;
+
+// called on (potential) change of zoom
+-(void)changedZoom;
 
 @end

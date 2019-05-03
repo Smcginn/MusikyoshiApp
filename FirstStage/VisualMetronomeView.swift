@@ -36,12 +36,15 @@ class VisualMetronomeView: UIView {
         var dotCenters = CGFloat(ceil(frame.height))
         let dotSize = CGFloat(ceil(dotCenters * 0.6))
         //var dotSpacing =  dotSize
-        if isiPhoneSE() {
+        if isiPhoneSE() ||
+           DeviceType.IS_IPHONE_5orSE ||
+           DeviceType.IS_IPHONE_4_OR_LESS {
             dotCenters *= 0.7
         }
          
         //let firstDotCenterXOffset = ceil(((CGFloat(numBeats) - 1.0) / 2.0) * dotCenters)
         let firstDotCenterXOffset = ceil(((CGFloat(numDots) - 1.0) / 2.0) * dotCenters)
+        useThisToSuppressWarnings(str: "\(firstDotCenterXOffset)")
         let firstDotCenterX = CGFloat(10.0) // CGFloat(ceil((frame.width / 2) - firstDotCenterXOffset))
         let dotCenterY = CGFloat(ceil(frame.height / 2))
 

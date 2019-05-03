@@ -416,20 +416,22 @@ struct alertIDs {
     static let kAlt_LowerPartial             : Int   =  2
     static let kAlt_VeryLow                  : Int   =  3
     static let kAlt_VeryHigh                 : Int   =  4
+    static let kAlt_WaveringBad              : Int   =  5
+    static let kAlt_WaveringOK               : Int   =  6
+
+    static let kAlt_ABitEarly                : Int   =  7
+    static let kAlt_VeryEarly                : Int   =  8
+    static let kAlt_ABitLate                 : Int   =  9
+    static let kAlt_VeryLate                 : Int   = 10
     
-    static let kAlt_ABitEarly                : Int   =  5
-    static let kAlt_VeryEarly                : Int   =  6
-    static let kAlt_ABitLate                 : Int   =  7
-    static let kAlt_VeryLate                 : Int   =  8
+    static let kAlt_TooShort                 : Int   = 11
+    static let kAlt_VeryShort                : Int   = 12
+    static let kAlt_ABitShort                : Int   = 13
+    static let kAlt_ABitLong                 : Int   = 14
+    static let kAlt_VeryLong                 : Int   = 15
+    static let kAlt_TooLong                  : Int   = 16
     
-    static let kAlt_TooShort                 : Int   =  9
-    static let kAlt_VeryShort                : Int   = 10
-    static let kAlt_ABitShort                : Int   = 11
-    static let kAlt_ABitLong                 : Int   = 12
-    static let kAlt_VeryLong                 : Int   = 13
-    static let kAlt_TooLong                  : Int   = 14
-    
-    static let kAlt_NotesDuringRest          : Int   = 15
+    static let kAlt_NotesDuringRest          : Int   = 17
 }
 
 func mapPerfIssueToAlertID( _ issueCode: performanceRating ) -> Int {
@@ -439,7 +441,9 @@ func mapPerfIssueToAlertID( _ issueCode: performanceRating ) -> Int {
     case .isLowerPartial:   return alertIDs.kAlt_LowerPartial
     case .wrongNoteFlat:    return alertIDs.kAlt_VeryLow
     case .wrongNoteSharp:   return alertIDs.kAlt_VeryHigh
-        
+    case .fluctuatingAcceptable:   return alertIDs.kAlt_WaveringBad
+    case .fluctuatingReasonable:   return alertIDs.kAlt_WaveringOK
+
     case .slightlyEarly:    return alertIDs.kAlt_ABitEarly
     case .veryEarly:        return alertIDs.kAlt_VeryEarly
     case .slightlyLate:     return alertIDs.kAlt_ABitLate
@@ -471,7 +475,11 @@ func getMsgTextForAlertID( _ alertID: Int ) -> String {
         retStr = "The Note is Very Flat"
     case alertIDs.kAlt_VeryHigh:
         retStr = "The Note is Very Sharp"
-        
+    case alertIDs.kAlt_WaveringBad:
+        retStr = "The pitch fluctuates considerably, but you are hitting the note"
+    case alertIDs.kAlt_WaveringOK:
+        retStr = "The pitch fluctuates, but you are mostly hitting the note"
+
     case alertIDs.kAlt_ABitEarly:
         retStr = "You played that note a bit early"
     case alertIDs.kAlt_VeryEarly:

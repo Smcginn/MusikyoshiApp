@@ -255,7 +255,7 @@ class LessonScheduler
     
     func useAn(noteName: String) -> Bool {
         let noteUp = noteName.uppercased()
-        if noteUp.contains("E") || noteUp.contains("A") {
+        if noteUp.contains("E") || noteUp.contains("F") || noteUp.contains("A") {
             return true
         } else {
             return false

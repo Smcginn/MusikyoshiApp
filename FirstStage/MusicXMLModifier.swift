@@ -9,6 +9,58 @@
 import Foundation
 import AEXML
 
+let kG_clef       =  0
+let kTrebleClef   =  kG_clef
+let kF_clef       =  1
+let kBassClef     =  kF_clef
+
+enum whichInstrument {
+    case trumpet
+    case trombone
+}
+
+struct MusicXMLInstrumentModifiers {
+    
+    var transpose_Diatonic: Int
+    var transpose_Chromatic: Int
+    var clef: Int
+    
+    var instrument: whichInstrument
+
+    //var key_Fifths: Int     // the number of flats or sharps in key: - == flats, + == sharps
+    //var key_Mode: Int       // major or minor
+
+    init( transpose_Diatonic:   Int = 0,
+          transpose_Chromatic:  Int = 0,
+          clef:                 Int = kTrebleClef
+          //key_Fifths:           Int = 0,
+          //key_Mode:             Int = 0,
+        ) {
+        self.transpose_Diatonic     = transpose_Diatonic
+        self.transpose_Chromatic    = transpose_Chromatic
+        self.clef                   = clef
+//        self.key_Fifths             = key_Fifths
+//        self.key_Mode               = key_Mode
+        
+        self.instrument = .trumpet
+    }
+    
+    mutating func setForTrombone() {
+        transpose_Diatonic  = 0
+        transpose_Chromatic = 0
+        clef = kBassClef
+        self.instrument = .trombone
+    }
+    
+    mutating func setForTrumpet() {
+        transpose_Diatonic  = -1
+        transpose_Chromatic = -2
+        clef = kTrebleClef
+        self.instrument = .trumpet
+    }
+}
+
+
 class MusicXMLModifier {
     //doesn't work with 32nd notes or dotted 16th or triplets
     //and maybe will also fail with something like 3/2 time where all the bars are two dotted quarter notes.
@@ -19,7 +71,12 @@ class MusicXMLModifier {
     static var sixteenthsPerBeat = 0
     static var beats = 0
 
-    class func modifyXMLToData(musicXMLUrl: URL, smallestWidth: Double, signatureWidth: Double) -> Data? {
+    class func modifyXMLToData(musicXMLUrl: URL,
+                               smallestWidth: Double,
+                               signatureWidth: Double,
+                               InstrMods: MusicXMLInstrumentModifiers) -> Data? {
+    
+//    class func modifyXMLToData(musicXMLUrl: URL, smallestWidth: Double, signatureWidth: Double) -> Data? {
 
         guard let data = try? Data(contentsOf: musicXMLUrl) else {
             print("Cannot convert XML file to Data!!")
@@ -37,10 +94,14 @@ class MusicXMLModifier {
         var firstBar = true
         var beatType = 0    //as in notation 2,4,8, or 16
         var shortestNoteDuration = 32    //in 16th notes
+        //var numFifths = Int(0)
 
         // number of sixteenths in note:
         //16 = whole, 8 = half, 4 = quarter, 2 = eighth, 12 = dotted half, etc.
         for measure in document["score-partwise"]["part"]["measure"].all! {
+//            if let beatsInt = measure["attributes"]["time"]["beats"].int {
+//                beats = beatsInt
+//            }
 
             if firstBar {
                 firstBar = false
@@ -87,11 +148,44 @@ class MusicXMLModifier {
         sixteenthNoteWidth = smallestWidth / Double(shortestNoteDuration)
 
         //set first note (and measure width) in first measure position
-        var measureWidth = signatureWidth + basicMeasureWidth
-        var noteX = signatureWidth + (smallestWidth / 2)
+        let sigWidth = Double(60.0)
+//        var measureWidth = signatureWidth + basicMeasureWidth
+        var measureWidth = sigWidth + basicMeasureWidth
+        //var noteX = signatureWidth + (smallestWidth / 2)
+        var noteX = sigWidth + (smallestWidth / 2)
 
         for measure in document["score-partwise"]["part"]["measure"].all! {
 
+            // adjust the first measure width based on number of sharps/flats in key sig
+            let measureKey = measure["attributes"]["key"]
+            if measureKey.error == nil {
+                if let numFifths = measureKey["fifths"].int {
+                    // Add 10 pix for general spacing, plus 10 pix for every s/f
+                    let xAdjustFactor = Double(abs(numFifths)) + 1.0
+                    measureWidth += xAdjustFactor * 10.0
+                    noteX += xAdjustFactor * 10.0
+                }
+            }
+
+            
+//            if InstrMods.instrument != .trumpet {
+//                let measureClef = measure["attributes"]["clef"]
+//                if measureClef.error == nil {
+//                    measureClef["sign"].value = "F"
+//                    measureClef["line"].value = "4"
+//                    let sign = measureClef["sign"].string
+//                    let line = measureClef["line"].int
+//                    print ("\n\n@@@@  Clef sign = \(sign), line = \(line)")
+//                }
+//            }
+            
+//            let measureTranspose =  measure["attributes"]["transpose"]
+//            if measureTranspose.error == nil {
+//                if InstrMods.instrument != .trumpet {
+//                    measureTranspose.removeFromParent()
+//                }
+//            }
+            
             //turn off new-system!!!!
             let measurePrint = measure["print"]
             if measurePrint.error == nil {
@@ -119,6 +213,58 @@ class MusicXMLModifier {
                         }                        
                     }
                 }
+                
+                
+//                let notePitch = note["pitch"]
+//                if notePitch.error == nil {
+//                    let octaveInt = notePitch["octave"].int
+//                    let alterInt  = notePitch["alter"].int
+//                    let step      = notePitch["step"].string
+//                    if octaveInt != nil {
+//                        let octv = NoteID(octaveInt!)
+//                        let alt  = alterInt != nil ? alterInt! : 0
+//                        let currPoas: tPOAS = (octave: octv, alter: alt, step: step)
+//
+//                        let kTromboneShift = -14
+//                        let kTubaShift     = -26
+//
+//                        let newPoas = getShiftedPOAS(currPOAS: currPoas, shift: kTromboneShift) // tuba
+//                        notePitch["step"].value = newPoas.step
+//
+//                        // TODO: if alter not present, must do an addchild call
+//
+//                        if alterInt == nil { // alter key not present, must add one
+//                            notePitch["octave"].removeFromParent()
+//                            notePitch.addChild(name: "alter")
+//                            notePitch.addChild(name: "octave")
+//                            notePitch["alter"].value = String(newPoas.alter)
+//                        }
+//
+//                        if newPoas.alter != 0 {
+//                            let accidental = note["accidental"].string
+//                            if accidental.isEmpty {
+//                                note.addChild(name: "accidental")
+//                            }
+//                            if newPoas.alter > 0 {
+//                                note["accidental"].value = String("sharp")
+//                            } else {
+//                                note["accidental"].value = String("flat")
+//                            }
+//                        }
+//
+//
+////                                               value: String(newPoas.alter),
+////                                               attributes: nil )
+//                                           //attributes: ["xmlns:m" : "http://www.w3schools.com/transaction/", "soap:mustUnderstand" : "1"])
+//                        //} else {
+//                        notePitch["octave"].value = String(newPoas.octave)
+//                       //}
+//
+//                        let newOctave = octaveInt! - 1
+////                        notePitch["octave"].value = String(newOctave)
+//                    }
+//                }
+                
             }
 
             //reset first note (and measure width) in measure position

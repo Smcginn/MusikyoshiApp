@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     struct AppUtility {
         static func currOrientation() {
-            var currO = UIDevice.current.orientation
+            let currO = UIDevice.current.orientation
             print("\(currO)")
         }
         
@@ -65,6 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         static func lockOrientationToLandscape() {
             let currOrient = UIDevice.current.orientation
+            useThisToSuppressWarnings(str: "\(currOrient)")
             self.lockOrientation(.landscape)
             UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue,
                                           forKey: "orientation")
@@ -102,17 +103,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
+        // Note: These register calls must be broken into checnks of 10 or so.
+        //   Otherwise, the compiler can't handle them. msg: "Statement too complex ..."
         UserDefaults.standard.register(defaults: [
             Constants.Settings.BPM: 60.0,
             Constants.Settings.AmplitudeThreshold: Float(0.1),
             Constants.Settings.TimingThreshold: 0.2,
             Constants.Settings.FrequencyThreshold: Double(0.03),
-            Constants.Settings.Transposition: -2,
+            Constants.Settings.Transposition: kTransposeFor_Trumpet,
             Constants.Settings.ShowNoteMarkers: false,
             Constants.Settings.ShowAnalysis: false,
             Constants.Settings.PlayTrumpet: true,
             Constants.Settings.SmallestNoteWidth: Int(30),
-            Constants.Settings.SignatureWidth: Int(60),
+            Constants.Settings.SignatureWidth: Int(120),
             Constants.Settings.ScoreMagnification: Int(14)
             ])
         
@@ -126,11 +129,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Constants.Settings.SubsriptionHasBeenPurchased: false,
             Constants.Settings.ConfirmedSubsExpiryDateAfter1970: Double(0.0),
             Constants.Settings.CheckForAppUpdateInterval: Int(timeIntvls.kMK_1_Month),
-            Constants.Settings.LastCheckForAppUpdate: Double(0.0)
+            Constants.Settings.LastCheckForAppUpdate: Double(0.0),
+            Constants.Settings.StudentInstrument: Int(kInst_Trumpet)
            ])
         
+        UserDefaults.standard.register(defaults: [
+            Constants.Settings.Trumpet_AmpRiseForNewSound:        Double(kTrumpet_defAmpRiseForNewSound),
+            Constants.Settings.Trumpet_SkipBeginningSamples:      Int(kTrumpet_defSkipBeginningSamples),
+            Constants.Settings.Trumpet_SamplesInAnalysisWindow:   Int(kTrumpet_defSamplesInAnalysisWindow),
+            
+            Constants.Settings.Trombone_AmpRiseForNewSound:       Double(kTrombone_defAmpRiseForNewSound),
+            Constants.Settings.Trombone_SkipBeginningSamples:     Int(kTrombone_defSkipBeginningSamples),
+            Constants.Settings.Trombone_SamplesInAnalysisWindow:  Int(kTrombone_defSamplesInAnalysisWindow),
+            
+            Constants.Settings.Euphonium_AmpRiseForNewSound:      Double(kEuphonium_defAmpRiseForNewSound),
+            Constants.Settings.Euphonium_SkipBeginningSamples:    Int(kEuphonium_defSkipBeginningSamples),
+            Constants.Settings.Euphonium_SamplesInAnalysisWindow: Int(kEuphonium_defSamplesInAnalysisWindow),
+            ])
+
+        UserDefaults.standard.register(defaults: [
+            Constants.Settings.Horn_AmpRiseForNewSound:      Double(kHorn_defAmpRiseForNewSound),
+            Constants.Settings.Horn_SkipBeginningSamples:    Int(kHorn_defSkipBeginningSamples),
+            Constants.Settings.Horn_SamplesInAnalysisWindow: Int(kHorn_defSamplesInAnalysisWindow),
+            
+            Constants.Settings.Tuba_AmpRiseForNewSound:      Double(kTuba_defAmpRiseForNewSound),
+            Constants.Settings.Tuba_SkipBeginningSamples:    Int(kTuba_defSkipBeginningSamples),
+            Constants.Settings.Tuba_SamplesInAnalysisWindow: Int(kTuba_defSamplesInAnalysisWindow),
+            ])
+
         setCheckForAppUpdateTimeIfFirstRun()
         
+        NoteService.initNotes()
+
+        var studentInstrument =
+            UserDefaults.standard.integer(forKey: Constants.Settings.StudentInstrument)
+        if studentInstrument < kInst_Trumpet || studentInstrument > kInst_Tuba {
+            studentInstrument = kInst_Trumpet
+        }
+        setCurrentStudentInstrument(instrument: studentInstrument)
+//        PerformanceAnalysisMgr.instance.resetPartialsTable(forInstrument: studentInstrument )
+
 /*
          Constants.Settings.MaxPlayingVolume: Double(0.0),
          Constants.Settings.PlayingVolumeSoundThreshold: Double(0.03),
@@ -144,7 +182,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  //       _ = AVAudioSessionManager.sharedInstance.setupAudioSession()
         
         
-        NoteService.initNotes()
         
         let entityName = String(describing: UserAttributes.self)
         let request = NSFetchRequest<UserAttributes>(entityName: entityName)
@@ -186,6 +223,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             for oneSkProd in products {
                 if let oneSkProd = oneSkProd as SKProduct? {
                     let currCode = oneSkProd.priceLocale.currencyCode
+                    useThisToSuppressWarnings(str: "\(String( describing: currCode))")
                     var prodPriceString = ""
                     if oneSkProd.localizedPrice != nil {
                         prodPriceString = oneSkProd.localizedPrice!

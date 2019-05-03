@@ -4,6 +4,7 @@
 //
 //  Created by Adam Kinney on 11/6/15.
 //  Changed by David S Reich - 2016.
+//  Changed by Scott Freshour - 2018.
 //  Copyright © 2015 Musikyoshi. All rights reserved.
 //
 
@@ -25,6 +26,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 struct NoteService {
     fileprivate static var notes = [Note]()
 
+    // Not called . . .
     static func getNote(_ step: String, octave: Int) -> Note? {
         let comparisionSet = notes.filter{ n in n.name == step && n.octave == octave }
         if comparisionSet.count == 1
@@ -93,6 +95,14 @@ struct NoteService {
         }
     }
     
+    static func getFreqForNoteID( noteID: NoteID ) -> Double {
+        // if let freq = NoteService.getNote( Int(nsNote.midiPitch) )?.frequency {
+        if let freq = NoteService.getNote( Int(noteID) )?.frequency {
+            return freq
+        }
+        return 0.0
+    }
+    
     static func getNote(_ orderId: Int) -> Note? {
         if(orderId > -1)
         {
@@ -112,6 +122,7 @@ struct NoteService {
         }
     }
     
+    // Not called . . .
     static func getNoteOffset(_ orderId: Int) -> NoteOffset? {
         switch orderId
         {
@@ -136,6 +147,7 @@ struct NoteService {
         }
     }
     
+    // Not called . . .
     //TODO: this doesn't work for #s
     //figure out a way to fix it
     static func getYPos(_ orderId: Int) -> Double{
@@ -206,6 +218,7 @@ struct NoteService {
         }
     }
 
+    // Not called . . .
     static func getLowestFrequency() -> Double {
         if let n = notes.first {
             return n.frequency
@@ -213,6 +226,7 @@ struct NoteService {
         return 0
     }
     
+    // Not called . . .
     static func getHighestFrequency() -> Double {
         if let n = notes.last {
             return n.frequency
@@ -224,8 +238,38 @@ struct NoteService {
         //♯
         //♭
 
+        notes.append(Note(27.50, "A", 0, 21))
+        notes.append(Note(29.14, "A♯", 0, 22, "B♭"))
+        notes.append(Note(30.87, "B", 0, 23))
+        
+        notes.append(Note(32.70, "C", 1, 24))
+        notes.append(Note(34.65, "C♯", 1, 25, "D♭"))
+        notes.append(Note(36.71, "D", 1, 26))
+        notes.append(Note(38.89, "D♯", 1, 27, "E♭"))
+        notes.append(Note(41.20, "E", 1, 28))
+        notes.append(Note(43.65, "F", 1, 29))
+        notes.append(Note(46.25, "F♯", 1, 30, "G♭"))
+        notes.append(Note(49.0, "G", 1, 31))
+        notes.append(Note(51.91, "G♯", 1, 32, "A♭"))
+        notes.append(Note(55.0, "A", 1, 33))
+        notes.append(Note(58.27, "A♯", 1, 34, "B♭"))
+        notes.append(Note(61.74, "B", 1, 35))
+
+        notes.append(Note(65.41, "C", 2, 36))
+        notes.append(Note(69.39, "C♯", 2, 37, "D♭"))
+        notes.append(Note(73.42, "D", 2, 38))
+        notes.append(Note(77.78, "D♯", 2, 39, "E♭"))
+        notes.append(Note(82.41, "E", 2, 40))
+        notes.append(Note(87.31, "F", 2, 41))
+        notes.append(Note(92.50, "F♯", 2, 42, "G♭"))
+        notes.append(Note(98.0, "G", 2, 43))
+        notes.append(Note(103.83, "G♯", 2, 44, "A♭"))
+        notes.append(Note(110, "A", 2, 45))
+
+        // new above this line for multi-instruments
         notes.append(Note(116.54, "A♯", 2, 46, "B♭"))
         notes.append(Note(123.47, "B", 2, 47))
+        
         notes.append(Note(130.81, "C", 3, 48))
         notes.append(Note(138.59, "C♯", 3, 49, "D♭"))
         notes.append(Note(146.83, "D", 3, 50))
@@ -236,9 +280,9 @@ struct NoteService {
         notes.append(Note(196, "G", 3, 55))
         notes.append(Note(207.65, "G♯", 3, 56, "A♭"))
         notes.append(Note(220, "A", 3, 57))
-        
         notes.append(Note(233.08, "A♯", 3, 58, "B♭"))
         notes.append(Note(246.94, "B", 3, 59))
+        
         notes.append(Note(261.63, "C", 4, 60))
         notes.append(Note(277.18, "C♯", 4, 61, "D♭"))
         notes.append(Note(293.66, "D", 4, 62))
@@ -249,9 +293,9 @@ struct NoteService {
         notes.append(Note(392, "G", 4, 67))
         notes.append(Note(415.3, "G♯", 4, 68, "A♭"))
         notes.append(Note(440, "A", 4, 69))
-        
         notes.append(Note(466.16, "A♯", 4, 70, "B♭"))
         notes.append(Note(493.88, "B", 4, 71))
+        
         notes.append(Note(523.25, "C", 5, 72))
         notes.append(Note(554.37, "C♯", 5, 73, "D♭"))
         notes.append(Note(587.33, "D", 5, 74))
@@ -262,9 +306,9 @@ struct NoteService {
         notes.append(Note(783.99, "G", 5, 79))
         notes.append(Note(830.61, "G♯", 5, 80, "A♭"))
         notes.append(Note(880, "A", 5, 81))
-        
         notes.append(Note(932.33, "A♯", 5, 82, "B♭"))
         notes.append(Note(987.77, "B", 5, 83))
+        
         notes.append(Note(1046.5, "C", 6, 84))
         notes.append(Note(1108.73, "C♯", 6, 85, "D♭"))
         notes.append(Note(1174.66, "D", 6, 86))
@@ -278,3 +322,168 @@ struct NoteService {
     }
     
 }
+
+// This stuff isn't used as of the first multi-instrument pass checkin, but might
+// be by LongTone exercises for translating notes from lesson json exercise code.
+
+// POAS == "PitchOctaveAlterStep"
+// octave:  The int part of C4, A5, etc.
+// alter:   For flats (-) or sharps (+). E.g., step = "B", alter= -1 == Bb. Optional in the XML file
+// step:    "C", "D", etc.
+typealias tPOAS = (octave: NoteID, alter: Int, step: String)
+
+func getShiftedPOAS(currPOAS: tPOAS, shift: Int) -> tPOAS {
+    var retPOAS = tPOAS(octave: 4, alter: 0, step: "C")
+    
+    // Get MIDI note for current POAS
+    //let currPOAS = tPOAS(octave: 4, alter: 0, step: "C")
+    let currMidiNote = getMIDINoteFromPOAS(poas: currPOAS)
+    
+    // shift MIDI note
+    var newMidiNote: NoteID = 0
+    if shift >= 0 {
+        newMidiNote = currMidiNote + NoteID(shift)
+    } else {
+        let negShift = NoteID(abs(shift))
+        newMidiNote = currMidiNote - negShift
+    }
+    
+    // Special consideration for high notes if French Horn
+    if getCurrentStudentInstrument() == kInst_FrenchHorn {
+        // If the note is greater than C5, shift down an octave
+        if newMidiNote > NoteIDs.C5 {
+            newMidiNote -= kOneOctaveInSemitones
+        }
+    }
+    
+    // Get POAS for shifted MIDI note
+    retPOAS = getPOASFromMIDINote(midiNote: newMidiNote)
+    
+    return retPOAS
+}
+
+func getMIDINoteFromPOAS(poas: tPOAS) -> NoteID {
+    var midiNote: NoteID =  12 * (poas.octave + 1)
+
+    let noteInOctave = getOctaveNoteForNoteChar(noteChar: poas.step)
+    midiNote += noteInOctave
+    if poas.alter >= 0 {
+        midiNote += NoteID(poas.alter)
+    } else {
+        let negShift = NoteID(abs(poas.alter))
+        midiNote = midiNote - negShift
+    }
+
+    // midiNote += poas.alter
+    
+    return midiNote
+}
+
+func getPOASFromMIDINote(midiNote: NoteID) -> tPOAS  {
+    let midiNoteInOct = midiNote % 12
+    let midiOct = (midiNote/12)  - 1//////   BLAR
+
+    // typealias tStepAndAlter = (step: String, alter: Int)
+    
+    // For now, always take the Flat enharmonic spelling
+    let useFlats = false
+    let newStepAndAlter = getNoteCharAndALterFromOctaveNote(octaveNote: midiNoteInOct,
+                                                            goSharp: useFlats)
+
+    let retPOAS = tPOAS(octave: midiOct, alter: newStepAndAlter.alter, step: newStepAndAlter.step)
+
+    return retPOAS
+}
+
+// "OctaveNote" means NoteID within a single octave, 1-11.
+// returns 0 for "C", 4 for "E", 11 for "B", etc.
+func getOctaveNoteForNoteChar(noteChar: String) -> NoteID {
+    switch noteChar {
+    case "D":   return 2
+    case "E":   return 4
+    case "F":   return 5
+    case "G":   return 7
+    case "A":   return 9
+    case "B":   return 11
+
+    case "C":   fallthrough
+    default:    return 0
+    }
+}
+
+typealias tStepAndAlter = (step: String, alter: Int)
+func getNoteCharAndALterFromOctaveNote(octaveNote: NoteID, goSharp:Bool) -> tStepAndAlter {
+    var noteChar = ""
+    var alt = 0
+    
+    switch octaveNote {
+    case 1:
+        if goSharp {
+            noteChar = "C"
+            alt      =  1
+        } else {
+            noteChar = "D"
+            alt      =  -1
+        }
+    case 2:
+        noteChar = "D"
+        alt      =  0
+    case 3:
+        if goSharp {
+            noteChar = "D"
+            alt      =  1
+        } else {
+            noteChar = "E"
+            alt      =  -1
+        }
+    case 4:
+        noteChar = "E"
+        alt      =  0
+    case 5:
+        noteChar = "F"
+        alt      =  0
+    case 6:
+        if goSharp {
+            noteChar = "F"
+            alt      =  1
+        } else {
+            noteChar = "G"
+            alt      =  -1
+        }
+    case 7:
+        noteChar = "G"
+        alt      =  0
+    case 8:
+        if goSharp {
+            noteChar = "G"
+            alt      =  1
+        } else {
+            noteChar = "A"
+            alt      =  -1
+        }
+    case 9:
+        noteChar = "A"
+        alt      =  0
+    case 10:
+        if goSharp {
+            noteChar = "A"
+            alt      =  1
+        } else {
+            noteChar = "B"
+            alt      =  -1
+        }
+    case 11:
+        noteChar = "B"
+        alt      =  0
+
+    case 0:  fallthrough
+    default:
+        noteChar = "C"
+        alt      =  0
+    }
+    
+    let retSA = tStepAndAlter(step: noteChar, alter: alt)
+
+    return retSA
+}
+

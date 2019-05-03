@@ -14,7 +14,7 @@ class Note
     var frequency: Double!
     var name: String!
     var octave: Int!
-    var orderId: Int!
+    var orderId: Int!        // MIDI Number
     var flatName: String!
     
     var xPos = 0.0

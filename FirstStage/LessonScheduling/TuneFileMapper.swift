@@ -201,9 +201,11 @@ func getLongtoneInfo(forLTCode: String) -> longtoneExerciseInfo {
         return retVal
     }
     
-    retVal.note = chunks[1]
     retVal.durationSecs = Int(chunks[2])!
-    
+    let beginNote: String = chunks[1]
+    let convNote = getLongToneExerNote(origNoteStr: beginNote)
+    retVal.note = convNote // chunks[1]
+
     return retVal
 }
 
@@ -221,8 +223,10 @@ func getLongtoneRecordInfo(forLTCode: String) -> longtoneExerciseInfo {
         return retVal
     }
     
-    retVal.note = chunks[1]
     retVal.durationSecs = kTryForLongtonePersonalRecord
+    let beginNote: String = chunks[1]
+    let convNote = getLongToneExerNote(origNoteStr: beginNote)
+    retVal.note = convNote // chunks[1]
     
     return retVal
 }

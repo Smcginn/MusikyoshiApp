@@ -73,6 +73,10 @@ struct IssueWeight {
     // pitch
     static let kSlightyFlatOrSharp:   Int  =  2     // 18 // 2
     static let kVeryFlatOrSharp:      Int  =  7     // 20 // 4
+
+    static let kWaveringReasonable:   Int  =  4     // 18 // 2
+    static let kWaveringAcceptable:   Int  =  7     // 18 // 2
+    
     static let kFlatOrSharpWrongNote: Int  =  10    // 50 // 10
     
     static let kUpperPartial:         Int  =  13    // 60 // 12
@@ -212,7 +216,9 @@ enum performanceRating { // for attack, duration, and pitch
     case wrongNoteSharp
     case isUpperPartial
     case isLowerPartial
-    
+    case fluctuatingReasonable
+    case fluctuatingAcceptable
+
     case noSound
     
     static func displayStringForRating( _ rating : performanceRating,
@@ -248,7 +254,9 @@ enum performanceRating { // for attack, duration, and pitch
         case .isUpperPartial: ratingText = "Upper Partial"
         case .isLowerPartial: ratingText = "Lower Partial"
         case .noSound:        ratingText = "No Sound"
-        }
+        case .fluctuatingReasonable: ratingText = "Wavering OK"
+        case .fluctuatingAcceptable: ratingText = "Wavering Bad"
+       }
     }
 }
 
@@ -272,7 +280,7 @@ let kStopPerformanceThresholdDefault: UInt = 5
 let kStopPerformanceThresholdMax: UInt = 100
 let kStopPerformanceThresholdNoStop = kStopPerformanceThresholdMax
 var kStopPerformanceThreshold: UInt = kStopPerformanceThresholdDefault
-var doEjectorSeat = true
+var doEjectorSeat = false
 // SLIDERABLE ^
 
 // Severity -  How bad is the issue. Used to determine color of pulsing circle,
@@ -284,6 +292,30 @@ let kSeverityGreen    = 0
 let kSeverityYellow   = 1
 let kSeverityRed      = 2
 // SLIDERABLE ^
+
+///////////////   Weighted pitch score /////////////////////////
+
+// For beginning Tuba, for example. Instead of calculating
+// average pitch, this involves detecting the percentage of the time the student
+// plays the correct pitch during the performance. (Also considers percentage
+// playing in zones "near" the note, with lower weights, etc.)
+var kUseWeightedPitchScore = false
+// Ranges/Zones
+let kWeightedPitch_NoteMatch_TolRange:        Double = 0.03
+let kWeightedPitch_NoteBitLowHigh_TolRange:   Double = 0.045 // 0.06
+let kWeightedPitch_NoteQuiteLowHigh_TolRange: Double = 0.08  // 0.13
+// Weights, for hits within the different zones
+let kWeightedPitch_NoteMatch_Weight:          Double = 1.0
+let kWeightedPitch_NoteBitLowHigh_Weight:     Double = 0.65
+let kWeightedPitch_NoteQuiteLowHigh_Weight:   Double = 0.4
+// Percentage thresholds for scoring overall weighted score
+let kWeightedPitch_Threshold_Correct:         Double = 0.75
+let kWeightedPitch_Threshold_Reasonable:      Double = 0.60
+let kWeightedPitch_Threshold_Accecptable:     Double = 0.35
+// If the weighted pitch isn't the correct pitch, then need to check for partials.
+// To do that, see if there is a most common note played (other than the target).
+// To do *that*, see if *some* note was played a reasonable pecntage of the time.
+let kWeightedPitch_MostCommonNotePlayedThreshold: Double = 0.6
 
 ///////////////////////////////////////////////////////////////////////////////
 // Consts that control debug info display and printing (lots of printing) to 
@@ -314,8 +346,9 @@ let kMKDebugOpt_PrintPerfAnalysisResults = false
 let kMKDebugOpt_PrintMinimalNoteAndSoundResults = true
 var kMKDebugOpt_PrintMinimalNoteAnalysis        = true
 
-let kDoPrintAmplitude = true
+let kDoPrintAmplitude = false
+let kDoPrintFrequency = false
 let kAmplitudePrintoutMultiplier_Sim =  200.0
-let kAmplitudePrintoutMultiplier_HW  =  900.0
+let kAmplitudePrintoutMultiplier_HW  =  100.0
 var gAmplitudePrintoutMultiplier = kAmplitudePrintoutMultiplier_Sim
 

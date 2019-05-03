@@ -11,6 +11,8 @@ import Foundation
 // TODO: define a UInt8 type that safely checks and converts Int, Int32, etc.
 typealias NoteID = UInt8
 
+let kOneOctaveInSemitones = UInt8(12)
+
 // These correspond to the MIDI Standard for note IDs, 0-127.
 
 struct NoteIDs {
@@ -20,8 +22,53 @@ struct NoteIDs {
     
     static let Cminus1: NoteID  = 0    // C of Octave -1 in MIDI parlance - 8 Hz!
     static let noteUndefined    = Cminus1
-    
+
+    // Octave 0
+    static let B0: NoteID       = 23
+    static let BSharp0: NoteID  = 24
+
+    // Octave 1
+    static let C1: NoteID       = BSharp1
+    static let CSharp1: NoteID  = 25
+    static let Db1: NoteID      = CSharp1
+    static let D1: NoteID       = 26
+    static let DSharp1: NoteID  = 27
+    static let Eb1: NoteID      = DSharp1
+    static let E1: NoteID       = 28
+    static let ESharp1: NoteID  = 29
+    static let F1: NoteID       = ESharp1
+    static let FSharp1: NoteID  = 30
+    static let Gb1: NoteID      = FSharp1
+    static let G1: NoteID       = 31
+    static let GSharp1: NoteID  = 32
+    static let Ab1: NoteID      = GSharp1
+    static let A1: NoteID       = 33
+    static let ASharp1: NoteID  = 34
+    static let Bb1: NoteID      = ASharp1
+    static let B1: NoteID       = 35
+    static let BSharp1: NoteID  = 36
+
     // Octave 2
+    static let C2: NoteID       = BSharp1
+    static let CSharp2: NoteID  = 37
+    static let Db2: NoteID      = CSharp2
+    static let D2: NoteID       = 38
+    static let DSharp2: NoteID  = 39
+    static let Eb2: NoteID      = DSharp2
+    static let E2: NoteID       = 40
+    static let ESharp2: NoteID  = 41
+    static let F2: NoteID       = ESharp2
+    static let FSharp2: NoteID  = 42
+    static let Gb2: NoteID      = FSharp2
+    static let G2: NoteID       = 43
+    static let GSharp2: NoteID  = 44
+    static let Ab2: NoteID      = GSharp2
+    static let A2: NoteID       = 45
+    static let ASharp2: NoteID  = 46
+    static let Bb2: NoteID      = ASharp2
+    static let B2: NoteID       = 47
+
+    // was: below this line
     static let BSharp2: NoteID  = 48
     
     // Octave 3
@@ -91,7 +138,7 @@ struct NoteIDs {
     static let C6: NoteID       = BSharp5
     
     // Current valid Range consts for use within App (Alpha) (Just add more if needed)
-    static let firstNoteID      = C3
+    static let firstNoteID      = E1 // most recently was G1, for V1.0.0, was C3
     static let lastNoteID       = C6
     static let validNoteIDRange = firstNoteID...lastNoteID
 }
@@ -102,9 +149,13 @@ struct NoteIDs {
 // E.g., for a Bb Trumpet, an input of NoteIDs.Bb4, will return NoteIDs.C5
 // (Works corectly for non-transposing instruments as well.)
 func concertNoteIdToInstrumentNoteID(noteID: NoteID) -> NoteID {
-    var returnNoteID = NoteIDs.noteUndefined
     let transOffset =
-        UserDefaults.standard.integer(forKey: Constants.Settings.Transposition)
+        UserDefaults.standard.integer(forKey: Constants.Settings.Transposition) // TRANSHYAR
+    if transOffset == 0 {
+        return noteID
+    }
+    
+    var returnNoteID = NoteIDs.noteUndefined
     let transNote  = Int(noteID) - transOffset
     if transNote >= Int(NoteID.min)  &&  transNote <= Int(NoteID.max) {
         returnNoteID = NoteID(transNote) // safe; will fit, tested above
@@ -118,9 +169,13 @@ func concertNoteIdToInstrumentNoteID(noteID: NoteID) -> NoteID {
 // E.g., for a Bb Trumpet, an input of NoteIDs.C5, will return NoteIDs.Bb4
 // (Works corectly for non-transposing instruments as well.)
 func instrumentNoteIdToConcertNoteID(transNote: NoteID) -> NoteID {
-    var returnNoteID = NoteIDs.noteUndefined
     let transOffset =
-        UserDefaults.standard.integer(forKey: Constants.Settings.Transposition)
+        UserDefaults.standard.integer(forKey: Constants.Settings.Transposition) // TRANSHYAR
+    if transOffset == 0 {
+        return transNote
+    }
+
+    var returnNoteID = NoteIDs.noteUndefined
     let concertNoteID = Int(transNote) + transOffset
     if concertNoteID >= Int(NoteID.min)  &&  concertNoteID <= Int(NoteID.max) {
         returnNoteID = NoteID(concertNoteID) // safe; will fit, tested above

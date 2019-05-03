@@ -89,6 +89,8 @@ class PerformanceScoreObjectScheduler {
                 PerfTrkMgr.instance.linkCurrSoundToCurrScoreObject(isNewScoreObject: false)
             }
             if tuneExerVC != nil {
+                let perfID = perfScObj.perfScoreObjectID
+                print ("\n  CURSOR MOVE: At \(currSongTime), for PerfObj #\(perfID), moving cursor to \(perfScObj.xPos)\n")
                 tuneExerVC!.drawCurrNoteLineAt(xPos: CGFloat(perfScObj.xPos))
             }
         }
@@ -110,19 +112,9 @@ class PerformanceScoreObjectScheduler {
                 printNoteRelatedMsg(msg: "Attempting to deactivate PerfNote #\(perfScObj.perfNoteOrRestID), at \(currSongTime)\n")
                 let currPerfNote = PerfTrkMgr.instance.currentPerfNote
                 if currPerfNote != nil {
-                    isGood = PerfTrkMgr.instance.analyzeOneScoreObject(perfScoreObj:currPerfNote!)
-                    if !isGood {
-                        let issue: PerfIssue =
-                            PerformanceIssueMgr.instance.scanPerfScoreObjForIssues(
-                                perfScoreObj: currPerfNote!,
-                                sortCrit: gPerfIssueSortCriteria )
-                        if issue.issueScore >= IssueWeight.kNoteDuringRest {
-                            print("\n   >>>>> Would have called Ejector Seat for Missed Note or Note During Rest\n")
-                        }
-                        if doEjectorSeat &&
-                           issue.issueScore > kStopPerformanceThreshold {
-                            tuneExerVC?.stopPlaying() // Ejector Seat !!!!
-                        }
+                    if doEjectorSeat {
+                        // only do preformance analysis here if doing ejector
+                        scanNoteForIssuesForEjection(perfNote: currPerfNote)
                     }
                     if currPerfNote!.perfNoteOrRestID == perfScObj.perfNoteOrRestID {
                         PerfTrkMgr.instance.currentPerfNote = nil
@@ -152,6 +144,25 @@ class PerformanceScoreObjectScheduler {
                     }
                 }
                 perfScObj.status = .ended
+            }
+        }
+    }
+    
+    func scanNoteForIssuesForEjection(perfNote: PerformanceNote?) {
+        guard doEjectorSeat && perfNote != nil else { return }
+
+        let isGood = PerfTrkMgr.instance.analyzeOneScoreObject(perfScoreObj:perfNote!)
+        if !isGood {
+            let issue: PerfIssue =
+                PerformanceIssueMgr.instance.scanPerfScoreObjForIssues(
+                    perfScoreObj: perfNote!,
+                    sortCrit: gPerfIssueSortCriteria )
+            if issue.issueScore >= IssueWeight.kNoteDuringRest {
+                print("\n   >>>>> Would have called Ejector Seat for Missed Note or Note During Rest\n")
+            }
+            if doEjectorSeat &&
+                issue.issueScore > kStopPerformanceThreshold {
+                tuneExerVC?.stopPlaying() // Ejector Seat !!!!
             }
         }
     }

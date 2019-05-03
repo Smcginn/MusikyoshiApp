@@ -568,10 +568,10 @@ extension IAPHelper {
                     for oneItem in items {
                         print("  ------------------------------------------")
                         let orgPurchDt = oneItem.originalPurchaseDate
-                        print ("      One Item, Purchase Date:    \(orgPurchDt)")
+                        print ("      One Item, Purchase Date:   \(String(describing: orgPurchDt))")
                         
                         let expiryDt = oneItem.subscriptionExpirationDate
-                        print ("      One Item,, Expiration Date: \(expiryDt) \n")
+                        print ("      One Item,, Expiration Date: \(String(describing: expiryDt)) \n")
                     }
                     print("  ------------------------------------------")
                     
@@ -829,16 +829,16 @@ extension IAPHelper: SKPaymentTransactionObserver {
     }
     
     private func deliverPurchaseNotificationFor(identifier: String?) {
-        print("In func deliverPurchaseNotificationFor,  for \(identifier)")
-        
         guard let identifier = identifier else { return }
+        
+        print("In func deliverPurchaseNotificationFor,  for \(String(describing: identifier))")
         
         iaphPurchasedProductIdentifiers.insert(identifier)
         
         // NOTE!!!  Stores in UserDefaults. Should be somewhere else !
         UserDefaults.standard.set(true, forKey: identifier)
         
-        print("Going to post a Notification,  for \(identifier)")
+        print("Going to post a Notification,  for \(String(describing: identifier))")
         NotificationCenter.default.post(name: .IAPHelperPurchaseNotification, object: identifier)
     }
 }
