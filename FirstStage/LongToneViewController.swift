@@ -734,6 +734,7 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
             layOptions.hidePartNames = true
             layOptions.hideBarNumbers = true
             ssScrollView.optimalSingleSystem = false
+            ssScrollView.clearScoreIsSetup()
             ssScrollView.setupScore(score!, openParts: showingParts, mag: kDefaultMagnification, opt: layOptions, completion: getPlayData)
         }
         else

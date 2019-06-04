@@ -75,4 +75,6 @@ static bool kMKDebugOpt_ShowSoundsAnalysis;
 -(void) clearCurrNoteLines;
 -(void) drawCurrNoteLineAt:(CGFloat) iXPos;
 
+-(void) setShowAnalysisView: (BOOL)iShow;
+
 @end

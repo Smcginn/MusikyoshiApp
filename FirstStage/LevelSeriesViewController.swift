@@ -120,6 +120,7 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        // Ask for permission to use the microphone, if not already granted
         var permissionGranted = false
         if alwaysFalseToSuppressWarn() { print("\(permissionGranted)") }
         switch AVAudioSession.sharedInstance().recordPermission() {
@@ -640,6 +641,10 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
  
+        /*
+         // This is for quickly testing the Video view, which is not normally
+         // part of this view at all. You should completely ignore this for the
+         // purposes of Level Series Overview work.
         if gMKDebugOpt_TestVideoViewInLessonOverview { // For Video Testing.
             if indexPath.row == 1 {
                 if vhView == nil {
@@ -665,9 +670,9 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
                 return
             }
         }
+        */
         
         //Here we are going to seguae to the lesson that the user selected
-        //performSegue(withIdentifier: "LessonSegue", sender: indexPath.row)  // PPPproblem!!!!!
         let selectedCell:UITableViewCell? = tableView.cellForRow(at: indexPath)!
         selectedCell?.contentView.backgroundColor = kDefault_SelectCellBkgrndColor
         currLevel = indexPath.section
@@ -761,6 +766,7 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
         self.dismiss(animated: true, completion: nil)
     }
     
+    // Create a checkmark image
     func makeCheckboxIconImage() {
         if  checkImage != nil && nocheckImage != nil
         { return }

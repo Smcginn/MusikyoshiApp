@@ -11,6 +11,7 @@ import Foundation
 import SwiftyJSON
 
 let kFieldDataNotDefined = "NOTDEFINED"
+let kNumberField_UseDefault = "0"
 let kTryForLongtonePersonalRecord = -1
 
 struct tuneFileInfo: Codable {
@@ -21,7 +22,10 @@ struct tuneFileInfo: Codable {
     var commentStr2:    String
     var helpCode1:      String // for now.  Prob an enum
     var helpCode2:      String // for now.  Prob an enum
-    
+    var noteWidth:      String
+    var magnification:  String
+    var frameWidth:     String
+
     init()
     {
         self.fileCode        = kFieldDataNotDefined
@@ -30,7 +34,34 @@ struct tuneFileInfo: Codable {
         self.commentStr1     = kFieldDataNotDefined
         self.commentStr2     = kFieldDataNotDefined
         self.helpCode1       = kFieldDataNotDefined
-        self.helpCode2       = kFieldDataNotDefined 
+        self.helpCode2       = kFieldDataNotDefined
+        self.magnification   = kFieldDataNotDefined
+        self.noteWidth       = kFieldDataNotDefined
+        self.frameWidth      = kFieldDataNotDefined
+    }
+    
+    init( fileCode:      String,
+          xmlFile:       String,
+          title:         String,
+          commentStr1:   String,
+          commentStr2:   String,
+          helpCode1:     String,
+          helpCode2:     String,
+          noteWidth:     String,
+          magnification: String,
+          frameWidth:    String
+        )
+    {
+        self.fileCode        = fileCode
+        self.xmlFile         = xmlFile
+        self.title           = title
+        self.commentStr1     = commentStr1
+        self.commentStr2     = commentStr2
+        self.helpCode1       = helpCode1
+        self.helpCode2       = helpCode1
+        self.magnification   = magnification
+        self.noteWidth       = noteWidth
+        self.frameWidth      = frameWidth
     }
     
     init( fileCode:      String,
@@ -48,6 +79,9 @@ struct tuneFileInfo: Codable {
         self.commentStr2     = commentStr2
         self.helpCode1       = helpCode1
         self.helpCode2       = helpCode1
+        self.magnification   = kNumberField_UseDefault
+        self.noteWidth       = kNumberField_UseDefault
+        self.frameWidth      = kNumberField_UseDefault
     }
     
     init( fileCode:      String,
@@ -62,6 +96,9 @@ struct tuneFileInfo: Codable {
         self.commentStr2     = ""
         self.helpCode1       = ""
         self.helpCode2       = ""
+        self.magnification   = kNumberField_UseDefault
+        self.noteWidth       = kNumberField_UseDefault
+        self.frameWidth      = kNumberField_UseDefault
     }
 }
 extension tuneFileInfo: Equatable {
@@ -73,7 +110,10 @@ extension tuneFileInfo: Equatable {
             lhs.commentStr1 == rhs.commentStr1 &&
             lhs.commentStr1 == rhs.commentStr2 &&
             lhs.helpCode1 == rhs.helpCode1 &&
-            lhs.helpCode2 == rhs.helpCode2
+            lhs.helpCode2 == rhs.helpCode2 &&
+            lhs.magnification == rhs.magnification &&
+            lhs.noteWidth == rhs.noteWidth &&
+            lhs.frameWidth == rhs.frameWidth
     }
 }
 
@@ -106,7 +146,10 @@ let kNoTuneFileEntry = tuneFileInfo( fileCode:    "NOTDEFINED",
                                      commentStr1: "NOTDEFINED",
                                      commentStr2: "NOTDEFINED",
                                      helpCode1:   "NOTDEFINED",
-                                     helpCode2:   "NOTDEFINED"
+                                     helpCode2:   "NOTDEFINED",
+                                     noteWidth:     kNumberField_UseDefault,
+                                     magnification: kNumberField_UseDefault,
+                                     frameWidth:    kNumberField_UseDefault
                                    )
 
 enum ExerciseType {
