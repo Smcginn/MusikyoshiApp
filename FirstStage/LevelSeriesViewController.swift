@@ -284,10 +284,10 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
         super.viewWillDisappear(animated)
         
         // Orientation BS - LevelSeriesVC --> viewWillDisappear
-        let appDel = UIApplication.shared.delegate as! AppDelegate
-        appDel.orientationLock = .portrait
+//        let appDel = UIApplication.shared.delegate as! AppDelegate
+//        appDel.orientationLock = .portrait
         //AppDelegate.AppUtility.unlockOrientation()
-        AppDelegate.AppUtility.lockOrientationToPortrait()
+//        AppDelegate.AppUtility.lockOrientationToPortrait()
         //AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.all)
     }
     

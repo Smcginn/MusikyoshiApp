@@ -10,48 +10,34 @@ import UIKit
 import AVFoundation
 
 class HomeViewController: UIViewController, UITextFieldDelegate {
-        
-    @IBOutlet weak var startLessonBtn: UIButton!
     
     // action for this is embedded in Mian SB as an invoke segue action
-    @IBOutlet weak var shareButton: UIBarButtonItem!
+//    @IBOutlet weak var shareButton: UIBarButtonItem!
     
-    @IBAction func shareButtonTapped(sender: UIButton) {
-        let textToShare = "Check out the Musikyoshi app!"
-        
-        if let appListing = NSURL(string: "https://itunes.apple.com/us/app/monkey-tones/id1132920269?mt=8") {
-            let objectsToShare = [textToShare, appListing] as [Any]
-            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-            
-            // excluded activities code
-            activityVC.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.addToReadingList]
-            
-            activityVC.popoverPresentationController?.sourceView = sender
-            self.present(activityVC, animated: true, completion: nil)
-        }
-    }
-    
-    @IBOutlet weak var progressPanelView: UIView!
+//    @IBAction func shareButtonTapped(sender: UIButton) {
+//        let textToShare = "Check out the Musikyoshi app!"
+//
+//        if let appListing = NSURL(string: "https://itunes.apple.com/us/app/monkey-tones/id1132920269?mt=8") {
+//            let objectsToShare = [textToShare, appListing] as [Any]
+//            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+//
+//            // excluded activities code
+//            activityVC.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.addToReadingList]
+//
+//            activityVC.popoverPresentationController?.sourceView = sender
+//            self.present(activityVC, animated: true, completion: nil)
+//        }
+//    }
     
     @IBOutlet weak var LessonsBtn: UIButton!
-    @IBOutlet weak var ResumePracticeSessionBtn: UIButton!
     @IBOutlet weak var OverviewBtn: UIButton!
-    @IBOutlet weak var MyProfileBtn: UIButton!
-    @IBOutlet weak var ChallengeBtn: UIButton!
     @IBOutlet weak var purchaseOptionsBtn: UIButton!
     
     @IBOutlet weak var hiddenPswdTextField: UITextField!
     
-    
     var didDisplayOverview = false
     
-    @IBAction func purchaseOptionsBtn_Pressed(_ sender: Any) {
-    }
-    
     @IBAction func LessonsBtnPressed(_ sender: Any) {
-    }
-    
-    @IBAction func ResumePracticeSessionBtnPressed(_ sender: Any) {
     }
     
     @IBAction func OverviewBtnPressed(_ sender: Any) {
@@ -171,8 +157,17 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.isHidden = true
+        
         numTimesDebugStuffOnTapped = 0
         numTimesSettingsEnabledTapped = 0
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        navigationController?.navigationBar.isHidden = false
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -231,67 +226,10 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         
         hiddenPswdTextField.delegate = self
         
-        self.view.backgroundColor = kDefaultViewBackgroundColor
-        progressPanelView.isHidden = true
-        
-        // Lessons Button
-        LessonsBtn.roundedButton()
-        LessonsBtn.backgroundColor = kDefault_ButtonBckgrndColor
-        let lessonsTxt = createAttributedText(str: "Levels",
-                                              fontSize: 30)
-        LessonsBtn.titleLabel?.attributedText = lessonsTxt
-        LessonsBtn.setTitleColor(kDefault_ButtonTextColor, for: .normal)
-        
-        // Purchase Options Button
-        purchaseOptionsBtn.roundedButton()
-        purchaseOptionsBtn.backgroundColor = kDefault_ButtonBckgrndColor
-        let purchaseOptionsTxt = createAttributedText(str: "Purchase Options",
-                                                      fontSize: 20)
-        purchaseOptionsBtn.titleLabel?.attributedText = purchaseOptionsTxt
-        purchaseOptionsBtn.setTitleColor(kDefault_ButtonTextColor, for: .normal)
-
-        
-        // Resume Practice Session Button
-        ResumePracticeSessionBtn.isEnabled = false
-        ResumePracticeSessionBtn.roundedButton()
-        ResumePracticeSessionBtn.backgroundColor = kDefault_ButtonBckgrndColor
-        let resumeTxt = createAttributedText(str: "Resume Practice Session",
-                                              fontSize: 16)
-        ResumePracticeSessionBtn.titleLabel?.attributedText = resumeTxt
-        ResumePracticeSessionBtn.setTitleColor(UIColor.lightText, for: .disabled)
-        
-        // Overview Button
-        OverviewBtn.isEnabled = true
-        OverviewBtn.roundedButton()
-        OverviewBtn.backgroundColor = kDefault_ButtonBckgrndColor
-        let overviewTxt = createAttributedText(str: "Overview",
-                                               fontSize: 20)
-        OverviewBtn.titleLabel?.attributedText = overviewTxt
-        OverviewBtn.setTitleColor(kDefault_ButtonTextColor, for: .normal)
-        
-        // My Profile Button
-        MyProfileBtn.isEnabled = false
-        MyProfileBtn.roundedButton()
-        MyProfileBtn.backgroundColor = kDefault_ButtonBckgrndColor
-        let profileTxt = createAttributedText(str: "My Profile",
-                                               fontSize: 16)
-        MyProfileBtn.titleLabel?.attributedText = profileTxt
-        MyProfileBtn.setTitleColor(UIColor.lightText, for: .disabled)
-        
-        // Challenge Button
-        ChallengeBtn.isEnabled = false
-        ChallengeBtn.roundedButton()
-        ChallengeBtn.backgroundColor = kDefault_ButtonBckgrndColor
-        let challengeTxt = createAttributedText(str: "Challenge Another Player!",
-                                              fontSize: 16)
-        ChallengeBtn.titleLabel?.attributedText = challengeTxt
-        ChallengeBtn.setTitleColor(UIColor.lightText, for: .disabled)
     }
     
     @IBAction func unwindToHomeVC(unwindSegue: UIStoryboardSegue) {
         print("here in unwindToHomeVC")
     }
-
-    
     
 }
