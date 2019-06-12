@@ -65,6 +65,8 @@ static const int kSeverityRed     = 2;
     CGFloat     _noteLineXPos;
     
     int         _whichHighlight;
+    
+    BOOL        _showAnalysisView;
 }
 @end
 
@@ -88,6 +90,7 @@ static const int kSeverityRed     = 2;
         [FSAnalysisOverlayView  setShowNotesAnalysis: NO];
         
         _whichHighlight = kNoHighlight;
+        _showAnalysisView = YES;
     }
     
     return self;
@@ -400,16 +403,32 @@ static const int kSeverityRed     = 2;
     [self setNeedsDisplayInRect:rct];
 }
 
+-(void) setShowAnalysisView: (BOOL)iShow
+{
+    // Restore at some point, if needed . . .
+//    _showAnalysisView = iShow;
+//    self.hidden = !_showAnalysisView;
+}
+
+
 -(void) drawRect:(CGRect)rect
 {
     NSLog(@"\n   ******** -> In FSAnalysisOverlayView::drawRect\n");
+    
+    // Restore at some point, if needed . . .//    if (!_showAnalysisView)
+//    {   NSLog(@"\n      exiting FSAnalysisOverlayView::drawRect   #1\n");
+//        return;
+//    }
     
     [super drawRect:rect];
     
     if ( !(kMKDebugOpt_ShowSoundsAnalysis ||
            kMKDebugOpt_ShowNotesAnalysis ||
            _kDoDrawNoteLines) )
-    {  return; }
+    {
+        // NSLog(@"\n      exiting FSAnalysisOverlayView::drawRect   #2\n");
+        return;
+    }
 
     const CGFloat kNoteBottomY  = 130.0f;
     

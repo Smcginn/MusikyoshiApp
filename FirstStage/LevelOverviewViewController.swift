@@ -59,6 +59,10 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
     var selectedRhythmId: String?
     var selectedRhythmName: String?
     var selectedTitle: String?
+    var selectedNoteWidth:Int = 0
+    var selectedFrameWidth:Int = 0
+    var selectedMagnification:Float = 0.0
+
     var lessonsJson: JSON?
     var exerLevelIndex: Int = 0
     var exerExerciseIndex: Int = 0
@@ -472,6 +476,9 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
                 destination.exerNumber = currExerNumber
                 destination.exerciseName = selectedTuneId!
                 destination.navBarTitle = selectedTitle!
+                destination.specifiedMag = selectedMagnification
+                destination.specifiedNoteWidth = selectedNoteWidth
+                destination.specifiedFrameWidth = selectedFrameWidth
                 destination.bestStarScore = currStarScore
                 destination.exerciseType = exerType
                 destination.isTune = true
@@ -681,6 +688,16 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
             selectedTuneId = String(tuneInfo.xmlFile.dropLast(4))
             selectedRhythmId = String(tuneInfo.xmlFile.dropLast(4))
             selectedTitle = tuneInfo.title
+            
+            // SCORESIZE
+            // These are for debugging; easily see vals coming from json file.
+            let noteWidthStr: String = tuneInfo.noteWidth
+            selectedNoteWidth = Int(noteWidthStr)!
+            let frameWidthStr: String = tuneInfo.frameWidth
+            selectedFrameWidth = Int(frameWidthStr)!
+            let magStr: String = tuneInfo.magnification
+            let magInt:Int = Int(magStr)!
+            selectedMagnification = Float(magInt)/10.0
             
             if selectedTuneId != kFieldDataNotDefined {
                 performSegue(withIdentifier: tuneSegueIdentifier, sender: self)

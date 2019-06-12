@@ -22,7 +22,10 @@
         "commentStr1":"",
         "commentStr2":"Take a deep breath!",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN002",
         "xmlFile":"TUN002.xml",
@@ -30,15 +33,21 @@
         "commentStr1":"",
         "commentStr2":"New Note D, 1st and 3rd Valve",
         "helpCode1":"",
-        "helpCode2":""
-         },{
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
+        },{
         "fileCode":"TUN003",
         "xmlFile":"TUN003.xml",
         "title":"3. Gimme Three",
         "commentStr1":"",
         "commentStr2":"New Note E, 1st and 2nd Valve",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN004",
         "xmlFile":"TUN004.xml",
@@ -46,7 +55,10 @@
         "commentStr1":"",
         "commentStr2":"Use your tongue to make the note sound. Say 'taaaaa'",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
          },{
         "fileCode":"TUN005",
         "xmlFile":"TUN005.xml",
@@ -54,7 +66,10 @@
         "commentStr1":"",
         "commentStr2":"New Note F, 1st Valve",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN006",
         "xmlFile":"TUN006.xml",
@@ -62,7 +77,10 @@
         "commentStr1":"",
         "commentStr2":"Half Notes and Half Rests get 2 beats",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN007",
         "xmlFile":"TUN007.xml",
@@ -70,7 +88,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN008",
         "xmlFile":"TUN008.xml",
@@ -78,7 +99,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN009",
         "xmlFile":"TUN009.xml",
@@ -86,7 +110,10 @@
         "commentStr1":"",
         "commentStr2":"Remember, B is 2nd Valve",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN010",
         "xmlFile":"TUN010.xml",
@@ -94,7 +121,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN011",
         "xmlFile":"TUN011.xml",
@@ -102,7 +132,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN012",
         "xmlFile":"TUN012.xml",
@@ -110,7 +143,10 @@
         "commentStr1":"",
         "commentStr2":"New Note G, open, no valves down",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN013",
         "xmlFile":"TUN013.xml",
@@ -118,7 +154,10 @@
         "commentStr1":"",
         "commentStr2":"A quarter note and a quarter rest get one beat",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN014",
         "xmlFile":"TUN014.xml",
@@ -126,7 +165,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN015",
         "xmlFile":"TUN015.xml",
@@ -134,7 +176,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN016",
         "xmlFile":"TUN016.xml",
@@ -142,7 +187,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN017",
         "xmlFile":"TUN017.xml",
@@ -150,7 +198,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN018",
         "xmlFile":"TUN018.xml",
@@ -158,7 +209,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN019",
         "xmlFile":"TUN019.xml",
@@ -166,23 +220,32 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
-        },{
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
+       },{
         "fileCode":"TUN020",
         "xmlFile":"TUN020.xml",
         "title":"20. Moving Up",
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
-        },{
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
+       },{
         "fileCode":"TUN021",
         "xmlFile":"TUN021.xml",
         "title":"21 Go Tell Aunt Rhodie",
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN022",
         "xmlFile":"TUN022.xml",
@@ -190,7 +253,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN023",
         "xmlFile":"TUN023.xml",
@@ -198,7 +264,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN024",
         "xmlFile":"TUN024.xml",
@@ -206,7 +275,10 @@
         "commentStr1":"",
         "commentStr2":"English Folk Song",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN025",
         "xmlFile":"TUN025.xml",
@@ -214,7 +286,10 @@
         "commentStr1":"",
         "commentStr2":"Traditional",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN026",
         "xmlFile":"TUN026.xml",
@@ -222,7 +297,10 @@
         "commentStr1":"",
         "commentStr2":"Traditional English Carol",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN027",
         "xmlFile":"TUN027.xml",
@@ -230,7 +308,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN028",
         "xmlFile":"TUN028.xml",
@@ -238,7 +319,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN029",
         "xmlFile":"TUN029.xml",
@@ -246,7 +330,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN030",
         "xmlFile":"TUN030.xml",
@@ -254,7 +341,10 @@
         "commentStr1":"",
         "commentStr2":"Dotted Half Note - 3 beats!",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN031",
         "xmlFile":"TUN031.xml",
@@ -262,7 +352,10 @@
         "commentStr1":"",
         "commentStr2":"French Folk Song",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN032",
         "xmlFile":"TUN032.xml",
@@ -270,7 +363,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN033",
         "xmlFile":"TUN033.xml",
@@ -278,7 +374,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN034",
         "xmlFile":"TUN034.xml",
@@ -286,7 +385,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN035",
         "xmlFile":"TUN035.xml",
@@ -294,7 +396,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN036",
         "xmlFile":"TUN036.xml",
@@ -302,7 +407,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN037",
         "xmlFile":"TUN037.xml",
@@ -310,7 +418,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN038",
         "xmlFile":"TUN038.xml",
@@ -318,7 +429,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN039",
         "xmlFile":"TUN039.xml",
@@ -326,7 +440,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN040",
         "xmlFile":"TUN040.xml",
@@ -334,7 +451,10 @@
         "commentStr1":"",
         "commentStr2":"3/4 Time Signature - 3 Beats per measure!",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN041",
         "xmlFile":"TUN041.xml",
@@ -342,7 +462,10 @@
         "commentStr1":"",
         "commentStr2":"Traditional Mexican Folk Song",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN042",
         "xmlFile":"TUN042.xml",
@@ -350,7 +473,10 @@
         "commentStr1":"",
         "commentStr2":"Johann Strauss, Adapted",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN043",
         "xmlFile":"TUN043.xml",
@@ -358,7 +484,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN044",
         "xmlFile":"44 Soaring High - Trumpet in Bb.xml",
@@ -366,7 +495,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN045",
         "xmlFile":"45 We Finally Meet, Eighth Note! - Trumpet in Bb.xml",
@@ -374,7 +506,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN046",
         "xmlFile":"46 Squash the Eighth Note - Trumpet in Bb.xml",
@@ -382,7 +517,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN047",
         "xmlFile":"47 William Tell Overture - Trumpet in Bb.xml",
@@ -390,7 +528,10 @@
         "commentStr1":"",
         "commentStr2":"Rossini, Adapted",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN048",
         "xmlFile":"48 Rock Climbing - Trumpet in Bb.xml",
@@ -398,7 +539,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN049",
         "xmlFile":"49 Frére Jacques - Trumpet in Bb.xml",
@@ -406,7 +550,10 @@
         "commentStr1":"",
         "commentStr2":"French Folk Song",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN050",
         "xmlFile":"50 It_s a Trap! - Trumpet in Bb.xml",
@@ -414,7 +561,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN051",
         "xmlFile":"51 Bullseye - Trumpet in Bb.xml",
@@ -422,7 +572,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN052",
         "xmlFile":"52 Ha Ha Ha Ha! - Trumpet in Bb.xml",
@@ -430,7 +583,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN053",
         "xmlFile":"53 Flat Cat - Trumpet in Bb.xml",
@@ -438,7 +594,10 @@
         "commentStr1":"",
         "commentStr2":"Bb is played 1st Valve",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN054",
         "xmlFile":"54 BINGO- Trumpet in Bb.xml",
@@ -446,7 +605,10 @@
         "commentStr1":"",
         "commentStr2":"Watch the Bb! 1st Valve",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN055",
         "xmlFile":"55 Rhythm Trix - Trumpet in Bb.xml",
@@ -454,7 +616,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN056",
         "xmlFile":"56 Calico Calypso - Trumpet in Bb.xml",
@@ -462,7 +627,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN057",
         "xmlFile":"57 Sweet Pickles - Trumpet in Bb.xml",
@@ -470,7 +638,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN058",
         "xmlFile":"58 Tie Pie - Trumpet in Bb.xml",
@@ -478,7 +649,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN059",
         "xmlFile":"59 Building my future - Trumpet in Bb.xml",
@@ -486,7 +660,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN060",
         "xmlFile":"60 Silly Ties - Trumpet in Bb.xml",
@@ -494,7 +671,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN061",
         "xmlFile":"61 Tricky Slurs - Trumpet in Bb.xml",
@@ -502,7 +682,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN062",
         "xmlFile":"62 Slurful - Trumpet in Bb.xml",
@@ -510,7 +693,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN063",
         "xmlFile":"63 Rise and Fall - Trumpet in Bb.xml",
@@ -518,7 +704,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN064",
         "xmlFile":"64 Minuet - Trumpet in Bb.xml",
@@ -526,7 +715,10 @@
         "commentStr1":"",
         "commentStr2":"Bach",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN065",
         "xmlFile":"65 Sonata in A Major - Trumpet in Bb.xml",
@@ -534,7 +726,10 @@
         "commentStr1":"",
         "commentStr2":"Mozart, adapted",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN066",
         "xmlFile":"66 Haydn Allegro - Trumpet in Bb.xml",
@@ -542,7 +737,10 @@
         "commentStr1":"",
         "commentStr2":"Excerpt from 12 Easy Pieces",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN067",
         "xmlFile":"67 Swing Low Sweet Chariot - Trumpet in Bb.xml",
@@ -550,7 +748,10 @@
         "commentStr1":"",
         "commentStr2":"Traditional",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN068",
         "xmlFile":"68 The Treasure - Trumpet in Bb.xml",
@@ -558,7 +759,10 @@
         "commentStr1":"",
         "commentStr2":"Czech Folk Song",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN069",
         "xmlFile":"69 Hard Times Come Again No More - Trumpet in Bb.xml",
@@ -566,7 +770,10 @@
         "commentStr1":"",
         "commentStr2":"Stephen Collins Foster",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN070",
         "xmlFile":"70 Auld Lang Syne- Trumpet in Bb.xml",
@@ -574,7 +781,10 @@
         "commentStr1":"",
         "commentStr2":"Scottish Traditional",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN071",
         "xmlFile":"71 Lilly Dale- Trumpet in Bb.xml",
@@ -582,7 +792,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN072",
         "xmlFile":"72 Nanuma- Trumpet in Bb.xml",
@@ -590,7 +803,10 @@
         "commentStr1":"",
         "commentStr2":"Ghanian Folk Melody",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN073",
         "xmlFile":"73 A Keelie Macolay - Trumpet in Bb.xml",
@@ -598,7 +814,10 @@
         "commentStr1":"",
         "commentStr2":"Ghanian Folk Melody",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN074",
         "xmlFile":"74 Uele! The Current is Very Strong! - Trumpet in Bb.xml",
@@ -606,7 +825,10 @@
         "commentStr1":"",
         "commentStr2":"Congalese Lullaby",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN075",
         "xmlFile":"75 Azulao - Trumpet in Bb.xml",
@@ -614,7 +836,10 @@
         "commentStr1":"",
         "commentStr2":"Brazilian Children's Song",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN076",
         "xmlFile":"76 Daisy Deane - Trumpet in Bb.xml",
@@ -622,7 +847,10 @@
         "commentStr1":"",
         "commentStr2":"JR Murray",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN077",
         "xmlFile":"77 Sleep My Baby - Trumpet.xml",
@@ -630,7 +858,10 @@
         "commentStr1":"",
         "commentStr2":"Moroccan Folk Melody",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN078",
         "xmlFile":"78 My Old Kentucky Home, Goodnight- Trumpet in Bb.xml",
@@ -638,7 +869,10 @@
         "commentStr1":"",
         "commentStr2":"Stephen Collins Foster",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN079",
         "xmlFile":"79 man on the flying trapeze.xml",
@@ -646,7 +880,10 @@
         "commentStr1":"",
         "commentStr2":"Greg Leybourne",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN080",
         "xmlFile":"80 Sakura Trumpet.xml",
@@ -654,7 +891,10 @@
         "commentStr1":"",
         "commentStr2":"Japanese Folk Song",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN081",
         "xmlFile":"81 A Penny for Your Thoughts - Trumpet.xml",
@@ -662,7 +902,10 @@
         "commentStr1":"",
         "commentStr2":"Stephen Collins Foster",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN082",
         "xmlFile":"82 Jeanie with the Light Brown Hair - Trumpet.xml",
@@ -670,7 +913,10 @@
         "commentStr1":"",
         "commentStr2":"Stephen Collins Foster",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN083",
         "xmlFile":"83 - Day OH!.xml",
@@ -678,7 +924,10 @@
         "commentStr1":"",
         "commentStr2":"Jamaican Folk Song",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN084",
         "xmlFile":"84 - O Sapo Nao Lava O Pe.xml",
@@ -686,7 +935,10 @@
         "commentStr1":"",
         "commentStr2":"The Toad Does Not Wash It's Foot- Brazilian Children's Song",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN085",
         "xmlFile":"85 Oh Shenandoah - Trumpet in Bb.xml",
@@ -694,7 +946,10 @@
         "commentStr1":"",
         "commentStr2":"American Folk Song",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN086",
         "xmlFile":"86 C Me Go! tpt.xml",
@@ -702,7 +957,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN087",
         "xmlFile":"87 C Scale - Trumpet in Bb.xml",
@@ -710,7 +968,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN088",
         "xmlFile":"88 C Arpeggio- tpt.xml",
@@ -718,7 +979,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN089",
         "xmlFile":"89 On Top of Old Smoky.xml",
@@ -726,7 +990,10 @@
         "commentStr1":"",
         "commentStr2":"American Folk Song",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN090",
         "xmlFile":"90 Joy to the World tpt.xml",
@@ -734,7 +1001,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN091",
         "xmlFile":"91 Second Valve, Pal!.xml",
@@ -742,7 +1012,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN092",
         "xmlFile":"92 F Sharp City -tpt.xml",
@@ -750,7 +1023,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN093",
         "xmlFile":"93 Farendole .xml",
@@ -758,7 +1034,10 @@
         "commentStr1":"",
         "commentStr2":"Bizet",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN094",
         "xmlFile":"94 Symphonie Fantastique _Dies Irae_ .xml",
@@ -766,7 +1045,10 @@
         "commentStr1":"",
         "commentStr2":"Berlioz",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN095",
         "xmlFile":"95 Pomp and Circumstance - tpt.xml",
@@ -774,7 +1056,10 @@
         "commentStr1":"",
         "commentStr2":"Elgar",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN096",
         "xmlFile":"96 Knuckle Song (Bubblegum) Trumpet.xml",
@@ -782,7 +1067,10 @@
         "commentStr1":"",
         "commentStr2":"Traditional",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN097",
         "xmlFile":"97 Old Timer Bill.xml",
@@ -790,7 +1078,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN098",
         "xmlFile":"98 See_ That_s Sharp! - tpt.xml",
@@ -798,7 +1089,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN099",
         "xmlFile":"99 See_ That_s Still Sharp! - tpt.xml",
@@ -806,7 +1100,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN100",
         "xmlFile":"100 Take Me Out to the Ball Game.xml",
@@ -814,7 +1111,10 @@
         "commentStr1":"",
         "commentStr2":"Norworth/VonTilzer",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN101",
         "xmlFile":"101 Deck the Halls Trumpet.xml",
@@ -822,7 +1122,10 @@
         "commentStr1":"",
         "commentStr2":"Traditional",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN102",
         "xmlFile":"102 Loch Lamond Trumpet.xml",
@@ -830,7 +1133,10 @@
         "commentStr1":"",
         "commentStr2":"Scottish Traditional Tune",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN103",
         "xmlFile":"103 Korobeiniki Trumpet.xml",
@@ -838,7 +1144,10 @@
         "commentStr1":"",
         "commentStr2":"Traditional Russian Melody",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN104",
         "xmlFile":"104 Shalom, Chavarim Trumpet.xml",
@@ -846,7 +1155,10 @@
         "commentStr1":"",
         "commentStr2":"Israeli Folk Song",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN105",
         "xmlFile":"105 Habanera - Trumpet.xml",
@@ -854,7 +1166,10 @@
         "commentStr1":"",
         "commentStr2":"Bizet's Carmen",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN106",
         "xmlFile":"106 Entry of the Gladiators -tpt.xml",
@@ -862,7 +1177,10 @@
         "commentStr1":"",
         "commentStr2":"Fucik",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN107",
         "xmlFile":"107 Trumpet Voluntary - Trumpet.xml",
@@ -870,7 +1188,10 @@
         "commentStr1":"",
         "commentStr2":"Clarke",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN108",
         "xmlFile":"108 Red River Valley - Trumpet.xml",
@@ -878,7 +1199,10 @@
         "commentStr1":"",
         "commentStr2":"American Folk Song",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN109",
         "xmlFile":"109 Trepak - Trumpet.xml",
@@ -886,7 +1210,10 @@
         "commentStr1":"",
         "commentStr2":"Tchaikovsky's Nutcracker Suite",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN110",
         "xmlFile":"110 The Entertainer -tpt.xml",
@@ -894,7 +1221,10 @@
         "commentStr1":"",
         "commentStr2":"Scott Joplin",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN111",
         "xmlFile":"111 Waltzing Matilda - Trumpet.xml",
@@ -902,7 +1232,10 @@
         "commentStr1":"",
         "commentStr2":"Australian Folk Song",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN112",
         "xmlFile":"112 Irish Tune From County Derry Trumpet.xml",
@@ -910,7 +1243,10 @@
         "commentStr1":"",
         "commentStr2":"Percy Grainger",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN113",
         "xmlFile":"113 Go Down Moses - Trumpet in Bb.xml",
@@ -918,15 +1254,21 @@
         "commentStr1":"",
         "commentStr2":"Traditional",
         "helpCode1":"",
-        "helpCode2":""
-         },{
+        "helpCode2":"",
+        "noteWidth":"25",
+        "magnification":"12",
+        "frameWidth":"4000"
+        },{
         "fileCode":"TUN114",
         "xmlFile":"114 Children_s March - Trumpet.xml",
         "title":"114. Children's March",
         "commentStr1":"",
         "commentStr2":"Percy Grainger",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"25",
+        "magnification":"12",
+        "frameWidth":"6000"
         },{
         "fileCode":"TUN115",
         "xmlFile":"115 When Johnny Comes Marching Home Trumpet.xml",
@@ -934,7 +1276,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN116",
         "xmlFile":"116 Irish Washer Woman Trumpet.xml",
@@ -942,7 +1287,10 @@
         "commentStr1":"",
         "commentStr2":"Irish Traditional Tune",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN117",
         "xmlFile":"117 Simple Gifts - tpt.xml",
@@ -950,7 +1298,10 @@
         "commentStr1":"",
         "commentStr2":"Shaker Tune - Brackett",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN118",
         "xmlFile":"118 March from The Nutcracker - Trumpet.xml",
@@ -958,15 +1309,21 @@
         "commentStr1":"",
         "commentStr2":"Tchaikovsky",
         "helpCode1":"",
-        "helpCode2":""
-         },{
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
+        },{
         "fileCode":"TUN119",
         "xmlFile":"119 Joy to the World .musicxml",
         "title":"119. Joy to the World",
         "commentStr1":"",
         "commentStr2":"Traditional",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"TUN120",
         "xmlFile":"120 Nessun Dorma - tpt.xml",
@@ -974,7 +1331,10 @@
         "commentStr1":"",
         "commentStr2":"Puccini, Adapted",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"INT001",
         "xmlFile":"Intervals 1 Major 2nd.xml",
@@ -982,7 +1342,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"INT002",
         "xmlFile":"Intervals 2- 3rds.xml",
@@ -990,7 +1353,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"INT003",
         "xmlFile":"Intervals 3 - 4ths.xml",
@@ -998,7 +1364,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"INT004",
         "xmlFile":"Intervals 4 - 5ths.xml",
@@ -1006,7 +1375,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"INT005",
         "xmlFile":"Intervals 5 - More 5ths.xml",
@@ -1014,7 +1386,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"INT006",
         "xmlFile":"Intervals 6 - Quicker 2nds, 3rds, 4ths.xml",
@@ -1022,7 +1397,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"SLR001",
         "xmlFile":"SLR001.xml",
@@ -1030,7 +1408,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"SLR002",
         "xmlFile":"SLR002.xml",
@@ -1038,7 +1419,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"SLR003",
         "xmlFile":"SLR003.xml",
@@ -1046,7 +1430,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
 
         },{
         "fileCode":"SLR004",
@@ -1055,7 +1442,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"SLR005",
         "xmlFile":"SLR005.xml",
@@ -1063,7 +1453,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"SLR006",
         "xmlFile":"SLR006.xml",
@@ -1071,7 +1464,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"SLR007",
         "xmlFile":"SLR007.xml",
@@ -1079,7 +1475,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"SLR008",
         "xmlFile":"Lip Slur 8 Trumpet.xml",
@@ -1087,7 +1486,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"SLR009",
         "xmlFile":"Lip Slur 9 Trumpet.xml",
@@ -1095,7 +1497,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"SLR010",
         "xmlFile":"Lip Slur 10 Trumpet.xml",
@@ -1103,7 +1508,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"SLR011",
         "xmlFile":"Lip Slur 11 Trumpet.xml",
@@ -1111,7 +1519,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"SLR012",
         "xmlFile":"Lip Slur 12 Trumpet.xml",
@@ -1119,7 +1530,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"SLR013",
         "xmlFile":"Lip Slur 13 Trumpet.xml",
@@ -1127,7 +1541,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"SLR014",
         "xmlFile":"Lip Slur 14 Trumpet.xml",
@@ -1135,7 +1552,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"SLR015",
         "xmlFile":"Lip Slur 15 Trumpet.xml",
@@ -1143,7 +1563,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"SLR016",
         "xmlFile":"Lip Slur 16 Trumpet.xml",
@@ -1151,7 +1574,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"SLR017",
         "xmlFile":"Lip Slur 17 Trumpet.xml",
@@ -1159,7 +1585,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"SLR018",
         "xmlFile":"Lip Slur 18 Trumpet.xml",
@@ -1167,7 +1596,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"SLR019",
         "xmlFile":"Lip Slur 19 Trumpet.xml",
@@ -1175,7 +1607,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"SLR020",
         "xmlFile":"Lip Slur 20 Trumpet.xml",
@@ -1183,7 +1618,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"SLR021",
         "xmlFile":"Lip Slur 21.xml",
@@ -1191,7 +1629,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"SLR022",
         "xmlFile":"Lip Slur 22 Trumpet.xml",
@@ -1199,7 +1640,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"SLR023",
         "xmlFile":"Lip Slur 23.xml",
@@ -1207,7 +1651,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"SLR024",
         "xmlFile":"Lip Slur 24 Trumpet.xml",
@@ -1215,7 +1662,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"SLR025",
         "xmlFile":"Lip Slur 25 Trumpet.xml",
@@ -1223,7 +1673,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"SLR026",
         "xmlFile":"Lip Slur 26.xml",
@@ -1231,7 +1684,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"25",
+        "magnification":"12",
+        "frameWidth":"6000"
         },{
         "fileCode":"PTY001",
         "xmlFile":"PTY001.xml",
@@ -1239,7 +1695,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY002",
         "xmlFile":"PTY002.xml",
@@ -1247,7 +1706,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY003",
         "xmlFile":"PTY003.xml",
@@ -1255,7 +1717,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY004",
         "xmlFile":"PTY004.xml",
@@ -1263,7 +1728,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY005",
         "xmlFile":"PTY005.xml",
@@ -1271,7 +1739,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY006",
         "xmlFile":"PTY006.xml",
@@ -1279,7 +1750,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY007",
         "xmlFile":"PTY007.xml",
@@ -1287,7 +1761,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY008",
         "xmlFile":"PTY008.xml",
@@ -1295,7 +1772,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY009",
         "xmlFile":"PTY009.xml",
@@ -1303,7 +1783,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY010",
         "xmlFile":"PTY010.xml",
@@ -1311,7 +1794,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY011",
         "xmlFile":"PTY011.xml",
@@ -1319,7 +1805,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY012",
         "xmlFile":"PTY012.xml",
@@ -1327,7 +1816,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
          "fileCode":"PTY013",
         "xmlFile":"PTY013.xml",
@@ -1335,7 +1827,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY014",
         "xmlFile":"PTY014.xml",
@@ -1343,7 +1838,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY015",
         "xmlFile":"PTY015.xml",
@@ -1351,7 +1849,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY016",
         "xmlFile":"PTY016.xml",
@@ -1359,7 +1860,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
          "fileCode":"PTY017",
         "xmlFile":"PTY017.xml",
@@ -1367,7 +1871,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY018",
         "xmlFile":"PTY018.xml",
@@ -1375,7 +1882,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY019",
         "xmlFile":"PTY019.xml",
@@ -1383,7 +1893,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY020",
         "xmlFile":"PTY020.xml",
@@ -1391,7 +1904,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY021",
         "xmlFile":"PTY021.xml",
@@ -1399,7 +1915,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY022",
         "xmlFile":"PTY022.xml",
@@ -1407,7 +1926,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY023",
         "xmlFile":"PTY023.xml",
@@ -1415,7 +1937,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
           "fileCode":"PTY024",
         "xmlFile":"Rhythm Party 24.xml",
@@ -1423,7 +1948,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
          "fileCode":"PTY025",
         "xmlFile":"Rhythm Party 25 tpt.xml",
@@ -1431,7 +1959,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY026",
         "xmlFile":"Rhythm Party 26.xml",
@@ -1439,7 +1970,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY027",
         "xmlFile":"Rhythm Party 27.xml",
@@ -1447,7 +1981,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY028",
         "xmlFile":"Rhythm Party 28.xml",
@@ -1455,7 +1992,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY029",
         "xmlFile":"Rhythm Party 29.xml",
@@ -1463,7 +2003,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY030",
         "xmlFile":"Rhythm Party 30.xml",
@@ -1471,7 +2014,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY031",
         "xmlFile":"Rhythm Party 31.xml",
@@ -1479,7 +2025,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY032",
         "xmlFile":"Rhythm Party 32.xml",
@@ -1487,7 +2036,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY033",
         "xmlFile":"Rhythm Party 33.xml",
@@ -1495,7 +2047,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY034",
         "xmlFile":"Rhythm Party 34.xml",
@@ -1503,7 +2058,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY035",
         "xmlFile":"Rhythm Party 35 - tpt.xml",
@@ -1511,7 +2069,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
          "fileCode":"PTY036",
         "xmlFile":"Rhythm Party 36 - tpt.xml",
@@ -1519,7 +2080,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY037",
         "xmlFile":"Rhythm Party 37 - tpt.xml",
@@ -1527,7 +2091,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY038",
         "xmlFile":"Rhythm Party 38 - tpt.xml",
@@ -1535,7 +2102,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY039",
         "xmlFile":"Rhythm Party 39 - tpt.xml",
@@ -1543,7 +2113,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY040",
         "xmlFile":"Rhythm Party 40 - tpt.xml",
@@ -1551,7 +2124,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY041",
         "xmlFile":"Rhythm Party 41 - tpt.xml",
@@ -1559,7 +2135,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY042",
         "xmlFile":"Rhythm Party 42 - tpt.xml",
@@ -1567,7 +2146,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
          "fileCode":"PTY043",
         "xmlFile":"Rhythm Party 43 tpt.xml",
@@ -1575,7 +2157,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY044",
         "xmlFile":"Rhythm Party 44 - tpt.xml",
@@ -1583,7 +2168,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY045",
         "xmlFile":"Rhythm Party 45 - tpt.xml",
@@ -1591,7 +2179,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY046",
         "xmlFile":"Rhythm Party 46 - tpt.xml",
@@ -1599,7 +2190,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY047",
         "xmlFile":"Rhythm Party 47 - tpt.xml",
@@ -1607,7 +2201,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY048",
         "xmlFile":"Rhythm Party 48 - tpt.xml",
@@ -1615,7 +2212,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY049",
         "xmlFile":"Rhythm Party 49 - tpt.xml",
@@ -1623,7 +2223,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY050",
         "xmlFile":"Rhythm Party 50- tpt.xml",
@@ -1631,7 +2234,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY051",
         "xmlFile":"Rhythm Party 51- tpt.xml",
@@ -1639,7 +2245,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY052",
         "xmlFile":"Rhythm Party 52- tpt.xml",
@@ -1647,7 +2256,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY053",
         "xmlFile":"Rhythm Party 53- tpt.xml",
@@ -1655,7 +2267,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY054",
         "xmlFile":"Rhythm Party 54- tpt.xml",
@@ -1663,7 +2278,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY055",
         "xmlFile":"Rhythm Party 55- tpt.xml",
@@ -1671,7 +2289,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
          "fileCode":"PTY056",
         "xmlFile":"Rhythm Party 56- tpt.xml",
@@ -1679,7 +2300,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
          "fileCode":"PTY057",
         "xmlFile":"Rhythm Party 57- tpt.xml",
@@ -1687,7 +2311,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY058",
         "xmlFile":"Rhythm Party 58- tpt.xml",
@@ -1695,7 +2322,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY059",
         "xmlFile":"Rhythm Party 59- tpt.xml",
@@ -1703,7 +2333,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY060",
         "xmlFile":"Rhythm Party 60- tpt.xml",
@@ -1711,7 +2344,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"25",
+        "magnification":"12",
+        "frameWidth":"3500"
         },{
         "fileCode":"PTY061",
         "xmlFile":"Rhythm Party 61- tpt.xml",
@@ -1719,7 +2355,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PTY062",
         "xmlFile":"Rhythm Party 62- tpt.xml",
@@ -1727,7 +2366,10 @@
         "commentStr1":"",
         "commentStr2":"Clap this exercise",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP002",
         "xmlFile":"PRP002.xml",
@@ -1735,7 +2377,10 @@
         "commentStr1":"This exercise will prepare you for the next Tune",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP003",
         "xmlFile":"PRP003.xml",
@@ -1743,7 +2388,10 @@
         "commentStr1":"This exercise will prepare you for the next Tune",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP004",
         "xmlFile":"PRP004.xml",
@@ -1751,7 +2399,10 @@
         "commentStr1":"This exercise will prepare you for the next Tune",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP006",
         "xmlFile":"PRP006.xml",
@@ -1759,7 +2410,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP007",
         "xmlFile":"PRP007.xml",
@@ -1767,7 +2421,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP009",
         "xmlFile":"PRP009.xml",
@@ -1775,7 +2432,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP010",
         "xmlFile":"PRP010.xml",
@@ -1783,7 +2443,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP013",
         "xmlFile":"PRP013.xml",
@@ -1791,7 +2454,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP016",
         "xmlFile":"PRP016.xml",
@@ -1799,7 +2465,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP017",
         "xmlFile":"PRP017.xml",
@@ -1807,7 +2476,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP018",
         "xmlFile":"PRP018.xml",
@@ -1815,7 +2487,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP020",
         "xmlFile":"PRP020.xml",
@@ -1823,7 +2498,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP021",
         "xmlFile":"PRP021.xml",
@@ -1831,7 +2509,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP022",
         "xmlFile":"PRP022.xml",
@@ -1839,7 +2520,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP024",
         "xmlFile":"PRP024.xml",
@@ -1847,7 +2531,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP025",
         "xmlFile":"PRP025.xml",
@@ -1855,7 +2542,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
          "fileCode":"PRP026",
         "xmlFile":"PRP026.xml",
@@ -1863,7 +2553,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP028",
         "xmlFile":"PRP028.xml",
@@ -1871,7 +2564,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP029",
         "xmlFile":"PRP029.xml",
@@ -1879,7 +2575,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP030",
         "xmlFile":"PRP030.xml",
@@ -1887,7 +2586,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP032",
         "xmlFile":"PRP032.xml",
@@ -1895,7 +2597,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP033",
         "xmlFile":"PRP033.xml",
@@ -1903,7 +2608,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP034",
         "xmlFile":"PRP034.xml",
@@ -1911,7 +2619,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP036",
         "xmlFile":"PRP036.xml",
@@ -1919,7 +2630,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP037",
         "xmlFile":"PRP037.xml",
@@ -1927,7 +2641,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP038",
         "xmlFile":"PRP038.xml",
@@ -1935,7 +2652,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP040",
         "xmlFile":"PRP040.xml",
@@ -1943,7 +2663,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
          "fileCode":"PRP041",
         "xmlFile":"Rhythm Prep for Tune 41 - tpt.xml",
@@ -1951,7 +2674,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP042",
         "xmlFile":"Rhythm Prep for Tune 42.xml",
@@ -1959,7 +2685,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP044",
         "xmlFile":"Rhythm Prep for Tune 44 - tpt.xml",
@@ -1967,7 +2696,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP045",
         "xmlFile":"Rhythm Prep for Tune 45 - tpt.xml",
@@ -1975,7 +2707,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP046",
         "xmlFile":"Rhythm Prep for Tune 46 - Trumpet in Bb.xml",
@@ -1983,7 +2718,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
          "fileCode":"PRP049",
         "xmlFile":"Rhythm Prep for Tune 49.xml",
@@ -1991,7 +2729,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP050",
         "xmlFile":"Rhythm Prep for Tune 50 - tpt.xml",
@@ -1999,7 +2740,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP054",
         "xmlFile":"Rhythm Prep for Tune 54.xml",
@@ -2007,7 +2751,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP055",
         "xmlFile":"Rhythm Prep For Tune 55 Trumpet in Bb.xml",
@@ -2015,7 +2762,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP056",
         "xmlFile":"Rhythm Prep for Tune 56 - tpt.xml",
@@ -2023,7 +2773,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
          "fileCode":"PRP059",
         "xmlFile":"Rhythm Prep for Tune 59- Trumpet in Bb.xml",
@@ -2031,7 +2784,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
          "fileCode":"PRP060",
         "xmlFile":"Rhythm Prep for Tune 60- Trumpet in Bb.xml",
@@ -2039,7 +2795,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP064",
         "xmlFile":"Rhythm Prep for Tune 64 - tpt.xml",
@@ -2047,7 +2806,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP065",
         "xmlFile":"Rhythm Prep for Tune 65 - tpt.xml",
@@ -2055,7 +2817,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP067",
         "xmlFile":"Rhythm Prep for Tune 67.xml",
@@ -2063,7 +2828,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP068",
         "xmlFile":"Rhythm Prep for Tune 68 - Tpt.xml",
@@ -2071,7 +2839,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP069",
         "xmlFile":"Rhythm Prep for Tune 69 - tpt.xml",
@@ -2079,7 +2850,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP071",
         "xmlFile":"Rhythm Prep for Tune 71 - tpt.xml",
@@ -2087,7 +2861,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP072",
         "xmlFile":"Rhythm Prep for Tune 72- Trumpet in Bb.xml",
@@ -2095,7 +2872,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP073",
         "xmlFile":"Rhythm Prep for Tune 73 - tpt.xml",
@@ -2103,7 +2883,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP075",
         "xmlFile":"Rhythm Prep for Tune 75 - tpt.xml",
@@ -2111,7 +2894,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP076",
         "xmlFile":"Rhythm Prep for Tune 76 Daisy Deane - Trumpet in Bb.xml",
@@ -2119,7 +2905,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP077",
         "xmlFile":"Rhythm Prep for Tune 77 Sleep My Baby - Trumpet.xml",
@@ -2127,7 +2916,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP079",
         "xmlFile":"Rhythm Prep for Tune 79 man on the flying trapeze.xml",
@@ -2135,7 +2927,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP081",
         "xmlFile":"Rhythm Prep for Tune 81 - Tpt.xml",
@@ -2143,7 +2938,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP083",
         "xmlFile":"Rhythm Prep for Tune 83 - Tpt.xml",
@@ -2151,7 +2949,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
          "fileCode":"PRP085",
         "xmlFile":"Rhythm Prep for Tune 85 - Trumpet in Bb.xml",
@@ -2159,7 +2960,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP093",
         "xmlFile":"Rhythm Prep for Tune 93.xml",
@@ -2167,7 +2971,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP097",
         "xmlFile":"Rhythm Prep for Tune 97.xml",
@@ -2175,7 +2982,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP099",
         "xmlFile":"Rhythm Prep for Tune 99 - tpt.xml",
@@ -2183,7 +2993,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
          "fileCode":"PRP101",
         "xmlFile":"Rhythm Prep for Tune 101.xml",
@@ -2191,7 +3004,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP103",
         "xmlFile":"Rhythm Prep for Tune 103.xml",
@@ -2199,7 +3015,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP105",
         "xmlFile":"Rhythm Prep for Tune 105.xml",
@@ -2207,7 +3026,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP110",
         "xmlFile":"Rhythm Prep for Tune 110.xml",
@@ -2215,7 +3037,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP114",
         "xmlFile":"Rhythm Prep for Tune 114.xml",
@@ -2223,7 +3048,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"25",
+        "magnification":"12",
+        "frameWidth":"7500"
         },{
         "fileCode":"PRP116",
         "xmlFile":"Rhythm Prep for Tune 116.xml",
@@ -2231,7 +3059,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"PRP119",
         "xmlFile":"Rhythm Prep for Tune 119.xml",
@@ -2239,7 +3070,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"SCP001",
         "xmlFile":"Scale Power 1 - tpt .xml",
@@ -2247,7 +3081,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"SCP002",
         "xmlFile":"Scale Power 2 - tpt .xml",
@@ -2255,7 +3092,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"SCP003",
         "xmlFile":"Scale Power 3 - G major - Trumpet in Bb.xml",
@@ -2263,7 +3103,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"SCP004",
         "xmlFile":"Scale Power 4 - Eb major - Trumpet in Bb.xml",
@@ -2271,7 +3114,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"SCP005",
         "xmlFile":"Scale Power 5 - Eb Scale - tpt .xml",
@@ -2279,7 +3125,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"SCP006",
         "xmlFile":"Scale Power 6 Chromatic Scale - Trumpet in Bb.xml",
@@ -2287,7 +3136,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"SCP007",
         "xmlFile":"Scale Power 7 -C minor - Trumpet in Bb.xml",
@@ -2295,7 +3147,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"SCP008",
         "xmlFile":"Scale Power 8 - E minor - Trumpet in Bb.xml",
@@ -2303,7 +3158,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"SCP009",
         "xmlFile":"Scale Power 9 D minor - Trumpet in Bb.xml",
@@ -2311,7 +3169,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"SCP010",
         "xmlFile":"Scale Power 10 - F Major - Trumpet in Bb.xml",
@@ -2319,7 +3180,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         },{
         "fileCode":"SCP011",
         "xmlFile":"Scale Power 11 - G major - Trumpet in Bb.xml",
@@ -2327,7 +3191,10 @@
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
-        "helpCode2":""
+        "helpCode2":"",
+        "noteWidth":"0",
+        "magnification":"0",
+        "frameWidth":"0"
         }
  ]
 }

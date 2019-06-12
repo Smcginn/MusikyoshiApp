@@ -188,7 +188,7 @@ class InternalSettingsTableViewController : UITableViewController {
     
     func setupSlider3() { // kSoundStartAdjustment
         // assume hardware
-        let sliderMinVal: Float = 0.1
+        let sliderMinVal: Float = 0.02
         let sliderMaxVal: Float = 0.275
         
 //        let currentVal = kSoundStartAdjustment

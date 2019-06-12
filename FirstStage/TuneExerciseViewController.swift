@@ -23,6 +23,9 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
     // Invoking VC sets these
     var navBarTitle:String   = ""         // to use as the screen's title
     var exerciseName         = ""         // the XML file to load
+    var specifiedMag: Float  = 0          // from TuneMapping json file
+    var specifiedNoteWidth:  Int = 0      // from TuneMapping json file
+    var specifiedFrameWidth: Int = 0      // from TuneMapping json file
     var isTune               = false
     var exerciseType: ExerciseType = .tuneExer // tune, rhythm party, rhythm prep, etc.
     var exerNumber: Int      = -1
@@ -326,8 +329,15 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
     }
     
     func setBestStarScore(newScore: Int) {
-        if newScore > bestStarScore {
-            bestStarScore = newScore
+        var theNewScore = newScore
+        if theNewScore < kNoStars {
+            theNewScore = kNoStars
+        } else if theNewScore > kFourStars {
+            theNewScore = kFourStars
+        }
+        
+        if theNewScore > bestStarScore {
+            bestStarScore = theNewScore
         }
     }
     var bestStarScore: Int = 0
@@ -463,6 +473,8 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
 
         playForMeButton.isEnabled = false
         if playButton.currentTitle == "Start Playing" {
+            
+            showAnalysisOverview(doShow: false)
 //            AVAudioSessionManager.sharedInstance.setSessionMode(forVideoPlayback: false)
             
 //            playButton.setTitle("Stop", forState: UIControlState.Normal)
@@ -542,24 +554,25 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
         print("loadOptions: \(String(describing: loadOptions))")
 //        print("errP: \(errP)")
 
-
-        ////////////
-        // SFUserDefs
-        
         // Part of first pass, trying things out. Might not keep this approach.
         var instrMods = MusicXMLInstrumentModifiers()
         instrMods.setForTrombone()
         //instrMods.setForTrumpet()
 
+        // SCORESIZE
+        var widthToUse = UserDefaults.standard.double(forKey: Constants.Settings.SmallestNoteWidth)
+        if specifiedNoteWidth != 0 {
+            widthToUse = 25
+        }
+        let sigWidth = UserDefaults.standard.double(forKey: Constants.Settings.SignatureWidth)
         guard let xmlData = MusicXMLModifier.modifyXMLToData(
                 musicXMLUrl: URL(fileURLWithPath: filePath),
-                smallestWidth: UserDefaults.standard.double(forKey: Constants.Settings.SmallestNoteWidth),
-                signatureWidth: UserDefaults.standard.double(forKey: Constants.Settings.SignatureWidth),
+                smallestWidth: widthToUse,
+                signatureWidth: sigWidth,
                 InstrMods: instrMods) else {
             print("Cannot get modified xmlData from \(filePath)!")
             return
         }
-        ////////////
 
         if let score0 = SSScore(xmlData: xmlData, options: loadOptions, error: &err) {
             score = score0
@@ -587,11 +600,23 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
 //            } else {
 //                ssScrollView.optimalSingleSystem = true
             }
-            //            ssScrollView.setupScore(score, openParts: showingParts, mag: kDefaultMagnification, opt: layOptions)
-            ssScrollView.setupScore(score!, openParts: showingParts, mag: kDefaultMagnification, opt: layOptions, completion: getPlayData)
+
+            var kMag: Float = kDefaultMagnification
+            if specifiedMag != 0.0 {
+                kMag = specifiedMag
+            }
+            
+            if specifiedFrameWidth != 0 {
+                ssScrollView.setSpecifiedFrameWidth(Int32(specifiedFrameWidth))
+            }
+            
+            ssScrollView.clearScoreIsSetup()
+            ssScrollView.setupScore( score!,   openParts: showingParts,   mag: kMag,
+                                     opt: layOptions,    completion: getPlayData )
         }
 
         if err.err != sscore_NoError {
+            itsBad() // so can set a breakpoint
             switch (err.err) {
             case sscore_OutOfMemoryError:	print("out of memory")
 
@@ -873,6 +898,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
             kMKDebugOpt_PrintMinimalNoteAnalysis = true
             performPostPerfAnalysis()
         }
+        ssScrollView.isScrollEnabled = true
     }
 
     func performPostPerfAnalysis()
@@ -1151,6 +1177,8 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
 //        exerciseDuration_ms += kBeginningPause_ms
         exerciseDuration = Double(exerciseDuration_ms) / 1000.0
 
+        var exerciseDurationWithPause_ms = 0
+        var exerciseDurationWithPause: Double = 0.0
         for bar in (playData?.bars)! {
             // SCF - look to this area for smoothing out scrolling. Perhaps
             // using bar start only ?
@@ -1186,15 +1214,17 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
                     print("animHorxOffset= \(animHorzOffset)")
                     firstNote = false
 
-                    // attempt to apuse the animation at the beginning, so the cursor
-                    // moves more to the right (more or the left remoains vivible for longer)
+                    // attempt to pause the animation at the beginning, so the cursor
+                    // moves more to the right (more or the left remains visible for longer)
                     let kBeginningPause_ms = Int(2*bar.duration_ms)
-                    exerciseDuration_ms += kBeginningPause_ms
-                    exerciseDuration = Double(exerciseDuration_ms) / 1000.0
+                    exerciseDurationWithPause_ms = exerciseDuration_ms + kBeginningPause_ms
+                    //exerciseDuration_ms += kBeginningPause_ms
+                    exerciseDurationWithPause = round(Double(exerciseDurationWithPause_ms) / 1000)
 
                     animValues.append(thisNoteXPos - animHorzOffset)
                     //animKeyTimes.append(Double(kBeginningPause_ms))
-                    animKeyTimes.append(Double(kBeginningPause_ms + Int(note.start)) / Double(exerciseDuration_ms))
+                    
+                    animKeyTimes.append( Double(kBeginningPause_ms + Int(note.start)) / Double(exerciseDurationWithPause_ms) )
                     barsDuration_ms += Int(bar.duration_ms)
                 }
 
@@ -1203,7 +1233,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
                 // is in the first note of pair - including duration of combined 1st & 2nd notes.
                 if startFromBarBeginning >= 0 {
                     animValues.append(thisNoteXPos - animHorzOffset)
-                    animKeyTimes.append(Double(barsDuration_ms + Int(note.start)) / Double(exerciseDuration_ms))
+                    animKeyTimes.append(Double(barsDuration_ms + Int(note.start)) / Double(exerciseDurationWithPause_ms))
                 }
             }
 
@@ -1219,7 +1249,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
         //        kfAnim.keyPath = "position.x"
         kfAnim.values = animValues
         kfAnim.keyTimes = animKeyTimes as [NSNumber]?
-        kfAnim.duration = exerciseDuration
+        kfAnim.duration = exerciseDurationWithPause     
         kfAnim.isAdditive = true
     }
 
@@ -2470,7 +2500,9 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
                     
                     svc.synth?.changedControls()
                     svc.notInCountdown = true
-                    
+                    svc.showAnalysisOverview(doShow: true)
+                    svc.freezeSeeScoreLayout()
+
                     if !headphonesInUse && !svc.doingPlayForMe()  {
  //                       self.svc.turnSpeakerOff()
                     }
@@ -2768,6 +2800,21 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
     
     func drawCurrNoteLineAt(xPos: CGFloat) {
         ssScrollView.drawCurrNoteLine(at: xPos-10)
+    }
+    
+    func showAnalysisOverview(doShow: Bool) {
+//        if doShow {
+//            print("Showing Analysis View")
+//        } else {
+//            print("Hiding Analysis View")
+//        }
+        ssScrollView.showAnalysisOverview(doShow)
+    }
+    
+    func freezeSeeScoreLayout() {
+        // Keeps the SeeScore view from thrashing through unneeded
+        // (and error-producing) calls to LayoutSubviews, etc.
+        ssScrollView.freezeLayout()
     }
     
     //MARK: - Jumping Monkey stuff

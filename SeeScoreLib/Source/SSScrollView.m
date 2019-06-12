@@ -52,7 +52,8 @@ static const int kMaxLedgers = 6; // determines max acceptable distance from sta
 @interface SSScrollView ()
 {
     FSAnalysisOverlayView  *analysisOverlayView; // MKMOD - added - 11/20/17
-
+    BOOL doShowAnalysisOverlayView;
+    
 	NSMutableArray *systemlist; // array of SSSystem
 	
 	NSArray<NSNumber*> *displayingParts;
@@ -115,7 +116,13 @@ static const int kMaxLedgers = 6; // determines max acceptable distance from sta
 	
 	sscore_changeHandler_id handlerId; // handler registered with SSScore is automatically notified of changes to the score when editing
     
+    int  specifiedFrameWidth;
+    
     BOOL useSeeScoreCursor;
+    BOOL _scoreIsSetup;
+    BOOL _layoutCompletedAfterScoreSetup;
+    BOOL _layoutFrozen;
+    CGRect _resolvedFrame;
 }
 
 @property (atomic) int abortingBackground; // set when background layout/draw is aborting
@@ -179,12 +186,17 @@ static const int kMaxLedgers = 6; // determines max acceptable distance from sta
 	self.maximumZoomScale = kMaxMagnification;
 	exactModeZoomScale = 1.0;
 	
+    specifiedFrameWidth = 0;
     useSeeScoreCursor = YES;	// MKMOD
+    _scoreIsSetup = NO;
+    _layoutCompletedAfterScoreSetup = NO;
+    _layoutFrozen = NO;
     
     [self addOverlayView];  // MKMOD - added - 11/20/17
     
 	// MKMODFIX this line is not in new code
 	[self setCursorColour: [UIColor redColor]];
+    _resolvedFrame = CGRectMake(0.0, 0.0, 100.0, 100.0);
 }
 
 // MKMOD - removed -(bool) displaySinglePart
@@ -360,20 +372,29 @@ static const int kMaxLedgers = 6; // determines max acceptable distance from sta
 -(void)relayoutWithCompletion:(handler_t)completionHandler
 {
     // MKMOD -  removed conditional    if (!editMode) {  around these two lines:
-	
+    
+// LEAVING FOR LONGTONE WORK  FOR LONGTONE WORK    NSLog(@"\nWHITE TRACKING #3  : SSCrollView::relayoutWithCompletion()    top\n");
+    
 	if (score)
 	{
+        
+ // LEAVING FOR LONGTONE WORK        NSLog(@"\nWHITE TRACKING #4  : SSCrollView::relayoutWithCompletion(),    if score  \n");
+        
 		lastStartBarDisplayed = -1;
 		lastNumBarsDisplayed = -1;
 		[self removeAllSystems];
 		[self setupScore:score openParts:displayingParts mag:self.magnification opt:_layoutOptions completion:completionHandler];
 	}
 	else
+    {
 	 	completionHandler();
-	}
+ // LEAVING FOR LONGTONE WORK         NSLog(@"\nWHITE TRACKING #5  : SSCrollView::relayoutWithCompletion(),  else //  if score \n");
+    }
+}
 
 -(void)relayout
 {
+ // LEAVING FOR LONGTONE WORK     NSLog(@"\nWHITE TRACKING #2  : SSCrollView::relayout()    top\n");
 	[self relayoutWithCompletion:^{}];
 }
 
@@ -494,7 +515,8 @@ static float limit(float val, float mini, float maxi)
 	SSSystem *system = [systemlist objectAtIndex:sysIndex];
 	// limit height of system
     // MKMOD - redefined declaration of systemHeight, prev used if editMode in assignment
-	float systemHeight = min(system.bounds.height * zoom, maxSystemHeight);
+
+    float systemHeight = min(system.bounds.height * zoom, maxSystemHeight);
 	assert(systemHeight > 0);
 	return systemHeight;
 }
@@ -530,6 +552,12 @@ static float limit(float val, float mini, float maxi)
 	return (width < kMagnificationReductionScreenWidthThreshold) ? 1.0 + kMagnificationProportionToScreenWidth*((width / kMagnificationReductionScreenWidthThreshold) - 1.0) : 1.0;
 }
 
+// 5/23/19 SCF - added
+-(void) setSpecifiedFrameWidth:(int)iSpecifiedFrameWidth
+{
+    specifiedFrameWidth = iSpecifiedFrameWidth;
+}
+
 -(void)setupScore:(SSScore*)sc openParts:(NSArray<NSNumber*> *)parts mag:(float)mag opt:(SSLayoutOptions *)options
 {
 	[self setupScore:sc openParts:parts mag:mag opt:options completion:^{}];
@@ -544,6 +572,16 @@ static float limit(float val, float mini, float maxi)
 			  opt:(SSLayoutOptions *)options
 	   completion:(handler_t)completionHandler
 {
+//    NSLog(@"\n\nWHITE TRACKING #8  : SSCrollView::setupScore()    top\n\n");
+
+    if (_scoreIsSetup)
+    {
+//        NSLog(@"\n\nWHITE TRACKING #11 : SSCrollView::setupScore()   EXIT #1 at top\n\n");
+        return;
+    }
+    
+    self.magnification = 1.2;    // hyar
+    
 	[self deactivateChangeHandler];
 	handlerId = 0;
 	[self disablePinch];
@@ -561,9 +599,10 @@ static float limit(float val, float mini, float maxi)
 		self->score = sc;
 		[self activateChangeHandler];
 		self->_magnification = mag;
-		// commented out CGRect frame = self.frame;
 
         __block CGRect frame = self.frame;  // moved this up
+        if (specifiedFrameWidth != 0)
+            frame.size.width = specifiedFrameWidth;
         
 		assert(frame.size.width > 0);
 		// we want a smaller scaling for smaller screens (iphone), but less than proportionate
@@ -577,46 +616,47 @@ static float limit(float val, float mini, float maxi)
 				assert(self->systemlist.count == 0);
 				if (self.abortingBackground == 0)
 				{
-                    // hyar
-//                    CGRect frm = self.frame;
-//                    //CGSize frmSz = self.frame.size;
-//                    frm.size.width *= 2;
-//                    self.frame = frm;
-                    
-////////////////////////////////////
-                    
- //                   __block CGRect frame = self.frame;
-
-                    
-                    
+                    self->_resolvedFrame = frame;
                     if (_optimalXMLxLayoutMagnification) {
+                      if (!_scoreIsSetup) {
+                        
                         __block float systemMagnification = 0;
                         __block bool widthIsTruncated = NO;//YES;
+                        __block int loopCount = 0;
                         do {
                             // MKMOD - ... to here    (see "MKMOD added" above
                             
+                            loopCount++;
+//                            NSLog(@"\n\n--- In SSCrollView::setupScore() ->  top of reduction loop;  loop count == %i\n\n",
+//                                  loopCount);
+
                             UIGraphicsBeginImageContextWithOptions(CGSizeMake(10,10), YES/*opaque*/, 0.0/* scale*/);
                             CGContextRef ctx = UIGraphicsGetCurrentContext();
                             // MKMOD - took out SSSystem* system = [score layoutSystemContext:  // 5-6 lines
                             
                             // MKMOD - Added this whole call to create sscore_error below
-                            enum sscore_error err = [score layoutWithContext:ctx
-                                                                       width:frame.size.width - (2 * kMargin.width) maxheight:frame.size.height
-                                                                       parts:parts magnification:self.magnification * magnificationScalingForWidth
-                                                                     options:options
-                                                                    callback:^bool (SSSystem *sys){
-                                                                        // callback is called for each new laid out system
-                                                                        // return false if abort required
-                                                                        if (self.abortingBackground == 0)
-                                                                        {
-                                                                            // MKMOD -  deleted assign to widthIsTruncated - 5/28/17
-                                                                            systemMagnification = sys.magnification;
-                                                                            // MKMOD -  changed this log - 5/28/17
-                                                                            //                                                                       NSLog(@"sys.magnification = %f, %i", sys.magnification, widthIsTruncated);
-                                                                            return true;
-                                                                        }
-                                                                        else
-                                                                            return false;}];
+                            enum sscore_error err =
+                                [score layoutWithContext:ctx
+                                                   width:frame.size.width - (2 * kMargin.width)
+                                               maxheight:frame.size.height
+                                                   parts:parts
+                                           magnification:self.magnification * magnificationScalingForWidth
+                                                 options:options
+                                                callback:^bool (SSSystem *sys){
+                                                    // callback is called for each new laid out system
+                                                    // return false if abort required
+                                                    if (self.abortingBackground == 0)
+                                                    {
+                                                        // MKMOD -  deleted assign to widthIsTruncated - 5/28/17
+                                                        systemMagnification = sys.magnification;
+                                                        // MKMOD -  changed this log - 5/28/17
+                                                        //                                                                       NSLog(@"sys.magnification = %f, %i", sys.magnification, widthIsTruncated);
+                                                        _scoreIsSetup = YES;
+                                                        self->_resolvedFrame = frame;
+                                                        return true;
+                                                    }
+                                                    else
+                                                        return false;}];
                             UIGraphicsEndImageContext();
                             
                             // MKMOD - took out 5 lines here   4/1/17 DR commit
@@ -629,24 +669,33 @@ static float limit(float val, float mini, float maxi)
                                 //                                    NSLog(@"systemMagnification:%f - width=%f", systemMagnification, frame.size.width);
                                 frame.size.width += 100;
                             }
+//                            NSLog(@"    ************  In setupScore, bottom of reduction loop; loop count == %i\n\n",
+//                                  loopCount);
+//                            NSLog(@"       widthIsTruncated = %s,  systemMag = %f, self.mag = %f",
+//                                  widthIsTruncated ? "YES" : "No", systemMagnification, self.magnification);
                         } while ((systemMagnification < self.magnification) || widthIsTruncated);
+//                        NSLog(@"************  In setupScore, Exited reduction loop!");
+                      }
                         
-                        // MKMOD -  changed this log - 5/28/17
-                        // MKMOD -  commented out this log - 11/6/17
-                        //                            NSLog(@"+++systemMagnification:%f - width=%f", systemMagnification, frame.size.width);
-                        
-                        
-                        // MKMOD -  added the dispatch_async "wrapper" - 11/6/17
-                        // MKMOD - on 11/20/17, made a similar, if not identical change here.
-                        // temp fix, from Matt's checkin
-                        // was:  self.frame = frame;
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            self.frame = frame;
-                        });
+                      // MKMOD -  changed this log - 5/28/17
+                      // MKMOD -  commented out this log - 11/6/17
+                      //                            NSLog(@"+++systemMagnification:%f - width=%f", systemMagnification, frame.size.width);
+                    
+                    
+                      // MKMOD -  added the dispatch_async "wrapper" - 11/6/17
+                      // MKMOD - on 11/20/17, made a similar, if not identical change here.
+                      // temp fix, from Matt's checkin
+                      // was:  self.frame = frame;
+                      dispatch_async(dispatch_get_main_queue(), ^{
+                          self.frame = self->_resolvedFrame;
+                      });
                     }
 
-///////////////////////////////////////
-                    
+                    ///////////////////////////////////////
+                    // else, for:  if (_optimalXMLxLayoutMagnification)
+                    // (merged from David's original code)
+                    // goes here
+                    ///////////////////////////////////////
                     
                     
 					UIGraphicsBeginImageContextWithOptions(CGSizeMake(10,10), YES/*opaque*/, 0.0/* scale*/);
@@ -654,19 +703,16 @@ static float limit(float val, float mini, float maxi)
                     float selfMag = self.magnification;
                     float selfMagSc4Wd = self->magnificationScalingForWidth;
                     float mag = self.magnification * self->magnificationScalingForWidth;
-                    float wd = frame.size.width - 2 * kMargin.width;
-                    float maxHt = 2*frame.size.height;
+                    float wd = _resolvedFrame.size.width - 2 * kMargin.width;
+                    float maxHt = 2*_resolvedFrame.size.height;
                     
-                    //mag = 2.0;
+                    // NSLog(@"************ In setupScore,  wd = %f,    mag = %f,   maxHt = %f", wd, mag, maxHt);
                     
-                    //wd *= 3;
-                    
-                    NSLog(@"************ In setupScore,  wd = %f,    mag = %f,   maxHt = %f", wd, mag, maxHt);
-                    
+ // LEAVING FOR LONGTONE WORK                     NSLog(@"\n\n  WHITE TRACKING #10 : SSCrollView::setupScore()    AFTER reduction loop\n\n");
 					enum sscore_error err =
                         [self->score layoutWithContext:ctx
                                                  width: wd // frame.size.width - 2 * kMargin.width
-                                             maxheight:2*frame.size.height
+                                             maxheight:2*_resolvedFrame.size.height
                                                  parts:parts
                                          magnification:mag //self.magnification * self->magnificationScalingForWidth
                                                options:self->_layoutOptions
@@ -829,6 +875,8 @@ static float min(float a, float b)
 
         // MKMOD - removed commented lines lines - 12/12/17
         [analysisOverlayView redrawMe];
+        
+        doShowAnalysisOverlayView = YES;
     }
 }
 
@@ -1021,16 +1069,32 @@ static float min(float a, float b)
 // / * MKMODSS  This is the merged method
 - (void)layoutSubviews
 {
+    if (_layoutFrozen) {
+        // Score setup and Layout is complete, App has frozen layout, so no need
+        // to layout subvies again. (Proceeding causes issues.)
+ // LEAVING FOR LONGTONE WORK         NSLog(@"\nWHITE TRACKING #12  : SSCrollView::layoutSubviews()  exiting #1\n");
+        return;
+    }
+    
+ // LEAVING FOR LONGTONE WORK     NSLog(@"\nWHITE TRACKING #6  : SSCrollView::layoutSubviews()    top\n");
+    
      // MKMOD - added stuff that was deleted later - 11/20/17
+    if (_layoutCompletedAfterScoreSetup) {
+        self.frame = self->_resolvedFrame; }
+    
 	[super layoutSubviews];
+    if (_layoutCompletedAfterScoreSetup) {
+        self.frame = self->_resolvedFrame; }
+    
 	if (activeZooming)
 		return;
 	CGSize frameSize = self.frame.size;
 	float frameAspect = frameSize.width / frameSize.height;
 	float lastFrameAspect = lastFrameSize.width / lastFrameSize.height;
-//	if (fabs(frameAspect - lastFrameAspect) > 0.1) // auto-detect device rotation by looking for frame width change
     // auto-detect device rotation by looking for frame width change
-    if ( fabs(frameAspect - lastFrameAspect) > 0.1   &&  !self->layoutProcessing )
+    if ( fabs(frameAspect - lastFrameAspect) > 0.1   &&
+         !self->layoutProcessing   &&
+         !self->_layoutCompletedAfterScoreSetup )
 		[self relayout];
 	if (self.abortingBackground == 0 && score && systemlist.count > 0) // this is called on every scroll movement
 	{
@@ -1115,7 +1179,13 @@ static float min(float a, float b)
 			[self displayCursor];
 		}
 	}
-	lastFrameSize = self.frame.size;
+    lastFrameSize = self->_resolvedFrame.size;
+
+    if (_scoreIsSetup) {
+ // LEAVING FOR LONGTONE WORK         NSLog(@"\n\nWHITE TRACKING #13  : SSCrollView::layoutSubviews()   setting  _layoutCompletedAfterScoreSetup = YES \n\n");
+        _layoutCompletedAfterScoreSetup = YES;
+    }
+    
 } // End of merged layoutSubviews
 // * /
 
@@ -1123,7 +1193,9 @@ static float min(float a, float b)
 
 -(bool)changedVisible
 {
-	int startBarDisplayed = [self startBarDisplayed];
+ // LEAVING FOR LONGTONE WORK     NSLog(@"\nWHITE TRACKING #7  : SSCrollView::changedVisible()    top\n");
+
+    int startBarDisplayed = [self startBarDisplayed];
 	if (startBarDisplayed != lastStartBarDisplayed)
 	{
 		lastStartBarDisplayed = startBarDisplayed;
@@ -2073,6 +2145,8 @@ static float min(float a, float b)
 {
     CGRect frm = self.frame
     
+ // LEAVING FOR LONGTONE WORK     NSLog(@"\nWHITE TRACKING #1  : SSCrollView::drawRect()\n");
+    
 	[super drawRect:rect];  // MKMOD - uncommeneted this - 11/20/17  MKMODSS - line was still commented in 3/19 update
 	CGContextRef ctx = UIGraphicsGetCurrentContext();
 	CGContextSetStrokeColorWithColor (ctx, UIColor.greenColor.CGColor);
@@ -2432,6 +2506,14 @@ static float min(float a, float b)
 
 // YOYOYO
 
+-(void) showAnalysisOverview:(BOOL) iShow
+{
+    if (analysisOverlayView == nil )
+    {
+        doShowAnalysisOverlayView = iShow;
+        analysisOverlayView.hidden = !doShowAnalysisOverlayView;
+    }
+}
 
 // MKMOD - added addOverlayView - 11/20/17
 -(void) addOverlayView
@@ -2541,6 +2623,20 @@ static float min(float a, float b)
     [analysisOverlayView clearPerfNoteAndSoundData];
 }
 
+-(void) clearScoreIsSetup
+{
+    _scoreIsSetup = NO;
+    _layoutCompletedAfterScoreSetup = NO;
+    _layoutFrozen = NO;
+}
+
+-(void) freezeLayout;
+{
+    // Keeps the SeeScore view from thrashing through unneeded
+    // (and error-producing) calls to LayoutSubviews, etc.
+    _layoutFrozen = YES;
+}
+
 // MKMOD - added noteTappedAtXCoord - 11/20/17
 // MKMOD - deleted noteTappedAtXCoord - 12/12/17
 
@@ -2566,6 +2662,11 @@ static float min(float a, float b)
     UITouch *t = [touches anyObject];
     CGPoint _downLocation =[t locationInView:self];
 
+    BOOL scrEnabled = self.scrollEnabled;
+    self.scrollEnabled = YES;
+    scrEnabled = self.scrollEnabled;
+
+    
     CGFloat touchX = _downLocation.x;
     // MKMOD - changed these two lines - 7/26/18
     int scoreObjectID = [analysisOverlayView findScoreObjectIDFromXPos: touchX];

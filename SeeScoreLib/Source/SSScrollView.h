@@ -645,4 +645,14 @@ enum ScrollType_e {scroll_off, scroll_system, scroll_bar};
 -(void) drawCurrNoteLineAt:(CGFloat) iXPos;
 -(void) useSeeScoreCursor:(BOOL) iUseSSCursor;
 
+-(void) showAnalysisOverview:(BOOL) iShow;
+
+-(void) clearScoreIsSetup;
+
+// Keeps the SeeScore view from thrashing through unneeded
+// (and error-producing) calls to LayoutSubviews, etc.
+-(void) freezeLayout;
+
+-(void) setSpecifiedFrameWidth:(int)iSpecifiedFrameWidth;
+
 @end
