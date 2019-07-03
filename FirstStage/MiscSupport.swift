@@ -221,6 +221,11 @@ extension UIColor {
         
         return nil
     }
+    
+    static let blueColor = UIColor(hexString: "#37d0e4ff")
+    static let pinkColor = UIColor(hexString: "#ff628dff")
+    static let fadedPinkColor = UIColor(hexString: "#ff95b2ff")
+    
 }
 
 

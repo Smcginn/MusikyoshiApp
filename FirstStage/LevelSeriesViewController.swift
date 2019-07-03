@@ -308,10 +308,6 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
         print("============================================================\n")
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return numLevelsToShow()
     }

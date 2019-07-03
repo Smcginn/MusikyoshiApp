@@ -44,10 +44,10 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC {
     @IBOutlet weak var IsASound_Btn: UIButton!
     
     @IBOutlet weak var calibrateBtn: UIButton!
-    @IBAction func calibrateMicBtnPressed(_ sender: Any) {
-        self.performSegue(withIdentifier: kSettingsPresentMicCalibSegueID,
-                          sender: self)
-    }
+//    @IBAction func calibrateMicBtnPressed(_ sender: Any) {
+//        self.performSegue(withIdentifier: kSettingsPresentMicCalibSegueID,
+//                          sender: self)
+//    }
     
     // Amp Rise settings related
     @IBOutlet weak var ampRiseValuesTableViewCell: UITableViewCell!
@@ -90,6 +90,18 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC {
     @IBAction func ResetAllBtnPressed(_ sender: Any) {
         let currInst = getCurrentStudentInstrument()
         resetAmpRiseValesToDefaults(forInstr: currInst)
+    }
+    
+    @IBAction func isASoundBtnPressed(_ sender: Any) {
+        if let parent = self.parent as? SettingsViewController {
+            parent.performSegue(withIdentifier: "toIsASoundVC", sender: nil)
+        }
+    }
+    
+    @IBAction func calibrateBtnPressed(_ sender: Any) {
+        if let parent = self.parent as? SettingsViewController {
+            parent.performSegue(withIdentifier: kSettingsPresentMicCalibSegueID, sender: nil)
+        }
     }
     
     func initAmpRiseSliders() {
@@ -177,7 +189,11 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         selectStudentInstrumentSegControl.multilinesMode = true
+        selectStudentInstrumentSegControl.setTitleTextAttributes([NSAttributedStringKey.font : UIFont(name: "Futura-Medium", size: 16)!], for: .normal)
+        
+        bpmStepper.tintColor = .blueColor
         
         initAmpRiseSliders()
     }
