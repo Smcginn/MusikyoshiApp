@@ -600,8 +600,6 @@
 		6DA7F6A721B7440500800099 /* AppVersionMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA7F6A321B7440500800099 /* AppVersionMonitor.swift */; };
 		6DA7F6AC21B74A3200800099 /* AppVersionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA7F6AB21B74A3200800099 /* AppVersionHelper.swift */; };
 		6DA7F6AD21B74A3200800099 /* AppVersionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA7F6AB21B74A3200800099 /* AppVersionHelper.swift */; };
-		6DB19E6921B318C8009940E5 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB19E6821B318C8009940E5 /* WelcomeViewController.swift */; };
-		6DB19E6A21B318C8009940E5 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB19E6821B318C8009940E5 /* WelcomeViewController.swift */; };
 		6DB8533A21248EF600F999C3 /* XMLFileMapping.json in Resources */ = {isa = PBXBuildFile; fileRef = 6DB8532A21248EF500F999C3 /* XMLFileMapping.json */; };
 		6DB8533B212498C700F999C3 /* XMLFileMapping.json in Resources */ = {isa = PBXBuildFile; fileRef = 6DB8532A21248EF500F999C3 /* XMLFileMapping.json */; };
 		6DB8533D2126438E00F999C3 /* LaunchingNextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB8533C2126438E00F999C3 /* LaunchingNextView.swift */; };
@@ -799,8 +797,6 @@
 		6DFA9BF9212A7D0B002BD4AB /* Stars-1 64x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DFA9BF5212A7CC0002BD4AB /* Stars-1 64x16.png */; };
 		6DFA9BFA212A7D0B002BD4AB /* Stars-2 64x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DFA9BF4212A7CC0002BD4AB /* Stars-2 64x16.png */; };
 		6DFA9BFB212A7D0B002BD4AB /* Stars-3 64x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DFA9BE4212A7CC0002BD4AB /* Stars-3 64x16.png */; };
-		BD7C17471F860E3B002AF462 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7C17461F860E3B002AF462 /* HomeViewController.swift */; };
-		BD7C174E1F86148A002AF462 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7C17461F860E3B002AF462 /* HomeViewController.swift */; };
 		BD8B79051F95BF75005B31CB /* PracticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8B79041F95BF75005B31CB /* PracticeViewController.swift */; };
 		BD8B79061F95BF75005B31CB /* PracticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8B79041F95BF75005B31CB /* PracticeViewController.swift */; };
 		BD8B79111F95C11B005B31CB /* UserAtributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8B79101F95C11B005B31CB /* UserAtributes.swift */; };
@@ -824,6 +820,10 @@
 		E409164222CC387500E5E034 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E409163F22CC387500E5E034 /* SettingsViewController.swift */; };
 		E409164322CC387500E5E034 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E409164022CC387500E5E034 /* SettingsTableViewController.swift */; };
 		E409164422CC387500E5E034 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E409164022CC387500E5E034 /* SettingsTableViewController.swift */; };
+		E409165B22CC392000E5E034 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E409165A22CC392000E5E034 /* HomeViewController.swift */; };
+		E409165C22CC392000E5E034 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E409165A22CC392000E5E034 /* HomeViewController.swift */; };
+		E409165E22CC396B00E5E034 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E409165D22CC396B00E5E034 /* WelcomeViewController.swift */; };
+		E409165F22CC396B00E5E034 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E409165D22CC396B00E5E034 /* WelcomeViewController.swift */; };
 		E940183E1FA998CF00FC6271 /* FSAnalysisOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = E940183D1FA998CF00FC6271 /* FSAnalysisOverlayView.m */; };
 		E940183F1FA998CF00FC6271 /* FSAnalysisOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = E940183D1FA998CF00FC6271 /* FSAnalysisOverlayView.m */; };
 		E9794BA91FFD45EA00CDC7FD /* PerformanceIssueMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9794BA81FFD45EA00CDC7FD /* PerformanceIssueMgr.swift */; };
@@ -1427,7 +1427,6 @@
 		6DA7F6A221B7440500800099 /* AppVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppVersion.swift; path = AppVersionMonitor/AppVersion.swift; sourceTree = "<group>"; };
 		6DA7F6A321B7440500800099 /* AppVersionMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppVersionMonitor.swift; path = AppVersionMonitor/AppVersionMonitor.swift; sourceTree = "<group>"; };
 		6DA7F6AB21B74A3200800099 /* AppVersionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppVersionHelper.swift; path = AppVersionMonitor/AppVersionHelper.swift; sourceTree = "<group>"; };
-		6DB19E6821B318C8009940E5 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		6DB8532A21248EF500F999C3 /* XMLFileMapping.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = XMLFileMapping.json; path = LessonScheduling/XMLFileMapping.json; sourceTree = "<group>"; };
 		6DB8533C2126438E00F999C3 /* LaunchingNextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LaunchingNextView.swift; path = LessonScheduling/LaunchingNextView.swift; sourceTree = "<group>"; };
 		6DB8533F2127A87500F999C3 /* Monkey_Skiing_03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Monkey_Skiing_03@2x.png"; path = "Images/Monkey_Skiing_03@2x.png"; sourceTree = "<group>"; };
@@ -1525,7 +1524,6 @@
 		6DFA9BE4212A7CC0002BD4AB /* Stars-3 64x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Stars-3 64x16.png"; path = "Images/Stars-3 64x16.png"; sourceTree = "<group>"; };
 		6DFA9BF4212A7CC0002BD4AB /* Stars-2 64x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Stars-2 64x16.png"; path = "Images/Stars-2 64x16.png"; sourceTree = "<group>"; };
 		6DFA9BF5212A7CC0002BD4AB /* Stars-1 64x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Stars-1 64x16.png"; path = "Images/Stars-1 64x16.png"; sourceTree = "<group>"; };
-		BD7C17461F860E3B002AF462 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		BD8B79041F95BF75005B31CB /* PracticeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PracticeViewController.swift; sourceTree = "<group>"; };
 		BD8B79101F95C11B005B31CB /* UserAtributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAtributes.swift; sourceTree = "<group>"; };
 		C90339361FB131D3005A9C7D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -1540,6 +1538,8 @@
 		E409163A22CC386800E5E034 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E409163F22CC387500E5E034 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E409164022CC387500E5E034 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		E409165A22CC392000E5E034 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		E409165D22CC396B00E5E034 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		E940183C1FA998CF00FC6271 /* FSAnalysisOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSAnalysisOverlayView.h; path = SeeScoreLib/Source/FSAnalysisOverlayView.h; sourceTree = SOURCE_ROOT; };
 		E940183D1FA998CF00FC6271 /* FSAnalysisOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSAnalysisOverlayView.m; path = SeeScoreLib/Source/FSAnalysisOverlayView.m; sourceTree = SOURCE_ROOT; };
 		E9794BA81FFD45EA00CDC7FD /* PerformanceIssueMgr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PerformanceIssueMgr.swift; path = PerformanceAnalysis/PerformanceIssueMgr.swift; sourceTree = "<group>"; };
@@ -1970,15 +1970,15 @@
 				1C87C0A72016F0030038784E /* LevelOverviewViewController.swift */,
 				E409162C22CC383500E5E034 /* LevelSeriesViewController.swift */,
 				E409162D22CC383500E5E034 /* LevelsViewController.swift */,
+				E409165A22CC392000E5E034 /* HomeViewController.swift */,
 				6381294F1CF05BF800A40C8E /* LongToneViewController.swift */,
 				6324D3031CE72E5D001934A5 /* TuneExerciseViewController.swift */,
-				BD7C17461F860E3B002AF462 /* HomeViewController.swift */,
 				E409164022CC387500E5E034 /* SettingsTableViewController.swift */,
 				E409163F22CC387500E5E034 /* SettingsViewController.swift */,
 				BD8B79041F95BF75005B31CB /* PracticeViewController.swift */,
 				6D3AE14E217A2C7D005ECC60 /* MicCalibrationViewController.swift */,
 				6D0C5F01217E33D400273E93 /* IsASoundViewController.swift */,
-				6DB19E6821B318C8009940E5 /* WelcomeViewController.swift */,
+				E409165D22CC396B00E5E034 /* WelcomeViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -3581,6 +3581,7 @@
 				6324D2DB1CE71B1A001934A5 /* FirstStage.xcdatamodeld in Sources */,
 				6DCC640122173722001026F1 /* PerfSampleAmplitudeTrackerV2.swift in Sources */,
 				E9AD0CC11FD9BCDF006472CE /* PerformanceNote.swift in Sources */,
+				E409165C22CC392000E5E034 /* HomeViewController.swift in Sources */,
 				6D817BE12186042A00258980 /* PATest_FreqAndPitchSampleSim.swift in Sources */,
 				E409164222CC387500E5E034 /* SettingsViewController.swift in Sources */,
 				E9815A392005124D0046445B /* VideoHelpResources.swift in Sources */,
@@ -3625,7 +3626,6 @@
 				6324D3651CE73C47001934A5 /* SSPlayLoopGraphics.m in Sources */,
 				6D8486DD21949EB3003D9D6A /* InAppAvailablePurchasesData.swift in Sources */,
 				6324D35F1CE73C47001934A5 /* SSScrollView.m in Sources */,
-				BD7C17471F860E3B002AF462 /* HomeViewController.swift in Sources */,
 				6DA54C48210BC8FA004BECB2 /* ScoreMgr.swift in Sources */,
 				6DC3FE8C2119617500168950 /* StarScoreView.swift in Sources */,
 				BD8B79121F95C11B005B31CB /* UserAtributes.swift in Sources */,
@@ -3637,6 +3637,7 @@
 				63D5E88A1EA37BF7007AE8D4 /* MusicFont.swift in Sources */,
 				6D268BEC21CD3C12002DA293 /* InstrumentSelectionDefs.swift in Sources */,
 				6DB8533E2126438E00F999C3 /* LaunchingNextView.swift in Sources */,
+				E409165F22CC396B00E5E034 /* WelcomeViewController.swift in Sources */,
 				E409163422CC384800E5E034 /* DayTableViewCell.swift in Sources */,
 				E9AD0CDE1FDF4180006472CE /* PerformanceTrackingMgr.swift in Sources */,
 				6D5A266F2138C2BD00D2B637 /* MiscSupport.swift in Sources */,
@@ -3653,7 +3654,6 @@
 				63D5E88B1EA37C1B007AE8D4 /* LongToneViewController.swift in Sources */,
 				6D431C2021975EC4009DBBE9 /* PlayTunesIAPProducts.swift in Sources */,
 				1C87C0A92016F0040038784E /* LevelOverviewViewController.swift in Sources */,
-				6DB19E6A21B318C8009940E5 /* WelcomeViewController.swift in Sources */,
 				6D6093B42114F66D00874A40 /* RestPerformanceAnalyzer.swift in Sources */,
 				BD8B79061F95BF75005B31CB /* PracticeViewController.swift in Sources */,
 			);
@@ -3712,6 +3712,7 @@
 				6D56674821A30C2600603DCD /* SKProduct+LocalizedPrice.swift in Sources */,
 				6D40FC7A21D721F0006E1742 /* TrumpetPartials.swift in Sources */,
 				63B4275A1E505573000E35AA /* Intonation.swift in Sources */,
+				E409165E22CC396B00E5E034 /* WelcomeViewController.swift in Sources */,
 				6D62460021F6455E00451400 /* DiscFileSystermSupport.swift in Sources */,
 				6D6C8CED2123422B00874F86 /* PerformanceScoreObjectScheduler.swift in Sources */,
 				6D631686212DF4D5004F2DE4 /* LevelSeriesTableViewHeaderFooterView.swift in Sources */,
@@ -3738,10 +3739,10 @@
 				639A2E541CF5E6CA004F7B1A /* VisualMetronomeView.swift in Sources */,
 				6D6093B62114F6C000874A40 /* PerformanceScoreObject.swift in Sources */,
 				6D3AE14F217A2C7D005ECC60 /* MicCalibrationViewController.swift in Sources */,
+				E409165B22CC392000E5E034 /* HomeViewController.swift in Sources */,
 				6324D3641CE73C47001934A5 /* SSPlayLoopGraphics.m in Sources */,
 				6324D35E1CE73C47001934A5 /* SSScrollView.m in Sources */,
 				1C87C0A82016F0030038784E /* LevelOverviewViewController.swift in Sources */,
-				BD7C174E1F86148A002AF462 /* HomeViewController.swift in Sources */,
 				6D8486CD21949DE4003D9D6A /* InAppAvailablePurchasesData.swift in Sources */,
 				BD8B79111F95C11B005B31CB /* UserAtributes.swift in Sources */,
 				1C87C0AE2016F3F70038784E /* LessonOverviewViewController.swift in Sources */,
@@ -3772,7 +3773,6 @@
 				6D431C1F21975EC4009DBBE9 /* PlayTunesIAPProducts.swift in Sources */,
 				BD8B79051F95BF75005B31CB /* PracticeViewController.swift in Sources */,
 				E409164322CC387500E5E034 /* SettingsTableViewController.swift in Sources */,
-				6DB19E6921B318C8009940E5 /* WelcomeViewController.swift in Sources */,
 				6D6093B82114F6CB00874A40 /* RestPerformanceAnalyzer.swift in Sources */,
 				E9AD0CC91FD9BEFE006472CE /* PerformanceAnalysisMgr.swift in Sources */,
 			);

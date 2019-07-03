@@ -33,15 +33,18 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var OverviewBtn: UIButton!
     @IBOutlet weak var purchaseOptionsBtn: UIButton!
     
+    @IBOutlet weak var welcomeLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    
     @IBOutlet weak var hiddenPswdTextField: UITextField!
     
-    var didDisplayOverview = false
+//    var didDisplayOverview = false
     
     @IBAction func LessonsBtnPressed(_ sender: Any) {
     }
     
     @IBAction func OverviewBtnPressed(_ sender: Any) {
-        displayWellcomeVC()
+        displayWelcomeVC()
     }
     
     @IBOutlet weak var debugStuffOnBtn: UIButton!
@@ -184,17 +187,24 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
 // HEY !!!!            displayDBCompatibilityAlert()
         }
         
-        if !didDisplayOverview {
-            displayWellcomeVC()
-            didDisplayOverview = true
+        let shouldDisplayOverview = !UserDefaults.standard.bool(forKey: "displayedOverviewPopup")
+        
+        if shouldDisplayOverview {
+            displayWelcomeVC()
+            UserDefaults.standard.set(true, forKey: "displayedOverviewPopup")
         }
+        
+//        if !didDisplayOverview {
+//            displayWelcomeVC()
+//            didDisplayOverview = true
+//        }
         
         settingEnabledBtn.backgroundColor = settingsEnblBtnBckgrndColor
         hiddenPswdTextField.isHidden = true
     }
     
     let showWellcomeVCSegueID = "showWellcomeVCSegue"
-    func displayWellcomeVC() {
+    func displayWelcomeVC() {
         performSegue(withIdentifier: showWellcomeVCSegueID, sender: nil)
     }
     
@@ -221,10 +231,25 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         self.present(ac, animated: true, completion: nil)
     }
     
+    func getFormattedDate() -> String {
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE, MMMM d"
+        
+        return formatter.string(from: Date())
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // UI customization
+        
         hiddenPswdTextField.delegate = self
+        
+        LessonsBtn.layer.cornerRadius = LessonsBtn.frame.width * 0.15
+        
+        dateLabel.text = getFormattedDate()
         
     }
     
