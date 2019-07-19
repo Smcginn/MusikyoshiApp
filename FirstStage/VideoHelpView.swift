@@ -62,7 +62,7 @@ class VideoHelpView: UIView {
         super.init(frame: frame)
         self.roundedVideoView()
         
-        self.backgroundColor = (UIColor.lightGray).withAlphaComponent(0.85)
+        self.backgroundColor = (UIColor.black).withAlphaComponent(0.70)
         addMsgLabels()
         addButtons()
     }
@@ -81,13 +81,15 @@ class VideoHelpView: UIView {
                                     width: comingSoonWd, height: comingSoonHt )
         comingSoonLabel = UILabel(frame: cmngSoonFrame)
         let comingSoonStr = "There was an issue with that Note:"
-        let comingSoonAttrStr =
-            NSMutableAttributedString( string: comingSoonStr,
-                                       attributes: [NSAttributedStringKey.font:UIFont(
-                                       name: "Marker Felt",
-                                       size: 24.0)!])
-        comingSoonLabel?.attributedText  = comingSoonAttrStr
-        comingSoonLabel?.textColor = UIColor.yellow
+//        let comingSoonAttrStr =
+//            NSMutableAttributedString( string: comingSoonStr,
+//                                       attributes: [NSAttributedStringKey.font:UIFont(
+//                                       name: "Marker Felt",
+//                                       size: 24.0)!])
+//        comingSoonLabel?.attributedText  = comingSoonAttrStr
+        comingSoonLabel?.text = comingSoonStr
+        comingSoonLabel?.font = UIFont(name: "Futura-Bold", size: 21)
+        comingSoonLabel?.textColor = .white
         comingSoonLabel?.numberOfLines = 2
         self.addSubview(comingSoonLabel!)
         
@@ -97,7 +99,7 @@ class VideoHelpView: UIView {
         let msgFrame = CGRect( x: comingSoonX , y: msgY,
                                width: comingSoonWd, height: msgHt )
         issueMsgLabel = UILabel(frame: msgFrame)
-        issueMsgLabel?.textColor = UIColor.yellow
+        issueMsgLabel?.textColor = .white
         issueMsgLabel?.lineBreakMode = .byWordWrapping
         issueMsgLabel?.numberOfLines = 3
         self.addSubview(issueMsgLabel!)
@@ -116,20 +118,21 @@ class VideoHelpView: UIView {
         var btnFrame = CGRect( x: leftBtnX , y: btnY, width: doneBtnWd, height: btnHt )
         doneBtn = UIButton(frame: btnFrame)
         doneBtn?.roundedButton()
-        doneBtn?.backgroundColor = UIColor.blue
+        doneBtn?.backgroundColor = .orangeColor
         doneBtn?.addTarget(self,
                            action: #selector(allDone(sender:)),
                            for: .touchUpInside )
         doneBtn?.isEnabled = true
-        let okStr = "OK"
-        let doneMutableString =
-            NSMutableAttributedString( string: okStr,
-                                       attributes: [NSAttributedStringKey.font:UIFont(
-                                        name: "Marker Felt",
-                                        size: 24.0)!])
-        doneBtn?.titleLabel?.attributedText = doneMutableString
-        doneBtn?.titleLabel?.textColor = UIColor.yellow
-        doneBtn?.setTitle("OK", for: .normal)
+//        let okStr = "OK"
+//        let doneMutableString =
+//            NSMutableAttributedString( string: okStr,
+//                                       attributes: [NSAttributedStringKey.font:UIFont(
+//                                        name: "Marker Felt",
+//                                        size: 24.0)!])
+//        doneBtn?.titleLabel?.attributedText = doneMutableString
+//        doneBtn?.titleLabel?.textColor = UIColor.yellow
+        doneBtn?.setTitle("Okay", for: .normal)
+        doneBtn?.titleLabel?.font = UIFont(name: "Futura-Medium", size: 16)
         self.addSubview(doneBtn!)
         
         ////////////////////////////////////////////////////////////////////////
@@ -138,21 +141,22 @@ class VideoHelpView: UIView {
         btnFrame.origin.x = rightBtnX
         againBtn = UIButton(frame: btnFrame)
         againBtn?.roundedButton()
-        againBtn?.backgroundColor = UIColor.blue
+        againBtn?.backgroundColor = .orangeColor
         againBtn?.addTarget(self,
                             action: #selector(playAgain(sender:)),
                             for: .touchUpInside )
         againBtn?.isEnabled = true
         
-        let str = "Watch Again"
-        let againMutableString =
-            NSMutableAttributedString( string: str,
-                                       attributes: [NSAttributedStringKey.font:UIFont(
-                                        name: "Marker Felt",
-                                        size: 24.0)!])
-        againBtn?.titleLabel?.attributedText = againMutableString
-        againBtn?.titleLabel?.textColor = UIColor.yellow
+//        let str = "Watch Again"
+//        let againMutableString =
+//            NSMutableAttributedString( string: str,
+//                                       attributes: [NSAttributedStringKey.font:UIFont(
+//                                        name: "Marker Felt",
+//                                        size: 24.0)!])
+//        againBtn?.titleLabel?.attributedText = againMutableString
+//        againBtn?.titleLabel?.textColor = UIColor.yellow
         againBtn?.setTitle("Watch Again", for: .normal)
+        againBtn?.titleLabel?.font = UIFont(name: "Futura-Medium", size: 16)
         self.addSubview(againBtn!)
     }
     
@@ -205,13 +209,15 @@ class VideoHelpView: UIView {
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineBreakMode = .byWordWrapping
-        let issueMsgAttrStr =
-            NSMutableAttributedString(
-                string: issueMsgText!,
-                attributes: [NSAttributedStringKey.font:UIFont(name: "Marker Felt",
-                                                        size: 24.0)!,
-                             NSAttributedStringKey.paragraphStyle: paragraphStyle])
-        issueMsgLabel?.attributedText  = issueMsgAttrStr
+//        let issueMsgAttrStr =
+//            NSMutableAttributedString(
+//                string: issueMsgText!,
+//                attributes: [NSAttributedStringKey.font:UIFont(name: "Marker Felt",
+//                                                        size: 24.0)!,
+//                             NSAttributedStringKey.paragraphStyle: paragraphStyle])
+//        issueMsgLabel?.attributedText  = issueMsgAttrStr
+        issueMsgLabel?.text = issueMsgText
+        issueMsgLabel?.font = UIFont(name: "Futura-Medium", size: 16)
         
         avpVC?.view.isHidden = true
         isHidden = false

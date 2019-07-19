@@ -40,6 +40,8 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     
 //    var didDisplayOverview = false
     
+    let particleEmitter = CAEmitterLayer()
+    
     @IBAction func LessonsBtnPressed(_ sender: Any) {
     }
     
@@ -116,6 +118,10 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        LessonsBtn.layer.cornerRadius = LessonsBtn.frame.width / 2
+        
+        createParticles()
+        
         if gMKDebugOpt_HomeScreenDebugOptionsEnabled {
             debugStuffOnBtn.isHidden = false
             debugStuffOnBtn.isEnabled = true
@@ -161,6 +167,8 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        hideViews()
+        
         navigationController?.navigationBar.isHidden = true
         
         numTimesDebugStuffOnTapped = 0
@@ -201,6 +209,42 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         
         settingEnabledBtn.backgroundColor = settingsEnblBtnBckgrndColor
         hiddenPswdTextField.isHidden = true
+        
+        animateViews()
+        
+    }
+    
+    func animateViews() {
+        
+        let delayFactor = 0.2
+        let duration = 0.8
+        let damping: CGFloat = 0.8
+        let initialSpringVel: CGFloat = 0.1
+        
+        welcomeLabel.transform = CGAffineTransform(translationX: -400, y: 0)
+        UIView.animate(withDuration: duration, delay: delayFactor * 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: {
+            self.welcomeLabel.alpha = 1
+            self.welcomeLabel.transform = .identity
+        }, completion: nil)
+        
+        LessonsBtn.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+        UIView.animate(withDuration: duration, delay: delayFactor * 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: {
+            self.LessonsBtn.alpha = 1
+            self.LessonsBtn.transform = .identity
+        }, completion: nil)
+        
+        dateLabel.transform = CGAffineTransform(translationX: -400, y: 0)
+        UIView.animate(withDuration: duration, delay: delayFactor * 1, usingSpringWithDamping: damping, initialSpringVelocity: initialSpringVel, options: .curveEaseOut, animations: {
+            self.dateLabel.alpha = 1
+            self.dateLabel.transform = .identity
+        }, completion: nil)
+        
+    }
+    
+    func hideViews() {
+        welcomeLabel.alpha = 0
+        dateLabel.alpha = 0
+        LessonsBtn.alpha = 0
     }
     
     let showWellcomeVCSegueID = "showWellcomeVCSegue"
@@ -247,14 +291,92 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         
         hiddenPswdTextField.delegate = self
         
-        LessonsBtn.layer.cornerRadius = LessonsBtn.frame.width * 0.15
-        
         dateLabel.text = getFormattedDate()
         
     }
     
     @IBAction func unwindToHomeVC(unwindSegue: UIStoryboardSegue) {
         print("here in unwindToHomeVC")
+    }
+    
+    private func createParticles() {
+        
+        particleEmitter.emitterPosition = CGPoint(x: LessonsBtn.frame.midX, y: LessonsBtn.frame.midY)
+        particleEmitter.zPosition = -1.0
+        particleEmitter.emitterShape = "point"
+        particleEmitter.emitterSize = CGSize(width: LessonsBtn.frame.width, height: LessonsBtn.frame.height)
+        
+        let wholeNoteOrange = makeEmitterCell(imageName: "wholeNote", color: .orangeColor)
+        let wholeNotePink = makeEmitterCell(imageName: "wholeNote", color: .pinkColor)
+        let wholeNotePurple = makeEmitterCell(imageName: "wholeNote", color: .purpleColor)
+        
+        let halfNoteOrange = makeEmitterCell(imageName: "halfNote", color: .orangeColor)
+        let halfNotePink = makeEmitterCell(imageName: "halfNote", color: .pinkColor)
+        let halfNotePurple = makeEmitterCell(imageName: "halfNote", color: .purpleColor)
+        
+        let eigthNoteOrange = makeEmitterCell(imageName: "eigthNote", color: .orangeColor)
+        let eigthNotePink = makeEmitterCell(imageName: "eigthNote", color: .pinkColor)
+        let eigthNotePurple = makeEmitterCell(imageName: "eigthNote", color: .purpleColor)
+        
+        let trebleClefOrange = makeEmitterCell(imageName: "trebleClef", color: .orangeColor)
+        let trebleClefPink = makeEmitterCell(imageName: "trebleClef", color: .pinkColor)
+        let trebleClefPurple = makeEmitterCell(imageName: "trebleClef", color: .purpleColor)
+        
+        let bassClefOrange = makeEmitterCell(imageName: "bassClef", color: .orangeColor)
+        let bassClefPink = makeEmitterCell(imageName: "bassClef", color: .pinkColor)
+        let bassClefPurple = makeEmitterCell(imageName: "bassClef", color: .purpleColor)
+        
+        particleEmitter.emitterCells = [wholeNoteOrange,
+                                        wholeNotePink,
+                                        wholeNotePurple,
+                                        halfNoteOrange,
+                                        halfNotePink,
+                                        halfNotePurple,
+                                        eigthNoteOrange,
+                                        eigthNotePink,
+                                        eigthNotePurple,
+                                        trebleClefOrange,
+                                        trebleClefPink,
+                                        trebleClefPurple,
+                                        bassClefOrange,
+                                        bassClefPink,
+                                        bassClefPurple
+                                       ]
+        
+        view.layer.addSublayer(particleEmitter)
+        
+    }
+    
+    private func makeEmitterCell(imageName: String, color: UIColor?) -> CAEmitterCell {
+        
+        let cell = CAEmitterCell()
+        
+        cell.birthRate = 0.03
+        cell.lifetime = 35
+        cell.lifetimeRange = 10
+        
+        cell.velocity = 40
+        cell.velocityRange = 10
+        
+        cell.emissionLongitude = .pi
+        cell.emissionRange = .pi
+        
+        if isiPhoneSE() {
+            cell.scale = 0.5
+        } else {
+            cell.scale = 0.9
+        }
+        
+        cell.scaleRange = 0.4
+        cell.scaleSpeed = -0.01
+        
+        cell.spin = 0.2
+        cell.spinRange = 0.1
+        
+        cell.color = color!.cgColor
+        cell.contents = UIImage(named: imageName)?.cgImage
+        return cell
+        
     }
     
 }

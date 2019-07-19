@@ -17,6 +17,8 @@ let kViewFinishedMode_First   = 1
 let kViewFinishedMode_Loading = 2
 let kViewFinishedMode_AllDone = 3
 
+let kAnimDuration = 2.0 // 0.6
+
 protocol ViewFinished {
     func viewFinished(result: Int)
 }
@@ -55,8 +57,6 @@ class LaunchingNextView: UIView {
     let kBeginMonkeyAnimCenterX:        CGFloat =  -50.0
     let kAddForEndMonkeyAnimCenterX:    CGFloat =  300.0 // 400.0
     
-    let kAnimDuration = 2.0 // 0.6
-    
     var waitingToBegin = true
     var exercisesDone = false
 
@@ -80,7 +80,6 @@ class LaunchingNextView: UIView {
     }
     
     func setupForModeReady() {
-        progBar?.isHidden = false
         progBar?.isHidden = false
         
         var topText : NSMutableAttributedString? // = nil
@@ -129,7 +128,6 @@ class LaunchingNextView: UIView {
     
     func setupForModeLoading() {
         progBar?.isHidden = false
-        progBar?.isHidden = false
         let goodJobText = randomEncouragingText()
         let goodJobAttrText = createAttrString(forString: goodJobText,
                                                fontSize: kHugeTextFontSz)
@@ -149,7 +147,6 @@ class LaunchingNextView: UIView {
     
     func setupForModeAllDone() {
         exercisesDone = true
-        progBar?.isHidden = true
         progBar?.isHidden = true
         let allDoneTxt = createAttrString(forString: "All Done!",
                                           fontSize: kHugeTextFontSz)

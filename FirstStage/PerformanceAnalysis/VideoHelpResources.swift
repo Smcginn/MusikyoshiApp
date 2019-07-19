@@ -467,7 +467,7 @@ func getMsgTextForAlertID( _ alertID: Int ) -> String {
     
     switch(alertID) {
     case alertIDs.kAlt_MissedNote:
-        retStr = "You Missed that note entirely, perhaps way too early or late"
+        retStr = "You missed that note entirely, perhaps way too early or late"
         
     case alertIDs.kAlt_LowerPartial:
         retStr = "You're Playing a Lower Partial"

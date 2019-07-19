@@ -16,7 +16,7 @@ import SwiftyJSON
 import AudioKit
 
 var gDoOverrideSubsPresent = false      // CHECK_THIS_FOR_SUBMIT
-var gDoLimitLevels = true              // CHECK_THIS_FOR_SUBMIT
+var gDoLimitLevels = false              // CHECK_THIS_FOR_SUBMIT
 let kNumberOfLevelsToShow: Int = 11
 
 // This is the artificial level number to display the tryput section at (it is not

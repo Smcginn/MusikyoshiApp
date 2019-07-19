@@ -14,12 +14,15 @@ import AudioKit
 //var gDoLimitLevels = true              // CHECK_THIS_FOR_SUBMIT
 //let kNumberOfLevelsToShow: Int = 11
 //
-//// This is the artificial level number to display the tryput section at (it is not
+//// This is the artificial level number to display the tryout section at (it is not
 //// the order in the json file). We show this if they don't have a subscription.
 //let kSectionToDisplayTryoutAt: Int = 2
 //
 //// In the JSON file, this is the number of Tryout Level
 //let kTryoutUpperValInJson: Int = 1000
+
+
+// ********* REPLACEMENT FOR LevelSeriesViewController (old files saved though) ********* 
 
 class LevelsViewController: UIViewController {
 
@@ -96,9 +99,9 @@ class LevelsViewController: UIViewController {
         return retJsonIdx
     }
     
-    var checkImage: UIImage? = nil
-    var nocheckImage: UIImage? = nil
-    var checkImageView: UIImageView? = nil
+//    var checkImage: UIImage? = nil
+//    var nocheckImage: UIImage? = nil
+//    var checkImageView: UIImageView? = nil
     
     var instrumentJson: JSON?
     var levelsJson: JSON?
@@ -113,6 +116,9 @@ class LevelsViewController: UIViewController {
     var allowAllLevelAccess = false
     
     var timer = Timer()
+    
+    // User tried to scroll to higher level without purchasing
+    var shouldDisplayAlertAfterScroll = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -147,6 +153,14 @@ class LevelsViewController: UIViewController {
         
         daysTableView.delegate = self
         daysTableView.dataSource = self
+        // daysTableView.separatorStyle = .none
+        
+        daysBackgroundView.layer.cornerRadius = daysBackgroundView.frame.height * 0.1
+        if #available(iOS 11.0, *) {
+            daysBackgroundView.layer.maskedCorners = [.layerMinXMinYCorner]
+        } else {
+            // Fallback on earlier versions
+        }
         
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
@@ -156,7 +170,8 @@ class LevelsViewController: UIViewController {
         
         assessPurchaseStatus()
         
-        //tableView.reloadData()
+        levelsTableView.reloadData()
+        daysTableView.reloadData()
         
         testBPM()
     }
@@ -277,7 +292,7 @@ class LevelsViewController: UIViewController {
     
     func displaySubsExpiredAlert() {
         let titleStr = "Something is wrong with your Subscription"
-        var msgStr = "\nYour subscription to PlayTunes has Expired or was Cancelled.\n\n"
+        var msgStr = "\nYour subscription to PlayTunes has expired or was cancelled.\n\n"
         msgStr += "To continue using PlayTunes, go to 'Purchase Options' "
         msgStr += "on the Home screen to extend your subscription\n\n"
         let ac = MyUIAlertController(title: titleStr, message: msgStr, preferredStyle: .alert)
@@ -326,6 +341,58 @@ class LevelsViewController: UIViewController {
         return count
     }
     
+    func isSelectedCell(row: Int) -> Bool {
+        //        print ("  in isSelectedCell;  section = \(indexPath.section),  row = \(indexPath.row)")
+        if activeLevel == currLevel && row == currDay {
+            //           print ("     currLevel = \(currLevel),  currDay = \(currDay); returning->  TRUE")
+            return true
+        } else {
+            //           print ("     currLevel = \(currLevel),  currDay = \(currDay); returning->  FALSE")
+            return false
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) { // PPPproblem!!!!!
+        
+        if let levels = instrumentJson?["levels"] {
+            if let destination = segue.destination as? DayOverviewViewController {
+                if let indexPath = sender as? IndexPath {
+                    _ = LessonScheduler.instance.setCurrentLevel(activeLevel)
+                    destination.thisViewsLevel = activeLevel
+                    destination.exerLevelIndex = indexPath.row
+                    destination.lessonsJson = levels[activeLevel]["exercises"]
+                    let daysJson:JSON? = levels[activeLevel]["days"]
+                    
+                    let day = indexPath.row
+                    _ = LessonScheduler.instance.setCurrentDay(day)
+                    destination.thisViewsLevelDay = day
+                    let oneDayExerListStr = daysJson![indexPath.row]["exercises"].string
+                    let oneDayExerTitle   = daysJson![indexPath.row]["title"].string
+                    destination.dayTitle = (oneDayExerTitle != nil) ? oneDayExerTitle! : ""
+                    destination.exercisesListStr = (oneDayExerListStr != nil) ? oneDayExerListStr! : ""
+                    
+                    destination.thresholdsID         = thresholdsID
+                    destination.singleEventThreshold = singleEventThreshold
+                    if let threshIDStr = levels[activeLevel]["thresholdsID"].string {
+                        destination.thresholdsID = threshIDStr
+                    }
+                    if let singEvtThersh = levels[activeLevel]["singleEventThreshold"].string {
+                        destination.singleEventThreshold = singEvtThersh
+                    }
+                    if let scanForPitchChange = levels[activeLevel]["scanForPitchLegatoChange"].string {
+                        if scanForPitchChange == "Y" {
+                            gScanForPitchDuringLegatoPlaying = true
+                        } else {
+                            gScanForPitchDuringLegatoPlaying = false
+                        }
+                    } else {
+                        //   ?????
+                    }
+                }
+            }
+        }
+    }
+    
 }
 
 extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -335,6 +402,13 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
         if tableView == self.levelsTableView {
             return numLevelsToShow()
         } else if tableView == self.daysTableView {
+            
+            guard levelsJson != nil else { return 0 }
+            if gDoLimitLevels && activeLevel > kNumberOfLevelsToShow {
+                itsBad()
+                return 0
+            }
+            
             return numDaysInLevel(level: activeLevel)
         }
         
@@ -354,6 +428,14 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
             cell.levelNumberLabel.text = String(indexPath.row + 1)
             cell.isActive = activeLevel == indexPath.row
             
+            let levelState = LessonScheduler.instance.getLevelState(level: indexPath.row)
+            
+            if levelState == kLDEState_Completed  {  // kLDEState_InProgress
+                cell.stateImageView.isHidden = false
+            } else {
+                cell.stateImageView.isHidden = true
+            }
+            
             return cell
             
         } else {
@@ -361,6 +443,38 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
             let cell: DayTableViewCell = tableView.dequeueReusableCell(withIdentifier: "daysCell", for: indexPath) as! DayTableViewCell
             
             cell.dayLabel.text = "Day " + String(indexPath.row + 1)
+            
+            if isSelectedCell(row: indexPath.row) {
+                cell.dayLabel.textColor = .black
+            } else {
+                cell.dayLabel.textColor = .greyTextColor
+            }
+            
+            if gDoLimitLevels && activeLevel > kNumberOfLevelsToShow {
+                itsBad()
+                return cell
+            }
+            
+            let jsonIdx = jsonIndexForRow(activeLevel)
+            
+//            var daysJson: JSON?
+//            daysJson = levelsJson![jsonIdx]["days"]
+//            if ( daysJson != nil ) {
+//                var titleStr = ""
+//                if let rowTitle = daysJson![indexPath.row]["title"].string {
+//                    titleStr += rowTitle
+//                }
+//                cell.dayLabel.text = titleStr
+//            }
+            
+            let thisLD: tLD_code = ( jsonIdx, indexPath.row )
+            let dayState = LessonScheduler.instance.getDayState(forLD: thisLD)
+            
+            if dayState == kLDEState_Completed {
+                cell.checkImageView.isHidden = false
+            } else {
+                cell.checkImageView.isHidden = true
+            }
             
             return cell
             
@@ -377,6 +491,105 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         return 100
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        /*
+         // This is for quickly testing the Video view, which is not normally
+         // part of this view at all. You should completely ignore this for the
+         // purposes of Level Series Overview work.
+         if gMKDebugOpt_TestVideoViewInLessonOverview { // For Video Testing.
+         if indexPath.row == 1 {
+         if vhView == nil {
+         createVideoHelpView()
+         }
+         
+         vhView?.videoID = vidIDs.kVid_Pitch_VeryLow_SpeedUpAir
+         vhView?.showVideoVC()
+         
+         /*  Modal attempt
+         if self.popVC == nil {
+         self.createVideoHelpView()
+         }
+         if self.popVC != nil && self.popVC?.vhView != nil {
+         self.popVC?.vhView?.videoID = vidIDs.kVid_Pitch_VeryLow_SpeedUpAir // vidIDs.kVid_Pitch_VeryLow_SpeedUpAir // videoID
+         self.popVC?.vhView?.showVideoVC()
+         self.popVC?.modalPresentationStyle = .popover
+         self.present((self.popVC!), animated: true, completion: nil)
+         //                    self.popVC!.popoverPresentationController?.sourceView = view
+         //                    self.popVC!.popoverPresentationController?.sourceRect = sender.frame
+         }
+         */
+         return
+         }
+         }
+         */
+        
+        //Here we are going to seguae to the lesson that the user selected
+        
+        if tableView == self.levelsTableView {
+            
+            // Scroll to tapped level
+            
+            let yPos = levelsTableView.rectForRow(at: IndexPath(row: indexPath.row, section: 0)).origin.y
+            tableView.setContentOffset(CGPoint(x: tableView.contentOffset.x, y: yPos), animated: true)
+            activeLevel = indexPath.row
+            
+        } else if tableView == self.daysTableView {
+            
+            let selectedCell: DayTableViewCell? = tableView.cellForRow(at: indexPath) as? DayTableViewCell
+            selectedCell?.dayLabel.textColor = .black
+            currLevel = activeLevel
+            currDay = indexPath.row
+            
+            let jsonIdx = jsonIndexForRow(activeLevel)
+            let convertedIndexPath = IndexPath(row: indexPath.row, section: jsonIdx)
+            performSegue(withIdentifier: "LessonSegue", sender: convertedIndexPath)  // PPPproblem!!!!!
+            
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        
+        if tableView == self.daysTableView {
+            
+            guard activeLevel >= 0 && activeLevel < (levelsJson?.count)! else {
+                print ("Unable to get levelsJson in LevelSeriesViewController::didDeselectRowAt")
+                return
+            }
+            
+            // var daysJson:JSON?
+            let daysJson:JSON? = levelsJson![activeLevel]["days"]
+            guard daysJson != nil  else {
+                print ("Unable to get daysJson in LevelSeriesViewController::didDeselectRowAt")
+                return
+            }
+            guard indexPath.row >= 0 && indexPath.row < (daysJson?.count)! else {
+                print ("row >= num days in LevelSeriesViewController::didDeselectRowAt")
+                return
+            }
+            
+            let myIndexPath = IndexPath(row: currDay, section: currLevel)
+            let cellToDeSelectQ: DayTableViewCell? = tableView.cellForRow(at: myIndexPath) as? DayTableViewCell
+            if cellToDeSelectQ != nil {
+                cellToDeSelectQ!.dayLabel.textColor = .greyTextColor
+                print ("-->>>  Completed Deselect option 1 in LevelSeriesViewController::didDeselectRowAt")
+            } else {
+                print ("unable to get cellToDeSelect option 1 in LevelSeriesViewController::didDeselectRowAt")
+            }
+            
+            let cellToDeSelectImp: DayTableViewCell? = tableView.cellForRow(at: indexPath) as? DayTableViewCell
+            if cellToDeSelectImp != nil {
+                cellToDeSelectImp!.dayLabel.textColor = .greyTextColor
+                print ("-->>>  Completed Deselect option 2 in LevelSeriesViewController::didDeselectRowAt")
+            } else {
+                print ("unable to gdt cellToDeSelect  option 2 in LevelSeriesViewController::didDeselectRowAt")
+            }
+            
+        }   
         
     }
     
@@ -405,9 +618,19 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
             var scrollingToRect = levelsTableView.rectForRow(at: scrollingToIP)
             let roundingRow = Int(((targetContentOffset.pointee.y - scrollingToRect.origin.y) / scrollingToRect.size.height).rounded())
             scrollingToIP.row += roundingRow // + 0/1
+            
+            if !allowAllLevelAccess && (showingTryoutLevel && scrollingToIP.row >= kSectionToDisplayTryoutAt) {
+                //            if PlayTunesIAPProducts.store.purchaseStatus.confirmed &&
+                //               PlayTunesIAPProducts.store.purchaseStatus.state == .expired {
+                
+                scrollingToIP.row = kSectionToDisplayTryoutAt - 1
+                
+                shouldDisplayAlertAfterScroll = true
+                
+            }
+            
             scrollingToRect = levelsTableView.rectForRow(at: scrollingToIP)
             targetContentOffset.pointee.y = scrollingToRect.origin.y
-            
             activeLevel = scrollingToIP.row
             
         }
@@ -421,7 +644,28 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
             let yPosLastRow = levelsTableView.rectForRow(at: IndexPath(row: levelsTableView.numberOfRows(inSection: 0) - 1, section: 0)).origin.y
             
             if scrollView.contentOffset.y > yPosLastRow {
-                scrollView.contentOffset.y = yPosLastRow
+                scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x, y: yPosLastRow), animated: false)
+            }
+            
+        }
+        
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        
+        if scrollView == self.levelsTableView {
+            
+            if shouldDisplayAlertAfterScroll {
+                
+                if PlayTunesIAPProducts.store.userDefsStoredSubscStatusIsKnown() &&
+                    PlayTunesIAPProducts.store.userDefsStoredSubscHasBeenPurchased() {
+                    displaySubsExpiredAlert()
+                } else {
+                    displayMustPurchaseAlert()
+                }
+                
+                shouldDisplayAlertAfterScroll = false
+                
             }
             
         }

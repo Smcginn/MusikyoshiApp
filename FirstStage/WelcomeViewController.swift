@@ -28,7 +28,7 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var subsDetailLabel: UILabel!
     
     // OK, Privacy Policy, and Terms of Use buttons are in this view
-    @IBOutlet weak var bottomButtonsEnclosingView: UIView!
+    // @IBOutlet weak var bottomButtonsEnclosingView: UIView!
     
     @IBOutlet weak var privacyPolicyBtn: UIButton!
     @IBAction func privacyPolicyBtnPressed(_ sender: Any) {
@@ -43,7 +43,11 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
-    @IBAction func okayBtnPressed(_ sender: Any) {
+//    @IBAction func okayBtnPressed(_ sender: Any) {
+//        self.dismiss(animated: true, completion: nil)
+//    }
+    
+    @IBAction func closeBtnPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -60,11 +64,8 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
         var howToUseDetText = "\u{2022} Select “Levels” to see the\n   available Practice Levels\n"
         howToUseDetText += "\u{2022} Select a Level to see the Days\n   within that Level\n"
         howToUseDetText += "\u{2022} Select a Day to display the exercises\n   within that Day, then:\n"
-        howToUseDetText += "   > Select 'Go' to automatically step \n"
-        howToUseDetText += "       through a guided practice\n"
-        howToUseDetText += "       session,            or\n"
-        howToUseDetText += "   > Select 'Choose' to pick\n"
-        howToUseDetText += "       individual exercises\n\n"
+        howToUseDetText += "   > Select 'Go' to automatically step through a guided practice session, or\n"
+        howToUseDetText += "   > Select 'Choose' to pick individual exercises\n\n"
         howToUseDetText += "Tip: It's best to use earbuds or headphones so you can hear the metronome."
 
         howToUseDetailsLabel.text = howToUseDetText
@@ -91,7 +92,7 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
         arSubMsgStr += "\u{2022} Any unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription to that publication, where applicable"
  
         
-        subsDetailLabel.text = arSubMsgStr
+        subsDetailLabel.text = arSubMsgStr + "\n"
         
         scrollView.showsVerticalScrollIndicator = true
     }
@@ -116,17 +117,17 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
         timer.invalidate()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        // Had some issues trying to set ScrollView dims unless doing it here
-        let bottomOfScrollView = bottomButtonsEnclosingView.frame.origin.y - 10
-        let topOfScrollView = scrollView.frame.origin.y
-        let scrollViewHt = bottomOfScrollView - topOfScrollView
-        scrollView.frame.size.height = scrollViewHt
-        
-        var scrollViewContentSize = scrollView.frame.size
-        scrollViewContentSize.height = kScrollContentHt
-        scrollView.contentSize = scrollViewContentSize
-    }
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+//        
+//        // Had some issues trying to set ScrollView dims unless doing it here
+//        let bottomOfScrollView = bottomButtonsEnclosingView.frame.origin.y - 10
+//        let topOfScrollView = scrollView.frame.origin.y
+//        let scrollViewHt = bottomOfScrollView - topOfScrollView
+//        scrollView.frame.size.height = scrollViewHt
+//        
+//        var scrollViewContentSize = scrollView.frame.size
+//        scrollViewContentSize.height = kScrollContentHt
+//        scrollView.contentSize = scrollViewContentSize
+//    }
 }

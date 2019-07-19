@@ -11,6 +11,7 @@ import UIKit
 class DayTableViewCell: UITableViewCell {
 
     @IBOutlet weak var dayLabel: UILabel!
+    @IBOutlet weak var checkImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

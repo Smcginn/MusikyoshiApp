@@ -12,6 +12,9 @@ import SwiftyJSON
 class InAppPurchasesViewController: UIViewController {
 
     @IBOutlet weak var iapScrollView: UIScrollView!
+    @IBOutlet weak var scrollViewContentView: UIView!
+    
+    @IBOutlet weak var scrollViewContentViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var restoreBtn: UIButton!
     
     var oneIAPPurchViews: [OneAvailableInAppPurchaseView?] = []
@@ -53,8 +56,8 @@ class InAppPurchasesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = kDarkSkyBlue
-        iapScrollView.backgroundColor = kDarkSkyBlue
+        // self.view.backgroundColor = kDarkSkyBlue
+        // iapScrollView.backgroundColor = kDarkSkyBlue
          contentHt = contentTopBottomSpacing
 
         let numIAPEntries = AvailIapPurchsMgr.sharedInstance.numIAPEntries()
@@ -66,7 +69,7 @@ class InAppPurchasesViewController: UIViewController {
         
         if numIAPEntries > 0 {
         
-            for idx in 0...numIAPEntries-1 {
+            for idx in 0..<numIAPEntries {
                 if let oneIAPPurchView =
                     Bundle.main.loadNibNamed("OneAvailableInAppPurchaseView",
                                              owner: self,
@@ -75,20 +78,22 @@ class InAppPurchasesViewController: UIViewController {
 //                    var currSz = oneIAPPurchView.frame.size
 //                    var superSz = super.view.frame.size
                     
-                    oneIAPPurchView.frame.size.height = oneVwHt
-                    oneIAPPurchView.frame.size.width  = oneVwWd
+                    //oneIAPPurchView.frame.size.height = oneVwHt
+                    oneIAPPurchView.translatesAutoresizingMaskIntoConstraints = false
+                    // oneIAPPurchView.frame.size.width  = view.frame.width * 0.4
+                    
                     oneIAPPurchView.layoutIfNeeded()
  //                   let radiiSize: CGSize = CGSize(width:12.0, height:8.0)
-                    oneIAPPurchView.backgroundColor = (kVeryLightSkyBlue)
-                    iapScrollView.addSubview(oneIAPPurchView)
+                    oneIAPPurchView.backgroundColor = (.greyColor)
+                    scrollViewContentView.addSubview(oneIAPPurchView)
                     
 //                    currSz = oneIAPPurchView.frame.size
 //                    let currBds = oneIAPPurchView.bounds
-
+                    
                     contentHt += oneIAPPurchView.frame.size.height
                     oneIAPPurchView.overviewLabel.numberOfLines = 0
-                    oneIAPPurchView.layer.borderColor = (UIColor.gray).cgColor
-                    oneIAPPurchView.layer.borderWidth = 1.0
+                    // oneIAPPurchView.layer.borderColor = (UIColor.gray).cgColor
+                    // oneIAPPurchView.layer.borderWidth = 1.0
                     oneIAPPurchView.chooseBtn.addTarget(
                         self,
                         action: #selector(InAppPurchasesViewController.iapChooseBtnPressed),
@@ -117,9 +122,9 @@ class InAppPurchasesViewController: UIViewController {
         
         contentHt += contentTopBottomSpacing
         
-        let currContentWd = iapScrollView.frame.size.width
-        let contentSz = CGSize(width: currContentWd, height: contentHt)
-        iapScrollView.contentSize = contentSz
+//        let currContentWd = iapScrollView.frame.size.width
+//        let contentSz = CGSize(width: currContentWd, height: contentHt)
+//        iapScrollView.contentSize = contentSz
 
         // Do any additional setup after loading the view.
         
@@ -184,17 +189,25 @@ class InAppPurchasesViewController: UIViewController {
         // dynamically loaded-by-nib views doesn't work unless those actions are
         // deferred until after AutoLayout has done its thing. Hence this stuff here.
         
-        contentHt = contentTopBottomSpacing
+        var contentViewHeight: CGFloat = 0
+        let spacing: CGFloat = 40
         
         var index = 0
         for oneIAPPurchView in oneIAPPurchViews {
-            oneIAPPurchView!.frame.origin.y = contentHt
-            oneIAPPurchView!.frame.size.height = oneVwHt
-            oneIAPPurchView!.frame.size.width  = oneVwWd
-            oneIAPPurchView!.center.x  = iapScrollView.center.x
+             // oneIAPPurchView!.frame.origin.y = contentHt
+            // oneIAPPurchView!.frame.size.height = oneVwHt
+            // oneIAPPurchView!.frame.size.width  = view.frame.width * 0.4
+             oneIAPPurchView!.centerXAnchor.constraint(equalTo: scrollViewContentView.centerXAnchor).isActive = true
+            
+            if index >= 1 {
+                oneIAPPurchView!.topAnchor.constraint(equalTo: oneIAPPurchViews[index-1]!.bottomAnchor, constant: spacing).isActive = true
+            } else {
+                oneIAPPurchView!.topAnchor.constraint(equalTo: scrollViewContentView.topAnchor).isActive = true
+            }
+            
             let radiiSize: CGSize = CGSize(width:12.0, height:18.0)
             oneIAPPurchView!.roundedView(radiiSz: radiiSize)
-            contentHt += oneVwHt
+            contentViewHeight += oneIAPPurchView!.frame.size.height
             
             let prodIDStr = AvailIapPurchsMgr.sharedInstance.getProductIDForEntry(idx: index)
             useThisToSuppressWarnings(str: "\(prodIDStr)")
@@ -218,16 +231,15 @@ class InAppPurchasesViewController: UIViewController {
             //            }
             
             index += 1
-            if index < oneIAPPurchViews.count {
-                contentHt += contentHtSpacing
-            }
         }
         
-        contentHt += contentTopBottomSpacing
+        contentViewHeight += spacing + 20 // 20 for bottom
+        scrollViewContentViewHeightConstraint.constant = contentViewHeight
         
-        let currContentWd = iapScrollView.frame.size.width
-        let contentSz = CGSize(width: currContentWd, height: contentHt)
-        iapScrollView.contentSize = contentSz
+        
+//        let currContentWd = iapScrollView.frame.size.width
+//        let contentSz = CGSize(width: currContentWd, height: contentHt)
+//        iapScrollView.contentSize = contentSz
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -239,6 +251,10 @@ class InAppPurchasesViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func backBtnPressed(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
     }
 
     var wantToBuyEntryIndex = 0

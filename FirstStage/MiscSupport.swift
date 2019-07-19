@@ -108,10 +108,10 @@ func createAttributedText(str: String, fontSize: CGFloat) -> NSMutableAttributed
         NSMutableAttributedString(
             string: str,
             attributes: [
-                NSAttributedStringKey.font:UIFont( name: "Marker Felt",
+                NSAttributedStringKey.font:UIFont( name: "Futura-Bold",
                                                    size: fontSize)!,
                 NSAttributedStringKey.paragraphStyle: paragraphStyle,
-                NSAttributedStringKey.foregroundColor : UIColor.yellow] )
+                NSAttributedStringKey.foregroundColor : UIColor.white] )
     if retAttrStr.length == 0 {
         print ("Unable to create NSMutableAttributedString in createAttributedText()")
     }
@@ -222,16 +222,28 @@ extension UIColor {
         return nil
     }
     
-    static let blueColor = UIColor(hexString: "#37d0e4ff")
-    static let pinkColor = UIColor(hexString: "#ff628dff")
-    static let fadedPinkColor = UIColor(hexString: "#ff95b2ff")
+    static let orangeColor = UIColor(hexString: "#ffb200ff")
+    static let pinkColor = UIColor(hexString: "#ff3da8ff")
+    static let fadedPinkColor = UIColor(hexString: "#ff79c3ff")
+    static let purpleColor = UIColor(hexString: "#8f46ffff")
+    static let darkColor = UIColor(hexString: "#22274fff")
+    static let greyTextColor = UIColor(hexString: "#d9d9d9ff")
+    static let greyColor = UIColor(hexString: "#efefefff")
     
 }
 
 
 extension UIDevice {
     public var is_iPhoneX: Bool {
-        return UIScreen.main.nativeBounds.height == 2436
+        
+        if UIScreen.main.nativeBounds.height == 2436  ||  // X, XS
+            UIScreen.main.nativeBounds.height == 1792  ||  // XR
+            UIScreen.main.nativeBounds.height == 2688      // XS Max
+        {
+            return true
+        } else {
+            return false
+        }
     }
 }
 

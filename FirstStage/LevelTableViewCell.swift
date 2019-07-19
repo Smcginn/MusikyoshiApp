@@ -12,6 +12,7 @@ class LevelTableViewCell: UITableViewCell {
 
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var levelNumberLabel: UILabel!
+    @IBOutlet weak var stateImageView: UIImageView!
     
     var isActive: Bool = false {
         didSet {

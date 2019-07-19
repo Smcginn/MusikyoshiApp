@@ -824,6 +824,16 @@
 		E409165C22CC392000E5E034 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E409165A22CC392000E5E034 /* HomeViewController.swift */; };
 		E409165E22CC396B00E5E034 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E409165D22CC396B00E5E034 /* WelcomeViewController.swift */; };
 		E409165F22CC396B00E5E034 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E409165D22CC396B00E5E034 /* WelcomeViewController.swift */; };
+		E409166622CC66CE00E5E034 /* LevelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E409162D22CC383500E5E034 /* LevelsViewController.swift */; };
+		E409167A22CE842B00E5E034 /* DayOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E409167922CE842B00E5E034 /* DayOverviewViewController.swift */; };
+		E409168A22CFEA6200E5E034 /* DayOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E409167922CE842B00E5E034 /* DayOverviewViewController.swift */; };
+		E409168C22CFEFCC00E5E034 /* ExerciseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E409168B22CFEFCC00E5E034 /* ExerciseTableViewCell.swift */; };
+		E40C310B22DE5733002FFCCB /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40C310A22DE5733002FFCCB /* OnboardingViewController.swift */; };
+		E40C311C22DE57E8002FFCCB /* OnboardingSlideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40C311B22DE57E8002FFCCB /* OnboardingSlideView.swift */; };
+		E40C311E22DE5813002FFCCB /* OnboardingSlideView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E40C311D22DE5813002FFCCB /* OnboardingSlideView.xib */; };
+		E40C311F22E19997002FFCCB /* OnboardingSlideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40C311B22DE57E8002FFCCB /* OnboardingSlideView.swift */; };
+		E40C312022E19B4A002FFCCB /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40C310A22DE5733002FFCCB /* OnboardingViewController.swift */; };
+		E4564D2122D05716000B4FA4 /* ExerciseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E409168B22CFEFCC00E5E034 /* ExerciseTableViewCell.swift */; };
 		E940183E1FA998CF00FC6271 /* FSAnalysisOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = E940183D1FA998CF00FC6271 /* FSAnalysisOverlayView.m */; };
 		E940183F1FA998CF00FC6271 /* FSAnalysisOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = E940183D1FA998CF00FC6271 /* FSAnalysisOverlayView.m */; };
 		E9794BA91FFD45EA00CDC7FD /* PerformanceIssueMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9794BA81FFD45EA00CDC7FD /* PerformanceIssueMgr.swift */; };
@@ -1540,6 +1550,11 @@
 		E409164022CC387500E5E034 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		E409165A22CC392000E5E034 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		E409165D22CC396B00E5E034 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		E409167922CE842B00E5E034 /* DayOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOverviewViewController.swift; sourceTree = "<group>"; };
+		E409168B22CFEFCC00E5E034 /* ExerciseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTableViewCell.swift; sourceTree = "<group>"; };
+		E40C310A22DE5733002FFCCB /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		E40C311B22DE57E8002FFCCB /* OnboardingSlideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSlideView.swift; sourceTree = "<group>"; };
+		E40C311D22DE5813002FFCCB /* OnboardingSlideView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnboardingSlideView.xib; sourceTree = "<group>"; };
 		E940183C1FA998CF00FC6271 /* FSAnalysisOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSAnalysisOverlayView.h; path = SeeScoreLib/Source/FSAnalysisOverlayView.h; sourceTree = SOURCE_ROOT; };
 		E940183D1FA998CF00FC6271 /* FSAnalysisOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSAnalysisOverlayView.m; path = SeeScoreLib/Source/FSAnalysisOverlayView.m; sourceTree = SOURCE_ROOT; };
 		E9794BA81FFD45EA00CDC7FD /* PerformanceIssueMgr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PerformanceIssueMgr.swift; path = PerformanceAnalysis/PerformanceIssueMgr.swift; sourceTree = "<group>"; };
@@ -1873,11 +1888,11 @@
 				6387FDE61CEDB5110054DE44 /* Supporting Files */,
 				E409163622CC385700E5E034 /* AppDelegate.swift */,
 				E409163A22CC386800E5E034 /* LaunchScreen.storyboard */,
-				E409163922CC386800E5E034 /* Main.storyboard */,
 				6324D2DC1CE71B1A001934A5 /* Assets.xcassets */,
 				634658391E90C63900C162CF /* synth-samples */,
 				6324D2E11CE71B1A001934A5 /* Info.plist */,
 				6324D2D91CE71B1A001934A5 /* FirstStage.xcdatamodeld */,
+				E409163922CC386800E5E034 /* Main.storyboard */,
 				638129551CF05C6100A40C8E /* Views */,
 				633C2AD81CE80D80001C5C16 /* View Controllers */,
 			);
@@ -1965,11 +1980,13 @@
 		633C2AD81CE80D80001C5C16 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				E40C310A22DE5733002FFCCB /* OnboardingViewController.swift */,
 				6DA1EA122193789D0069942D /* InAppPurchasesViewController.swift */,
 				6D0018CC2162C03500B7B498 /* InternalSettingsViewController.swift */,
-				1C87C0A72016F0030038784E /* LevelOverviewViewController.swift */,
 				E409162C22CC383500E5E034 /* LevelSeriesViewController.swift */,
 				E409162D22CC383500E5E034 /* LevelsViewController.swift */,
+				1C87C0A72016F0030038784E /* LevelOverviewViewController.swift */,
+				E409167922CE842B00E5E034 /* DayOverviewViewController.swift */,
 				E409165A22CC392000E5E034 /* HomeViewController.swift */,
 				6381294F1CF05BF800A40C8E /* LongToneViewController.swift */,
 				6324D3031CE72E5D001934A5 /* TuneExerciseViewController.swift */,
@@ -2168,6 +2185,8 @@
 			isa = PBXGroup;
 			children = (
 				638129561CF05C7900A40C8E /* Balloon.swift */,
+				E40C311B22DE57E8002FFCCB /* OnboardingSlideView.swift */,
+				E40C311D22DE5813002FFCCB /* OnboardingSlideView.xib */,
 				639A2E441CF5AB09004F7B1A /* DotView.swift */,
 				633D1B6C1CF94BEC00B5C4FD /* FeedbackView.swift */,
 				E9815A3C2009A0930046445B /* PerfAnalysisSettingsPopup.swift */,
@@ -2176,6 +2195,7 @@
 				639A2E531CF5E6CA004F7B1A /* VisualMetronomeView.swift */,
 				6DC3FE8A2119617500168950 /* StarScoreView.swift */,
 				6D631685212DF4D5004F2DE4 /* LevelSeriesTableViewHeaderFooterView.swift */,
+				E409168B22CFEFCC00E5E034 /* ExerciseTableViewCell.swift */,
 				E409163022CC384500E5E034 /* DayTableViewCell.swift */,
 				E409163122CC384600E5E034 /* LevelTableViewCell.swift */,
 			);
@@ -3384,6 +3404,7 @@
 				6336B1E71EA32B0200A78D02 /* Piano.mf.75.m4a in Resources */,
 				6DBF1F3B213EEB850052AD57 /* Sound during rest - _512Kbps_288p.mp4 in Resources */,
 				6D9C008C21DBD0490012A03B /* TenorTrombone.49.m4a in Resources */,
+				E40C311E22DE5813002FFCCB /* OnboardingSlideView.xib in Resources */,
 				6D9C013321DBD0C80012A03B /* Horn.mf.59.m4a in Resources */,
 				6336B1981EA32AF000A78D02 /* Trumpet.novib.mf.60.m4a in Resources */,
 				6DF3A0FD21E68A8300C3D525 /* tuba.58.mp3 in Resources */,
@@ -3573,6 +3594,7 @@
 				6DB9A97021FCC7E000719BBF /* ScoreFileVersionManagement.swift in Sources */,
 				E9815A3E2009A0930046445B /* PerfAnalysisSettingsPopup.swift in Sources */,
 				6324D3631CE73C47001934A5 /* First Stage_key.m in Sources */,
+				E409166622CC66CE00E5E034 /* LevelsViewController.swift in Sources */,
 				6D7220B12208B12500560930 /* instrumentAmplitudeRiseValues.swift in Sources */,
 				6D34A17E2139F9E10071BAB6 /* AppDefs.swift in Sources */,
 				638129591CF05C7900A40C8E /* Balloon.swift in Sources */,
@@ -3639,6 +3661,7 @@
 				6DB8533E2126438E00F999C3 /* LaunchingNextView.swift in Sources */,
 				E409165F22CC396B00E5E034 /* WelcomeViewController.swift in Sources */,
 				E409163422CC384800E5E034 /* DayTableViewCell.swift in Sources */,
+				E409168A22CFEA6200E5E034 /* DayOverviewViewController.swift in Sources */,
 				E9AD0CDE1FDF4180006472CE /* PerformanceTrackingMgr.swift in Sources */,
 				6D5A266F2138C2BD00D2B637 /* MiscSupport.swift in Sources */,
 				6D9CFFDF21DA90560012A03B /* PlaybackInstrumentViewController.swift in Sources */,
@@ -3652,9 +3675,12 @@
 				6D40FC8221D72303006E1742 /* TrombonePartials.swift in Sources */,
 				63D5E8871EA37BEA007AE8D4 /* NoteOffset.swift in Sources */,
 				63D5E88B1EA37C1B007AE8D4 /* LongToneViewController.swift in Sources */,
+				E4564D2122D05716000B4FA4 /* ExerciseTableViewCell.swift in Sources */,
 				6D431C2021975EC4009DBBE9 /* PlayTunesIAPProducts.swift in Sources */,
 				1C87C0A92016F0040038784E /* LevelOverviewViewController.swift in Sources */,
+				E40C311F22E19997002FFCCB /* OnboardingSlideView.swift in Sources */,
 				6D6093B42114F66D00874A40 /* RestPerformanceAnalyzer.swift in Sources */,
+				E40C312022E19B4A002FFCCB /* OnboardingViewController.swift in Sources */,
 				BD8B79061F95BF75005B31CB /* PracticeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3682,6 +3708,7 @@
 				6DA1EA10219377610069942D /* OneAvailableInAppPurchaseView.swift in Sources */,
 				6DA7F6A421B7440500800099 /* AppVersion.swift in Sources */,
 				E9AD0CCB1FD9BF08006472CE /* PerformanceSound.swift in Sources */,
+				E409168C22CFEFCC00E5E034 /* ExerciseTableViewCell.swift in Sources */,
 				E9794BA91FFD45EA00CDC7FD /* PerformanceIssueMgr.swift in Sources */,
 				6DA7F6A621B7440500800099 /* AppVersionMonitor.swift in Sources */,
 				E9AD0CE31FE09B77006472CE /* NotePerformanceAnalyzer.swift in Sources */,
@@ -3721,6 +3748,7 @@
 				63EB90171CF1C4EB00F09B05 /* AVAudioSessionManager.swift in Sources */,
 				6D3AE14521768504005ECC60 /* IAPHelper.swift in Sources */,
 				E9AD0CCE1FD9BFE5006472CE /* NotePitchAnalysisCriteria.swift in Sources */,
+				E40C311C22DE57E8002FFCCB /* OnboardingSlideView.swift in Sources */,
 				6D01C40021238C75004B8440 /* LessonScheduler.swift in Sources */,
 				6D40FC8121D722FD006E1742 /* TubaPartials.swift in Sources */,
 				E409164122CC387500E5E034 /* SettingsViewController.swift in Sources */,
@@ -3761,6 +3789,7 @@
 				E409163722CC385700E5E034 /* AppDelegate.swift in Sources */,
 				6D5A266E2138C2BD00D2B637 /* MiscSupport.swift in Sources */,
 				6D9CFFDE21DA90560012A03B /* PlaybackInstrumentViewController.swift in Sources */,
+				E409167A22CE842B00E5E034 /* DayOverviewViewController.swift in Sources */,
 				6D0C5F02217E33D500273E93 /* IsASoundViewController.swift in Sources */,
 				6D01C40321238CAC004B8440 /* TuneFileMapper.swift in Sources */,
 				E9AD0CDD1FDF4180006472CE /* PerformanceTrackingMgr.swift in Sources */,
@@ -3774,6 +3803,7 @@
 				BD8B79051F95BF75005B31CB /* PracticeViewController.swift in Sources */,
 				E409164322CC387500E5E034 /* SettingsTableViewController.swift in Sources */,
 				6D6093B82114F6CB00874A40 /* RestPerformanceAnalyzer.swift in Sources */,
+				E40C310B22DE5733002FFCCB /* OnboardingViewController.swift in Sources */,
 				E9AD0CC91FD9BEFE006472CE /* PerformanceAnalysisMgr.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

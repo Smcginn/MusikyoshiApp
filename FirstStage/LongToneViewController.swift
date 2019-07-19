@@ -40,49 +40,56 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
 //                setupStarScoreStuff()
 //                starScoreViewIsSetup = true
 //            }
-            playBtn.isHidden = true
-            starScoreView.setStarCount(numStars: bestStarScore)
-            starScoreView.isHidden = false
-            starScoreLbl?.text = "Best so far:"
-            starScoreLbl?.isHidden = false
+            playBtn.isEnabled = false
+//            starScoreView.setStarCount(numStars: bestStarScore)
+//            starScoreView.isHidden = false
+            setStarScore(score: bestStarScore)
+//            starScoreLbl?.text = "Best so far:"
+//            starScoreLbl?.isHidden = false
             
         case kLTExerState_InExer:
-            playBtn.isHidden = true
+            playBtn.isEnabled = false
             currStarScore = 0
-            starScoreView.setStarCount(numStars: currStarScore)
-            starScoreView.isHidden = false
-            starScoreLbl?.text = "This Try:"
-            starScoreLbl?.isHidden = false
+            setStarScore(score: currStarScore)
+//            starScoreView.setStarCount(numStars: currStarScore)
+//            starScoreView.isHidden = false
+//            starScoreLbl?.text = "This Try:"
+//            starScoreLbl?.isHidden = false
             // hide button, switch text to congrats lable, show Monkey
             
         case kLTExerState_TryAgain:
-            starScoreView.setStarCount(numStars: currStarScore)
-            starScoreView.isHidden = false
-            starScoreLbl?.text = "This Try:"
-            starScoreLbl?.isHidden = false
+            playBtn.isEnabled = true
+            setStarScore(score: currStarScore)
+//            starScoreView.setStarCount(numStars: currStarScore)
+//            starScoreView.isHidden = false
+//            starScoreLbl?.text = "This Try:"
+//            starScoreLbl?.isHidden = false
             var playBtnAttrStr: NSMutableAttributedString
             if doingPersonalRecord {
-                playBtnAttrStr = createAttributedText(str: "Try Again?", fontSize: 24.0)
+                playBtnAttrStr = createAttributedText(str: "TRY AGAIN?", fontSize: 21.0)
             } else {
-                playBtnAttrStr = createAttributedText(str: "Try Again", fontSize: 24.0)
+                playBtnAttrStr = createAttributedText(str: "TRY AGAIN", fontSize: 21.0)
             }
             playBtn.setAttributedTitle(playBtnAttrStr, for: .normal)
             playBtn.isHidden = false
             // show button, reset text
             
         case kLTExerState_Done:
-            starScoreView.setStarCount(numStars: bestStarScore)
-            starScoreLbl?.text = "Best so far:"
-            starScoreLbl?.isHidden = false
-            starScoreView.isHidden = false
+            setStarScore(score: bestStarScore)
+//            starScoreView.setStarCount(numStars: bestStarScore)
+//            starScoreLbl?.text = "Best so far:"
+//            starScoreLbl?.isHidden = false
+//            starScoreView.isHidden = false
             playBtn.isHidden = false
             // hide button, switch text to congrats lable, auto-fade monkey face out
-            
-            let playBtnAttrStr = createAttributedText(str: "Next Exercise", fontSize: 24.0)
-            playBtn.setAttributedTitle(playBtnAttrStr, for: .normal)
+
+            playBtn.isEnabled = false
+//            let playBtnAttrStr = createAttributedText(str: "Next Exercise", fontSize: 24.0)
+//            playBtn.setAttributedTitle(playBtnAttrStr, for: .normal)
 
         default:
             playBtn.isHidden = false
+            playBtn.isEnabled = true
         }
     }
     
@@ -131,6 +138,8 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
     @IBAction func tapToHearBtnTapped(_ sender: Any) {
         playScore()
     }
+    
+    
     
     var targetNoteID = 0
     let kFirstLongTone25Note = 55
@@ -190,13 +199,13 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
     var starScoreViewIsSetup = false
     var starScoreLbl: UILabel? = nil
     let feedbackView = FeedbackView()
-    var starScoreView = StarScore()
-    func showStarScore() {
-        starScoreView.isHidden = false
-    }
-    func hideStarScore() {
-        starScoreView.isHidden = true
-    }
+//    var starScoreView = StarScore()
+//    func showStarScore() {
+//        starScoreView.isHidden = false
+//    }
+//    func hideStarScore() {
+//        starScoreView.isHidden = true
+//    }
 
     func setBestStarScore(newScore: Int) {
         if newScore > bestStarScore {
@@ -209,23 +218,25 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
     // New SF
     ///////////////////////////////
     
-    @IBOutlet weak var navigationBar: UINavigationBar!
+//    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var instructionLbl: UILabel!
-    @IBOutlet weak var timerLbl: UILabel!
+    @IBOutlet weak var timerLbl: UILabel! // Currently hidden, using instructions label to show (7/6)
     @IBOutlet weak var playBtn: UIButton!
     @IBOutlet weak var balloon: Balloon!
-    @IBOutlet weak var feedbackLbl: UILabel!
-    @IBOutlet weak var feedbackPnl: UIStackView!
-    @IBOutlet weak var visualizationPanel: UIView!
+    @IBOutlet weak var feedbackLbl: UILabel! // Currently hidden, using instructions label to show (7/6)
+    @IBOutlet weak var feedbackPnl: UIStackView! // Currently hidden, using instructions label to show (7/6)
     @IBOutlet weak var sparkLine: SparkLine!
-    @IBOutlet weak var countdownLbl: UILabel!
+    @IBOutlet weak var countdownLbl: UILabel! // Currently hidden, using instructions label to show (7/6)
     @IBOutlet weak var ssScrollView: SSScrollView!
     @IBOutlet weak var guideTextView: UITextView!
     @IBOutlet var sparkLineTapRecognizer: UITapGestureRecognizer!
+    @IBOutlet weak var starStackView: UIStackView!
+    @IBOutlet weak var panelView: UIView!
+    @IBOutlet weak var panelLabel: UILabel!
     
-    @IBAction func backButtonTapped(_ sender: Any) {
-        prepareForReturnToCallingVC()
-    }
+//    @IBAction func backButtonTapped(_ sender: Any) {
+//        prepareForReturnToCallingVC()
+//    }
     
     @IBOutlet weak var doneBtn: UIButton!
     @IBAction func doneBtnTapped(_ sender: Any) {
@@ -259,7 +270,8 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
                                                   exerStatus: kLDEState_NotStarted,
                                                   exerScore:  0)
         }
-        self.dismiss(animated: true, completion: nil)
+        // self.dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
     
     func setUseAn() {
@@ -361,6 +373,8 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setStarScore(score: bestStarScore)
+        
         playingSynth = true
         whichVC = kLongTonesVC
         
@@ -377,20 +391,27 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
         let playWd = CGFloat(175.0)
         playBtn.bounds.size.width = playWd
         playBtn.frame.size.width = playWd
+        
+        panelView.layer.cornerRadius = panelView.frame.height * 0.1
+        if #available(iOS 11.0, *) {
+            panelView.layer.maskedCorners = [.layerMinXMinYCorner]
+        } else {
+            // Fallback on earlier versions
+        }
 
-        let visSz  = visualizationPanel.frame
-         let playX = visSz.width/2.0 - playWd/2.0
-        playBtn.frame.origin.x = playX
-        let playBtnAttrStr = createAttributedText(str: "Start Playing", fontSize: 18.0)
-        playBtn.titleLabel?.attributedText = playBtnAttrStr // "All Done!"
-        playBtn.backgroundColor = kDefault_ButtonBckgrndColor
+//        let visSz  = visualizationPanel.frame
+//         let playX = visSz.width/2.0 - playWd/2.0
+//        playBtn.frame.origin.x = playX
+//        let playBtnAttrStr = createAttributedText(str: "Start Playing", fontSize: 18.0)
+//        playBtn.titleLabel?.attributedText = playBtnAttrStr // "All Done!"
+//        playBtn.backgroundColor = kDefault_ButtonBckgrndColor
 
         
-        doneBtn.layer.cornerRadius = 10
-        doneBtn.clipsToBounds = true
-        let doneBtnAttrStr = createAttributedText(str: "Done", fontSize: 18.0)
-        doneBtn.titleLabel?.attributedText = doneBtnAttrStr // "All Done!"
-        doneBtn.backgroundColor = kDefault_ButtonBckgrndColor
+//        doneBtn.layer.cornerRadius = 10
+//        doneBtn.clipsToBounds = true
+//        let doneBtnAttrStr = createAttributedText(str: "Done", fontSize: 18.0)
+//        doneBtn.titleLabel?.attributedText = doneBtnAttrStr // "All Done!"
+//        doneBtn.backgroundColor = kDefault_ButtonBckgrndColor
         
 //        let kLongtone_ButtonBckgrndColor        =  kDefault_ButtonBckgrndColor
 //        let kLongtone_ButtonTextColor           =  kDefault_ButtonTextColor
@@ -461,19 +482,19 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
         // this one is it:
         if doingPersonalRecord {
             if useAn {
-                navigationBar.topItem?.title =
+                //titleLabel.text =
                     "Long Tone Personal Record - Play an \(noteName) for as long as you can"
             } else {
-                navigationBar.topItem?.title =
+                //titleLabel.text =
                     "Long Tone Personal Record - Play a \(noteName) for as long as you can"
             }
             instructionLbl.text  = ""
         } else {
             if useAn {
-                navigationBar.topItem?.title =
+                //titleLabel.text =
                     "Long Tone - Play an \(noteName) for \(targtTimeInt) Seconds"
             } else {
-                navigationBar.topItem?.title =
+                //titleLabel.text =
                     "Long Tone - Play a \(noteName) for \(targtTimeInt) Seconds"
             }
             instructionLbl.text  =
@@ -488,12 +509,12 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
         tryCount = 0
         setupImageViews()
         
-        self.view.backgroundColor = kLongtone_BackgroundColor
+        // self.view.backgroundColor = kLongtone_BackgroundColor
         self.guideTextView.backgroundColor  = kLongtone_BackgroundColor
         self.guideTextView.isHidden = true // per Shawn's request
         
         if kLongtone_DoSetVisPanelColor {
-            self.visualizationPanel.backgroundColor = kLongtone_VisPanelBkgrndColor
+            // self.visualizationPanel.backgroundColor = kLongtone_VisPanelBkgrndColor
         }
         
         NotificationCenter.default.addObserver(
@@ -503,37 +524,73 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
                 object: self)
     }
     
-    func setupStarScoreStuff() {
-
-        let starSz  = StarScore.getSize()
- //       let ballFrame = balloon.frame
-        let visFrame = visualizationPanel.frame
- //       let visbounds = visualizationPanel.bounds
+    @IBAction func listenBtnPressed(_ sender: Any) {
+        playScore()
+    }
+    
+//    func setupStarScoreStuff() {
+//
+//        let starSz  = StarScore.getSize()
+// //       let ballFrame = balloon.frame
+//        let visFrame = visualizationPanel.frame
+// //       let visbounds = visualizationPanel.bounds
+//
+//        var starY =  visFrame.height - 110 //(starSz.height/2.0)
+//        var starX =  visFrame.size.width - (starSz.width + 10)
+//
+//        if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
+//            // center the star score view
+//            starX = (visFrame.size.width/2.0) - (starSz.width/2.0)
+//            // and bring it up a bit
+//            starY -= 100
+//        }
+//        let starOrigin = CGPoint(x:starX, y:starY)
+//
+//        starScoreView.initWithPoint(atPoint: starOrigin)
+//        starScoreView.setStarCount(numStars: 3)
+//        starScoreView.isHidden = true
+//        visualizationPanel.addSubview(starScoreView)
+//
+//        let lableWd  = CGFloat(100.0)
+//        let lableX   = starX - lableWd
+//        let lblFrame = CGRect(x: lableX, y: starY+25, width: lableWd, height: 30)
+//        starScoreLbl = UILabel.init(frame: lblFrame)
+//        starScoreLbl?.text = "Best so far:"
+//        starScoreLbl?.isHidden = true
+//        visualizationPanel.addSubview(starScoreLbl!)
+//
+//    }
+    
+    // Have animation parameter in future?
+    func setStarScore(score: Int) {
         
-        var starY =  visFrame.height - 110 //(starSz.height/2.0)
-        var starX =  visFrame.size.width - (starSz.width + 10)
-        
-        if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
-            // center the star score view
-            starX = (visFrame.size.width/2.0) - (starSz.width/2.0)
-            // and bring it up a bit
-            starY -= 100
+        for i in 0..<starStackView.subviews.count {
+            
+            if let starImageView = starStackView.subviews[i] as? UIImageView {
+                
+                if i < score {
+                    starImageView.alpha = 1
+                } else {
+                    starImageView.alpha = 0.6
+                }
+                
+            }
+            
         }
-        let starOrigin = CGPoint(x:starX, y:starY)
         
-        starScoreView.initWithPoint(atPoint: starOrigin)
-        starScoreView.setStarCount(numStars: 3)
-        starScoreView.isHidden = true
-        visualizationPanel.addSubview(starScoreView)
+    }
+    
+    func pulseStarStackView() {
         
-        let lableWd  = CGFloat(100.0)
-        let lableX   = starX - lableWd
-        let lblFrame = CGRect(x: lableX, y: starY+25, width: lableWd, height: 30)
-        starScoreLbl = UILabel.init(frame: lblFrame)
-        starScoreLbl?.text = "Best so far:"
-        starScoreLbl?.isHidden = true
-        visualizationPanel.addSubview(starScoreLbl!)
-
+        let pulseAnimation = CABasicAnimation(keyPath: "transform.scale")
+        pulseAnimation.fromValue = 1.0
+        pulseAnimation.toValue =  1.5
+        pulseAnimation.autoreverses = true
+        pulseAnimation.duration = 0.5
+        pulseAnimation.beginTime = 0.0
+        pulseAnimation.repeatCount = 4.0
+        starStackView.layer.add(pulseAnimation, forKey: nil)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -561,10 +618,10 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        if !starScoreViewIsSetup {
-            setupStarScoreStuff()
-            starScoreViewIsSetup = true
-        }
+//        if !starScoreViewIsSetup {
+//            setupStarScoreStuff()
+//            starScoreViewIsSetup = true
+//        }
 
         if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
             
@@ -572,7 +629,7 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
     }
     
     @IBAction func sparkLineTapped(_ sender: UITapGestureRecognizer) {
-        playScore()
+        // playScore()
     }
     
     func loadFile(_ scoreFile: String) {
@@ -614,7 +671,7 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
     func setArrowAndPrompt(_ isNear: Bool, isUp: Bool) {
         //near or far, up or down
         arrowImageView.isHidden = false
-        guideTextView.isHidden = false
+        // guideTextView.isHidden = false  ** Per Shawn's request, may add back in later (7/6)
         guideTextView.text = ""
         var imageX = CGFloat(0)
         var imageY = CGFloat(0)
@@ -847,7 +904,7 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
         } else if currLTExerState == kLTExerState_Done { // playBtn.currentTitle == "Next Exercise" {
             //TODO: goto Next Exercise
             
-            prepareForReturnToCallingVC()
+            // prepareForReturnToCallingVC()
             
 //            callingVCDelegate?.setExerciseResults(exerNumber: exerNumber,
 //                                                  exerStatus: kLDEState_Completed,
@@ -897,12 +954,13 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
     
     func updateTimerText() { // (currTime: Float, targTime: Float ) {
         if doingPersonalRecord {
-            timerLbl.text = String(format: "%.2f", currentTime)
+            // timerLbl.text = String(format: "%.2f", currentTime)
+            panelLabel.text = String(format: "%.2f", currentTime)
         } else {
             if isExerciseSuccess {
-                timerLbl.text = String(format: "%.2f/%.2f", targetTime, targetTime)
+                panelLabel.text = String(format: "%.2f/%.2f", targetTime, targetTime)
             } else {
-                timerLbl.text = String(format: "%.2f/%.2f", currentTime, targetTime)
+                panelLabel.text = String(format: "%.2f/%.2f", currentTime, targetTime)
             }
         }
     }
@@ -948,41 +1006,44 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
 //        playBtn.isEnabled = false
  //       playBtn.setTitle("", for: UIControlState())
 //        playBtn.setTitle("Get Ready", forState: .Normal)
-        countdownLbl.text = "3"
-        countdownLbl.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+//        countdownLbl.text = "3"
+//        countdownLbl.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+        panelLabel.text = "3"
+        panelLabel.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
         
         exerciseState = ExerciseState.inProgress
         
         UIView.animate(withDuration: 1.0, animations: {
-            self.countdownLbl.alpha = 1
-            self.countdownLbl.transform = CGAffineTransform(scaleX: 1, y: 1)
+            self.panelLabel.alpha = 1
+            self.panelLabel.transform = CGAffineTransform(scaleX: 1, y: 1)
         })
         
         delay(1.0){
 //            self.playBtn.setTitle("Set", forState: .Normal)
             
-            self.countdownLbl.alpha = 0
-            self.countdownLbl.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
-            self.countdownLbl.text = "2"
+            self.panelLabel.alpha = 0
+            self.panelLabel.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+            self.panelLabel.text = "2"
             
             UIView.animate(withDuration: 1.0, animations: {
-                self.countdownLbl.alpha = 1
-                self.countdownLbl.transform = CGAffineTransform(scaleX: 1, y: 1)
+                self.panelLabel.alpha = 1
+                self.panelLabel.transform = CGAffineTransform(scaleX: 1, y: 1)
             })
             
             delay(1.0){
 //                self.playBtn.setTitle("Go!", forState: .Normal)
                 
-                self.countdownLbl.alpha = 0
-                self.countdownLbl.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
-                self.countdownLbl.text = "1"
+                self.panelLabel.alpha = 0
+                self.panelLabel.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+                self.panelLabel.text = "1"
                 
                 UIView.animate(withDuration: 1.0, animations: {
-                    self.countdownLbl.alpha = 1
-                    self.countdownLbl.transform = CGAffineTransform(scaleX: 1, y: 1)
+                    self.panelLabel.alpha = 1
+                    self.panelLabel.transform = CGAffineTransform(scaleX: 1, y: 1)
                 })
                 delay(1.0){
-                    self.countdownLbl.alpha = 0
+                    self.panelLabel.transform = CGAffineTransform.identity
+                    self.panelLabel.text = ""
                     self.balloon.alpha = 1
                     self.startExercise()
                 }
@@ -994,6 +1055,7 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
 //        starScoreLbl?.isHidden = true
 //        starScoreView.setStarCount(numStars: currStarScore)
 //        showStarScore()
+        setStarScore(score: currStarScore)
         
         actualTimeNotSet = true
         switchExerState(newState: kLTExerState_InExer)
@@ -1021,16 +1083,21 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
     func setTargetTimeIfDoingPersonalBest(setLabels: Bool) { // SHAWN
         currPersBest =
             LessonScheduler.instance.getPersonalBestTime(forNoteID: targetNoteID)
-        timerLbl.text = String(format: "Current Record: %.2f", currPersBest)
+        // timerLbl.text = String(format: "Current Record: %.2f", currPersBest)
+        panelLabel.text = String(format: "Current Record: %.2f", currPersBest)
         
         targetTime = targetTimeAndStarScoreMgr.targetTime
         if setLabels {
             if currPersBest > 0.0  {
-                self.feedbackLbl.text =
+//                self.feedbackLbl.text =
+//                    String(format: "Beat your record!",
+//                           currPersBest)
+                self.panelLabel.text =
                     String(format: "Beat your record!",
                            currPersBest)
+
             } else {
-                self.feedbackLbl.text = ""
+                // self.feedbackLbl.text = ""
             }
         }
      
@@ -1061,29 +1128,36 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
                                                              newPersBest: elapsed)
                 _ = LessonScheduler.instance.saveScoreFile()
                 setTargetTimeIfDoingPersonalBest(setLabels: false)
-                feedbackLbl.text = "Great!!!   Best Ever!!!"
+                // feedbackLbl.text = "Great - best ever!"
+                panelLabel.text = "Great - best ever!"
                 feedbackLbl.isHidden = false
                 switchExerState(newState: kLTExerState_TryAgain)
-                timerLbl.text = String(format: "New Best Time: %.1f", currPersBest)
+                // timerLbl.text = String(format: "New Best Time: %.1f", currPersBest)
+                panelLabel.text?.append(String(format: "\nNew Best Time: %.1f", currPersBest))
            } else {
                 balloon.deflateBallon()
-                feedbackLbl.text = "Good Job, almost your best!"
+//                feedbackLbl.text = "Good job, almost your best!"
+                panelLabel.text = "Good job, almost your best!"
                 feedbackLbl.isHidden = false
                 switchExerState(newState: kLTExerState_TryAgain)
-                timerLbl.text = String(format: "This Try: %.2f, Best: %.2f", elapsed, currPersBest)
+               // timerLbl.text = String(format: "This Try: %.2f, Best: %.2f", elapsed, currPersBest)
+                panelLabel.text?.append(String(format: "\nThis Try: %.2f, Best: %.2f", elapsed, currPersBest))
            }
         } else if isExerciseSuccess {
             let doHide = !doingPersonalRecord
             balloon.explodeBalloon(hideMonkeyFace: doHide)
             balloon.fillColor = UIColor.green.cgColor
-            feedbackLbl.text = "You did it!"
+//            feedbackLbl.text = "You did it!"
             //smileImageView.isHidden = false
-            starScoreView.setStarCount(numStars: bestStarScore)
-            starScoreView.isHidden = false
-            starScoreLbl?.text = "Best so far:"
-            starScoreLbl?.isHidden = false
-            starScoreView.pulseView()
+            setStarScore(score: bestStarScore)
+//            starScoreView.setStarCount(numStars: bestStarScore)
+//            starScoreView.isHidden = false
+//            starScoreLbl?.text = "Best so far:"
+//            starScoreLbl?.isHidden = false
+            //starScoreView.pulseView()
+            pulseStarStackView()
             updateTimerText()
+            panelLabel.text?.append("\nYou did it! Best so far:")
             //timerLbl.text = String(format: "%.2f/%.2f", targetTime, targetTime)
             switchExerState(newState: kLTExerState_Done)
             
@@ -1095,11 +1169,13 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
         {
             balloon.deflateBallon()
            // timer = Timer.scheduledTimer(timeInterval: balloonUpdateRate, target: self, selector: #selector(LongToneViewController.deflateBalloon), userInfo: nil, repeats: true)
-            feedbackLbl.text = "Almost..."
-            starScoreView.setStarCount(numStars: currStarScore)
-            starScoreView.isHidden = true
-            starScoreLbl?.text = "This Try:"
-            starScoreLbl?.isHidden = false
+//            feedbackLbl.text = "Almost..."
+            panelLabel.text = "Almost... this try:"
+            setStarScore(score: currStarScore)
+//            starScoreView.setStarCount(numStars: currStarScore)
+//            starScoreView.isHidden = true
+//            starScoreLbl?.text = "This Try:"
+//            starScoreLbl?.isHidden = false
        // }
         
         feedbackLbl.isHidden = false
@@ -1118,7 +1194,9 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
         } else {
 //            playBtn.isHidden = false
 //            playBtn.isEnabled = true
-            feedbackLbl.text = "Pretty Good!  Let's move on ..."
+            // feedbackLbl.text = "Pretty Good!  Let's move on ..."
+            panelLabel.text = "Pretty good!  Let's move on..."
+            setStarScore(score: bestStarScore)
 //            starScoreView.setStarCount(numStars: bestStarScore)
 //            starScoreLbl?.isHidden = false
 //
@@ -1241,10 +1319,11 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
                         }
                         */
                         currStarScore = targetTimeAndStarScoreMgr.currentStarScore()
-                        
-                        starScoreView.setStarCount(numStars: currStarScore)
-                        starScoreLbl?.text = "This Try:"
-                        starScoreLbl?.isHidden = false
+
+                        setStarScore(score: currStarScore)
+//                        starScoreView.setStarCount(numStars: currStarScore)
+//                        starScoreLbl?.text = "This Try:"
+//                        starScoreLbl?.isHidden = false
 
                         updateTimerText()
                         // timerLbl.text = String(format: "%.2f/%.2f", currentTime, targetTime)
@@ -1252,7 +1331,8 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
 //                        playBtn.isHidden = false
 //                        playBtn.isEnabled = false
                         
-                        feedbackLbl.text = "Keep it up!"
+//                        feedbackLbl.text = "Keep it up!"
+                        panelLabel.text?.append("\nKeep it up!")
 
                         // playBtn.setTitle("Keep it up!", for: UIControlState())
                     }

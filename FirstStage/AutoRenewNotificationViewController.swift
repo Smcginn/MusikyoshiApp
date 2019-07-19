@@ -35,6 +35,10 @@ class AutoRenewNotificationViewController: UIViewController {
         // showTermsAndConditionsAlert()
     }
     
+    @IBAction func backBtnPressed(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+    
     func showApplesEULAHandler(_ act: UIAlertAction) {
         if let url = URL(string: kMKTermsOfUseURL) {
             UIApplication.shared.open(url, options:[:])
@@ -65,31 +69,27 @@ class AutoRenewNotificationViewController: UIViewController {
         performSegue(withIdentifier: "unwindToInAppPurchSegueID", sender: nil)
     }
     
-    @IBAction func cancelButtonPressed(_ sender: Any) {
-        performSegue(withIdentifier: "unwindToInAppPurchSegueID", sender: nil)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLayoutSubviews()
         
         self.title = "Confirm"
 
         
-        let superFrame = super.view.frame
-        let scrollFrame = scrollView.frame
+//        let superFrame = super.view.frame
+//        let scrollFrame = scrollView.frame
         
         // 320x830 for SE
-        let contentSz = CGSize(width: scrollFrame.size.width,
-                               height: scrollFrame.size.height)
- 
-        let frameHt = superFrame.size.height - scrollFrame.origin.y
-        let frameSz = CGSize(width: scrollFrame.size.width,
-                             height: frameHt)
-        scrollView.frame.size = frameSz // superFrame.size
+//        let contentSz = CGSize(width: scrollFrame.size.width,
+//                               height: scrollFrame.size.height)
+//
+//        let frameHt = superFrame.size.height - scrollFrame.origin.y
+//        let frameSz = CGSize(width: scrollFrame.size.width,
+//                             height: frameHt)
+        // scrollView.frame.size = frameSz // superFrame.size
         let scrollFrame2 = scrollView.frame
         useThisToSuppressWarnings(str: "\(scrollFrame2.size.width)")
 
-        scrollView.contentSize = contentSz
+        // scrollView.contentSize = contentSz
 
         getAndSetTextForThisProduct()
         
@@ -101,11 +101,11 @@ class AutoRenewNotificationViewController: UIViewController {
         
         let superFrame = super.view.frame
         let scrollFrame = scrollView.frame
-        scrollView.frame.size.height = super.view.frame.size.height
+//        scrollView.frame.size.height = super.view.frame.size.height
         
         let contentSz = CGSize(width: scrollFrame.size.width, height: superFrame.size.height)
         useThisToSuppressWarnings(str: "\(contentSz.width)")
-        scrollView.contentSize = CGSize(width:300, height:1000) //320
+        // scrollView.contentSize = CGSize(width:300, height:1000) //320
         
         let scrollFrame2 = scrollView.frame
         
@@ -119,6 +119,7 @@ class AutoRenewNotificationViewController: UIViewController {
     }
 
     func getAndSetTextForThisProduct() {
+        
         purchaseTitleValueLabel.text = purchaseTitleText
         descriptionValueLabel.text = descriptionText
         subsPriceValueLabel.text = subsPriceText

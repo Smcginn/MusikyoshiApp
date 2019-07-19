@@ -37,7 +37,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
     var perfStarScore = 0
     var numberOfAttempts = 0
 
-    @IBOutlet weak var backBtn: UIBarButtonItem!
+    @IBOutlet weak var panelTrailingConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var doneBtn: UIButton!
     @IBAction func doneBtnTapped(_ sender: Any) {
@@ -51,11 +51,10 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
         callingVCDelegate?.setExerciseResults(exerNumber: exerNumber,
                                               exerStatus: kLDEState_Completed,
                                               exerScore:  bestStarScore)
-        self.dismiss(animated: true, completion: nil)
+         navigationController?.popViewController(animated: true)
     }
 
     
-    @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var ssScrollView: SSScrollView!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var playForMeButton: UIButton!
@@ -63,14 +62,14 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var gateView: UIView!
     @IBOutlet weak var metronomeView: VisualMetronomeView!
-
+//    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var coverSeeScoreBtnView: UIView!
+//    @IBOutlet weak var backBtn: UIButton!
+    @IBOutlet weak var panelView: UIView!
+    @IBOutlet weak var panelLabel: UILabel!
+    @IBOutlet weak var starStackView: UIStackView!
     
     @IBOutlet weak var internalSettingsBtn: UIButton!
-    
-    @IBAction func backButtonTapped(_ sender: Any) {
-        returnToCallingVC()
-    }
 
     let amplitudeThreshold = UserDefaults.standard.double(forKey: Constants.Settings.AmplitudeThreshold)
     let timingThreshold = UserDefaults.standard.double(forKey: Constants.Settings.TimingThreshold)
@@ -196,8 +195,8 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
     override func viewDidLoad() {
         super.viewDidLoad()
         internalSettingsBtn.isHidden = !gMKDebugOpt_ShowSlidersBtn
-        self.view.backgroundColor = kTuneExer_BackgroundColor
-        coverSeeScoreBtnView.backgroundColor = kTuneExer_BackgroundColor
+        // self.view.backgroundColor = kTuneExer_BackgroundColor
+        coverSeeScoreBtnView.backgroundColor = .white
         whichVC = kTuneExerciseVC
         
         // Orientation BS - TuneExeciseVC --> viewDidLoad
@@ -206,7 +205,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
         AppDelegate.AppUtility.lockOrientationToLandscape()
 //        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight,
 //                                               andRotateTo: UIInterfaceOrientation.landscapeRight)
-
+        
         if exerciseType == .rhythmPartyExer {
             title = "Rhythm Party!"
             infoLabel.text = "Clap the notes"
@@ -219,6 +218,13 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
         } else {
             title = "Tune"
             infoLabel.text = "Play the notes"
+        }
+        
+        panelView.layer.cornerRadius = panelView.frame.height * 0.1
+        if #available(iOS 11.0, *) {
+            panelView.layer.maskedCorners = [.layerMinXMinYCorner]
+        } else {
+            // Fallback on earlier versions
         }
         
         // Do any additional setup after loading the view.
@@ -249,23 +255,25 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
             printAndTestAnalysisTables()
         }
         
-        doneBtn.backgroundColor = kDefault_ButtonBckgrndColor
-        doneBtn.layer.cornerRadius = 10
-        doneBtn.clipsToBounds = true
-        let doneBtnAttrStr = createAttributedText(str: "Done", fontSize: 18.0)
-        doneBtn.titleLabel?.attributedText = doneBtnAttrStr // "All Done!"
+        // This stuff done in storyboard now
         
-        playButton.backgroundColor = kDefault_ButtonBckgrndColor
-        playButton.layer.cornerRadius = 10
-        playButton.clipsToBounds = true
-        let playBtnAttrStr = createAttributedText(str: "Start Playing", fontSize: 18.0)
-        playButton.titleLabel?.attributedText = playBtnAttrStr
+//        doneBtn.backgroundColor = kDefault_ButtonBckgrndColor
+//        doneBtn.layer.cornerRadius = 10
+//        doneBtn.clipsToBounds = true
+//        let doneBtnAttrStr = createAttributedText(str: "Done", fontSize: 18.0)
+//        doneBtn.titleLabel?.attributedText = doneBtnAttrStr // "All Done!"
         
-        playForMeButton.backgroundColor = kDefault_ButtonBckgrndColor
-        playForMeButton.layer.cornerRadius = 10
-        playForMeButton.clipsToBounds = true
-        let playForMeBtnAttrStr = createAttributedText(str: "Play this for me", fontSize: 18.0)
-        playForMeButton.titleLabel?.attributedText = playForMeBtnAttrStr
+//        playButton.backgroundColor = kDefault_ButtonBckgrndColor
+//        playButton.layer.cornerRadius = 10
+//        playButton.clipsToBounds = true
+//        let playBtnAttrStr = createAttributedText(str: "Start Playing", fontSize: 18.0)
+//        playButton.titleLabel?.attributedText = playBtnAttrStr
+        
+//        playForMeButton.backgroundColor = kDefault_ButtonBckgrndColor
+//        playForMeButton.layer.cornerRadius = 10
+//        playForMeButton.clipsToBounds = true
+//        let playForMeBtnAttrStr = createAttributedText(str: "Play this for me", fontSize: 18.0)
+//        playForMeButton.titleLabel?.attributedText = playForMeBtnAttrStr
         
         ssScrollView.contentSize.height = 1.0
         ssScrollView.isScrollEnabled = true
@@ -294,6 +302,12 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
         case starScoreGrading
         case videoSelection
     }
+    
+    enum slideDirection {
+        case out
+        case back
+    }
+    
     func setAnalysisCriteria( exerType: ExerciseType, forPass: sortCriteriaPass ) {
         if forPass == .starScoreGrading {
             switch exerType {
@@ -320,12 +334,26 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
     var layoutStarScoreForiPad = false
     var starScoreLbl: UILabel? = nil
     let feedbackView = FeedbackView()
-    var starScoreView = StarScore()
-    func showStarScore() {
-        starScoreView.isHidden = false
-    }
-    func hideStarScore() {
-        starScoreView.isHidden = true
+    // var starScoreView = StarScore() Replaced by stack view on storyboard
+//    func showStarScore() {
+//        starScoreView.isHidden = false
+//    }
+//    func hideStarScore() {
+//        starScoreView.isHidden = true
+//    }
+    
+    func animatePanel(direction: slideDirection) {
+        
+        if direction == .out {
+            panelTrailingConstraint.constant = -panelView.frame.width
+        } else if direction == .back {
+            panelTrailingConstraint.constant = 0
+        }
+        
+        UIView.animate(withDuration: 0.5) {
+            self.panelView.superview?.layoutIfNeeded()
+        }
+        
     }
     
     func setBestStarScore(newScore: Int) {
@@ -345,64 +373,67 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
     
     var starScoreMgr = StarScoreMgr()
     
-    func setupStarScoreStuff() {
-        
-        let starSz  = StarScore.getSize()
-        let selfFrame = self.view.frame
-        let starX = selfFrame.size.width - (starSz.width + 20)
-
-        var starY =  selfFrame.height - 110 //(starSz.height/2.0)
-        if layoutStarScoreForiPad {
-            let ssFrame = ssScrollView.frame
-            starY = ssFrame.origin.y + ssFrame.size.height + 20
-        }
-        
-        starY -= 10
-        let starOrigin = CGPoint(x:starX, y:starY)
-        
-        starScoreView.initWithPoint(atPoint: starOrigin)
-        starScoreView.setStarCount(numStars: 3)
-        starScoreView.isHidden = true
-        self.view.addSubview(starScoreView)
-        
-        let lblFrame = CGRect(x: 0, y: starY+25, width: 100, height: 30)
-        starScoreLbl = UILabel.init(frame: lblFrame)
-        starScoreLbl?.text = "Best so far:"
-        self.view.addSubview(starScoreLbl!)
-        starScoreLbl?.isHidden = true
-	}
+//    func setupStarScoreStuff() {
+//
+//        let starSz  = StarScore.getSize()
+//        let selfFrame = self.view.frame
+//        let starX = selfFrame.size.width - (starSz.width + 20)
+//
+//        var starY =  selfFrame.height - 110 //(starSz.height/2.0)
+//        if layoutStarScoreForiPad {
+//            let ssFrame = ssScrollView.frame
+//            starY = ssFrame.origin.y + ssFrame.size.height + 20
+//        }
+//
+//        starY -= 10
+//        let starOrigin = CGPoint(x:starX, y:starY)
+//
+//        starScoreView.initWithPoint(atPoint: starOrigin)
+//        starScoreView.setStarCount(numStars: 3)
+//        starScoreView.isHidden = true
+//        self.view.addSubview(starScoreView)
+//
+//        let lblFrame = CGRect(x: 0, y: starY+25, width: 100, height: 30)
+//        starScoreLbl = UILabel.init(frame: lblFrame)
+//        starScoreLbl?.text = "Best so far:"
+//        self.view.addSubview(starScoreLbl!)
+//        starScoreLbl?.isHidden = true
+//    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         var ssFrame = ssScrollView.frame
+        
         if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
-            ssFrame.size.height += 100.0
-            ssScrollView.frame = ssFrame
-            metronomeView.frame.origin.y = ssFrame.origin.y + ssFrame.size.height + 10
-            metronomeView.frame.size.width = (metronomeView.frame.size.height*6)
+//            ssFrame.size.height += 100.0
+//            ssScrollView.frame = ssFrame
+//            metronomeView.frame.origin.y = ssFrame.origin.y + ssFrame.size.height + 10
+//            metronomeView.frame.size.width = (metronomeView.frame.size.height*6)
             layoutStarScoreForiPad = true
         } else if UIDevice.current.is_iPhoneX {
-            ssScrollView.frame = ssFrame
-            let leftOffset:  CGFloat = 40.0
-            let rightOffset: CGFloat = 30.0
-            let newWidth: CGFloat = ssScrollView.frame.size.width - (leftOffset+rightOffset)
-            ssScrollView.frame.size.width = newWidth
-            ssScrollView.frame.origin.x  += leftOffset
+//            ssScrollView.frame = ssFrame
+//            let leftOffset:  CGFloat = 40.0
+//            let rightOffset: CGFloat = 30.0
+//            let newWidth: CGFloat = ssScrollView.frame.size.width - (leftOffset+rightOffset)
+//            ssScrollView.frame.size.width = newWidth
+//            ssScrollView.frame.origin.x  += leftOffset
             ssScrollView.clipsToBounds = true
-            metronomeView.frame.origin.x += leftOffset
+//            metronomeView.frame.origin.x += leftOffset
         } else {
-            metronomeView.frame.origin.y += 23
+            // metronomeView.frame.origin.y += 23
             coverSeeScoreBtnView.frame.size.height -= 20
             coverSeeScoreBtnView.frame.origin.y    += 20
             
-            playButton.frame.origin.y += 5
-            playForMeButton.frame.origin.y = playButton.frame.origin.y
+//            playButton.frame.origin.y += 5
+//            playForMeButton.frame.origin.y = playButton.frame.origin.y
         }
          
-        if !starScoreViewIsSetup {
-            setupStarScoreStuff()
-            starScoreViewIsSetup = true
-        }
+//        if !starScoreViewIsSetup {
+//            setupStarScoreStuff()
+//            starScoreViewIsSetup = true
+//        }
+        setStarScore(score: bestStarScore)
+        
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -429,9 +460,9 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
 //        setAnalysisCriteria( exerType: self.exerciseType )
 
         // this one is it:
-        navigationBar.topItem?.title = navBarTitle
+        // titleLabel.text = navBarTitle
         
-        self.title = "Your Title"
+        // self.title = "Your Title"
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -459,10 +490,16 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+//    @IBAction func backBtnPressed(_ sender: Any) {
+//        returnToCallingVC()
+//    }
 
     @IBAction func playButtonTapped(_ sender: UIButton) {
         
-        starScoreView.isHidden = true
+        animatePanel(direction: .out)
+        
+        // starScoreView.isHidden = true
         ssScrollView.useSeeScoreCursor(false)
         
         // remove when Video help view is more correct (Modal, etc.) and this
@@ -472,13 +509,13 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
         }
 
         playForMeButton.isEnabled = false
-        if playButton.currentTitle == "Start Playing" {
+        if playButton.currentTitle == "PLAY" {
             
             showAnalysisOverview(doShow: false)
 //            AVAudioSessionManager.sharedInstance.setSessionMode(forVideoPlayback: false)
             
 //            playButton.setTitle("Stop", forState: UIControlState.Normal)
-            playButton.setTitle("Listening ...", for: UIControlState())
+            playButton.setTitle("Listening...", for: UIControlState())
 //            let playBtnAttrStr = createAttributedText(str: "Listening ...", fontSize: 18.0)
 //            playButton.titleLabel?.attributedText = playBtnAttrStr
 
@@ -492,7 +529,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
             _ = navigationController?.popViewController(animated: true)
             return
         } else {
-            playButton.setTitle("Stopping ...", for: UIControlState())
+            playButton.setTitle("Stopping...", for: UIControlState())
 //            let playBtnAttrStr = createAttributedText(str: "Stopping ...", fontSize: 18.0)
 //            playButton.titleLabel?.attributedText = playBtnAttrStr
             delay(0.1) {
@@ -503,7 +540,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
 
     @IBAction func playForMeButtonTapped(_ sender: UIButton) {
         
-        starScoreView.isHidden = true
+        // starScoreView.isHidden = true
         ssScrollView.useSeeScoreCursor(true)
 
         // remove when Video help view is more correct (Modal, etc.) and this
@@ -516,14 +553,33 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
         playingSynth = true
         
         playForMeButton.isEnabled = false
-        playButton.setTitle("Playing ...", for: UIControlState())
+        playButton.setTitle("PLAYING...", for: UIControlState())
 //        let playBtnAttrStr = createAttributedText(str: "Playing ...", fontSize: 18.0)
 //        playButton.titleLabel?.attributedText = playBtnAttrStr
         playScore()
     }
 
+    // Have animation parameter in future?
+    func setStarScore(score: Int) {
+        
+        for i in 0..<starStackView.subviews.count {
+            
+            if let starImageView = starStackView.subviews[i] as? UIImageView {
+                
+                if i < score {
+                    starImageView.alpha = 1
+                } else {
+                    starImageView.alpha = 0.6
+                }
+                
+            }
+            
+        }
+        
+    }
+    
     func loadFile(_ scoreFile: String) {
-        playButton.setTitle("Start Playing", for: UIControlState())
+        playButton.setTitle("PLAY", for: UIControlState())
 //        let playBtnAttrStr = createAttributedText(str: "Start Playing", fontSize: 18.0)
 //        playButton.titleLabel?.attributedText = playBtnAttrStr
 //        playButton.isEnabled = true
@@ -564,6 +620,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
         if specifiedNoteWidth != 0 {
             widthToUse = 25
         }
+        
         let sigWidth = UserDefaults.standard.double(forKey: Constants.Settings.SignatureWidth)
         guard let xmlData = MusicXMLModifier.modifyXMLToData(
                 musicXMLUrl: URL(fileURLWithPath: filePath),
@@ -875,8 +932,10 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
             playingAnimation = false
             ssScrollView.layer.removeAnimation(forKey: "move")
         }
+        
+        animatePanel(direction: .back)
 
-        playButton.setTitle("Start Playing", for: UIControlState())
+        playButton.setTitle("PLAY", for: UIControlState())
 //        let playBtnAttrStr = createAttributedText(str: "Start Playing", fontSize: 18.0)
 //        playButton.titleLabel?.attributedText = playBtnAttrStr
 //        playButton.setTitle("Next Exercise", for: UIControlState())
@@ -1003,8 +1062,9 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
         starScoreMgr.furthestThroughSong        = elapsedPlayTime
         let calcedStarScore = starScoreMgr.calculatedScore
         setBestStarScore(newScore: calcedStarScore)
-        starScoreView.setStarCount(numStars: bestStarScore)
-        starScoreView.isHidden = false
+        setStarScore(score: bestStarScore)
+//        starScoreView.setStarCount(numStars: bestStarScore)
+//        starScoreView.isHidden = false
         
         if  gMKDebugOpt_ShowDebugSettingsBtn {
             let titleStr = "Note Attack Summary\n('-' is early; otherwise late)"
@@ -2730,13 +2790,13 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
             playButton.isEnabled = true
             playForMeButton.isEnabled = true
             doneBtn.isEnabled = true
-            backBtn.isEnabled = true
+            // backBtn.isEnabled = true
             // ssScrollView.isEnabled = true
         } else {
             playButton.isEnabled = false
             playForMeButton.isEnabled = false
             doneBtn.isEnabled = false
-            backBtn.isEnabled = false
+            // backBtn.isEnabled = false
             // ssScrollView.isEnabled = false
          }
     }

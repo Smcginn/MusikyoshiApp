@@ -20,7 +20,7 @@ class VisualMetronomeView: UIView {
     override func awakeFromNib() {
         regularColor = regularColor.withAlphaComponent(0.3)
         beatClearColor = beatColor.withAlphaComponent(0.3)
-        rebuildMetronome ()
+        rebuildMetronome()
         super.awakeFromNib()
     }
     

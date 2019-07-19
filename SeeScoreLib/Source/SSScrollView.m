@@ -601,6 +601,7 @@ static float limit(float val, float mini, float maxi)
 		self->_magnification = mag;
 
         __block CGRect frame = self.frame;  // moved this up
+        frame.size.width = 500;
         if (specifiedFrameWidth != 0)
             frame.size.width = specifiedFrameWidth;
         
@@ -687,7 +688,7 @@ static float limit(float val, float mini, float maxi)
                       // temp fix, from Matt's checkin
                       // was:  self.frame = frame;
                       dispatch_async(dispatch_get_main_queue(), ^{
-                          self.frame = self->_resolvedFrame;
+                          self.contentSize = self->_resolvedFrame.size;
                       });
                     }
 

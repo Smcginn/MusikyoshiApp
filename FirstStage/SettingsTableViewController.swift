@@ -13,7 +13,7 @@ let kSettingsPresentMicCalibSegueID = "SettingsPresentMicCalibVCSegue"
 
 import UIKit
 
-class SettingsTableViewController: UITableViewController, PresentingMicCalibVC {
+class SettingsTableViewController: UITableViewController, PresentingMicCalibVC, UIPickerViewDataSource, UIPickerViewDelegate {
     
     var currInstrumentSetting: Int = 0
     
@@ -29,15 +29,132 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC {
     @IBOutlet weak var signatureWidthLabel: UILabel!
     @IBOutlet weak var signatureWidthStepper: UIStepper!
     
-    @IBOutlet weak var selectStudentInstrumentSegControl: MySegmentedControl!
+//    @IBOutlet weak var selectStudentInstrumentSegControl: MySegmentedControl!
     
-    @IBAction func selectStudentInstrumentSegControl_Changed(_ sender: Any) {
-        let instrument = selectStudentInstrumentSegControl.selectedSegmentIndex
-        UserDefaults.standard.set(instrument,
-                                  forKey: Constants.Settings.StudentInstrument)
-        setCurrentStudentInstrument(instrument: instrument)
-
+//    @IBAction func selectStudentInstrumentSegControl_Changed(_ sender: Any) {
+//        let instrument = selectStudentInstrumentSegControl.selectedSegmentIndex
+//        UserDefaults.standard.set(instrument,
+//                                  forKey: Constants.Settings.StudentInstrument)
+//        setCurrentStudentInstrument(instrument: instrument)
+//
+//        loadAmpRiseValuesForCurrentInst()
+//    }
+    
+    var currSelInst = getCurrentStudentInstrument()
+    var newSelInst  = getCurrentStudentInstrument()
+    
+    var showInstrumentPicker = false
+    
+    let instrumentsText = [ "Trumpet",
+                            "Trombone",
+                            "Euphonium",
+                            "French Horn",
+                            "Tuba",
+        /*
+        "Flute",
+        "Oboe",
+        "Clarinet",
+        "Bass Clarinet",
+        "Bassoon",
+        "Alto Saxophone",
+        "Tenor Saxophone",
+        "Baritone Saxophone" */ ]
+    
+    @IBOutlet weak var selectedInstrumentLabel: UILabel!
+    @IBOutlet weak var instrumentPicker: UIPickerView!
+    @IBOutlet weak var changeSelectedInstrumentButton: UIButton!
+    @IBOutlet weak var doneSelectingInstrumentButton: UIButton!
+    
+    @IBAction func changeSelectedInstrumentButtonPressed(_ sender: Any) {
+        
+        changeSelectedInstrumentButton.isEnabled = false
+        changeSelectedInstrumentButton.isHidden = true
+        doneSelectingInstrumentButton.isHidden = false
+        instrumentPicker.isHidden = false
+        showInstrumentPicker = true
+        
+        self.instrumentPicker?.selectRow(currSelInst,
+                                         inComponent: 0,
+                                         animated: true )
+        tableView.beginUpdates()
+        tableView.endUpdates()
+        
+        // CHANGEHERE
+        // Set current instrument
+        
+    }
+    
+    @IBAction func doneSelectingInstrumentButtonPressed(_ sender: Any) {
+        
+        changeSelectedInstrumentButton.isEnabled = true
+        changeSelectedInstrumentButton.isHidden = false
+        doneSelectingInstrumentButton.isHidden = true
+        instrumentPicker.isHidden = true
+        showInstrumentPicker = false
+        
+        currSelInst = newSelInst
+        selectedInstrumentLabel.text = "Current instrument: " + instrumentsText[currSelInst]
+        
+        setCurrentStudentInstrument(instrument: currSelInst)
         loadAmpRiseValuesForCurrentInst()
+        
+        tableView.beginUpdates()
+        tableView.endUpdates()
+        
+    }
+    
+    func setupInstrumentSelection() {
+        currSelInst = getCurrentStudentInstrument()
+        selectedInstrumentLabel.text = "Current instrument: " + instrumentsText[currSelInst]
+        
+    }
+    
+    ////////////////////////////////////////////////////////////
+    //
+    //   Picker Delegate and Data Source methods
+    //
+    
+    public func pickerView(_ pickerView: UIPickerView,
+                    didSelectRow row: Int,
+                    inComponent component: Int) {
+        newSelInst = row
+    }
+    
+//    public func pickerView(_ pickerView: UIPickerView,
+//                           titleForRow row: Int,
+//                           forComponent component: Int) -> String? {
+//        return instrumentsText[row]
+//    }
+    
+    public func pickerView(_ pickerView: UIPickerView,
+                           widthForComponent component: Int) -> CGFloat {
+        return 250.0
+    }
+    
+    public func pickerView(_ pickerView: UIPickerView,
+                           rowHeightForComponent component: Int) -> CGFloat {
+        return 25.0
+    }
+    
+    public func pickerView(_ pickerView: UIPickerView,
+                           numberOfRowsInComponent component: Int) -> Int {
+        // What is this?
+        // return kInst_NumInstruments
+        
+        return instrumentsText.count
+    }
+    
+    public func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    public func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        let pickerLabel = UILabel()
+        pickerLabel.textColor = UIColor.black
+        pickerLabel.text = instrumentsText[row]
+        pickerLabel.font = UIFont(name: "Futura-Medium", size: 16)
+        pickerLabel.textAlignment = NSTextAlignment.center
+        return pickerLabel
     }
     
     @IBOutlet weak var IsASound_Label: UILabel!
@@ -189,11 +306,13 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        selectStudentInstrumentSegControl.multilinesMode = true
-        selectStudentInstrumentSegControl.setTitleTextAttributes([NSAttributedStringKey.font : UIFont(name: "Futura-Medium", size: 16)!], for: .normal)
         
-        bpmStepper.tintColor = .blueColor
+        bpmStepper.tintColor = .pinkColor
+        
+        self.instrumentPicker!.dataSource = self //as UIPickerViewDataSource
+        self.instrumentPicker!.delegate = self
+        
+        setupInstrumentSelection()
         
         initAmpRiseSliders()
     }
@@ -271,22 +390,6 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC {
 //            }
 //        }
         
-        var segTitle = "Trombone"
-        selectStudentInstrumentSegControl.setTitle(segTitle,
-                                                   forSegmentAt: 1)
-        
-        segTitle = "Euphonium"
-        selectStudentInstrumentSegControl.setTitle(segTitle,
-                                                   forSegmentAt: 2)
-        
-        segTitle = "French\nHorn"
-        selectStudentInstrumentSegControl.setTitle(segTitle,
-                                                   forSegmentAt: 3)
-        
-        segTitle = "Tuba"
-        selectStudentInstrumentSegControl.setTitle(segTitle,
-                                                   forSegmentAt: 4)
-        
         var studentInstrument =
             UserDefaults.standard.integer(forKey: Constants.Settings.StudentInstrument)
         currInstrumentSetting = studentInstrument
@@ -294,8 +397,6 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC {
         if studentInstrument < kInst_Trumpet || studentInstrument > kInst_Tuba {
             studentInstrument = kInst_Trumpet
         }
-        selectStudentInstrumentSegControl.selectedSegmentIndex = studentInstrument
-    
     
         loadAmpRiseValuesForCurrentInst()
     }
@@ -310,12 +411,12 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC {
         UserDefaults.standard.set(noteWidthStepper.value, forKey: Constants.Settings.SmallestNoteWidth)
         UserDefaults.standard.set(signatureWidthStepper.value, forKey: Constants.Settings.SignatureWidth)
         
-        let instrument = selectStudentInstrumentSegControl.selectedSegmentIndex
-        if currInstrumentSetting != instrument {
-            UserDefaults.standard.set(instrument,
-                                      forKey: Constants.Settings.StudentInstrument)
-            setCurrentStudentInstrument(instrument: instrument)
-        }
+//        let instrument = selectStudentInstrumentSegControl.selectedSegmentIndex
+//        if currInstrumentSetting != instrument {
+//            UserDefaults.standard.set(instrument,
+//                                      forKey: Constants.Settings.StudentInstrument)
+//            setCurrentStudentInstrument(instrument: instrument)
+//        }
         
         super.viewWillDisappear(animated)
     }
@@ -323,6 +424,51 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC {
     func returningFromMicCalibVC(didCalibrate: Bool) {
         print("in Setup::returningFromMicCalibVC()")
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        if indexPath.section == 0 && indexPath.row == 2 {
+            if let parent = self.parent as? SettingsViewController {
+                parent.performSegue(withIdentifier: "toPurchaseOptions", sender: nil)
+            }
+        }
+        
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if indexPath.row == 0 && showInstrumentPicker {
+            return 200
+        } else if indexPath.row <= 2 {
+            return 64
+        } else if indexPath.row == 4 { // Amp rise sliders - only show if debug mode
+            if gMKDebugOpt_ShowDebugSettingsBtn {
+                return 300
+            } else {
+                return 0
+            }
+        } else if indexPath.row == 5 { // "Is a Sound" button - only show if debug mode
+            if gMKDebugOpt_ShowDebugSettingsBtn {
+                return 50
+            } else {
+                return 0
+            }
+        }
+        
+        //        else if indexPath.row == 6 { // "Is a Sound" button - only show if debug mode
+        //            if gMKDebugOpt_ShowDebugSettingsBtn {
+        //                return 50
+        //            } else {
+        //                return 0
+        //            }
+        //        }
+        
+        // else . . . lots of disabled stuff we're not quite yet commiting to
+        //            getting rid of
+        return 0
+        
+    }
+    
 }
 
 extension UITextField {

@@ -95,6 +95,7 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
         AppDelegate.AppUtility.lockOrientationToLandscape()
         //        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight,
         //                                               andRotateTo: UIInterfaceOrientation.landscapeRight)
+        
     }
     
     override func viewDidLoad() {
@@ -192,6 +193,44 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
        PerformanceAnalysisMgr.instance.printThresholdsInUse()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        
+        //        if needToCalibrateMic {
+        //            goToCalibrateMicVCIfAppropriate()
+        //        }
+        
+        //        else {
+        if firstTimeInView {
+            firstTimeInView = false
+            self.launchingNextView?.isHidden =  true
+            var titleStr = "Press 'GO' to go through a guided practice session"
+            titleStr +=    "\n\nPress 'Choose' to pick individual exercises"
+            let ac = MyUIAlertController(title: titleStr,
+                                         message: "",
+                                         preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "GO",
+                                       style: .default,
+                                       handler: startAutoSchedHandler))
+            ac.addAction(UIAlertAction(title: "Choose",
+                                       style: .default,
+                                       handler: nil))
+            //ac.view.backgroundColor =  kLightGold
+            //            ac.view.tintColor = UIColor.green
+            ac.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = kDefault_AlertBackgroundColor
+            
+            self.present(ac, animated: true, completion: nil)
+        }
+        
+        if self.exercisesDone {
+            //           delay(2.0) {
+            self.showAllDoneAlert()
+            //            }
+        }
+        //       }  //  else,  of if needToCalibrateMic
+    }
+    
     // DELME
     /*
     func thisorthat()
@@ -286,44 +325,6 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
                                       section: 0)
             self.tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
         }
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        
-//        if needToCalibrateMic {
-//            goToCalibrateMicVCIfAppropriate()
-//        }
-        
-//        else {
-            if firstTimeInView {
-                firstTimeInView = false
-                self.launchingNextView?.isHidden =  true
-                var titleStr = "Press 'GO' to go through a guided practice session"
-                titleStr +=    "\n\nPress 'Choose' to pick individual exercises"
-                let ac = MyUIAlertController(title: titleStr,
-                                             message: "",
-                                             preferredStyle: .alert)
-                ac.addAction(UIAlertAction(title: "GO",
-                                           style: .default,
-                                           handler: startAutoSchedHandler))
-                ac.addAction(UIAlertAction(title: "Choose",
-                                           style: .default,
-                                           handler: nil))
-                //ac.view.backgroundColor =  kLightGold
-                //            ac.view.tintColor = UIColor.green
-                ac.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = kDefault_AlertBackgroundColor
-                
-                self.present(ac, animated: true, completion: nil)
-            }
-            
-            if self.exercisesDone {
-     //           delay(2.0) {
-                    self.showAllDoneAlert()
-    //            }
-            }
- //       }  //  else,  of if needToCalibrateMic
     }
     
     /*
@@ -434,11 +435,12 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func doneWithDayHandler(_ act: UIAlertAction) {
-        self.dismiss(animated: true, completion: nil)
+        //self.dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
 
 //        if allDoneWithLevelAlso {
 //            let titleStr = "! Way to Go !"
-//            var msgStr = "You can redo exercises you've completed (for a btter score)"
+//            var msgStr = "You can redo exercises you've completed (for a better score)"
 //            msgStr +=    "\n\nOr Exit to the Levels Screen"
 //            let ac = MyUIAlertController(title: titleStr,
 //                                         message: msgStr,
@@ -576,6 +578,7 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
       }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "LessonItemCell", for: indexPath)
         
          _ = verifyThisViewsLDSet()
@@ -585,8 +588,6 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
         let thisLDE = makeLDEForViewsLevelDay( andThisExer: indexPath.row )
         let cellText = LessonScheduler.instance.getPrettyNameForExercise( forLDE: thisLDE )
 
-        
-        
         
         let currLDE = LsnSchdlr.instance.getCurrentLDE()
         let currExerNum = currLDE.exer
