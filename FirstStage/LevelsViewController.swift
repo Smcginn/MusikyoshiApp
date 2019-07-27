@@ -431,9 +431,9 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
             let levelState = LessonScheduler.instance.getLevelState(level: indexPath.row)
             
             if levelState == kLDEState_Completed  {  // kLDEState_InProgress
-                cell.stateImageView.isHidden = false
+                cell.stateImageView.alpha = 1
             } else {
-                cell.stateImageView.isHidden = true
+                cell.stateImageView.alpha = 0
             }
             
             return cell
