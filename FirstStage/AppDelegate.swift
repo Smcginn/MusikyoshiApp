@@ -157,15 +157,54 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Constants.Settings.Tuba_AmpRiseForNewSound:      Double(kTuba_defAmpRiseForNewSound),
             Constants.Settings.Tuba_SkipBeginningSamples:    Int(kTuba_defSkipBeginningSamples),
             Constants.Settings.Tuba_SamplesInAnalysisWindow: Int(kTuba_defSamplesInAnalysisWindow),
+  
+            Constants.Settings.Flute_AmpRiseForNewSound:      Double(kFlute_defAmpRiseForNewSound),
+            Constants.Settings.Flute_SkipBeginningSamples:    Int(kFlute_defSkipBeginningSamples),
+            Constants.Settings.Flute_SamplesInAnalysisWindow: Int(kFlute_defSamplesInAnalysisWindow),
             ])
 
+        UserDefaults.standard.register(defaults: [
+            Constants.Settings.Oboe_AmpRiseForNewSound:      Double(kOboe_defAmpRiseForNewSound),
+            Constants.Settings.Oboe_SkipBeginningSamples:    Int(kOboe_defSkipBeginningSamples),
+            Constants.Settings.Oboe_SamplesInAnalysisWindow: Int(kOboe_defSamplesInAnalysisWindow),
+            
+            Constants.Settings.Clarinet_AmpRiseForNewSound:      Double(kClarinet_defAmpRiseForNewSound),
+            Constants.Settings.Clarinet_SkipBeginningSamples:    Int(kClarinet_defSkipBeginningSamples),
+            Constants.Settings.Clarinet_SamplesInAnalysisWindow: Int(kClarinet_defSamplesInAnalysisWindow),
+            
+            Constants.Settings.BassClarinet_AmpRiseForNewSound:      Double(kBassClarinet_defAmpRiseForNewSound),
+            Constants.Settings.BassClarinet_SkipBeginningSamples:    Int(kBassClarinet_defSkipBeginningSamples),
+            Constants.Settings.BassClarinet_SamplesInAnalysisWindow: Int(kBassClarinet_defSamplesInAnalysisWindow),
+            ])
+        
+        UserDefaults.standard.register(defaults: [
+            Constants.Settings.Bassoon_AmpRiseForNewSound:      Double(kBassoon_defAmpRiseForNewSound),
+            Constants.Settings.BassoonTuba_SkipBeginningSamples:    Int(kBassoon_defSkipBeginningSamples),
+            Constants.Settings.Bassoon_SamplesInAnalysisWindow: Int(kBassoon_defSamplesInAnalysisWindow),
+            
+            Constants.Settings.AltoSax_AmpRiseForNewSound:      Double(kAltoSax_defAmpRiseForNewSound),
+            Constants.Settings.AltoSax_SkipBeginningSamples:    Int(kAltoSax_defSkipBeginningSamples),
+            Constants.Settings.AltoSax_SamplesInAnalysisWindow: Int(kAltoSax_defSamplesInAnalysisWindow),
+            
+            Constants.Settings.TenorSax_AmpRiseForNewSound:      Double(kTenorSax_defAmpRiseForNewSound),
+            Constants.Settings.TenorSax_SkipBeginningSamples:    Int(kTenorSax_defSkipBeginningSamples),
+            Constants.Settings.TenorSax_SamplesInAnalysisWindow: Int(kTenorSax_defSamplesInAnalysisWindow),
+            ])
+        
+        UserDefaults.standard.register(defaults: [
+            Constants.Settings.BaritoneSax_AmpRiseForNewSound:      Double(kBaritoneSax_defAmpRiseForNewSound),
+            Constants.Settings.BaritoneSax_SkipBeginningSamples:    Int(kBaritoneSax_defSkipBeginningSamples),
+            Constants.Settings.BaritoneSax_SamplesInAnalysisWindow: Int(kBaritoneSax_defSamplesInAnalysisWindow),
+            ])
+ 
+        
         setCheckForAppUpdateTimeIfFirstRun()
         
         NoteService.initNotes()
 
         var studentInstrument =
             UserDefaults.standard.integer(forKey: Constants.Settings.StudentInstrument)
-        if studentInstrument < kInst_Trumpet || studentInstrument > kInst_Tuba {
+        if studentInstrument < kInst_Trumpet || studentInstrument > kInst_LastAcceptableInst {
             studentInstrument = kInst_Trumpet
         }
         setCurrentStudentInstrument(instrument: studentInstrument)

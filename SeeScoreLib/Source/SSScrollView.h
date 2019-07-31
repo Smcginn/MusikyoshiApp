@@ -566,6 +566,8 @@ enum ScrollType_e {scroll_off, scroll_system, scroll_bar};
 @property (nonatomic) bool optimalXMLxLayoutMagnification;
 // MKMOD
 
+@property (nonatomic) bool forLongToneView;
+
 //@protocol SSViewInterface
 
 -(float)drawScale;

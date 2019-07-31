@@ -637,8 +637,20 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
                 itsBad()
                 return
             }
-            
+ 
+/*
+            // TRANSPOSEHERE
+            var currTrans = score?.transpose()
+            let currInst = getCurrentStudentInstrument()
+            let transAmt = getSSTransposeForInstr(instr: currInst)
+            let serr = score?.setTranspose(transAmt)
+            if alwaysFalseToSuppressWarn() { print("\(String(describing: serr))") }
+            currTrans = score?.transpose()
+*/
+//            var serr = score?.setTranspose(24)
+//            if alwaysFalseToSuppressWarn() { print("\(String(describing: serr))") }
   //          let serr = score?.setTranspose(-14)
+//            if alwaysFalseToSuppressWarn() { print("\(String(describing: serr))") }
             
             //				titleLabel.text = [filePath lastPathComponent];
             let numParts = score!.numParts
@@ -654,6 +666,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
                 layOptions.ignoreXMLPositions = false
                 layOptions.useXMLxLayout = true
                 ssScrollView.optimalXMLxLayoutMagnification = true
+                ssScrollView.forLongToneView = false
 //            } else {
 //                ssScrollView.optimalSingleSystem = true
             }
@@ -726,6 +739,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
 
         guard score != nil else { return }
         
+        // TRANSPOSEHERE
         // TRANTRANTRAN  transpose here     - see SSScore.h
 //        let serr = score?.setTranspose(-2)
         

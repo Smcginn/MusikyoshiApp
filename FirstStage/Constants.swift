@@ -63,5 +63,32 @@ struct Constants
         static let Tuba_AmpRiseForNewSound           = "tuba_AmpRiseForNewSound"
         static let Tuba_SkipBeginningSamples         = "tuba_SkipBeginningSamples"
         static let Tuba_SamplesInAnalysisWindow      = "tuba_SamplesInAnalysisWindow"
+        
+        // Amplitude Rise vars, for woodwinds
+        static let Flute_AmpRiseForNewSound             = "flute_AmpRiseForNewSound"
+        static let Flute_SkipBeginningSamples           = "flute_SkipBeginningSamples"
+        static let Flute_SamplesInAnalysisWindow        = "flute_SamplesInAnalysisWindow"
+        static let Oboe_AmpRiseForNewSound              = "oboe_AmpRiseForNewSound"
+        static let Oboe_SkipBeginningSamples            = "oboe_SkipBeginningSamples"
+        static let Oboe_SamplesInAnalysisWindow         = "oboe_SamplesInAnalysisWindow"
+        static let Clarinet_AmpRiseForNewSound          = "clarinet_AmpRiseForNewSound"
+        static let Clarinet_SkipBeginningSamples        = "clarinet_SkipBeginningSamples"
+        static let Clarinet_SamplesInAnalysisWindow     = "clarinet_SamplesInAnalysisWindow"
+        static let BassClarinet_AmpRiseForNewSound      = "bassClarinet_AmpRiseForNewSound"
+        static let BassClarinet_SkipBeginningSamples    = "bassClarinet_SkipBeginningSamples"
+        static let BassClarinet_SamplesInAnalysisWindow = "bassClarinet_SamplesInAnalysisWindow"
+
+        static let Bassoon_AmpRiseForNewSound           = "bassoon_AmpRiseForNewSound"
+        static let BassoonTuba_SkipBeginningSamples     = "bassoon_SkipBeginningSamples"
+        static let Bassoon_SamplesInAnalysisWindow      = "bassoon_SamplesInAnalysisWindow"
+        static let AltoSax_AmpRiseForNewSound           = "altoSax_AmpRiseForNewSound"
+        static let AltoSax_SkipBeginningSamples         = "altoSax_SkipBeginningSamples"
+        static let AltoSax_SamplesInAnalysisWindow      = "altoSax_SamplesInAnalysisWindow"
+        static let TenorSax_AmpRiseForNewSound          = "tenorSax_AmpRiseForNewSound"
+        static let TenorSax_SkipBeginningSamples        = "tenorSax_SkipBeginningSamples"
+        static let TenorSax_SamplesInAnalysisWindow     = "tenorSax_SamplesInAnalysisWindow"
+        static let BaritoneSax_AmpRiseForNewSound       = "baritoneSax_AmpRiseForNewSound"
+        static let BaritoneSax_SkipBeginningSamples     = "baritoneSax_SkipBeginningSamples"
+        static let BaritoneSax_SamplesInAnalysisWindow  = "baritoneSax_SamplesInAnalysisWindow"
     }
 }

@@ -481,6 +481,7 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
         
         // this one is it:
         if doingPersonalRecord {
+	// TRhis has to be fixed    FIXME
             if useAn {
                 //titleLabel.text =
                     "Long Tone Personal Record - Play an \(noteName) for as long as you can"
@@ -791,6 +792,14 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
             layOptions.hidePartNames = true
             layOptions.hideBarNumbers = true
             ssScrollView.optimalSingleSystem = false
+
+            if true {
+                layOptions.ignoreXMLPositions = false
+                layOptions.useXMLxLayout = true
+                ssScrollView.optimalXMLxLayoutMagnification = true
+                ssScrollView.forLongToneView = true
+            }
+            
             ssScrollView.clearScoreIsSetup()
             ssScrollView.setupScore(score!, openParts: showingParts, mag: kDefaultMagnification, opt: layOptions, completion: getPlayData)
         }

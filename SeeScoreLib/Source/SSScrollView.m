@@ -624,6 +624,8 @@ static float limit(float val, float mini, float maxi)
                         __block float systemMagnification = 0;
                         __block bool widthIsTruncated = NO;//YES;
                         __block int loopCount = 0;
+                        __block bool longToneViewComplete = NO;
+                        __block bool preLoopDone = NO;
                         do {
                             // MKMOD - ... to here    (see "MKMOD added" above
                             
@@ -670,13 +672,36 @@ static float limit(float val, float mini, float maxi)
                                 //                                    NSLog(@"systemMagnification:%f - width=%f", systemMagnification, frame.size.width);
                                 frame.size.width += 100;
                             }
-//                            NSLog(@"    ************  In setupScore, bottom of reduction loop; loop count == %i\n\n",
-//                                  loopCount);
-//                            NSLog(@"       widthIsTruncated = %s,  systemMag = %f, self.mag = %f",
-//                                  widthIsTruncated ? "YES" : "No", systemMagnification, self.magnification);
-                        } while ((systemMagnification < self.magnification) || widthIsTruncated);
+                            NSLog(@"    ************  In setupScore, bottom of reduction loop; loop count == %i\n\n",
+                                  loopCount);
+                            NSLog(@"       widthIsTruncated = %s,  systemMag = %f, self.mag = %f",
+                                  widthIsTruncated ? "YES" : "No", systemMagnification, self.magnification);
+                            
+                            if (self.forLongToneView) {
+                                if (loopCount >= 1)
+                                    longToneViewComplete = YES;
+                            }
+
+                            // Are we done?
+                            if (self.forLongToneView) {
+                                if (longToneViewComplete) {
+                                    preLoopDone = YES;
+                                }
+                            } else {
+                                if ((systemMagnification < self.magnification) || widthIsTruncated) {
+                                    preLoopDone = NO;
+                                } else {
+                                    preLoopDone = YES;
+                                }
+                            }
+                            
+                        } while ( !preLoopDone );
+//                        } while ( ((systemMagnification < self.magnification) || widthIsTruncated) &&
+//                                 (self.forLongToneView && !longToneViewComplete)
+//                               );
 //                        NSLog(@"************  In setupScore, Exited reduction loop!");
                       }
+                     
                         
                       // MKMOD -  changed this log - 5/28/17
                       // MKMOD -  commented out this log - 11/6/17
@@ -689,6 +714,12 @@ static float limit(float val, float mini, float maxi)
                       // was:  self.frame = frame;
                       dispatch_async(dispatch_get_main_queue(), ^{
                           self.contentSize = self->_resolvedFrame.size;
+//                          if (self.frame.size.width > self->_resolvedFrame.size.width) {
+//                              // score is not as wide as screen. don't alter the frame.
+//                              self.contentSize = self->_resolvedFrame.size;
+//                          } else {
+//                              self.frame = self->_resolvedFrame;
+//                          }
                       });
                     }
 
@@ -698,6 +729,54 @@ static float limit(float val, float mini, float maxi)
                     // goes here
                     ///////////////////////////////////////
                     
+                    /////////======================================================================================
+                    
+
+//
+//
+//
+//
+//
+//                    else
+//                        if (_optimalSingleSystem) {
+//                            __block int numNewSystems = 0;
+//                            do {
+//                                numNewSystems = 0;
+//                                UIGraphicsBeginImageContextWithOptions(CGSizeMake(10,10), YES/*opaque*/, 0.0/* scale*/);
+//                                CGContextRef ctx = UIGraphicsGetCurrentContext();
+//                                enum sscore_error err = [score layoutWithContext:ctx
+//                                                                           width:frame.size.width - (2 * kMargin.width) maxheight:frame.size.height
+//                                                                           parts:parts magnification:self.magnification * magnificationScalingForWidth
+//                                                                         options:options
+//                                                                        callback:^bool (SSSystem *sys){
+//                                                                            // callback is called for each new laid out system
+//                                                                            // return false if abort required
+//                                                                            if (self.abortingBackground == 0)
+//                                                                            {
+//                                                                                numNewSystems++;
+//                                                                                return true;
+//                                                                            }
+//                                                                            else
+//                                                                                return false;}];
+//                                UIGraphicsEndImageContext();
+//                                if (err != sscore_NoError)
+//                                    break;
+//                                if (numNewSystems > 1) {
+//                                    NSLog(@"numNewSystems:%d - width=%f", numNewSystems, frame.size.width);
+//                                    frame.size.width += 100;
+//                                }
+//                                NSLog(@"SSScrollView.magnification = %f", self.magnification);
+//                            } while (numNewSystems > 1);
+//
+//                            self.frame = frame;
+//                            NSLog(@"one system: xmlScoreWidth = width=%f", frame.size.width);
+//                        }
+ 
+                    
+                    
+                    
+                    ////////========================================================================================
+
                     
 					UIGraphicsBeginImageContextWithOptions(CGSizeMake(10,10), YES/*opaque*/, 0.0/* scale*/);
 					CGContextRef ctx = UIGraphicsGetCurrentContext();

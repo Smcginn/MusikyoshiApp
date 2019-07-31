@@ -87,6 +87,8 @@ class MusicXMLModifier {
             print("Cannot convert Data to AEXMLDocument!!")
             return nil
         }
+        
+        let currInst = getCurrentStudentInstrument()
 
 //        print("doc1:\n\(document.xml)\n")
 
@@ -167,17 +169,19 @@ class MusicXMLModifier {
                 }
             }
 
+            let clefLine = getClefLineForInstr(instr: currInst)
             
-//            if InstrMods.instrument != .trumpet {
-//                let measureClef = measure["attributes"]["clef"]
-//                if measureClef.error == nil {
-//                    measureClef["sign"].value = "F"
-//                    measureClef["line"].value = "4"
-//                    let sign = measureClef["sign"].string
-//                    let line = measureClef["line"].int
-//                    print ("\n\n@@@@  Clef sign = \(sign), line = \(line)")
-//                }
-//            }
+            if InstrMods.instrument != .trumpet {
+                let measureClef = measure["attributes"]["clef"]
+                if measureClef.error == nil {
+                    measureClef["sign"].value = clefLine.clef //"F"
+                    measureClef["line"].value = clefLine.line //"4"
+                    let sign = measureClef["sign"].string
+                    let line = measureClef["line"].string
+                    print ("\n\n@@@@  Clef sign = \(sign), line = \(line)")
+                }
+            }
+ 
             
 //            let measureTranspose =  measure["attributes"]["transpose"]
 //            if measureTranspose.error == nil {
@@ -214,7 +218,19 @@ class MusicXMLModifier {
                     }
                 }
                 
-                
+                let octChange = getOctaveChangeForInstr(instr: currInst)
+                if octChange != 0 {
+                    let notePitch = note["pitch"]
+                    if notePitch.error == nil {
+                        let octaveInt = notePitch["octave"].int
+                        if octaveInt != nil {
+                            let newOctInt = octaveInt! + octChange
+                            notePitch["octave"].value = String(newOctInt)
+                            let testInt = notePitch["octave"].string
+                            print ("testInt! = \(testInt)")
+                        }
+                    }
+                }
 //                let notePitch = note["pitch"]
 //                if notePitch.error == nil {
 //                    let octaveInt = notePitch["octave"].int
