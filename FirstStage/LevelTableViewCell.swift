@@ -13,6 +13,7 @@ class LevelTableViewCell: UITableViewCell {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var levelNumberLabel: UILabel!
     @IBOutlet weak var stateImageView: UIImageView!
+    @IBOutlet weak var levelLabel: UILabel!
     
     var isActive: Bool = false {
         didSet {
@@ -27,6 +28,11 @@ class LevelTableViewCell: UITableViewCell {
         
         self.backgroundColor = .clear
         self.selectionStyle = .none
+        
+        if isiPhoneSE() {
+            levelLabel.font = UIFont(name: "Futura-Medium", size: 16)
+            levelNumberLabel.font = UIFont(name: "Futura-Bold", size: 33)
+        }
         
         self.containerView.layer.cornerRadius = 15
         

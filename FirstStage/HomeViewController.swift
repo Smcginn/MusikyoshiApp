@@ -31,7 +31,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var LessonsBtn: UIButton!
     @IBOutlet weak var OverviewBtn: UIButton!
-    @IBOutlet weak var purchaseOptionsBtn: UIButton!
     
     @IBOutlet weak var welcomeLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
@@ -351,12 +350,15 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         
         let cell = CAEmitterCell()
         
-        cell.birthRate = 0.03
+        let randomNum = Double.random(in: 0...10)
+        cell.beginTime = randomNum
+        
+        cell.birthRate = 0.1
         cell.lifetime = 35
         cell.lifetimeRange = 10
         
-        cell.velocity = 40
-        cell.velocityRange = 10
+        cell.velocity = 60
+        cell.velocityRange = 25
         
         cell.emissionLongitude = .pi
         cell.emissionRange = .pi

@@ -112,8 +112,6 @@ extension OnboardingViewController: UIScrollViewDelegate {
         let currentHorizontalOffset: CGFloat = scrollView.contentOffset.x
         let percentageHorizontalOffset: CGFloat = currentHorizontalOffset / maximumHorizontalOffset
         
-        print(currentHorizontalOffset)
-        
         // Scale images
         
         let interval = 1.0 / CGFloat(slides.count - 1)
