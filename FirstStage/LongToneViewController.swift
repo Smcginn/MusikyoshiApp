@@ -798,6 +798,9 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
                 layOptions.useXMLxLayout = true
                 ssScrollView.optimalXMLxLayoutMagnification = true
                 ssScrollView.forLongToneView = true
+                
+                let ssFrameWd = 256.0 // ssScrollView.frame.size.width
+                ssScrollView.setSpecifiedFrameWidth(Int32(ssFrameWd))
             }
             
             ssScrollView.clearScoreIsSetup()

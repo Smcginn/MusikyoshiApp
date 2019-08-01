@@ -50,16 +50,15 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC, 
                             "Euphonium",
                             "French Horn",
                             "Tuba",
-        /*
-        "Flute",
-        "Oboe",
-        "Clarinet",
-        "Bass Clarinet",
-        "Bassoon",
-        "Alto Saxophone",
-        "Tenor Saxophone",
-        "Baritone Saxophone" */ ]
-    
+                            "Flute",
+                            "Oboe",
+                            "Clarinet",
+                            "Bass Clarinet",
+                            "Bassoon",
+                            "Alto Saxophone",
+                            "Tenor Saxophone",
+                            "Baritone Saxophone" ]
+
     @IBOutlet weak var selectedInstrumentLabel: UILabel!
     @IBOutlet weak var instrumentPicker: UIPickerView!
     @IBOutlet weak var changeSelectedInstrumentButton: UIButton!
@@ -207,6 +206,7 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC, 
     @IBAction func ResetAllBtnPressed(_ sender: Any) {
         let currInst = getCurrentStudentInstrument()
         resetAmpRiseValesToDefaults(forInstr: currInst)
+        loadAmpRiseValuesForCurrentInst() // set the sliders to restored values
     }
     
     @IBAction func isASoundBtnPressed(_ sender: Any) {
@@ -237,10 +237,20 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC, 
 
         var instStr = ""
         switch currInst {
-        case kInst_Trombone:    instStr += "Trombone"
-        case kInst_Euphonium:   instStr += "Euphonium"
-        case kInst_FrenchHorn:  instStr += "Horn"
-        case kInst_Tuba:        instStr += "Tuba"
+        case kInst_Trombone:        instStr += "Trombone"
+        case kInst_Euphonium:       instStr += "Euphonium"
+        case kInst_FrenchHorn:      instStr += "Horn"
+        case kInst_Tuba:            instStr += "Tuba"
+            
+        case kInst_Flute:           instStr += "Flute"
+        case kInst_Oboe:            instStr += "Oboe"
+        case kInst_Clarinet:        instStr += "Clarinet"
+        case kInst_BassClarinet:    instStr += "BassClarinet"
+        case kInst_Bassoon:         instStr += "Bassoon"
+        case kInst_AltoSax:         instStr += "AltoSax"
+        case kInst_TenorSax:        instStr += "TenorSax"
+        case kInst_BaritoneSax:     instStr += "BaritoneSax"
+            
         case kInst_Trumpet:  fallthrough
         default:                instStr += "Trumpet"
         }
@@ -435,40 +445,42 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC, 
         
     }
     
+    // Table View Cell indices
+    let kTCIndex_InstPicker      = 0
+    let kTCIndex_BPM             = 1
+    let kTCIndex_PurchOptions    = 2
+    let kTCIndex_AmpRise         = 3
+    let kTCIndex_IsASound        = 4
+    let kTCIndex_MicCalibrate    = 5
+    let kTCIndex_SmallestNoteWd  = 6
+    let kTCIndex_SigWd           = 7
+
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if indexPath.row == 0 && showInstrumentPicker {
+        if indexPath.row == kTCIndex_InstPicker && showInstrumentPicker {
             return 200
-        } else if indexPath.row <= 2 {
+        } else if indexPath.row <= kTCIndex_PurchOptions {
             return 64
-        } else if indexPath.row == 4 { // Amp rise sliders - only show if debug mode
+        } else if indexPath.row == kTCIndex_AmpRise { // Amp rise sliders - only show if debug mode
             if gMKDebugOpt_ShowDebugSettingsBtn {
                 return 300
             } else {
                 return 0
             }
-        } else if indexPath.row == 5 { // "Is a Sound" button - only show if debug mode
+        } else if indexPath.row == kTCIndex_IsASound  ||    // only show these
+                  indexPath.row == kTCIndex_MicCalibrate  { //      if in debug mode
             if gMKDebugOpt_ShowDebugSettingsBtn {
-                return 50
+                return 64
             } else {
                 return 0
             }
         }
-        
-        //        else if indexPath.row == 6 { // "Is a Sound" button - only show if debug mode
-        //            if gMKDebugOpt_ShowDebugSettingsBtn {
-        //                return 50
-        //            } else {
-        //                return 0
-        //            }
-        //        }
         
         // else . . . lots of disabled stuff we're not quite yet commiting to
         //            getting rid of
         return 0
         
     }
-    
 }
 
 extension UITextField {
