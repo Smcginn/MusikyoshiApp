@@ -558,6 +558,10 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
 //        playButton.titleLabel?.attributedText = playBtnAttrStr
         playScore()
     }
+    
+    @IBAction func stopBtnTapped(_ sender: Any) {
+        self.stopPlaying()
+    }
 
     // Have animation parameter in future?
     func setStarScore(score: Int) {

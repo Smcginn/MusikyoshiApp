@@ -4099,6 +4099,7 @@
 					"$(PROJECT_DIR)/SeeScoreLib/Universal",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/SeeScoreLib/AppStore-Release",
 				);
 				INFOPLIST_FILE = FirstStage/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -4135,6 +4136,7 @@
 					"$(PROJECT_DIR)/SeeScoreLib/Universal",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/SeeScoreLib/AppStore-Release",
 				);
 				INFOPLIST_FILE = FirstStage/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;

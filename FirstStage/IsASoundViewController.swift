@@ -105,6 +105,10 @@ class IsASoundViewController: UIViewController {
         userChangedPeakCount = true
     }
     
+    @IBAction func doneTapped(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+    
     @IBOutlet weak var hopSize_Label: UILabel!
     @IBOutlet weak var peakCount_Label: UILabel!
     
