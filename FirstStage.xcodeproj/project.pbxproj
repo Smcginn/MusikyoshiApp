@@ -374,10 +374,6 @@
 		6D6093BC21163E1800874A40 /* ThresholdsMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6093BA21163E1800874A40 /* ThresholdsMgr.swift */; };
 		6D62460021F6455E00451400 /* DiscFileSystermSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6245FF21F6455E00451400 /* DiscFileSystermSupport.swift */; };
 		6D62460121F6455E00451400 /* DiscFileSystermSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6245FF21F6455E00451400 /* DiscFileSystermSupport.swift */; };
-		6D63167B212D0610004F2DE4 /* SingleStar - 32.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D63166A212D060F004F2DE4 /* SingleStar - 32.png */; };
-		6D63167C212D0610004F2DE4 /* SingleStar - 32.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D63166A212D060F004F2DE4 /* SingleStar - 32.png */; };
-		6D63167D212D0610004F2DE4 /* SingleStar - 64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D63167A212D0610004F2DE4 /* SingleStar - 64.png */; };
-		6D63167E212D0610004F2DE4 /* SingleStar - 64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D63167A212D0610004F2DE4 /* SingleStar - 64.png */; };
 		6D631681212D0670004F2DE4 /* blank 64x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D63167F212D0670004F2DE4 /* blank 64x64.png */; };
 		6D631682212D0670004F2DE4 /* blank 64x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D63167F212D0670004F2DE4 /* blank 64x64.png */; };
 		6D631683212D0670004F2DE4 /* blank 256x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D631680212D0670004F2DE4 /* blank 256x64.png */; };
@@ -388,22 +384,6 @@
 		6D6C8CEE2123422B00874F86 /* PerformanceScoreObjectScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6C8CEC2123422B00874F86 /* PerformanceScoreObjectScheduler.swift */; };
 		6D7220B02208B12500560930 /* instrumentAmplitudeRiseValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7220AF2208B12500560930 /* instrumentAmplitudeRiseValues.swift */; };
 		6D7220B12208B12500560930 /* instrumentAmplitudeRiseValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7220AF2208B12500560930 /* instrumentAmplitudeRiseValues.swift */; };
-		6D7248FD2128771600378131 /* Stars-2 256x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7248EA2128771500378131 /* Stars-2 256x64.png */; };
-		6D7248FE2128771600378131 /* Stars-2 256x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7248EA2128771500378131 /* Stars-2 256x64.png */; };
-		6D7248FF2128771600378131 /* Stars-4 256x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7248FA2128771500378131 /* Stars-4 256x64.png */; };
-		6D7249002128771600378131 /* Stars-4 256x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7248FA2128771500378131 /* Stars-4 256x64.png */; };
-		6D7249012128771600378131 /* Stars-1 256x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7248FB2128771500378131 /* Stars-1 256x64.png */; };
-		6D7249022128771600378131 /* Stars-1 256x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7248FB2128771500378131 /* Stars-1 256x64.png */; };
-		6D7249032128771600378131 /* Stars-3 256x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7248FC2128771600378131 /* Stars-3 256x64.png */; };
-		6D7249042128771600378131 /* Stars-3 256x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7248FC2128771600378131 /* Stars-3 256x64.png */; };
-		6D7249062128775000378131 /* Stars-0 256x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7249052128775000378131 /* Stars-0 256x64.png */; };
-		6D7249072128775000378131 /* Stars-0 256x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7249052128775000378131 /* Stars-0 256x64.png */; };
-		6D7249092128807600378131 /* Stars-4 128x32.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7249082128807600378131 /* Stars-4 128x32.png */; };
-		6D72490A2128807600378131 /* Stars-4 128x32.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7249082128807600378131 /* Stars-4 128x32.png */; };
-		6D72490C2128817100378131 /* Stars-4 64x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D72490B2128817100378131 /* Stars-4 64x16.png */; };
-		6D72490D2128817100378131 /* Stars-4 64x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D72490B2128817100378131 /* Stars-4 64x16.png */; };
-		6D7249112128991F00378131 /* Stars-0 64x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D72490E2128991E00378131 /* Stars-0 64x16.png */; };
-		6D7249122128991F00378131 /* Stars-0 64x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D72490E2128991E00378131 /* Stars-0 64x16.png */; };
 		6D7249132128991F00378131 /* Current Arrow 64x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D72490F2128991E00378131 /* Current Arrow 64x16.png */; };
 		6D7249142128991F00378131 /* Current Arrow 64x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D72490F2128991E00378131 /* Current Arrow 64x16.png */; };
 		6D7249152128991F00378131 /* Blank 64x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7249102128991F00378131 /* Blank 64x16.png */; };
@@ -614,8 +594,6 @@
 		6DB8534A2127A87600F999C3 /* Monkey_Skiing_06@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DB853422127A87600F999C3 /* Monkey_Skiing_06@2x.png */; };
 		6DB9A96F21FCC7E000719BBF /* ScoreFileVersionManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB9A96E21FCC7E000719BBF /* ScoreFileVersionManagement.swift */; };
 		6DB9A97021FCC7E000719BBF /* ScoreFileVersionManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB9A96E21FCC7E000719BBF /* ScoreFileVersionManagement.swift */; };
-		6DBF1F0C213ED8D60052AD57 /* Stars-4 Even 256x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F0B213ED8D50052AD57 /* Stars-4 Even 256x64.png */; };
-		6DBF1F0D213ED8E30052AD57 /* Stars-4 Even 256x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F0B213ED8D50052AD57 /* Stars-4 Even 256x64.png */; };
 		6DBF1F29213EEB850052AD57 /* Duration - A bit short.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F0E213EEB820052AD57 /* Duration - A bit short.mp4 */; };
 		6DBF1F2A213EEB850052AD57 /* Duration - A bit short.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F0E213EEB820052AD57 /* Duration - A bit short.mp4 */; };
 		6DBF1F2B213EEB850052AD57 /* Duration - Too Long.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F0F213EEB820052AD57 /* Duration - Too Long.mp4 */; };
@@ -670,16 +648,6 @@
 		6DBF1F5E213EEB850052AD57 /* Pitch - Very Low - Speed up air.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F28213EEB850052AD57 /* Pitch - Very Low - Speed up air.mp4 */; };
 		6DBF1F60213EEF0F0052AD57 /* Duration - Very Long_512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F5F213EEF0F0052AD57 /* Duration - Very Long_512Kbps_288p.mp4 */; };
 		6DBF1F61213EEF0F0052AD57 /* Duration - Very Long_512Kbps_288p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F5F213EEF0F0052AD57 /* Duration - Very Long_512Kbps_288p.mp4 */; };
-		6DC3FE802118DD1D00168950 /* Balloon_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DC3FE7B2118DD1D00168950 /* Balloon_4.png */; };
-		6DC3FE812118DD1D00168950 /* Balloon_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DC3FE7C2118DD1D00168950 /* Balloon_3.png */; };
-		6DC3FE822118DD1D00168950 /* Balloon_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DC3FE7D2118DD1D00168950 /* Balloon_2.png */; };
-		6DC3FE832118DD1D00168950 /* Balloon_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DC3FE7E2118DD1D00168950 /* Balloon_5.png */; };
-		6DC3FE842118DD1D00168950 /* Balloon_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DC3FE7F2118DD1D00168950 /* Balloon_1.png */; };
-		6DC3FE852118E08900168950 /* Balloon_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DC3FE7F2118DD1D00168950 /* Balloon_1.png */; };
-		6DC3FE862118E08900168950 /* Balloon_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DC3FE7D2118DD1D00168950 /* Balloon_2.png */; };
-		6DC3FE872118E08900168950 /* Balloon_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DC3FE7C2118DD1D00168950 /* Balloon_3.png */; };
-		6DC3FE882118E08900168950 /* Balloon_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DC3FE7B2118DD1D00168950 /* Balloon_4.png */; };
-		6DC3FE892118E08900168950 /* Balloon_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DC3FE7E2118DD1D00168950 /* Balloon_5.png */; };
 		6DC3FE8B2119617500168950 /* StarScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC3FE8A2119617500168950 /* StarScoreView.swift */; };
 		6DC3FE8C2119617500168950 /* StarScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC3FE8A2119617500168950 /* StarScoreView.swift */; };
 		6DC3FE912119628100168950 /* bananas@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DC3FE8D2119628000168950 /* bananas@2x.png */; };
@@ -695,8 +663,6 @@
 		6DC834C72135136400AAA613 /* OneStarNew 64x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DC834C62135136400AAA613 /* OneStarNew 64x64.png */; };
 		6DC834C82135136400AAA613 /* OneStarNew 64x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DC834C62135136400AAA613 /* OneStarNew 64x64.png */; };
 		6DCC640122173722001026F1 /* PerfSampleAmplitudeTrackerV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D277EBC220A9DFF00247359 /* PerfSampleAmplitudeTrackerV2.swift */; };
-		6DCDFF162118AF9F000E8E38 /* Monkey_Ballon_Explode.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DCDFF102118AF9F000E8E38 /* Monkey_Ballon_Explode.png */; };
-		6DCDFF212118AFAB000E8E38 /* Monkey_Ballon_Explode.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DCDFF102118AF9F000E8E38 /* Monkey_Ballon_Explode.png */; };
 		6DD52D782257A32400F1C668 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C33BBA92016E80B00CD83A6 /* SwiftyJSON.framework */; };
 		6DD52D792257ED5600F1C668 /* SwiftyStoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D431C322198EA33009DBBE9 /* SwiftyStoreKit.framework */; };
 		6DD52D7A2257ED8D00F1C668 /* SeeScoreLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6324D3191CE7327F001934A5 /* SeeScoreLib.framework */; };
@@ -787,16 +753,6 @@
 		6DF3A11A21E68A8300C3D525 /* tuba.62.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DF3A0C521E68A8300C3D525 /* tuba.62.mp3 */; };
 		6DF3A11B21E68A8300C3D525 /* tuba.39.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DF3A0C621E68A8300C3D525 /* tuba.39.mp3 */; };
 		6DF3A11C21E68A8300C3D525 /* tuba.39.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DF3A0C621E68A8300C3D525 /* tuba.39.mp3 */; };
-		6DF608D12131C666007D69A5 /* star_icon 16x16.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DF608C02131C665007D69A5 /* star_icon 16x16.jpg */; };
-		6DF608D22131C666007D69A5 /* star_icon 16x16.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DF608C02131C665007D69A5 /* star_icon 16x16.jpg */; };
-		6DF608D32131C666007D69A5 /* star_icon 64x64.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DF608D02131C666007D69A5 /* star_icon 64x64.jpg */; };
-		6DF608D42131C666007D69A5 /* star_icon 64x64.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6DF608D02131C666007D69A5 /* star_icon 64x64.jpg */; };
-		6DFA9BF6212A7CC1002BD4AB /* Stars-3 64x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DFA9BE4212A7CC0002BD4AB /* Stars-3 64x16.png */; };
-		6DFA9BF7212A7CC1002BD4AB /* Stars-2 64x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DFA9BF4212A7CC0002BD4AB /* Stars-2 64x16.png */; };
-		6DFA9BF8212A7CC1002BD4AB /* Stars-1 64x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DFA9BF5212A7CC0002BD4AB /* Stars-1 64x16.png */; };
-		6DFA9BF9212A7D0B002BD4AB /* Stars-1 64x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DFA9BF5212A7CC0002BD4AB /* Stars-1 64x16.png */; };
-		6DFA9BFA212A7D0B002BD4AB /* Stars-2 64x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DFA9BF4212A7CC0002BD4AB /* Stars-2 64x16.png */; };
-		6DFA9BFB212A7D0B002BD4AB /* Stars-3 64x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DFA9BE4212A7CC0002BD4AB /* Stars-3 64x16.png */; };
 		BD8B79051F95BF75005B31CB /* PracticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8B79041F95BF75005B31CB /* PracticeViewController.swift */; };
 		BD8B79061F95BF75005B31CB /* PracticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8B79041F95BF75005B31CB /* PracticeViewController.swift */; };
 		BD8B79111F95C11B005B31CB /* UserAtributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8B79101F95C11B005B31CB /* UserAtributes.swift */; };
@@ -833,6 +789,18 @@
 		E40C311E22DE5813002FFCCB /* OnboardingSlideView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E40C311D22DE5813002FFCCB /* OnboardingSlideView.xib */; };
 		E40C311F22E19997002FFCCB /* OnboardingSlideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40C311B22DE57E8002FFCCB /* OnboardingSlideView.swift */; };
 		E40C312022E19B4A002FFCCB /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40C310A22DE5733002FFCCB /* OnboardingViewController.swift */; };
+		E42B243822F7580F0024A4AE /* Balloon_Pink.png in Resources */ = {isa = PBXBuildFile; fileRef = E42B243722F7580F0024A4AE /* Balloon_Pink.png */; };
+		E42B243922F7580F0024A4AE /* Balloon_Pink.png in Resources */ = {isa = PBXBuildFile; fileRef = E42B243722F7580F0024A4AE /* Balloon_Pink.png */; };
+		E42B243B22F78F550024A4AE /* Balloon_Purple.png in Resources */ = {isa = PBXBuildFile; fileRef = E42B243A22F78F550024A4AE /* Balloon_Purple.png */; };
+		E42B243C22F78F550024A4AE /* Balloon_Purple.png in Resources */ = {isa = PBXBuildFile; fileRef = E42B243A22F78F550024A4AE /* Balloon_Purple.png */; };
+		E42B243E22F78F5B0024A4AE /* Balloon_Orange.png in Resources */ = {isa = PBXBuildFile; fileRef = E42B243D22F78F5B0024A4AE /* Balloon_Orange.png */; };
+		E42B243F22F78F5B0024A4AE /* Balloon_Orange.png in Resources */ = {isa = PBXBuildFile; fileRef = E42B243D22F78F5B0024A4AE /* Balloon_Orange.png */; };
+		E42B244322F790E90024A4AE /* Balloon_Explode_Pink.png in Resources */ = {isa = PBXBuildFile; fileRef = E42B244022F790E80024A4AE /* Balloon_Explode_Pink.png */; };
+		E42B244422F790E90024A4AE /* Balloon_Explode_Pink.png in Resources */ = {isa = PBXBuildFile; fileRef = E42B244022F790E80024A4AE /* Balloon_Explode_Pink.png */; };
+		E42B244522F790E90024A4AE /* Balloon_Explode_Orange.png in Resources */ = {isa = PBXBuildFile; fileRef = E42B244122F790E80024A4AE /* Balloon_Explode_Orange.png */; };
+		E42B244622F790E90024A4AE /* Balloon_Explode_Orange.png in Resources */ = {isa = PBXBuildFile; fileRef = E42B244122F790E80024A4AE /* Balloon_Explode_Orange.png */; };
+		E42B244722F790E90024A4AE /* Balloon_Explode_Purple.png in Resources */ = {isa = PBXBuildFile; fileRef = E42B244222F790E90024A4AE /* Balloon_Explode_Purple.png */; };
+		E42B244822F790E90024A4AE /* Balloon_Explode_Purple.png in Resources */ = {isa = PBXBuildFile; fileRef = E42B244222F790E90024A4AE /* Balloon_Explode_Purple.png */; };
 		E4564D2122D05716000B4FA4 /* ExerciseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E409168B22CFEFCC00E5E034 /* ExerciseTableViewCell.swift */; };
 		E940183E1FA998CF00FC6271 /* FSAnalysisOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = E940183D1FA998CF00FC6271 /* FSAnalysisOverlayView.m */; };
 		E940183F1FA998CF00FC6271 /* FSAnalysisOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = E940183D1FA998CF00FC6271 /* FSAnalysisOverlayView.m */; };
@@ -1323,21 +1291,11 @@
 		6D6093B12114F66D00874A40 /* PerformanceScoreObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PerformanceScoreObject.swift; path = PerformanceAnalysis/PerformanceScoreObject.swift; sourceTree = "<group>"; };
 		6D6093BA21163E1800874A40 /* ThresholdsMgr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ThresholdsMgr.swift; path = PerformanceAnalysis/ThresholdsMgr.swift; sourceTree = "<group>"; };
 		6D6245FF21F6455E00451400 /* DiscFileSystermSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscFileSystermSupport.swift; sourceTree = "<group>"; };
-		6D63166A212D060F004F2DE4 /* SingleStar - 32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "SingleStar - 32.png"; path = "Images/SingleStar - 32.png"; sourceTree = "<group>"; };
-		6D63167A212D0610004F2DE4 /* SingleStar - 64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "SingleStar - 64.png"; path = "Images/SingleStar - 64.png"; sourceTree = "<group>"; };
 		6D63167F212D0670004F2DE4 /* blank 64x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "blank 64x64.png"; path = "Images/blank 64x64.png"; sourceTree = "<group>"; };
 		6D631680212D0670004F2DE4 /* blank 256x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "blank 256x64.png"; path = "Images/blank 256x64.png"; sourceTree = "<group>"; };
 		6D631685212DF4D5004F2DE4 /* LevelSeriesTableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelSeriesTableViewHeaderFooterView.swift; sourceTree = "<group>"; };
 		6D6C8CEC2123422B00874F86 /* PerformanceScoreObjectScheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PerformanceScoreObjectScheduler.swift; path = PerformanceAnalysis/PerformanceScoreObjectScheduler.swift; sourceTree = "<group>"; };
 		6D7220AF2208B12500560930 /* instrumentAmplitudeRiseValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = instrumentAmplitudeRiseValues.swift; sourceTree = "<group>"; };
-		6D7248EA2128771500378131 /* Stars-2 256x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Stars-2 256x64.png"; path = "Images/Stars-2 256x64.png"; sourceTree = "<group>"; };
-		6D7248FA2128771500378131 /* Stars-4 256x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Stars-4 256x64.png"; path = "Images/Stars-4 256x64.png"; sourceTree = "<group>"; };
-		6D7248FB2128771500378131 /* Stars-1 256x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Stars-1 256x64.png"; path = "Images/Stars-1 256x64.png"; sourceTree = "<group>"; };
-		6D7248FC2128771600378131 /* Stars-3 256x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Stars-3 256x64.png"; path = "Images/Stars-3 256x64.png"; sourceTree = "<group>"; };
-		6D7249052128775000378131 /* Stars-0 256x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Stars-0 256x64.png"; path = "Images/Stars-0 256x64.png"; sourceTree = "<group>"; };
-		6D7249082128807600378131 /* Stars-4 128x32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Stars-4 128x32.png"; path = "Images/Stars-4 128x32.png"; sourceTree = "<group>"; };
-		6D72490B2128817100378131 /* Stars-4 64x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Stars-4 64x16.png"; path = "Images/Stars-4 64x16.png"; sourceTree = "<group>"; };
-		6D72490E2128991E00378131 /* Stars-0 64x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Stars-0 64x16.png"; path = "Images/Stars-0 64x16.png"; sourceTree = "<group>"; };
 		6D72490F2128991E00378131 /* Current Arrow 64x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Current Arrow 64x16.png"; path = "Images/Current Arrow 64x16.png"; sourceTree = "<group>"; };
 		6D7249102128991F00378131 /* Blank 64x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Blank 64x16.png"; path = "Images/Blank 64x16.png"; sourceTree = "<group>"; };
 		6D7249172128A8B100378131 /* Monkey_Ballon-Face02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Monkey_Ballon-Face02@2x.png"; path = "Images/Monkey_Ballon-Face02@2x.png"; sourceTree = "<group>"; };
@@ -1444,7 +1402,6 @@
 		6DB853412127A87500F999C3 /* Monkey_Skiing_01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Monkey_Skiing_01@2x.png"; path = "Images/Monkey_Skiing_01@2x.png"; sourceTree = "<group>"; };
 		6DB853422127A87600F999C3 /* Monkey_Skiing_06@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Monkey_Skiing_06@2x.png"; path = "Images/Monkey_Skiing_06@2x.png"; sourceTree = "<group>"; };
 		6DB9A96E21FCC7E000719BBF /* ScoreFileVersionManagement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScoreFileVersionManagement.swift; path = PerformanceAnalysis/ScoreFileVersionManagement.swift; sourceTree = "<group>"; };
-		6DBF1F0B213ED8D50052AD57 /* Stars-4 Even 256x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Stars-4 Even 256x64.png"; path = "Images/Stars-4 Even 256x64.png"; sourceTree = "<group>"; };
 		6DBF1F0E213EEB820052AD57 /* Duration - A bit short.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Duration - A bit short.mp4"; path = "Videos/Duration - A bit short.mp4"; sourceTree = "<group>"; };
 		6DBF1F0F213EEB820052AD57 /* Duration - Too Long.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Duration - Too Long.mp4"; path = "Videos/Duration - Too Long.mp4"; sourceTree = "<group>"; };
 		6DBF1F10213EEB820052AD57 /* No Sound - relax embouchure_512Kbps_288p.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "No Sound - relax embouchure_512Kbps_288p.mp4"; path = "Videos/No Sound - relax embouchure_512Kbps_288p.mp4"; sourceTree = "<group>"; };
@@ -1472,11 +1429,6 @@
 		6DBF1F27213EEB850052AD57 /* No Sound - Check Mic Settings.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "No Sound - Check Mic Settings.mp4"; path = "Videos/No Sound - Check Mic Settings.mp4"; sourceTree = "<group>"; };
 		6DBF1F28213EEB850052AD57 /* Pitch - Very Low - Speed up air.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pitch - Very Low - Speed up air.mp4"; path = "Videos/Pitch - Very Low - Speed up air.mp4"; sourceTree = "<group>"; };
 		6DBF1F5F213EEF0F0052AD57 /* Duration - Very Long_512Kbps_288p.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Duration - Very Long_512Kbps_288p.mp4"; path = "Videos/Duration - Very Long_512Kbps_288p.mp4"; sourceTree = "<group>"; };
-		6DC3FE7B2118DD1D00168950 /* Balloon_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Balloon_4.png; path = Images/Balloon_4.png; sourceTree = "<group>"; };
-		6DC3FE7C2118DD1D00168950 /* Balloon_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Balloon_3.png; path = Images/Balloon_3.png; sourceTree = "<group>"; };
-		6DC3FE7D2118DD1D00168950 /* Balloon_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Balloon_2.png; path = Images/Balloon_2.png; sourceTree = "<group>"; };
-		6DC3FE7E2118DD1D00168950 /* Balloon_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Balloon_5.png; path = Images/Balloon_5.png; sourceTree = "<group>"; };
-		6DC3FE7F2118DD1D00168950 /* Balloon_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Balloon_1.png; path = Images/Balloon_1.png; sourceTree = "<group>"; };
 		6DC3FE8A2119617500168950 /* StarScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarScoreView.swift; sourceTree = "<group>"; };
 		6DC3FE8D2119628000168950 /* bananas@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bananas@2x.png"; path = "Images/bananas@2x.png"; sourceTree = "<group>"; };
 		6DC3FE8E2119628000168950 /* bananas_incomplete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bananas_incomplete.png; path = Images/bananas_incomplete.png; sourceTree = "<group>"; };
@@ -1484,7 +1436,6 @@
 		6DC3FE902119628000168950 /* bananas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bananas.png; path = Images/bananas.png; sourceTree = "<group>"; };
 		6DC834B42134B94B00AAA613 /* IconImageMgr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IconImageMgr.swift; path = LessonScheduling/IconImageMgr.swift; sourceTree = "<group>"; };
 		6DC834C62135136400AAA613 /* OneStarNew 64x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "OneStarNew 64x64.png"; path = "Images/OneStarNew 64x64.png"; sourceTree = "<group>"; };
-		6DCDFF102118AF9F000E8E38 /* Monkey_Ballon_Explode.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Monkey_Ballon_Explode.png; path = Images/Monkey_Ballon_Explode.png; sourceTree = "<group>"; };
 		6DD52D7C2257EF9300F1C668 /* SeeScoreLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SeeScoreLib.framework; path = "SeeScoreLib/AppStore-Release/SeeScoreLib.framework"; sourceTree = "<group>"; };
 		6DDE849D2135A61B00A81875 /* LongtonePersonalBestSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LongtonePersonalBestSupport.swift; path = LessonScheduling/LongtonePersonalBestSupport.swift; sourceTree = "<group>"; };
 		6DEBD410216E3F4B0037C935 /* PlayTunes at 120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PlayTunes at 120.png"; path = "Images/PlayTunes at 120.png"; sourceTree = "<group>"; };
@@ -1529,11 +1480,6 @@
 		6DF3A0C421E68A8300C3D525 /* tuba.63.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = tuba.63.mp3; path = "synth-samples/tuba-samples/tuba.63.mp3"; sourceTree = "<group>"; };
 		6DF3A0C521E68A8300C3D525 /* tuba.62.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = tuba.62.mp3; path = "synth-samples/tuba-samples/tuba.62.mp3"; sourceTree = "<group>"; };
 		6DF3A0C621E68A8300C3D525 /* tuba.39.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = tuba.39.mp3; path = "synth-samples/tuba-samples/tuba.39.mp3"; sourceTree = "<group>"; };
-		6DF608C02131C665007D69A5 /* star_icon 16x16.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "star_icon 16x16.jpg"; path = "Images/star_icon 16x16.jpg"; sourceTree = "<group>"; };
-		6DF608D02131C666007D69A5 /* star_icon 64x64.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "star_icon 64x64.jpg"; path = "Images/star_icon 64x64.jpg"; sourceTree = "<group>"; };
-		6DFA9BE4212A7CC0002BD4AB /* Stars-3 64x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Stars-3 64x16.png"; path = "Images/Stars-3 64x16.png"; sourceTree = "<group>"; };
-		6DFA9BF4212A7CC0002BD4AB /* Stars-2 64x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Stars-2 64x16.png"; path = "Images/Stars-2 64x16.png"; sourceTree = "<group>"; };
-		6DFA9BF5212A7CC0002BD4AB /* Stars-1 64x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Stars-1 64x16.png"; path = "Images/Stars-1 64x16.png"; sourceTree = "<group>"; };
 		BD8B79041F95BF75005B31CB /* PracticeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PracticeViewController.swift; sourceTree = "<group>"; };
 		BD8B79101F95C11B005B31CB /* UserAtributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAtributes.swift; sourceTree = "<group>"; };
 		C90339361FB131D3005A9C7D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -1555,6 +1501,12 @@
 		E40C310A22DE5733002FFCCB /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		E40C311B22DE57E8002FFCCB /* OnboardingSlideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSlideView.swift; sourceTree = "<group>"; };
 		E40C311D22DE5813002FFCCB /* OnboardingSlideView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnboardingSlideView.xib; sourceTree = "<group>"; };
+		E42B243722F7580F0024A4AE /* Balloon_Pink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Balloon_Pink.png; sourceTree = "<group>"; };
+		E42B243A22F78F550024A4AE /* Balloon_Purple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Balloon_Purple.png; sourceTree = "<group>"; };
+		E42B243D22F78F5B0024A4AE /* Balloon_Orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Balloon_Orange.png; sourceTree = "<group>"; };
+		E42B244022F790E80024A4AE /* Balloon_Explode_Pink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Balloon_Explode_Pink.png; sourceTree = "<group>"; };
+		E42B244122F790E80024A4AE /* Balloon_Explode_Orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Balloon_Explode_Orange.png; sourceTree = "<group>"; };
+		E42B244222F790E90024A4AE /* Balloon_Explode_Purple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Balloon_Explode_Purple.png; sourceTree = "<group>"; };
 		E940183C1FA998CF00FC6271 /* FSAnalysisOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSAnalysisOverlayView.h; path = SeeScoreLib/Source/FSAnalysisOverlayView.h; sourceTree = SOURCE_ROOT; };
 		E940183D1FA998CF00FC6271 /* FSAnalysisOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSAnalysisOverlayView.m; path = SeeScoreLib/Source/FSAnalysisOverlayView.m; sourceTree = SOURCE_ROOT; };
 		E9794BA81FFD45EA00CDC7FD /* PerformanceIssueMgr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PerformanceIssueMgr.swift; path = PerformanceAnalysis/PerformanceIssueMgr.swift; sourceTree = "<group>"; };
@@ -2502,11 +2454,12 @@
 		E9CFE60D201A6D9200C69C43 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				6DC3FE7F2118DD1D00168950 /* Balloon_1.png */,
-				6DC3FE7D2118DD1D00168950 /* Balloon_2.png */,
-				6DC3FE7C2118DD1D00168950 /* Balloon_3.png */,
-				6DC3FE7B2118DD1D00168950 /* Balloon_4.png */,
-				6DC3FE7E2118DD1D00168950 /* Balloon_5.png */,
+				E42B243722F7580F0024A4AE /* Balloon_Pink.png */,
+				E42B243D22F78F5B0024A4AE /* Balloon_Orange.png */,
+				E42B243A22F78F550024A4AE /* Balloon_Purple.png */,
+				E42B244122F790E80024A4AE /* Balloon_Explode_Orange.png */,
+				E42B244022F790E80024A4AE /* Balloon_Explode_Pink.png */,
+				E42B244222F790E90024A4AE /* Balloon_Explode_Purple.png */,
 				6DC3FE8E2119628000168950 /* bananas_incomplete.png */,
 				6DC3FE8F2119628000168950 /* bananas_incomplete@2x.png */,
 				6DC3FE902119628000168950 /* bananas.png */,
@@ -2519,7 +2472,6 @@
 				6D8E104B2131031C00B1B3B8 /* Current Arrow 36x16.png */,
 				6D8E10362130DD6F00B1B3B8 /* Current Arrow 40x16.png */,
 				6D72490F2128991E00378131 /* Current Arrow 64x16.png */,
-				6DCDFF102118AF9F000E8E38 /* Monkey_Ballon_Explode.png */,
 				6D7249172128A8B100378131 /* Monkey_Ballon-Face02@2x.png */,
 				E9CFE62020263C0700C69C43 /* Monkey_Jumping Temples_monkey 02@2x.png */,
 				E9CFE62120263C0700C69C43 /* Monkey_Jumping Temples_monkey 03@2x.png */,
@@ -2533,22 +2485,6 @@
 				6DC834C62135136400AAA613 /* OneStarNew 64x64.png */,
 				6DEBD410216E3F4B0037C935 /* PlayTunes at 120.png */,
 				6DEBD421216E40E30037C935 /* PlayTunes at 210.png */,
-				6D63166A212D060F004F2DE4 /* SingleStar - 32.png */,
-				6D63167A212D0610004F2DE4 /* SingleStar - 64.png */,
-				6DF608C02131C665007D69A5 /* star_icon 16x16.jpg */,
-				6DF608D02131C666007D69A5 /* star_icon 64x64.jpg */,
-				6D72490E2128991E00378131 /* Stars-0 64x16.png */,
-				6D7249052128775000378131 /* Stars-0 256x64.png */,
-				6DFA9BF5212A7CC0002BD4AB /* Stars-1 64x16.png */,
-				6D7248FB2128771500378131 /* Stars-1 256x64.png */,
-				6DFA9BF4212A7CC0002BD4AB /* Stars-2 64x16.png */,
-				6D7248EA2128771500378131 /* Stars-2 256x64.png */,
-				6DFA9BE4212A7CC0002BD4AB /* Stars-3 64x16.png */,
-				6D7248FC2128771600378131 /* Stars-3 256x64.png */,
-				6D72490B2128817100378131 /* Stars-4 64x16.png */,
-				6D7249082128807600378131 /* Stars-4 128x32.png */,
-				6D7248FA2128771500378131 /* Stars-4 256x64.png */,
-				6DBF1F0B213ED8D50052AD57 /* Stars-4 Even 256x64.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -2851,7 +2787,6 @@
 				633CA1D51CF73D0C00061F3D /* NearArrow.png in Resources */,
 				6D7249142128991F00378131 /* Current Arrow 64x16.png in Resources */,
 				634658B01E90C68E00C162CF /* Piano.mf.53.m4a in Resources */,
-				6D72490A2128807600378131 /* Stars-4 128x32.png in Resources */,
 				634658E31E90C68E00C162CF /* Piano.mf.104.m4a in Resources */,
 				6DF3A0E221E68A8300C3D525 /* tuba.32.mp3 in Resources */,
 				6346590D1E90C6A000C162CF /* Trumpet.novib.mf.54.m4a in Resources */,
@@ -2866,7 +2801,6 @@
 				6D9C00EC21DBD0C80012A03B /* Horn.mf.61.m4a in Resources */,
 				6DBF1F56213EEB850052AD57 /* No Sound - Are You Playing_512Kbps_288p.mp4 in Resources */,
 				634659211E90C6A000C162CF /* Trumpet.novib.mf.74.m4a in Resources */,
-				6D72490D2128817100378131 /* Stars-4 64x16.png in Resources */,
 				6346592D1E90C6A000C162CF /* Trumpet.novib.mf.86.m4a in Resources */,
 				6346590C1E90C6A000C162CF /* Trumpet.novib.mf.53.m4a in Resources */,
 				634658D11E90C68E00C162CF /* Piano.mf.86.m4a in Resources */,
@@ -2877,12 +2811,12 @@
 				634658CD1E90C68E00C162CF /* Piano.mf.82.m4a in Resources */,
 				E9CFE62420263C0700C69C43 /* Monkey_Jumping Temples_monkey 02@2x.png in Resources */,
 				633CA1D41CF73D0C00061F3D /* FarArrow.png in Resources */,
-				6D7249072128775000378131 /* Stars-0 256x64.png in Resources */,
+				E42B243C22F78F550024A4AE /* Balloon_Purple.png in Resources */,
 				6D9C00A521DBD0490012A03B /* TenorTrombone.50.m4a in Resources */,
+				E42B244622F790E90024A4AE /* Balloon_Explode_Orange.png in Resources */,
 				6D9C009521DBD0490012A03B /* TenorTrombone.41.m4a in Resources */,
 				6D9C007F21DBD0490012A03B /* TenorTrombone.67.m4a in Resources */,
 				6DF3A10E21E68A8300C3D525 /* tuba.53.mp3 in Resources */,
-				6DBF1F0C213ED8D60052AD57 /* Stars-4 Even 256x64.png in Resources */,
 				634659201E90C6A000C162CF /* Trumpet.novib.mf.73.m4a in Resources */,
 				634658AC1E90C68E00C162CF /* Piano.mf.49.m4a in Resources */,
 				6D9C00A121DBD0490012A03B /* TenorTrombone.48.m4a in Resources */,
@@ -2893,7 +2827,6 @@
 				6DF3A10021E68A8300C3D525 /* tuba.31.mp3 in Resources */,
 				634658D91E90C68E00C162CF /* Piano.mf.94.m4a in Resources */,
 				633D1B731CF94CEB00B5C4FD /* FeedbackImage.png in Resources */,
-				6DF608D42131C666007D69A5 /* star_icon 64x64.jpg in Resources */,
 				6DBF1F61213EEF0F0052AD57 /* Duration - Very Long_512Kbps_288p.mp4 in Resources */,
 				634658AB1E90C68E00C162CF /* Piano.mf.48.m4a in Resources */,
 				6DF3A0EA21E68A8300C3D525 /* tuba.29.mp3 in Resources */,
@@ -2921,9 +2854,7 @@
 				6DB853462127A87600F999C3 /* Monkey_Skiing_02@2x.png in Resources */,
 				6D9C009D21DBD0490012A03B /* TenorTrombone.66.m4a in Resources */,
 				634659261E90C6A000C162CF /* Trumpet.novib.mf.79.m4a in Resources */,
-				6DFA9BF6212A7CC1002BD4AB /* Stars-3 64x16.png in Resources */,
 				6D9C010021DBD0C80012A03B /* Horn.mf.57.m4a in Resources */,
-				6D7249022128771600378131 /* Stars-1 256x64.png in Resources */,
 				634658AF1E90C68E00C162CF /* Piano.mf.52.m4a in Resources */,
 				634658E01E90C68E00C162CF /* Piano.mf.101.m4a in Resources */,
 				634658A31E90C68E00C162CF /* Piano.mf.40.m4a in Resources */,
@@ -2942,7 +2873,6 @@
 				6DF3A0FA21E68A8300C3D525 /* tuba.54.mp3 in Resources */,
 				6DC3FE962119628100168950 /* bananas_incomplete@2x.png in Resources */,
 				6D9C011221DBD0C80012A03B /* Horn.mf.46.m4a in Resources */,
-				6DFA9BF7212A7CC1002BD4AB /* Stars-2 64x16.png in Resources */,
 				6D9C009321DBD0490012A03B /* TenorTrombone.52.m4a in Resources */,
 				634658BA1E90C68E00C162CF /* Piano.mf.63.m4a in Resources */,
 				634658D51E90C68E00C162CF /* Piano.mf.90.m4a in Resources */,
@@ -2952,18 +2882,14 @@
 				6D9C00F621DBD0C80012A03B /* Horn.mf.77.m4a in Resources */,
 				634658B21E90C68E00C162CF /* Piano.mf.55.m4a in Resources */,
 				6DF3A0DA21E68A8300C3D525 /* tuba.30.mp3 in Resources */,
-				6D7249002128771600378131 /* Stars-4 256x64.png in Resources */,
 				634658991E90C68E00C162CF /* Piano.mf.30.m4a in Resources */,
 				6DBF1F58213EEB850052AD57 /* Pitch - Low Partial, Change Tongue Arch_512Kbps_288p.mp4 in Resources */,
 				6DF3A0D421E68A8300C3D525 /* tuba.49.mp3 in Resources */,
-				6DC3FE822118DD1D00168950 /* Balloon_2.png in Resources */,
 				6D9C00AF21DBD0490012A03B /* TenorTrombone.45.m4a in Resources */,
 				634658DC1E90C68E00C162CF /* Piano.mf.97.m4a in Resources */,
 				1C87C0A42016EA940038784E /* TrumpetLessons.json in Resources */,
-				6D63167C212D0610004F2DE4 /* SingleStar - 32.png in Resources */,
 				6DF3A11021E68A8300C3D525 /* tuba.64.mp3 in Resources */,
 				634658C71E90C68E00C162CF /* Piano.mf.76.m4a in Resources */,
-				6DC3FE842118DD1D00168950 /* Balloon_1.png in Resources */,
 				6D8E104A2130E77200B1B3B8 /* Current Arrow 22x16.png in Resources */,
 				634658A21E90C68E00C162CF /* Piano.mf.39.m4a in Resources */,
 				6DF3A09A21E55D6900C3D525 /* TenorTrombone.39.m4a in Resources */,
@@ -2977,6 +2903,7 @@
 				6D9C010221DBD0C80012A03B /* Horn.mf.36.m4a in Resources */,
 				634659191E90C6A000C162CF /* Trumpet.novib.mf.66.m4a in Resources */,
 				6DC3FE982119628100168950 /* bananas.png in Resources */,
+				E42B244822F790E90024A4AE /* Balloon_Explode_Purple.png in Resources */,
 				6D9C010A21DBD0C80012A03B /* Horn.mf.54.m4a in Resources */,
 				634659231E90C6A000C162CF /* Trumpet.novib.mf.76.m4a in Resources */,
 				6D9C008321DBD0490012A03B /* TenorTrombone.56.m4a in Resources */,
@@ -2998,11 +2925,9 @@
 				6D9C007521DBD0490012A03B /* TenorTrombone.46.m4a in Resources */,
 				6D9C00EA21DBD0C80012A03B /* Horn.mf.42.m4a in Resources */,
 				6D9C008921DBD0490012A03B /* TenorTrombone.68.m4a in Resources */,
-				6D7249122128991F00378131 /* Stars-0 64x16.png in Resources */,
 				634658AE1E90C68E00C162CF /* Piano.mf.51.m4a in Resources */,
 				6D9C00AB21DBD0490012A03B /* TenorTrombone.61.m4a in Resources */,
 				6DC3FE942119628100168950 /* bananas_incomplete.png in Resources */,
-				6D63167E212D0610004F2DE4 /* SingleStar - 64.png in Resources */,
 				634658971E90C68E00C162CF /* Piano.mf.28.m4a in Resources */,
 				634658CB1E90C68E00C162CF /* Piano.mf.80.m4a in Resources */,
 				6D9C008D21DBD0490012A03B /* TenorTrombone.49.m4a in Resources */,
@@ -3041,10 +2966,10 @@
 				6DF3A0F021E68A8300C3D525 /* tuba.51.mp3 in Resources */,
 				633CA1D31CF73D0C00061F3D /* GreenSmile.png in Resources */,
 				6346590B1E90C6A000C162CF /* Trumpet.novib.mf.52.m4a in Resources */,
-				6D7249042128771600378131 /* Stars-3 256x64.png in Resources */,
 				6DF3A0E621E68A8300C3D525 /* tuba.46.mp3 in Resources */,
 				6DF3A10C21E68A8300C3D525 /* tuba.47.mp3 in Resources */,
 				6D9C008B21DBD0490012A03B /* TenorTrombone.44.m4a in Resources */,
+				E42B244422F790E90024A4AE /* Balloon_Explode_Pink.png in Resources */,
 				6D9C00F021DBD0C80012A03B /* Horn.mf.52.m4a in Resources */,
 				634658921E90C68E00C162CF /* Piano.mf.23.m4a in Resources */,
 				6D9C009921DBD0490012A03B /* TenorTrombone.62.m4a in Resources */,
@@ -3052,7 +2977,6 @@
 				634658951E90C68E00C162CF /* Piano.mf.26.m4a in Resources */,
 				634658BD1E90C68E00C162CF /* Piano.mf.66.m4a in Resources */,
 				6346592A1E90C6A000C162CF /* Trumpet.novib.mf.83.m4a in Resources */,
-				6DF608D22131C666007D69A5 /* star_icon 16x16.jpg in Resources */,
 				634658B71E90C68E00C162CF /* Piano.mf.60.m4a in Resources */,
 				634659221E90C6A000C162CF /* Trumpet.novib.mf.75.m4a in Resources */,
 				634658C31E90C68E00C162CF /* Piano.mf.72.m4a in Resources */,
@@ -3089,6 +3013,7 @@
 				6355ECF81CF68EB70037945F /* marmstk1.wav in Resources */,
 				633C2ADE1CE813E7001C5C16 /* XML Tunes in Resources */,
 				6346590F1E90C6A000C162CF /* Trumpet.novib.mf.56.m4a in Resources */,
+				E42B243F22F78F5B0024A4AE /* Balloon_Orange.png in Resources */,
 				6D9C00EE21DBD0C80012A03B /* Horn.mf.50.m4a in Resources */,
 				634658DB1E90C68E00C162CF /* Piano.mf.96.m4a in Resources */,
 				6DBF1F36213EEB850052AD57 /* Pitch - Upper Partial, Slow air.mp4 in Resources */,
@@ -3105,16 +3030,13 @@
 				6D9C010421DBD0C80012A03B /* Horn.mf.71.m4a in Resources */,
 				634659181E90C6A000C162CF /* Trumpet.novib.mf.65.m4a in Resources */,
 				634658C21E90C68E00C162CF /* Piano.mf.71.m4a in Resources */,
-				6D7248FE2128771600378131 /* Stars-2 256x64.png in Resources */,
 				634658C41E90C68E00C162CF /* Piano.mf.73.m4a in Resources */,
 				6DF3A0CE21E68A8300C3D525 /* tuba.45.mp3 in Resources */,
 				6D9C010821DBD0C80012A03B /* Horn.mf.73.m4a in Resources */,
 				6D9C013621DBD0C80012A03B /* Horn.mf.44.m4a in Resources */,
-				6DFA9BF8212A7CC1002BD4AB /* Stars-1 64x16.png in Resources */,
 				6346589A1E90C68E00C162CF /* Piano.mf.31.m4a in Resources */,
 				634658E21E90C68E00C162CF /* Piano.mf.103.m4a in Resources */,
 				634658E51E90C68E00C162CF /* Piano.mf.106.m4a in Resources */,
-				6DC3FE802118DD1D00168950 /* Balloon_4.png in Resources */,
 				6D9C00FA21DBD0C80012A03B /* Horn.mf.51.m4a in Resources */,
 				6DBF1F54213EEB850052AD57 /* Attack - Late - Enter earlier.mp4 in Resources */,
 				634658CF1E90C68E00C162CF /* Piano.mf.84.m4a in Resources */,
@@ -3128,11 +3050,9 @@
 				6D631684212D0670004F2DE4 /* blank 256x64.png in Resources */,
 				634658DD1E90C68E00C162CF /* Piano.mf.98.m4a in Resources */,
 				6DF3A10A21E68A8300C3D525 /* tuba.40.mp3 in Resources */,
-				6DCDFF162118AF9F000E8E38 /* Monkey_Ballon_Explode.png in Resources */,
 				6D9C00B321DBD0490012A03B /* TenorTrombone.43.m4a in Resources */,
 				6D9C00E421DBD0C80012A03B /* Horn.mf.75.m4a in Resources */,
 				6D9C00F821DBD0C80012A03B /* Horn.mf.38.m4a in Resources */,
-				6DC3FE812118DD1D00168950 /* Balloon_3.png in Resources */,
 				634658BC1E90C68E00C162CF /* Piano.mf.65.m4a in Resources */,
 				6DBF1F4A213EEB850052AD57 /* No Sound - wet lips_512Kbps_288p.mp4 in Resources */,
 				634658C91E90C68E00C162CF /* Piano.mf.78.m4a in Resources */,
@@ -3149,13 +3069,13 @@
 				6D9C013421DBD0C80012A03B /* Horn.mf.59.m4a in Resources */,
 				6DF3A0FE21E68A8300C3D525 /* tuba.58.mp3 in Resources */,
 				634658DA1E90C68E00C162CF /* Piano.mf.95.m4a in Resources */,
-				6DC3FE832118DD1D00168950 /* Balloon_5.png in Resources */,
 				6DF3A10421E68A8300C3D525 /* tuba.61.mp3 in Resources */,
 				634658A51E90C68E00C162CF /* Piano.mf.42.m4a in Resources */,
 				6DF3A0EC21E68A8300C3D525 /* tuba.36.mp3 in Resources */,
 				6346591A1E90C6A000C162CF /* Trumpet.novib.mf.67.m4a in Resources */,
 				6346589C1E90C68E00C162CF /* Piano.mf.33.m4a in Resources */,
 				634658E11E90C68E00C162CF /* Piano.mf.102.m4a in Resources */,
+				E42B243922F7580F0024A4AE /* Balloon_Pink.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3177,20 +3097,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D63167B212D0610004F2DE4 /* SingleStar - 32.png in Resources */,
 				6D9C00ED21DBD0C80012A03B /* Horn.mf.50.m4a in Resources */,
 				6D9C009021DBD0490012A03B /* TenorTrombone.60.m4a in Resources */,
-				6DBF1F0D213ED8E30052AD57 /* Stars-4 Even 256x64.png in Resources */,
 				6336B1D41EA32B0200A78D02 /* Piano.mf.56.m4a in Resources */,
 				6D9C00A421DBD0490012A03B /* TenorTrombone.50.m4a in Resources */,
 				6336B1CB1EA32B0200A78D02 /* Piano.mf.47.m4a in Resources */,
 				6336B1BA1EA32B0200A78D02 /* Piano.mf.30.m4a in Resources */,
 				6336B1961EA32AF000A78D02 /* Trumpet.novib.mf.58.m4a in Resources */,
 				6336B2051EA32B0200A78D02 /* Piano.mf.105.m4a in Resources */,
+				E42B243B22F78F550024A4AE /* Balloon_Purple.png in Resources */,
+				E42B244722F790E90024A4AE /* Balloon_Explode_Purple.png in Resources */,
 				633CA1DB1CF73D1A00061F3D /* NearArrow.png in Resources */,
 				6DF3A0E321E68A8300C3D525 /* tuba.41.mp3 in Resources */,
 				6D9C00A021DBD0490012A03B /* TenorTrombone.48.m4a in Resources */,
 				6D9C00B421DBD0490012A03B /* TenorTrombone.53.m4a in Resources */,
+				E42B243822F7580F0024A4AE /* Balloon_Pink.png in Resources */,
 				6D9C011121DBD0C80012A03B /* Horn.mf.46.m4a in Resources */,
 				6336B1C41EA32B0200A78D02 /* Piano.mf.40.m4a in Resources */,
 				6336B1F81EA32B0200A78D02 /* Piano.mf.92.m4a in Resources */,
@@ -3206,7 +3127,6 @@
 				6D9C007E21DBD0490012A03B /* TenorTrombone.67.m4a in Resources */,
 				6336B1B91EA32B0200A78D02 /* Piano.mf.29.m4a in Resources */,
 				6DF3A0F921E68A8300C3D525 /* tuba.54.mp3 in Resources */,
-				6DC3FE882118E08900168950 /* Balloon_4.png in Resources */,
 				6336B1C91EA32B0200A78D02 /* Piano.mf.45.m4a in Resources */,
 				6336B2001EA32B0200A78D02 /* Piano.mf.100.m4a in Resources */,
 				6336B1BF1EA32B0200A78D02 /* Piano.mf.35.m4a in Resources */,
@@ -3217,7 +3137,6 @@
 				6D8E104C2131031D00B1B3B8 /* Current Arrow 36x16.png in Resources */,
 				E9CFE62820263C0F00C69C43 /* Monkey_Jumping Temples_monkey 02@2x.png in Resources */,
 				6D9C008821DBD0490012A03B /* TenorTrombone.68.m4a in Resources */,
-				6DC3FE862118E08900168950 /* Balloon_2.png in Resources */,
 				6336B1941EA32AF000A78D02 /* Trumpet.novib.mf.56.m4a in Resources */,
 				6336B1FD1EA32B0200A78D02 /* Piano.mf.97.m4a in Resources */,
 				6DBF1F5D213EEB850052AD57 /* Pitch - Very Low - Speed up air.mp4 in Resources */,
@@ -3236,7 +3155,6 @@
 				6DF3A0C721E68A8300C3D525 /* tuba.33.mp3 in Resources */,
 				6DBF1F4F213EEB850052AD57 /* No Sound - firm up embouchure_512Kbps_288p.mp4 in Resources */,
 				6D9C00FB21DBD0C80012A03B /* Horn.mf.63.m4a in Resources */,
-				6D7249112128991F00378131 /* Stars-0 64x16.png in Resources */,
 				633D1B741CF9588700B5C4FD /* FeedbackImage.png in Resources */,
 				6336B1B31EA32B0200A78D02 /* Piano.mf.23.m4a in Resources */,
 				6DF3A11121E68A8300C3D525 /* tuba.37.mp3 in Resources */,
@@ -3251,7 +3169,6 @@
 				6D9C007821DBD0490012A03B /* TenorTrombone.71.m4a in Resources */,
 				6336B1E81EA32B0200A78D02 /* Piano.mf.76.m4a in Resources */,
 				6DBF1F59213EEB850052AD57 /* Pitch - Low Partial, Firm Up Embouchure_512Kbps_288p.mp4 in Resources */,
-				6DC3FE852118E08900168950 /* Balloon_1.png in Resources */,
 				6D9C008221DBD0490012A03B /* TenorTrombone.56.m4a in Resources */,
 				6336B1B11EA32AF000A78D02 /* Trumpet.novib.mf.85.m4a in Resources */,
 				6D9C00AC21DBD0490012A03B /* TenorTrombone.72.m4a in Resources */,
@@ -3267,13 +3184,11 @@
 				6336B19D1EA32AF000A78D02 /* Trumpet.novib.mf.65.m4a in Resources */,
 				E409163B22CC386800E5E034 /* Main.storyboard in Resources */,
 				6DBF1F2D213EEB850052AD57 /* No Sound - relax embouchure_512Kbps_288p.mp4 in Resources */,
-				6D7248FD2128771600378131 /* Stars-2 256x64.png in Resources */,
 				6336B1E41EA32B0200A78D02 /* Piano.mf.72.m4a in Resources */,
 				6DF3A0CB21E68A8300C3D525 /* tuba.44.mp3 in Resources */,
 				6336B1951EA32AF000A78D02 /* Trumpet.novib.mf.57.m4a in Resources */,
 				6D9C012721DBD0C80012A03B /* Horn.mf.69.m4a in Resources */,
 				6336B1A91EA32AF000A78D02 /* Trumpet.novib.mf.77.m4a in Resources */,
-				6DFA9BFB212A7D0B002BD4AB /* Stars-3 64x16.png in Resources */,
 				E9CFE62B20263C0F00C69C43 /* Monkey_Jumping Temples_monkey 06@2x.png in Resources */,
 				6D631681212D0670004F2DE4 /* blank 64x64.png in Resources */,
 				6336B1A41EA32AF000A78D02 /* Trumpet.novib.mf.72.m4a in Resources */,
@@ -3288,7 +3203,6 @@
 				6336B1971EA32AF000A78D02 /* Trumpet.novib.mf.59.m4a in Resources */,
 				6336B1E01EA32B0200A78D02 /* Piano.mf.68.m4a in Resources */,
 				6336B1CA1EA32B0200A78D02 /* Piano.mf.46.m4a in Resources */,
-				6DF608D12131C666007D69A5 /* star_icon 16x16.jpg in Resources */,
 				6336B1EF1EA32B0200A78D02 /* Piano.mf.83.m4a in Resources */,
 				6DC3FE932119628100168950 /* bananas_incomplete.png in Resources */,
 				6D9C00B221DBD0490012A03B /* TenorTrombone.43.m4a in Resources */,
@@ -3300,7 +3214,6 @@
 				6336B1911EA32AF000A78D02 /* Trumpet.novib.mf.53.m4a in Resources */,
 				6D9C007421DBD0490012A03B /* TenorTrombone.46.m4a in Resources */,
 				6DB8533B212498C700F999C3 /* XMLFileMapping.json in Resources */,
-				6DFA9BFA212A7D0B002BD4AB /* Stars-2 64x16.png in Resources */,
 				6336B1BB1EA32B0200A78D02 /* Piano.mf.31.m4a in Resources */,
 				6D9C011D21DBD0C80012A03B /* Horn.mf.66.m4a in Resources */,
 				6DBF1F55213EEB850052AD57 /* No Sound - Are You Playing_512Kbps_288p.mp4 in Resources */,
@@ -3329,7 +3242,6 @@
 				6DF3A09921E55D6000C3D525 /* TenorTrombone.39.m4a in Resources */,
 				6DBF1F29213EEB850052AD57 /* Duration - A bit short.mp4 in Resources */,
 				6DBF1F53213EEB850052AD57 /* Attack - Late - Enter earlier.mp4 in Resources */,
-				6D7249012128771600378131 /* Stars-1 256x64.png in Resources */,
 				6D9C00F921DBD0C80012A03B /* Horn.mf.51.m4a in Resources */,
 				6D9C009C21DBD0490012A03B /* TenorTrombone.66.m4a in Resources */,
 				6336B2031EA32B0200A78D02 /* Piano.mf.103.m4a in Resources */,
@@ -3356,6 +3268,7 @@
 				6DF3A0D121E68A8300C3D525 /* tuba.43.mp3 in Resources */,
 				6D9C008621DBD0490012A03B /* TenorTrombone.63.m4a in Resources */,
 				6324D30E1CE72F8D001934A5 /* Assets.xcassets in Resources */,
+				E42B243E22F78F5B0024A4AE /* Balloon_Orange.png in Resources */,
 				6336B2021EA32B0200A78D02 /* Piano.mf.102.m4a in Resources */,
 				6DBF1F60213EEF0F0052AD57 /* Duration - Very Long_512Kbps_288p.mp4 in Resources */,
 				6D9C009421DBD0490012A03B /* TenorTrombone.41.m4a in Resources */,
@@ -3379,6 +3292,7 @@
 				6D9C010321DBD0C80012A03B /* Horn.mf.71.m4a in Resources */,
 				6DF3A10B21E68A8300C3D525 /* tuba.47.mp3 in Resources */,
 				6336B1C31EA32B0200A78D02 /* Piano.mf.39.m4a in Resources */,
+				E42B244522F790E90024A4AE /* Balloon_Explode_Orange.png in Resources */,
 				6D9C00F321DBD0C80012A03B /* Horn.mf.72.m4a in Resources */,
 				6336B1B81EA32B0200A78D02 /* Piano.mf.28.m4a in Resources */,
 				6D9C009E21DBD0490012A03B /* TenorTrombone.57.m4a in Resources */,
@@ -3391,7 +3305,6 @@
 				6DB853432127A87600F999C3 /* Monkey_Skiing_03@2x.png in Resources */,
 				6D9C007C21DBD0490012A03B /* TenorTrombone.51.m4a in Resources */,
 				E9CFE62920263C0F00C69C43 /* Monkey_Jumping Temples_monkey 03@2x.png in Resources */,
-				6D63167D212D0610004F2DE4 /* SingleStar - 64.png in Resources */,
 				6336B1E31EA32B0200A78D02 /* Piano.mf.71.m4a in Resources */,
 				6336B1EC1EA32B0200A78D02 /* Piano.mf.80.m4a in Resources */,
 				6DF3A0D321E68A8300C3D525 /* tuba.49.mp3 in Resources */,
@@ -3399,7 +3312,6 @@
 				6DF3A0E121E68A8300C3D525 /* tuba.32.mp3 in Resources */,
 				E9CFE62A20263C0F00C69C43 /* Monkey_Jumping Temples_monkey 04@2x.png in Resources */,
 				6D9C00AA21DBD0490012A03B /* TenorTrombone.61.m4a in Resources */,
-				6DFA9BF9212A7D0B002BD4AB /* Stars-1 64x16.png in Resources */,
 				6D9C011F21DBD0C80012A03B /* Horn.mf.67.m4a in Resources */,
 				6336B1E71EA32B0200A78D02 /* Piano.mf.75.m4a in Resources */,
 				6DBF1F3B213EEB850052AD57 /* Sound during rest - _512Kbps_288p.mp4 in Resources */,
@@ -3426,7 +3338,6 @@
 				6336B1D11EA32B0200A78D02 /* Piano.mf.53.m4a in Resources */,
 				6336B1DB1EA32B0200A78D02 /* Piano.mf.63.m4a in Resources */,
 				6336B1AF1EA32AF000A78D02 /* Trumpet.novib.mf.83.m4a in Resources */,
-				6D72490C2128817100378131 /* Stars-4 64x16.png in Resources */,
 				6DF3A11921E68A8300C3D525 /* tuba.62.mp3 in Resources */,
 				6336B1C71EA32B0200A78D02 /* Piano.mf.43.m4a in Resources */,
 				6336B1A71EA32AF000A78D02 /* Trumpet.novib.mf.75.m4a in Resources */,
@@ -3434,9 +3345,7 @@
 				6D9C010D21DBD0C80012A03B /* Horn.mf.65.m4a in Resources */,
 				6336B1ED1EA32B0200A78D02 /* Piano.mf.81.m4a in Resources */,
 				6336B1D71EA32B0200A78D02 /* Piano.mf.59.m4a in Resources */,
-				6DCDFF212118AFAB000E8E38 /* Monkey_Ballon_Explode.png in Resources */,
 				6336B1991EA32AF000A78D02 /* Trumpet.novib.mf.61.m4a in Resources */,
-				6D7249032128771600378131 /* Stars-3 256x64.png in Resources */,
 				6D9C00A821DBD0490012A03B /* TenorTrombone.69.m4a in Resources */,
 				6336B1B41EA32B0200A78D02 /* Piano.mf.24.m4a in Resources */,
 				6336B1FE1EA32B0200A78D02 /* Piano.mf.98.m4a in Resources */,
@@ -3448,10 +3357,8 @@
 				6336B1AA1EA32AF000A78D02 /* Trumpet.novib.mf.78.m4a in Resources */,
 				6D9C007621DBD0490012A03B /* TenorTrombone.70.m4a in Resources */,
 				6336B1F51EA32B0200A78D02 /* Piano.mf.89.m4a in Resources */,
-				6D7249092128807600378131 /* Stars-4 128x32.png in Resources */,
 				6DBF1F47213EEB850052AD57 /* Ptich - Very Low, Reset with B embouchure, use a mirror_512Kbps_288p.mp4 in Resources */,
 				6D9C00EB21DBD0C80012A03B /* Horn.mf.61.m4a in Resources */,
-				6DF608D32131C666007D69A5 /* star_icon 64x64.jpg in Resources */,
 				6336B1A21EA32AF000A78D02 /* Trumpet.novib.mf.70.m4a in Resources */,
 				6DF3A0D721E68A8300C3D525 /* tuba.34.mp3 in Resources */,
 				6DBF1F31213EEB850052AD57 /* Pitch - A Bit High, check fingering_512Kbps_288p.mp4 in Resources */,
@@ -3461,13 +3368,11 @@
 				6DF3A0EB21E68A8300C3D525 /* tuba.36.mp3 in Resources */,
 				6DF3A0DB21E68A8300C3D525 /* tuba.60.mp3 in Resources */,
 				6336B1D91EA32B0200A78D02 /* Piano.mf.61.m4a in Resources */,
-				6DC3FE872118E08900168950 /* Balloon_3.png in Resources */,
 				6D7249152128991F00378131 /* Blank 64x16.png in Resources */,
 				6336B1AB1EA32AF000A78D02 /* Trumpet.novib.mf.79.m4a in Resources */,
 				6D9C00F521DBD0C80012A03B /* Horn.mf.77.m4a in Resources */,
 				6D9C007A21DBD0490012A03B /* TenorTrombone.54.m4a in Resources */,
 				6336B1A81EA32AF000A78D02 /* Trumpet.novib.mf.76.m4a in Resources */,
-				6D7248FF2128771600378131 /* Stars-4 256x64.png in Resources */,
 				6D9C011B21DBD0C80012A03B /* Horn.mf.62.m4a in Resources */,
 				6DF3A11521E68A8300C3D525 /* tuba.56.mp3 in Resources */,
 				6DF3A11721E68A8300C3D525 /* tuba.63.mp3 in Resources */,
@@ -3481,7 +3386,6 @@
 				6D9C010F21DBD0C80012A03B /* Horn.mf.47.m4a in Resources */,
 				6DF3A0F521E68A8300C3D525 /* tuba.28.mp3 in Resources */,
 				6D9C012521DBD0C80012A03B /* Horn.mf.53.m4a in Resources */,
-				6D7249062128775000378131 /* Stars-0 256x64.png in Resources */,
 				6DBF1F35213EEB850052AD57 /* Pitch - Upper Partial, Slow air.mp4 in Resources */,
 				6D9C00A621DBD0490012A03B /* TenorTrombone.64.m4a in Resources */,
 				6D9C010B21DBD0C80012A03B /* Horn.mf.74.m4a in Resources */,
@@ -3490,9 +3394,9 @@
 				6336B2041EA32B0200A78D02 /* Piano.mf.104.m4a in Resources */,
 				6DF3A0CD21E68A8300C3D525 /* tuba.45.mp3 in Resources */,
 				6DBF1F33213EEB850052AD57 /* Pitch - A bit low - firm up embouchure.mp4 in Resources */,
+				E42B244322F790E90024A4AE /* Balloon_Explode_Pink.png in Resources */,
 				6336B1F71EA32B0200A78D02 /* Piano.mf.91.m4a in Resources */,
 				6DF3A0FF21E68A8300C3D525 /* tuba.31.mp3 in Resources */,
-				6DC3FE892118E08900168950 /* Balloon_5.png in Resources */,
 				6D9C012F21DBD0C80012A03B /* Horn.mf.41.m4a in Resources */,
 				6DF3A0F721E68A8300C3D525 /* tuba.48.mp3 in Resources */,
 				6D9C013521DBD0C80012A03B /* Horn.mf.44.m4a in Resources */,
