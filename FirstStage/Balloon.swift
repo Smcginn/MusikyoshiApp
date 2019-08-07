@@ -18,23 +18,39 @@ class Balloon: UIView {
     var imgView: UIImageView!
     var monkeyFaceImgVw: UIImageView!
     
-    let balloonImage1 = UIImage(named: "Balloon_1")
-    let balloonImage2 = UIImage(named: "Balloon_2")
-    let balloonImage3 = UIImage(named: "Balloon_3")
-    let balloonImage4 = UIImage(named: "Balloon_4")
-    let balloonImage5 = UIImage(named: "Balloon_5")
-    let balloonExplodeImg = UIImage(named: "Monkey_Ballon_Explode")
+    let pinkBalloonImage = UIImage(named: "Balloon_Pink")
+    let orangeBalloonImage = UIImage(named: "Balloon_Orange")
+    let purpleBalloonImage = UIImage(named: "Balloon_Purple")
+//    let balloonImage1 = UIImage(named: "Balloon_1")
+//    let balloonImage2 = UIImage(named: "Balloon_2")
+//    let balloonImage3 = UIImage(named: "Balloon_3")
+//    let balloonImage4 = UIImage(named: "Balloon_4")
+//    let balloonImage5 = UIImage(named: "Balloon_5")
+    
+    let pinkBalloonExplodeImg = UIImage(named: "Balloon_Explode_Pink")
+    let orangeBalloonExplodeImg = UIImage(named: "Balloon_Explode_Orange")
+    let purpleBalloonExplodeImg = UIImage(named: "Balloon_Explode_Purple")
+    
+    var htToWdRat: CGFloat = 1.1
 
     var superCenter = CGPoint(x: 0.0, y: 0.0)
     
     var expCount = 0
-    var currImg  = 1
+//    var currImg  = 1
 
     var startX:  CGFloat = 0.0
     var startY:  CGFloat = 0.0
     var startWd: CGFloat = 0.0
     var endWd:   CGFloat = 0.0
     var wdRange: CGFloat = 0.0
+    
+    enum Color {
+        case purple
+        case pink
+        case orange
+    }
+    
+    var color: Color = .pink
     
     var fillColor = UIColor.blue.cgColor {
         didSet{
@@ -52,7 +68,7 @@ class Balloon: UIView {
             // this will change Y position of your imageView center
             // by 1 every time you press button
             self.imgView.frame.size.width  = self.startWd
-            self.imgView.frame.size.height = self.startWd
+            self.imgView.frame.size.height = self.startWd * self.htToWdRat
             self.imgView.frame.origin.x    = self.startX
             self.imgView.frame.origin.y    = self.startY
             self.imgView.alpha = 1.0
@@ -71,28 +87,28 @@ class Balloon: UIView {
         currPercentage = toPercentageInt
         
         // change image if necessary, as balloon gets bigger
-        if currPercentage > 20 &&  currImg <= 1 {
-            imgView.image = balloonImage2
-            currImg = 2
-        }
-        else if currPercentage > 40 && currImg <= 2 {
-            imgView.image = balloonImage3
-            currImg = 3
-        }
-        else if currPercentage > 60 && currImg <= 3 {
-            imgView.image = balloonImage4
-            currImg = 4
-        }
-        else if currPercentage > 80 && currImg <= 4 {
-            imgView.image = balloonImage5
-            currImg = 5
-        }
+//        if currPercentage > 20 &&  currImg <= 1 {
+//            imgView.image = balloonImage2
+//            currImg = 2
+//        }
+//        else if currPercentage > 40 && currImg <= 2 {
+//            imgView.image = balloonImage3
+//            currImg = 3
+//        }
+//        else if currPercentage > 60 && currImg <= 3 {
+//            imgView.image = balloonImage4
+//            currImg = 4
+//        }
+//        else if currPercentage > 80 && currImg <= 4 {
+//            imgView.image = balloonImage5
+//            currImg = 5
+//        }
         
         let growth = wdRange * toPercentage
         print("  growth == \(growth)")
         let newWd = startWd + growth
         print("  newWd == \(newWd)")
-        imgView.frame.size = CGSize(width:newWd, height: newWd)
+        imgView.frame.size = CGSize(width:newWd, height: newWd * htToWdRat)
         
         let x = self.frame.width/2 - newWd/2
         let y = self.frame.height/2 - newWd/2
@@ -103,14 +119,22 @@ class Balloon: UIView {
     
     func explodeBalloon(hideMonkeyFace: Bool = true)
     {
-        imgView.image = balloonExplodeImg
+        
+        switch self.color {
+        case .pink:
+            imgView.image = pinkBalloonExplodeImg
+        case .purple:
+            imgView.image = purpleBalloonExplodeImg
+        case .orange:
+            imgView.image = orangeBalloonExplodeImg
+        }
         
         // First, animate increasing explosion image by 400 pixels
         UIView.animate(withDuration: 0.75, delay: 0.0, options: .curveLinear, animations: {
             // this will change Y position of your imageView center
             // by 1 every time you press button
             self.imgView.frame.size.width += 400
-            self.imgView.frame.size.height += 400
+            self.imgView.frame.size.height += 400 * self.htToWdRat
             self.imgView.frame.origin.x -= 200
             self.imgView.frame.origin.y -= 200
             self.imgView.alpha = 0.7
@@ -178,10 +202,20 @@ class Balloon: UIView {
     
     
     func reset() {
-        currImg = 1
+        //currImg = 1
         currPercentage = 1
-        imgView.image = balloonImage1
-        imgView.frame.size = balloonImage1!.size
+        //imgView.image = balloonImage1
+        
+        switch self.color {
+        case .pink:
+            imgView.image = pinkBalloonImage
+        case .purple:
+            imgView.image = purpleBalloonImage
+        case .orange:
+            imgView.image = orangeBalloonImage
+        }
+        
+        // imgView.frame.size = balloonImage1!.size
         
         let imgWd = imgView.frame.width
         let imgHt = imgView.frame.height
@@ -199,7 +233,8 @@ class Balloon: UIView {
     
     override func awakeFromNib() {
         
-        startWd = balloonImage1!.size.width
+        startWd = 50
+        //startWd = balloonImage1!.size.width
         endWd   = self.frame.size.width
         wdRange = endWd - startWd
         
@@ -216,12 +251,28 @@ class Balloon: UIView {
         monkeyY -= 25.0 // this is the amount that the mouth is not centered
                         //   in Monkey face image
         
-        addSubview(monkeyFaceImgVw)
+        // addSubview(monkeyFaceImgVw)
         monkeyFaceImgVw.frame.origin.x = monkeyX
         monkeyFaceImgVw.frame.origin.y = monkeyY
+        
+        let rand = Int.random(in: 1...3)
+        
+        switch rand {
+        case 1:
+            self.color = .pink
+            imgView = UIImageView(image: pinkBalloonImage)
+        case 2:
+            self.color = .purple
+            imgView = UIImageView(image: purpleBalloonImage)
+        case 3:
+            self.color = .orange
+            imgView = UIImageView(image: orangeBalloonImage)
+        default:
+            self.color = .pink
+            imgView = UIImageView(image: pinkBalloonImage)
+        }
 
-        imgView = UIImageView(image: balloonImage1)
-        imgView.frame.size = balloonImage1!.size
+        imgView.frame.size = CGSize(width: startWd, height: startWd * htToWdRat)
         addSubview(imgView)
         
         superCenter = self.center
