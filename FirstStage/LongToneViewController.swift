@@ -341,7 +341,20 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
         case "D#5", "Eb5":  targetNoteID = 75
         case "E5" :         targetNoteID = 76
         case "F5" :         targetNoteID = 77
+        case "F#5", "Gb5":  targetNoteID = 78
+        case "G5":          targetNoteID = 79
+        case "G#5", "Ab5":  targetNoteID = 80
+        case "A5":          targetNoteID = 81
+        case "A#5", "Bb5":  targetNoteID = 82
+        case "B5",  "Cb6":  targetNoteID = 83
             
+        case "C6":          targetNoteID = 84
+        case "C#6", "Db6":  targetNoteID = 85
+        case "D6":          targetNoteID = 86
+        case "D#6", "Eb6":  targetNoteID = 87
+        case "E6" :         targetNoteID = 88
+        case "F6" :         targetNoteID = 89
+
         default:            targetNoteID = 60 // C4
         }
     }
@@ -429,6 +442,15 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
         setUseAn()
         absoluteTargetNote = NoteService.getNote(targetNoteID + transpositionOffset)
         targetNote = NoteService.getNote(targetNoteID)
+        
+        print("==========================\nIn LongTones View \n")
+        print("targetNote: \(targetNote?.fullName)")
+        print("targetNote: \(String(describing: targetNote?.fullName))")
+        print("absoluteTargetNote: \(absoluteTargetNote?.fullName)")
+        print("absoluteTargetNote: \(String(describing: absoluteTargetNote?.fullName))")
+        print("transpositionOffset: \(transpositionOffset)")
+        print("==========================\n")
+        
         if targetNote != nil {
             print("targetNote: \(String(describing: targetNote))")
 
@@ -471,9 +493,17 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
                 noteName = targetNote!.flatName
              }
         }
-        let instSubpath = getXMLInstrDirString()
-        let fileSubpath = "XML Tunes/" + instSubpath + notesMusicXMLFileName
 
+        var instSubpath = getXMLInstrDirString()
+        var fileSubpath = "XML Tunes/" + instSubpath + notesMusicXMLFileName
+        if !xmlFileExistsInInstrumentDir( filename: fileSubpath ) {
+            // try the secondary dir
+            instSubpath = getXMLInstrSecondaryDirString()
+            fileSubpath = "XML Tunes/" + instSubpath + notesMusicXMLFileName
+        }
+        
+        print("XML file used by LongTone: \(fileSubpath)")
+        
         loadFile(fileSubpath)
 
         let targtTimeInt = Int(targetTime)
@@ -733,7 +763,7 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
         
         // Part of first pass, trying things out. Might not keep this approach.
         var instrMods = MusicXMLInstrumentModifiers()
-        instrMods.setForTrumpet()
+        instrMods.setForTrombone()
         
         guard let xmlData = MusicXMLModifier.modifyXMLToData(
                 musicXMLUrl: URL(fileURLWithPath: filePath),
@@ -758,27 +788,24 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
             // obtain this for exh instrument.
             
             //figure out which part#
-            let currInstFirstNote  = getFirstNoteForCurrentInstrument()
+            let currInstFirstNote  = getFirstNoteInXMLForCurrentInstrument()
             let currInstNoteOffset = getNoteOffsetForCurrentInstrument()
 
-            // partIndex = Int32(kC4 - kFirstLongTone25Note)   //default to C4
-            // partIndex = Int32(kC4 - currInstFirstNote)   //default to C4
             partIndex = Int32(currInstNoteOffset - currInstFirstNote) //default to C4
-            // let partNumber = Int32(targetNoteID - kFirstLongTone25Note)
+            
+            let ltTransAmount = gInstrumentSettings.longToneTranspose
             let partNumber = Int32(targetNoteID - currInstFirstNote)
             useThisToSuppressWarnings(str: "\(partNumber)")
-            //partNumber += 1
-            //let partNumber = Int32(1) // Int32(targetNoteID - currInstFirstNote)
             if 0..<score!.numParts ~= partNumber {
                 partIndex = partNumber
             }
 
+            print("\nIn Longtones -> ltTransAmount: \(ltTransAmount), partNumber: \(partNumber)\n")
+            
             var    showingParts = [NSNumber]()
             showingParts.removeAll()
-//            showingParts.append(NSNumber(value: false))  
             let numParts = Int(score!.numParts)
             for i in 0..<numParts {
-                //showingParts.append(NSNumber(value: (Int32(i+1) == partNumber) as Bool)) // display the selected part
                 showingParts.append(NSNumber(value: (Int32(i) == partNumber) as Bool))
             }
             

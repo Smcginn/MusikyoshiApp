@@ -626,8 +626,20 @@ extension ScoreMgr {
                 let numExers  = exerStrings.count
                 for exerIdx in 0...numExers-1 {
                     let oneExerStr = exerStrings[exerIdx]
-                    let oneExerScore = exerciseScore(exerciseID: oneExerStr, index: exerIdx)
-                    currUserScore?.levels[lvlIdx].days[dayIdx].exercises.append(oneExerScore)
+                    
+                    var skipThisOne = false
+                    if !currInstrumentIsBrass() { // then have to check for slurs
+                        // SLUR EXER Elimination:   Here is where to do it!
+                        let exerType = getExerciseType( exerCode: oneExerStr )
+                        if exerType == .lipSlurExer {
+                            skipThisOne = true
+                        }
+                    }
+                    
+                    if !skipThisOne {
+                        let oneExerScore = exerciseScore(exerciseID: oneExerStr, index: exerIdx)
+                        currUserScore?.levels[lvlIdx].days[dayIdx].exercises.append(oneExerScore)
+                    }
                 }
             }
         }

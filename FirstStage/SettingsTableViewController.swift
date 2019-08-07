@@ -15,7 +15,7 @@ import UIKit
 
 class SettingsTableViewController: UITableViewController, PresentingMicCalibVC, UIPickerViewDataSource, UIPickerViewDelegate {
     
-    var currInstrumentSetting: Int = 0
+    var savedCurrInstrument: Int = 0
     
     @IBOutlet weak var showMarkersControl: UISwitch!
     @IBOutlet weak var showAnalysisControl: UISwitch!
@@ -402,7 +402,7 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC, 
         
         var studentInstrument =
             UserDefaults.standard.integer(forKey: Constants.Settings.StudentInstrument)
-        currInstrumentSetting = studentInstrument
+        savedCurrInstrument = studentInstrument
         
         if studentInstrument < kInst_Trumpet || studentInstrument > kInst_Tuba {
             studentInstrument = kInst_Trumpet
@@ -421,12 +421,12 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC, 
         UserDefaults.standard.set(noteWidthStepper.value, forKey: Constants.Settings.SmallestNoteWidth)
         UserDefaults.standard.set(signatureWidthStepper.value, forKey: Constants.Settings.SignatureWidth)
         
-//        let instrument = selectStudentInstrumentSegControl.selectedSegmentIndex
-//        if currInstrumentSetting != instrument {
-//            UserDefaults.standard.set(instrument,
-//                                      forKey: Constants.Settings.StudentInstrument)
-//            setCurrentStudentInstrument(instrument: instrument)
-//        }
+        // We wait to do this test here, in case they make a mistake in selecting an
+        // instrument. We only commit and create the score file when leaving Settings screen.
+        let currInstrument = getCurrentStudentInstrument()
+        if currInstrument != savedCurrInstrument {
+            _ = LessonScheduler.instance.loadScoreFile()
+        }
         
         super.viewWillDisappear(animated)
     }

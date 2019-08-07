@@ -68,6 +68,13 @@ class PlaybackInstrumentViewController: UIViewController, SSSyControls,  SSSynth
         return Int32(waveformRiseFallValue)
     }
     
+    let kSampInst_Idx_Trumpet    = 0
+    let kSampInst_Idx_Trombone   = 1
+    let kSampInst_Idx_Euphonium  = 2
+    let kSampInst_Idx_FrenchHorn = 3
+    let kSampInst_Idx_Tuba       = 4
+    let kSampInst_Idx_Piano      = 5
+
     // IMPORTANT: These SampledInstrumentsInfos are appended (with the exception
     //            of Piano) in the order of the defined kInst_nnn defs.
     // Don't stray from this, either here or by altering kInst_nnn defs order.
@@ -139,7 +146,7 @@ class PlaybackInstrumentViewController: UIViewController, SSSyControls,  SSSynth
                 base_filename: "tuba",
                 extension: "mp3",
                 base_midipitch: 27,
-                numfiles: 39,
+                numfiles: 52,
                 volume: Float(1.0),
                 attack_time_ms: 2,
                 decay_time_ms: 10,
@@ -186,19 +193,23 @@ class PlaybackInstrumentViewController: UIViewController, SSSyControls,  SSSynth
         guard !sampledInstrumentIds.isEmpty else { return 0 }
         var index = 0
 
-        if whichVC == kTuneExerciseVC {
-            if getCurrentStudentInstrument() == kInst_Trumpet &&
-               sampledInstrumentIds.count > 0 {
-                index = kInst_Trumpet
-            } else if sampledInstrumentIds.count >= kInst_Piano+1 {
-                index  = kInst_Piano
-            }
-        } else {  // whichVC == kLongTonesVC
-            if sampledInstrumentIds.count > 1 {
-                let currInstIdx = getCurrentStudentInstrument()
-                if currInstIdx >= 0 && currInstIdx < sampledInstrumentIds.count {
-                    // index = UserDefaults.standard.bool(forKey: Constants.Settings.PlayTrumpet) ? 1 : 0
-                    index = currInstIdx
+        if sampledInstrumentIds.count > 1 {
+            let currInstIdx = getCurrentStudentInstrument()
+            if whichVC == kTuneExerciseVC {
+                if currInstIdx == kInst_Trumpet {
+                    index = kSampInst_Idx_Trumpet
+                } else {
+                    index = kSampInst_Idx_Piano
+                }
+            } else {  // whichVC == kLongTonesVC
+                if sampledInstrumentIds.count > 1 {
+                    if currInstIdx >= 0 {
+                        if currInstIdx <= kInst_Tuba { // brass are implemented
+                            index = currInstIdx
+                        } else { // woodwinds aren't
+                            index = kSampInst_Idx_Piano
+                        }
+                    }
                 }
             }
         }

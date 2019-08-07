@@ -2,8 +2,8 @@
   "name": "trumpet",
   "title": "Beginner and Intermidiate level",
   "jsonVersionMajor":"0",
-  "jsonVersionMid":"0",
-  "jsonVersionMinor":"11",
+  "jsonVersionMid":"1",
+  "jsonVersionMinor":"0",
   "levels":[{
             "Level Comment":"=================== LEVEL 1 ============================",
             "title":"Level 1",

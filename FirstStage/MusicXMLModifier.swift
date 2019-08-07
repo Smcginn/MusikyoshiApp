@@ -156,6 +156,32 @@ class MusicXMLModifier {
         //var noteX = signatureWidth + (smallestWidth / 2)
         var noteX = sigWidth + (smallestWidth / 2)
 
+        var loopCount = 0
+        for part in document["score-partwise"]["part"].all! {
+            loopCount += 1
+            for measure in part["measure"].all! {
+                let measureTranspose =  measure["attributes"]["transpose"]
+                if measureTranspose.error == nil {
+                    let transDiaChrm = getTransDiaChrmForInstr(instr: currInst)
+                    if transDiaChrm != kNoTransDiaChrmChange {
+                        var diatonic  = measureTranspose["diatonic"].int
+                        var chromatic = measureTranspose["chromatic"].int
+                        if diatonic != nil && chromatic != nil {
+                            print("In modifyXMLData,  old diatonic = \(diatonic!), old chrom: \(chromatic!)")
+                            diatonic!  += transDiaChrm.diatonic
+                            chromatic! += transDiaChrm.chromatic
+                            measureTranspose["diatonic"].value  = String(diatonic!)
+                            measureTranspose["chromatic"].value = String(chromatic!)
+                            diatonic  = measureTranspose["diatonic"].int
+                            chromatic = measureTranspose["chromatic"].int
+                            print("In modifyXMLData,  new diatonic = \(diatonic!), new chrom: \(chromatic!)")
+                        }
+                    }
+                }
+            }
+        }
+
+        loopCount = 0
         for measure in document["score-partwise"]["part"]["measure"].all! {
 
             // adjust the first measure width based on number of sharps/flats in key sig
@@ -182,11 +208,29 @@ class MusicXMLModifier {
                 }
             }
  
+//            typealias tTransDiaChrm = (diatonic: Int, chromatic: Int)
+//            let kNoTransDiaChrmChange =  (diatonic: 0, chromatic: 0)
+//            let kBariTransDiaChrm = (diatonic: -8, chromatic: -12)
+            
+
+            loopCount += 1
             
 //            let measureTranspose =  measure["attributes"]["transpose"]
 //            if measureTranspose.error == nil {
-//                if InstrMods.instrument != .trumpet {
-//                    measureTranspose.removeFromParent()
+//                let transDiaChrm = getTransDiaChrmForInstr(instr: currInst)
+//                if transDiaChrm != kNoTransDiaChrmChange {
+//                    var diatonic  = measureTranspose["diatonic"].int
+//                    var chromatic = measureTranspose["chromatic"].int
+//                    if diatonic != nil && chromatic != nil {
+//                        print("In modifyXMLData,  old diatonic = \(diatonic!), old chrom: \(chromatic!)")
+//                        diatonic!  += transDiaChrm.diatonic
+//                        chromatic! += transDiaChrm.chromatic
+//                        measureTranspose["diatonic"].value  = String(diatonic!)
+//                        measureTranspose["chromatic"].value = String(chromatic!)
+//                        diatonic  = measureTranspose["diatonic"].int
+//                        chromatic = measureTranspose["chromatic"].int
+//                        print("In modifyXMLData,  new diatonic = \(diatonic!), new chrom: \(chromatic!)")
+//                    }
 //                }
 //            }
             
@@ -288,7 +332,7 @@ class MusicXMLModifier {
             noteX = smallestWidth / 2
         }
 
-//        print("doc2:\n\(document.xml)\n")
+        print("doc2:\n==============================\n\n\(document.xml)\n===============================\n\n")
         return document.xml.data(using: .utf8)
     }
 

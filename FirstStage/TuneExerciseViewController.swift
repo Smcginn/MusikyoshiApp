@@ -179,6 +179,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
     let beatMillisecOffset:Int32 = kMetronomeTimingAdjustment // METROMETRO
     var trackingAudioAndNotes = false
 
+    /* DELME-moved elsewhere
     func xmlFileExistsInInstrumentDir( filename: String ) -> Bool {
         
         if let filePath = Bundle.main.path(forResource: filename,
@@ -190,7 +191,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
         }
         return false
     }
-    
+    */
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -232,18 +233,23 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
         showingSinglePart = false // is set when a single part is being displayed
         cursorBarIndex = 0
 
-        let instSubpath = getXMLInstrDirString()
-        var subpath = "XML Tunes/" + instSubpath + exerciseName
-        
-        if !xmlFileExistsInInstrumentDir( filename: subpath ) {
-            // Then this is probably one of the original Trumpet files, one level up.
-            // This is temporary, until all musicXML files have been converted.
-            if getCurrentStudentInstrument() == kInst_Trumpet {
-                subpath = "XML Tunes/" + exerciseName
+        var instSubpath = getXMLInstrDirString()
+        var fileSubpath = "XML Tunes/" + instSubpath + exerciseName
+        if !xmlFileExistsInInstrumentDir( filename: fileSubpath ) {
+            // try the secondary dir
+            instSubpath = getXMLInstrSecondaryDirString()
+            fileSubpath = "XML Tunes/" + instSubpath + exerciseName
+            if !xmlFileExistsInInstrumentDir( filename: fileSubpath ) {
+                // Then this is probably one of the original Trumpet files, one level up.
+                // This is temporary, until all musicXML files have been converted.
+                if getCurrentStudentInstrument() == kInst_Trumpet {
+                    fileSubpath = "XML Tunes/" + exerciseName
+                }
             }
         }
+        print("XML file used by TuneExer: \(fileSubpath)")
+        loadFile(fileSubpath)
         
-        loadFile(subpath)
         countOffLabel.text = ""
 
         frequencyThresholdPercent = 1.0 + frequencyThreshold
