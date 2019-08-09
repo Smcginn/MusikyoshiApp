@@ -546,6 +546,8 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
 
     @IBAction func playForMeButtonTapped(_ sender: UIButton) {
         
+        animatePanel(direction: .out)
+
         // starScoreView.isHidden = true
         ssScrollView.useSeeScoreCursor(true)
 

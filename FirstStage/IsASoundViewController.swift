@@ -328,11 +328,6 @@ class IsASoundViewController: UIViewController {
         
         kAmplitudeThresholdForIsSound = currIsASoundThreshold
         saveData()
-        
-        // Orientation BS --> viewWillDisappear
-        let appDel = UIApplication.shared.delegate as! AppDelegate
-        appDel.orientationLock = .portrait
-        AppDelegate.AppUtility.lockOrientationToPortrait()
     }
     
 	override func viewDidLayoutSubviews() {

@@ -59,7 +59,7 @@ class PerformanceTrackingMgr {
     // When modified so thresholds are reset with level advancement, these need to
     // be changed to vars, and reset at that time as well.
     let rhythmAnalyzer = NoteRhythmPerformanceAnalyzer.init()
-    let pitchAnalyzer  = TrumpetPitchPerformanceAnalyzer.init()
+    var pitchAnalyzer  = BrassPitchPerformanceAnalyzer.init()    
     let restAnalyzer   = RestPerformanceAnalyzer.init()
     var sampleAmplitudeTrkr: PerfSampleAmplitudeTrackerV2
 

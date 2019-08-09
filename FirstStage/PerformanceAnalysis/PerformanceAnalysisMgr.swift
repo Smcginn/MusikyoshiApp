@@ -285,6 +285,11 @@ class PerformanceAnalysisMgr {
     //  return value: isPartialRetVal is a tuple of Bool and tNoteFreqRangeData
     func isThisFreqAPartialOfThisNote(freq: Double, noteID: NoteID)
         -> isPartialRetVal {
+         
+        if !currInstrumentIsBrass() {
+            return kNotPartialForNote
+        }
+            
         if !tablesBuilt {
             let tols = pitchAndRhythmTolerances() // use default vals
             rebuildAllAnalysisTables( tols )

@@ -151,7 +151,7 @@ class NotePitchPerformanceAnalyzer : NotePerformanceAnalyzer {
     }
 }
 
-class TrumpetPitchPerformanceAnalyzer : NotePitchPerformanceAnalyzer {
+class BrassPitchPerformanceAnalyzer : NotePitchPerformanceAnalyzer {
     
     override func isInstrSpecificVeryHiLowIssue( perfNote: PerformanceNote )
         -> Bool {

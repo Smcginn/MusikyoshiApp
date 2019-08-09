@@ -251,8 +251,8 @@ let kOboeInstrumentSettings =
                         isBrassInstrument:      false )
 
 let kClarinetInstrumentSettings =
-    InstrumentSettings( pitchTranspose:         0,
-                        longToneTranspose:      -26,
+    InstrumentSettings( pitchTranspose:         -2,
+                        longToneTranspose:      0,
                         xmlDir:                 kClarinetSubDir,
                         secondaryXmlDir:        kTrumpetSubDir,
                         toneLibraryDir:         kClarinetSubDir,
@@ -261,8 +261,8 @@ let kClarinetInstrumentSettings =
                         isBrassInstrument:      false )
 
 let kBassClarinetInstrumentSettings =
-    InstrumentSettings( pitchTranspose:         0,
-                        longToneTranspose:      -26,
+    InstrumentSettings( pitchTranspose:         -2,
+                        longToneTranspose:      -12,
                         xmlDir:                 kBassClarinetSubDir,
                         secondaryXmlDir:        kTrumpetSubDir,
                         toneLibraryDir:         kBassClarinetSubDir,
