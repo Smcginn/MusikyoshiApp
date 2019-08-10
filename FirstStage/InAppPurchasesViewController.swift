@@ -16,6 +16,7 @@ class InAppPurchasesViewController: UIViewController {
     
     @IBOutlet weak var scrollViewContentViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var restoreBtn: UIButton!
+    @IBOutlet weak var titleLabel: UILabel!
     
     var oneIAPPurchViews: [OneAvailableInAppPurchaseView?] = []
 
@@ -65,6 +66,10 @@ class InAppPurchasesViewController: UIViewController {
         if numIAPEntries <= 0 {
             presentNoEntriesAlert()
             return
+        }
+        
+        if DeviceType.IS_IPHONE_5orSE {
+            titleLabel.font = UIFont(name: "Futura-Bold", size: 27.0)
         }
         
         if numIAPEntries > 0 {

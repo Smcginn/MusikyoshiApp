@@ -18,6 +18,10 @@ class DayTableViewCell: UITableViewCell {
         
         self.selectionStyle = .none
         
+        if DeviceType.IS_IPHONE_5orSE {
+            dayLabel.font = UIFont(name: "Futura-Bold", size: 16.0)
+        }
+        
     }
 
 }

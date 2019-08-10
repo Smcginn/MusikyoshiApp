@@ -10,12 +10,18 @@ import UIKit
 
 class SettingsViewController: UIViewController {
 
+    @IBOutlet weak var titleLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
         navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        if DeviceType.IS_IPHONE_5orSE {
+            titleLabel.font = UIFont(name: "Futura-Bold", size: 27.0)
+        }
         
     }
     

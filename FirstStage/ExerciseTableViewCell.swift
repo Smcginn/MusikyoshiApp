@@ -19,6 +19,18 @@ class ExerciseTableViewCell: UITableViewCell {
         }
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        selectionStyle = .none
+        
+        backgroundColor = .clear
+        
+        if DeviceType.IS_IPHONE_5orSE {
+            exerciseLabel.font = UIFont(name: "Futura-Bold", size: 14.0)
+        }
+    }
+    
     func updateStars() {
         
         for i in 0..<starStackView.subviews.count {

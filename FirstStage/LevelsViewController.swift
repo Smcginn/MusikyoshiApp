@@ -32,6 +32,8 @@ class LevelsViewController: UIViewController {
     
     @IBOutlet weak var daysBackgroundView: UIView!
     
+    let particleEmitter = CAEmitterLayer()
+    
     // is there a subscription?
     //   - this affects Tryout AND showing upper levels
     var subscriptionGood   = false
@@ -209,6 +211,12 @@ class LevelsViewController: UIViewController {
         //            selector: #selector(LevelSeriesViewController.changeTryputHeaderColor),
         //            userInfo: nil,
         //            repeats: true)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        createParticles()
     }
     
     @IBAction func backBtnPressed(_ sender: Any) {
@@ -447,7 +455,7 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
             if isSelectedCell(row: indexPath.row) {
                 cell.dayLabel.textColor = .black
             } else {
-                cell.dayLabel.textColor = .greyTextColor
+                cell.dayLabel.textColor = .darkGray
             }
             
             if gDoLimitLevels && activeLevel > kNumberOfLevelsToShow {
@@ -669,6 +677,60 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
             }
             
         }
+        
+    }
+    
+    private func createParticles() {
+        
+        particleEmitter.emitterPosition = CGPoint(x: daysBackgroundView.frame.minX + 50, y: view.center.y)
+        particleEmitter.zPosition = -1.0
+        particleEmitter.emitterShape = "rectangle"
+        particleEmitter.emitterSize = CGSize(width: 1, height: view.frame.height)
+        
+        let wholeNote = makeEmitterCell(imageName: "wholeNote")
+        let halfNote = makeEmitterCell(imageName: "halfNote")
+        let eigthNote = makeEmitterCell(imageName: "eigthNote")
+        let trebleClef = makeEmitterCell(imageName: "trebleClef")
+        let bassClef = makeEmitterCell(imageName: "bassClef")
+
+        particleEmitter.emitterCells = [wholeNote, halfNote, eigthNote, trebleClef, bassClef]
+        
+        view.layer.addSublayer(particleEmitter)
+        
+    }
+    
+    private func makeEmitterCell(imageName: String) -> CAEmitterCell {
+        
+        let cell = CAEmitterCell()
+        
+        let randomNum = Double.random(in: 0...3)
+        cell.beginTime = randomNum
+        
+        cell.birthRate = 0.33
+        cell.lifetime = 35
+        cell.lifetimeRange = 10
+        
+        cell.velocity = 50
+        cell.velocityRange = 20
+        
+        cell.emissionLongitude = .pi
+        cell.emissionRange = .pi / 2
+        
+        if DeviceType.IS_IPHONE_5orSE {
+            cell.scale = 0.2
+        } else {
+            cell.scale = 0.4
+        }
+        
+        cell.scaleRange = 0.05
+        cell.scaleSpeed = -0.005
+        
+        cell.spin = 0.2
+        cell.spinRange = 0.1
+        
+        cell.contents = UIImage(named: imageName)?.cgImage
+        
+        return cell
         
     }
     

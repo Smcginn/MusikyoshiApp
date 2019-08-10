@@ -58,6 +58,10 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
         
         scrollView.delegate = self
         
+        if DeviceType.IS_IPHONE_5orSE {
+            WelcomeTitleLabel.font = UIFont(name: "Futura-Bold", size: 27.0)
+        }
+        
         accessUpperLevelsLabel.text =
                 "To Access PlayTunes' Upper \nLevels"
         

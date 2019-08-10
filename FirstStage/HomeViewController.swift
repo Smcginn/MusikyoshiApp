@@ -290,6 +290,10 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         
         hiddenPswdTextField.delegate = self
         
+        if DeviceType.IS_IPHONE_5orSE {
+            welcomeLabel.font = UIFont(name: "Futura-Bold", size: 27.0)
+        }
+        
         dateLabel.text = getFormattedDate()
         
     }
@@ -363,7 +367,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         cell.emissionLongitude = .pi
         cell.emissionRange = .pi
         
-        if isiPhoneSE() {
+        if DeviceType.IS_IPHONE_5orSE {
             cell.scale = 0.5
         } else {
             cell.scale = 0.9

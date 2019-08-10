@@ -39,6 +39,8 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
 
     @IBOutlet weak var panelTrailingConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var stopBtn: UIButton!
+    
     @IBOutlet weak var doneBtn: UIButton!
     @IBAction func doneBtnTapped(_ sender: Any) {
         returnToCallingVC()
@@ -439,6 +441,18 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
 //            starScoreViewIsSetup = true
 //        }
         setStarScore(score: bestStarScore)
+        
+        if DeviceType.IS_IPHONE_5orSE {
+            infoLabel.font = UIFont(name: "Futura-Medium", size: 12.0)
+        }
+        
+        let s: CGFloat = (DeviceType.IS_IPHONE_5orSE || DeviceType.IS_IPHONE_6) ? 16.0 : 21.0
+        
+        panelLabel.font = UIFont(name: "Futura-Medium", size: s)!
+        playButton.titleLabel?.font = UIFont(name: "Futura-Bold", size: s)!
+        playForMeButton.titleLabel?.font = UIFont(name: "Futura-Bold", size: s)!
+        doneBtn.titleLabel?.font = UIFont(name: "Futura-Bold", size: s)!
+        stopBtn.titleLabel?.font = UIFont(name: "Futura-Bold", size: s)!
         
     }
     

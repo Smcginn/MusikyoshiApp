@@ -16,10 +16,13 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var resumeBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var instructionsLabel: UILabel!
 
     @IBOutlet weak var progBarBackgroundView: UIView!
     @IBOutlet weak var progBarView: UIView!
     @IBOutlet weak var progBarViewWidthConstraint: NSLayoutConstraint!
+    
+    let particleEmitter = CAEmitterLayer()
     
     var needToCalibrateMic = true
     
@@ -119,6 +122,11 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if DeviceType.IS_IPHONE_5orSE {
+            titleLabel.font = UIFont(name: "Futura-Bold", size: 27.0)
+            instructionsLabel.font = UIFont(name: "Futura-Medium", size: 12.0)
+        }
 
 //        // Orientation BS - LevelOverviewVC --> viewDidLoad
 //        let appDel = UIApplication.shared.delegate as! AppDelegate
@@ -259,6 +267,8 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        createParticles()
+        
         resumeBtn.layer.cornerRadius = resumeBtn.frame.width / 2
         
         progBarBackgroundView.layer.cornerRadius = progBarBackgroundView.frame.height / 2
@@ -270,8 +280,6 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
         
         let delayFactor = 0.2
         let duration = 0.8
-        let damping: CGFloat = 0.8
-        let initialSpringVel: CGFloat = 0.1
         
         resumeBtn.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
         UIView.animate(withDuration: duration, delay: delayFactor * 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: {
@@ -801,6 +809,61 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
         
     }
     
+    private func createParticles() {
+        
+        particleEmitter.emitterPosition = CGPoint(x: resumeBtn.frame.midX, y: resumeBtn.frame.midY)
+        particleEmitter.zPosition = -1.0
+        particleEmitter.emitterShape = "point"
+        particleEmitter.emitterSize = CGSize(width: resumeBtn.frame.width, height: resumeBtn.frame.height)
+        
+        let wholeNote = makeEmitterCell(imageName: "wholeNote")
+        let halfNote = makeEmitterCell(imageName: "halfNote")
+        let eigthNote = makeEmitterCell(imageName: "eigthNote")
+        let trebleClef = makeEmitterCell(imageName: "trebleClef")
+        let bassClef = makeEmitterCell(imageName: "bassClef")
+        
+        particleEmitter.emitterCells = [wholeNote, halfNote, eigthNote, trebleClef, bassClef]
+        
+        view.layer.addSublayer(particleEmitter)
+        
+    }
+    
+    private func makeEmitterCell(imageName: String) -> CAEmitterCell {
+        
+        let cell = CAEmitterCell()
+        
+        let randomNum = Double.random(in: 0...3)
+        cell.beginTime = randomNum
+        
+        cell.birthRate = 0.33
+        cell.lifetime = 35
+        cell.lifetimeRange = 10
+        
+        cell.velocity = 60
+        cell.velocityRange = 25
+        
+        cell.emissionLongitude = .pi
+        cell.emissionRange = .pi
+        
+        if DeviceType.IS_IPHONE_5orSE {
+            cell.scale = 0.2
+        } else {
+            cell.scale = 0.4
+        }
+        
+        cell.scaleRange = 0.4
+        cell.scaleSpeed = -0.01
+        
+        cell.spin = 0.2
+        cell.spinRange = 0.1
+        
+        cell.color = UIColor.pinkColor?.cgColor
+        cell.contents = UIImage(named: imageName)?.cgImage
+        
+        return cell
+        
+    }
+    
 //    func launchPausedDlg() {
 //        var titleStr = "Press 'Resume' to continue guided practice session"
 //        titleStr +=    "\n\nPress 'Choose' to exit guided practice session\n(and pick individual exercises)"
@@ -941,7 +1004,7 @@ extension DayOverviewViewController: UITableViewDelegate, UITableViewDataSource 
         } else {
 //            image = IconImageMgr.instance.getExerciseIcon(numStars: thisExerStarScore,
 //                                                          isCurrent: false )
-            cell.exerciseLabel.textColor = .greyTextColor
+            cell.exerciseLabel.textColor = .darkGray
             
         }
         

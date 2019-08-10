@@ -21,6 +21,8 @@ class AutoRenewNotificationViewController: UIViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
     
+    @IBOutlet weak var titleLabel: UILabel!
+    
     @IBAction func privacyPolicyBtnPressed(_ sender: Any) {
         if let url = URL(string: kMKPrivacyPolicyURL) {
             UIApplication.shared.open(url, options:[:])
@@ -71,6 +73,10 @@ class AutoRenewNotificationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLayoutSubviews()
+        
+        if DeviceType.IS_IPHONE_5orSE {
+            titleLabel.font = UIFont(name: "Futura-Bold", size: 27.0)
+        }
         
         self.title = "Confirm"
 

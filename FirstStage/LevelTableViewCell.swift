@@ -29,9 +29,9 @@ class LevelTableViewCell: UITableViewCell {
         self.backgroundColor = .clear
         self.selectionStyle = .none
         
-        if isiPhoneSE() {
+        if DeviceType.IS_IPHONE_5orSE {
             levelLabel.font = UIFont(name: "Futura-Medium", size: 16)
-            levelNumberLabel.font = UIFont(name: "Futura-Bold", size: 33)
+            levelNumberLabel.font = UIFont(name: "Futura-Bold", size: 27)
         }
         
         self.containerView.layer.cornerRadius = 15

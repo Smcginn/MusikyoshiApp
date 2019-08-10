@@ -65,10 +65,13 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
 //            starScoreLbl?.text = "This Try:"
 //            starScoreLbl?.isHidden = false
             var playBtnAttrStr: NSMutableAttributedString
+            
+            let size: CGFloat = (DeviceType.IS_IPHONE_5orSE || DeviceType.IS_IPHONE_6) ? 16.0 : 21.0
+            
             if doingPersonalRecord {
-                playBtnAttrStr = createAttributedText(str: "TRY AGAIN?", fontSize: 21.0)
+                playBtnAttrStr = createAttributedText(str: "TRY AGAIN?", fontSize: size)
             } else {
-                playBtnAttrStr = createAttributedText(str: "TRY AGAIN", fontSize: 21.0)
+                playBtnAttrStr = createAttributedText(str: "TRY AGAIN", fontSize: size)
             }
             playBtn.setAttributedTitle(playBtnAttrStr, for: .normal)
             playBtn.isHidden = false
@@ -222,6 +225,7 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
     @IBOutlet weak var instructionLbl: UILabel!
     @IBOutlet weak var timerLbl: UILabel! // Currently hidden, using instructions label to show (7/6)
     @IBOutlet weak var playBtn: UIButton!
+    @IBOutlet weak var listenBtn: UIButton!
     @IBOutlet weak var balloon: Balloon!
     @IBOutlet weak var feedbackLbl: UILabel! // Currently hidden, using instructions label to show (7/6)
     @IBOutlet weak var feedbackPnl: UIStackView! // Currently hidden, using instructions label to show (7/6)
@@ -654,9 +658,17 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
 //            starScoreViewIsSetup = true
 //        }
 
-        if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
-            
+        if DeviceType.IS_IPHONE_5orSE {
+            instructionLbl.font = UIFont(name: "Futura-Medium", size: 12.0)
         }
+        
+        let s: CGFloat = (DeviceType.IS_IPHONE_5orSE || DeviceType.IS_IPHONE_6) ? 16.0 : 21.0
+    
+        panelLabel.font = UIFont(name: "Futura-Medium", size: s)!
+        playBtn.titleLabel?.font = UIFont(name: "Futura-Bold", size: s)!
+        listenBtn.titleLabel?.font = UIFont(name: "Futura-Bold", size: s)!
+        doneBtn.titleLabel?.font = UIFont(name: "Futura-Bold", size: s)!
+        
     }
     
     @IBAction func sparkLineTapped(_ sender: UITapGestureRecognizer) {

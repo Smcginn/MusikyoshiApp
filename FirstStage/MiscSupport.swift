@@ -293,6 +293,10 @@ func isiPhoneSE() -> Bool {
     }
 }
 
+//func isiPhoneSE(usingWindowSize: Bool) -> Bool {
+//    return usingWindowSize ? ScreenSize.SCREEN_WIDTH <= 480 && ScreenSize.SCREEN_HEIGHT <= 320 : isiPhoneSE()
+//}
+
 /*x
 enum UIUserInterfaceIdiom : Int
 {
