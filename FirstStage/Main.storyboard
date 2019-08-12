@@ -41,21 +41,21 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Edi-Oo-gxi" userLabel="SSScrollView" customClass="SSScrollView">
-                                <rect key="frame" x="71.5" y="96.5" width="824.5" height="231"/>
+                                <rect key="frame" x="0.0" y="96.5" width="896" height="231"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="231" id="aH8-Oj-15v"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4lG-Uj-c1R" userLabel="Gate View">
-                                <rect key="frame" x="141.5" y="106.5" width="6" height="145"/>
+                                <rect key="frame" x="70" y="106.5" width="6" height="145"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="6" id="1qx-iX-iSS"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="hOC-AT-tf6">
-                                <rect key="frame" x="346" y="134" width="82" height="156"/>
+                                <rect key="frame" x="317.5" y="134" width="82" height="156"/>
                                 <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="120"/>
                                 <color key="textColor" red="1" green="0.23921568630000001" blue="0.6588235294" alpha="0.6903133095854922" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -220,6 +220,7 @@
                             <constraint firstAttribute="bottom" secondItem="q3q-vW-9TH" secondAttribute="bottom" id="BV5-dh-X8i"/>
                             <constraint firstItem="tEd-Gf-flh" firstAttribute="top" secondItem="2kB-BL-om5" secondAttribute="top" id="E3i-et-ijS"/>
                             <constraint firstItem="ql5-YQ-buG" firstAttribute="top" secondItem="23m-qv-AS4" secondAttribute="bottom" id="FxX-T9-pEu"/>
+                            <constraint firstItem="Edi-Oo-gxi" firstAttribute="leading" secondItem="2kB-BL-om5" secondAttribute="leading" id="Gss-vJ-ZNI"/>
                             <constraint firstAttribute="bottom" secondItem="eiQ-Dy-vc2" secondAttribute="bottom" id="JMx-2y-L4s"/>
                             <constraint firstAttribute="trailing" secondItem="q3q-vW-9TH" secondAttribute="trailing" id="JN5-dX-DBe"/>
                             <constraint firstItem="q3q-vW-9TH" firstAttribute="height" secondItem="tEd-Gf-flh" secondAttribute="height" id="MqD-Bm-h2Y"/>
@@ -250,7 +251,6 @@
                             <constraint firstItem="eiQ-Dy-vc2" firstAttribute="top" secondItem="2kB-BL-om5" secondAttribute="top" id="tdx-1V-jpq"/>
                             <constraint firstItem="tEd-Gf-flh" firstAttribute="leading" secondItem="2kB-BL-om5" secondAttribute="leading" id="vDf-5C-izp"/>
                             <constraint firstItem="4lG-Uj-c1R" firstAttribute="leading" secondItem="Edi-Oo-gxi" secondAttribute="leading" constant="70" id="vLM-6h-owt"/>
-                            <constraint firstItem="Edi-Oo-gxi" firstAttribute="leading" secondItem="ql5-YQ-buG" secondAttribute="trailing" id="vM9-Ly-DjK"/>
                             <constraint firstItem="4lG-Uj-c1R" firstAttribute="top" secondItem="Edi-Oo-gxi" secondAttribute="top" constant="10" id="x7N-nT-tqt"/>
                             <constraint firstItem="q3q-vW-9TH" firstAttribute="leading" secondItem="2kB-BL-om5" secondAttribute="leading" id="y20-J9-PNy"/>
                             <constraint firstItem="aQo-Tc-x0f" firstAttribute="trailing" secondItem="MCQ-TR-JQY" secondAttribute="leading" id="zHq-bK-3pb"/>
