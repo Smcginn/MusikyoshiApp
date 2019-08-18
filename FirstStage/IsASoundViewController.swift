@@ -24,7 +24,7 @@ class IsASoundViewController: UIViewController {
     var userChangedPeakCount = false
     
     let kMinIsSoundThreshold: Double = 0.01
-    let kMaxIsSoundThreshold: Double = 0.15 // 0.4
+    let kMaxIsSoundThreshold: Double = 0.3 // 0.15 // 0.4
     let kMaxVolumeForDisplay: Double = 1.25
 
     var storedIsASoundThreshold: Double = 0.123

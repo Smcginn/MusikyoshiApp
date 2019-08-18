@@ -195,6 +195,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Constants.Settings.BaritoneSax_AmpRiseForNewSound:      Double(kBaritoneSax_defAmpRiseForNewSound),
             Constants.Settings.BaritoneSax_SkipBeginningSamples:    Int(kBaritoneSax_defSkipBeginningSamples),
             Constants.Settings.BaritoneSax_SamplesInAnalysisWindow: Int(kBaritoneSax_defSamplesInAnalysisWindow),
+            Constants.Settings.Mallet_AmpRiseForNewSound:      Double(kMallet_defAmpRiseForNewSound),
+            Constants.Settings.Mallet_SkipBeginningSamples:    Int(kMallet_defSkipBeginningSamples),
+            Constants.Settings.Mallet_SamplesInAnalysisWindow: Int(kMallet_defSamplesInAnalysisWindow),
             ])
  
         

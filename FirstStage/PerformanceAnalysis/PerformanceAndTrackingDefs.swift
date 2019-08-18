@@ -299,7 +299,7 @@ let kSeverityRed      = 2
 // average pitch, this involves detecting the percentage of the time the student
 // plays the correct pitch during the performance. (Also considers percentage
 // playing in zones "near" the note, with lower weights, etc.)
-var kUseWeightedPitchScore = false
+var kUseWeightedPitchScore = true
 // Ranges/Zones
 let kWeightedPitch_NoteMatch_TolRange:        Double = 0.03
 let kWeightedPitch_NoteBitLowHigh_TolRange:   Double = 0.045 // 0.06
@@ -316,6 +316,11 @@ let kWeightedPitch_Threshold_Accecptable:     Double = 0.35
 // To do that, see if there is a most common note played (other than the target).
 // To do *that*, see if *some* note was played a reasonable pecntage of the time.
 let kWeightedPitch_MostCommonNotePlayedThreshold: Double = 0.6
+
+// Student must have played at least this much of the time to not get Wrong Note
+// (Will still not be correct, but gets different msg)
+let kCorrectNotePlayedPercThreshold:          Double = 0.40
+
 
 ///////////////////////////////////////////////////////////////////////////////
 // Consts that control debug info display and printing (lots of printing) to 
@@ -346,9 +351,9 @@ let kMKDebugOpt_PrintPerfAnalysisResults = false
 let kMKDebugOpt_PrintMinimalNoteAndSoundResults = true
 var kMKDebugOpt_PrintMinimalNoteAnalysis        = true
 
-let kDoPrintAmplitude = false
+let kDoPrintAmplitude = true
 let kDoPrintFrequency = false
-let kAmplitudePrintoutMultiplier_Sim =  200.0
+let kAmplitudePrintoutMultiplier_Sim =  12.0
 let kAmplitudePrintoutMultiplier_HW  =  100.0
 var gAmplitudePrintoutMultiplier = kAmplitudePrintoutMultiplier_Sim
 

@@ -54,6 +54,7 @@ public class PerformanceNote : PerformanceScoreObject
     
     // calculated in pitch snalysis phase, *if* a Sound is linked
     private var weightedPercentageCorrect: Double = 0.0
+    var correctNotePlayedPercentage: Double = 0.0
     func getWeightedPercentageCorrect() -> Double {
         weightedPercentageCorrect = 0.0
         guard isLinkedToSound else { return 0.0 }
@@ -61,6 +62,7 @@ public class PerformanceNote : PerformanceScoreObject
         if let linkedSound = PerformanceTrackingMgr.instance.findSoundBySoundID(soundID: linkedToSoundID) {
             weightedPercentageCorrect =
                     linkedSound.calcWeightedPercentageCorrect(targetNoteID: expectedMidiNote )
+            correctNotePlayedPercentage = linkedSound.correctNotePlayedPercentage
 //            linkedSound.calcMostCommonPitchPlayed()
 //            let mostCommonPerc = linkedSound.getMostPlayedNotePercentage()
 //            let mostCommonPitchNoteID = linkedSound.getMostPlayedNoteID()
@@ -168,7 +170,7 @@ public class PerformanceNote : PerformanceScoreObject
             actualNoteName = actNote!.fullName
         }
         
-        let actFreqStr = String(format: "%.2f", actualFrequency)
+        
         let actDurStr = String(format: "%.2f", actualDuration)
         
         let timingDiff = _actualStartTime_comp - _expectedStartTime
@@ -185,10 +187,24 @@ public class PerformanceNote : PerformanceScoreObject
         var durationRatingStr = ""
         performanceRating.displayStringForRating( durationRating,
                                                   ratingText: &durationRatingStr )
+        var actFreqStr = ""
         var pitchRatingStr = ""
+
+        if kUseWeightedPitchScore {
+            let mostCommonFreq = NoteService.getFreqForNoteID( noteID: mostCommonPlayedNote )
+            actFreqStr = String(format: "%.2f", mostCommonFreq)
+            actFreqStr += ", "
+            let convPC = mostCommonPlayedNotePercentage * 100.0
+            let convPCInt = Int(convPC)
+            let percStr = String(convPCInt) // mostCommonPlayedNotePercentage)
+            actFreqStr += percStr + "%"
+        } else {
+            // Averaging pitches
+            actFreqStr = String(format: "%.2f", actualFrequency)
+        }
         performanceRating.displayStringForRating( pitchRating,
                                                   ratingText: &pitchRatingStr )
-        
+
         msgString += "Expected Note:     " + expectedNoteName + "\n"
         msgString += "         Freq:     " + expFreqStr + "\n"
         msgString += "         Duration: " + expDurStr + "\n"

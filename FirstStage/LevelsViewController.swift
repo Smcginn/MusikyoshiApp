@@ -433,7 +433,13 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
                 itsBad()
             }
             
-            cell.levelNumberLabel.text = String(indexPath.row + 1)
+            // The text for the level is not simply index + 1. It's in the json
+            var levelTxt = String(indexPath.row + 1) // default
+            if let titleStr = levelsJson?[indexPath.row]["title"].string {
+                levelTxt = titleStr
+            }
+            cell.levelNumberLabel.text = levelTxt
+            
             cell.isActive = activeLevel == indexPath.row
             
             let levelState = LessonScheduler.instance.getLevelState(level: indexPath.row)

@@ -89,10 +89,12 @@ let kInst_TenorSax:     Int = 11
 let kInst_BaritoneSax:  Int = 12
 let kInst_NumWoodwinds: Int =  8
 
-let kInst_Piano:        Int = 13
+let kInst_Mallet:       Int = 13
 
-let kInst_LastAcceptableInst:  Int = kInst_BaritoneSax
-let kInst_NumInstruments = kInst_NumBrass + kInst_NumWoodwinds
+let kInst_Piano:        Int = 14
+
+let kInst_LastAcceptableInst:  Int = kInst_Mallet
+let kInst_NumInstruments = kInst_NumBrass + kInst_NumWoodwinds + 1
 
 ////////////////////////////////////////////////////////////////
 // MARK:- "Hard-Coded" per instument settings
@@ -112,6 +114,8 @@ let kTransposeFor_Bassoon:       Int =   0
 let kTransposeFor_AltoSax:       Int =  -9     // (Eb instrument)
 let kTransposeFor_TenorSax:      Int =   0  // NOT CORRECT ???  FIX
 let kTransposeFor_BaritoneSax:   Int = -21     // (Eb instrument)
+
+let kTransposeFor_Mallet:        Int =   kTransposeFor_Oboe
 // CHANGEHERE - real vales for above
 
 // sub directories, of bundles paths, for each instrument
@@ -130,6 +134,8 @@ let kAltoSaxSubDir      = "AltoSax/"
 let kTenorSaxSubDir     = "TenorSax/"   // NO!  Trumpet
 let kBaritoneSaxSubDir  = "BariSax/"
 // CHANGEHERE - real vales for above
+
+let kMalletSubDir       = kOboeSubDir
 
 // specific to Video directories
 let kBrassVideos        = "/brass"
@@ -310,6 +316,16 @@ let kBaritoneSaxInstrumentSettings =
                         baseVideoLibraryDir:    kBrassVideos,
                         isBrassInstrument:      false )
 
+let kMalletInstrumentSettings =
+    InstrumentSettings( pitchTranspose:         0,
+                        longToneTranspose:      10,
+                        xmlDir:                 kMalletSubDir,
+                        secondaryXmlDir:        kOboeSubDir,
+                        toneLibraryDir:         kOboeSubDir,
+                        primaryVideoLibraryDir: kNoSpecificVideos,
+                        baseVideoLibraryDir:    kBrassVideos,
+                        isBrassInstrument:      false )
+
 
 //private var gCurrentInstrument = kInst_Trumpet
 private var gCurrentInstrument =
@@ -332,21 +348,21 @@ func setCurrentStudentInstrument( instrument: Int ) {
 
     switch instrument {
     case kInst_Trombone:
-        kUseWeightedPitchScore = false
+        kUseWeightedPitchScore = true
         gInstrumentSettings = kTromboneInstrumentSettings
         UserDefaults.standard.set(kTransposeFor_Trombone,
                                   forKey: Constants.Settings.Transposition)
         PerformanceAnalysisMgr.instance.resetPartialsTable(forInstrument: kInst_Trombone )
         
     case kInst_Euphonium:
-        kUseWeightedPitchScore = false
+        kUseWeightedPitchScore = true
         gInstrumentSettings = kEuphoniumInstrumentSettings
         UserDefaults.standard.set(kTransposeFor_Euphonium,
                                   forKey: Constants.Settings.Transposition)
         PerformanceAnalysisMgr.instance.resetPartialsTable(forInstrument: kInst_Euphonium )
         
     case kInst_FrenchHorn:
-        kUseWeightedPitchScore = false
+        kUseWeightedPitchScore = true
         gInstrumentSettings = kFrenchHornInstrumentSettings
         UserDefaults.standard.set(kTransposeFor_FrenchHorn,
                                   forKey: Constants.Settings.Transposition)
@@ -360,65 +376,71 @@ func setCurrentStudentInstrument( instrument: Int ) {
         PerformanceAnalysisMgr.instance.resetPartialsTable(forInstrument: kInst_Tuba )
 
     case kInst_Flute:
-        kUseWeightedPitchScore = false
+        kUseWeightedPitchScore = true
         gInstrumentSettings = kFluteInstrumentSettings
         UserDefaults.standard.set(kTransposeFor_Flute,
                                   forKey: Constants.Settings.Transposition)
 //        PerformanceAnalysisMgr.instance.resetPartialsTable(forInstrument: kInst_Trumpet )
         
     case kInst_Oboe:
-        kUseWeightedPitchScore = false
+        kUseWeightedPitchScore = true
         gInstrumentSettings = kOboeInstrumentSettings
         UserDefaults.standard.set(kTransposeFor_Oboe,
                                   forKey: Constants.Settings.Transposition)
 //        PerformanceAnalysisMgr.instance.resetPartialsTable(forInstrument: kInst_Trumpet )
         
     case kInst_Clarinet:
-        kUseWeightedPitchScore = false
+        kUseWeightedPitchScore = true
         gInstrumentSettings = kClarinetInstrumentSettings
         UserDefaults.standard.set(kTransposeFor_Clarinet,
                                   forKey: Constants.Settings.Transposition)
 //        PerformanceAnalysisMgr.instance.resetPartialsTable(forInstrument: kInst_Trumpet )
         
     case kInst_BassClarinet:
-        kUseWeightedPitchScore = false
+        kUseWeightedPitchScore = true
         gInstrumentSettings = kBassClarinetInstrumentSettings
         UserDefaults.standard.set(kTransposeFor_BassClarinet,
                                   forKey: Constants.Settings.Transposition)
 //        PerformanceAnalysisMgr.instance.resetPartialsTable(forInstrument: kInst_Trumpet )
         
     case kInst_Bassoon:
-        kUseWeightedPitchScore = false
+        kUseWeightedPitchScore = true
         gInstrumentSettings = kBassoonInstrumentSettings
         UserDefaults.standard.set(kTransposeFor_Bassoon,
                                   forKey: Constants.Settings.Transposition)
 //        PerformanceAnalysisMgr.instance.resetPartialsTable(forInstrument: kInst_Trumpet )
         
     case kInst_AltoSax:
-        kUseWeightedPitchScore = false
+        kUseWeightedPitchScore = true
         gInstrumentSettings = kAltoSaxInstrumentSettings
         UserDefaults.standard.set(kTransposeFor_AltoSax,
                                   forKey: Constants.Settings.Transposition)
 //        PerformanceAnalysisMgr.instance.resetPartialsTable(forInstrument: kInst_Trumpet )
         
     case kInst_TenorSax:
-        kUseWeightedPitchScore = false
+        kUseWeightedPitchScore = true
         gInstrumentSettings = kTenorSaxInstrumentSettings
         UserDefaults.standard.set(kTransposeFor_TenorSax,
                                   forKey: Constants.Settings.Transposition)
         //        PerformanceAnalysisMgr.instance.resetPartialsTable(forInstrument: kInst_Tuba )
         
     case kInst_BaritoneSax:
-        kUseWeightedPitchScore = false
+        kUseWeightedPitchScore = true
         gInstrumentSettings = kBaritoneSaxInstrumentSettings
         UserDefaults.standard.set(kTransposeFor_BaritoneSax,
                                   forKey: Constants.Settings.Transposition)
         //        PerformanceAnalysisMgr.instance.resetPartialsTable(forInstrument: kInst_Tuba )
         
+    case kInst_Mallet:
+        kUseWeightedPitchScore = true
+        gInstrumentSettings = kMalletInstrumentSettings
+        UserDefaults.standard.set(kTransposeFor_Mallet,
+                                  forKey: Constants.Settings.Transposition)
+        //        PerformanceAnalysisMgr.instance.resetPartialsTable(forInstrument: kInst_Tuba )
         
     case kInst_Trumpet:      fallthrough
     default:
-        kUseWeightedPitchScore = false
+        kUseWeightedPitchScore = true
         gInstrumentSettings = kTrumpetInstrumentSettings
         UserDefaults.standard.set(kTransposeFor_Trumpet,
                                   forKey: Constants.Settings.Transposition)
@@ -447,6 +469,8 @@ func getXMLInstrDirString() -> String {
     case kInst_TenorSax:     retStr = kTenorSaxSubDir
     case kInst_BaritoneSax:  retStr = kBaritoneSaxSubDir
 
+    case kInst_Mallet:       retStr = kMalletSubDir
+
     case kInst_Trumpet:      fallthrough
     default:                 retStr = kTrumpetSubDir
     }
@@ -474,6 +498,8 @@ func getXMLInstrSecondaryDirString() -> String {
     case kInst_AltoSax:      retStr = kAltoSaxSubDir
     case kInst_TenorSax:     retStr = kTenorSaxSubDir
     case kInst_BaritoneSax:  retStr = kAltoSaxSubDir
+        
+    case kInst_Mallet:       retStr = kOboeSubDir
         
     case kInst_Trumpet:      fallthrough
     default:                 retStr = kTrumpetSubDir
@@ -513,6 +539,8 @@ func getScoreFileSubNameForInstr(instr: Int) -> String {
     case kInst_TenorSax:     retStr = "_TenorSax"
     case kInst_BaritoneSax:  retStr = "_BariSax"
         
+    case kInst_Mallet:       retStr = "_Mallet"
+        
     case kInst_Trumpet:      fallthrough
     default:                 retStr = "_Trumpet"
     }
@@ -542,6 +570,8 @@ func getClefLineForInstr(instr: Int) -> tClefLine {
     case kInst_AltoSax:      retVal = kG_ClefLine
     case kInst_TenorSax:     retVal = kG_ClefLine   // NOT CORRECT ???  FIX
     case kInst_BaritoneSax:  retVal = kG_ClefLine
+        
+    case kInst_Mallet:       retVal = kG_ClefLine
         
     case kInst_Trumpet:      fallthrough
     default:                 retVal = kG_ClefLine
@@ -585,6 +615,8 @@ let kSSTransposeFor_Bassoon:       Int32 =   0
 let kSSTransposeFor_AltoSax:       Int32 =  -9
 let kSSTransposeFor_TenorSax:      Int32 =   0
 let kSSTransposeFor_BaritoneSax:   Int32 =   0
+
+let kSSTransposeFor_Mallet:        Int32 =   0
 // CHANGEHERE - real vales for above
 
 func getSSTransposeForInstr(instr: Int) -> Int32 {
@@ -604,6 +636,8 @@ func getSSTransposeForInstr(instr: Int) -> Int32 {
     case kInst_AltoSax:      retVal = kSSTransposeFor_AltoSax
     case kInst_TenorSax:     retVal = kSSTransposeFor_TenorSax
     case kInst_BaritoneSax:  retVal = kSSTransposeFor_BaritoneSax
+        
+    case kInst_Mallet:       retVal = kSSTransposeFor_Mallet
         
     case kInst_Trumpet:      fallthrough
     default:                 retVal = kSSTransposeFor_Trumpet
@@ -630,6 +664,8 @@ func getOctaveChangeForInstr(instr: Int) -> Int {
     case kInst_AltoSax:      retVal = 0
     case kInst_TenorSax:     retVal = 0  // NOT CORRECT ???  FIX
     case kInst_BaritoneSax:  retVal = 0
+        
+    case kInst_Mallet:       retVal = 0
         
     case kInst_Trumpet:      fallthrough
     default:                 retVal = 0
@@ -724,6 +760,8 @@ func getFirstNoteInXMLForCurrentInstrument() -> Int {
     case kInst_TenorSax:     retVal = 27    // Eb1 == 27 - FIXME
     case kInst_BaritoneSax:  retVal = 55 // using alto file 43    // G2  == 43 - FIXME
 
+    case kInst_Mallet:       retVal = 55 // Wrong, but Shawn said same as Oboe
+
     case kInst_Trumpet:      fallthrough
     default:                 retVal = 55    // G3  == 55
     }
@@ -749,6 +787,8 @@ func getNoteOffsetForCurrentInstrument() -> Int {
     case kInst_AltoSax:      retVal = 62    // Eb1 == 27 - FIXME
     case kInst_TenorSax:     retVal = 27    // Eb1 == 27 - FIXME
     case kInst_BaritoneSax:  retVal = 27    // Eb1 == 27 - FIXME
+        
+    case kInst_Mallet:       retVal = 27 // Wrong, but Shawn said same as Oboe
         
     case kInst_Trumpet:      fallthrough
     default:                 retVal = 60    // C4 == 60

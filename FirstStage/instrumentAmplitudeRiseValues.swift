@@ -64,6 +64,9 @@ let kBaritoneSax_defSkipBeginningSamples:       UInt     = 15
 let kBaritoneSax_defSamplesInAnalysisWindow:    UInt     = 2
 let kBaritoneSax_defAmpRiseForNewSound:         Double   = 0.2
 
+let kMallet_defSkipBeginningSamples:            UInt     = 15
+let kMallet_defSamplesInAnalysisWindow:         UInt     = 2
+let kMallet_defAmpRiseForNewSound:              Double   = 0.2
 
 let kSkipBeginningSamples_min:             UInt     = 10
 let kSkipBeginningSamples_max:             UInt     = 30
@@ -112,7 +115,9 @@ func getAmpRiseSamplesToSkip(forInstr: Int) -> UInt {
     case kInst_AltoSax:     key =  Constants.Settings.AltoSax_SkipBeginningSamples
     case kInst_TenorSax:    key =  Constants.Settings.TenorSax_SkipBeginningSamples
     case kInst_BaritoneSax: key =  Constants.Settings.BaritoneSax_SkipBeginningSamples
-
+        
+    case kInst_Mallet:      key =  Constants.Settings.Mallet_SkipBeginningSamples
+        
     case kInst_Trumpet:     fallthrough
     default:                key =  Constants.Settings.Trumpet_SkipBeginningSamples
     }
@@ -177,6 +182,8 @@ func getAmpRiseForNewSound(forInstr: Int) -> Double {
     case kInst_TenorSax:    key =  Constants.Settings.TenorSax_AmpRiseForNewSound
     case kInst_BaritoneSax: key =  Constants.Settings.BaritoneSax_AmpRiseForNewSound
         
+    case kInst_Mallet:      key =  Constants.Settings.Mallet_AmpRiseForNewSound
+
     case kInst_Trumpet:     fallthrough
     default:                key =  Constants.Settings.Trumpet_AmpRiseForNewSound
     }
@@ -211,6 +218,8 @@ func setAmpRiseSamplesToSkip(forInstr: Int, numSamples: UInt) {
     case kInst_TenorSax:    key =  Constants.Settings.TenorSax_SkipBeginningSamples
     case kInst_BaritoneSax: key =  Constants.Settings.BaritoneSax_SkipBeginningSamples
         
+    case kInst_Mallet:      key =  Constants.Settings.Mallet_SkipBeginningSamples
+        
     case kInst_Trumpet:     fallthrough
     default:                key =  Constants.Settings.Trumpet_SkipBeginningSamples
     }
@@ -239,6 +248,8 @@ func setNumSamplesInAnalysisWindow(forInstr: Int, numSamples: UInt) {
     case kInst_TenorSax:    key =  Constants.Settings.TenorSax_SamplesInAnalysisWindow
     case kInst_BaritoneSax: key =  Constants.Settings.BaritoneSax_SamplesInAnalysisWindow
 
+    case kInst_Mallet:      key =  Constants.Settings.Mallet_SamplesInAnalysisWindow
+        
     case kInst_Trumpet:     fallthrough
     default:                key =  Constants.Settings.Trumpet_SamplesInAnalysisWindow
     }
@@ -266,6 +277,8 @@ func setAmpRiseForNewSound(forInstr: Int, rise: Double) {
     case kInst_AltoSax:     key =  Constants.Settings.AltoSax_AmpRiseForNewSound
     case kInst_TenorSax:    key =  Constants.Settings.TenorSax_AmpRiseForNewSound
     case kInst_BaritoneSax: key =  Constants.Settings.BaritoneSax_AmpRiseForNewSound
+        
+    case kInst_Mallet:      key =  Constants.Settings.Mallet_AmpRiseForNewSound
         
     case kInst_Trumpet:     fallthrough
     default:                key =  Constants.Settings.Trumpet_AmpRiseForNewSound
@@ -329,9 +342,9 @@ func resetAmpRiseValesToDefaults(forInstr: Int) {
         
     case kInst_Oboe:
         resetAmpRiseValuesToDefaultsUsing(instr:  kInst_Oboe,
-              numSkipSamples:  kOboe_defSkipBeginningSamples,
-              samplesInWindow: kOboe_defSamplesInAnalysisWindow,
-              ampRise:         kOboe_defAmpRiseForNewSound )
+                                          numSkipSamples:  kOboe_defSkipBeginningSamples,
+                                          samplesInWindow: kOboe_defSamplesInAnalysisWindow,
+                                          ampRise:         kOboe_defAmpRiseForNewSound )
         
     case kInst_Clarinet:
         resetAmpRiseValuesToDefaultsUsing(instr:  kInst_Clarinet,
@@ -369,6 +382,12 @@ func resetAmpRiseValesToDefaults(forInstr: Int) {
               samplesInWindow: kBaritoneSax_defSamplesInAnalysisWindow,
               ampRise:         kBaritoneSax_defAmpRiseForNewSound )
         
+    case kInst_Mallet:
+        resetAmpRiseValuesToDefaultsUsing(instr:  kInst_Mallet,
+              numSkipSamples:  kMallet_defSkipBeginningSamples,
+              samplesInWindow: kMallet_defSamplesInAnalysisWindow,
+              ampRise:         kMallet_defAmpRiseForNewSound )
+
     case kInst_Trumpet:     fallthrough
     default:
         resetAmpRiseValuesToDefaultsUsing(instr:  kInst_Trumpet,

@@ -21,6 +21,7 @@ enum whichInstrument {
 
 struct MusicXMLInstrumentModifiers {
     
+    var makeKeySig_C: Bool
     var transpose_Diatonic: Int
     var transpose_Chromatic: Int
     var clef: Int
@@ -30,12 +31,14 @@ struct MusicXMLInstrumentModifiers {
     //var key_Fifths: Int     // the number of flats or sharps in key: - == flats, + == sharps
     //var key_Mode: Int       // major or minor
 
-    init( transpose_Diatonic:   Int = 0,
+    init( makeKeySig_C:         Bool = false,
+          transpose_Diatonic:   Int = 0,
           transpose_Chromatic:  Int = 0,
           clef:                 Int = kTrebleClef
           //key_Fifths:           Int = 0,
           //key_Mode:             Int = 0,
         ) {
+        self.makeKeySig_C           = makeKeySig_C
         self.transpose_Diatonic     = transpose_Diatonic
         self.transpose_Chromatic    = transpose_Chromatic
         self.clef                   = clef
@@ -78,6 +81,8 @@ class MusicXMLModifier {
     
 //    class func modifyXMLToData(musicXMLUrl: URL, smallestWidth: Double, signatureWidth: Double) -> Data? {
 
+        var accidentalOnFirstNoteOfBar = false
+        
         guard let data = try? Data(contentsOf: musicXMLUrl) else {
             print("Cannot convert XML file to Data!!")
             return nil
@@ -92,6 +97,62 @@ class MusicXMLModifier {
 
 //        print("doc1:\n\(document.xml)\n")
 
+/* added ~ 8/12/19    leave out
+        for measure in document["score-partwise"]["part"]["measure"].all! {
+            var isFirstElem = true
+            for note in measure["note"].all! {
+                if isFirstElem {
+                    let notePitch = note["pitch"]
+                    if notePitch.error == nil {
+                        let alterInt  = notePitch["alter"]
+                        if alterInt.error == nil {
+                            accidentalOnFirstNoteOfBar = true
+                        }
+                    }
+                }
+                isFirstElem = false
+            }
+        }
+        
+        if accidentalOnFirstNoteOfBar {
+            for measure in document["score-partwise"]["part"]["measure"].all! {
+                //        <print>
+                //          <system-layout>
+                //              <system-margins>
+                //                  <left-margin>70</left-margin>
+                //                  <right-margin>0</right-margin>
+                //              </system-margins>
+                //              <top-system-distance>185</top-system-distance>
+                //          </system-layout>
+                //          <measure-numbering>system</measure-numbering>
+                //        </print>
+                let measureLayout = measure["print"]["measure-layout"]
+                if measureLayout.error == nil {
+                    let yo = "yo"
+                    let no = "no"
+                } else {
+                    measure["print"]["measure-layout"]["measure-distance"].value =
+                    "<measure-layout><measure-distance>70<//measure-distance></measure-layout>"
+                    //                  <left-margin>70</left-margin>
+                    //                  <right-margin>0</right-margin>
+                    //              </system-margins>
+                    //              <top-system-distance>185</top-system-distance>
+                    //          </measure-layout>
+                    print("\(measure)")
+                }
+                
+                let systemMargins = measure["print"]["system-layout"]["system-margins"]
+                if systemMargins.error == nil {
+                    let leftMargin  = systemMargins["left-margin"].int
+                    // if leftMargin == nil {
+                    if leftMargin != nil {
+                        let newLeftMargin = leftMargin! + 130
+                        systemMargins["left-margin"].value = String(newLeftMargin)
+                    }
+                }
+            }
+        }
+*/
         //find shortest duration note
         var firstBar = true
         var beatType = 0    //as in notation 2,4,8, or 16
@@ -104,7 +165,7 @@ class MusicXMLModifier {
 //            if let beatsInt = measure["attributes"]["time"]["beats"].int {
 //                beats = beatsInt
 //            }
-
+            
             if firstBar {
                 firstBar = false
                 if let beatsInt = measure["attributes"]["time"]["beats"].int {
@@ -122,11 +183,25 @@ class MusicXMLModifier {
                 sixteenthsPerBeat = 16 / beatType
             }
 
+// Added ~ 8/12/19   var isFirstElem = true
             for note in measure["note"].all! {
                 let thisNoteDuration = getNoteDuration(note: note, dotted: false)
                 if shortestNoteDuration > thisNoteDuration {
                     shortestNoteDuration = thisNoteDuration
                 }
+    
+// Added ~ 8/12/19
+//                if isFirstElem {
+//                    let notePitch = note["pitch"]
+//                    if notePitch.error == nil {
+//                        let alterInt  = notePitch["alter"]
+//                        if alterInt.error == nil {
+//                            accidentalOnFirstNoteOfBar = true
+//                        }
+//                    }
+//                }
+//
+//                isFirstElem = false
             }
         }
 
@@ -156,6 +231,7 @@ class MusicXMLModifier {
         //var noteX = signatureWidth + (smallestWidth / 2)
         var noteX = sigWidth + (smallestWidth / 2)
 
+
         var loopCount = 0
         for part in document["score-partwise"]["part"].all! {
             loopCount += 1
@@ -181,20 +257,35 @@ class MusicXMLModifier {
             }
         }
 
-        loopCount = 0
+
+// Added ~ 8/12/19        loopCount = 0
+        
         for measure in document["score-partwise"]["part"]["measure"].all! {
 
             // adjust the first measure width based on number of sharps/flats in key sig
             let measureKey = measure["attributes"]["key"]
             if measureKey.error == nil {
-                if let numFifths = measureKey["fifths"].int {
-                    // Add 10 pix for general spacing, plus 10 pix for every s/f
-                    let xAdjustFactor = Double(abs(numFifths)) + 1.0
-                    measureWidth += xAdjustFactor * 10.0
-                    noteX += xAdjustFactor * 10.0
+                if InstrMods.makeKeySig_C { // negate any key signature info, make it "C"
+                    print("\nIn modifyXMLToData; Forcing Key signature to C\n")
+                    if measureKey["fifths"].int != nil {
+                        measureKey["fifths"].value = "0"
+                    }
+                    if measureKey["mode"].int != nil {
+                        measureKey["mode"].value = "major"
+                    }
+                } else {
+                    if let numFifths = measureKey["fifths"].int {
+                        // Add 10 pix for general spacing, plus 10 pix for every s/f
+                        let xAdjustFactor = Double(abs(numFifths)) + 1.0
+                        measureWidth += xAdjustFactor * 10.0
+                        noteX += xAdjustFactor * 10.0
+                    }
                 }
             }
 
+            
+            
+/* Added ~ 8/12/19
             let clefLine = getClefLineForInstr(instr: currInst)
             
             if InstrMods.instrument != .trumpet {
@@ -207,13 +298,14 @@ class MusicXMLModifier {
                     print ("\n\n@@@@  Clef sign = \(sign), line = \(line)")
                 }
             }
- 
+ */
+            
 //            typealias tTransDiaChrm = (diatonic: Int, chromatic: Int)
 //            let kNoTransDiaChrmChange =  (diatonic: 0, chromatic: 0)
 //            let kBariTransDiaChrm = (diatonic: -8, chromatic: -12)
             
 
-            loopCount += 1
+// Added ~ 8/12/19            loopCount += 1
             
 //            let measureTranspose =  measure["attributes"]["transpose"]
 //            if measureTranspose.error == nil {
@@ -242,9 +334,32 @@ class MusicXMLModifier {
                 }
             }
 
+            let mWd = measure.attributes["width"]
+
+//            measureWidth *= 2
             measure.attributes["width"] = "\(measureWidth)"
 
+            var isFirstElem = true
             for note in measure["note"].all! {
+
+                // Fix for accidentals on measure line
+                if isFirstElem {
+                    let notePitch = note["pitch"]
+                    if notePitch.error == nil {
+                        let alterInt  = notePitch["alter"]
+                        if alterInt.error == nil {
+                            accidentalOnFirstNoteOfBar = true
+                        }
+                    }
+                    if accidentalOnFirstNoteOfBar, let defNoteXStr = note.attributes["default-x"] {
+                        let defNoteX = Double(defNoteXStr)!
+                        if defNoteX > noteX {
+                            noteX = defNoteX
+                        }
+                    }
+                }
+                isFirstElem = false
+                
                 note.attributes["default-x"] = "\(noteX)"
                 noteX += getNoteWidth(note: note, dotted: true)
 
@@ -275,6 +390,8 @@ class MusicXMLModifier {
                         }
                     }
                 }
+
+                
 //                let notePitch = note["pitch"]
 //                if notePitch.error == nil {
 //                    let octaveInt = notePitch["octave"].int
@@ -330,6 +447,7 @@ class MusicXMLModifier {
             //reset first note (and measure width) in measure position
             measureWidth = basicMeasureWidth
             noteX = smallestWidth / 2
+            accidentalOnFirstNoteOfBar = false
         }
 
         print("doc2:\n==============================\n\n\(document.xml)\n===============================\n\n")

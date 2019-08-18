@@ -308,6 +308,7 @@ public class PerformanceSound
         print ("   Exiting bottom of updateCurrentNoteIfLinkedPeriodic, for sound  #\(soundID). Set actFreq to \(self.averagePitchRunning)")
     }
     
+    var correctNotePlayedPercentage: Double = 0.0
     func calcWeightedPercentageCorrect( targetNoteID: NoteID) -> Double {
         guard isLinkedToNote, let linkNote = linkedNoteObject else { return 0.0 }
         guard linkNote.isNote() else { return 0.0 }
@@ -321,6 +322,7 @@ public class PerformanceSound
         pitchClusterAnalyzer.calcPercentages()
         
         let weightedPCCorrect = pitchClusterAnalyzer.weightedPercentageCorrect
+        correctNotePlayedPercentage = pitchClusterAnalyzer.correctPlayedPercentage
         return weightedPCCorrect
     }
     
@@ -385,7 +387,9 @@ public class PerformanceSound
         }
     }
 
+    var mostCommonPitchPlayedCalced = false
     func calcMostCommonPitchPlayed() {
+        guard !mostCommonPitchPlayedCalced else { return } // get out if already done
         guard isLinkedToNote, let linkNote = linkedNoteObject else { return }
         guard linkNote.isNote() else { return }
         let numSamples = pitchSamples.count
@@ -411,6 +415,7 @@ public class PerformanceSound
             }
         }
         
+        mostCommonPitchPlayedCalced = true
         print ("Most played noteID: \(mostPlayedNote.noteID), count: \(mostPlayedNote.count)")
     }
     
@@ -545,7 +550,8 @@ class freqClusterAnalyzer {
     var weightedPercentageCorrect: Double = 0.0
     var mostPlayedNote: NoteID = 0
     var mostPlayedNotePercentae: Double = 0.0
-
+    var correctPlayedPercentage: Double = 0.0
+    
     struct freqCluster {
         private var freqRange = kEmptyNoteFreqRange
         private var count: Int = 0
@@ -620,11 +626,11 @@ class freqClusterAnalyzer {
             }
         }
         
-        let correctPC = correctFreqCluster.calcWeightedPercntage(ofTotal: numSamples)
+        correctPlayedPercentage = correctFreqCluster.calcWeightedPercntage(ofTotal: numSamples)
         let aBitPC    = bitWideFreqCluster.calcWeightedPercntage(ofTotal: numSamples)
         let quitePC   = quiteWideFreqCluster.calcWeightedPercntage(ofTotal: numSamples)
         
-        weightedPercentageCorrect = correctPC + aBitPC + quitePC
+        weightedPercentageCorrect = correctPlayedPercentage + aBitPC + quitePC
     }
 
 }
