@@ -37,6 +37,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
     var perfStarScore = 0
     var numberOfAttempts = 0
 
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var panelTrailingConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var stopBtn: UIButton!
@@ -222,6 +223,8 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
             title = "Tune"
             infoLabel.text = "Play the notes"
         }
+        
+        titleLabel.text = navBarTitle
         
         panelView.layer.cornerRadius = panelView.frame.height * 0.1
         if #available(iOS 11.0, *) {

@@ -322,6 +322,7 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
         print("startAutoSchedHandler  called")
 //        self.launchingNextView?.isHidden =  false
 //        self.launchingNextView?.animateMonkeyImageView()
+        self.instructionsLabel.text = "Press PAUSE to exit guided mode."
         self.resumeBtn.setTitle("PAUSE", for: .normal)
         self.progBarView.isHidden = false
         self.progBarBackgroundView.isHidden = false
@@ -334,6 +335,7 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
         self.paused = false
 //        self.launchingNextView?.isHidden =  false
 //        self.launchingNextView?.animateMonkeyImageView()
+        self.instructionsLabel.text = "Press PAUSE to exit guided mode."
         self.resumeBtn.setTitle("PAUSE", for: .normal)
         self.progBarView.isHidden = false
         self.progBarBackgroundView.isHidden = false
@@ -345,7 +347,7 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
         
         // Sketchy
         
-        if resumeBtn.titleLabel?.text == "RESUME" {
+        if resumeBtn.titleLabel?.text == "START" {
             
             if firstTimeInView {
                 firstTimeInView = false
@@ -369,6 +371,8 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
                     self.progBarBackgroundView.isHidden = true
                     viewFinished(result: kViewFinished_Pause)
                 }
+                
+                self.instructionsLabel.text = "Tap START for a guided practice session, or select individual exercises on the left."
                 
             }
 
@@ -757,7 +761,7 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
             // launchPausedDlg()
             
             // ----> Pause button lands here
-            self.resumeBtn.setTitle("RESUME", for: .normal)
+            self.resumeBtn.setTitle("START", for: .normal)
             
             paused = true
             //self.launchingNextView?.isPaused = true
