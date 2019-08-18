@@ -6,7 +6,7 @@
   "jsonVersionMinor":"0",
   "levels":[{
             "Level Comment":"=================== LEVEL 1 ============================",
-            "title":"Level 1",
+            "title":"1",
             "levelTag":"L1",
             "levelIdx":"0",
             "thresholdsID":"beginner1",
@@ -37,7 +37,7 @@
             "exercises":[]
             },{
             "Level Comment":"=================== LEVEL 2 ============================",
-            "title":"Level 2",
+            "title":"2",
             "intro":"This Level has longer Long Tone exercises",
             "levelTag":"L2",
             "levelIdx":"1",
@@ -70,7 +70,7 @@
             },{
             
             "Level Comment":"=================== LEVEL 3 ============================",
-            "title":"Level 3",
+            "title":"3",
             "intro":"This Level has longer Long Tone exercises",
             "levelTag":"L3",
             "levelIdx":"2",
@@ -102,7 +102,7 @@
             "exercises":[]
             },{
             "Level Comment":"=================== LEVEL 4 ============================",
-            "title":"Level 4",
+            "title":"4",
             "intro":"This Level has longer Long Tone exercises",
             "levelTag":"L4",
             "levelIdx":"3",
@@ -134,7 +134,7 @@
             "exercises":[]
             },{
             "Level Comment":"=================== LEVEL 5 ============================",
-            "title":"Level 5",
+            "title":"5",
             "intro":"This Level has longer Long Tone exercises",
             "levelTag":"L5",
             "levelIdx":"4",
@@ -166,7 +166,7 @@
             "exercises":[]
             },{
             "Level Comment":"=================== LEVEL 6 ============================",
-            "title":"Level 6",
+            "title":"6",
             "intro":"This Level has longer Long Tone exercises",
             "levelTag":"L6",
             "levelIdx":"5",
@@ -198,7 +198,7 @@
             "exercises":[]
             },{
             "Level Comment":"=================== LEVEL 7 ============================",
-            "title":"Level 7",
+            "title":"7",
             "intro":"This Level has longer Long Tone exercises",
             "levelTag":"L7",
             "levelIdx":"6",
@@ -230,7 +230,7 @@
             "exercises":[]
             },{
             "Level Comment":"=================== LEVEL 8 ============================",
-            "title":"Level 8",
+            "title":"8",
             "intro":"This Level has longer Long Tone exercises",
             "levelTag":"L8",
             "levelIdx":"7",
@@ -262,7 +262,7 @@
             "exercises":[]
             },{
             "Level Comment":"=================== LEVEL 9 ============================",
-            "title":"Level 9",
+            "title":"9",
             "intro":"This Level has longer Long Tone exercises",
             "levelTag":"L9",
             "levelIdx":"8",
@@ -294,7 +294,7 @@
             "exercises":[]
             },{
             "Level Comment":"=================== LEVEL 10 ============================",
-            "title":"Level 10",
+            "title":"10",
             "levelTag":"L10",
             "levelIdx":"9",
             "thresholdsID":"beginner2",
@@ -328,7 +328,7 @@
             
             
             "Level Comment":"=================== LEVEL 15 ============================",
-            "title":"Level 15",
+            "title":"15",
             "levelTag":"L15",
             "levelIdx":"14",
             "thresholdsID":"beginner1",
@@ -350,7 +350,7 @@
             "exercises":[]
             },{
             "Level Comment":"=================== LEVEL 20 ============================",
-            "title":"Level 20",
+            "title":"20",
             "levelTag":"L20",
             "levelIdx":"19",
             "thresholdsID":"intermediate1",
@@ -381,7 +381,7 @@
             "exercises":[]
             },{
             "Level Comment":"=================== LEVEL 29 ============================",
-            "title":"Level 29",
+            "title":"29",
             "levelTag":"L29",
             "levelIdx":"28",
             "thresholdsID":"beginner3",

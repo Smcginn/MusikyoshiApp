@@ -30,8 +30,8 @@ import AVFoundation
 import AVKit
 
 // As noted above - programmatic, for quick proof of concept. Size consts:
-let avcHt = 250.0  // 285.0 for iPhone 7.  320.0 works for iPhone 7 Plus
-let avcWd = avcHt * 1.777
+var avcHt = 250.0  // 285.0 for iPhone 7.  320.0 works for iPhone 7 Plus
+var avcWd = avcHt * 1.777
 let bottomButtonSpacing = 40.0
 
 class VideoHelpView: UIView {
@@ -49,6 +49,14 @@ class VideoHelpView: UIView {
     var doneShowingVideoDelegate: DoneShowingVideo?
     
     static func getSize() -> CGSize {
+        let sz = CGSize(width: avcWd, height: avcHt+bottomButtonSpacing)
+        return sz
+    }
+    
+    static func get_SE_Size() -> CGSize {
+        avcHt = 235.0
+        var avcWd = avcHt * 1.777
+
         let sz = CGSize(width: avcWd, height: avcHt+bottomButtonSpacing)
         return sz
     }

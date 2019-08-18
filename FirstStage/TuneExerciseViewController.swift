@@ -410,7 +410,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        var ssFrame = ssScrollView.frame
+        let ssFrame = ssScrollView.frame
         
         if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
 //            ssFrame.size.height += 100.0
@@ -419,12 +419,12 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
 //            metronomeView.frame.size.width = (metronomeView.frame.size.height*6)
             layoutStarScoreForiPad = true
         } else if UIDevice.current.is_iPhoneX {
-//            ssScrollView.frame = ssFrame
-//            let leftOffset:  CGFloat = 40.0
-//            let rightOffset: CGFloat = 30.0
-//            let newWidth: CGFloat = ssScrollView.frame.size.width - (leftOffset+rightOffset)
-//            ssScrollView.frame.size.width = newWidth
-//            ssScrollView.frame.origin.x  += leftOffset
+            ssScrollView.frame = ssFrame
+            let leftOffset:  CGFloat = 40.0
+            let rightOffset: CGFloat = 30.0
+            let newWidth: CGFloat = ssScrollView.frame.size.width - (leftOffset+rightOffset)
+            ssScrollView.frame.size.width = newWidth
+            ssScrollView.frame.origin.x  += leftOffset
             ssScrollView.clipsToBounds = true
 //            metronomeView.frame.origin.x += leftOffset
         } else {
@@ -646,6 +646,11 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
         if specifiedNoteWidth != 0 {
             widthToUse = 25
         }
+        
+        // if the current level is 4 or less, force the key signature to C (no sharps or flats)
+        let currLDE = LsnSchdlr.instance.getCurrentLDE()
+        let currLevel = currLDE.level
+        instrMods.makeKeySig_C = currLevel > 3 ? false : true   
         
         let sigWidth = UserDefaults.standard.double(forKey: Constants.Settings.SignatureWidth)
         guard let xmlData = MusicXMLModifier.modifyXMLToData(
@@ -2811,11 +2816,13 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
         
         if self.vhView == nil {
             let sz = VideoHelpView.getSize()
+
             let horzSpacing = (self.view.frame.width - sz.width) / 2
-            let x = horzSpacing * 1.75
+            var x = horzSpacing * 1.75
             var y = CGFloat(40.0)
             if DeviceType.IS_IPHONE_5orSE {
-                y = 25.0
+                x += 13.0
+                y  = 25.0
             }
             let frm = CGRect( x: x, y:y, width: sz.width, height: sz.height )
             self.vhView = VideoHelpView.init(frame: frm)

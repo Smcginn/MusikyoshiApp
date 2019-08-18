@@ -47,6 +47,7 @@ class NotePitchPerformanceAnalyzer : NotePerformanceAnalyzer {
         let isFlat = note.expectedFrequency > note.actualFrequency
 
         let weightedPCCorrect = note.getWeightedPercentageCorrect()
+        let correctNotePlayedPercentage =  note.correctNotePlayedPercentage
         var msgStr = "In Pitch Analyzer; For Note \(note.perfNoteOrRestID), "
         msgStr    += "Weighted Percentage Correct == \(weightedPCCorrect)"
         print (msgStr)
@@ -55,7 +56,7 @@ class NotePitchPerformanceAnalyzer : NotePerformanceAnalyzer {
         let mostCommonNote = note.mostCommonPlayedNote
         let mostCommonNotePerc = note.mostCommonPlayedNotePercentage
 
-        if kUseWeightedPitchScore {
+        if kUseWeightedPitchScore {   // "Bucket" algo
             var isPartial = false
             if weightedPCCorrect >= kWeightedPitch_Threshold_Correct {
                 note.pitchRating = .pitchGood
@@ -73,10 +74,22 @@ class NotePitchPerformanceAnalyzer : NotePerformanceAnalyzer {
                 
                 if !isPartial { // continue the "weighting" game
                     if weightedPCCorrect >= kWeightedPitch_Threshold_Reasonable {
-                        note.pitchRating = .fluctuatingReasonable
-                        note.pitchScore = IssueWeight.kWaveringReasonable
-                        note.weightedScore += note.pitchScore
-
+                        // use the percentage of time in the actual note to
+                        // determine if this is wavering, or just a wrong note
+                        if correctNotePlayedPercentage >= kCorrectNotePlayedPercThreshold {
+                            note.pitchRating = .fluctuatingReasonable
+                            note.pitchScore = IssueWeight.kWaveringReasonable
+                            note.weightedScore += note.pitchScore
+                        } else { // let's just call it a wrong note
+                            if isFlat {
+                                note.pitchRating = .slightlyFlat
+                            } else {
+                                note.pitchRating = .slightlySharp
+                            }
+                            note.pitchScore = IssueWeight.kSlightyFlatOrSharp
+                            note.weightedScore += note.pitchScore
+                        }
+                        
                     } else if weightedPCCorrect >= kWeightedPitch_Threshold_Accecptable {
                         note.pitchRating = .fluctuatingAcceptable
                         note.pitchScore = IssueWeight.kWaveringAcceptable

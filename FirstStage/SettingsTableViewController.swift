@@ -57,7 +57,8 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC, 
                             "Bassoon",
                             "Alto Saxophone",
                             "Tenor Saxophone",
-                            "Baritone Saxophone" ]
+                            "Baritone Saxophone",
+                            "Mallet Percussion"  ]
 
     @IBOutlet weak var selectedInstrumentLabel: UILabel!
     @IBOutlet weak var instrumentPicker: UIPickerView!
@@ -250,6 +251,8 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC, 
         case kInst_AltoSax:         instStr += "AltoSax"
         case kInst_TenorSax:        instStr += "TenorSax"
         case kInst_BaritoneSax:     instStr += "BaritoneSax"
+            
+        case kInst_Mallet:          instStr += "Mallet Percussion"
             
         case kInst_Trumpet:  fallthrough
         default:                instStr += "Trumpet"

@@ -629,10 +629,13 @@ extension ScoreMgr {
                     
                     var skipThisOne = false
                     if !currInstrumentIsBrass() { // then have to check for slurs
-                        // SLUR EXER Elimination:   Here is where to do it!
                         let exerType = getExerciseType( exerCode: oneExerStr )
-                        if exerType == .lipSlurExer {
+                        if exerType == .lipSlurExer { // Lips slurs only valid for brass
                             skipThisOne = true
+                        }
+                        if getCurrentStudentInstrument() == kInst_Mallet &&
+                           (exerType == .longtoneExer || exerType == .longtoneRecordExer) {
+                            skipThisOne = true // per Shawn's request
                         }
                     }
                     
