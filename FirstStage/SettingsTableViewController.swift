@@ -28,6 +28,7 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC, 
     @IBOutlet weak var noteWidthStepper: UIStepper!
     @IBOutlet weak var signatureWidthLabel: UILabel!
     @IBOutlet weak var signatureWidthStepper: UIStepper!
+    @IBOutlet weak var videoModeSegControl: UISegmentedControl!
     
 //    @IBOutlet weak var selectStudentInstrumentSegControl: MySegmentedControl!
     
