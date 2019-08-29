@@ -5,7 +5,7 @@
     <rights>©</rights>
     <encoding>
       <software>Finale v25 for Mac</software>
-      <encoding-date>2018-12-30</encoding-date>
+      <encoding-date>2019-07-29</encoding-date>
       <supports attribute="new-system" element="print" type="yes" value="yes"/>
       <supports attribute="new-page" element="print" type="yes" value="yes"/>
       <supports element="accidental" type="yes"/>
@@ -66,23 +66,23 @@
     <score-part id="P1">
       <part-name print-object="no">Trombone</part-name>
       <part-abbreviation print-object="no">Tbn.</part-abbreviation>
-      <score-instrument id="P1-I2">
+      <score-instrument id="P1-I6">
         <instrument-name>ARIA Player</instrument-name>
         <instrument-sound>brass.trombone</instrument-sound>
         <virtual-instrument/>
       </score-instrument>
       <midi-device>ARIA Player</midi-device>
-      <midi-instrument id="P1-I2">
-        <midi-channel>2</midi-channel>
+      <midi-instrument id="P1-I6">
+        <midi-channel>6</midi-channel>
         <midi-program>1</midi-program>
         <volume>80</volume>
-        <pan>4</pan>
+        <pan>11</pan>
       </midi-instrument>
     </score-part>
   </part-list>
   <!--=========================================================-->
   <part id="P1">
-    <measure number="1" width="214">
+    <measure number="1" width="177">
       <print>
         <system-layout>
           <system-margins>
@@ -95,7 +95,7 @@
       </print>
       <attributes>
         <divisions>2</divisions>
-        <key>
+        <key print-object="no">
           <fifths>-2</fifths>
           <mode>major</mode>
         </key>
@@ -116,20 +116,21 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="2" width="109">
-      <note default-x="13">
+    <measure number="2" width="119">
+      <note default-x="25">
         <pitch>
           <step>B</step>
           <alter>-1</alter>
-          <octave>2</octave>
+          <octave>3</octave>
         </pitch>
         <duration>8</duration>
         <voice>1</voice>
         <type>whole</type>
+        <accidental>flat</accidental>
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="3" width="109">
+    <measure number="3" width="107">
       <note>
         <rest measure="yes"/>
         <duration>8</duration>
@@ -137,20 +138,21 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="4" width="109">
-      <note default-x="13">
+    <measure number="4" width="119">
+      <note default-x="25">
         <pitch>
           <step>B</step>
           <alter>-1</alter>
-          <octave>2</octave>
+          <octave>3</octave>
         </pitch>
         <duration>8</duration>
         <voice>1</voice>
         <type>whole</type>
+        <accidental>flat</accidental>
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="5" width="109">
+    <measure number="5" width="107">
       <note>
         <rest measure="yes"/>
         <duration>8</duration>
@@ -158,20 +160,21 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="6" width="109">
-      <note default-x="13">
+    <measure number="6" width="119">
+      <note default-x="25">
         <pitch>
           <step>B</step>
           <alter>-1</alter>
-          <octave>2</octave>
+          <octave>3</octave>
         </pitch>
         <duration>8</duration>
         <voice>1</voice>
         <type>whole</type>
+        <accidental>flat</accidental>
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="7" width="109">
+    <measure number="7" width="107">
       <note>
         <rest measure="yes"/>
         <duration>8</duration>
@@ -179,16 +182,17 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="8" width="117">
-      <note default-x="13">
+    <measure number="8" width="129">
+      <note default-x="25">
         <pitch>
           <step>B</step>
           <alter>-1</alter>
-          <octave>2</octave>
+          <octave>3</octave>
         </pitch>
         <duration>8</duration>
         <voice>1</voice>
         <type>whole</type>
+        <accidental>flat</accidental>
       </note>
       <barline location="right">
         <bar-style>light-heavy</bar-style>
