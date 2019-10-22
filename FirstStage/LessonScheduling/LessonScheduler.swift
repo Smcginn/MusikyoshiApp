@@ -38,6 +38,10 @@ let kLDE_NotSet: tLDE_code   = ( level: kLDE_FldNotSet,
 let kLDE_NotFound: tLDE_code = ( level: kLDE_FldNotFound,
                                  day:   kLDE_FldNotFound,
                                  exer:  kLDE_FldNotFound )
+let kLDE_Default: tLDE_code  = ( level: 0,
+                                 day:   0,
+                                 exer:  0 )
+
 func ldIsUsable(ld:tLD_code) -> Bool {
     if ld != kLD_NotSet && ld != kLD_NotFound && ld != kLD_AtEndOfEntries {
         return true
@@ -76,7 +80,7 @@ class LessonScheduler
     let tuneFileMapper = TuneFileMapper()
 
     // currentLDE: The Exercise being currently performed
-    var currentLDE: tLDE_code = kLDE_NotSet
+    var currentLDE: tLDE_code = kLDE_Default // kLDE_NotSet
     
     func getCurrentLDE() -> tLDE_code {
         return currentLDE
@@ -197,6 +201,10 @@ class LessonScheduler
         return true
     }
     
+    func getCurrLevel() -> Int {
+        return scoreMgr.currLevel()
+    }
+
     func getCurrExerNumber() -> Int {
         return scoreMgr.currExer()
     }
@@ -262,7 +270,8 @@ class LessonScheduler
         }
     }
 
-    func getPrettyNameForExercise( forLDE: tLDE_code ) -> String {
+    func getPrettyNameForExercise( forLDE: tLDE_code,
+                                   appendComposer: Bool = false ) -> String {
         var retStr = "SOMETHING WRONG"
         let thisLD: tLD_code = (forLDE.level, forLDE.day)
         let exerNum = forLDE.exer
@@ -285,6 +294,10 @@ class LessonScheduler
             let tuneFI = getTuneFileInfo(forFileCode: exerEntry.exerCodeStr)
             //retStr += "\"" + tuneFI.title + "\""
             retStr += tuneFI.title
+            if appendComposer, tuneFI.commentStr2.length != 0 {
+                retStr += " - "
+                retStr += tuneFI.commentStr2
+            }
         } else if exerEntry.exerType == .longtoneExer {
             let ltInfo:longtoneExerciseInfo = getLongtoneInfo(forLTCode: exerEntry.exerCodeStr)
             //retStr = "Long Tone - Play a \(ltInfo.note) for \(ltInfo.durationSecs) Seconds"

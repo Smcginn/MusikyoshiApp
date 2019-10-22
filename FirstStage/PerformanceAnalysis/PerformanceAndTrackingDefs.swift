@@ -121,12 +121,13 @@ let kNumSamplesToCollect = 300
 let kAmpThresholdForIsSound_Sim = 0.05 // 0.15  // before MicTracker: 0.07
 let kAmpThresholdForIsSound_HW  = 0.100  // 0.02 before MicTracker: 0.02 ;  Mic Tracker: 0.12
 var kAmplitudeThresholdForIsSound = kAmpThresholdForIsSound_HW
+let kHW_to_SIM_SignalRatio = kAmpThresholdForIsSound_HW / kAmpThresholdForIsSound_Sim
 
 let kUseDefaultHopSizeAndPeakCount = true
 
 // Number of samples to let pass before before beginning to average the pitch, to
 // consider it "stable". Without a little time to settle, pitch average is inaccurate
-let kSamplesNeededToDeterminePitch = 16  // SLIDERABLE ?
+var gSamplesNeededToDeterminePitch = 22  // SLIDERABLE ?
 
 // In legato playing: Number of consecutive samples consistantly not equal to established
 // pitch before considered a different note. (One or two variants in a stable pitch is
@@ -134,7 +135,9 @@ let kSamplesNeededToDeterminePitch = 16  // SLIDERABLE ?
 var gDifferentPitchSampleThreshold: Int  = 16 // 10   // SLIDERABLE ?
 
 // Turn on/off use of scanning for pitch change during legato playing
-var gScanForPitchDuringLegatoPlaying = true 
+var gScanForPitchDuringLegatoPlaying = true // can toggle based on levels, etc.
+// "Master" swtich. Overrides gScanForPitchDuringLegatoPlaying. Set in dialog.
+var gScanForPitchDuringLegatoPlayingAbsolute = false
 
 //////   Sound Start Adjustment   ////////////////////////////
 //
@@ -150,7 +153,7 @@ let kSoundStartAdjustment_MinValue: Float = 0.080
 let kSoundStartAdjustment_MaxValue: Float = 0.220
 let kSoundStartAdjustment_Sim = TimeInterval(0.180) // (0.130) // (0.080) // (0.180)// (0.120)
 let kSoundStartAdjustment_HW  = TimeInterval(0.116) // (0.175) // (0.075)
-var kSoundStartAdjustment = kSoundStartAdjustment_HW
+var gSoundStartAdjustment = kSoundStartAdjustment_HW
 
 //////   Metronome Adjustment   ////////////////////////////
 let kMetronomeTimingAdjustment_Sim: Int32  = -175 // -175!!!!! // -170
@@ -162,9 +165,9 @@ let kPlaybackVolume_Sim: Double  = 0.0
 let kPlaybackVolume_HW:  Double  = 1.0
 var kPlaybackVolume:     Double  = kPlaybackVolume_HW
 
-var kRunningInSim           = true
+var gRunningInSim           = true
 
-// Given the delay explained above (kSoundStartAdjustment), need to adjust the
+// Given the delay explained above (gSoundStartAdjustment), need to adjust the
 // location of the beginning and end of sounds when displaying them.
 let kOverlayPixelAdjustment = 4
 
@@ -299,7 +302,7 @@ let kSeverityRed      = 2
 // average pitch, this involves detecting the percentage of the time the student
 // plays the correct pitch during the performance. (Also considers percentage
 // playing in zones "near" the note, with lower weights, etc.)
-var kUseWeightedPitchScore = true
+var gUseWeightedPitchScore = true
 // Ranges/Zones
 let kWeightedPitch_NoteMatch_TolRange:        Double = 0.03
 let kWeightedPitch_NoteBitLowHigh_TolRange:   Double = 0.045 // 0.06
@@ -321,6 +324,19 @@ let kWeightedPitch_MostCommonNotePlayedThreshold: Double = 0.6
 // (Will still not be correct, but gets different msg)
 let kCorrectNotePlayedPercThreshold:          Double = 0.40
 
+/////////////////////////////////////////////////////////////////////////
+//  Video help, or not
+//
+let kVideoHelpMode_Video        = 0
+let kVideoHelpMode_Text         = 1
+let kVideoHelpMode_None         = 2
+var gVideoHelpMode = kVideoHelpMode_Video
+func getVideoHelpMode() -> Int { return gVideoHelpMode }
+func setVideoHelpMode(newMode: Int) { gVideoHelpMode = newMode }
+
+// For some instruments (Mallet) we don't want to show the videos, as they are too
+// specific to woodwinds or brass.
+var gUseTextNotVideoScore = false
 
 ///////////////////////////////////////////////////////////////////////////////
 // Consts that control debug info display and printing (lots of printing) to 
@@ -357,3 +373,19 @@ let kAmplitudePrintoutMultiplier_Sim =  12.0
 let kAmplitudePrintoutMultiplier_HW  =  100.0
 var gAmplitudePrintoutMultiplier = kAmplitudePrintoutMultiplier_Sim
 
+var gDoAmplitudeRiseChecking = true
+
+let kMinEighthIsSoundThreshold: Double = 0.01
+let kMaxEighthIsSoundThreshold: Double = 0.7 // 0.15 // 0.4
+let kEighthIsSoundThresholdOff: Double = 0.03 // on/off.  Lower than this val == off
+
+// Alternative to gIsSoundThreshold, for the end of notes only. This will
+// cause a new sound to be generated if the level drops below this.
+// Only used at end of note, if note is eighth and fast tempo
+var gEighthIsSoundThreshold = kMinEighthIsSoundThreshold
+var gUseEighthIsSoundThresholdInGeneral = false
+let gUseEighthIsSoundThresholdNow = AtomicInteger()
+// Any duration less than this will use gEighthIsSoundThreshold
+let kEighthIsSoundThresholdDurationCutoff = 0.4
+
+var gNumAccidentalsInScore: Int = 0

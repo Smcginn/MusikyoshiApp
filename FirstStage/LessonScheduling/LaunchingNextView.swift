@@ -17,7 +17,13 @@ let kViewFinishedMode_First   = 1
 let kViewFinishedMode_Loading = 2
 let kViewFinishedMode_AllDone = 3
 
-let kAnimDuration = 2.0 // 0.6
+
+let kViewExerMode_Auto   = 0
+let kViewExerMode_Paused = 0
+
+
+
+let kAnimDuration = 2.15 // 0.6
 
 protocol ViewFinished {
     func viewFinished(result: Int)

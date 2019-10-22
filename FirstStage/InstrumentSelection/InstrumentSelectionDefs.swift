@@ -109,14 +109,14 @@ let kTransposeFor_Tuba:          Int =   0
 let kTransposeFor_Flute:         Int =   0
 let kTransposeFor_Oboe:          Int =   0
 let kTransposeFor_Clarinet:      Int =  -2     // (Bb instrument)
-let kTransposeFor_BassClarinet:  Int = -14     // (Bb instrument)
+let kTransposeFor_BassClarinet:  Int = -14 // -26     // (Bb instrument)
 let kTransposeFor_Bassoon:       Int =   0
 let kTransposeFor_AltoSax:       Int =  -9     // (Eb instrument)
-let kTransposeFor_TenorSax:      Int =   0  // NOT CORRECT ???  FIX
+let kTransposeFor_TenorSax:      Int = -14  // NOT CORRECT ???  FIX
 let kTransposeFor_BaritoneSax:   Int = -21     // (Eb instrument)
 
-let kTransposeFor_Mallet:        Int =   kTransposeFor_Oboe
-// CHANGEHERE - real vales for above
+let kTransposeFor_Mallet:        Int =   0
+// CHANGEHERE - real values for above
 
 // sub directories, of bundles paths, for each instrument
 let kTrumpetSubDir      = "Trumpet/"
@@ -128,18 +128,40 @@ let kTubaSubDir         = "Tuba/"
 let kFluteSubDir        = "Flute/"
 let kOboeSubDir         = "Flute/"
 let kClarinetSubDir     = "Trumpet/"
-let kBassClarinetSubDir = "Trumpet/"   //  ??  "Tuba/"
+let kBassClarinetSubDir = "BassClarinet/"   //  ??  "Tuba/"
 let kBassoonSubDir      = "Trombone/"
 let kAltoSaxSubDir      = "AltoSax/"
 let kTenorSaxSubDir     = "TenorSax/"   // NO!  Trumpet
 let kBaritoneSaxSubDir  = "BariSax/"
 // CHANGEHERE - real vales for above
 
-let kMalletSubDir       = kOboeSubDir
+let kMalletSubDir       = "Mallet/"
 
 // specific to Video directories
 let kBrassVideos        = "/brass"
 let kNoSpecificVideos   = ""
+
+//////////////////////////////////////////////////////////////////////////////
+// Sound Start Offset: There is some latency between the sound being generated
+// and it triggering the is-a-sound threshold. These values asjust for that, and
+// are used when judging if the note was played on time.
+// Having different settings for each instrument is probably due to each
+// instrument having a different amount of time to reach the is-a-sound threshold.
+let kSoundStartOffsetFor_Trumpet:       TimeInterval =  TimeInterval(0.121)
+let kSoundStartOffsetFor_Trombone:      TimeInterval =  TimeInterval(1.16)
+let kSoundStartOffsetFor_Euphonium:     TimeInterval =  kSoundStartAdjustment_HW
+let kSoundStartOffsetFor_FrenchHorn:    TimeInterval =  kSoundStartAdjustment_HW
+let kSoundStartOffsetFor_Tuba:          TimeInterval =  TimeInterval(0.147)
+let kSoundStartOffsetFor_Flute:         TimeInterval =  TimeInterval(0.134)
+let kSoundStartOffsetFor_Oboe:          TimeInterval =  TimeInterval(0.116)
+let kSoundStartOffsetFor_Clarinet:      TimeInterval =  TimeInterval(0.116)
+let kSoundStartOffsetFor_BassClarinet:  TimeInterval =  kSoundStartAdjustment_HW
+let kSoundStartOffsetFor_Bassoon:       TimeInterval =  kSoundStartAdjustment_HW
+let kSoundStartOffsetFor_AltoSax:       TimeInterval =  kSoundStartAdjustment_HW
+let kSoundStartOffsetFor_TenorSax:      TimeInterval =  kSoundStartAdjustment_HW
+let kSoundStartOffsetFor_BaritoneSax:   TimeInterval =  kSoundStartAdjustment_HW
+let kSoundStartOffsetFor_Mallet:        TimeInterval =  kSoundStartAdjustment_HW
+
 
 //////////////////////////////////////////////////////////////////////////////
 // InstrumentSettings struct
@@ -227,10 +249,10 @@ let kFrenchHornInstrumentSettings =
                         isBrassInstrument:      true )
 
 let kTubaInstrumentSettings =
-    InstrumentSettings( pitchTranspose:         0,
+    InstrumentSettings( pitchTranspose:         -12, // display transpose
                         longToneTranspose:      -26,
                         xmlDir:                 kTubaSubDir,
-                        secondaryXmlDir:        kTrumpetSubDir,
+                        secondaryXmlDir:        kTromboneSubDir,
                         toneLibraryDir:         kTubaSubDir,
                         primaryVideoLibraryDir: kNoSpecificVideos,
                         baseVideoLibraryDir:    kBrassVideos,
@@ -268,7 +290,7 @@ let kClarinetInstrumentSettings =
 
 let kBassClarinetInstrumentSettings =
     InstrumentSettings( pitchTranspose:         -2,
-                        longToneTranspose:      -12,
+                        longToneTranspose:      0,
                         xmlDir:                 kBassClarinetSubDir,
                         secondaryXmlDir:        kTrumpetSubDir,
                         toneLibraryDir:         kBassClarinetSubDir,
@@ -297,8 +319,8 @@ let kAltoSaxInstrumentSettings =
                         isBrassInstrument:      false )
 
 let kTenorSaxInstrumentSettings =
-    InstrumentSettings( pitchTranspose:         0,
-                        longToneTranspose:      -26,
+    InstrumentSettings( pitchTranspose:         -2, // The XML files are altered
+                        longToneTranspose:      12,  
                         xmlDir:                 kTenorSaxSubDir,
                         secondaryXmlDir:        kTrumpetSubDir,
                         toneLibraryDir:         kTenorSaxSubDir,
@@ -318,7 +340,7 @@ let kBaritoneSaxInstrumentSettings =
 
 let kMalletInstrumentSettings =
     InstrumentSettings( pitchTranspose:         0,
-                        longToneTranspose:      10,
+                        longToneTranspose:      24,
                         xmlDir:                 kMalletSubDir,
                         secondaryXmlDir:        kOboeSubDir,
                         toneLibraryDir:         kOboeSubDir,
@@ -348,91 +370,117 @@ func setCurrentStudentInstrument( instrument: Int ) {
 
     switch instrument {
     case kInst_Trombone:
-        kUseWeightedPitchScore = true
+        gUseWeightedPitchScore = true
+        gUseTextNotVideoScore = false
+        gSoundStartAdjustment = kSoundStartOffsetFor_Trombone
         gInstrumentSettings = kTromboneInstrumentSettings
         UserDefaults.standard.set(kTransposeFor_Trombone,
                                   forKey: Constants.Settings.Transposition)
         PerformanceAnalysisMgr.instance.resetPartialsTable(forInstrument: kInst_Trombone )
         
     case kInst_Euphonium:
-        kUseWeightedPitchScore = true
+        gUseWeightedPitchScore = true
+        gUseTextNotVideoScore = false
+        gSoundStartAdjustment = kSoundStartOffsetFor_Euphonium
         gInstrumentSettings = kEuphoniumInstrumentSettings
         UserDefaults.standard.set(kTransposeFor_Euphonium,
                                   forKey: Constants.Settings.Transposition)
         PerformanceAnalysisMgr.instance.resetPartialsTable(forInstrument: kInst_Euphonium )
         
     case kInst_FrenchHorn:
-        kUseWeightedPitchScore = true
+        gUseWeightedPitchScore = true
+        gUseTextNotVideoScore = false
+        gSoundStartAdjustment = kSoundStartOffsetFor_FrenchHorn
         gInstrumentSettings = kFrenchHornInstrumentSettings
         UserDefaults.standard.set(kTransposeFor_FrenchHorn,
                                   forKey: Constants.Settings.Transposition)
         PerformanceAnalysisMgr.instance.resetPartialsTable(forInstrument: kInst_FrenchHorn )
         
     case kInst_Tuba:
-        kUseWeightedPitchScore = true
+        gUseWeightedPitchScore = true
+        gUseTextNotVideoScore = false
+        gSoundStartAdjustment = kSoundStartOffsetFor_Tuba
         gInstrumentSettings = kTubaInstrumentSettings
         UserDefaults.standard.set(kTransposeFor_Tuba,
                                   forKey: Constants.Settings.Transposition)
         PerformanceAnalysisMgr.instance.resetPartialsTable(forInstrument: kInst_Tuba )
 
     case kInst_Flute:
-        kUseWeightedPitchScore = true
+        gUseWeightedPitchScore = true
+        gUseTextNotVideoScore = false
+        gSoundStartAdjustment = kSoundStartOffsetFor_Flute
         gInstrumentSettings = kFluteInstrumentSettings
         UserDefaults.standard.set(kTransposeFor_Flute,
                                   forKey: Constants.Settings.Transposition)
 //        PerformanceAnalysisMgr.instance.resetPartialsTable(forInstrument: kInst_Trumpet )
         
     case kInst_Oboe:
-        kUseWeightedPitchScore = true
+        gUseWeightedPitchScore = true
+        gUseTextNotVideoScore = false
+        gSoundStartAdjustment = kSoundStartOffsetFor_Oboe
         gInstrumentSettings = kOboeInstrumentSettings
         UserDefaults.standard.set(kTransposeFor_Oboe,
                                   forKey: Constants.Settings.Transposition)
 //        PerformanceAnalysisMgr.instance.resetPartialsTable(forInstrument: kInst_Trumpet )
         
     case kInst_Clarinet:
-        kUseWeightedPitchScore = true
+        gUseWeightedPitchScore = true
+        gUseTextNotVideoScore = false
+        gSoundStartAdjustment = kSoundStartOffsetFor_Clarinet
         gInstrumentSettings = kClarinetInstrumentSettings
         UserDefaults.standard.set(kTransposeFor_Clarinet,
                                   forKey: Constants.Settings.Transposition)
 //        PerformanceAnalysisMgr.instance.resetPartialsTable(forInstrument: kInst_Trumpet )
         
     case kInst_BassClarinet:
-        kUseWeightedPitchScore = true
+        gUseWeightedPitchScore = true
+        gUseTextNotVideoScore = false
+        gSoundStartAdjustment = kSoundStartOffsetFor_BassClarinet
         gInstrumentSettings = kBassClarinetInstrumentSettings
         UserDefaults.standard.set(kTransposeFor_BassClarinet,
                                   forKey: Constants.Settings.Transposition)
 //        PerformanceAnalysisMgr.instance.resetPartialsTable(forInstrument: kInst_Trumpet )
         
     case kInst_Bassoon:
-        kUseWeightedPitchScore = true
+        gUseWeightedPitchScore = true
+        gUseTextNotVideoScore = false
+        gSoundStartAdjustment = kSoundStartOffsetFor_Bassoon
         gInstrumentSettings = kBassoonInstrumentSettings
         UserDefaults.standard.set(kTransposeFor_Bassoon,
                                   forKey: Constants.Settings.Transposition)
 //        PerformanceAnalysisMgr.instance.resetPartialsTable(forInstrument: kInst_Trumpet )
         
     case kInst_AltoSax:
-        kUseWeightedPitchScore = true
+        gUseWeightedPitchScore = true
+        gUseTextNotVideoScore = false
+        gSoundStartAdjustment = kSoundStartOffsetFor_AltoSax
         gInstrumentSettings = kAltoSaxInstrumentSettings
         UserDefaults.standard.set(kTransposeFor_AltoSax,
                                   forKey: Constants.Settings.Transposition)
 //        PerformanceAnalysisMgr.instance.resetPartialsTable(forInstrument: kInst_Trumpet )
         
     case kInst_TenorSax:
-        kUseWeightedPitchScore = true
+        gUseWeightedPitchScore = true
+        gUseTextNotVideoScore = false
+        gSoundStartAdjustment = kSoundStartOffsetFor_TenorSax
         gInstrumentSettings = kTenorSaxInstrumentSettings
         UserDefaults.standard.set(kTransposeFor_TenorSax,
                                   forKey: Constants.Settings.Transposition)
         //        PerformanceAnalysisMgr.instance.resetPartialsTable(forInstrument: kInst_Tuba )
         
     case kInst_BaritoneSax:
-        kUseWeightedPitchScore = true
+        gUseWeightedPitchScore = true
+        gUseTextNotVideoScore = false
+        gSoundStartAdjustment = kSoundStartOffsetFor_BaritoneSax
         gInstrumentSettings = kBaritoneSaxInstrumentSettings
         UserDefaults.standard.set(kTransposeFor_BaritoneSax,
                                   forKey: Constants.Settings.Transposition)
         //        PerformanceAnalysisMgr.instance.resetPartialsTable(forInstrument: kInst_Tuba )
         
     case kInst_Mallet:
-        kUseWeightedPitchScore = true
+        gUseWeightedPitchScore = true
+        gUseTextNotVideoScore = true
+        gSoundStartAdjustment = kSoundStartOffsetFor_Mallet
         gInstrumentSettings = kMalletInstrumentSettings
         UserDefaults.standard.set(kTransposeFor_Mallet,
                                   forKey: Constants.Settings.Transposition)
@@ -440,7 +488,9 @@ func setCurrentStudentInstrument( instrument: Int ) {
         
     case kInst_Trumpet:      fallthrough
     default:
-        kUseWeightedPitchScore = true
+        gUseWeightedPitchScore = true
+        gUseTextNotVideoScore = false
+        gSoundStartAdjustment = kSoundStartOffsetFor_Trumpet
         gInstrumentSettings = kTrumpetInstrumentSettings
         UserDefaults.standard.set(kTransposeFor_Trumpet,
                                   forKey: Constants.Settings.Transposition)
@@ -488,18 +538,18 @@ func getXMLInstrSecondaryDirString() -> String {
     case kInst_Trombone:     retStr = kTromboneSubDir
     case kInst_Euphonium:    retStr = kEuphoniumSubDir
     case kInst_FrenchHorn:   retStr = kFrenchHornSubDir
-    case kInst_Tuba:         retStr = kTubaSubDir
+    case kInst_Tuba:         retStr = kTromboneSubDir
         
     case kInst_Flute:        retStr = kFluteSubDir
     case kInst_Oboe:         retStr = kFluteSubDir
     case kInst_Clarinet:     retStr = kClarinetSubDir
-    case kInst_BassClarinet: retStr = kBassClarinetSubDir
+    case kInst_BassClarinet: retStr = kTrumpetSubDir
     case kInst_Bassoon:      retStr = kBassoonSubDir
     case kInst_AltoSax:      retStr = kAltoSaxSubDir
-    case kInst_TenorSax:     retStr = kTenorSaxSubDir
+    case kInst_TenorSax:     retStr = kTrumpetSubDir
     case kInst_BaritoneSax:  retStr = kAltoSaxSubDir
         
-    case kInst_Mallet:       retStr = kOboeSubDir
+    case kInst_Mallet:       retStr = kMalletSubDir
         
     case kInst_Trumpet:      fallthrough
     default:                 retStr = kTrumpetSubDir
@@ -582,17 +632,26 @@ func getClefLineForInstr(instr: Int) -> tClefLine {
 
 //
 
+// This affects pitch, not display
 // For altering the per-part transpose setting of the in-memory rep of the XML file
 typealias tTransDiaChrm = (diatonic: Int, chromatic: Int)
-let kNoTransDiaChrmChange =  (diatonic: 0, chromatic: 0)
-let kBariTransDiaChrm = (diatonic: -8, chromatic: -12)
+let kNoTransDiaChrmChange   =  (diatonic: 0, chromatic: 0)
+let kBariTransDiaChrm       = (diatonic: -8, chromatic: -12)
+let kBassClarTransDiaChrm   = (diatonic: -8, chromatic: -12)
+let kTubaTransDiaChrm       = (diatonic: -8, chromatic: -12)
+let kTenorTransDiaChrm      = (diatonic: -8, chromatic: -12)
+let kMalletTransDiaChrm     = (diatonic: 16, chromatic:  24)
 func getTransDiaChrmForInstr(instr: Int) -> tTransDiaChrm {
     
     var retVal = kNoTransDiaChrmChange
     
     switch instr {
+ //   case kInst_Tuba:         retVal = kTubaTransDiaChrm
+    case kInst_BassClarinet: retVal = kBassClarTransDiaChrm
+    case kInst_TenorSax:     retVal = kTenorTransDiaChrm
     case kInst_BaritoneSax:  retVal = kBariTransDiaChrm
-        
+    case kInst_Mallet:       retVal = kMalletTransDiaChrm
+
     case kInst_Trumpet:      fallthrough
     default:                 retVal = kNoTransDiaChrmChange
     }
@@ -600,7 +659,7 @@ func getTransDiaChrmForInstr(instr: Int) -> tTransDiaChrm {
     return retVal
 }
 
-// Not usre these kSSTranspose values, and func below, are needed.
+// Not sure these kSSTranspose values, and func below, are needed.
 let kSSTransposeFor_Trumpet:       Int32 =   0
 let kSSTransposeFor_Trombone:      Int32 =   0
 let kSSTransposeFor_Euphonium:     Int32 =   0
@@ -651,24 +710,24 @@ func getOctaveChangeForInstr(instr: Int) -> Int {
     var retVal : Int = 0
     
     switch instr {
-    case kInst_Trombone:     retVal = 0
-    case kInst_Euphonium:    retVal = 0
-    case kInst_FrenchHorn:   retVal = 0
-    case kInst_Tuba:         retVal = 0
+    case kInst_Trombone:     retVal =  0
+    case kInst_Euphonium:    retVal =  0
+    case kInst_FrenchHorn:   retVal =  0
+    case kInst_Tuba:         retVal = -1
         
-    case kInst_Flute:        retVal = 0
-    case kInst_Oboe:         retVal = 0
-    case kInst_Clarinet:     retVal = 0
-    case kInst_BassClarinet: retVal = 0
-    case kInst_Bassoon:      retVal = 0
-    case kInst_AltoSax:      retVal = 0
-    case kInst_TenorSax:     retVal = 0  // NOT CORRECT ???  FIX
-    case kInst_BaritoneSax:  retVal = 0
+    case kInst_Flute:        retVal =  0
+    case kInst_Oboe:         retVal =  0
+    case kInst_Clarinet:     retVal =  0
+    case kInst_BassClarinet: retVal =  0
+    case kInst_Bassoon:      retVal =  0
+    case kInst_AltoSax:      retVal =  0
+    case kInst_TenorSax:     retVal =  1  // NOT CORRECT ???  FIX
+    case kInst_BaritoneSax:  retVal =  0
         
-    case kInst_Mallet:       retVal = 0
+    case kInst_Mallet:       retVal =  0
         
     case kInst_Trumpet:      fallthrough
-    default:                 retVal = 0
+    default:                 retVal =  0
     }
     
     return retVal
@@ -754,10 +813,10 @@ func getFirstNoteInXMLForCurrentInstrument() -> Int {
     case kInst_Flute:        retVal = 55    // G3  == 55  to G5  needs to go to F6
     case kInst_Oboe:         retVal = 55    // G3  == 55
     case kInst_Clarinet:     retVal = 55    // G3  == 55 - FIXME ?
-    case kInst_BassClarinet: retVal = 27    // Eb1 == 27 - FIXME
+    case kInst_BassClarinet: retVal = 55    // Eb1 == 27 - FIXME
     case kInst_Bassoon:      retVal = 39    // Eb2 == 39 - FIXME ?
     case kInst_AltoSax:      retVal = 55    // G3  == 55
-    case kInst_TenorSax:     retVal = 27    // Eb1 == 27 - FIXME
+    case kInst_TenorSax:     retVal = 67    // G4  == 67
     case kInst_BaritoneSax:  retVal = 55 // using alto file 43    // G2  == 43 - FIXME
 
     case kInst_Mallet:       retVal = 55 // Wrong, but Shawn said same as Oboe
@@ -782,10 +841,10 @@ func getNoteOffsetForCurrentInstrument() -> Int {
     case kInst_Flute:        retVal = 27    // Eb1 == 27 - FIXME
     case kInst_Oboe:         retVal = 27    // Eb1 == 27 - FIXME
     case kInst_Clarinet:     retVal = 60    // C4  == 60 - FIXME ?
-    case kInst_BassClarinet: retVal = 27    // Eb1 == 27 - FIXME
+    case kInst_BassClarinet: retVal = 55    // Eb1 == 27 - FIXME
     case kInst_Bassoon:      retVal = 39    // Eb2 == 39 - FIXME ?
     case kInst_AltoSax:      retVal = 62    // Eb1 == 27 - FIXME
-    case kInst_TenorSax:     retVal = 27    // Eb1 == 27 - FIXME
+    case kInst_TenorSax:     retVal = 67    // G4  == 67
     case kInst_BaritoneSax:  retVal = 27    // Eb1 == 27 - FIXME
         
     case kInst_Mallet:       retVal = 27 // Wrong, but Shawn said same as Oboe
@@ -793,5 +852,108 @@ func getNoteOffsetForCurrentInstrument() -> Int {
     case kInst_Trumpet:      fallthrough
     default:                 retVal = 60    // C4 == 60
     }
+    return retVal
+}
+
+
+
+
+/*
+ 
+ Trumpet and Clarinet, behaving similarly, so for both of these:
+ Settings at 60BPM: Legato Pitch Samples: 22  Amp Rise: .2 Num to Skip 20
+ 
+ 9/8/19: Quarters at 144. Finally able to get 4 stars by dialing back the num. to skip to min. (10) and legato pitch split down to min: 3.
+ 
+ 8/22/19: Trumpet setting: sound-start offset: .121 (may need individual instrument setting here, not sure why)  - Ampl. change; .2    WIndow size: 2
+ 
+ 8/27/19:  Trumpet: Sound start offset .121     Ampl change .2    Window size 2  Is a Sound: .298 (maxed)
+ 
+ Legato default = 16    as of 8/12, and still
+ 
+ Amp Rise defaults:
+ Skip:          15
+ Window Size:    2
+ Amp Rise:       0.2
+ 
+ 
+            AR                                              Sound
+            Window      AR         AR           Legato      Start       Is a
+            Size:       Skip:      Change:      Skip:       Offset:     Sound:
+ 
+ 8/22
+ Trumpet    2           (15)       .2           (16)        .121
+ 60?
+ 
+ 8/27
+ Trumpet    2           (15)       .2           (16)        .121       .298
+ 60?
+ 
+ 9/4
+ Trumpet                                                                .33
+ 
+ 9/8
+ Trumpet    (2)         10         (.2)         3           (.121)      (.33)
+ 144?
+ 
+ Trumpet at 60
+ ----------------
+ AR Window Size:      2
+ AR Skip Samples:    15
+ AR Change:           0.2
+ Legato Skip:        16
+ Sound Start Offset: 0.121
+ Is a Sound:         .33
+ 
+ Trumpet at 144
+ ----------------
+ AR Window Size:      2
+ AR Skip Samples:    10
+ AR Change:           0.2
+ Legato Skip:         3
+ Sound Start Offset:  0.121
+ Is a Sound:          0.33
+
+ 
+ At 144, a 1/4 note is .416 of a second long, or 41 samples (at 100 samples per second).
+ At 144, a 1/8 note is .208 of a second long, or 41 samples (at 100 samples per second).
+
+ */
+
+let kTrumpet_NumLegatoSkipSamplesAt60bpm    = 16
+let kTrumpet_NumLegatoSkipSamplesAt144bpm   =  3
+let kTrumpet_NumARSkipSamplesAt60bpm        = 15
+let kTrumpet_NumARSkipSamplesAt144bpm       = 10
+
+
+func setValuesAfterBpmChange() {
+    let currInst = getCurrentStudentInstrument()
+    if currInst == kInst_Trumpet {
+        
+    }
+}
+
+
+
+
+
+func getValueAtCurrBPM(valueAt60bpm: Double, valueAt144bpm: Double) ->Double {
+    var retVal = Double(0.0)
+    
+    let currBPM = Double(60)
+    
+    if currBPM <= 60 {
+        retVal = valueAt60bpm
+    } else if currBPM >= 144 {
+        retVal = valueAt144bpm
+    } else {
+        let theRange = Double(144 - 60)
+        let rangeDiff = valueAt144bpm - valueAt60bpm
+        let increment = rangeDiff/theRange
+        
+        let amountOver60 = currBPM - 60
+        retVal = valueAt60bpm + amountOver60*increment
+    }
+    
     return retVal
 }

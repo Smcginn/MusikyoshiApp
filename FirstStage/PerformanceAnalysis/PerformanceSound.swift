@@ -18,9 +18,11 @@ public class PerformanceSound
     init ( start: TimeInterval, mode : soundType, noteOffset: TimeInterval )
     {
         soundID = PerformanceSound.getUniqueSoundID()
+        let soundStartOffset = getSoundStartOffset()
         _startTime_abs  = start
         _startTime_song = soundTimeToNoteTimeExt(soundStart: _startTime_abs)
-        _startTime_comp = _startTime_song - kSoundStartAdjustment
+        _startTime_comp = _startTime_song - soundStartOffset
+        // _startTime_comp = _startTime_song - gSoundStartAdjustment
 
         soundMode = mode
         soundToNoteTimeOffset = noteOffset
@@ -73,7 +75,9 @@ public class PerformanceSound
     func setStartTimeAbs(startTimeAbs: TimeInterval) {
         _startTime_abs  = startTimeAbs
         _startTime_song = soundTimeToNoteTimeExt(soundStart: _startTime_abs)
-        _startTime_comp = _startTime_song - kSoundStartAdjustment
+        let soundStartOffset = getSoundStartOffset()
+        _startTime_comp = _startTime_song - soundStartOffset
+        // _startTime_comp = _startTime_song - gSoundStartAdjustment
     }
     
     var _endTime_abs  = noTimeValueSet
@@ -91,8 +95,10 @@ public class PerformanceSound
     func setEndTimeAbs(endTimeAbs: TimeInterval) {
         _endTime_abs  = endTimeAbs
         _endTime_song = soundTimeToNoteTimeExt(soundStart: _endTime_abs)
-        _endTime_comp = _endTime_song - kSoundStartAdjustment
-        
+        let soundStartOffset = getSoundStartOffset()
+        _endTime_comp = _endTime_song - soundStartOffset
+        // _endTime_comp = _endTime_song - gSoundStartAdjustment
+
         _duration = _endTime_abs - _startTime_abs
         if !initialPitchHasStablized() {
             let lastSamp = lastEarlySample()
@@ -112,7 +118,9 @@ public class PerformanceSound
         print("   Before: _startTime_song == \(_startTime_song), _startTime_comp == \(_startTime_comp)")
         
         _startTime_song = soundTimeToNoteTimeExt(soundStart: _startTime_abs)
-        _startTime_comp = _startTime_song - kSoundStartAdjustment
+        let soundStartOffset = getSoundStartOffset()
+        _startTime_comp = _startTime_song - soundStartOffset
+        //_startTime_comp = _startTime_song - gSoundStartAdjustment
         print("   After:  _startTime_song == \(_startTime_song), _startTime_comp == \(_startTime_comp)")
 
         if isLinkedToNote && linkedNoteObject != nil {
@@ -153,8 +161,12 @@ public class PerformanceSound
     func lastEarlySample() -> Double {
         return earlySamples.isEmpty ? 0.0 : earlySamples.last!
     }
+    
+    // var legSkipWindowToUse = gSamplesNeededToDeterminePitch
+    var pitchSkipWindowToUse = getSamplesToDeterminePitch()
     func initialPitchHasStablized() -> Bool {
-        return earlyPitchSampleCount > kSamplesNeededToDeterminePitch || forcedPitch
+        //return earlyPitchSampleCount > gSamplesNeededToDeterminePitch || forcedPitch
+        return earlyPitchSampleCount > pitchSkipWindowToUse || forcedPitch
     }
     
     // Called if pitch established, and the sample matches current average.
@@ -209,7 +221,9 @@ public class PerformanceSound
     // Use this after addDifferentPitchSample: have enough samples at diff pitch accrued
     // to say it's definitely a new note? (Is so, stop curr sound and create new)
     func isDefinitelyADifferentNote() -> Bool {
-        return consecutiveDiffPitches >= gDifferentPitchSampleThreshold
+        let diffNoteThresh = getSamplesForLegatoPitchChange()
+        return consecutiveDiffPitches >= diffNoteThresh
+        // return consecutiveDiffPitches >= gDifferentPitchSampleThreshold
     }
     
     // After a new sound was created because of new legato note, call this to
@@ -472,6 +486,56 @@ public class PerformanceSound
         }
     }
 
+    func getSamplesForDisplay() -> String {
+        var retStr = ""
+ 
+        var concertNoteName: String = ""
+        var trasnposedNoteName: String = ""
+        let avgPitchStr = String(format: "%.1f", self.averagePitch)
+        let avgPitchRunStr = String(format: "%.1f", self.averagePitchRunning)
+        
+//        print ("\n==============================================================\n")
+        retStr +=  ("   Pitch Samples for Sound #\(self.soundID)\n\n")
+        if createdBecauseOfLegatoPitchChange {
+            retStr += ("   Sound created because of pitch change\n\n")
+        }
+        retStr +=  ("       - avgPitch:  \(avgPitchStr)\n")
+        retStr +=  ("       - avgPtcRun: \(avgPitchRunStr)\n")
+        retStr +=  ("\nSound had \(self.numPitchSamples()) pitched samples:\n")
+        retStr +=  ( "\n            -------- Early samples: ------\n" )
+        for eSamp in earlySamples {
+            getNoteInfoForPitch(pitch: eSamp,
+                                concertNoteStr: &concertNoteName,
+                                transposedNoteStr: &trasnposedNoteName )
+            let pitchStr = String(format: "%.1f", eSamp)
+            retStr += ( "    \(pitchStr) Hz, \t\(trasnposedNoteName), \t(Concert: \(concertNoteName))\n" )
+        }
+        retStr += ( "\n            -------- Established Pitch samples: ------\n" )
+        for samp in pitchSamples {
+            let pitchStr = String(format: "%.1f", samp)
+            getNoteInfoForPitch(pitch: samp,
+                                concertNoteStr: &concertNoteName,
+                                transposedNoteStr: &trasnposedNoteName )
+            retStr += ( "    \(pitchStr), \tTransposed: \(trasnposedNoteName), \tConcert: \(concertNoteName)\n" )
+        }
+        if diffPitchSamples.count > 0 {
+            retStr += ( "\n            ------- Diff Samples -------" )
+            for dSamp in diffPitchSamples {
+                let pitchStr = String(format: "%.1f", dSamp)
+                getNoteInfoForPitch(pitch: dSamp,
+                                    concertNoteStr: &concertNoteName,
+                                    transposedNoteStr: &trasnposedNoteName )
+                retStr += ( "    \(pitchStr), \tTransposed: \(trasnposedNoteName), \tConcert: \(concertNoteName)\n" )
+            }
+        }
+        if stoppedBecauseOfLegatoPitchChange {
+            retStr += ("\n   Sound ended because of pitch change\n")
+        }
+        
+        return retStr
+    }
+    
+    
     func printSamplesDetailed() {
         var concertNoteName: String = ""
         var trasnposedNoteName: String = ""
@@ -483,24 +547,24 @@ public class PerformanceSound
             print ("   Sound created because of pitch change\n")
         }
         print ("   Pitch Samples for Sound #\(self.soundID)\n")
-        print ("       - avgPitch:  \(avgPitchStr)")
+        print ("       - avgPitch:  \(avgPitchStr)\n")
         print ("       - avgPtcRun: \(avgPitchRunStr)\n")
         print ("    - sound had \(self.numPitchSamples()) pitched samples:")
-        print ( "\n            -------- Early samples: ------" )
+        print ( "\n            -------- Early samples: ------\n" )
         for eSamp in earlySamples {
             getNoteInfoForPitch(pitch: eSamp,
                                 concertNoteStr: &concertNoteName,
                                 transposedNoteStr: &trasnposedNoteName )
             let pitchStr = String(format: "%.1f", eSamp)
-            print ( "    \(pitchStr) Hz, \t\(trasnposedNoteName), \t(Concert: \(concertNoteName))" )
+            print ( "    \(pitchStr) Hz, \t\(trasnposedNoteName), \t(Concert: \(concertNoteName))\n" )
         }
-        print ( "\n            -------- Established Pitch samples: ------" )
+        print ( "\n            -------- Established Pitch samples: ------\n" )
         for samp in pitchSamples {
             let pitchStr = String(format: "%.1f", samp)
             getNoteInfoForPitch(pitch: samp,
                                 concertNoteStr: &concertNoteName,
                                 transposedNoteStr: &trasnposedNoteName )
-            print ( "    \(pitchStr), \tTransposed: \(trasnposedNoteName), \tConcert: \(concertNoteName)" )
+            print ( "    \(pitchStr), \tTransposed: \(trasnposedNoteName), \tConcert: \(concertNoteName)\n" )
         }
         if diffPitchSamples.count > 0 {
             print ( "\n            ------- Diff Samples -------" )
@@ -509,7 +573,7 @@ public class PerformanceSound
                 getNoteInfoForPitch(pitch: dSamp,
                                     concertNoteStr: &concertNoteName,
                                     transposedNoteStr: &trasnposedNoteName )
-                print ( "    \(pitchStr), \tTransposed: \(trasnposedNoteName), \tConcert: \(concertNoteName)" )
+                print ( "    \(pitchStr), \tTransposed: \(trasnposedNoteName), \tConcert: \(concertNoteName)\n" )
             }
         }
         if stoppedBecauseOfLegatoPitchChange {

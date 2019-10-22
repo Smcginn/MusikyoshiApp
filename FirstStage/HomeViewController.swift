@@ -48,41 +48,30 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         displayWelcomeVC()
     }
     
+    var handlingDebugModePassword = true
+    
     @IBOutlet weak var debugStuffOnBtn: UIButton!
     var numTimesDebugStuffOnTapped = 0
     @IBAction func debugStuffOnPressed(_ sender: Any) {
         numTimesDebugStuffOnTapped += 1
-        if numTimesDebugStuffOnTapped >= 5 {
-            gMKDebugOpt_HomeScreenDebugOptionsEnabled = true
-            debugStuffOnBtn.isHidden = false
-            debugStuffOnBtn.isOpaque = true
-            debugStuffOnBtn.titleLabel?.isHidden = false
-            debugStuffOnBtn.titleLabel?.textColor = UIColor.green
-            debugStuffOnBtn.backgroundColor =
-                (UIColor.lightGray).withAlphaComponent(1.0)
-            debugStuffOnBtn.setTitleColor(UIColor.blue, for: .normal)
-            gMKDebugOpt_ShowDebugSettingsBtn = true
-            gMKDebugOpt_ShowFakeScoreInLTAlert = true
-            gMKDebugOpt_ShowSlidersBtn = true
-            gMKDebugOpt_ShowResetBtnInMicCalibScene = true
-            gMKDebugOpt_IsSoundAndLatencySettingsEnabled = true
+        if numTimesDebugStuffOnTapped >= 8 {
+            handlingDebugModePassword = true
+            hiddenPswdTextField.backgroundColor = .lightGray
+            hiddenPswdTextField.isHidden = false
+            hiddenPswdTextField.isEnabled = true
+            hiddenPswdTextField.keyboardType = .default
+            hiddenPswdTextField.becomeFirstResponder()
         }
-    }
+     }
     
     var numTimesSettingsEnabledTapped = 0
     var settingsEnblBtnBckgrndColor = UIColor.clear
     @IBOutlet weak var settingEnabledBtn: UIButton!
     @IBAction func settingEnabledBtnPressed(_ sender: Any) {
         numTimesSettingsEnabledTapped += 1
-        if numTimesSettingsEnabledTapped >= 10 {
-            settingEnabledBtn.isOpaque = true
-            settingEnabledBtn.titleLabel?.textColor = UIColor.green
-            settingsEnblBtnBckgrndColor = .lightGray
-            settingEnabledBtn.backgroundColor = settingsEnblBtnBckgrndColor
-            settingEnabledBtn.setTitleColor(UIColor.blue, for: .normal)
-            gMKDebugOpt_IsSoundAndLatencySettingsEnabled = true
-        }
-        if numTimesSettingsEnabledTapped >= 15 {
+        if numTimesSettingsEnabledTapped >= 8 {
+            handlingDebugModePassword = false
+            hiddenPswdTextField.backgroundColor = .lightGray
             hiddenPswdTextField.isHidden = false
             hiddenPswdTextField.isEnabled = true
             hiddenPswdTextField.keyboardType = .default
@@ -96,13 +85,31 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         
         // must match the dev password
         if response == "EULA" {
-            settingEnabledBtn.isOpaque = true
-            settingEnabledBtn.titleLabel?.textColor = UIColor.green
-            settingsEnblBtnBckgrndColor = .magenta
-            settingEnabledBtn.backgroundColor = settingsEnblBtnBckgrndColor
-            settingEnabledBtn.setTitleColor(UIColor.blue, for: .normal)
-            gDoOverrideSubsPresent = true
-            gDoLimitLevels = false
+            if handlingDebugModePassword {
+                gMKDebugOpt_ShowDebugSettingsBtn = true
+
+                gMKDebugOpt_HomeScreenDebugOptionsEnabled = true
+                debugStuffOnBtn.isHidden = false
+                debugStuffOnBtn.isOpaque = true
+                debugStuffOnBtn.titleLabel?.isHidden = false
+                debugStuffOnBtn.titleLabel?.textColor = UIColor.green
+                debugStuffOnBtn.backgroundColor =
+                    (UIColor.lightGray).withAlphaComponent(1.0)
+                debugStuffOnBtn.setTitleColor(UIColor.blue, for: .normal)
+                gMKDebugOpt_ShowFakeScoreInLTAlert = true
+                gMKDebugOpt_ShowSlidersBtn = true
+                gMKDebugOpt_ShowResetBtnInMicCalibScene = true
+                gMKDebugOpt_IsSoundAndLatencySettingsEnabled = true
+            } else {
+                gDoOverrideSubsPresent = true
+                settingEnabledBtn.isOpaque = true
+ //               settingEnabledBtn.titleLabel?.textColor = UIColor.green
+                settingsEnblBtnBckgrndColor = .lightGray
+                settingEnabledBtn.backgroundColor = settingsEnblBtnBckgrndColor
+                settingEnabledBtn.setTitleColor(UIColor.black, for: .normal)
+                gDoOverrideSubsPresent = true
+                gDoLimitLevels = false
+            }
         }
         
         hiddenPswdTextField.isHidden = true
@@ -120,6 +127,8 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         LessonsBtn.layer.cornerRadius = LessonsBtn.frame.width / 2
         
         createParticles()
+        
+        settingEnabledBtn.setTitle("Levels Enabled", for: .normal)
         
         if gMKDebugOpt_HomeScreenDebugOptionsEnabled {
             debugStuffOnBtn.isHidden = false
@@ -142,24 +151,21 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         }
         
         settingEnabledBtn.backgroundColor = settingsEnblBtnBckgrndColor
-        if gMKDebugOpt_IsSoundAndLatencySettingsEnabled {
+        // should be testing gDoOverrideSubsPresent
+        // if gMKDebugOpt_IsSoundAndLatencySettingsEnabled {
+        if gDoOverrideSubsPresent {
             settingEnabledBtn.isHidden = false
             settingEnabledBtn.isEnabled = true
             settingEnabledBtn.isOpaque = true
             settingEnabledBtn.titleLabel?.textColor = UIColor.green
             settingEnabledBtn.titleLabel?.isHidden = false
-            settingEnabledBtn.setTitleColor(UIColor.blue, for: .normal)
-//            settingEnabledBtn.backgroundColor =
-//                (UIColor.lightGray).withAlphaComponent(1.0)
+            settingEnabledBtn.setTitleColor(UIColor.black, for: .normal)
         } else {
             settingEnabledBtn.isHidden = false
             settingEnabledBtn.isEnabled = true
             settingEnabledBtn.isOpaque = false
             settingEnabledBtn.titleLabel?.isHidden = true
-            settingEnabledBtn.titleLabel?.textColor = UIColor.clear
             settingEnabledBtn.setTitleColor(UIColor.clear, for: .normal)
-//            settingEnabledBtn.backgroundColor =
-//                (UIColor.lightGray).withAlphaComponent(0.0)
        }
     }
     
@@ -191,7 +197,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         let versionsEqual =
             LsnSchdlr.instance.scoreMgr.isJsonVersionEqual(versionTuple: appJsonDataVersion)
         if (!versionsEqual) {
-// HEY !!!!            displayDBCompatibilityAlert()
+            displayDBCompatibilityAlert()
         }
         
         let shouldDisplayOverview = !UserDefaults.standard.bool(forKey: "displayedOverviewPopup")

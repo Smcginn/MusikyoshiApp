@@ -312,6 +312,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         }
         
+        // Clearly unnecessary to repeat all this.  When there's time,
+        // review the exact roder required:
+        RealTimeSettingsManager.instance.resetFor_CurrInst()
+        InstrumentSettingsManager.sharedInstance.setupDefaultForCurrInstr()
+        
+        gUseEighthIsSoundThresholdNow.set(0)
+        
+//        RealTimeSettingsManager.instance.test_getAdjustedAttackToleranceImpl()
+        RealTimeSettingsManager.instance.resetFor_CurrInst()
+        
         return true
     }
     

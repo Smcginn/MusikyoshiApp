@@ -403,8 +403,12 @@ extension ScoreMgr {
         let fm = FileManager.default
         do {
             if !fm.fileExists(atPath: mkScoreFilePath) {
-                print("\n In deleteCurrentScoreFile;  File does not exist\n")
-                return true // it's not there, so . . .
+                print("\n In deleteCurrentScoreFile;  V1 File does not exist\n")
+                // Ok, so perhaps it's a V2 file . . .
+                let currInst = getCurrentStudentInstrument()
+                let retVal = deleteScoreFileForInst(instr: currInst)
+                return retVal
+                // return true // it's not there, so . . .
             } else {
                 try fm.removeItem(atPath: mkScoreFilePath)
             }
@@ -716,8 +720,9 @@ extension ScoreMgr {
         let dbMinor = getDBMinorVersion()
         
         if dbMajor == versionTuple.major  &&
-            dbMid   == versionTuple.mid    &&
-            dbMinor == versionTuple.minor      {
+           dbMid   == versionTuple.mid    &&
+           dbMinor == versionTuple.minor
+        {
             return true
         } else {
             return false

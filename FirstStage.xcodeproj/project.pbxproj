@@ -333,6 +333,12 @@
 		6D08D759219E4E7500928463 /* AutoRenewNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D08D757219E4E7500928463 /* AutoRenewNotificationViewController.swift */; };
 		6D0C5F02217E33D500273E93 /* IsASoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0C5F01217E33D400273E93 /* IsASoundViewController.swift */; };
 		6D0C5F03217E33D500273E93 /* IsASoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0C5F01217E33D400273E93 /* IsASoundViewController.swift */; };
+		6D1076A223465A74005E66D8 /* LevelSettingsInterpolating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1076A123465A74005E66D8 /* LevelSettingsInterpolating.swift */; };
+		6D1076A323465A74005E66D8 /* LevelSettingsInterpolating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1076A123465A74005E66D8 /* LevelSettingsInterpolating.swift */; };
+		6D1076A5234819AF005E66D8 /* RealTimeSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1076A4234819AF005E66D8 /* RealTimeSettingsManager.swift */; };
+		6D1076A6234819AF005E66D8 /* RealTimeSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1076A4234819AF005E66D8 /* RealTimeSettingsManager.swift */; };
+		6D1076A82348EA30005E66D8 /* RealTimeSettingsGetters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1076A72348EA30005E66D8 /* RealTimeSettingsGetters.swift */; };
+		6D1076A92348EA30005E66D8 /* RealTimeSettingsGetters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1076A72348EA30005E66D8 /* RealTimeSettingsGetters.swift */; };
 		6D1509F622722747008F0490 /* AEXML.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 635A60991EC6B7BA0099154A /* AEXML.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6D22AEC620D06E8200ACEC81 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633D1B6C1CF94BEC00B5C4FD /* FeedbackView.swift */; };
 		6D268BEB21CD3C12002DA293 /* InstrumentSelectionDefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D268BEA21CD3C12002DA293 /* InstrumentSelectionDefs.swift */; };
@@ -398,6 +404,10 @@
 		6D8072B1227B866700FEC160 /* AEXML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D8072B0227B866700FEC160 /* AEXML.framework */; };
 		6D817BE02186042A00258980 /* PATest_FreqAndPitchSampleSim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D817BDF2186042A00258980 /* PATest_FreqAndPitchSampleSim.swift */; };
 		6D817BE12186042A00258980 /* PATest_FreqAndPitchSampleSim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D817BDF2186042A00258980 /* PATest_FreqAndPitchSampleSim.swift */; };
+		6D82A20C23391B7600026BD8 /* TryOutLevelsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D82A20B23391B7600026BD8 /* TryOutLevelsManager.swift */; };
+		6D82A20D23391B7600026BD8 /* TryOutLevelsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D82A20B23391B7600026BD8 /* TryOutLevelsManager.swift */; };
+		6D82A20F23391C9400026BD8 /* TryOutLevelsManager.json in Resources */ = {isa = PBXBuildFile; fileRef = 6D82A20E23391C9400026BD8 /* TryOutLevelsManager.json */; };
+		6D82A21023391C9400026BD8 /* TryOutLevelsManager.json in Resources */ = {isa = PBXBuildFile; fileRef = 6D82A20E23391C9400026BD8 /* TryOutLevelsManager.json */; };
 		6D8486CD21949DE4003D9D6A /* InAppAvailablePurchasesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8486CC21949DE4003D9D6A /* InAppAvailablePurchasesData.swift */; };
 		6D8486DD21949EB3003D9D6A /* InAppAvailablePurchasesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8486CC21949DE4003D9D6A /* InAppAvailablePurchasesData.swift */; };
 		6D8486DF2194AC7D003D9D6A /* InAppPurchasesDescritopnText.json in Resources */ = {isa = PBXBuildFile; fileRef = 6D8486DE2194AC7D003D9D6A /* InAppPurchasesDescritopnText.json */; };
@@ -410,6 +420,18 @@
 		6D8E104D2131031D00B1B3B8 /* Current Arrow 36x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D8E104B2131031C00B1B3B8 /* Current Arrow 36x16.png */; };
 		6D8E104F213103DA00B1B3B8 /* Current Arrow 30x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D8E104E213103DA00B1B3B8 /* Current Arrow 30x16.png */; };
 		6D8E1050213103DA00B1B3B8 /* Current Arrow 30x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D8E104E213103DA00B1B3B8 /* Current Arrow 30x16.png */; };
+		6D912C1F231EB63D0033532E /* FreqSampleAnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D912C1E231EB63D0033532E /* FreqSampleAnalysisView.swift */; };
+		6D912C20231EB63D0033532E /* FreqSampleAnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D912C1E231EB63D0033532E /* FreqSampleAnalysisView.swift */; };
+		6D912C22232BE1FF0033532E /* PerformanceLevelSettings.json in Resources */ = {isa = PBXBuildFile; fileRef = 6D912C21232BE1FF0033532E /* PerformanceLevelSettings.json */; };
+		6D912C23232BE2000033532E /* PerformanceLevelSettings.json in Resources */ = {isa = PBXBuildFile; fileRef = 6D912C21232BE1FF0033532E /* PerformanceLevelSettings.json */; };
+		6D912C25232C0D5E0033532E /* PerformanceLevelSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D912C24232C0D5E0033532E /* PerformanceLevelSettings.swift */; };
+		6D912C26232C0D5E0033532E /* PerformanceLevelSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D912C24232C0D5E0033532E /* PerformanceLevelSettings.swift */; };
+		6D917E602318495F008A597C /* AudioSampleAnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D917E502318495F008A597C /* AudioSampleAnalysisView.swift */; };
+		6D917E612318495F008A597C /* AudioSampleAnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D917E502318495F008A597C /* AudioSampleAnalysisView.swift */; };
+		6D917E6323185006008A597C /* RuntimeEventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D917E6223185006008A597C /* RuntimeEventManager.swift */; };
+		6D917E6423185006008A597C /* RuntimeEventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D917E6223185006008A597C /* RuntimeEventManager.swift */; };
+		6D917E662318AE94008A597C /* WaveformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D917E652318AE94008A597C /* WaveformView.swift */; };
+		6D917E672318AE94008A597C /* WaveformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D917E652318AE94008A597C /* WaveformView.swift */; };
 		6D9C007421DBD0490012A03B /* TenorTrombone.46.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6D9C005321DBD0460012A03B /* TenorTrombone.46.m4a */; };
 		6D9C007521DBD0490012A03B /* TenorTrombone.46.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6D9C005321DBD0460012A03B /* TenorTrombone.46.m4a */; };
 		6D9C007621DBD0490012A03B /* TenorTrombone.70.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6D9C005421DBD0460012A03B /* TenorTrombone.70.m4a */; };
@@ -664,6 +686,8 @@
 		6DC834B62134B94B00AAA613 /* IconImageMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC834B42134B94B00AAA613 /* IconImageMgr.swift */; };
 		6DC834C72135136400AAA613 /* OneStarNew 64x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DC834C62135136400AAA613 /* OneStarNew 64x64.png */; };
 		6DC834C82135136400AAA613 /* OneStarNew 64x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DC834C62135136400AAA613 /* OneStarNew 64x64.png */; };
+		6DCBFD062334492600F510DB /* MusicXMLNoteTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCBFD052334492600F510DB /* MusicXMLNoteTracker.swift */; };
+		6DCBFD072334492600F510DB /* MusicXMLNoteTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCBFD052334492600F510DB /* MusicXMLNoteTracker.swift */; };
 		6DCC640122173722001026F1 /* PerfSampleAmplitudeTrackerV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D277EBC220A9DFF00247359 /* PerfSampleAmplitudeTrackerV2.swift */; };
 		6DD52D782257A32400F1C668 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C33BBA92016E80B00CD83A6 /* SwiftyJSON.framework */; };
 		6DD52D792257ED5600F1C668 /* SwiftyStoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D431C322198EA33009DBBE9 /* SwiftyStoreKit.framework */; };
@@ -1271,6 +1295,9 @@
 		6D08D73C219DDB0300928463 /* NetworkActivityIndicatorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkActivityIndicatorManager.swift; path = InAppPurchases/NetworkActivityIndicatorManager.swift; sourceTree = "<group>"; };
 		6D08D757219E4E7500928463 /* AutoRenewNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoRenewNotificationViewController.swift; sourceTree = "<group>"; };
 		6D0C5F01217E33D400273E93 /* IsASoundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsASoundViewController.swift; sourceTree = "<group>"; };
+		6D1076A123465A74005E66D8 /* LevelSettingsInterpolating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LevelSettingsInterpolating.swift; path = PerformanceAnalysis/LevelSettingsInterpolating.swift; sourceTree = "<group>"; };
+		6D1076A4234819AF005E66D8 /* RealTimeSettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RealTimeSettingsManager.swift; path = InstrumentSelection/RealTimeSettingsManager.swift; sourceTree = "<group>"; };
+		6D1076A72348EA30005E66D8 /* RealTimeSettingsGetters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RealTimeSettingsGetters.swift; path = InstrumentSelection/RealTimeSettingsGetters.swift; sourceTree = "<group>"; };
 		6D268BEA21CD3C12002DA293 /* InstrumentSelectionDefs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InstrumentSelectionDefs.swift; path = InstrumentSelection/InstrumentSelectionDefs.swift; sourceTree = "<group>"; };
 		6D277EBC220A9DFF00247359 /* PerfSampleAmplitudeTrackerV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PerfSampleAmplitudeTrackerV2.swift; path = PerformanceAnalysis/PerfSampleAmplitudeTrackerV2.swift; sourceTree = "<group>"; };
 		6D34A17C2139F9E10071BAB6 /* AppDefs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDefs.swift; sourceTree = "<group>"; };
@@ -1305,12 +1332,20 @@
 		6D8072AE227B863300FEC160 /* AEXML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AEXML.framework; path = "../../../../Library/Developer/Xcode/DerivedData/FirstStage-etnsojllxxjcrghdzqznbedmtrhm/Build/Products/Debug-iphonesimulator/AEXML.framework"; sourceTree = "<group>"; };
 		6D8072B0227B866700FEC160 /* AEXML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AEXML.framework; path = "../../../../Library/Developer/Xcode/DerivedData/FirstStage-etnsojllxxjcrghdzqznbedmtrhm/Build/Products/Debug-iphoneos/AEXML.framework"; sourceTree = "<group>"; };
 		6D817BDF2186042A00258980 /* PATest_FreqAndPitchSampleSim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PATest_FreqAndPitchSampleSim.swift; path = PerformanceAnalysis/PerfAnalysisTesting/PATest_FreqAndPitchSampleSim.swift; sourceTree = "<group>"; };
+		6D82A20B23391B7600026BD8 /* TryOutLevelsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TryOutLevelsManager.swift; path = InAppPurchases/TryOutLevelsManager.swift; sourceTree = "<group>"; };
+		6D82A20E23391C9400026BD8 /* TryOutLevelsManager.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = TryOutLevelsManager.json; path = InAppPurchases/TryOutLevelsManager.json; sourceTree = "<group>"; };
 		6D8486CC21949DE4003D9D6A /* InAppAvailablePurchasesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InAppAvailablePurchasesData.swift; path = InAppPurchases/InAppAvailablePurchasesData.swift; sourceTree = "<group>"; };
 		6D8486DE2194AC7D003D9D6A /* InAppPurchasesDescritopnText.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = InAppPurchasesDescritopnText.json; path = InAppPurchases/InAppPurchasesDescritopnText.json; sourceTree = "<group>"; };
 		6D8E10362130DD6F00B1B3B8 /* Current Arrow 40x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Current Arrow 40x16.png"; path = "Images/Current Arrow 40x16.png"; sourceTree = "<group>"; };
 		6D8E10482130E77200B1B3B8 /* Current Arrow 22x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Current Arrow 22x16.png"; path = "Images/Current Arrow 22x16.png"; sourceTree = "<group>"; };
 		6D8E104B2131031C00B1B3B8 /* Current Arrow 36x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Current Arrow 36x16.png"; path = "Images/Current Arrow 36x16.png"; sourceTree = "<group>"; };
 		6D8E104E213103DA00B1B3B8 /* Current Arrow 30x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Current Arrow 30x16.png"; path = "Images/Current Arrow 30x16.png"; sourceTree = "<group>"; };
+		6D912C1E231EB63D0033532E /* FreqSampleAnalysisView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FreqSampleAnalysisView.swift; path = PerformanceAnalysis/FreqSampleAnalysisView.swift; sourceTree = "<group>"; };
+		6D912C21232BE1FF0033532E /* PerformanceLevelSettings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = PerformanceLevelSettings.json; path = PerformanceAnalysis/PerformanceLevelSettings.json; sourceTree = "<group>"; };
+		6D912C24232C0D5E0033532E /* PerformanceLevelSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PerformanceLevelSettings.swift; path = PerformanceAnalysis/PerformanceLevelSettings.swift; sourceTree = "<group>"; };
+		6D917E502318495F008A597C /* AudioSampleAnalysisView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AudioSampleAnalysisView.swift; path = PerformanceAnalysis/AudioSampleAnalysisView.swift; sourceTree = "<group>"; };
+		6D917E6223185006008A597C /* RuntimeEventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeEventManager.swift; sourceTree = "<group>"; };
+		6D917E652318AE94008A597C /* WaveformView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WaveformView.swift; path = PerformanceAnalysis/WaveformView.swift; sourceTree = "<group>"; };
 		6D9C005321DBD0460012A03B /* TenorTrombone.46.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = TenorTrombone.46.m4a; path = "synth-samples/tenortrombone-samples/TenorTrombone.46.m4a"; sourceTree = "<group>"; };
 		6D9C005421DBD0460012A03B /* TenorTrombone.70.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = TenorTrombone.70.m4a; path = "synth-samples/tenortrombone-samples/TenorTrombone.70.m4a"; sourceTree = "<group>"; };
 		6D9C005521DBD0460012A03B /* TenorTrombone.71.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = TenorTrombone.71.m4a; path = "synth-samples/tenortrombone-samples/TenorTrombone.71.m4a"; sourceTree = "<group>"; };
@@ -1438,6 +1473,7 @@
 		6DC3FE902119628000168950 /* bananas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bananas.png; path = Images/bananas.png; sourceTree = "<group>"; };
 		6DC834B42134B94B00AAA613 /* IconImageMgr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IconImageMgr.swift; path = LessonScheduling/IconImageMgr.swift; sourceTree = "<group>"; };
 		6DC834C62135136400AAA613 /* OneStarNew 64x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "OneStarNew 64x64.png"; path = "Images/OneStarNew 64x64.png"; sourceTree = "<group>"; };
+		6DCBFD052334492600F510DB /* MusicXMLNoteTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicXMLNoteTracker.swift; sourceTree = "<group>"; };
 		6DD52D7C2257EF9300F1C668 /* SeeScoreLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SeeScoreLib.framework; path = "SeeScoreLib/AppStore-Release/SeeScoreLib.framework"; sourceTree = "<group>"; };
 		6DDE849D2135A61B00A81875 /* LongtonePersonalBestSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LongtonePersonalBestSupport.swift; path = LessonScheduling/LongtonePersonalBestSupport.swift; sourceTree = "<group>"; };
 		6DEBD410216E3F4B0037C935 /* PlayTunes at 120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PlayTunes at 120.png"; path = "Images/PlayTunes at 120.png"; sourceTree = "<group>"; };
@@ -1803,6 +1839,7 @@
 		6324D2C61CE71B19001934A5 = {
 			isa = PBXGroup;
 			children = (
+				6D917E6223185006008A597C /* RuntimeEventManager.swift */,
 				6DD52D7C2257EF9300F1C668 /* SeeScoreLib.framework */,
 				6D431C322198EA33009DBBE9 /* SwiftyStoreKit.framework */,
 				C90339381FB13239005A9C7D /* Changelog.md */,
@@ -1920,12 +1957,13 @@
 				6324D36A1CE73ED9001934A5 /* Exercise.swift */,
 				6324D36B1CE73ED9001934A5 /* Measure.swift */,
 				6324D3671CE73ED9001934A5 /* MusicFont.swift */,
+				63BF9E061EBFFF07002BB5C1 /* MusicXMLModifier.swift */,
+				6DCBFD052334492600F510DB /* MusicXMLNoteTracker.swift */,
 				6324D37C1CE73F22001934A5 /* MusicXMLService.swift */,
 				6324D36C1CE73ED9001934A5 /* Note.swift */,
 				6379EE7C1CE95CDF00188A70 /* NoteAnalysis.swift */,
 				6324D36D1CE73ED9001934A5 /* NoteOffset.swift */,
 				6324D3681CE73ED9001934A5 /* NoteService.swift */,
-				63BF9E061EBFFF07002BB5C1 /* MusicXMLModifier.swift */,
 				BD8B79101F95C11B005B31CB /* UserAtributes.swift */,
 			);
 			name = Brain;
@@ -2176,14 +2214,84 @@
 		6D01C3FE21238C0E004B8440 /* LessonScheduling */ = {
 			isa = PBXGroup;
 			children = (
+				6DC834B42134B94B00AAA613 /* IconImageMgr.swift */,
+				6DB8533C2126438E00F999C3 /* LaunchingNextView.swift */,
 				6D01C3FF21238C75004B8440 /* LessonScheduler.swift */,
+				6DDE849D2135A61B00A81875 /* LongtonePersonalBestSupport.swift */,
+				6D6C8CEC2123422B00874F86 /* PerformanceScoreObjectScheduler.swift */,
 				6D01C40221238CAC004B8440 /* TuneFileMapper.swift */,
 				6DB8532A21248EF500F999C3 /* XMLFileMapping.json */,
-				6DB8533C2126438E00F999C3 /* LaunchingNextView.swift */,
-				6DC834B42134B94B00AAA613 /* IconImageMgr.swift */,
-				6DDE849D2135A61B00A81875 /* LongtonePersonalBestSupport.swift */,
 			);
 			name = LessonScheduling;
+			sourceTree = "<group>";
+		};
+		6D10768C23465624005E66D8 /* Debug SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				6D917E502318495F008A597C /* AudioSampleAnalysisView.swift */,
+				6D912C1E231EB63D0033532E /* FreqSampleAnalysisView.swift */,
+				6D917E652318AE94008A597C /* WaveformView.swift */,
+			);
+			name = "Debug SubViews";
+			sourceTree = "<group>";
+		};
+		6D10769C23465686005E66D8 /* ToleranceAdjustment */ = {
+			isa = PBXGroup;
+			children = (
+				6D6093BA21163E1800874A40 /* ThresholdsMgr.swift */,
+				6D912C21232BE1FF0033532E /* PerformanceLevelSettings.json */,
+				6D912C24232C0D5E0033532E /* PerformanceLevelSettings.swift */,
+				6D1076A123465A74005E66D8 /* LevelSettingsInterpolating.swift */,
+			);
+			name = ToleranceAdjustment;
+			sourceTree = "<group>";
+		};
+		6D10769D234656F5005E66D8 /* ScoreFile And Scheduling */ = {
+			isa = PBXGroup;
+			children = (
+				6D6093AE2114F66C00874A40 /* ScoreData.swift */,
+				6DB9A96E21FCC7E000719BBF /* ScoreFileVersionManagement.swift */,
+				6DA54C46210BC8F9004BECB2 /* ScoreMgr.swift */,
+			);
+			name = "ScoreFile And Scheduling";
+			sourceTree = "<group>";
+		};
+		6D10769E234657F2005E66D8 /* Pitch Related */ = {
+			isa = PBXGroup;
+			children = (
+				6D9EF64D21D6F9DB000D165A /* BrassPartials */,
+				E9AD0CB81FD9BCDF006472CE /* NoteFreqRangeTable.swift */,
+				E9AD0CB91FD9BCDF006472CE /* NoteIDs.swift */,
+				E9AD0CCD1FD9BFE5006472CE /* NotePitchAnalysisCriteria.swift */,
+			);
+			name = "Pitch Related";
+			sourceTree = "<group>";
+		};
+		6D10769F2346584D005E66D8 /* RealTime Tracking */ = {
+			isa = PBXGroup;
+			children = (
+				E9AD0CBB1FD9BCDF006472CE /* PerformanceNote.swift */,
+				6D6093AF2114F66D00874A40 /* PerformanceRest.swift */,
+				6D6093B12114F66D00874A40 /* PerformanceScoreObject.swift */,
+				E9AD0CBC1FD9BCDF006472CE /* PerformanceSound.swift */,
+				6DA5763B21473C26002D1D58 /* PerfSampleAmplitudeTracker.swift */,
+				6D277EBC220A9DFF00247359 /* PerfSampleAmplitudeTrackerV2.swift */,
+				E9AD0CDC1FDF4180006472CE /* PerformanceTrackingMgr.swift */,
+			);
+			name = "RealTime Tracking";
+			sourceTree = "<group>";
+		};
+		6D1076A023465865005E66D8 /* PostPerf Analysis */ = {
+			isa = PBXGroup;
+			children = (
+				E9AD0CE21FE09B77006472CE /* NotePerformanceAnalyzer.swift */,
+				E9AD0CE51FE09D32006472CE /* NotePitchPerformanceAnalyzer.swift */,
+				E9AD0CE81FE09E63006472CE /* NoteRhythmPerformanceAnalyzer.swift */,
+				E9AD0CBA1FD9BCDF006472CE /* PerformanceAnalysisMgr.swift */,
+				E9794BA81FFD45EA00CDC7FD /* PerformanceIssueMgr.swift */,
+				6D6093B02114F66D00874A40 /* RestPerformanceAnalyzer.swift */,
+			);
+			name = "PostPerf Analysis";
 			sourceTree = "<group>";
 		};
 		6D268BDA21CD3ACC002DA293 /* InstrumentSelection */ = {
@@ -2192,6 +2300,8 @@
 				6D268BEA21CD3C12002DA293 /* InstrumentSelectionDefs.swift */,
 				6D9CFFDD21DA90560012A03B /* PlaybackInstrumentViewController.swift */,
 				6D7220AF2208B12500560930 /* instrumentAmplitudeRiseValues.swift */,
+				6D1076A4234819AF005E66D8 /* RealTimeSettingsManager.swift */,
+				6D1076A72348EA30005E66D8 /* RealTimeSettingsGetters.swift */,
 			);
 			name = InstrumentSelection;
 			sourceTree = "<group>";
@@ -2199,15 +2309,17 @@
 		6D3AE143217684B5005ECC60 /* InApp Purchases */ = {
 			isa = PBXGroup;
 			children = (
-				6D56673821A30C2600603DCD /* SKProduct+LocalizedPrice.swift */,
-				6D08D73C219DDB0300928463 /* NetworkActivityIndicatorManager.swift */,
-				6D8486DE2194AC7D003D9D6A /* InAppPurchasesDescritopnText.json */,
-				6DA1EA0D219377610069942D /* OneAvailableInAppPurchaseView.swift */,
-				6DA1EA0C219377600069942D /* OneAvailableInAppPurchaseView.xib */,
+				6D08D757219E4E7500928463 /* AutoRenewNotificationViewController.swift */,
 				6D3AE14421768504005ECC60 /* IAPHelper.swift */,
 				6D8486CC21949DE4003D9D6A /* InAppAvailablePurchasesData.swift */,
+				6D8486DE2194AC7D003D9D6A /* InAppPurchasesDescritopnText.json */,
+				6D08D73C219DDB0300928463 /* NetworkActivityIndicatorManager.swift */,
+				6DA1EA0D219377610069942D /* OneAvailableInAppPurchaseView.swift */,
+				6DA1EA0C219377600069942D /* OneAvailableInAppPurchaseView.xib */,
 				6D431C1E21975EC4009DBBE9 /* PlayTunesIAPProducts.swift */,
-				6D08D757219E4E7500928463 /* AutoRenewNotificationViewController.swift */,
+				6D56673821A30C2600603DCD /* SKProduct+LocalizedPrice.swift */,
+				6D82A20E23391C9400026BD8 /* TryOutLevelsManager.json */,
+				6D82A20B23391B7600026BD8 /* TryOutLevelsManager.swift */,
 			);
 			name = "InApp Purchases";
 			sourceTree = "<group>";
@@ -2424,31 +2536,15 @@
 		E9AD0C991FD115F1006472CE /* PerformanceAnalysis */ = {
 			isa = PBXGroup;
 			children = (
-				6D9EF64D21D6F9DB000D165A /* BrassPartials */,
-				6D817BDE2186033F00258980 /* PerfAnalysisTesting */,
-				E9AD0CB81FD9BCDF006472CE /* NoteFreqRangeTable.swift */,
-				E9AD0CB91FD9BCDF006472CE /* NoteIDs.swift */,
-				E9AD0CE21FE09B77006472CE /* NotePerformanceAnalyzer.swift */,
-				E9AD0CCD1FD9BFE5006472CE /* NotePitchAnalysisCriteria.swift */,
-				E9AD0CE51FE09D32006472CE /* NotePitchPerformanceAnalyzer.swift */,
-				E9AD0CE81FE09E63006472CE /* NoteRhythmPerformanceAnalyzer.swift */,
-				E9AD0CBA1FD9BCDF006472CE /* PerformanceAnalysisMgr.swift */,
 				E9AD0CDF1FDF4457006472CE /* PerformanceAndTrackingDefs.swift */,
-				E9794BA81FFD45EA00CDC7FD /* PerformanceIssueMgr.swift */,
-				E9AD0CBB1FD9BCDF006472CE /* PerformanceNote.swift */,
-				6D6093AF2114F66D00874A40 /* PerformanceRest.swift */,
-				6D6093B12114F66D00874A40 /* PerformanceScoreObject.swift */,
-				6D6C8CEC2123422B00874F86 /* PerformanceScoreObjectScheduler.swift */,
-				E9AD0CBC1FD9BCDF006472CE /* PerformanceSound.swift */,
-				E9AD0CDC1FDF4180006472CE /* PerformanceTrackingMgr.swift */,
-				6DA5763B21473C26002D1D58 /* PerfSampleAmplitudeTracker.swift */,
-				6D6093B02114F66D00874A40 /* RestPerformanceAnalyzer.swift */,
-				6D6093AE2114F66C00874A40 /* ScoreData.swift */,
-				6DB9A96E21FCC7E000719BBF /* ScoreFileVersionManagement.swift */,
-				6DA54C46210BC8F9004BECB2 /* ScoreMgr.swift */,
-				6D6093BA21163E1800874A40 /* ThresholdsMgr.swift */,
+				6D10768C23465624005E66D8 /* Debug SubViews */,
+				6D817BDE2186033F00258980 /* PerfAnalysisTesting */,
+				6D10769E234657F2005E66D8 /* Pitch Related */,
+				6D1076A023465865005E66D8 /* PostPerf Analysis */,
+				6D10769F2346584D005E66D8 /* RealTime Tracking */,
+				6D10769D234656F5005E66D8 /* ScoreFile And Scheduling */,
+				6D10769C23465686005E66D8 /* ToleranceAdjustment */,
 				E9815A382005124D0046445B /* VideoHelpResources.swift */,
-				6D277EBC220A9DFF00247359 /* PerfSampleAmplitudeTrackerV2.swift */,
 			);
 			name = PerformanceAnalysis;
 			sourceTree = "<group>";
@@ -2986,6 +3082,7 @@
 				634659121E90C6A000C162CF /* Trumpet.novib.mf.59.m4a in Resources */,
 				6D9C011421DBD0C80012A03B /* Horn.mf.43.m4a in Resources */,
 				6DF3A0EE21E68A8300C3D525 /* tuba.42.mp3 in Resources */,
+				6D912C23232BE2000033532E /* PerformanceLevelSettings.json in Resources */,
 				634658B91E90C68E00C162CF /* Piano.mf.62.m4a in Resources */,
 				6D9C00F221DBD0C80012A03B /* Horn.mf.55.m4a in Resources */,
 				6DF3A0CA21E68A8300C3D525 /* tuba.27.mp3 in Resources */,
@@ -3070,6 +3167,7 @@
 				634659161E90C6A000C162CF /* Trumpet.novib.mf.63.m4a in Resources */,
 				6346591D1E90C6A000C162CF /* Trumpet.novib.mf.70.m4a in Resources */,
 				6D9C013421DBD0C80012A03B /* Horn.mf.59.m4a in Resources */,
+				6D82A21023391C9400026BD8 /* TryOutLevelsManager.json in Resources */,
 				6DF3A0FE21E68A8300C3D525 /* tuba.58.mp3 in Resources */,
 				634658DA1E90C68E00C162CF /* Piano.mf.95.m4a in Resources */,
 				6DF3A10421E68A8300C3D525 /* tuba.61.mp3 in Resources */,
@@ -3241,10 +3339,12 @@
 				6D9C00AE21DBD0490012A03B /* TenorTrombone.45.m4a in Resources */,
 				6DBF1F2B213EEB850052AD57 /* Duration - Too Long.mp4 in Resources */,
 				6D9C011321DBD0C80012A03B /* Horn.mf.43.m4a in Resources */,
+				6D82A20F23391C9400026BD8 /* TryOutLevelsManager.json in Resources */,
 				6336B1F91EA32B0200A78D02 /* Piano.mf.93.m4a in Resources */,
 				6DF3A09921E55D6000C3D525 /* TenorTrombone.39.m4a in Resources */,
 				6DBF1F29213EEB850052AD57 /* Duration - A bit short.mp4 in Resources */,
 				6DBF1F53213EEB850052AD57 /* Attack - Late - Enter earlier.mp4 in Resources */,
+				6D912C22232BE1FF0033532E /* PerformanceLevelSettings.json in Resources */,
 				6D9C00F921DBD0C80012A03B /* Horn.mf.51.m4a in Resources */,
 				6D9C009C21DBD0490012A03B /* TenorTrombone.66.m4a in Resources */,
 				6336B2031EA32B0200A78D02 /* Piano.mf.103.m4a in Resources */,
@@ -3490,6 +3590,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D1076A323465A74005E66D8 /* LevelSettingsInterpolating.swift in Sources */,
+				6DCBFD072334492600F510DB /* MusicXMLNoteTracker.swift in Sources */,
 				6DA1EA11219377610069942D /* OneAvailableInAppPurchaseView.swift in Sources */,
 				6DA7F6A521B7440500800099 /* AppVersion.swift in Sources */,
 				E9794BAA1FFD45EA00CDC7FD /* PerformanceIssueMgr.swift in Sources */,
@@ -3511,6 +3613,9 @@
 				6DCC640122173722001026F1 /* PerfSampleAmplitudeTrackerV2.swift in Sources */,
 				E9AD0CC11FD9BCDF006472CE /* PerformanceNote.swift in Sources */,
 				6D484A5B22FBA60900816DD3 /* LevelSeriesViewController.swift in Sources */,
+				6D82A20D23391B7600026BD8 /* TryOutLevelsManager.swift in Sources */,
+				6D917E6423185006008A597C /* RuntimeEventManager.swift in Sources */,
+				6D917E612318495F008A597C /* AudioSampleAnalysisView.swift in Sources */,
 				E409165C22CC392000E5E034 /* HomeViewController.swift in Sources */,
 				6D817BE12186042A00258980 /* PATest_FreqAndPitchSampleSim.swift in Sources */,
 				E409164222CC387500E5E034 /* SettingsViewController.swift in Sources */,
@@ -3574,6 +3679,7 @@
 				6D5A266F2138C2BD00D2B637 /* MiscSupport.swift in Sources */,
 				6D9CFFDF21DA90560012A03B /* PlaybackInstrumentViewController.swift in Sources */,
 				6D0C5F03217E33D500273E93 /* IsASoundViewController.swift in Sources */,
+				6D912C20231EB63D0033532E /* FreqSampleAnalysisView.swift in Sources */,
 				6D01C40421238CAC004B8440 /* TuneFileMapper.swift in Sources */,
 				633C2AE21CE86915001C5C16 /* Constants.swift in Sources */,
 				E940183F1FA998CF00FC6271 /* FSAnalysisOverlayView.m in Sources */,
@@ -3581,6 +3687,8 @@
 				6DDE849F2135A61B00A81875 /* LongtonePersonalBestSupport.swift in Sources */,
 				E409163822CC385700E5E034 /* AppDelegate.swift in Sources */,
 				6D40FC8221D72303006E1742 /* TrombonePartials.swift in Sources */,
+				6D917E672318AE94008A597C /* WaveformView.swift in Sources */,
+				6D912C26232C0D5E0033532E /* PerformanceLevelSettings.swift in Sources */,
 				63D5E8871EA37BEA007AE8D4 /* NoteOffset.swift in Sources */,
 				63D5E88B1EA37C1B007AE8D4 /* LongToneViewController.swift in Sources */,
 				E4564D2122D05716000B4FA4 /* ExerciseTableViewCell.swift in Sources */,
@@ -3588,6 +3696,8 @@
 				1C87C0A92016F0040038784E /* LevelOverviewViewController.swift in Sources */,
 				E40C311F22E19997002FFCCB /* OnboardingSlideView.swift in Sources */,
 				6D6093B42114F66D00874A40 /* RestPerformanceAnalyzer.swift in Sources */,
+				6D1076A92348EA30005E66D8 /* RealTimeSettingsGetters.swift in Sources */,
+				6D1076A6234819AF005E66D8 /* RealTimeSettingsManager.swift in Sources */,
 				E40C312022E19B4A002FFCCB /* OnboardingViewController.swift in Sources */,
 				BD8B79061F95BF75005B31CB /* PracticeViewController.swift in Sources */,
 			);
@@ -3613,6 +3723,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D1076A223465A74005E66D8 /* LevelSettingsInterpolating.swift in Sources */,
+				6DCBFD062334492600F510DB /* MusicXMLNoteTracker.swift in Sources */,
 				6DA1EA10219377610069942D /* OneAvailableInAppPurchaseView.swift in Sources */,
 				6DA7F6A421B7440500800099 /* AppVersion.swift in Sources */,
 				E9AD0CCB1FD9BF08006472CE /* PerformanceSound.swift in Sources */,
@@ -3634,6 +3746,9 @@
 				E9AD0CC71FD9BEF6006472CE /* NoteFreqRangeTable.swift in Sources */,
 				6DA7F6AC21B74A3200800099 /* AppVersionHelper.swift in Sources */,
 				6D277EBD220A9DFF00247359 /* PerfSampleAmplitudeTrackerV2.swift in Sources */,
+				6D82A20C23391B7600026BD8 /* TryOutLevelsManager.swift in Sources */,
+				6D917E6323185006008A597C /* RuntimeEventManager.swift in Sources */,
+				6D917E602318495F008A597C /* AudioSampleAnalysisView.swift in Sources */,
 				6D6093B92114F6CE00874A40 /* ScoreData.swift in Sources */,
 				6324D3071CE72F8D001934A5 /* FirstStage.xcdatamodeld in Sources */,
 				6D817BE02186042A00258980 /* PATest_FreqAndPitchSampleSim.swift in Sources */,
@@ -3697,6 +3812,7 @@
 				E409163722CC385700E5E034 /* AppDelegate.swift in Sources */,
 				6D5A266E2138C2BD00D2B637 /* MiscSupport.swift in Sources */,
 				6D9CFFDE21DA90560012A03B /* PlaybackInstrumentViewController.swift in Sources */,
+				6D912C1F231EB63D0033532E /* FreqSampleAnalysisView.swift in Sources */,
 				E409167A22CE842B00E5E034 /* DayOverviewViewController.swift in Sources */,
 				6D0C5F02217E33D500273E93 /* IsASoundViewController.swift in Sources */,
 				6D01C40321238CAC004B8440 /* TuneFileMapper.swift in Sources */,
@@ -3704,6 +3820,8 @@
 				633C2AE11CE86915001C5C16 /* Constants.swift in Sources */,
 				E940183E1FA998CF00FC6271 /* FSAnalysisOverlayView.m in Sources */,
 				6DDE849E2135A61B00A81875 /* LongtonePersonalBestSupport.swift in Sources */,
+				6D917E662318AE94008A597C /* WaveformView.swift in Sources */,
+				6D912C25232C0D5E0033532E /* PerformanceLevelSettings.swift in Sources */,
 				6D40FC8021D722FD006E1742 /* TrombonePartials.swift in Sources */,
 				63D5E8881EA37BEA007AE8D4 /* NoteOffset.swift in Sources */,
 				63D5E88C1EA37C1B007AE8D4 /* LongToneViewController.swift in Sources */,
@@ -3711,6 +3829,8 @@
 				BD8B79051F95BF75005B31CB /* PracticeViewController.swift in Sources */,
 				E409164322CC387500E5E034 /* SettingsTableViewController.swift in Sources */,
 				6D6093B82114F6CB00874A40 /* RestPerformanceAnalyzer.swift in Sources */,
+				6D1076A82348EA30005E66D8 /* RealTimeSettingsGetters.swift in Sources */,
+				6D1076A5234819AF005E66D8 /* RealTimeSettingsManager.swift in Sources */,
 				E40C310B22DE5733002FFCCB /* OnboardingViewController.swift in Sources */,
 				E9AD0CC91FD9BEFE006472CE /* PerformanceAnalysisMgr.swift in Sources */,
 			);

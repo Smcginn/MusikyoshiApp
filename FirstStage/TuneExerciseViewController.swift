@@ -122,7 +122,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
     var highPitchThreshold = Double(0.0)
     let minPitch = NoteService.getLowestFrequency()
     let maxPitch = NoteService.getHighestFrequency()
-    var soundSampleRate = 0.01
+    var soundSampleRate = 0.005 // 0.01
     var checkPerfObjsRate = 0.003
     var insideNote = false
     var insideRest = false
@@ -154,6 +154,14 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
                 testFreqAndPitchSampleSim.canBeginTesting = true
                 testFreqAndPitchSampleSim.lastSampleIndex = 0
             }
+            
+            RTEventMgr.sharedInstance.startAcceptingEntries()
+            let songStartEvt = tRuntimeEvent(eventType:     kRuntimeEventType_SongStart,
+                                            eventDetail1:   kRTEVDetail_NotSet,
+                                            objectType:     kRTEVObjectType_NotSet,
+                                            associatedID:   0,
+                                            timestamp:      0.0)
+            RTEventMgr.sharedInstance.addEntry( newEvent: songStartEvt)
             
 //            PerfTrkMgr.instance.signalDetectedDuringPerformance = false
 //            PerfTrkMgr.instance.perfLongEnoughToDetectNoSound = false
@@ -196,6 +204,9 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
     }
     */
     
+    var audioSampAnlysView: AudioSampleAnalysisView? = nil
+    var freqSampAnlysView:  FrequencySampleAnalysisView? = nil
+
     override func viewDidLoad() {
         super.viewDidLoad()
         internalSettingsBtn.isHidden = !gMKDebugOpt_ShowSlidersBtn
@@ -212,18 +223,19 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
         
         if exerciseType == .rhythmPartyExer {
             title = "Rhythm Party!"
-            infoLabel.text = "Clap the notes"
         } else if exerciseType == .rhythmPrepExer {
             title = "Rhythm Prep"
-            infoLabel.text = "Play the notes"
+//            infoLabel.text = "Play the notes"
 //        } else if exerciseType == .lipSlurExer {
 //            title = "Play without tonguing"
 //            infoLabel.text = "Play without tonguing"
         } else {
             title = "Tune"
-            infoLabel.text = "Play the notes"
+//            infoLabel.text = "Play the notes"
         }
         
+        infoLabel.text = getInfoLabelText()
+
         titleLabel.text = navBarTitle
         
         panelView.layer.cornerRadius = panelView.frame.height * 0.1
@@ -262,6 +274,12 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
 
         ssScrollView.overlayViewDelegate = self
         setupDebugSettingsBtn()
+        setupShowSoundAnalysisViewBtn()
+        setupShowFreqAnalysisViewBtn()
+        setupDisplayCurrentSettingsBtn()
+        setupDoFakeScoreBtn()
+        setupResetThisExerScoreBtn()
+
         if kMKDebugOpt_PrintStudentPerformanceDataDebugOutput {
             printAndTestAnalysisTables()
         }
@@ -299,6 +317,41 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
         }
         testFreqAndPitchSampleSim.canBeginTesting = false
         testFreqAndPitchSampleSim.lastSampleIndex = 0
+        
+        if gMKDebugOpt_ShowDebugSettingsBtn {
+            createAudioSampAnlysView()
+            createFreqSampAnlysView()
+        }
+    }
+    
+    func createFreqSampAnlysView() {
+        let parsz = self.view.frame.size
+        let viewWd = parsz.width  - 30.0
+        let viewHt = parsz.height - 80.0
+        let viewX  = CGFloat(15.0)
+        let viewY  = CGFloat(65.0)
+        let frm =  CGRect(x: viewX, y: viewY, width: viewWd, height: viewHt)
+        freqSampAnlysView = FrequencySampleAnalysisView(frame: frm)
+        if freqSampAnlysView != nil {
+            self.view.addSubview(freqSampAnlysView!)
+        }
+        freqSampAnlysView?.isHidden = true
+        freqSampAnlysView?.parentVC = self // weak optional
+    }
+    
+    func createAudioSampAnlysView() {
+        let parsz = self.view.frame.size
+        let viewWd = parsz.width  - 30.0
+        let viewHt = parsz.height - 80.0
+        let viewX  = CGFloat(15.0)
+        let viewY  = CGFloat(65.0)
+        let frm =  CGRect(x: viewX, y: viewY, width: viewWd, height: viewHt)
+        audioSampAnlysView = AudioSampleAnalysisView(frame: frm)
+        if audioSampAnlysView != nil {
+            self.view.addSubview(audioSampAnlysView!)
+        }
+        audioSampAnlysView?.isHidden = true
+        audioSampAnlysView?.parentVC = self // weak optional
     }
     
     deinit {
@@ -430,13 +483,29 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
             ssScrollView.frame.origin.x  += leftOffset
             ssScrollView.clipsToBounds = true
 //            metronomeView.frame.origin.x += leftOffset
+        } else if DeviceType.IS_IPHONE_5orSE {
+            if getCurrentStudentInstrument() == kInst_Tuba {
+                ssScrollView.frame.origin.y    -= 20
+                ssScrollView.frame.size.height += 30
+                coverSeeScoreBtnView.frame.size.height -= 30
+                coverSeeScoreBtnView.frame.origin.y    += 30
+                coverSeeScoreBtnView.backgroundColor = .clear
+                metronomeView.frame.origin.y += 20
+                infoLabel.isHidden = true // otherwsie only part of it shows. . .
+           } else {
+                coverSeeScoreBtnView.frame.size.height -= 20
+                coverSeeScoreBtnView.frame.origin.y    += 20
+            }
+            
+            //            playButton.frame.origin.y += 5
+            //            playForMeButton.frame.origin.y = playButton.frame.origin.y
         } else {
             // metronomeView.frame.origin.y += 23
             coverSeeScoreBtnView.frame.size.height -= 20
             coverSeeScoreBtnView.frame.origin.y    += 20
             
-//            playButton.frame.origin.y += 5
-//            playForMeButton.frame.origin.y = playButton.frame.origin.y
+            //            playButton.frame.origin.y += 5
+            //            playForMeButton.frame.origin.y = playButton.frame.origin.y
         }
          
 //        if !starScoreViewIsSetup {
@@ -444,6 +513,14 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
 //            starScoreViewIsSetup = true
 //        }
         setStarScore(score: bestStarScore)
+        
+        
+        let UIIdiom  = UIDevice.current.userInterfaceIdiom
+        let ss = ScreenSize.SCREEN_MAX_LENGTH
+
+        let isSimSE = UIDevice.current.modelName == "Simulator"  && ss == 568.0 ? true : false
+        
+        
         
         if DeviceType.IS_IPHONE_5orSE {
             infoLabel.font = UIFont(name: "Futura-Medium", size: 12.0)
@@ -520,6 +597,8 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
 
     @IBAction func playButtonTapped(_ sender: UIButton) {
         
+        RTEventMgr.sharedInstance.clearAllEntries()
+
         animatePanel(direction: .out)
         
         // starScoreView.isHidden = true
@@ -563,6 +642,8 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
 
     @IBAction func playForMeButtonTapped(_ sender: UIButton) {
         
+        RTEventMgr.sharedInstance.clearAllEntries()
+
         animatePanel(direction: .out)
 
         // starScoreView.isHidden = true
@@ -586,6 +667,16 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
     
     @IBAction func stopBtnTapped(_ sender: Any) {
         self.stopPlaying()
+        
+        guard gMKDebugOpt_ShowDebugSettingsBtn else { return }
+
+        print("\n\n =======================================\n")
+        let numEntries = RTEventMgr.sharedInstance.count()
+        for index in 0..<numEntries {
+            let txt = RTEventMgr.sharedInstance.getDisplayStringForEntry(idx: index)
+            print(txt)
+        }
+
     }
 
     // Have animation parameter in future?
@@ -598,7 +689,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
                 if i < score {
                     starImageView.alpha = 1
                 } else {
-                    starImageView.alpha = 0.6
+                    starImageView.alpha = 0.2
                 }
                 
             }
@@ -646,8 +737,12 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
 
         // SCORESIZE
         var widthToUse = UserDefaults.standard.double(forKey: Constants.Settings.SmallestNoteWidth)
-        if specifiedNoteWidth != 0 {
-            widthToUse = 25
+        if specifiedNoteWidth == 0 {
+            if DeviceType.IS_IPHONE_5orSE {
+                widthToUse = 25
+            }
+        } else {
+            widthToUse = Double(specifiedNoteWidth)
         }
         
         // if the current level is 4 or less, force the key signature to C (no sharps or flats)
@@ -687,6 +782,9 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
 //            if alwaysFalseToSuppressWarn() { print("\(String(describing: serr))") }
             
             //				titleLabel.text = [filePath lastPathComponent];
+            
+ //           let serr = score?.setTranspose(-12)
+            
             let numParts = score!.numParts
             for _ in 0..<numParts {
                 showingParts.append(NSNumber(value: true as Bool)) // display all parts
@@ -708,6 +806,10 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
             var kMag: Float = kDefaultMagnification
             if specifiedMag != 0.0 {
                 kMag = specifiedMag
+            } else { // MAG_ISSUE
+                if DeviceType.IS_IPHONE_5orSE {
+                    specifiedMag = 1.0
+                }
             }
             
             if specifiedFrameWidth != 0 {
@@ -743,20 +845,33 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
         }
     }
 
+    func getInfoLabelText() -> String {
+        var retStr = ""
+        if playingSynth { // in Listen mode
+            if exerciseType == .rhythmPartyExer {
+                retStr = "Listen - and clap at the beginning of each note"
+            } else if exerciseType == .lipSlurExer {
+                retStr = "Listen - and play without tonguing"
+            } else {
+                retStr = "Listen - and play the notes"
+            }
+        } else {
+            if exerciseType == .rhythmPartyExer {
+                retStr = "Clap at the beginning of each note"
+            } else if exerciseType == .lipSlurExer {
+                retStr = "Play without tonguing"
+            } else {
+                retStr = "Play the notes"
+            }
+        }
+        return retStr
+    }
+    
     func playScore() {
         kMKDebugOpt_PrintMinimalNoteAnalysis = false
-        if playingSynth {
-            if isTune {
-                infoLabel.text = "Listen - and play the notes"
-            } else {
-                infoLabel.text = "Listen - and clap at the beginning of each note and count the beats"
-            }
-        } else if isTune {
-            infoLabel.text = "Play the notes"
-        } else {
-            infoLabel.text = "Clap at the beginning of each note and count the beats"
-        }
 
+        infoLabel.text = getInfoLabelText()
+        
         ssScrollView.contentOffset = CGPoint.zero // CGPoint(x:0.0, y:-5.0) //  HEY !!!
         ssScrollView.isScrollEnabled = false
         playingAnimation = false
@@ -768,6 +883,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
         notInCountdown = false
         firstNoteOrRestEventAcknowledged = false
         PerformanceTrackingMgr.instance.resetSoundAndNoteTracking()
+        MusicXMLNoteTracker.instance.aboutToBeginPerformance()
         ssScrollView.clearNotePerformanceResults();
         ssScrollView.turnHighlightOff()
 
@@ -972,6 +1088,8 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
             countOffLabel.isHidden = true;
         }
         sleep(1)
+        infoLabel.text = getInfoLabelText()
+
  //        AudioKitManager.sharedInstance.stopMicTracker()
 
         // AudioKitManager.sharedInstance.stop() //  9/7 SCF moved to here
@@ -1142,9 +1260,9 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
             // START_TIME_CHANGE
 //            msgStr += "\n\n--- (Non-Compensated) ---\n"
 //
-//            let minNonCompDiffStr = String(format: "%.3f", gLastRunMinAttackDiff-kSoundStartAdjustment)
-//            let maxNonCompDiffStr = String(format: "%.3f", gLastRunMaxAttackDiff-kSoundStartAdjustment)
-//            let avgNonCompDiffStr = String(format: "%.3f", gLastRunAvgAttackDiff-kSoundStartAdjustment)
+//            let minNonCompDiffStr = String(format: "%.3f", gLastRunMinAttackDiff-gSoundStartAdjustment)
+//            let maxNonCompDiffStr = String(format: "%.3f", gLastRunMaxAttackDiff-gSoundStartAdjustment)
+//            let avgNonCompDiffStr = String(format: "%.3f", gLastRunAvgAttackDiff-gSoundStartAdjustment)
 //
 //            msgStr += "\nAVERAGE Difference: \t"
 //            msgStr += avgNonCompDiffStr
@@ -1192,16 +1310,20 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
                         let severity =
                             PerformanceIssueMgr.instance.getSeverity(issueScore: issScore)
                         let perfNoteID:Int32 = worstPerfIssue!.perfScoreObjectID
-        //                worstPerfIssue!.videoID  = vidIDs.kVid_Pitch_VeryLow_SpeedUpAir // YYYYYOOOOO
-                        if worstPerfIssue!.videoID != vidIDs.kVid_NoVideoAvailable {
+                        let helpMode = getVideoHelpMode()
+                        if helpMode == kVideoHelpMode_Video &&
+                           worstPerfIssue!.videoID != vidIDs.kVid_NoVideoAvailable {
                             self.scrollToNoteAndLaunchVideo(perfNoteID: perfNoteID,
                                                             videoID: worstPerfIssue!.videoID,
                                                             severity: severity)
-                        }
-                        else if worstPerfIssue!.alertID != alertIDs.kAlt_NoAlertMsgAvailable {
+                        } else if helpMode != kVideoHelpMode_None &&
+                                  worstPerfIssue!.alertID != alertIDs.kAlt_NoAlertMsgAvailable {
                             self.scrollToNoteAndLaunchAlert(perfNoteID: perfNoteID,
                                                             alertID: worstPerfIssue!.alertID,
                                                             severity: severity)
+                        } else {
+                            self.scrollToNoteAndHighlight(perfNoteID: perfNoteID,
+                                                          severity: severity)
                         }
                     }
                 }
@@ -1322,18 +1444,34 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
                     print("animHorxOffset= \(animHorzOffset)")
                     firstNote = false
 
-                    // attempt to pause the animation at the beginning, so the cursor
-                    // moves more to the right (more or the left remains visible for longer)
-                    let kBeginningPause_ms = Int(2*bar.duration_ms)
-                    exerciseDurationWithPause_ms = exerciseDuration_ms + kBeginningPause_ms
-                    //exerciseDuration_ms += kBeginningPause_ms
-                    exerciseDurationWithPause = round(Double(exerciseDurationWithPause_ms) / 1000)
+                    if DeviceType.IS_IPHONE_5orSE {
+                        // attempt to pause the animation at the beginning, so the cursor
+                        // moves more to the right (more or the left remains visible for longer)
+                        //let kBeginningPause_ms = 0 // Int(2*bar.duration_ms)
+                        let kBeginningPause_ms = Int(bar.duration_ms/2)
+                        //let kBeginningPause = Int(round(Double(kBeginningPause_ms) / 1000))
+                        exerciseDurationWithPause_ms = exerciseDuration_ms + kBeginningPause_ms
+                        //exerciseDuration_ms += kBeginningPause_ms
+                        exerciseDurationWithPause = round(Double(exerciseDurationWithPause_ms) / 1000)
 
-                    animValues.append(thisNoteXPos - animHorzOffset)
-                    //animKeyTimes.append(Double(kBeginningPause_ms))
-                    
-                    animKeyTimes.append( Double(kBeginningPause_ms + Int(note.start)) / Double(exerciseDurationWithPause_ms) )
-                    barsDuration_ms += Int(bar.duration_ms)
+                        animValues.append(thisNoteXPos - animHorzOffset)
+                        //animKeyTimes.append(Double(kBeginningPause_ms))
+
+                        animKeyTimes.append( Double(kBeginningPause_ms + Int(note.start)) / Double(exerciseDurationWithPause_ms) )
+                        barsDuration_ms += kBeginningPause_ms
+                    } else {
+                        let kBeginningPause_ms = Int(2*bar.duration_ms)
+                        //let kBeginningPause_ms = 0//Int(bar.duration_ms/2)
+                        exerciseDurationWithPause_ms = exerciseDuration_ms + kBeginningPause_ms
+                        //exerciseDuration_ms += kBeginningPause_ms
+                        exerciseDurationWithPause = round(Double(exerciseDurationWithPause_ms) / 1000)
+                        
+                        animValues.append(thisNoteXPos - animHorzOffset)
+                        //animKeyTimes.append(Double(kBeginningPause_ms))
+                        
+                        animKeyTimes.append( Double(kBeginningPause_ms + Int(note.start)) / Double(exerciseDurationWithPause_ms) )
+                        barsDuration_ms += Int(bar.duration_ms)
+                   }
                 }
 
                 // Exclude the second note of a cross-bar tied note pair, which has a negative
@@ -1474,7 +1612,29 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
             
      //       let currAmpltd = AudioKitManager.sharedInstance.frequencyTracker.amplitude
         }
-        let signalDetected : Bool = currAmpltd > kAmplitudeThresholdForIsSound
+        
+        let elapsedTime = Date().timeIntervalSince(songStartTm)
+        var currSoundID: Int32 = 0
+        if let currSound : PerformanceSound = perfTrkgMgr.currentSound {
+            currSoundID = currSound.soundID
+        }
+        
+        let ampEvt = createAmplitudeEvent( currSoundID:   currSoundID,
+                                           timestamp:     elapsedTime,
+                                           amplitude:     currAmpltd )
+        RTEventMgr.sharedInstance.addEntry( newEvent: ampEvt)
+        
+        
+        let amplitudeThresholdForIsSound = getIsASoundThreshold()
+
+        var signalDetected : Bool = currAmpltd > amplitudeThresholdForIsSound
+        // var signalDetected : Bool = currAmpltd > kAmplitudeThresholdForIsSound
+        
+//        if gUseEighthIsSoundThresholdNow.get() > 0 {  // Then use this calc instead . . .
+//            print ("))))))))     Using gEighthIsSoundThreshold for signal detected")
+//            signalDetected = currAmpltd > gEighthIsSoundThreshold
+//        }
+        
         if signalDetected {
             soundDetectedDuringSession = true
         }
@@ -1483,7 +1643,10 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
         let timeSinceAnalysisStart : TimeInterval = Date().timeIntervalSince(startTime)
         let timeSinceSongStart =
             timeSinceAnalysisStart - PerformanceTrackingMgr.instance.songStartTimeOffset
-        let timeSinceSSComp = timeSinceSongStart - kSoundStartAdjustment // START_TIME_CHANGE
+        
+        let soundStartOffset = getSoundStartOffset()
+        let timeSinceSSComp = timeSinceSongStart - soundStartOffset // START_TIME_CHANGE
+        // let timeSinceSSComp = timeSinceSongStart - gSoundStartAdjustment // START_TIME_CHANGE
 
         printAmplitude(currAmp: currAmpltd, at: timeSinceSongStart, atComp: timeSinceSSComp)
 
@@ -1511,6 +1674,14 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
                         let soundStartTIme = perfTrkgMgr.absTimeForNewSound
                         print("\n")
                         printSoundRelatedMsg(msg: " !!   Stopping Sound, creating new bc of amplitude drop at: \(timeSinceSongStart)   !!\n")
+ 
+                        let currSoundID = getCurrentSoundID()
+                        let elapsedTime = Date().timeIntervalSince(songStartTm)
+                        let soundEndEvt = createSoundEndEvent( soundID:    currSoundID,
+                                                               timestamp:  elapsedTime,
+                                                               reason:     kRTEVDetail_SoundEnd_AmpRise )
+                        RTEventMgr.sharedInstance.addEntry( newEvent: soundEndEvt) // SE_2
+
                         stopCurrentSound( soundEndTime: soundStartTIme )
                     }
                     soundStopped = true
@@ -1525,7 +1696,11 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
                 
                 // Not a new note bc of Amp change (if soundStopped remains false).
                 // Check for a new note because of a pitch change during legato playing.
-                if !soundStopped && gScanForPitchDuringLegatoPlaying {
+                if !soundStopped &&
+                    gScanForPitchDuringLegatoPlayingAbsolute &&
+                    MusicXMLNoteTracker.instance.isNoteWithinASlur() {
+//                   gScanForPitchDuringLegatoPlaying {
+
                     let oldFreq = currSound.averagePitchRunning
                     if areDifferentNotes( pitch1: oldFreq, pitch2: currFreq ) {
                         // The student could be playing legato, transitioning to diff note.
@@ -1557,6 +1732,13 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
                                 noteOffset: perfTrkgMgr.songStartTimeOffset,
                                 splitTime: &splitTime )
 
+                            let currSoundID = getCurrentSoundID()
+                            let elapsedTime = Date().timeIntervalSince(songStartTm)
+                            let soundEndEvt = createSoundEndEvent( soundID:   currSoundID,
+                                                                   timestamp: elapsedTime,
+                                                                   reason:    kRTEVDetail_SoundEnd_Pitch )
+                            RTEventMgr.sharedInstance.addEntry( newEvent: soundEndEvt) // SE_3
+                            
                             // Create a new sound.
                             let soundMode : soundType = isTune ? .pitched : .percusive
                             perfTrkgMgr.startTrackingPerformanceSound(
@@ -1578,8 +1760,14 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
                                 printSoundRelatedMsg(msg: "  S S         Start Time Comp:         \(startCompStr)")
                                 printSoundRelatedMsg(msg: "  S S         Duration:                \(currSound.duration)")
                             }
-                            perfTrkgMgr.resetAmpTracker()
                             
+                            
+                            
+                            perfTrkgMgr.resetAmpTracker()
+//                            PerfTrkMgr.instance.evaluateSkipWindows() // blar
+
+                            
+                            // Try to link this new sound to a new note
                             if let newSound = perfTrkgMgr.currentSound {
                                 newSound.xOffsetStart = firstNoteOrRestXOffset + currXOffset
                                 newSound.forceAveragePitch(pitchSample: currFreq)
@@ -1603,8 +1791,22 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
     //                                print (" \n  SS1 - Creating new sound \(newSound.soundID) (legato split), abs time: \(newSound.startTime_abs), song time: \(newSound.startTime_song)")
     //                                print("    (initial amplitude = \(currAmpltd)")
     //                            }
+                                
+            //                    blar
                                 perfTrkgMgr.linkCurrSoundToCurrScoreObject(isNewScoreObject: false)
                                 currSound.createdBecauseOfLegatoPitchChange = true
+                                
+ //                               PerfTrkMgr.instance.evaluateSkipWindows() // blar
+
+                                
+                                let currSoundID = getCurrentSoundID()
+                                let elapsedTime = Date().timeIntervalSince(songStartTm)
+                                let soundEndEvt =
+                                    createSoundStartEvent( newSoundID: currSoundID,
+                                                           timestamp:  elapsedTime,
+                                                           reason:     kRTEVDetail_NewSound_Pitch )
+                                RTEventMgr.sharedInstance.addEntry( newEvent: soundEndEvt) // SS_3
+
                             } // if let newSound
                         } // isDefinitelyADifferentNote()
                     }  // if areDifferentNotes
@@ -1616,12 +1818,15 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
             } // else - sound with stable pitch exists
         } // signalDetected &&  currentlyTrackingSound
 
+        // New sound detected - simple, rose above isASound threshold
         else if signalDetected && !perfTrkgMgr.currentlyTrackingSound && notInCountdown {
             // New sound detected
+            var newSoundReason = kRTEVDetail_NewSound_Detected // SS_1
             let soundMode : soundType = isTune ? .pitched : .percusive
 
             // check ampTracker for status.
             if perfTrkgMgr.isANewNoteBCofAmpChange() {
+                newSoundReason = kRTEVDetail_NewSound_AmpRise // SS_2
                 let newStartTIme = perfTrkgMgr.absTimeForNewSound
                 perfTrkgMgr.startTrackingPerformanceSound(
                     startAt: newStartTIme,
@@ -1639,7 +1844,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
             if let currSound = perfTrkgMgr.currentSound {
                 if kMKDebugOpt_PrintStudentPerformanceDataDebugOutput ||
                    kMKDebugOpt_PrintMinimalNoteAndSoundResults            {
-                    // print (" \n  Creating new sound \(soundID), effective time: \(timeSinceSongStart-kSoundStartAdjustment)")
+                    // print (" \n  Creating new sound \(soundID), effective time: \(timeSinceSongStart-gSoundStartAdjustment)")
                     // want to quickly see this during debugging
                     soundID = currSound.soundID
                     if alwaysFalseToSuppressWarn() { print("\(soundID)") } // suppress warning
@@ -1662,14 +1867,30 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
                 currSound.xOffsetStart = firstNoteOrRestXOffset + currXOffset
                 soundID = currSound.soundID
             }
+            let elapsedTime = Date().timeIntervalSince(songStartTm)
+            let soundStartEvt = createSoundStartEvent( newSoundID:    soundID,
+                                                       timestamp:     elapsedTime,
+                                                       reason:        newSoundReason )
+            RTEventMgr.sharedInstance.addEntry( newEvent: soundStartEvt) // SS_1, SS_2
         }
 
         else if !signalDetected && perfTrkgMgr.currentlyTrackingSound {
             // Existing sound ended
 
+//            gUseEighthIsSoundThresholdNow.set(0) // may have been on - make sure it's off
+//            print(")))))))) Turning gUseEighthIsSoundThresholdNow  OFF")
+
             print("\n")
             printSoundRelatedMsg(msg: "  !!   Stopping Sound, Simple:  at: \(timeSinceSongStart)!!\n")
             perfTrkgMgr.resetAmpTracker()
+            
+            let currSoundID = getCurrentSoundID()
+            let elapsedTime = Date().timeIntervalSince(songStartTm)
+            let soundEndEvt = createSoundEndEvent( soundID:   currSoundID,
+                                                   timestamp: elapsedTime,
+                                                   reason:    kRTEVDetail_SoundEnd_Detected )
+            RTEventMgr.sharedInstance.addEntry( newEvent: soundEndEvt) // SE_1
+            
             stopCurrentSound( soundEndTime: timeSinceAnalysisStart )
             
             /*
@@ -1692,6 +1913,14 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
         }
     }
 
+    func getCurrentSoundID() -> Int32 {
+        var soundID: Int32 = 0
+        if let currSound = perfTrkgMgr.currentSound {
+            soundID = currSound.soundID
+        }
+        return soundID
+    }
+    
     func stopCurrentSound(soundEndTime: TimeInterval) {
         if kMKDebugOpt_PrintStudentPerformanceDataDebugOutput ||
             kMKDebugOpt_PrintMinimalNoteAndSoundResults      {
@@ -1930,7 +2159,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
 
     func showScore() {
         if noteResultValues.count == 0 {
-            infoLabel.text = ""
+//            infoLabel.text = ""
             return
         }
 
@@ -2022,7 +2251,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
             }
         }
 
-        infoLabel.text = scoreString
+//        infoLabel.text = scoreString
 
 //        var numberCorrect = 0
 //
@@ -2239,6 +2468,8 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
         return 0
     }
 
+    var isTied = false
+    
     /////////////////////////////////////////////////////////////////////////////
     // Create a new PerformanceNote, add to appropriate container,
     // link to sound if one exists.
@@ -2248,6 +2479,17 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
     //        outside the VC). Will look at this again at a later date.
     func createNewPerfNote( nsNote: SSPDNote ) {
 
+        
+        let rawNote = nsNote.rawnote
+        let artFlags = rawNote.articulation_flags
+        //{
+        if (artFlags & sscore_pd_artic_tied_flag.rawValue) == 1 {
+                isTied = true
+            } else {
+                isTied = false
+            }
+        //}
+        
         // W let xpos = noteXPos(note.note)
         let xpos = noteXPos( nsNote )
         currNoteXPos = CGFloat(xpos)
@@ -2295,6 +2537,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
 //             }
         }
         
+        let midiPitch = NoteID(nsNote.midiPitch)
         newNote.expectedMidiNote = NoteID(nsNote.midiPitch)
 
         if newNote.perfNoteOrRestID == 3 {
@@ -2408,6 +2651,10 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
                     missedSound = false
                     lateSound = false
 
+                    let noteMidiPitch = note.note.midiPitch
+                    let mappedNoteMidiPitch = NoteID(noteMidiPitch)
+                    //newNote.expectedMidiNote = NoteID(nsNote.midiPitch)
+                    
                     // For tracking student performance
                     createNewPerfNote( nsNote: note.note )
 
@@ -2749,12 +2996,228 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
                                              for: .normal )
         self.view.addSubview(showDebugSettingsBtn!)
     }
+    
+    var showSoundAnalysisBtn: UIButton?
 
+    func setupShowSoundAnalysisViewBtn() {
+        guard gMKDebugOpt_ShowDebugSettingsBtn else { return }
+        guard DeviceType.IS_IPAD else { return }
+        
+        let btnWd: CGFloat     = 120.0
+        let btnHt: CGFloat     =  60.0
+        let debugBtnFrame = CGRect( x: 420,  y: 10,
+                                    width: btnWd, height: btnHt )
+        showSoundAnalysisBtn = UIButton(frame: debugBtnFrame)
+        showSoundAnalysisBtn?.roundedButton()
+        showSoundAnalysisBtn?.backgroundColor =  (UIColor.blue).withAlphaComponent(0.05)
+        showSoundAnalysisBtn?.addTarget(self,
+                                        action: #selector(doShowSoundAnalysisViewBtnPressed(sender:)),
+                                        for: .touchUpInside )
+        showSoundAnalysisBtn?.isEnabled = true
+        showSoundAnalysisBtn?.titleLabel?.lineBreakMode = .byWordWrapping
+        let btnStr = "Show Sound\nAnalysis Window"
+        let btnAttrStr =
+            NSMutableAttributedString( string: btnStr,
+                                       attributes: [NSAttributedStringKey.font:UIFont(
+                                        name: "System Font",
+                                        size: 14.0)!])
+        showSoundAnalysisBtn?.titleLabel?.attributedText = btnAttrStr
+        showSoundAnalysisBtn?.setTitle(btnStr, for: .normal)
+        showSoundAnalysisBtn?.setTitleColor( (UIColor.black).withAlphaComponent(0.4),
+                                             for: .normal )
+        self.view.addSubview(showSoundAnalysisBtn!)
+    }
+    
+    @objc func doShowSoundAnalysisViewBtnPressed(sender: UIButton) {
+        guard gMKDebugOpt_ShowDebugSettingsBtn else { return }
+        
+        if audioSampAnlysView != nil {
+            if audioSampAnlysView!.isHidden {
+                audioSampAnlysView!.isHidden = false
+                audioSampAnlysView!.setIsShowing(showing: true)
+                audioSampAnlysView!.displayAmplitude()
+            } else {
+                audioSampAnlysView!.isHidden = true
+                audioSampAnlysView!.setIsShowing(showing: false)
+            }
+        }
+    }
+ 
+    var showFreqAnalysisBtn: UIButton?
+    
+    func setupShowFreqAnalysisViewBtn() {
+        guard gMKDebugOpt_ShowDebugSettingsBtn else { return }
+        guard DeviceType.IS_IPAD else { return }
+        
+        let btnWd: CGFloat     = 120.0
+        let btnHt: CGFloat     =  60.0
+        let debugBtnFrame = CGRect( x: 560,  y: 10,
+                                    width: btnWd, height: btnHt )
+        showFreqAnalysisBtn = UIButton(frame: debugBtnFrame)
+        showFreqAnalysisBtn?.roundedButton()
+        showFreqAnalysisBtn?.backgroundColor =  (UIColor.blue).withAlphaComponent(0.05)
+        showFreqAnalysisBtn?.addTarget(self,
+                                        action: #selector(doShowSoundFrequncyViewBtnPressed(sender:)),
+                                        for: .touchUpInside )
+        showFreqAnalysisBtn?.isEnabled = true
+        showFreqAnalysisBtn?.titleLabel?.lineBreakMode = .byWordWrapping
+        let btnStr = "Show Sound\nFrequency Window"
+        let btnAttrStr =
+            NSMutableAttributedString( string: btnStr,
+                                       attributes: [NSAttributedStringKey.font:UIFont(
+                                        name: "System Font",
+                                        size: 14.0)!])
+        showFreqAnalysisBtn?.titleLabel?.attributedText = btnAttrStr
+        showFreqAnalysisBtn?.setTitle(btnStr, for: .normal)
+        showFreqAnalysisBtn?.setTitleColor( (UIColor.black).withAlphaComponent(0.4),
+                                             for: .normal )
+        self.view.addSubview(showFreqAnalysisBtn!)
+    }
+    
+    @objc func doShowSoundFrequncyViewBtnPressed(sender: UIButton) {
+        guard gMKDebugOpt_ShowDebugSettingsBtn else { return }
+        
+        if audioSampAnlysView != nil {
+            if freqSampAnlysView!.isHidden {
+                freqSampAnlysView!.isHidden = false
+                freqSampAnlysView!.setIsShowing(showing: true)
+ //               freqSampAnlysView!.displayAmplitude()
+            } else {
+                freqSampAnlysView!.isHidden = true
+                freqSampAnlysView!.setIsShowing(showing: false)
+            }
+        }
+    }
+    
+    //////////////////////
+    var showDoFakeScoreBtn: UIButton?
+    
+    func setupDoFakeScoreBtn() {
+        guard gMKDebugOpt_ShowDebugSettingsBtn else { return }
+        
+        let btnWd: CGFloat     = 100.0
+        let btnHt: CGFloat     =  60.0
+        let parFrameHt = self.view.frame.size.height
+        let btnY = parFrameHt - (btnHt + 10)
+        let debugBtnFrame = CGRect( x: 200,  y: btnY,
+                                    width: btnWd, height: btnHt )
+        showDoFakeScoreBtn = UIButton(frame: debugBtnFrame)
+        showDoFakeScoreBtn?.roundedButton()
+        showDoFakeScoreBtn?.backgroundColor =  (UIColor.blue).withAlphaComponent(0.05)
+        showDoFakeScoreBtn?.addTarget(self,
+                                       action: #selector(doDoFakeScoreBtnPressed(sender:)),
+                                       for: .touchUpInside )
+        showDoFakeScoreBtn?.isEnabled = true
+        showDoFakeScoreBtn?.titleLabel?.lineBreakMode = .byWordWrapping
+        let btnStr = "Fake The\nScore And\nReturn"
+        let btnAttrStr =
+            NSMutableAttributedString( string: btnStr,
+                                       attributes: [NSAttributedStringKey.font:UIFont(
+                                        name: "System Font",
+                                        size: 14.0)!])
+        showDoFakeScoreBtn?.titleLabel?.attributedText = btnAttrStr
+        showDoFakeScoreBtn?.setTitle(btnStr, for: .normal)
+        showDoFakeScoreBtn?.setTitleColor( (UIColor.black).withAlphaComponent(0.4),
+                                            for: .normal )
+        self.view.addSubview(showDoFakeScoreBtn!)
+    }
+    
+    @objc func doDoFakeScoreBtnPressed(sender: UIButton) {
+        guard gMKDebugOpt_ShowDebugSettingsBtn else { return }
+        
+        print("")
+        bestStarScore = 3
+        returnToCallingVC()
+
+    }
+
+    
+    //////////////////////
+    var resetThisExerScoreBtn: UIButton?
+    
+    func setupResetThisExerScoreBtn() {
+        guard gMKDebugOpt_ShowDebugSettingsBtn else { return }
+        
+        let btnWd: CGFloat     = 100.0
+        let btnHt: CGFloat     =  60.0
+        let parFrameHt = self.view.frame.size.height
+        let btnY = parFrameHt - (btnHt + 10)
+        let debugBtnFrame = CGRect( x: 310,  y: btnY,
+                                    width: btnWd, height: btnHt )
+        resetThisExerScoreBtn = UIButton(frame: debugBtnFrame)
+        resetThisExerScoreBtn?.roundedButton()
+        resetThisExerScoreBtn?.backgroundColor =  (UIColor.blue).withAlphaComponent(0.05)
+        resetThisExerScoreBtn?.addTarget(self,
+                                      action: #selector(doResetThisExerScoreBtnPressed(sender:)),
+                                      for: .touchUpInside )
+        resetThisExerScoreBtn?.isEnabled = true
+        resetThisExerScoreBtn?.titleLabel?.lineBreakMode = .byWordWrapping
+        let btnStr = "  Reset\nThis Exer's\nStar Score"
+        let btnAttrStr =
+            NSMutableAttributedString( string: btnStr,
+                                       attributes: [NSAttributedStringKey.font:UIFont(
+                                        name: "System Font",
+                                        size: 14.0)!])
+        resetThisExerScoreBtn?.titleLabel?.attributedText = btnAttrStr
+        resetThisExerScoreBtn?.setTitle(btnStr, for: .normal)
+        resetThisExerScoreBtn?.setTitleColor( (UIColor.black).withAlphaComponent(0.4),
+                                           for: .normal )
+        self.view.addSubview(resetThisExerScoreBtn!)
+    }
+    
+    @objc func doResetThisExerScoreBtnPressed(sender: UIButton) {
+        guard gMKDebugOpt_ShowDebugSettingsBtn else { return }
+        
+        print("")
+        bestStarScore = 0
+        callingVCDelegate?.setExerciseResults(exerNumber: exerNumber,
+                                              exerStatus: kLDEState_NotStarted,
+                                              exerScore:  bestStarScore)
+        setStarScore(score: 0)
+    }
+    
+////////////////////////////
+    
+    var currSettingsBtn: UIButton?
+    
+    func setupDisplayCurrentSettingsBtn() {
+        guard gMKDebugOpt_ShowDebugSettingsBtn else { return }
+//        guard DeviceType.IS_IPAD else { return }
+        
+        let btnWd: CGFloat     = 120.0
+        let btnHt: CGFloat     =  60.0
+        let debugBtnFrame = CGRect( x: 280,  y: 10,
+                                    width: btnWd, height: btnHt )
+        currSettingsBtn = UIButton(frame: debugBtnFrame)
+        currSettingsBtn?.roundedButton()
+        currSettingsBtn?.backgroundColor =  (UIColor.blue).withAlphaComponent(0.05)
+        currSettingsBtn?.addTarget(self,
+                                       action: #selector(doDisplayCurrentSettingsBtnPressed(sender:)),
+                                       for: .touchUpInside )
+        currSettingsBtn?.isEnabled = true
+        currSettingsBtn?.titleLabel?.lineBreakMode = .byWordWrapping
+        let btnStr = "Display Current\nInstrument Settings"
+        let btnAttrStr =
+            NSMutableAttributedString( string: btnStr,
+                                       attributes: [NSAttributedStringKey.font:UIFont(
+                                        name: "System Font",
+                                        size: 14.0)!])
+        currSettingsBtn?.titleLabel?.attributedText = btnAttrStr
+        currSettingsBtn?.setTitle(btnStr, for: .normal)
+        currSettingsBtn?.setTitleColor( (UIColor.black).withAlphaComponent(0.4),
+                                            for: .normal )
+        self.view.addSubview(currSettingsBtn!)
+    }
+    
+    @objc func doDisplayCurrentSettingsBtnPressed(sender: UIButton) {
+        presentSettingsSummaryAlert(presentingVC: self)
+    }
+    
     var perfSettingsPopView: PerfAnalysisSettingsPopupView?
 
     @objc func doShowDebugSetupBtnPressed(sender: UIButton) {
         guard gMKDebugOpt_ShowDebugSettingsBtn else { return }
-
+        
         if perfSettingsPopView == nil {
             let sz = PerfAnalysisSettingsPopupView.getSize()
             let frm = CGRect(x: 20, y: 35, width: sz.width, height: sz.height )
@@ -2764,7 +3227,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
         }
         perfSettingsPopView?.showPopup()
     }
-
+    
     // PerfAnalysisSettingsChangedProtocol func
     func perfAnalysisSettingsChange(_ whatChanged : Int)
     {
@@ -2857,10 +3320,15 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
     
     func scrollToNoteAndLaunchVideo(perfNoteID: Int32, videoID: Int, severity: Int) {
 
-        // Only do the highlighting if there was acutally a note detected
+        // Only do the highlighting if there was actually a note detected
         var considerHighlightGood = true
         if soundDetectedDuringSession {
             considerHighlightGood = ssScrollView.highlightScoreObject(perfNoteID, severity: Int32(severity))
+        }
+        
+        // If the student has turned off video and text help, then get out.
+        if !(gVideoHelpMode == kVideoHelpMode_Video || gVideoHelpMode == kVideoHelpMode_Text ) {
+            return
         }
         
         if considerHighlightGood { // do the video . . .
@@ -2891,7 +3359,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
     }
 
     func scrollToNoteAndLaunchAlert(perfNoteID: Int32, alertID: Int, severity: Int) {
-
+        
         if ssScrollView.highlightScoreObject(perfNoteID, severity: Int32(severity)) {
             delay(1.0) {
                 if self.vhView == nil {
@@ -2903,7 +3371,11 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
             }
         }
     }
-
+    
+    func scrollToNoteAndHighlight(perfNoteID: Int32, severity: Int) {
+        ssScrollView.highlightScoreObject(perfNoteID, severity: Int32(severity))
+    }
+    
     func clearCurrNoteLines() {
         ssScrollView.clearCurrNoteLines()
     }

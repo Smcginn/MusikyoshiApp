@@ -56,7 +56,7 @@ class NotePitchPerformanceAnalyzer : NotePerformanceAnalyzer {
         let mostCommonNote = note.mostCommonPlayedNote
         let mostCommonNotePerc = note.mostCommonPlayedNotePercentage
 
-        if kUseWeightedPitchScore {   // "Bucket" algo
+        if gUseWeightedPitchScore {   // "Bucket" algo
             var isPartial = false
             if weightedPCCorrect >= kWeightedPitch_Threshold_Correct {
                 note.pitchRating = .pitchGood
@@ -171,7 +171,15 @@ class BrassPitchPerformanceAnalyzer : NotePitchPerformanceAnalyzer {
             
             // Check for partials
             let actFreq = perfNote.actualFrequency
+            let actNote = NoteService.getNote(actFreq)
             let theNoteID = perfNote.transExpectedNoteID
+            
+            if actNote != nil {
+                let actNoteID = Int(actNote!.orderId)
+                if actNoteID == theNoteID {
+                    return false
+                }
+            }
             
             let isPartRV: isPartialRetVal =
                 PerformanceAnalysisMgr.instance.isThisFreqAPartialOfThisNote(

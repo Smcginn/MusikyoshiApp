@@ -185,6 +185,9 @@ struct PerfAnalysisDefs {
         Int((PerfAnalysisDefs.kLastTableNoteId-PerfAnalysisDefs.kFirstTableNoteId)+1)
 }
 
+// To be able to use shortened "PerfAnlsisMgr.instance.xyz()", etc.
+typealias PerfAnlsisMgr = PerformanceAnalysisMgr
+
 class PerformanceAnalysisMgr {
     
     // Central point for managing post-performance analysis of pitch and rhythm 

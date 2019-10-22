@@ -598,10 +598,11 @@ static float limit(float val, float mini, float maxi)
 			self->exactModeZoomScale = 1.0;
 		self->score = sc;
 		[self activateChangeHandler];
-		self->_magnification = mag;
+        self->_magnification = mag;
 
         __block CGRect frame = self.frame;  // moved this up
-        frame.size.width = 500;
+        frame.size.width = 600;
+        //frame.size.height = 200;
         if (specifiedFrameWidth != 0)
             frame.size.width = specifiedFrameWidth;
         
@@ -652,6 +653,7 @@ static float limit(float val, float mini, float maxi)
                                                     {
                                                         // MKMOD -  deleted assign to widthIsTruncated - 5/28/17
                                                         systemMagnification = sys.magnification;
+                                                        //systemMagnification = mag;
                                                         // MKMOD -  changed this log - 5/28/17
                                                         //                                                                       NSLog(@"sys.magnification = %f, %i", sys.magnification, widthIsTruncated);
                                                         _scoreIsSetup = YES;
@@ -801,8 +803,10 @@ static float limit(float val, float mini, float maxi)
 																// return false if abort required
 																
                                                                 CGSize sysBounds = sys.bounds;
-
                                                   
+                                                                //sysBounds.height = 200.0;
+                                                                //sys.bounds = sysBounds;
+                                                                //sys.magnification = 1.0
 																if (self.abortingBackground == 0)
 																{
 																	dispatch_sync(dispatch_get_main_queue(), ^{
@@ -847,7 +851,8 @@ static float limit(float val, float mini, float maxi)
 						&& self->systemlist.count > 0) // copy system magnification from top system up to this in exact layout mode so that the magnification looks similar on switch of layout mode
 					{
 						SSSystem *topSystem = (SSSystem*)[self->systemlist objectAtIndex:0];
-						self->_magnification = topSystem.magnification;
+                        self->_magnification = topSystem.magnification;
+                        //self->_magnification = mag; // topSystem.magnification;
 					}
 
 					[self enablePinch];

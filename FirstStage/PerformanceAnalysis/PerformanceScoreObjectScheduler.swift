@@ -83,6 +83,27 @@ class PerformanceScoreObjectScheduler {
                 PerfTrkMgr.instance.currentPerfNote = perfScObj as? PerformanceNote
                 PerfTrkMgr.instance.currentlyInAScoreNote = true
                 PerfTrkMgr.instance.linkCurrSoundToCurrScoreObject(isNewScoreObject: true)
+                
+ //               PerfTrkMgr.instance.evaluateSkipWindows()
+                
+                
+                // NS_1
+                let elapsedTime = Date().timeIntervalSince(PerfTrkMgr.instance.songStartTime)
+                let ampEvt = createNoteStartEvent( newNoteID: perfScObj.perfNoteOrRestID,
+                                                   timestamp: elapsedTime)
+                RTEventMgr.sharedInstance.addEntry( newEvent: ampEvt)
+                
+                let id = Int(perfScObj.perfNoteOrRestID)
+                MusicXMLNoteTracker.instance.nowOnNote(noteID: id)
+                
+                let expDur = perfScObj.expectedDurAdjusted
+                PerfTrkMgr.instance.setDurationOfCurrentNote(noteDur: expDur)
+
+//                if gUseEighthIsSoundThresholdInGeneral   &&
+//                   perfScObj.expectedDuration < kEighthIsSoundThresholdDurationCutoff {
+//                     print (")))))))) Turning gUseEighthIsSoundThresholdNow  ON")
+//                     gUseEighthIsSoundThresholdNow.set(1)
+//                }
             } else {
                 PerfTrkMgr.instance.currentPerfRest = perfScObj as? PerformanceRest
                 PerfTrkMgr.instance.currentlyInAScoreRest = true
@@ -122,7 +143,19 @@ class PerformanceScoreObjectScheduler {
                     }
                 }
                 perfScObj.status = .ended
-            } else { // it's a rest
+                let elapsedTime = Date().timeIntervalSince(PerfTrkMgr.instance.songStartTime)
+                let ampEvt = createNoteEndEvent( noteID: perfScObj.perfNoteOrRestID,
+                                                 timestamp: elapsedTime)
+                RTEventMgr.sharedInstance.addEntry( newEvent: ampEvt)
+                
+                PerformanceTrackingMgr.instance.clearDurationOfCurrentNote()
+                MusicXMLNoteTracker.instance.endingCurrentNote()
+
+//                if gUseEighthIsSoundThresholdNow.get() > 0 {
+//                    print (")))))))) Turning gUseEighthIsSoundThresholdNow  OFF")
+//                    gUseEighthIsSoundThresholdNow.set(0)
+//                }
+           } else { // it's a rest
                 print("\n")
                 printNoteRelatedMsg(msg: "Attempting to deactivate PerfRest #\(perfScObj.perfNoteOrRestID), at \(currSongTime)\n")
                 let currPerfRest = PerfTrkMgr.instance.currentPerfRest

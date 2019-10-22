@@ -67,12 +67,16 @@ public class PerformanceScoreObject
     let kDurationAdjustment = 0.05 // milliseconds. Change this to dial in.
 
     func setExpectedTimes( startTime: TimeInterval, duration: TimeInterval ) {
+        let soundStartOffset = getSoundStartOffset()
         _expectedStartTime      = startTime
         _expectedDuration       = duration
         _expectedDurAdjusted    = _expectedDuration - kDurationAdjustment
         _expectedEndTime        = _expectedStartTime + _expectedDuration
-        _expectedStartTime_comp = _expectedStartTime + kSoundStartAdjustment // changed + to -
-        _expectedEndTime_comp   = _expectedEndTime   + kSoundStartAdjustment // changed + to -
+        _expectedStartTime_comp = _expectedStartTime + soundStartOffset // changed + to -
+        _expectedEndTime_comp   = _expectedEndTime   + soundStartOffset // changed + to -
+//        _expectedStartTime_comp = _expectedStartTime + gSoundStartAdjustment // changed + to -
+//        _expectedEndTime_comp   = _expectedEndTime   + gSoundStartAdjustment // changed + to -
+
         _expectedEndTimeMinusTolerance =
             _expectedEndTime - PerformanceAnalysisMgr.instance.currTolerances.rhythmTolerance
         
@@ -84,7 +88,7 @@ public class PerformanceScoreObject
                             : (_expectedStartTime + _expectedDuration) - gAdjustAttackVar_VeryOff
 
         
-        //_deactivateTime_comp   = _deactivateTime // removed: - kSoundStartAdjustment
+        //_deactivateTime_comp   = _deactivateTime // removed: - gSoundStartAdjustment
         
         _deactivateTime_comp
             = self.isNote() ? (_expectedStartTime + _expectedDuration) - (gAdjustAttackVar_ABitOff*0.33)
@@ -125,7 +129,9 @@ public class PerformanceScoreObject
     var actualStartTime_song: TimeInterval {
         set {
             _actualStartTime_song = newValue
-            _actualStartTime_comp = _actualStartTime_song - kSoundStartAdjustment
+            let soundStartOffset = getSoundStartOffset()
+            _actualStartTime_comp = _actualStartTime_song - soundStartOffset
+            //_actualStartTime_comp = _actualStartTime_song - gSoundStartAdjustment
         }
         get {
             return _actualStartTime_song
@@ -143,7 +149,9 @@ public class PerformanceScoreObject
     func setActualEndTimeAbs( endTimeAbs: TimeInterval) {
         _actualEndTime_abs  = endTimeAbs
         _actualEndTime_song = soundTimeToNoteTimeExt(soundStart: endTimeAbs)
-        _actualEndTime_comp = _actualEndTime_song - kSoundStartAdjustment
+        let soundStartOffset = getSoundStartOffset()
+        _actualEndTime_comp = _actualEndTime_song - soundStartOffset
+        // _actualEndTime_comp = _actualEndTime_song - gSoundStartAdjustment
         _actualDuration     = _actualEndTime_song - _actualStartTime_song
     }
     var actualEndTime_song: TimeInterval {

@@ -254,6 +254,7 @@ extension UIColor {
     static let orangeColor = UIColor(hexString: "#ffb200ff")
     static let pinkColor = UIColor(hexString: "#ff3da8ff")
     static let fadedPinkColor = UIColor(hexString: "#ff79c3ff")
+    static let disabledPinkColor = UIColor(hexString: "#653F5630")
     static let purpleColor = UIColor(hexString: "#8f46ffff")
     static let darkColor = UIColor(hexString: "#22274fff")
     static let greyTextColor = UIColor(hexString: "#d9d9d9ff")
@@ -406,3 +407,42 @@ struct InventoryList<T> {
 }
  */
 
+func getCurrBPM() -> TimeInterval {
+    let currBPM = UserDefaults.standard.double(forKey: Constants.Settings.BPM)
+    guard currBPM > 0 else {
+        itsBad()
+        return currBPM
+    }
+    
+    return currBPM
+}
+
+public class AtomicInteger {
+    
+    private let lock = DispatchSemaphore(value: 1)
+    private var value = 0
+    
+    // You need to lock on the value when reading it too since
+    // there are no volatile variables in Swift as of today.
+    public func get() -> Int {
+        
+        lock.wait()
+        defer { lock.signal() }
+        return value
+    }
+    
+    public func set(_ newValue: Int) {
+        
+        lock.wait()
+        defer { lock.signal() }
+        value = newValue
+    }
+    
+    public func incrementAndGet() -> Int {
+        
+        lock.wait()
+        defer { lock.signal() }
+        value += 1
+        return value
+    }
+}

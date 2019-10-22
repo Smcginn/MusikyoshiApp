@@ -84,6 +84,23 @@ struct vidIDs {
 //     track of which vids have been played, this is perhaps the place to
 //     determine which one to play next.
 func mapPerfIssueToVideoID( _ issueCode: performanceRating ) -> Int {
+ 
+    if gVideoHelpMode != kVideoHelpMode_Video {
+        return vidIDs.kVid_NoVideoAvailable
+    }
+
+    // If we're supposed to skip videos, and it's one of the videos
+    // that don't work for non-breath instruments, get out
+    if gUseTextNotVideoScore &&
+       (issueCode == .wrongNoteFlat    ||
+        issueCode == .slightlyFlat     ||
+        issueCode == .slightlySharp    ||
+        issueCode == .wrongNoteSharp   ||
+        issueCode == .isUpperPartial   ||
+        issueCode == .isLowerPartial      ) {
+        return vidIDs.kVid_NoVideoAvailable
+    }
+    
     switch(issueCode) {
         
     // Attack
@@ -146,6 +163,7 @@ func getLowPartialIdx() -> Int {
     return retIdx
 }
 
+// This is one -  Relax Embouchure - except only ever called if brass
 var gUpperPartialIdx = vidIDs.kVid_Pitch_UpperPartial_SlowAir
 func getUpperPartialIdx() -> Int {
     let retIdx = gUpperPartialIdx
@@ -159,45 +177,67 @@ func getUpperPartialIdx() -> Int {
     return retIdx
 }
 
+// This is one -  Relax Embouchure
 var gVeryHighIdx = vidIDs.kVid_Pitch_VeryHigh_DoubleCheckFingering
 func getVeryHighIdx() -> Int {
     let retIdx = gVeryHighIdx
-    switch gVeryHighIdx {
-    case vidIDs.kVid_Pitch_VeryHigh_DoubleCheckFingering:
-        gVeryHighIdx = vidIDs.kVid_Pitch_VeryHigh_RelaxEembouchure
-    case vidIDs.kVid_Pitch_VeryHigh_RelaxEembouchure: fallthrough
-    default:
+
+    if currInstrumentIsBrass() {
+        switch gVeryHighIdx {
+            case vidIDs.kVid_Pitch_VeryHigh_DoubleCheckFingering:
+                gVeryHighIdx = vidIDs.kVid_Pitch_VeryHigh_RelaxEembouchure
+            case vidIDs.kVid_Pitch_VeryHigh_RelaxEembouchure: fallthrough
+        default:
+            gVeryHighIdx = vidIDs.kVid_Pitch_VeryHigh_DoubleCheckFingering
+        }
+    } else {
         gVeryHighIdx = vidIDs.kVid_Pitch_VeryHigh_DoubleCheckFingering
     }
     return retIdx
 }
 
+// This is one -  curve lips, ResetWithBEmb_Mirror
 var gVeryLowIdx = vidIDs.kVid_Pitch_VeryLow_SpeedUpAir
 func getVeryLowIdx() -> Int {
     let retIdx = gVeryLowIdx
-    switch gVeryLowIdx {
-    case vidIDs.kVid_Pitch_VeryLow_SpeedUpAir:
-        gVeryLowIdx = vidIDs.kVid_Pitch_VeryLow_CurveLipsIn
-    case vidIDs.kVid_Pitch_VeryLow_CurveLipsIn:
-        gVeryLowIdx = vidIDs.kVid_Pitch_VeryLow_ResetWithBEmb_Mirror
-    case vidIDs.kVid_Pitch_VeryLow_ResetWithBEmb_Mirror: fallthrough
-    default:
+    if currInstrumentIsBrass() {
+        switch gVeryLowIdx {
+        case vidIDs.kVid_Pitch_VeryLow_SpeedUpAir:
+            gVeryLowIdx = vidIDs.kVid_Pitch_VeryLow_CurveLipsIn
+        case vidIDs.kVid_Pitch_VeryLow_CurveLipsIn:
+            gVeryLowIdx = vidIDs.kVid_Pitch_VeryLow_ResetWithBEmb_Mirror
+        case vidIDs.kVid_Pitch_VeryLow_ResetWithBEmb_Mirror: fallthrough
+        default:
+            gVeryLowIdx = vidIDs.kVid_Pitch_VeryLow_SpeedUpAir
+        }
+    } else {
         gVeryLowIdx = vidIDs.kVid_Pitch_VeryLow_SpeedUpAir
     }
     return retIdx
 }
 
+// This is one -  Relax Embouchure
 var gABitHighIdx = vidIDs.kVid_Pitch_ABitHigh_SlowAirspeed
 func getABitHighIdx() -> Int {
     let retIdx = gABitHighIdx
-    switch gABitHighIdx {
-    case vidIDs.kVid_Pitch_ABitHigh_SlowAirspeed:
-        gABitHighIdx = vidIDs.kVid_Pitch_ABitHigh_CheckFingering
-    case vidIDs.kVid_Pitch_ABitHigh_CheckFingering:
-        gABitHighIdx = vidIDs.kVid_Pitch_ABitHigh_RelaxEmbouchure
-    case vidIDs.kVid_Pitch_ABitHigh_RelaxEmbouchure: fallthrough
-    default:
-        gABitHighIdx = vidIDs.kVid_Pitch_ABitHigh_SlowAirspeed
+    if currInstrumentIsBrass() {
+        switch gABitHighIdx {
+            case vidIDs.kVid_Pitch_ABitHigh_SlowAirspeed:
+                gABitHighIdx = vidIDs.kVid_Pitch_ABitHigh_CheckFingering
+            case vidIDs.kVid_Pitch_ABitHigh_CheckFingering:
+                gABitHighIdx = vidIDs.kVid_Pitch_ABitHigh_RelaxEmbouchure
+            case vidIDs.kVid_Pitch_ABitHigh_RelaxEmbouchure: fallthrough
+            default:
+                gABitHighIdx = vidIDs.kVid_Pitch_ABitHigh_SlowAirspeed
+        }
+    } else {
+        switch gABitHighIdx {
+            case vidIDs.kVid_Pitch_ABitHigh_SlowAirspeed:
+                gABitHighIdx = vidIDs.kVid_Pitch_ABitHigh_CheckFingering
+            case vidIDs.kVid_Pitch_ABitHigh_CheckFingering:  fallthrough
+            default:
+                gABitHighIdx = vidIDs.kVid_Pitch_ABitHigh_SlowAirspeed
+        }
     }
     return retIdx
 }
@@ -414,24 +454,27 @@ struct alertIDs {
     static let kAlt_MissedNote               : Int   =  1
     
     static let kAlt_LowerPartial             : Int   =  2
-    static let kAlt_VeryLow                  : Int   =  3
-    static let kAlt_VeryHigh                 : Int   =  4
-    static let kAlt_WaveringBad              : Int   =  5
-    static let kAlt_WaveringOK               : Int   =  6
+    static let kAlt_UpperPartial             : Int   =  3
+    static let kAlt_VeryLow                  : Int   =  4
+    static let kAlt_SlightlyLow              : Int   =  5
+    static let kAlt_SlightlyHigh             : Int   =  6
+    static let kAlt_VeryHigh                 : Int   =  7
+    static let kAlt_WaveringBad              : Int   =  8
+    static let kAlt_WaveringOK               : Int   =  9
 
-    static let kAlt_ABitEarly                : Int   =  7
-    static let kAlt_VeryEarly                : Int   =  8
-    static let kAlt_ABitLate                 : Int   =  9
-    static let kAlt_VeryLate                 : Int   = 10
+    static let kAlt_ABitEarly                : Int   = 10
+    static let kAlt_VeryEarly                : Int   = 11
+    static let kAlt_ABitLate                 : Int   = 12
+    static let kAlt_VeryLate                 : Int   = 13
     
-    static let kAlt_TooShort                 : Int   = 11
-    static let kAlt_VeryShort                : Int   = 12
-    static let kAlt_ABitShort                : Int   = 13
-    static let kAlt_ABitLong                 : Int   = 14
-    static let kAlt_VeryLong                 : Int   = 15
-    static let kAlt_TooLong                  : Int   = 16
+    static let kAlt_TooShort                 : Int   = 14
+    static let kAlt_VeryShort                : Int   = 15
+    static let kAlt_ABitShort                : Int   = 16
+    static let kAlt_ABitLong                 : Int   = 17
+    static let kAlt_VeryLong                 : Int   = 18
+    static let kAlt_TooLong                  : Int   = 19
     
-    static let kAlt_NotesDuringRest          : Int   = 17
+    static let kAlt_NotesDuringRest          : Int   = 20
 }
 
 func mapPerfIssueToAlertID( _ issueCode: performanceRating ) -> Int {
@@ -439,7 +482,11 @@ func mapPerfIssueToAlertID( _ issueCode: performanceRating ) -> Int {
     case .missedNote:       return alertIDs.kAlt_MissedNote
         
     case .isLowerPartial:   return alertIDs.kAlt_LowerPartial
+    case .isUpperPartial:   return alertIDs.kAlt_UpperPartial
+
     case .wrongNoteFlat:    return alertIDs.kAlt_VeryLow
+    case .slightlyFlat:     return alertIDs.kAlt_SlightlyLow
+    case .slightlySharp:    return alertIDs.kAlt_SlightlyHigh
     case .wrongNoteSharp:   return alertIDs.kAlt_VeryHigh
     case .fluctuatingAcceptable:   return alertIDs.kAlt_WaveringBad
     case .fluctuatingReasonable:   return alertIDs.kAlt_WaveringOK
@@ -471,15 +518,22 @@ func getMsgTextForAlertID( _ alertID: Int ) -> String {
         
     case alertIDs.kAlt_LowerPartial:
         retStr = "You're Playing a Lower Partial"
+    case alertIDs.kAlt_UpperPartial:
+        retStr = "You're Playing an Upper Partial"
     case alertIDs.kAlt_VeryLow:
         retStr = "The Note is Very Flat"
+    case alertIDs.kAlt_SlightlyLow:
+        retStr = "The Note is Slightly Flat"
+    case alertIDs.kAlt_SlightlyHigh:
+        retStr = "The Note is Slightly Sharp"
     case alertIDs.kAlt_VeryHigh:
         retStr = "The Note is Very Sharp"
     case alertIDs.kAlt_WaveringBad:
-        retStr = "The pitch fluctuates considerably, but you are hitting the note"
+        //retStr = "The pitch fluctuates considerably, but you are hitting the note"
+        retStr = "The note moves up and down a lot - keep a steady embouchure and support the sound with lots of air"
     case alertIDs.kAlt_WaveringOK:
-        retStr = "The pitch fluctuates, but you are mostly hitting the note"
-
+        //retStr = "The pitch fluctuates, but you are mostly hitting the note"
+        retStr = "The note moves up and down a bit - keep a steady airstream. You are mostly hitting the note!"
     case alertIDs.kAlt_ABitEarly:
         retStr = "You played that note a bit early"
     case alertIDs.kAlt_VeryEarly:

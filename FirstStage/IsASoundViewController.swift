@@ -24,7 +24,7 @@ class IsASoundViewController: UIViewController {
     var userChangedPeakCount = false
     
     let kMinIsSoundThreshold: Double = 0.01
-    let kMaxIsSoundThreshold: Double = 0.3 // 0.15 // 0.4
+    let kMaxIsSoundThreshold: Double = 0.7 // 0.15 // 0.4
     let kMaxVolumeForDisplay: Double = 1.25
 
     var storedIsASoundThreshold: Double = 0.123
@@ -177,7 +177,7 @@ class IsASoundViewController: UIViewController {
     }
     
     func setupTimingOffsetControls() {
-        currLatencyOffset = kSoundStartAdjustment
+        currLatencyOffset = gSoundStartAdjustment
         storedLatencyOffset =
             UserDefaults.standard.double(forKey: Constants.Settings.UserLatencyOffsetThresholdOverride)
         if storedLatencyOffset > 0.001 { // defaulted to 0; > .01 means it's been set
@@ -196,7 +196,7 @@ class IsASoundViewController: UIViewController {
             let avgAttackDiffStr = String(format: "%.3f", gRunningAvgAttackDiff)
             avgAttackDiffValueLabel.text = avgAttackDiffStr
             
-            var suggestedVal = kSoundStartAdjustment + gRunningAvgAttackDiff
+            var suggestedVal = gSoundStartAdjustment + gRunningAvgAttackDiff
             if suggestedVal > Double(kSoundStartAdjustment_MaxValue) {
                 suggestedVal = Double(kSoundStartAdjustment_MaxValue)
             }
@@ -491,7 +491,7 @@ class IsASoundViewController: UIViewController {
 
         if userChangedStartTimeOffset {
             clearGlobalRunningAttackDiffs()
-            kSoundStartAdjustment = currLatencyOffset
+            gSoundStartAdjustment = currLatencyOffset
             UserDefaults.standard.set(currLatencyOffset,
                                       forKey: Constants.Settings.UserLatencyOffsetThresholdOverride)
         }

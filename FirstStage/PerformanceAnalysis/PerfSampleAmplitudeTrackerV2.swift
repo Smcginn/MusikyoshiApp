@@ -15,7 +15,7 @@ class sortOfCirularBuffer {
     
     private var bufferSize: Int
     private var currVirtualIndex:  Int = -1
-    private var windowSize: Int = 2
+    private var windowSize: Int = 2   // Samples in Analysis Window
     
     init(bufferSize: Int, windowSize: Int) {
         _ = ASSUME( bufferSize >= windowSize )
@@ -70,6 +70,7 @@ class sortOfCirularBuffer {
     }
     
     func getMaxRangeForWindow() -> Double {
+    //func getMaxRangeForWindow(theWindow: Double) -> Double {
         var countingIdx = getIndexForStartOfWindow()
         guard countingIdx >= 0  else {
             print("In getMaxRangeForWindow, countingIdx is not > 0; returning 0")
@@ -101,10 +102,15 @@ typealias tSoundAmpVal = Double
 
 class PerfSampleAmplitudeTrackerV2 {
     
-    let bufferSz = 35
-    var audioBuffer = sortOfCirularBuffer(bufferSize: 30,
+    func resetForLevelAndBPM() {
+        let analysisWinSize = getAmpRiseAnalysisWindow()
+        audioBuffer.setWindowSize(newSize: analysisWinSize)
+    }
+    
+    static let circBufferSz = 60
+    var audioBuffer = sortOfCirularBuffer(bufferSize: circBufferSz,
                                           windowSize: Int(gSamplesInAnalysisWindow))
-    var timeBuffer  = sortOfCirularBuffer(bufferSize: 30,
+    var timeBuffer  = sortOfCirularBuffer(bufferSize: circBufferSz,
                                           windowSize: Int(gSamplesInAnalysisWindow))
     
     // gSkipBeginningSamples  explanation:
@@ -114,6 +120,8 @@ class PerfSampleAmplitudeTrackerV2 {
     //   If we don't ignore the first rise, *it* will trigger the detection. So we
     //   have to let so many samples go before beginning to look for another rise.
 
+    var ampSkipWindowToUse:Int = 20
+    
     var numRunningSamples: UInt = 0
     
     // 10 * 10 ms = .1 second
@@ -140,10 +148,31 @@ class PerfSampleAmplitudeTrackerV2 {
         return doCreateNewSound
     }
     
+    let kNoNoteDurationSet: Double = 4.00 // so no clipping
+    var currNoteDuration: Double   = 4.00 // kNoNoteDurationSet
+    func setDurationOfCurrentNote(noteDur: Double) {
+        currNoteDuration = noteDur
+        let skipWinSz = getAmpRiseSkipWindow(noteDur: currNoteDuration)
+        ampSkipWindowToUse = skipWinSz
+        print("\n  ARAR - In AmpTracker, setDurationOfCurrentNote, Skip Samples  == \(ampSkipWindowToUse)\n")
+    }
+    func clearDurationOfCurrentNote() {
+        currNoteDuration = kNoNoteDurationSet
+        ampSkipWindowToUse = 22
+    }
+
     func canCalcAmpChange() -> Bool {
+        if !gDoAmplitudeRiseChecking {
+            return false
+        }
+        
+        // getAdjustedAmpRiseSkipWindow
+        // ampSkipWindowToUse2 = getAmpRiseSkipWindow(noteDur: currNoteDuration)
+        
         let numElems = audioBuffer.getVirtualCount()
 
-        if numElems >= Int(gSkipBeginningSamples)  &&
+        //if numElems >= Int(gSkipBeginningSamples)  &&
+        if numElems >= Int(ampSkipWindowToUse)  &&
             numElems >= Int(gSamplesInAnalysisWindow) {
             return true
         } else {
@@ -157,7 +186,9 @@ class PerfSampleAmplitudeTrackerV2 {
         //        print ("    Queue before append:  \(queue)")
         
         lastAmpSample = newAmp
-        if newAmp < kAmplitudeThresholdForIsSound {
+        let amplitudeThresholdForIsSound = getIsASoundThreshold()
+        // if newAmp < kAmplitudeThresholdForIsSound {
+        if newAmp < amplitudeThresholdForIsSound {
             noSignal         = true // should stop tracking sound . . .
             finished         = true
             doCreateNewSound = false
@@ -179,7 +210,10 @@ class PerfSampleAmplitudeTrackerV2 {
         
         // RETHINK - perhaps comment this out - Buffer is taking care of this.
         numRunningSamples += 1
-        if numRunningSamples < gSkipBeginningSamples { return } // then skip this one
+        //if numRunningSamples < gSkipBeginningSamples { return } // then skip this one
+        //let ampSkipWindowToUse2 = getAmpRiseSkipWindow(noteDur: currNoteDuration)
+         if numRunningSamples < ampSkipWindowToUse {
+            return } // then skip this one
         
         audioBuffer.addSample(sample: newAmp)
         timeBuffer.addSample(sample: newTime)
@@ -200,6 +234,7 @@ class PerfSampleAmplitudeTrackerV2 {
     }
     
     func getAmpRiseOverWindow() -> tSoundAmpVal {
+        let ampRiseToUse = getAmpRiseChangeValue()
         return audioBuffer.getMaxRangeForWindow()
     }
     
@@ -210,7 +245,16 @@ class PerfSampleAmplitudeTrackerV2 {
         } else {
             var ampDiff = audioBuffer.getMaxRangeForWindow()
             ampDiff = abs(ampDiff)
-            if ampDiff > gAmpRiseForNewSound {
+            
+//            var ampRiseToUse = gAmpRiseForNewSound
+//            if gUseAmpRiseChangeSlowFastValues {
+//                ampRiseToUse = gRTSM_AmpRise
+//            }
+            
+            var ampRiseToUse = getAmpRiseChangeValue()
+            
+            // if ampDiff > gAmpRiseForNewSound {
+            if ampDiff > ampRiseToUse {
                 if !currSoundIsDead {
                     let currSongzTime = currentSongTime()
                     printSoundRelatedMsg(msg: "  CURRENT SOUND DONE  BC of AMP Rise! At: \(currSongzTime)   Amp Diff: \(ampDiff)")
@@ -225,8 +269,7 @@ class PerfSampleAmplitudeTrackerV2 {
             }
         }
     }
-    
-    
+
     
  /*
     

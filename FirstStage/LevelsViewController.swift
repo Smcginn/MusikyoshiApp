@@ -3,6 +3,12 @@
 //  PlayTunes-debug
 //
 //  Created by turtle on 7/1/19.
+//  Modified by Scott Freshour
+//
+//      (Based on the original LessonSeriesViewController.swift
+//       Created by Caitlyn Chen on 1/22/18.
+//       Modified by Scott Freshour)
+//
 //  Copyright © 2019 Musikyoshi. All rights reserved.
 //
 
@@ -10,7 +16,7 @@ import UIKit
 import SwiftyJSON
 import AudioKit
 
-//var gDoOverrideSubsPresent = false      // CHECK_THIS_FOR_SUBMIT
+//var gDoOverrideSubsPresent = false     // CHECK_THIS_FOR_SUBMIT
 //var gDoLimitLevels = true              // CHECK_THIS_FOR_SUBMIT
 //let kNumberOfLevelsToShow: Int = 11
 //
@@ -39,7 +45,10 @@ class LevelsViewController: UIViewController {
     var subscriptionGood   = false
 
     var showingTryoutLevel = true
-    
+    var isSlursLevel = false
+    var selectedLevelIsEnabled = true
+    var selectedLevelTitleStr = ""
+
     var activeLevel = 0 {
         didSet {
             if oldValue != activeLevel {
@@ -70,8 +79,14 @@ class LevelsViewController: UIViewController {
         }
         
         // if !showingTryoutLevel {
+        //  // Don't show tryout level
             retNumToShow -= 1
         // }
+        
+        if !currInstrumentIsBrass() {
+            // Don't show Lip Slurs level
+            retNumToShow -= 1
+        }
         
         if retNumToShow < 0 {
             retNumToShow = 0
@@ -172,10 +187,14 @@ class LevelsViewController: UIViewController {
         
         assessPurchaseStatus()
         
+        let currLDE = LessonScheduler.instance.getCurrentLDE()
+        activeLevel = currLDE.level //  LessonScheduler.instance.getCurrLevel()
+        setupNewlySelectedLevel()
         levelsTableView.reloadData()
         daysTableView.reloadData()
         
         testBPM()
+        scrollToActiveLevel()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -369,10 +388,19 @@ class LevelsViewController: UIViewController {
                     destination.thisViewsLevel = activeLevel
                     destination.exerLevelIndex = indexPath.row
                     destination.lessonsJson = levels[activeLevel]["exercises"]
+
+                    if let levelTitle = levels[activeLevel]["title"].string {
+                        destination.levelTitle = levelTitle
+                    }
+                    
                     let daysJson:JSON? = levels[activeLevel]["days"]
                     
                     let day = indexPath.row
                     _ = LessonScheduler.instance.setCurrentDay(day)
+                    
+                    let lde: tLDE_code = (level: activeLevel, day: day, exer: 0)
+                    _ = LessonScheduler.instance.setCurrentLDE(toLDE: lde)
+
                     destination.thisViewsLevelDay = day
                     let oneDayExerListStr = daysJson![indexPath.row]["exercises"].string
                     let oneDayExerTitle   = daysJson![indexPath.row]["title"].string
@@ -401,6 +429,47 @@ class LevelsViewController: UIViewController {
         }
     }
     
+    let kSlursTempCutoff = 120
+    func canDoSlursAtThisTempo() -> Bool {
+        if !isSlursLevel {
+            return true
+        }
+        
+        let currBpm = Int(getCurrBPM())
+        return currBpm > kSlursTempCutoff ? false : true
+    }
+    
+    func presentCantDoSlursAtThisTempAlert() {
+        let currBPM = Int(getCurrBPM())
+        guard currBPM > 0 else { return }
+        
+        let titleStr = "Slur Exercises Unavailable at this Tempo"
+        var msgStr = "\nFor this release, Slur exercises are unavailable at this tempo (\(currBPM) BPM).\n\n"
+        msgStr += "To play Slur execrcises, you will need to set the BPM to \(kSlursTempCutoff) or less."
+        msgStr += "\n\n(Sorry - we will fix this soon!))"
+
+        let ac = MyUIAlertController(title: titleStr, message: msgStr, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default,
+                                   handler: nil))
+        self.present(ac, animated: true, completion: nil)
+    }
+}
+
+let kIdxForLipSlurs    = "990"
+let kIdxForLongTones6  = "992"
+let kIdxForLongTones10 = "993"
+let kIdxForLongTones20 = "994"
+let kIdxForLongTones30 = "995"
+func isSpecialLevel( levelIdx: String ) -> Bool {
+    if levelIdx == kIdxForLipSlurs     ||
+        levelIdx == kIdxForLongTones6   ||
+        levelIdx == kIdxForLongTones10  ||
+        levelIdx == kIdxForLongTones20  ||
+        levelIdx == kIdxForLongTones30     {
+        return true
+    } else {
+        return false
+    }
 }
 
 extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -433,13 +502,37 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
                 itsBad()
             }
             
-            // The text for the level is not simply index + 1. It's in the json
-            var levelTxt = String(indexPath.row + 1) // default
-            if let titleStr = levelsJson?[indexPath.row]["title"].string {
-                levelTxt = titleStr
-            }
-            cell.levelNumberLabel.text = levelTxt
+            var levelIsEnabled = true
             
+            // The text for the level is not simply index + 1. It's in the json
+            var levelTitle = String(indexPath.row + 1) // default
+            let titleStr = levelsJson?[indexPath.row]["title"].string
+            if titleStr != nil {
+                levelTitle = titleStr!
+                levelIsEnabled =
+                    TryOutLevelsManager.sharedInstance.isLevelEnabled(levelTitle: levelTitle)
+            } else {
+                itsBad()
+            }
+            cell.levelNumberLabel.text = levelTitle
+            cell.setLevelLabelToDefaultSettings()
+            cell.isEnabled = levelIsEnabled
+
+            // Check for the special levels. If it is one, then use the json title
+            // for the Level Text (not the number text, like above)
+            if let levelIdx = levelsJson?[indexPath.row]["levelIdx"].string {
+                if isSpecialLevel( levelIdx: levelIdx ) {
+                    cell.setLevelLabelForSpecificLabel()
+                    cell.levelNumberLabel.text = ""
+                    if titleStr != nil { // NOTE: setting levelLabel, not NumberLabel
+                        cell.levelLabel.text = titleStr! // e.g., "Lip Slurs"
+                    }
+//                    if levelIdx == kIdxForLipSlurs {
+//                        isSlursLevel = true
+//                    }
+                }
+            }
+
             cell.isActive = activeLevel == indexPath.row
             
             let levelState = LessonScheduler.instance.getLevelState(level: indexPath.row)
@@ -456,13 +549,52 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
             
             let cell: DayTableViewCell = tableView.dequeueReusableCell(withIdentifier: "daysCell", for: indexPath) as! DayTableViewCell
             
-            cell.dayLabel.text = "Day " + String(indexPath.row + 1)
-            
-            if isSelectedCell(row: indexPath.row) {
-                cell.dayLabel.textColor = .black
-            } else {
-                cell.dayLabel.textColor = .darkGray
+            var cellTitleText = "Day " + String(indexPath.row + 1)
+//            cell.dayLabel.text = "Day " + String(indexPath.row + 1)
+
+ //           let titleStr = levelsJson?[indexPath.row]["title"].string
+
+            if let levelIdx = levelsJson![activeLevel]["levelIdx"].string {
+                if isSpecialLevel( levelIdx: levelIdx ) {
+                    let daysJson:JSON? = levelsJson![activeLevel]["days"]
+                    if daysJson != nil {
+                        let oneDayExerTitle = daysJson![indexPath.row]["title"].string
+                        if oneDayExerTitle != nil {
+                            cellTitleText = oneDayExerTitle!
+                        }
+                    }
+                }
             }
+            
+            cell.dayLabel.text = cellTitleText
+            
+            var dayIsEnabled = false
+            if selectedLevelIsEnabled {
+                //let selectedCell: DayTableViewCell? = tableView.cellForRow(at: indexPath) as? DayTableViewCell
+                //let selCellTitle = selectedCell?.dayLabel.text
+                dayIsEnabled =
+                    TryOutLevelsManager.sharedInstance.isDayEnabled(levelTitle: selectedLevelTitleStr,
+                                                                    dayTitle: cellTitleText )
+            }
+
+            if dayIsEnabled {
+                cell.dayIsEnabled = true
+            } else {
+                cell.dayIsEnabled = false
+
+            }
+            
+            //selectedCell?.isSelectedDay = true
+
+            let currLDE = LessonScheduler.instance.getCurrentLDE()
+            let currDay = currLDE.day
+            if currDay == indexPath.row  {
+                cell.isSelectedDay = true
+            } else {
+                cell.isSelectedDay = false
+            }
+            
+
             
             if gDoLimitLevels && activeLevel > kNumberOfLevelsToShow {
                 itsBad()
@@ -546,25 +678,131 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
         if tableView == self.levelsTableView {
             
             // Scroll to tapped level
-            
             let yPos = levelsTableView.rectForRow(at: IndexPath(row: indexPath.row, section: 0)).origin.y
             tableView.setContentOffset(CGPoint(x: tableView.contentOffset.x, y: yPos), animated: true)
-            activeLevel = indexPath.row
+            
+//            var levelIsEnabled = true
+//
+//            // The text for the level is not simply index + 1. It's in the json
+//            var levelTitle = String(indexPath.row + 1) // default
+//            let titleStr = levelsJson?[indexPath.row]["title"].string
+//            if titleStr != nil {
+//                levelTitle = titleStr!
+//                levelIsEnabled =
+//                    TryOutLevelsManager.sharedInstance.isLevelEnabled(levelTitle: titleStr!)
+//            } else {
+//                itsBad()
+//            }
+//            if !levelIsEnabled {
+//                selectedLevelIsEnabled = false
+//                //return
+//            } else {
+//                 selectedLevelIsEnabled = true
+//            }
+//            selectedLevelTitleStr = levelTitle
+ 
+            if activeLevel != indexPath.row {
+                activeLevel = indexPath.row
+                setupNewlySelectedLevel()
+                //                _ = LessonScheduler.instance.setCurrentLevel(activeLevel)
+                //                _ = LessonScheduler.instance.setCurrentDay(0)
+                let lde: tLDE_code = (level: activeLevel, day: 0, exer: 0)
+                _ = LessonScheduler.instance.setCurrentLDE(toLDE: lde)
+                self.daysTableView.reloadData()
+                
+                if let levelIdx = levelsJson?[indexPath.row]["levelIdx"].string {
+                    isSlursLevel =  levelIdx == kIdxForLipSlurs ? true : false
+                }
+            }
+
+//            activeLevel = indexPath.row
+//            setupNewlySelectedLevel()
+            
+//            _ = LessonScheduler.instance.setCurrentLevel(activeLevel)
+
+//            self.daysTableView.reloadData()
             
         } else if tableView == self.daysTableView {
             
+//            let canDo = canDoSlursAtThisTempo()
+//            if !canDo {
+//                presentCantDoSlursAtThisTempAlert()
+////                return
+//            }
+            
+            if !selectedLevelIsEnabled {
+                return
+            }
+            
             let selectedCell: DayTableViewCell? = tableView.cellForRow(at: indexPath) as? DayTableViewCell
-            selectedCell?.dayLabel.textColor = .black
-            currLevel = activeLevel
-            currDay = indexPath.row
+            let selCellTitle = selectedCell?.dayLabel.text
+            var dayIsEnabled =
+                TryOutLevelsManager.sharedInstance.isDayEnabled(levelTitle: selectedLevelTitleStr,
+                                                                dayTitle: selCellTitle ?? "" )
             
-            let jsonIdx = jsonIndexForRow(activeLevel)
-            let convertedIndexPath = IndexPath(row: indexPath.row, section: jsonIdx)
-            performSegue(withIdentifier: "LessonSegue", sender: convertedIndexPath)  // PPPproblem!!!!!
             
+//            selectedLevelTitleStr  cell.dayLabel.text
+//            if titleStr != nil {
+//                levelTitle = titleStr!
+//                dayIsEnabled =
+//                    TryOutLevelsManager.sharedInstance.isLevelEnabled(levelTitle: titleStr!)
+//            } else {
+//                itsBad()
+//            }
+//            if !levelIsEnabled {
+//                selectedLevelIsEnabled = false
+//                //return
+//            } else {
+//                selectedLevelIsEnabled = true
+//            }
+
+            selectedCell?.dayIsEnabled = dayIsEnabled
+            if dayIsEnabled {
+ //               selectedCell?.dayLabel.textColor = .black
+ //               selectedCell?.dayIsEnabled  = true
+                selectedCell?.isSelectedDay = true
+                currLevel = activeLevel
+                currDay = indexPath.row
+                
+                let lde: tLDE_code = (level: activeLevel, day: currDay, exer: 0)
+                _ = LessonScheduler.instance.setCurrentLDE(toLDE: lde)
+
+                daysTableView.reloadData()
+                
+                let jsonIdx = jsonIndexForRow(activeLevel)
+                let convertedIndexPath = IndexPath(row: indexPath.row, section: jsonIdx)
+                performSegue(withIdentifier: "LessonSegue", sender: convertedIndexPath)  // PPPproblem!!!!!
+            } else {
+                selectedCell?.isSelectedDay = false
+            }
         }
         
     }
+    
+    func setupNewlySelectedLevel() {
+        var levelIsEnabled = true
+        
+        var levelTitle = String(activeLevel + 1) // default
+        let titleStr = levelsJson?[activeLevel]["title"].string
+        if titleStr != nil {
+            levelTitle = titleStr!
+            levelIsEnabled =
+                TryOutLevelsManager.sharedInstance.isLevelEnabled(levelTitle: titleStr!)
+        } else {
+            itsBad()
+        }
+        if !levelIsEnabled {
+            selectedLevelIsEnabled = false
+            //return
+        } else {
+            selectedLevelIsEnabled = true
+        }
+        selectedLevelTitleStr = levelTitle
+//        activeLevel = indexPath.row
+
+    }
+    
+    
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         
@@ -645,8 +883,27 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
             
             scrollingToRect = levelsTableView.rectForRow(at: scrollingToIP)
             targetContentOffset.pointee.y = scrollingToRect.origin.y
-            activeLevel = scrollingToIP.row
             
+            if activeLevel != scrollingToIP.row {
+                activeLevel = scrollingToIP.row
+                setupNewlySelectedLevel()
+//                _ = LessonScheduler.instance.setCurrentLevel(activeLevel)
+//                _ = LessonScheduler.instance.setCurrentDay(0)
+                let lde: tLDE_code = (level: activeLevel, day: 0, exer: 0)
+                _ = LessonScheduler.instance.setCurrentLDE(toLDE: lde)
+                self.daysTableView.reloadData()
+                if let levelIdx = levelsJson?[scrollingToIP.row]["levelIdx"].string {
+                    isSlursLevel =  levelIdx == kIdxForLipSlurs ? true : false
+                }
+           }
+            
+//            //let indexPath = NSIndexPath(row: activeLevel, section: 0)
+//            let indexPath = IndexPath(row: activeLevel, section: 0)
+//            //tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: .None)
+//
+//            self.levelsTableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+//            //self.levelsTableView.curr
+//            self.daysTableView.reloadData()
         }
         
     }
@@ -685,6 +942,21 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
     }
+    
+    func scrollToActiveLevel() {
+//        let yPosActiveRow =
+//            levelsTableView.rectForRow(at: IndexPath(row: levelsTableView.numberOfRows(inSection: 0) - 1,
+//                                                     section: 0)).origin.y
+        
+        let yPosActiveRow = levelsTableView.rectForRow(at: IndexPath(row:activeLevel, section: 0)).origin.y
+        self.levelsTableView.setContentOffset(CGPoint(x: self.levelsTableView.contentOffset.x, y: yPosActiveRow), animated: false)
+
+        //if scrollView.contentOffset.y > yPosLastRow {
+//            scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x, y: yPosActiveRow), animated: false)
+        //}
+    }
+    
+    
     
     private func createParticles() {
         

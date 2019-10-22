@@ -35,6 +35,8 @@ class Balloon: UIView {
 
     var superCenter = CGPoint(x: 0.0, y: 0.0)
     
+    var defaultRadius = CGFloat(10.0)
+    
     var expCount = 0
 //    var currImg  = 1
 
@@ -140,16 +142,20 @@ class Balloon: UIView {
             self.imgView.alpha = 0.7
         }) { (_) in
 
-        // Then, fade out the image while having the pieces "fall"
-        UIView.animate(withDuration: 2.0, delay: 0.0, options: .curveLinear, animations: {
-            // this will change Y position of your imageView center
-            // by 1 every time you press button
-            self.imgView.center.y += 300
-            self.imgView.alpha = 0.0
-            if hideMonkeyFace {
-                self.monkeyFaceImgVw.alpha = 0.0
+            // Then, fade out the image while having the pieces "fall"
+            UIView.animate(withDuration: 2.0, delay: 0.0, options: .curveLinear, animations: {
+                // this will change Y position of your imageView center
+                // by 1 every time you press button
+                self.imgView.center.y += 300
+                self.imgView.alpha = 0.0
+                if hideMonkeyFace {
+                    self.monkeyFaceImgVw.alpha = 0.0
+                }
+            } ) { (_) in
+                
+                // Finally, reset image to non-exploded balloon
+                self.reset()
             }
-        } )
         }
     }
     
@@ -217,6 +223,8 @@ class Balloon: UIView {
         
         // imgView.frame.size = balloonImage1!.size
         
+        imgView.frame.size = CGSize(width: startWd, height: startWd * htToWdRat)
+        
         let imgWd = imgView.frame.width
         let imgHt = imgView.frame.height
         let wd = self.frame.width
@@ -229,6 +237,8 @@ class Balloon: UIView {
         imgView.frame.origin.y = y
         
         imgView.alpha = 1.0
+        
+        self.radius = defaultRadius
    }
     
     override func awakeFromNib() {

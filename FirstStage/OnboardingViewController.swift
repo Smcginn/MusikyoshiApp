@@ -29,6 +29,10 @@ class OnboardingViewController: UIViewController {
         
         pageControl.numberOfPages = slides.count
         pageControl.currentPage = 0
+        
+        var pageIndColor =  pageControl.pageIndicatorTintColor
+        var currPageIndColor =  pageControl.currentPageIndicatorTintColor
+        
         view.bringSubview(toFront: pageControl)
         
     }

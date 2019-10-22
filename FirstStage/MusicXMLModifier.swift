@@ -81,7 +81,11 @@ class MusicXMLModifier {
     
 //    class func modifyXMLToData(musicXMLUrl: URL, smallestWidth: Double, signatureWidth: Double) -> Data? {
 
+        var currNoteID = 1
+        MusicXMLNoteTracker.instance.clearAllEntries()
+        
         var accidentalOnFirstNoteOfBar = false
+        gNumAccidentalsInScore = 0
         
         guard let data = try? Data(contentsOf: musicXMLUrl) else {
             print("Cannot convert XML file to Data!!")
@@ -234,23 +238,51 @@ class MusicXMLModifier {
 
         var loopCount = 0
         for part in document["score-partwise"]["part"].all! {
+            
+            //let measures = part["measure"].all!
+            var avgMeasureWd = 0
+            var avgFirstXOffset = Double(0)
+            
+            getAveragesFor2Thru4(part: part,
+                                 avgMeasureWidth: &avgMeasureWd,
+                                 avgFirstX: &avgFirstXOffset)
+            
+            var maxMeasureWd = 0
+            var maxFirstXOffset = Double(0)
+            getMaximumssFor2Thru4(part: part,
+                                  maxMeasureWidth: &maxMeasureWd,
+                                  maxFirstX: &maxFirstXOffset)
+
             loopCount += 1
             for measure in part["measure"].all! {
-                let measureTranspose =  measure["attributes"]["transpose"]
-                if measureTranspose.error == nil {
-                    let transDiaChrm = getTransDiaChrmForInstr(instr: currInst)
-                    if transDiaChrm != kNoTransDiaChrmChange {
-                        var diatonic  = measureTranspose["diatonic"].int
-                        var chromatic = measureTranspose["chromatic"].int
-                        if diatonic != nil && chromatic != nil {
-                            print("In modifyXMLData,  old diatonic = \(diatonic!), old chrom: \(chromatic!)")
-                            diatonic!  += transDiaChrm.diatonic
-                            chromatic! += transDiaChrm.chromatic
-                            measureTranspose["diatonic"].value  = String(diatonic!)
-                            measureTranspose["chromatic"].value = String(chromatic!)
-                            diatonic  = measureTranspose["diatonic"].int
-                            chromatic = measureTranspose["chromatic"].int
-                            print("In modifyXMLData,  new diatonic = \(diatonic!), new chrom: \(chromatic!)")
+                let measureAttributes =  measure["attributes"]
+                if measureAttributes.error == nil { // attibutes present
+                    var measureTranspose = measureAttributes["transpose"]
+                    if measureTranspose.error != nil { // transpose not present; add it
+                        measureAttributes.addChild(name: "transpose")
+                        measureTranspose = measureAttributes["transpose"]
+                        if measureTranspose.error == nil {
+                            measureTranspose.addChild(name: "diatonic") // add children
+                            measureTranspose.addChild(name: "chromatic")
+                            measureTranspose["diatonic"].value  = "0" // set default vals
+                            measureTranspose["chromatic"].value = "0"
+                        }
+                    }
+                    if measureTranspose.error == nil {
+                        let transDiaChrm = getTransDiaChrmForInstr(instr: currInst)
+                        if transDiaChrm != kNoTransDiaChrmChange {
+                            var diatonic  = measureTranspose["diatonic"].int
+                            var chromatic = measureTranspose["chromatic"].int
+                            if diatonic != nil && chromatic != nil {
+                                print("In modifyXMLData,  old diatonic = \(diatonic!), old chrom: \(chromatic!)")
+                                diatonic!  += transDiaChrm.diatonic
+                                chromatic! += transDiaChrm.chromatic
+                                measureTranspose["diatonic"].value  = String(diatonic!)
+                                measureTranspose["chromatic"].value = String(chromatic!)
+                                diatonic  = measureTranspose["diatonic"].int
+                                chromatic = measureTranspose["chromatic"].int
+                                print("In modifyXMLData,  new diatonic = \(diatonic!), new chrom: \(chromatic!)")
+                            }
                         }
                     }
                 }
@@ -340,8 +372,25 @@ class MusicXMLModifier {
             measure.attributes["width"] = "\(measureWidth)"
 
             var isFirstElem = true
+            var measureDiff: Double = 0.0
             for note in measure["note"].all! {
 
+                // Check for slurs, and if found, notate
+                var noteData = NoteData()
+                noteData.noteID = currNoteID
+                let noteNotations = note["notations"]
+                if noteNotations.error == nil {
+                    if let typeStr = noteNotations["slur"].attributes["type"] {
+                        if typeStr == "start" {
+                            noteData.beginSlur = true
+                        } else if typeStr == "stop" {
+                            noteData.endSlur = true
+                        }
+                    }
+                }
+                MusicXMLNoteTracker.instance.addNoteEntry(noteData)
+                currNoteID += 1
+                
                 // Fix for accidentals on measure line
                 if isFirstElem {
                     let notePitch = note["pitch"]
@@ -349,16 +398,22 @@ class MusicXMLModifier {
                         let alterInt  = notePitch["alter"]
                         if alterInt.error == nil {
                             accidentalOnFirstNoteOfBar = true
+                            gNumAccidentalsInScore += 1
                         }
                     }
                     if accidentalOnFirstNoteOfBar, let defNoteXStr = note.attributes["default-x"] {
                         let defNoteX = Double(defNoteXStr)!
                         if defNoteX > noteX {
+                            measureDiff = defNoteX - noteX
                             noteX = defNoteX
                         }
                     }
                 }
                 isFirstElem = false
+                if measureDiff != 0 {
+                    measureWidth += measureDiff
+                    measure.attributes["width"] = "\(measureWidth)"    //YO
+                }
                 
                 note.attributes["default-x"] = "\(noteX)"
                 noteX += getNoteWidth(note: note, dotted: true)
@@ -450,10 +505,33 @@ class MusicXMLModifier {
             accidentalOnFirstNoteOfBar = false
         }
 
+        for part in document["score-partwise"]["part"].all! {
+            lookForAndFixUnusuallyLongMeasures(part: part)
+        }
+        
         print("doc2:\n==============================\n\n\(document.xml)\n===============================\n\n")
         return document.xml.data(using: .utf8)
     }
 
+    func suggestedNoteWidth() -> Int {
+        var hasAccidental = false
+        var hasDot        = false
+
+        return 0
+    }
+    
+    func minMeasureWidth() -> Int {
+        var numNotes = 0
+        var numRests = 0
+        var noteWidthSum = 0
+        
+        
+        
+        
+        return 0
+    }
+    
+    
     //note duration in 16th note equivalents
     private class func getNoteDuration(note: AEXMLElement, dotted: Bool) -> Int {
         var thisNoteDuration = 0
@@ -503,5 +581,245 @@ class MusicXMLModifier {
 
     private class func getNoteWidth(note: AEXMLElement, dotted: Bool) -> Double {
         return sixteenthNoteWidth * Double(getNoteDuration(note: note, dotted: dotted))
+    }
+
+    //let measures = part["measure"].all!
+
+    class func getAveragesFor2Thru4(part: AEXMLElement,
+                                    avgMeasureWidth: inout Int,
+                                    avgFirstX: inout Double) {
+        avgMeasureWidth = 0
+        avgFirstX = 0
+        var firstXSum: Double = 0
+        
+        var m1Wd = 0
+        var m2Wd = 0
+        var m3Wd = 0
+        var m4Wd = 0
+        var measCount = 0
+        
+        var numNotesAccessed = 0
+        
+//        var idx = 0
+        for measure in part["measure"].all! {
+            measCount += 1
+            if measCount == 1 {
+                continue  // skip because of Time and Key signature makes it longer
+            }
+            
+            let mWdStr = measure.attributes["width"]
+            //let mWd = measure["attributes"]["width"].int
+
+            if mWdStr == nil {
+                itsBad()
+            } else {
+                let mWdInt = Int(mWdStr!)!
+                switch measCount {
+//                    case 0: m1Wd = mWdInt
+//                            avgMeasureWidth = mWdInt
+                    case 2: m2Wd = mWdInt
+                            avgMeasureWidth = m2Wd
+                    case 3: m3Wd = mWdInt
+                            avgMeasureWidth = (m2Wd + m3Wd) / 2
+                    
+                    case 4: m4Wd = mWdInt
+                            avgMeasureWidth  = (m2Wd + m3Wd + m4Wd) / 3
+                    default:
+                        ()
+                }
+            }
+            
+            for note in measure["note"].all! {
+                if let defNoteXStr = note.attributes["default-x"] {
+                    let defNoteX = Double(defNoteXStr)!
+                    numNotesAccessed += 1
+                    firstXSum += defNoteX
+                }
+                break // only do first note in measure
+            }
+            
+            if measCount > 1 { // no divide by 0
+                avgFirstX = firstXSum / Double(measCount-1)
+            }
+            
+            
+//            measCount += 1
+//            idx += 1
+            if measCount >= 4 {
+//                avgFirstX = 0
+//                var firstXSum: Double = 0
+
+                break
+            }
+        }
+    }
+
+    
+    
+    
+    
+    
+    class func getMaximumssFor2Thru4(part: AEXMLElement,
+                                     maxMeasureWidth: inout Int,
+                                     maxFirstX: inout Double) {
+        maxMeasureWidth = 0
+        maxFirstX = 0
+        var measCount = 0
+        
+        for measure in part["measure"].all! {
+            measCount += 1
+            if measCount == 1 {
+                continue  // skip because of Time and Key signature makes it longer
+            }
+            
+            if let mWdStr = measure.attributes["width"] {
+                var mWdInt: Int = Int(mWdStr) ?? 0
+                if mWdInt == 0 {
+                    let mWdD = Double(mWdStr) ?? 0.0
+                    mWdInt = Int(mWdD)
+                }
+                if mWdInt > maxMeasureWidth {
+                    maxMeasureWidth = mWdInt
+                }
+
+                
+//            //let mWd = measure["attributes"]["width"].int
+//
+////            if mWdStr == nil {
+////                itsBad()
+////            } else {
+//                if let mWdInt = Int(mWdStr) {
+//                    if mWdInt > maxMeasureWidth {
+//                        maxMeasureWidth = mWdInt
+//                    }
+//                }
+//            }
+            }
+  
+//            var measureWidth = 0
+//            if let mWdStr: String = measure.attributes["width"] {
+//                //let tempIntStr = mWdStr
+//                var mWdInt: Int = Int(mWdStr) ?? 0
+//                if mWdInt == 0 {
+//                    let mWdD = Double(mWdStr) ?? 0.0
+//                    mWdInt = Int(mWdD)
+//                }
+//                measureWidth = mWdInt
+//            }
+//
+//
+            
+            
+            
+            
+            var defNoteX = Double(0)
+            for note in measure["note"].all! {
+                if let defNoteXStr = note.attributes["default-x"] {
+                    defNoteX = Double(defNoteXStr)!
+                }
+                break // only do first note in measure
+            }
+            
+            if defNoteX > maxFirstX {
+                maxFirstX = defNoteX
+            }
+
+            if measCount >= 4 {
+                 break
+            }
+        }
+    }
+    
+    class func lookForAndFixUnusuallyLongMeasures(part: AEXMLElement) {
+        var measCount = 0
+        var maxMeasureWd = 0
+        var maxFirstXOffset = Double(0)
+        getMaximumssFor2Thru4(part: part,
+                              maxMeasureWidth: &maxMeasureWd,
+                              maxFirstX: &maxFirstXOffset)
+        
+        for measure in part["measure"].all! {
+            if measCount == 0 {
+                measCount += 1
+                continue  // skip because of Time and Key signature makes it longer
+            }
+            
+//            var measureWidth = 0
+//            let mWdStr = measure.attributes["width"]
+//            if mWdStr == nil {
+//                itsBad()
+//            } else {
+//                measureWidth = Int(mWdStr!)!
+//            }00
+ 
+            var measureWidth = 0
+            if let mWdStr: String = measure.attributes["width"] {
+                //let tempIntStr = mWdStr
+                var mWdInt: Int = Int(mWdStr) ?? 0
+                if mWdInt == 0 {
+                    let mWdD = Double(mWdStr) ?? 0.0
+                    mWdInt = Int(mWdD)
+                }
+                measureWidth = mWdInt
+            }
+            
+            var defNoteX = Double(0)
+            for note in measure["note"].all! {
+                if let defNoteXStr = note.attributes["default-x"] {
+                    defNoteX = Double(defNoteXStr)!
+                }
+                break // only test first note in measure
+            }
+            
+            if measureWidth > 0 && defNoteX > 0 &&  // got valid vals for both
+               Double(measureWidth) > Double(maxMeasureWd)*1.5 &&
+               defNoteX > maxFirstXOffset*1.5     {
+                
+                adjustMeasureToAverageVals(measure: measure,
+                                           maxMeasureWidth: maxMeasureWd,
+                                           maxFirstX: maxFirstXOffset)
+
+//                var yomaxFirstX = defNoteX
+//                print ("\(yomaxFirstX)")
+            }
+            
+            measCount += 1
+        }
+    }
+    
+    class func adjustMeasureToAverageVals(measure: AEXMLElement,
+                                          maxMeasureWidth: Int,
+                                          maxFirstX: Double) {
+        
+        var xDiff: Double = 0.0
+        
+        var couldGetFirstElemOffset = false
+        var isFirstElem = true
+        for note in measure["note"].all! {
+            if let defNoteXStr = note.attributes["default-x"] {
+                let defNoteX = Double(defNoteXStr) ?? 0.0
+                if defNoteX != 0
+                {
+                    if isFirstElem {
+                        xDiff = defNoteX - maxFirstX
+                        xDiff *= 0.9 // just to make sure it isn't too close
+                        couldGetFirstElemOffset = true
+                        isFirstElem = false
+                    }
+                    
+                    let newX = defNoteX - xDiff
+                    note.attributes["default-x"] = "\(newX)"
+                }
+            }
+            if isFirstElem && !couldGetFirstElemOffset {
+                break // no point in continuing
+            }
+        }
+
+        if couldGetFirstElemOffset && xDiff != 0 {
+            // add 10% to give a little space at end . . .
+            let adjustedMeasWd = Int(Double(maxMeasureWidth) * 1.10)
+            measure.attributes["width"] = "\(adjustedMeasWd)"
+        }
     }
 }

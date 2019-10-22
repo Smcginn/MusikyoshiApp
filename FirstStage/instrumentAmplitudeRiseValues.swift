@@ -17,7 +17,7 @@ let kTrumpet_defAmpRiseForNewSound:        Double   = 0.2
 
 let kTrombone_defSkipBeginningSamples:     UInt     = 15
 let kTrombone_defSamplesInAnalysisWindow:  UInt     = 2
-let kTrombone_defAmpRiseForNewSound:       Double   = 0.2
+let kTrombone_defAmpRiseForNewSound:       Double   = 0.47
 
 let kEuphonium_defSkipBeginningSamples:    UInt     = 15
 let kEuphonium_defSamplesInAnalysisWindow: UInt     = 2
@@ -27,18 +27,18 @@ let kHorn_defSkipBeginningSamples:         UInt     = 15
 let kHorn_defSamplesInAnalysisWindow:      UInt     = 2
 let kHorn_defAmpRiseForNewSound:           Double   = 0.2
 
-let kTuba_defSkipBeginningSamples:         UInt     = 15
-let kTuba_defSamplesInAnalysisWindow:      UInt     = 2
-let kTuba_defAmpRiseForNewSound:           Double   = 0.2
+let kTuba_defSkipBeginningSamples:         UInt     = 18
+let kTuba_defSamplesInAnalysisWindow:      UInt     = 3
+let kTuba_defAmpRiseForNewSound:           Double   = 0.646
 
 // Woodwinds
 let kFlute_defSkipBeginningSamples:             UInt     = 15
-let kFlute_defSamplesInAnalysisWindow:          UInt     = 2
-let kFlute_defAmpRiseForNewSound:               Double   = 0.2
+let kFlute_defSamplesInAnalysisWindow:          UInt     = 3
+let kFlute_defAmpRiseForNewSound:               Double   = 0.52
 
 let kOboe_defSkipBeginningSamples:              UInt     = 15
 let kOboe_defSamplesInAnalysisWindow:           UInt     = 2
-let kOboe_defAmpRiseForNewSound:                Double   = 0.2
+let kOboe_defAmpRiseForNewSound:                Double   = 0.806
 
 let kClarinet_defSkipBeginningSamples:          UInt     = 15
 let kClarinet_defSamplesInAnalysisWindow:       UInt     = 2
@@ -93,6 +93,7 @@ func setCurrentAmpRiseValsForInstrument(forInstr: Int) {
 ///////////////////////////////////////////////////////////////////////
 // MARK:- Getters
 
+/* old
 func getAmpRiseSamplesToSkip(forInstr: Int) -> UInt {
     var retVal: UInt = kTrumpet_defSkipBeginningSamples
     guard forInstr < kInst_NumInstruments else {
@@ -126,7 +127,41 @@ func getAmpRiseSamplesToSkip(forInstr: Int) -> UInt {
 
     return retVal
 }
+*/
+// new:
 
+func getAmpRiseSamplesToSkip(forInstr: Int) -> UInt {
+    var retVal: UInt = kTrumpet_defSkipBeginningSamples
+    guard forInstr < kInst_NumInstruments else {
+        itsBad()
+        return retVal
+    }
+    
+    switch forInstr {
+    case kInst_Trombone:    retVal = kTrombone_defSkipBeginningSamples
+    case kInst_Euphonium:   retVal = kEuphonium_defSkipBeginningSamples
+    case kInst_FrenchHorn:  retVal = kHorn_defSkipBeginningSamples
+    case kInst_Tuba:        retVal = kTuba_defSkipBeginningSamples
+        
+    case kInst_Flute:       retVal = kFlute_defSkipBeginningSamples
+    case kInst_Oboe:        retVal = kOboe_defSkipBeginningSamples
+    case kInst_Clarinet:    retVal = kClarinet_defSkipBeginningSamples
+    case kInst_BassClarinet: retVal = kBassClarinet_defSkipBeginningSamples
+    case kInst_Bassoon:     retVal = kBassoon_defSkipBeginningSamples
+    case kInst_AltoSax:     retVal = kAltoSax_defSkipBeginningSamples
+    case kInst_TenorSax:    retVal = kTenorSax_defSkipBeginningSamples
+    case kInst_BaritoneSax: retVal = kBaritoneSax_defSkipBeginningSamples
+        
+    case kInst_Mallet:      retVal = kMallet_defSkipBeginningSamples
+        
+    case kInst_Trumpet:     fallthrough
+    default:                retVal = kTrumpet_defSkipBeginningSamples
+    }
+    
+    return retVal
+}
+
+/* old
 func getNumSamplesInAnalysisWindow(forInstr: Int) -> UInt {
     var retVal: UInt = kTrumpet_defSamplesInAnalysisWindow
     guard forInstr < kInst_NumInstruments else {
@@ -158,8 +193,43 @@ func getNumSamplesInAnalysisWindow(forInstr: Int) -> UInt {
     
     return retVal
 }
+*/
 
-func getAmpRiseForNewSound(forInstr: Int) -> Double {
+// New
+
+func getNumSamplesInAnalysisWindow(forInstr: Int) -> UInt {
+    var retVal: UInt = kTrumpet_defSamplesInAnalysisWindow
+    guard forInstr < kInst_NumInstruments else {
+        itsBad()
+        return retVal
+    }
+    
+    switch forInstr {
+    case kInst_Trombone:    retVal = kTrombone_defSamplesInAnalysisWindow
+    case kInst_Euphonium:   retVal = kEuphonium_defSamplesInAnalysisWindow
+    case kInst_FrenchHorn:  retVal = kHorn_defSamplesInAnalysisWindow
+    case kInst_Tuba:        retVal = kTuba_defSamplesInAnalysisWindow
+        
+    case kInst_Flute:       retVal = kFlute_defSamplesInAnalysisWindow
+    case kInst_Oboe:        retVal = kOboe_defSamplesInAnalysisWindow
+    case kInst_Clarinet:    retVal = kClarinet_defSamplesInAnalysisWindow
+    case kInst_BassClarinet: retVal = kBassClarinet_defSamplesInAnalysisWindow
+    case kInst_Bassoon:     retVal = kBassoon_defSamplesInAnalysisWindow
+    case kInst_AltoSax:     retVal = kAltoSax_defSamplesInAnalysisWindow
+    case kInst_TenorSax:    retVal = kTenorSax_defSamplesInAnalysisWindow
+    case kInst_BaritoneSax: retVal = kBaritoneSax_defSamplesInAnalysisWindow
+        
+    case kInst_Mallet:      retVal = kMallet_defSamplesInAnalysisWindow
+        
+    case kInst_Trumpet:     fallthrough
+    default:                retVal = kTrumpet_defSamplesInAnalysisWindow
+    }
+   
+    return retVal
+}
+
+/* Old
+func getAmpRiseForNewSound(forInstr: Int, forSettings: Bool = false) -> Double {
     var retVal: Double = kTrumpet_defAmpRiseForNewSound
     guard forInstr < kInst_NumInstruments else {
         itsBad()
@@ -192,10 +262,47 @@ func getAmpRiseForNewSound(forInstr: Int) -> Double {
     
     return retVal
 }
+*/
+// New
+
+
+func getAmpRiseForNewSound(forInstr: Int, forSettings: Bool = false) -> Double {
+    var retVal: Double = kTrumpet_defAmpRiseForNewSound
+    guard forInstr < kInst_NumInstruments else {
+        itsBad()
+        return retVal
+    }
+    
+    switch forInstr {
+    case kInst_Trombone:    retVal = kTrombone_defAmpRiseForNewSound
+    case kInst_Euphonium:   retVal = kEuphonium_defAmpRiseForNewSound
+    case kInst_FrenchHorn:  retVal = kHorn_defAmpRiseForNewSound
+    case kInst_Tuba:        retVal = kTuba_defAmpRiseForNewSound
+        
+    case kInst_Flute:       retVal = kFlute_defAmpRiseForNewSound
+    case kInst_Oboe:        retVal = kOboe_defAmpRiseForNewSound
+    case kInst_Clarinet:    retVal = kClarinet_defAmpRiseForNewSound
+    case kInst_BassClarinet: retVal = kBassClarinet_defAmpRiseForNewSound
+    case kInst_Bassoon:     retVal = kBassoon_defAmpRiseForNewSound
+    case kInst_AltoSax:     retVal = kAltoSax_defAmpRiseForNewSound
+    case kInst_TenorSax:    retVal = kTenorSax_defAmpRiseForNewSound
+    case kInst_BaritoneSax: retVal = kBaritoneSax_defAmpRiseForNewSound
+        
+    case kInst_Mallet:      retVal = kMallet_defAmpRiseForNewSound
+        
+    case kInst_Trumpet:     fallthrough
+    default:                retVal = kTrumpet_defAmpRiseForNewSound
+    }
+    
+    return retVal
+}
+
+
+///////////
 
 ///////////////////////////////////////////////////////////////////////
 // MARK:- Support for calls from Settings Window (when in debug mode)
-
+/*
 func setAmpRiseSamplesToSkip(forInstr: Int, numSamples: UInt) {
     guard forInstr >= kInst_Trumpet && forInstr < kInst_NumInstruments else {
         itsBad()
@@ -226,7 +333,9 @@ func setAmpRiseSamplesToSkip(forInstr: Int, numSamples: UInt) {
     
     UserDefaults.standard.set(numSamples, forKey: key)
 }
+*/
 
+/*
 func setNumSamplesInAnalysisWindow(forInstr: Int, numSamples: UInt) {
     guard forInstr < kInst_NumInstruments else {
         itsBad()
@@ -256,7 +365,10 @@ func setNumSamplesInAnalysisWindow(forInstr: Int, numSamples: UInt) {
     
     UserDefaults.standard.set(numSamples, forKey: key)
 }
+*/
 
+
+/*
 func setAmpRiseForNewSound(forInstr: Int, rise: Double) {
     guard forInstr < kInst_NumInstruments else {
         itsBad()
@@ -286,10 +398,11 @@ func setAmpRiseForNewSound(forInstr: Int, rise: Double) {
     
     UserDefaults.standard.set(rise, forKey: key)
 }
+*/
 
 ///////////////////////////////////////////////////////////////////////
 // MARK:- Called from Settings Window (when in debug mode)
-
+/*
 func changeAmpRiseSamplesToSkip(forInstr: Int, numSamples: UInt) {
     setAmpRiseSamplesToSkip(forInstr: forInstr, numSamples: numSamples)
     setCurrentAmpRiseValsForInstrument(forInstr: forInstr)
@@ -304,7 +417,10 @@ func changeAmpRiseForNewSound(forInstr: Int, rise: Double) {
     setAmpRiseForNewSound(forInstr: forInstr, rise: rise)
     setCurrentAmpRiseValsForInstrument(forInstr: forInstr)
 }
+*/
 
+
+/*
 func resetAmpRiseValesToDefaults(forInstr: Int) {
     
     // CHANGEHERE
@@ -405,5 +521,5 @@ func resetAmpRiseValuesToDefaultsUsing(instr: Int,
     changeNumSamplesInAnalysisWindow(forInstr: instr, numSamples: samplesInWindow)
     changeAmpRiseForNewSound(forInstr: instr, rise: ampRise)
 }
-
+*/
 

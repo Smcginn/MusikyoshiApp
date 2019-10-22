@@ -96,20 +96,21 @@ class VideoHelpView: UIView {
 //                                       size: 24.0)!])
 //        comingSoonLabel?.attributedText  = comingSoonAttrStr
         comingSoonLabel?.text = comingSoonStr
-        comingSoonLabel?.font = UIFont(name: "Futura-Bold", size: 21)
+ //       comingSoonLabel?.font = UIFont(name: "Futura-Bold", size: 21)
         comingSoonLabel?.textColor = .white
         comingSoonLabel?.numberOfLines = 2
-        self.addSubview(comingSoonLabel!)
+//        self.addSubview(comingSoonLabel!)
         
         /////////////////////////////////////////////////////////////////
-        let msgY  =  50.0
+        let msgY  =  0.0 // 50.0
         let msgHt = 300.0
         let msgFrame = CGRect( x: comingSoonX , y: msgY,
                                width: comingSoonWd, height: msgHt )
         issueMsgLabel = UILabel(frame: msgFrame)
         issueMsgLabel?.textColor = .white
         issueMsgLabel?.lineBreakMode = .byWordWrapping
-        issueMsgLabel?.numberOfLines = 3
+        issueMsgLabel?.numberOfLines = 5
+        issueMsgLabel?.font = UIFont(name: "Futura-Bold", size: 21)
         self.addSubview(issueMsgLabel!)
     }
     
@@ -225,10 +226,30 @@ class VideoHelpView: UIView {
 //                             NSAttributedStringKey.paragraphStyle: paragraphStyle])
 //        issueMsgLabel?.attributedText  = issueMsgAttrStr
         issueMsgLabel?.text = issueMsgText
-        issueMsgLabel?.font = UIFont(name: "Futura-Medium", size: 16)
+        issueMsgLabel?.font = UIFont(name: "Futura-Medium", size: 21)
         
         avpVC?.view.isHidden = true
+        setButtonsVisibilityAndOpacity(mode: kVideoDialogMode_ShowText)
         isHidden = false
+    }
+    
+    let kVideoDialogMode_ShowVideo = 0
+    let kVideoDialogMode_ShowText  = 1
+    func setButtonsVisibilityAndOpacity(mode: Int) {
+        if mode == kVideoDialogMode_ShowVideo {
+            againBtn?.isHidden = false
+            self.backgroundColor = (UIColor.black).withAlphaComponent(0.70)
+        } else {
+            againBtn?.isHidden = true
+            self.backgroundColor = (UIColor.black).withAlphaComponent(1.0)
+        }
+
+//        if gVideoHelpMode != kVideoHelpMode_Video || gUseTextNotVideoScore {
+//            againBtn?.isHidden = true
+//            self.backgroundColor = (UIColor.black).withAlphaComponent(1.0)
+//        } else {
+//            againBtn?.isHidden = false
+//            self.backgroundColor = (UIColor.black).withAlphaComponent(0.70)
     }
     
     ///////////////////////////////////////////////////////////////////
@@ -238,11 +259,13 @@ class VideoHelpView: UIView {
     ///////////////////////////////////////////////////////////////////
 
     func showVideoVC() {
+        
         if avPlayer == nil || avpVC == nil {
             buildVideoVC()
         }
         guard avPlayer != nil && avpVC != nil else { return }
-            
+        
+        setButtonsVisibilityAndOpacity(mode: kVideoDialogMode_ShowVideo)
         avPlayer?.pause()
         avPlayer?.seek(to: kCMTimeZero)
         

@@ -31,7 +31,7 @@
         "xmlFile":"TUN002.xml",
         "title":"2. Stepping Up",
         "commentStr1":"",
-        "commentStr2":"New Note D, 1st and 3rd Valve",
+        "commentStr2":"",
         "helpCode1":"",
         "helpCode2":"",
         "noteWidth":"0",
@@ -42,7 +42,7 @@
         "xmlFile":"TUN003.xml",
         "title":"3. Gimme Three",
         "commentStr1":"",
-        "commentStr2":"New Note E, 1st and 2nd Valve",
+        "commentStr2":"",
         "helpCode1":"",
         "helpCode2":"",
         "noteWidth":"0",
@@ -53,7 +53,7 @@
         "xmlFile":"TUN004.xml",
         "title":"4. Leaping Down",
         "commentStr1":"",
-        "commentStr2":"Use your tongue to make the note sound. Say 'taaaaa'",
+        "commentStr2":"",
         "helpCode1":"",
         "helpCode2":"",
         "noteWidth":"0",
@@ -64,7 +64,7 @@
         "xmlFile":"TUN005.xml",
         "title":"5. One More Makes Four",
         "commentStr1":"",
-        "commentStr2":"New Note F, 1st Valve",
+        "commentStr2":"",
         "helpCode1":"",
         "helpCode2":"",
         "noteWidth":"0",
@@ -108,7 +108,7 @@
         "xmlFile":"TUN009.xml",
         "title":"9. A New Note Down Under",
         "commentStr1":"",
-        "commentStr2":"Remember, B is 2nd Valve",
+        "commentStr2":"",
         "helpCode1":"",
         "helpCode2":"",
         "noteWidth":"0",
@@ -141,7 +141,7 @@
         "xmlFile":"TUN012.xml",
         "title":"12. The Fifth Note! Beethoven's 9th",
         "commentStr1":"",
-        "commentStr2":"New Note G, open, no valves down",
+        "commentStr2":"Beethoven",
         "helpCode1":"",
         "helpCode2":"",
         "noteWidth":"0",
@@ -185,7 +185,7 @@
         "xmlFile":"TUN016.xml",
         "title":"16. Hot Cross Buns",
         "commentStr1":"",
-        "commentStr2":"",
+        "commentStr2":"English Folk Song",
         "helpCode1":"",
         "helpCode2":"",
         "noteWidth":"0",
@@ -196,7 +196,7 @@
         "xmlFile":"TUN017.xml",
         "title":"17 . Sweetly Sings the Donkey",
         "commentStr1":"",
-        "commentStr2":"",
+        "commentStr2":"Traditional",
         "helpCode1":"",
         "helpCode2":"",
         "noteWidth":"0",
@@ -238,7 +238,7 @@
        },{
         "fileCode":"TUN021",
         "xmlFile":"TUN021.xml",
-        "title":"21 Go Tell Aunt Rhodie",
+        "title":"21 Feels Like Home",
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
@@ -251,7 +251,7 @@
         "xmlFile":"TUN022.xml",
         "title":"22. The Twinkle Twinkle In Mozart's Eyes",
         "commentStr1":"",
-        "commentStr2":"",
+        "commentStr2":"Mozart",
         "helpCode1":"",
         "helpCode2":"",
         "noteWidth":"0",
@@ -436,7 +436,7 @@
         },{
         "fileCode":"TUN039",
         "xmlFile":"TUN039.xml",
-        "title":"39. B-OOTIFUL",
+        "title":"39. To The Peak!",
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
@@ -590,9 +590,9 @@
         },{
         "fileCode":"TUN053",
         "xmlFile":"TUN053.xml",
-        "title":"53. Flat Cat",
+        "title":"53. Lower The Anchor",
         "commentStr1":"",
-        "commentStr2":"Bb is played 1st Valve",
+        "commentStr2":"",
         "helpCode1":"",
         "helpCode2":"",
         "noteWidth":"0",
@@ -603,7 +603,7 @@
         "xmlFile":"TUN054.xml",
         "title":"54. B-I-N-G-O",
         "commentStr1":"",
-        "commentStr2":"Watch the Bb! 1st Valve",
+        "commentStr2":"English Folk Song",
         "helpCode1":"",
         "helpCode2":"",
         "noteWidth":"0",
@@ -790,7 +790,7 @@
         "xmlFile":"TUN071.xml",
         "title":"71. Lilly Dale",
         "commentStr1":"",
-        "commentStr2":"",
+        "commentStr2":"Billy Jack Wills",
         "helpCode1":"",
         "helpCode2":"",
         "noteWidth":"0",
@@ -870,8 +870,8 @@
         "commentStr2":"Stephen Collins Foster",
         "helpCode1":"",
         "helpCode2":"",
-        "noteWidth":"0",
-        "magnification":"0",
+        "noteWidth":"20",
+        "magnification":"12",
         "frameWidth":"0"
         },{
         "fileCode":"TUN079",
@@ -931,9 +931,9 @@
         },{
         "fileCode":"TUN084",
         "xmlFile":"TUN084.xml",
-        "title":"84.  O Sapo Nao Lava O Pe",
+        "title":"84. O Sapo Nao Lava O Pe",
         "commentStr1":"",
-        "commentStr2":"The Toad Does Not Wash It's Foot- Brazilian Children's Song",
+        "commentStr2":"Brazilian Children's Song",
         "helpCode1":"",
         "helpCode2":"",
         "noteWidth":"0",
@@ -947,13 +947,13 @@
         "commentStr2":"American Folk Song",
         "helpCode1":"",
         "helpCode2":"",
-        "noteWidth":"0",
-        "magnification":"0",
+        "noteWidth":"25",
+        "magnification":"12",
         "frameWidth":"0"
         },{
         "fileCode":"TUN086",
         "xmlFile":"TUN086.xml",
-        "title":"86. C Me Go! ",
+        "title":"86. Here We Go!",
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
@@ -964,7 +964,7 @@
         },{
         "fileCode":"TUN087",
         "xmlFile":"TUN087.xml",
-        "title":"87. C Scale",
+        "title":"87. Wail On This Scale",
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
@@ -975,7 +975,7 @@
         },{
         "fileCode":"TUN088",
         "xmlFile":"TUN088.xml",
-        "title":"88. C Arpeggio",
+        "title":"88. Arpeggio",
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
@@ -999,7 +999,7 @@
         "xmlFile":"TUN090.xml",
         "title":"90. Joy to the World ",
         "commentStr1":"",
-        "commentStr2":"",
+        "commentStr2":"English Carol",
         "helpCode1":"",
         "helpCode2":"",
         "noteWidth":"0",
@@ -1008,7 +1008,7 @@
         },{
         "fileCode":"TUN091",
         "xmlFile":"TUN091.xml",
-        "title":"91. Second Valve, Pal!",
+        "title":"91. New Note Float",
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
@@ -1019,7 +1019,7 @@
         },{
         "fileCode":"TUN092",
         "xmlFile":"TUN092.xml",
-        "title":"92. F Sharp City",
+        "title":"92. Watchout!",
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
@@ -1085,7 +1085,7 @@
         },{
         "fileCode":"TUN098",
         "xmlFile":"TUN098.xml",
-        "title":"98 See? That's Sharp!",
+        "title":"98. Raise the roof! Oh, and that note",
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
@@ -1096,7 +1096,7 @@
         },{
         "fileCode":"TUN099",
         "xmlFile":"TUN099.xml",
-        "title":"99. See? That's Still Sharp!",
+        "title":"99. Roof (and note) STILL Raised!",
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
@@ -1140,7 +1140,7 @@
         },{
         "fileCode":"TUN103",
         "xmlFile":"TUN103.xml",
-        "title":"103. Korobeiniki ",
+        "title":"103. Korobeiniki",
         "commentStr1":"",
         "commentStr2":"Traditional Russian Melody",
         "helpCode1":"",
@@ -1151,7 +1151,7 @@
         },{
         "fileCode":"TUN104",
         "xmlFile":"TUN104.xml",
-        "title":"104. Shalom, Chavarim ",
+        "title":"104. Shalom, Chavarim",
         "commentStr1":"",
         "commentStr2":"Israeli Folk Song",
         "helpCode1":"",
@@ -1162,7 +1162,7 @@
         },{
         "fileCode":"TUN105",
         "xmlFile":"TUN105.xml",
-        "title":"105. Habanera ",
+        "title":"105. Habanera",
         "commentStr1":"",
         "commentStr2":"Bizet's Carmen",
         "helpCode1":"",
@@ -1217,7 +1217,7 @@
         },{
         "fileCode":"TUN110",
         "xmlFile":"TUN110.xml",
-        "title":"110. The Entertainer ",
+        "title":"110. The Entertainer",
         "commentStr1":"",
         "commentStr2":"Scott Joplin",
         "helpCode1":"",
@@ -1250,7 +1250,7 @@
         },{
         "fileCode":"TUN113",
         "xmlFile":"TUN113.xml",
-        "title":"113. Go Down Moses   ",
+        "title":"113. Go Down Moses",
         "commentStr1":"",
         "commentStr2":"Traditional",
         "helpCode1":"",
@@ -1272,9 +1272,9 @@
         },{
         "fileCode":"TUN115",
         "xmlFile":"TUN115.xml",
-        "title":"115. When Johnny Comes Marching Home ",
+        "title":"115. When Johnny Comes Marching Home",
         "commentStr1":"",
-        "commentStr2":"",
+        "commentStr2":"Lyrics Gilmore/American Traditional",
         "helpCode1":"",
         "helpCode2":"",
         "noteWidth":"0",
@@ -1316,7 +1316,7 @@
         },{
         "fileCode":"TUN119",
         "xmlFile":"TUN119.xml",
-        "title":"119. Joy to the World",
+        "title":"119. The Knights Gather",
         "commentStr1":"",
         "commentStr2":"Traditional",
         "helpCode1":"",
@@ -1325,16 +1325,71 @@
         "magnification":"0",
         "frameWidth":"0"
         },{
-        "fileCode":"TUN120",
-        "xmlFile":"TUN120.xml",
-        "title":"120. Nessun Dorma",
-        "commentStr1":"",
-        "commentStr2":"Puccini, Adapted",
-        "helpCode1":"",
-        "helpCode2":"",
-        "noteWidth":"0",
-        "magnification":"0",
-        "frameWidth":"0"
+            "fileCode":"TUN120",
+            "xmlFile":"TUN120.xml",
+            "title":"120. Nessun Dorma",
+            "commentStr1":"",
+            "commentStr2":"Puccini, Adapted",
+            "helpCode1":"",
+            "helpCode2":"",
+            "noteWidth":"0",
+            "magnification":"0",
+            "frameWidth":"0"
+        },{
+            "fileCode":"TUN121",
+            "xmlFile":"TUN121.xml",
+            "title":"121. Haydn Trumpet Concerto",
+            "commentStr1":"",
+            "commentStr2":"Movement III, Adapted",
+            "helpCode1":"",
+            "helpCode2":"",
+            "noteWidth":"0",
+            "magnification":"0",
+            "frameWidth":"0"
+        },{
+            "fileCode":"TUN122",
+            "xmlFile":"TUN122.xml",
+            "title":"122. New World Symphony Finale",
+            "commentStr1":"",
+            "commentStr2":"Dvorak",
+            "helpCode1":"",
+            "helpCode2":"",
+            "noteWidth":"0",
+            "magnification":"0",
+            "frameWidth":"0"
+        },{
+            "fileCode":"TUN123",
+            "xmlFile":"TUN123.xml",
+            "title":"123. Knuckle Song (Bubblegum)",
+            "commentStr1":"",
+            "commentStr2":"",
+            "helpCode1":"",
+            "helpCode2":"",
+            "noteWidth":"0",
+            "magnification":"0",
+            "frameWidth":"0"
+        },{
+            "fileCode":"TUN131",
+            "xmlFile":"TUN131.xml",
+            "title":"131. ",
+            "commentStr1":"",
+            "commentStr2":"",
+            "helpCode1":"",
+            "helpCode2":"",
+            "noteWidth":"0",
+            "magnification":"0",
+            "frameWidth":"0"
+        },{
+            "fileCode":"TUN143",
+            "xmlFile":"TUN143.xml",
+            "title":"143. The Knights Gather",
+            "commentStr1":"",
+            "commentStr2":"",
+            "helpCode1":"",
+            "helpCode2":"",
+            "noteWidth":"0",
+            "magnification":"0",
+            "frameWidth":"0"
         },{
         "fileCode":"INT001",
         "xmlFile":"INT001.xml",
@@ -1404,7 +1459,7 @@
         },{
             "fileCode":"INT007",
             "xmlFile":"INT007.xml",
-            "title":"",
+            "title":"Intervals 7 - Quicker 4ths",
             "commentStr1":"",
             "commentStr2":"",
             "helpCode1":"",
@@ -1415,7 +1470,7 @@
         },{
             "fileCode":"INT008",
             "xmlFile":"INT008.xml",
-            "title":"",
+            "title":"Intervals 8 - 5ths",
             "commentStr1":"",
             "commentStr2":"",
             "helpCode1":"",
@@ -1426,7 +1481,7 @@
         },{
             "fileCode":"INT009",
             "xmlFile":"INT009.xml",
-            "title":"",
+            "title":"Intervals 8 - More 5ths",
             "commentStr1":"",
             "commentStr2":"",
             "helpCode1":"",
@@ -1711,16 +1766,27 @@
         "magnification":"0",
         "frameWidth":"0"
         },{
-        "fileCode":"SLR026",
-        "xmlFile":"SLR026.xml",
-        "title":"Lip Slur 26",
-        "commentStr1":"",
-        "commentStr2":"",
-        "helpCode1":"",
-        "helpCode2":"",
-        "noteWidth":"25",
-        "magnification":"12",
-        "frameWidth":"6000"
+            "fileCode":"SLR026",
+            "xmlFile":"SLR026.xml",
+            "title":"Lip Slur 26",
+            "commentStr1":"",
+            "commentStr2":"",
+            "helpCode1":"",
+            "helpCode2":"",
+            "noteWidth":"25",
+            "magnification":"12",
+            "frameWidth":"6000"
+        },{
+            "fileCode":"SLR027",
+            "xmlFile":"SLR027.xml",
+            "title":"Lip Slur 27",
+            "commentStr1":"",
+            "commentStr2":"",
+            "helpCode1":"",
+            "helpCode2":"",
+            "noteWidth":"25",
+            "magnification":"12",
+            "frameWidth":"6000"
         },{
         "fileCode":"PTY001",
         "xmlFile":"PTY001.xml",
@@ -2745,16 +2811,27 @@
         "magnification":"0",
         "frameWidth":"0"
         },{
-        "fileCode":"PRP046",
-        "xmlFile":"PRP046.xml",
-        "title":"Rhythm Prep for Tune 46",
-        "commentStr1":"",
-        "commentStr2":"",
-        "helpCode1":"",
-        "helpCode2":"",
-        "noteWidth":"0",
-        "magnification":"0",
-        "frameWidth":"0"
+            "fileCode":"PRP046",
+            "xmlFile":"PRP046.xml",
+            "title":"Rhythm Prep for Tune 46",
+            "commentStr1":"",
+            "commentStr2":"",
+            "helpCode1":"",
+            "helpCode2":"",
+            "noteWidth":"0",
+            "magnification":"0",
+            "frameWidth":"0"
+        },{
+            "fileCode":"PRP048",
+            "xmlFile":"PRP048.xml",
+            "title":"Rhythm Prep for Tune 48",
+            "commentStr1":"",
+            "commentStr2":"",
+            "helpCode1":"",
+            "helpCode2":"",
+            "noteWidth":"0",
+            "magnification":"0",
+            "frameWidth":"0"
         },{
          "fileCode":"PRP049",
         "xmlFile":"PRP049.xml",
@@ -2777,6 +2854,17 @@
         "noteWidth":"0",
         "magnification":"0",
         "frameWidth":"0"
+        },{
+            "fileCode":"PRP052",
+            "xmlFile":"PRP052.xml",
+            "title":"Rhythm Prep for Tune 52",
+            "commentStr1":"",
+            "commentStr2":"",
+            "helpCode1":"",
+            "helpCode2":"",
+            "noteWidth":"0",
+            "magnification":"0",
+            "frameWidth":"0"
         },{
         "fileCode":"PRP054",
         "xmlFile":"PRP054.xml",
@@ -2811,7 +2899,18 @@
         "magnification":"0",
         "frameWidth":"0"
         },{
-         "fileCode":"PRP059",
+            "fileCode":"PRP057",
+            "xmlFile":"PRP057.xml",
+            "title":"Rhythm Prep for Tune 57",
+            "commentStr1":"",
+            "commentStr2":"",
+            "helpCode1":"",
+            "helpCode2":"",
+            "noteWidth":"0",
+            "magnification":"0",
+            "frameWidth":"0"
+        },{
+        "fileCode":"PRP059",
         "xmlFile":"PRP059.xml",
         "title":"Rhythm Prep for Tune 59",
         "commentStr1":"",
@@ -2998,6 +3097,17 @@
         "magnification":"0",
         "frameWidth":"0"
         },{
+            "fileCode":"PRP089",
+            "xmlFile":"PRP089.xml",
+            "title":"Rhythm Prep for Tune 89",
+            "commentStr1":"",
+            "commentStr2":"",
+            "helpCode1":"",
+            "helpCode2":"",
+            "noteWidth":"0",
+            "magnification":"0",
+            "frameWidth":"0"
+        },{
         "fileCode":"PRP093",
         "xmlFile":"PRP093.xml",
         "title":"Rhythm Prep for Tune 93",
@@ -3110,7 +3220,7 @@
         },{
         "fileCode":"SCP001",
         "xmlFile":"SCP001.xml",
-        "title":"Scale Power 1",
+        "title":"Scale Power 1 - Concert Bb Major",
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
@@ -3121,7 +3231,7 @@
         },{
         "fileCode":"SCP002",
         "xmlFile":"SCP002.xml",
-        "title":"Scale Power",
+        "title":"Scale Power 2 - Concert Bb Major",
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
@@ -3132,7 +3242,7 @@
         },{
         "fileCode":"SCP003",
         "xmlFile":"SCP003.xml",
-        "title":"Scale Power 3 - G major",
+        "title":"Scale Power 3 - Concert F Major",
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
@@ -3143,7 +3253,7 @@
         },{
         "fileCode":"SCP004",
         "xmlFile":"SCP004.xml",
-        "title":"Scale Power 4 - Eb major",
+        "title":"Scale Power 4 - Concert Db Major",
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
@@ -3154,7 +3264,7 @@
         },{
         "fileCode":"SCP005",
         "xmlFile":"SCP005.xml",
-        "title":"Scale Power 5 - Eb Scale",
+        "title":"Scale Power 5 - Concert Db Scale",
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
@@ -3176,7 +3286,7 @@
         },{
         "fileCode":"SCP007",
         "xmlFile":"SCP007.xml",
-        "title":"Scale Power 7 - C minor",
+        "title":"Scale Power 7 - Concert Bb Minor",
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
@@ -3187,7 +3297,7 @@
         },{
         "fileCode":"SCP008",
         "xmlFile":"SCP008.xml",
-        "title":"Scale Power 8 - E minor",
+        "title":"Scale Power 8 - Concert D Minor",
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
@@ -3198,7 +3308,7 @@
         },{
         "fileCode":"SCP009",
         "xmlFile":"SCP009.xml",
-        "title":"Scale Power 9 - D minor ",
+        "title":"Scale Power 9 - Concert E Minor",
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
@@ -3209,7 +3319,7 @@
         },{
         "fileCode":"SCP010",
         "xmlFile":"SCP010.xml",
-        "title":"Scale Power 10 - F Major ",
+        "title":"Scale Power 10 - Concert Eb Major",
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",
@@ -3220,7 +3330,7 @@
         },{
         "fileCode":"SCP011",
         "xmlFile":"SSCP011.xml",
-        "title":"Scale Power 11 - G major ",
+        "title":"Scale Power 11 - Concert F Major",
         "commentStr1":"",
         "commentStr2":"",
         "helpCode1":"",

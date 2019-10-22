@@ -64,29 +64,27 @@ class PerformanceTrackingMgr {
     var sampleAmplitudeTrkr: PerfSampleAmplitudeTrackerV2
 
     init() {
-        let currInst = getCurrentStudentInstrument()
-        setCurrentAmpRiseValsForInstrument(forInstr: currInst)
-        sampleAmplitudeTrkr = PerfSampleAmplitudeTrackerV2()
-
         userDefsTimingThreshold =
             UserDefaults.standard.double(forKey: Constants.Settings.TimingThreshold)
         if UIDevice.current.modelName == "Simulator" {
             print("In Simulator")
-            kRunningInSim = true
+            gRunningInSim = true
             kAmplitudeThresholdForIsSound = kAmpThresholdForIsSound_Sim
-            kSoundStartAdjustment = kSoundStartAdjustment_Sim
+            gSoundStartAdjustment = kSoundStartAdjustment_Sim
             kMetronomeTimingAdjustment = kMetronomeTimingAdjustment_Sim
             gAmplitudePrintoutMultiplier = kAmplitudePrintoutMultiplier_Sim
-            kRunningInSim = true
         } else {
             print("In Real Device")
-            kRunningInSim = false
+            gRunningInSim = false
             kAmplitudeThresholdForIsSound = kAmpThresholdForIsSound_HW
-            kSoundStartAdjustment = kSoundStartAdjustment_HW
+            gSoundStartAdjustment = kSoundStartAdjustment_HW
             kMetronomeTimingAdjustment = kMetronomeTimingAdjustment_HW
             gAmplitudePrintoutMultiplier = kAmplitudePrintoutMultiplier_HW
-            kRunningInSim = false
         }
+        
+        let currInst = getCurrentStudentInstrument()
+        setCurrentAmpRiseValsForInstrument(forInstr: currInst)
+        sampleAmplitudeTrkr = PerfSampleAmplitudeTrackerV2()
         
         let storedIsASoundThreshold =
             UserDefaults.standard.double(forKey: Constants.Settings.UserNoteThresholdOverride)
@@ -97,6 +95,10 @@ class PerformanceTrackingMgr {
         // sampleAmplitudeTrkr.testBuffer()
     }
 
+    func getDeviceAdjustedAmpRise() -> Double {
+        return 0.0
+    }
+    
     ///////////////////////////////////////////////////////////////////////////
     //
     //  MARK: -     PerformanceNote and PerformanceRest related
@@ -110,6 +112,39 @@ class PerformanceTrackingMgr {
     // Sound's data is the basis for the "reality" portion, and can be compared 
     // to the expectations for the given note.
     var perfNotesAndRests = [PerformanceScoreObject]()
+    
+    func numPerfNotes() -> Int {
+        var numNotes = 0
+        let numPerfObjects = perfNotesAndRests.count
+        for i in 0..<numPerfObjects {
+            let onePerfObj = perfNotesAndRests[i]
+            if onePerfObj.isNote() {
+                numNotes += 1
+            }
+        }
+        return numNotes
+    }
+    
+    func getPerfNote(withID: Int) -> PerformanceNote? {
+        var retPerfNote: PerformanceNote? = nil
+        guard withID > 0,
+              withID <= numPerfNotes() else {
+            return retPerfNote
+        }
+        
+        let numPerfObjects = perfNotesAndRests.count
+        for i in 0..<numPerfObjects {
+            let onePerfObj = perfNotesAndRests[i]
+            if onePerfObj.isNote() {
+                if onePerfObj.perfNoteOrRestID == withID {
+                    retPerfNote = onePerfObj as? PerformanceNote
+                    break
+                }
+            }
+        }
+
+        return retPerfNote
+    }
     
     // If there is a current active Note from the score (that the student should 
     // be playing) these will be set (cleared when the Note ends, set for the next 
@@ -200,6 +235,16 @@ class PerformanceTrackingMgr {
     
     ///////////////////////////////////////////////////////////////////////////
     // MARK: - Amplitude tracking
+    
+    let kNoNoteDurationSet: Double = 4.00 // so no clipping
+    var currNoteDuration: Double   = 4.00 // kNoNoteDurationSet
+    
+    func setDurationOfCurrentNote(noteDur: Double) {
+        sampleAmplitudeTrkr.setDurationOfCurrentNote(noteDur: noteDur)
+    }
+    func clearDurationOfCurrentNote() {
+        sampleAmplitudeTrkr.clearDurationOfCurrentNote()
+    }
     
     func addAmplitudeValue( ampVal: tSoundAmpVal, absTime: TimeInterval ) {
         sampleAmplitudeTrkr.enqueue(ampVal, absTime)
@@ -292,6 +337,7 @@ class PerformanceTrackingMgr {
     
     // If starting a new performance (e.g., Press Play), clear data from last one
     func resetSoundAndNoteTracking() {
+        sampleAmplitudeTrkr.resetForLevelAndBPM()
         currentPerfNote = nil
         currentSound = nil
         perfNotesAndRests.removeAll()
@@ -300,6 +346,104 @@ class PerformanceTrackingMgr {
         PerformanceScoreObject.resetUniqueIDs()
         currentlyInAScoreNote  = false
         currentlyTrackingSound = false
+    }
+    
+    // If there's a current sound, and the amplitude doesn't drop below the "is a
+    // sound" threshold, there are still two things that can trigger a new sound/note:
+    //   1) a tongued new-note (the amplitude rises quickly over a short time)
+    //   2) the pitch changes and stabilizes - a new note during legato playing
+    // For both of these, there are "skip windows" - periods during which samples
+    // are ignored because in both cases (the pitch or smplitude) needs time to
+    // stabilize before being scanned for changes.
+    // Following the skip window is an analysis window durung which the sound is
+    // analyzed for pitch and amplitude changes, to see if it's a new sound, etc.
+    // But - at fast tempos and short note durations (e.g., 1/8 notes at 144)
+    // the sum of the times spent in skip and analysis windows can exceed the
+    // note duration, and a legitimate new note is note detected/triggered.
+    //
+    // So, need to see if the skip windows need to be shortened so analysis window
+    // starts earlier, to be able to detect the new-note pitch/amplitude change.
+    func evaluateSkipWindows() {
+        guard let currPerfNote : PerformanceNote = currentPerfNote else {
+            return } // formatted this way to be able to set a breakpoint
+        guard let currSound : PerformanceSound = currentSound else {
+            return }
+        guard currSound.isLinkedToNote && currPerfNote.isLinkedToSound else {
+            return }
+
+        // Get the current values,
+        let ampRiseSkipWindow =
+            getAmpRiseSkipWindow(noteDur: currPerfNote.expectedDurAdjusted)
+        let legatoWindow = getSamplesForLegatoPitchChange()
+        let pitchStableSkipWindow = getSamplesToDeterminePitch()
+
+        
+        
+        // reset values to defaults
+        
+// YOHOHO         Revisit these !!!!
+        sampleAmplitudeTrkr.ampSkipWindowToUse = ampRiseSkipWindow
+        currSound.pitchSkipWindowToUse = pitchStableSkipWindow
+        
+        let expStart = currPerfNote.expectedStartTime
+        let actStart = currPerfNote.actualStartTime_comp
+        var startDiff = Double(actStart - expStart)
+//        if startDiff < 0 { // early, so ignore
+//            startDiff = 0.0
+//        }
+        let startDiffSamples = Int(round(startDiff * 100))
+        
+        let tempoBPM = Double(UserDefaults.standard.integer(forKey: Constants.Settings.BPM))
+
+        let dur = Double(currPerfNote.expectedDuration)
+        let durInSamples = Int(round(dur * 100))
+        let durInSamplesAdjusted = Int(round((dur * 100) * 0.85))
+
+
+        
+        let ampWindowsSum = Int(gSkipBeginningSamples + gSamplesInAnalysisWindow)
+        let samplesNeededToDeterminePitch = getSamplesToDeterminePitch()
+        let diffPitchThresh = getSamplesForLegatoPitchChange()
+        let legatoWindowsSum = Int(samplesNeededToDeterminePitch + diffPitchThresh)
+        // let legatoWindowsSum = Int(samplesNeededToDeterminePitch + gDifferentPitchSampleThreshold)
+        // let legatoWindowsSum = Int(gSamplesNeededToDeterminePitch + gDifferentPitchSampleThreshold)
+
+        // Already calc'ed in RealTimeSettingsManager if  !gUseOldRealtimeSettings
+        let ampDiff: Int = durInSamplesAdjusted - ampWindowsSum
+        if ampDiff < 0 {
+            
+            
+            // YOHOHO
+            
+            
+            sampleAmplitudeTrkr.ampSkipWindowToUse = Int(gSkipBeginningSamples) + ampDiff
+//            if sampleAmplitudeTrkr.ampSkipWindowToUse < 0 {
+//                sampleAmplitudeTrkr.ampSkipWindowToUse = 0
+//            }
+        }
+        
+        let legDiff = durInSamplesAdjusted - legatoWindowsSum
+        if legDiff < 0 {
+            // currSound.legSkipWindowToUse = pitchSkipWindowToUse + legDiff
+            currSound.pitchSkipWindowToUse = samplesNeededToDeterminePitch + legDiff
+            if currSound.pitchSkipWindowToUse < 0 {
+                currSound.pitchSkipWindowToUse = 0
+            }
+        }
+
+        print ("\n\n\n ===================================\n")
+        print ("Amplitude/Legato Change Windows For Note")
+        print ("  Note Duration:        \(dur)")
+        print ("  Duration Sammples:    \(durInSamples) samples")
+        print ("  Amp Window Sum:       \(ampWindowsSum) samples")
+        print ("  Legato Window Sum:    \(legatoWindowsSum) samples")
+        print ("  AmpDiff Sammples:     \(ampDiff) samples")
+        print ("  LegDiff Sammples:     \(legDiff) samples")
+        print ("  Expected Start:       \(expStart)")
+        print ("  Actual Start:         \(actStart)")
+        print ("  StartDiff Sammples:   \(startDiffSamples) samples")
+
+        print ("\n ===================================")
     }
     
     // called when a new sound is detected, to see if an existing note needs a sound
@@ -360,8 +504,14 @@ class PerformanceTrackingMgr {
                 printLinkingRelatedMsg(msg: "    - rejecting; currPerfNote already Linked to Sound\n");  return
             }
             
+            // LINKAGELINKAGELINKAGE  - search tag, to quickly find this exact spot
+            //   This is where the calculation of rhythm tolerance, for linkage
+            //   eligibility should be done.
+            let attackTol = getRealtimeAttackTolerance(currPerfNote)
+            // = InstSettingsMgr.sharedInstance.getAdjustedAttackTolerance(currPerfNote)
+            
             let diff = abs( currSound.startTime_comp - currPerfNote.expectedStartTime  )
-            let attackTol = PerformanceAnalysisMgr.instance.currTolerances.rhythmTolerance
+            // let attackTol = PerformanceAnalysisMgr.instance.currTolerances.rhythmTolerance
             printLinkingRelatedMsg(msg: "SO to SC Linking: For Sound \(currSound.soundID), StartTime_song =  \(currSound.startTime_comp)")
             printLinkingRelatedMsg(msg: "SO to SC Linking: For Note  \(currPerfNote.perfNoteOrRestID), exp/act start diff = \(diff), attackTol = \(attackTol)")
 
@@ -371,6 +521,8 @@ class PerformanceTrackingMgr {
                 currSound.linkToNote(noteID: currPerfNote.perfNoteOrRestID, note: currPerfNote)
                 currPerfNote.actualStartTime_song = currSound.startTime_song
                 currPerfNote.actualFrequency = currSound.averagePitchRunning
+                
+                evaluateSkipWindows()
             } else {
                 printLinkingRelatedMsg(msg: "SO to SC Linking:   -> Rejecting, bc (diff <= attackTol)")
             }
@@ -534,6 +686,17 @@ class PerformanceTrackingMgr {
             let noteObj = scoreObj as! PerformanceNote
             noteObj.printSoundsSamplesDetailed()
         }
+    }
+    
+    func getSoundSamplesStringForNote(noteID: Int) -> String {
+        var retStr = ""
+        
+        let perfNote = getPerfNote(withID: noteID)
+        guard perfNote != nil else {
+            return retStr
+        }
+        retStr = perfNote!.getSamplesForDisplay()
+        return retStr
     }
     
     var storedNoteID: Int32 = 0

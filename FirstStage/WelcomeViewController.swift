@@ -62,25 +62,56 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
             WelcomeTitleLabel.font = UIFont(name: "Futura-Bold", size: 27.0)
         }
         
-        accessUpperLevelsLabel.text =
-                "To Access PlayTunes' Upper \nLevels"
-        
-        var howToUseDetText = "\u{2022} Select “Levels” to see the\n   available Practice Levels\n"
-        howToUseDetText += "\u{2022} Select a Level to see the Days\n   within that Level\n"
-        howToUseDetText += "\u{2022} Select a Day to display the exercises\n   within that Day, then:\n"
-        howToUseDetText += "   > Select 'Go' to automatically step through a guided practice session, or\n"
-        howToUseDetText += "   > Select 'Choose' to pick individual exercises\n\n"
-        howToUseDetText += "Tip: It's best to use earbuds or headphones so you can hear the metronome."
+        // var howToUseDetText = "\u{2022} Select “Levels” to see the\n   available Practice Levels\n"
+        // howToUseDetText += "\u{2022} Select a Level to see the Days\n   within that Level\n"
+        // howToUseDetText += "\u{2022} Select a Day to display the exercises\n   within that Day, then:\n"
+        // howToUseDetText += "   > Select 'Go' to automatically step through a guided practice session, or\n"
+        // howToUseDetText += "   > Select 'Choose' to pick individual exercises\n\n"
+        // howToUseDetText += "Tip: It's best to use earbuds or headphones so you can hear the metronome."
 
+        var howToUseDetText = "\u{2022} Use Headphones! We have a built-in metronome which REALLY helps your accuracy, and your score!  You can only hear the metronome with headphones.\n\n"
+        
+        howToUseDetText += "\u{2022} Select the round “Gear” button to see the Settings.\n\n"
+        
+        howToUseDetText += "\u{2022} In Settings, select the instrument, then select the tempo.  You can change the tempo anytime, speed it up as you improve.\n\n"
+        
+//        howToUseDetText += "\u{2022} In Settings, select the help mode: if you want video feedback (fastest way to improve, videos will popup and suggest a fix based on your performance), select 'Video.' Choose 'Text' if you want to get text help only.  If you want just the star rating, select 'None.'\n\n"
+        
+        howToUseDetText += "\u{2022} Select the Help mode, in Settings:\n> Choose 'Video' if you want video feedback (fastest way to improve, videos will popup and suggest a fix based on your performance)\n> Choose 'Text' if you want to get text help only\n> Choose 'None' if you want just the star rating\n\n"
+        
+        howToUseDetText += "\u{2022} Choose 'Play', then select Level. From there, pick a Day. We usually start on Day 1.\n\n"
+        
+        howToUseDetText += "\u{2022} You can decide if you would like to have the exercises move to the next exercise automatically or if you want to jump around and choose exercises yourself.\n> If you want the app to lead you through the practice session (recommended, especially for beginners) just press 'Start.'\n> If you want to select exercises yourself, just scroll to the exercise you want and tap it.\n\n"
+        
+        howToUseDetText += "\u{2022} If you complete an exercise and you don’t get the star rating you would like, we will remember your score so you can come back later that day or another day and try to improve it.\n\n"
+        
         howToUseDetailsLabel.text = howToUseDetText
         
-        var tryOutDetText = "You can access Levels 1 & 2 for free, forever. That’s almost 200 exercises!\n\n"
-        tryOutDetText += "For this free try-out, you don't need to do anything else; you are good to go!"
+        // 123456789012345678901234567890123456789012345 67890
+        // All-Level Access
+        // PlayTunes for Trumpet, English Help Videos
+        
+       ////////////////////////////////////////////////////////////////////////////////////////////////////
+        accessUpperLevelsLabel.text = "To Access All Of PlayTunes' Upper Levels"
+        
+//        var tryOutDetText = "You can access Levels 1 & 2 for free, forever. That’s almost 200 exercises!\n\n"
+//        tryOutDetText += "For this free try-out, you don't need to do anything else; you are good to go!"
+        
+        var tryOutDetText = "We have lots of free areas of the app to try out for both beginners and those with some experience. Levels 1 and 2 are completely free. Day 1 of these levels is free also: Levels 3, 4, 10, 15, 20, 25, 30.  We even give you parts of our Long Tones Level and Lip Slurs Level.  Go ahead and explore Day 1 of all the Pink levels - you can unlock Gray levels when you purchase a subscription.\n\n"
+        
+        tryOutDetText += "That’s hundreds of free exercises to help you get better!\n\n"
+        
+        tryOutDetText += "For access to 150 days of practice, and hundreds of unique exercises, you will need to purchase a PlayTunes All-Level Access Subscription through iTunes.\n\n"
+        
+//        tryOutDetText += "PlayTunes offers a 1-month ($2.99/month) and 6-month ($12.99 for 6 months) Auto-Renewing Subscriptions.\n\n"
         
         tryOutPTForFreeDetailsLabel.text = tryOutDetText
 
-        var subDetailText = "In order to get access to the 500 exercises in the upper levels, you will need to purchase a PlayTunes All-Level Access Subscription through iTunes.\n\n"
-        subDetailText += "PlayTunes offers 1-month ($9.99 per month) and 6-month ($49.99 for 6 months) Auto-Renewing Subscriptions.\n\n"
+        var subDetailText = "" //In order to get access to the 500 exercises in the upper levels, you will need to purchase a PlayTunes All-Level Access Subscription through iTunes.\n\n"
+        //subDetailText += "PlayTunes offers 1-month ($9.99 per month) and 6-month ($49.99 for 6 months) Auto-Renewing Subscriptions.\n\n"
+        
+        subDetailText += "PlayTunes offers 1-month ($2.99/month) and 6-month ($9.99 for 6 months) Auto-Renewing Subscriptions.\n\n"
+        
         subDetailText += "Select 'Purchase Options' to choose and purchase an available Subscription."
 
         accessUpperLevelsDetailLabel.text = subDetailText

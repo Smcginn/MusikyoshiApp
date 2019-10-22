@@ -84,6 +84,12 @@ public class PerformanceNote : PerformanceScoreObject
             mostCommonPlayedNotePercentage = linkedSound.getMostPlayedNotePercentage()
             mostCommonPlayedNote = linkedSound.getMostPlayedNoteID()
             mostCommonPlayedNoteCount = linkedSound.getMostPlayedNoteCount()
+            
+            if gUseWeightedPitchScore {
+                // Latest Bucket Algo Fix
+                let mostCommonFreq = NoteService.getFreqForNoteID( noteID: mostCommonPlayedNote )
+                actualFrequency = mostCommonFreq
+            }
         }
     }
     
@@ -125,12 +131,31 @@ public class PerformanceNote : PerformanceScoreObject
         
         guard let linkedSound =
             PerformanceTrackingMgr.instance.findSoundBySoundID(soundID: linkedToSoundID) else {
-            print("\n  Unable to find Linked Sound")
-            return
+                print("\n  Unable to find Linked Sound")
+                return
         }
-
+        
         linkedSound.printSamplesDetailed()
     }
+    
+    func getSamplesForDisplay() -> String {
+        var retStr = ""
+        guard isLinkedToSound else {
+            print("\n  Not Linked to Sound")
+            retStr = "\n  Note Not Linked to Sound"
+            return retStr
+        }
+        
+        guard let linkedSound =
+            PerformanceTrackingMgr.instance.findSoundBySoundID(soundID: linkedToSoundID) else {
+                print("\n  Unable to find Linked Sound")
+                retStr = "\n  Unable to find Linked Sound"
+                return retStr
+        }
+        
+        retStr = linkedSound.getSamplesForDisplay()
+        return retStr
+    }    
     
     // Used by an Alert to populate the messageString with data about this Note.
     //  (The Alert is a debug feature. It is not visible in release mode.)
@@ -190,7 +215,7 @@ public class PerformanceNote : PerformanceScoreObject
         var actFreqStr = ""
         var pitchRatingStr = ""
 
-        if kUseWeightedPitchScore {
+        if gUseWeightedPitchScore {
             let mostCommonFreq = NoteService.getFreqForNoteID( noteID: mostCommonPlayedNote )
             actFreqStr = String(format: "%.2f", mostCommonFreq)
             actFreqStr += ", "

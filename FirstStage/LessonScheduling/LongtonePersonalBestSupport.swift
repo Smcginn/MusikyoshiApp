@@ -52,6 +52,9 @@ let kLTPersBestKey_NumEntries: Int = 128
 
 // DATA_BASE_CONVERT
 func mapNoteIDToPBKey(noteID: Int) -> Int {
+    return noteID
+    
+    /*
     var retKey = kLTPersBestKey_C4
     let noteID_Uint8 = NoteID(noteID)
     switch noteID_Uint8 {
@@ -79,12 +82,15 @@ func mapNoteIDToPBKey(noteID: Int) -> Int {
     }
     
     return retKey
+  */
 }
 
 func verifyPersBestKey(persBestKey: Int) -> Bool {
-    guard persBestKey >= kLTPersBestKey_First,
-          persBestKey <= kLTPersBestKey_Last  else { return false }
- 
+    guard persBestKey >= 0,
+          persBestKey <= 127  else { return false }
+//    guard persBestKey >= kLTPersBestKey_First,
+//        persBestKey <= kLTPersBestKey_Last  else { return false }
+    
     return true
 }
 

@@ -23,6 +23,9 @@ class ThresholdsMgr {
     
     func setThresholds(thresholdsID: String,
                        ejectorSeatThreshold: String) {
+        setThresholdWith(useThresholds: Thresh_Beginner_1)
+        
+        /*
         switch thresholdsID {
         case kThershIDsStr_Begin_1:   setThresholdWith(useThresholds: Thresh_Beginner_1)
             break
@@ -49,6 +52,7 @@ class ThresholdsMgr {
         } else {
             kStopPerformanceThreshold = kStopPerformanceThresholdDefault
         }
+        */
     }
     
     struct AnalysisThresholds {
@@ -89,7 +93,7 @@ class ThresholdsMgr {
                             pitchVeryBoundaryPC:    0.05 )
     
     let Thresh_Intermediate_3: AnalysisThresholds =
-        AnalysisThresholds( rhythmTolerance:        0.2,
+        AnalysisThresholds( rhythmTolerance:        0.15,
                             correctPitchPC:         0.97,
                             pitchABitToVeryPC:      0.915,
                             pitchVeryBoundaryPC:    0.05 )

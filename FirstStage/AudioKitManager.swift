@@ -11,6 +11,9 @@ import AudioKit
 
 let kUseSplitChaining = true
 
+let kGainMultiplier = 10.0
+
+
 class AudioKitManager: NSObject {
     static let minTrackingFrequency = Double(50)
     static let maxTrackingFrequency = Double(2000)
@@ -30,14 +33,16 @@ class AudioKitManager: NSObject {
     private override init () {
         if UIDevice.current.modelName == "Simulator" {
             print("AK:init() - In Simulator")
-            kAmplitudeThresholdForIsSound = kAmpThresholdForIsSound_Sim
+            // kAmplitudeThresholdForIsSound now set elsewhere
+            // kAmplitudeThresholdForIsSound = kAmpThresholdForIsSound_Sim
             kPlaybackVolume = kPlaybackVolume_Sim
             // FIXME: Need to make this work for per-instrument basis
             // gAmpDropForNewSound = kAmpDropForNewSound_Sim
 
         } else {
             print("AK:init() - In Real Device")
-            kAmplitudeThresholdForIsSound = kAmpThresholdForIsSound_HW
+            // kAmplitudeThresholdForIsSound now set elsewhere
+            // kAmplitudeThresholdForIsSound = kAmpThresholdForIsSound_HW
             kPlaybackVolume = kPlaybackVolume_HW
             // FIXME: Need to make this work for per-instrument basis
             //gAmpDropForNewSound = kAmpDropForNewSound_HW
@@ -69,6 +74,43 @@ class AudioKitManager: NSObject {
         
         print("\n\n          In AudioKitManager.setup, rebuilding everything, recreating Mic, Tracker, etc.\n\n")
 
+        
+        // Attempting to analyze (fix?) the Crash were the output sampe rates don't match
+        let ak_sampRate = AKSettings.sampleRate
+        let ak_chanCount = AKSettings.channelCount
+
+        let inChannelCount = AudioKit.engine.inputNode.inputFormat(forBus: 0).channelCount
+        var inSampRate = AudioKit.engine.inputNode.inputFormat(forBus: 0).sampleRate
+        
+        let outChannelCount = AudioKit.engine.outputNode.outputFormat(forBus: 0).channelCount
+        var outSampRate = AudioKit.engine.outputNode.outputFormat(forBus: 0).sampleRate
+        
+//        let unusedVar1 = ak_sampRate * 2
+//        let unusedVar2 = ak_chanCount * 2
+
+        print("\n==============================================================")
+        print("  Setting up AK stuff    - AKAKAK\n\n")
+        print("      AKSettings.sampleRate                            = \(ak_sampRate)")
+        print("      AKSettings.channelCount                          = \(ak_chanCount)")
+        print("      AudioKit.engine.inputNode.inputFormatsampleRate  = \(inSampRate)")
+        print("      AudioKit.engine.inputNode.inputFormatChanCount   = \(inChannelCount)")
+        print("      AudioKit.engine.inputNode.outputFormatsampleRate = \(outSampRate)")
+        print("      AudioKit.engine.inputNode.outputFormatChanCount  = \(outChannelCount)")
+        
+        if outSampRate != inSampRate {
+            // Disabling. Restore commented code to enable bug fix.
+            
+            // This can cause a crash. Set them so they are equal. The output is often
+            // lower than the input.
+            print("\n  !!!!!!  AKAKAK  !!!!!!   outSampRate != inSampRate  !!!!!!!\n\n")
+//            print("    outSampRate != inSampRate -  attempting to change")
+//            AKSettings.sampleRate = inSampRate
+//            let outSampRate2 = AudioKit.engine.outputNode.outputFormat(forBus: 0).sampleRate
+//            print("    New outSampRate = \(outSampRate2)\n\n")
+        } else {
+            print("\n\n")
+        }
+        
         microphone = AKMicrophone()
 
 //======================================================
@@ -170,7 +212,8 @@ class AudioKitManager: NSObject {
 
         var outputVol = microphone.volume
         if alwaysFalseToSuppressWarn() { print("\(outputVol)") }
-        microphone.volume = 10
+        let currVal = microphone.volume
+        microphone.volume = kGainMultiplier
         outputVol = microphone.volume
 
         isRunning = true

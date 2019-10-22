@@ -13,6 +13,8 @@ import SwiftyJSON
 
 class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults, PresentingMicCalibVC {
     
+    
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var resumeBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
@@ -40,8 +42,9 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
     var exerStrs:[String] = []
     var exerType:ExerciseType = .unknownExer
     var currStarScore: Int = 0
+    var levelTitle: String = ""
     var dayTitle: String = ""
-    
+
     var currExerNumber:Int = 0 // for sanity check - compare against reported results
     
     // This data is set by presented VC (either LongtoneVC or TuneExerciseVC)
@@ -158,11 +161,18 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
         }
         useThisToSuppressWarnings(str: "\(itWorked)")
         
+        RealTimeSettingsManager.instance.resetFor_CurrBPM_AndLevel()
+        
         self.progBarViewWidthConstraint.constant = 0
         self.progBarBackgroundView.isHidden = true
         self.progBarView.isHidden = true
         
-        titleLabel.text = "Level \(thisViewsLevel + 1), Day \(thisViewsLevelDay + 1)"
+        // Need to have a better method of detection, but for now . . .
+        if levelTitle.length > 3 { // Special category. Omit "Level"
+            titleLabel.text = "\(dayTitle)"
+        } else { // just a number. Include "Level"
+            titleLabel.text = "Level \(levelTitle), Day \(thisViewsLevelDay + 1)"
+        }
         
         tableView.separatorStyle = .none
         tableView.delegate = self
@@ -320,6 +330,7 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
     
     func startAutoSchedHandler( /* _ act: UIAlertAction */ ) {
         print("startAutoSchedHandler  called")
+        self.paused = false
 //        self.launchingNextView?.isHidden =  false
 //        self.launchingNextView?.animateMonkeyImageView()
         self.instructionsLabel.text = "Press PAUSE to exit guided mode."
@@ -340,44 +351,68 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
         self.progBarView.isHidden = false
         self.progBarBackgroundView.isHidden = false
         self.animateProgressBar()
-        //self.launchingNextView?.mode = kViewFinishedMode_Loading
+        self.launchingNextView?.isPaused = true
+//        self.launchingNextView?.mode = kViewFinishedMode_Loading
     }
+    
+    enum tAutoMode {
+        case paused_or_choose   // could be either
+        case auto
+    }
+    var autoMode: tAutoMode = .paused_or_choose
+    
+    
+//    var pauseHasBeenPressed = false
     
     @IBAction func resumeBtnPressed(_ sender: Any) {
         
         // Sketchy
         
-        if resumeBtn.titleLabel?.text == "START" {
-            
+        let currMode = self.launchingNextView?.mode
+        
+        
+        //if resumeBtn.titleLabel?.text == "START" {
+        if autoMode == .paused_or_choose {
+            autoMode = .auto
+            self.paused = false
+
             if firstTimeInView {
                 firstTimeInView = false
                 //          self.launchingNextView?.isHidden =  true
                 startAutoSchedHandler()
             } else {
                 resumeAutoSchedHandler()
-            }
+                viewFinished(result: kViewFinished_UnPause)
+           }
             
-        } else if resumeBtn.titleLabel?.text == "PAUSE" {
+//        } else if resumeBtn.titleLabel?.text == "PAUSE" {
+        } else if autoMode == .auto {
+            autoMode = .paused_or_choose
+            self.paused = true
             
+//            pauseHasBeenPressed = true
+
             if let launchingNextView = launchingNextView {
                 
+                // just added this:
+                launchingNextView.isPaused = true
+                progBarView.isHidden = true
+
                 if launchingNextView.waitingToBegin || launchingNextView.exercisesDone {
                     viewFinished(result: kViewFinished_Proceed)
-                } else if launchingNextView.isPaused {
-                    launchingNextView.isPaused = false
-                    viewFinished(result: kViewFinished_UnPause)
+//                } else if launchingNextView.isPaused {
+//                    launchingNextView.isPaused = false
+//                    viewFinished(result: kViewFinished_UnPause)
                 } else {
                     progBarView.isHidden = true
                     self.progBarBackgroundView.isHidden = true
                     viewFinished(result: kViewFinished_Pause)
                 }
                 
-                self.instructionsLabel.text = "Tap START for a guided practice session, or select individual exercises on the left."
+                self.instructionsLabel.text = "Tap RESUME for a guided practice session, or select individual exercises on the left."
                 
             }
-
         }
-        
     }
     
     @IBAction func backBtnPressed(_ sender: Any) {
@@ -550,7 +585,7 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
         }
         
         self.tableView.reloadData()
-        if !(self.launchingNextView?.waitingToBegin)! {
+        if !paused && !(self.launchingNextView?.waitingToBegin)! {
             // self.launchingNextView?.animateMonkeyImageView()
             animateProgressBar()
         }
@@ -566,11 +601,11 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
             self.launchingNextView?.mode = kViewFinishedMode_Ready
         } else if self.firstExer {
             self.launchingNextView?.mode = kViewFinishedMode_First
-            //        } else if self.exercisesDone {
-            //            delay(2.0) {
-            //                self.showAllDoneAlerts()
-            //            }
-            //            // self.launchingNextView?.mode = kViewFinishedMode_AllDone
+        } else if self.exercisesDone {
+            delay(2.0) {
+                self.showAllDoneAlerts()
+            }
+            self.launchingNextView?.mode = kViewFinishedMode_AllDone
         } else {
             self.launchingNextView?.mode = kViewFinishedMode_Loading
         }
@@ -744,8 +779,13 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
     func viewFinished(result: Int) {
         if result == kViewFinished_Proceed {
             if (self.launchingNextView?.waitingToBegin)! {
-                self.animateProgressBar()
-                self.launchingNextView?.mode = kViewFinishedMode_First
+                if self.paused { // user pressed pause before exer launched
+                    self.resumeBtn.setTitle("RESUME", for: .normal)
+                    autoMode = .paused_or_choose
+                } else {
+                    self.animateProgressBar()
+                    self.launchingNextView?.mode = kViewFinishedMode_First
+                }
             } else if exercisesDone {
                 // NOTE update superview of status?
                 //              self.dismiss(animated: true, completion: nil)
@@ -761,14 +801,17 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
             // launchPausedDlg()
             
             // ----> Pause button lands here
-            self.resumeBtn.setTitle("START", for: .normal)
-            
+            // self.resumeBtn.setTitle("START", for: .normal)
+            self.resumeBtn.setTitle("RESUME", for: .normal)
+            autoMode = .paused_or_choose
+
             paused = true
             //self.launchingNextView?.isPaused = true
             //self.launchingNextView?.mode = kViewFinishedMode_Ready
             print ("Yo! Pausededed!")
         } else if result == kViewFinished_UnPause  {
             self.resumeBtn.setTitle("PAUSE", for: .normal)
+            autoMode = .auto
             paused = false
             self.launchingNextView?.isPaused = false
             self.launchingNextView?.mode = kViewFinishedMode_Loading
@@ -798,12 +841,16 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
                     self.progBarView.superview?.layoutIfNeeded()
                 }) { (_) in
                     
+                    delay(0.1) {}
                     if (self.launchingNextView?.waitingToBegin)! {
                         self.launchingNextView?.mode = kViewFinishedMode_First
                     }
                     
                     if !launchingNextView.exercisesDone { // don't auto-return to caller if all done
-                        self.viewFinished(result: kViewFinished_Proceed)
+                        // blar - check if paused
+                        if !self.paused {
+                            self.viewFinished(result: kViewFinished_Proceed)
+                        }
                     }
                 }
                 
@@ -991,7 +1038,8 @@ extension DayOverviewViewController: UITableViewDelegate, UITableViewDataSource 
         guard indexPath.row < numExers else { return cell }
         
         let thisLDE = makeLDEForViewsLevelDay( andThisExer: indexPath.row )
-        let cellText = LessonScheduler.instance.getPrettyNameForExercise( forLDE: thisLDE )
+        let cellText = LessonScheduler.instance.getPrettyNameForExercise( forLDE: thisLDE,
+                                                                          appendComposer: true )
         
         let currLDE = LsnSchdlr.instance.getCurrentLDE()
         let currExerNum = currLDE.exer

@@ -50,8 +50,14 @@ class PATestFreqAndPitchSampleSim {
     }
     
     func SetupLegatoPitchTest1() {
-        let numSamps = setupPitchDataFor_Test1()
-        autofillAmpSamples_1(numSamples: numSamps)
+//        let numSamps = setupPitchDataFor_Test1()
+//        autofillAmpSamples_1(numSamples: numSamps)
+     
+//        let numSamps = setupPitchDataFor_Test2()
+//        autofillAmpSamples_2(numSamples: numSamps)
+        
+        let numSamps = setupPitchDataFor_Test3()
+        autofillAmpSamples_3(numSamples: numSamps)
         
         print("\n-----------------------------------------------------")
         print("\n  PATestFreqAndPitchSampleSim Test, Pitch samples:")
@@ -161,4 +167,180 @@ class PATestFreqAndPitchSampleSim {
         
         return 340
     }
+    
+    
+    
+    
+    /////////////////////////////////
+    //
+    //          2 - partial
+    //
+    
+    
+    func autofillAmpSamples_2(numSamples: Int) {
+        amplitudeSamples = [Double](repeating: 0.0, count: 500)
+        
+        // rise
+        amplitudeSamples[0] = 0.0
+        amplitudeSamples[1] = 0.01
+        amplitudeSamples[2] = 0.02
+        amplitudeSamples[3] = 0.03
+        amplitudeSamples[4] = 0.04
+        amplitudeSamples[5] = 0.05
+        amplitudeSamples[6] = 0.06
+        amplitudeSamples[7] = 0.07
+        amplitudeSamples[8] = kAutoFill_AmpVal
+        //        amplitudeSamples[9] = 0.09
+        //        amplitudeSamples[10] = 0.10
+        //        amplitudeSamples[11] = 0.11
+        //        amplitudeSamples[12] = 0.12
+        //        amplitudeSamples[13] = kAutoFill_AmpVal
+        
+        // const amplitude
+        for i in 9...numSamples {
+            amplitudeSamples[i] = kAutoFill_AmpVal
+        }
+        
+        var desencdingAmp = kAutoFill_AmpVal
+        for i in 73...86 {
+            desencdingAmp -= 0.07
+            if desencdingAmp < 0.0 {
+                desencdingAmp = 0.0
+            }
+            pitchSamples[i] = 73.4
+        }
+    }
+    
+    func setupPitchDataFor_Test2() -> Int  {
+        
+        pitchSamples = [Double](repeating: 0.0, count: 500)
+        
+        pitchSamples[0] = 120.3
+        pitchSamples[1] = 120.3
+        for i in 2...38 {
+            pitchSamples[i] = 225.6
+        }
+        
+        // Sound # 2 - C4
+        // Wobbly transition from G4 to C4
+        pitchSamples[39]  = 120.3
+        pitchSamples[40] = 120.3
+        
+        pitchSamples[41] = 225.6
+        pitchSamples[42] = 225.6
+        pitchSamples[43] = 225.6
+        pitchSamples[44] = 225.6
+        pitchSamples[45] = 225.6
+        pitchSamples[46] = 225.6
+        pitchSamples[47] = 225.6
+        pitchSamples[48] = 225.6
+        pitchSamples[49] = 225.6
+        
+        for i in 50...58 {
+            pitchSamples[i] = 74.6
+        }
+        
+        for i in 59...67 {
+            pitchSamples[i] = 73.9
+        }
+        
+        for i in 68...72 {
+            pitchSamples[i] = 73.4
+        }
+        
+        for i in 73...86 {
+            pitchSamples[i] = 73.4
+        }
+        
+        return 86
+    }
+
+    
+    /////////////////////////////////
+    //
+    //          Set 3 - One octave aparts
+    //
+    
+    
+    func autofillAmpSamples_3(numSamples: Int) {
+        amplitudeSamples = [Double](repeating: 0.0, count: 500)
+        
+        // rise
+        amplitudeSamples[0] = 0.0
+        amplitudeSamples[1] = 0.01
+        amplitudeSamples[2] = 0.02
+        amplitudeSamples[3] = 0.03
+        amplitudeSamples[4] = 0.04
+        amplitudeSamples[5] = 0.05
+        amplitudeSamples[6] = 0.06
+        amplitudeSamples[7] = 0.07
+        amplitudeSamples[8] = kAutoFill_AmpVal
+        //        amplitudeSamples[9] = 0.09
+        //        amplitudeSamples[10] = 0.10
+        //        amplitudeSamples[11] = 0.11
+        //        amplitudeSamples[12] = 0.12
+        //        amplitudeSamples[13] = kAutoFill_AmpVal
+        
+        // const amplitude
+        for i in 9...numSamples {
+            amplitudeSamples[i] = kAutoFill_AmpVal
+        }
+        
+        var desencdingAmp = kAutoFill_AmpVal
+        for i in 73...86 {
+            desencdingAmp -= 0.07
+            if desencdingAmp < 0.0 {
+                desencdingAmp = 0.0
+            }
+            pitchSamples[i] = 73.4
+        }
+    }
+    
+    // 161.5, 80.1
+    
+    let kD2_Freq = Double(73.4)
+    let kD3_Freq = Double(146.8)
+    func setupPitchDataFor_Test3() -> Int  {
+        
+        pitchSamples = [Double](repeating: 0.0, count: 500)
+        
+        for i in 0...9 {
+            pitchSamples[i] = kD3_Freq
+        }
+        
+        for i in 10...19 {
+            pitchSamples[i] = kD3_Freq
+        }
+        
+        for i in 20...29 {
+            pitchSamples[i] = kD3_Freq
+        }
+        
+        for i in 30...39 {
+            pitchSamples[i] = kD2_Freq
+        }
+        
+        for i in 40...49 {
+            pitchSamples[i] = kD3_Freq
+        }
+        
+        for i in 50...59 {
+            pitchSamples[i] = kD2_Freq
+        }
+        
+        for i in 60...69 {
+            pitchSamples[i] = kD3_Freq
+        }
+        
+        for i in 70...79 {
+            pitchSamples[i] = kD2_Freq
+        }
+
+        for i in 80...86 {
+            pitchSamples[i] = kD3_Freq
+        }
+        
+        return 86
+    }
 }
+

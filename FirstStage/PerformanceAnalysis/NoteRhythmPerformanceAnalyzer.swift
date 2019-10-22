@@ -69,7 +69,7 @@ func calcAndSetAdjustedRhythmTolerances(bpm: Double) {
     
     gBPMAttackWindowMultiplier = kBPMAttackWindow_Numerator / bpm
     
-    gAdjustAttackVar_Correct = attackVariance_Correct // * gBPMAttackWindowMultiplier
+    gAdjustAttackVar_Correct = attackVariance_Correct * gBPMAttackWindowMultiplier
     gAdjustAttackVar_ABitOff = attackVariance_ABitOff * gBPMAttackWindowMultiplier
     if gAdjustAttackVar_VeryOff_DoOverride {
         gAdjustAttackVar_Correct = gAdjustAttackVar_VeryOffOverride

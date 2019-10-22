@@ -58,9 +58,59 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC, 
                             "Bassoon",
                             "Alto Saxophone",
                             "Tenor Saxophone",
-                            "Baritone Saxophone",
-                            "Mallet Percussion"  ]
+                            "Baritone Saxophone" ] // ,
+//                           "Bells"  ]
 
+    func getPickerIndexFromInstID(InstID: Int) -> Int {
+        var retVal = 0
+        switch InstID {
+        case kInst_Flute:           retVal =  0
+        case kInst_Oboe:            retVal =  1
+        case kInst_Clarinet:        retVal =  2
+        case kInst_BassClarinet:    retVal =  3
+        case kInst_Bassoon:         retVal =  4
+        case kInst_AltoSax:         retVal =  5
+        case kInst_TenorSax:        retVal =  6
+        case kInst_BaritoneSax:     retVal =  7
+        case kInst_FrenchHorn:      retVal =  8
+        case kInst_Trumpet:         retVal =  9
+        case kInst_Trombone:        retVal = 10
+        case kInst_Euphonium:       retVal = 11
+        case kInst_Tuba:            retVal = 12
+        case kInst_Mallet:          retVal = 13
+            
+        default:   retVal = 0
+        }
+        return retVal
+    }
+    
+    func getInstIDFromTableIndex(pickerIndex: Int) -> Int {
+        var retVal = 0
+        switch pickerIndex {
+            case  0:   retVal = kInst_Flute
+            case  1:   retVal = kInst_Oboe
+            case  2:   retVal = kInst_Clarinet
+            case  3:   retVal = kInst_BassClarinet
+            case  4:   retVal = kInst_Bassoon
+            case  5:   retVal = kInst_AltoSax
+            case  6:   retVal = kInst_TenorSax
+            case  7:   retVal = kInst_BaritoneSax
+            case  8:   retVal = kInst_FrenchHorn
+            case  9:   retVal = kInst_Trumpet
+            case 10:   retVal = kInst_Trombone
+            case 11:   retVal = kInst_Euphonium
+            case 12:   retVal = kInst_Tuba
+            case 13:   retVal = kInst_Mallet
+
+            default:   retVal = kInst_Trumpet
+        }
+        return retVal
+    }
+    
+    func printInstSelection() {
+        
+    }
+    
     @IBOutlet weak var selectedInstrumentLabel: UILabel!
     @IBOutlet weak var instrumentPicker: UIPickerView!
     @IBOutlet weak var changeSelectedInstrumentButton: UIButton!
@@ -98,6 +148,7 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC, 
         
         setCurrentStudentInstrument(instrument: currSelInst)
         loadAmpRiseValuesForCurrentInst()
+        setCurrentAmpRiseValsForInstrument(forInstr: currSelInst)
         
         tableView.beginUpdates()
         tableView.endUpdates()
@@ -179,12 +230,14 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC, 
     @IBOutlet weak var resetAllToDefaultsLabel: UILabel!
     
     @IBAction func ampRiseChangeSlider_Changed(_ sender: Any) {
-        let newVal = ampRiseChangeSlider.value
+        let newVal = Double(ampRiseChangeSlider.value)
         let ampRiseChangeValueStr = String(format: "%.2f", newVal)
         ampRiseChangeValueLabel.text = ampRiseChangeValueStr
 
-        let currInst = getCurrentStudentInstrument()
-        changeAmpRiseForNewSound(forInstr: currInst, rise: Double(newVal))
+//        let currInst = getCurrentStudentInstrument()
+//        changeAmpRiseForNewSound(forInstr: currInst, rise: newVal)
+        
+        gAmpRiseForNewSound =  newVal // getAmpRiseForNewSound(forInstr: forInstr)
     }
     
     @IBAction func ampRiseWindowSizeSlider_Changed(_ sender: Any) {
@@ -192,8 +245,10 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC, 
         let ampRiseWindowSizeStr = String(newVal)
         ampRiseWindowSizeLabel.text = ampRiseWindowSizeStr
 
-        let currInst = getCurrentStudentInstrument()
-        changeNumSamplesInAnalysisWindow(forInstr: currInst, numSamples: UInt(newVal))
+//        let currInst = getCurrentStudentInstrument()
+//        changeNumSamplesInAnalysisWindow(forInstr: currInst, numSamples: UInt(newVal))
+        
+        gSamplesInAnalysisWindow = UInt(newVal) // getNumSamplesInAnalysisWindow(forInstr: forInstr)
     }
     
     @IBAction func ampRiseNumToSkipSlider_Changed(_ sender: Any) {
@@ -201,13 +256,15 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC, 
         let ampRiseNumToSkipStr = String(newVal)
         ampRiseNumToSkipLabel.text = ampRiseNumToSkipStr
         
-        let currInst = getCurrentStudentInstrument()
-        changeAmpRiseSamplesToSkip(forInstr: currInst, numSamples: UInt(newVal))
+//        let currInst = getCurrentStudentInstrument()
+//        changeAmpRiseSamplesToSkip(forInstr: currInst, numSamples: UInt(newVal))
+
+        gSkipBeginningSamples    = UInt(newVal) // getAmpRiseSamplesToSkip(forInstr: forInstr)
     }
     
     @IBAction func ResetAllBtnPressed(_ sender: Any) {
-        let currInst = getCurrentStudentInstrument()
-        resetAmpRiseValesToDefaults(forInstr: currInst)
+ //       let currInst = getCurrentStudentInstrument()
+ //       resetAmpRiseValesToDefaults(forInstr: currInst)
         loadAmpRiseValuesForCurrentInst() // set the sliders to restored values
     }
     
@@ -266,7 +323,8 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC, 
         resetStr += "'s Defaults"
         resetAllToDefaultsLabel.text = resetStr
         
-        let ampRiseChangeValue     = getAmpRiseForNewSound(forInstr: currInst)
+        let ampRiseChangeValue     = getAmpRiseForNewSound(forInstr: currInst,
+                                                           forSettings: true)
         let ampRiseWindowSizeValue = getNumSamplesInAnalysisWindow(forInstr: currInst)
         let ampRiseNumToSkipValue  = getAmpRiseSamplesToSkip(forInstr: currInst)
 
@@ -413,6 +471,10 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC, 
         }
     
         loadAmpRiseValuesForCurrentInst()
+        
+        let vidHelpMode = getVideoHelpMode()
+        videoModeSegControl.selectedSegmentIndex = vidHelpMode
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -425,12 +487,19 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC, 
         UserDefaults.standard.set(noteWidthStepper.value, forKey: Constants.Settings.SmallestNoteWidth)
         UserDefaults.standard.set(signatureWidthStepper.value, forKey: Constants.Settings.SignatureWidth)
         
+        // InstrumentSettingsManager.sharedInstance.resetAdjustedAmpRise()
+        
         // We wait to do this test here, in case they make a mistake in selecting an
         // instrument. We only commit and create the score file when leaving Settings screen.
         let currInstrument = getCurrentStudentInstrument()
         if currInstrument != savedCurrInstrument {
             _ = LessonScheduler.instance.loadScoreFile()
+            RealTimeSettingsManager.instance.resetFor_CurrInst()
         }
+        RealTimeSettingsManager.instance.resetFor_CurrBPM_AndLevel()
+        
+        let newVidHelpMode = videoModeSegControl.selectedSegmentIndex
+        setVideoHelpMode(newMode: newVidHelpMode)
         
         super.viewWillDisappear(animated)
     }
@@ -441,7 +510,8 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC, 
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        if indexPath.section == 0 && indexPath.row == 2 {
+        if indexPath.section == 0 &&
+           indexPath.row == kTCIndex_PurchOptions {
             if let parent = self.parent as? SettingsViewController {
                 parent.performSegue(withIdentifier: "toPurchaseOptions", sender: nil)
             }
@@ -450,14 +520,15 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC, 
     }
     
     // Table View Cell indices
-    let kTCIndex_InstPicker      = 0
-    let kTCIndex_BPM             = 1
-    let kTCIndex_PurchOptions    = 2
-    let kTCIndex_AmpRise         = 3
-    let kTCIndex_IsASound        = 4
-    let kTCIndex_MicCalibrate    = 5
-    let kTCIndex_SmallestNoteWd  = 6
-    let kTCIndex_SigWd           = 7
+    let kTCIndex_InstPicker         = 0
+    let kTCIndex_BPM                = 1
+    let kTCIndex_CorrectionSettings = 2
+    let kTCIndex_PurchOptions       = 3
+    let kTCIndex_AmpRise            = 4
+    let kTCIndex_IsASound           = 5
+    let kTCIndex_MicCalibrate       = 6
+    let kTCIndex_SmallestNoteWd     = 7
+    let kTCIndex_SigWd              = 8
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
