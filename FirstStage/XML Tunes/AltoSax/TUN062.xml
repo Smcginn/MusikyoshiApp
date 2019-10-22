@@ -5,7 +5,7 @@
     <rights>©</rights>
     <encoding>
       <software>Finale v25 for Mac</software>
-      <encoding-date>2019-07-16</encoding-date>
+      <encoding-date>2019-09-03</encoding-date>
       <supports attribute="new-system" element="print" type="yes" value="yes"/>
       <supports attribute="new-page" element="print" type="yes" value="yes"/>
       <supports element="accidental" type="yes"/>
@@ -162,11 +162,12 @@
           <octave>4</octave>
         </pitch>
         <duration>2</duration>
+        <tie type="start"/>
         <voice>1</voice>
         <type>quarter</type>
         <stem default-y="5.5">up</stem>
         <notations>
-          <slur number="1" placement="below" type="start"/>
+          <tied type="start"/>
         </notations>
       </note>
       <note default-x="54">
@@ -178,9 +179,6 @@
         <voice>1</voice>
         <type>quarter</type>
         <stem default-y="-55">down</stem>
-        <notations>
-          <slur number="1" type="stop"/>
-        </notations>
       </note>
       <note default-x="95">
         <pitch>
@@ -188,11 +186,12 @@
           <octave>4</octave>
         </pitch>
         <duration>2</duration>
+        <tie type="start"/>
         <voice>1</voice>
         <type>quarter</type>
         <stem default-y="5.5">up</stem>
         <notations>
-          <slur number="1" placement="below" type="start"/>
+          <tied type="start"/>
         </notations>
       </note>
       <note default-x="136">
@@ -204,9 +203,6 @@
         <voice>1</voice>
         <type>quarter</type>
         <stem default-y="-55">down</stem>
-        <notations>
-          <slur number="1" type="stop"/>
-        </notations>
       </note>
     </measure>
     <!--=======================================================-->
@@ -260,11 +256,12 @@
           <octave>5</octave>
         </pitch>
         <duration>2</duration>
+        <tie type="start"/>
         <voice>1</voice>
         <type>quarter</type>
         <stem default-y="-50.5">down</stem>
         <notations>
-          <slur number="1" placement="below" type="start"/>
+          <tied type="start"/>
         </notations>
       </note>
       <note default-x="55">
@@ -276,9 +273,6 @@
         <voice>1</voice>
         <type>quarter</type>
         <stem default-y="-45">down</stem>
-        <notations>
-          <slur number="1" type="stop"/>
-        </notations>
       </note>
       <note default-x="96">
         <pitch>
@@ -286,11 +280,12 @@
           <octave>5</octave>
         </pitch>
         <duration>2</duration>
+        <tie type="start"/>
         <voice>1</voice>
         <type>quarter</type>
         <stem default-y="-40">down</stem>
         <notations>
-          <slur number="1" placement="below" type="start"/>
+          <tied type="start"/>
         </notations>
       </note>
       <note default-x="136">
@@ -302,9 +297,6 @@
         <voice>1</voice>
         <type>quarter</type>
         <stem default-y="-45">down</stem>
-        <notations>
-          <slur number="1" type="stop"/>
-        </notations>
       </note>
     </measure>
     <!--=======================================================-->
@@ -363,11 +355,12 @@
           <octave>5</octave>
         </pitch>
         <duration>2</duration>
+        <tie type="start"/>
         <voice>1</voice>
         <type>quarter</type>
         <stem default-y="-45.5">down</stem>
         <notations>
-          <slur number="1" placement="below" type="start"/>
+          <tied type="start"/>
         </notations>
       </note>
       <note default-x="166">
@@ -379,9 +372,6 @@
         <voice>1</voice>
         <type>quarter</type>
         <stem default-y="5">up</stem>
-        <notations>
-          <slur number="1" type="stop"/>
-        </notations>
       </note>
       <note default-x="254">
         <pitch>
@@ -389,11 +379,12 @@
           <octave>5</octave>
         </pitch>
         <duration>2</duration>
+        <tie type="start"/>
         <voice>1</voice>
         <type>quarter</type>
         <stem default-y="-45.5">down</stem>
         <notations>
-          <slur number="1" placement="below" type="start"/>
+          <tied type="start"/>
         </notations>
       </note>
       <note default-x="341">
@@ -405,9 +396,6 @@
         <voice>1</voice>
         <type>quarter</type>
         <stem default-y="5">up</stem>
-        <notations>
-          <slur number="1" type="stop"/>
-        </notations>
       </note>
     </measure>
     <!--=======================================================-->
@@ -438,11 +426,12 @@
           <octave>4</octave>
         </pitch>
         <duration>2</duration>
+        <tie type="start"/>
         <voice>1</voice>
         <type>quarter</type>
         <stem default-y="11">up</stem>
         <notations>
-          <slur number="1" placement="below" type="start"/>
+          <tied type="start"/>
         </notations>
       </note>
       <note default-x="277">
@@ -454,9 +443,6 @@
         <voice>1</voice>
         <type>quarter</type>
         <stem default-y="5">up</stem>
-        <notations>
-          <slur number="1" type="stop"/>
-        </notations>
       </note>
     </measure>
     <!--=======================================================-->

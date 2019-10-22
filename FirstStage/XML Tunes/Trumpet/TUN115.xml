@@ -6,7 +6,7 @@
     <rights>©</rights>
     <encoding>
       <software>Finale v25 for Mac</software>
-      <encoding-date>2018-08-18</encoding-date>
+      <encoding-date>2019-08-31</encoding-date>
       <supports attribute="new-system" element="print" type="yes" value="yes"/>
       <supports attribute="new-page" element="print" type="yes" value="yes"/>
       <supports element="accidental" type="yes"/>
@@ -212,11 +212,6 @@
         <voice>1</voice>
         <type>quarter</type>
         <stem default-y="-55">down</stem>
-        <notations>
-          <articulations>
-            <breath-mark default-x="18" default-y="8" placement="above"/>
-          </articulations>
-        </notations>
       </note>
       <note default-x="134">
         <pitch>
@@ -283,11 +278,6 @@
         <type>half</type>
         <dot/>
         <stem default-y="1">up</stem>
-        <notations>
-          <articulations>
-            <breath-mark default-x="18" default-y="19" placement="above"/>
-          </articulations>
-        </notations>
       </note>
     </measure>
     <!--=======================================================-->
@@ -359,11 +349,6 @@
         <type>quarter</type>
         <accidental>flat</accidental>
         <stem default-y="-55">down</stem>
-        <notations>
-          <articulations>
-            <breath-mark default-x="19" default-y="8" placement="above"/>
-          </articulations>
-        </notations>
       </note>
       <note default-x="64">
         <pitch>
@@ -431,9 +416,6 @@
         <stem default-y="-45">down</stem>
         <notations>
           <tied type="stop"/>
-          <articulations>
-            <breath-mark default-x="18" default-y="14" placement="above"/>
-          </articulations>
         </notations>
       </note>
       <note default-x="137">
@@ -478,9 +460,6 @@
         <stem default-y="-45">down</stem>
         <notations>
           <tied type="stop"/>
-          <articulations>
-            <breath-mark default-x="18" default-y="14" placement="above"/>
-          </articulations>
         </notations>
       </note>
       <note default-x="98">
@@ -585,11 +564,6 @@
         <voice>1</voice>
         <type>quarter</type>
         <stem default-y="-50">down</stem>
-        <notations>
-          <articulations>
-            <breath-mark default-x="18" default-y="9" placement="above"/>
-          </articulations>
-        </notations>
       </note>
       <note default-x="110">
         <pitch>
@@ -732,11 +706,6 @@
         <type>quarter</type>
         <dot/>
         <stem default-y="-45">down</stem>
-        <notations>
-          <articulations>
-            <breath-mark default-x="18" default-y="14" placement="above"/>
-          </articulations>
-        </notations>
       </note>
       <note default-x="62">
         <pitch>
@@ -780,11 +749,6 @@
         <type>quarter</type>
         <dot/>
         <stem default-y="10.5">up</stem>
-        <notations>
-          <articulations>
-            <breath-mark default-x="18" default-y="29" placement="above"/>
-          </articulations>
-        </notations>
       </note>
     </measure>
     <!--=======================================================-->

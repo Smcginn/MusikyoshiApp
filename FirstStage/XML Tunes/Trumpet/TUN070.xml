@@ -7,7 +7,7 @@
     <rights>©MusiKyoshi 2015</rights>
     <encoding>
       <software>Finale v25 for Mac</software>
-      <encoding-date>2018-11-10</encoding-date>
+      <encoding-date>2019-08-31</encoding-date>
       <supports attribute="new-system" element="print" type="yes" value="yes"/>
       <supports attribute="new-page" element="print" type="yes" value="yes"/>
       <supports element="accidental" type="yes"/>
@@ -260,11 +260,6 @@
         <type>quarter</type>
         <dot/>
         <stem default-y="-14.5">up</stem>
-        <notations>
-          <articulations>
-            <breath-mark default-x="18" default-y="8" placement="above"/>
-          </articulations>
-        </notations>
       </note>
       <note default-x="61">
         <pitch>
@@ -407,11 +402,6 @@
         <voice>1</voice>
         <type>quarter</type>
         <stem default-y="-9">up</stem>
-        <notations>
-          <articulations>
-            <breath-mark default-x="18" default-y="9" placement="above"/>
-          </articulations>
-        </notations>
       </note>
       <note default-x="172">
         <pitch>
@@ -480,11 +470,6 @@
         <type>half</type>
         <dot/>
         <stem default-y="-15">up</stem>
-        <notations>
-          <articulations>
-            <breath-mark default-x="18" default-y="8" placement="above"/>
-          </articulations>
-        </notations>
       </note>
       <note default-x="100">
         <pitch>
@@ -576,11 +561,6 @@
         <voice>1</voice>
         <type>quarter</type>
         <stem default-y="-9">up</stem>
-        <notations>
-          <articulations>
-            <breath-mark default-x="18" default-y="9" placement="above"/>
-          </articulations>
-        </notations>
       </note>
       <note default-x="133">
         <pitch>
@@ -727,11 +707,6 @@
         <type>quarter</type>
         <dot/>
         <stem default-y="-9.5">up</stem>
-        <notations>
-          <articulations>
-            <breath-mark default-x="18" default-y="9" placement="above"/>
-          </articulations>
-        </notations>
       </note>
       <note default-x="80">
         <pitch>

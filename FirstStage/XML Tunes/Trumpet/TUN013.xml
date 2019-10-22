@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 3.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
-<score-partwise version="3.0">
-  <movement-title>13. Four Quarters</movement-title>
+<!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 3.1 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
+<score-partwise version="3.1">
+  <movement-title>PlayTunes Tune 7</movement-title>
   <identification>
-    <creator type="composer">Shawn McGinn</creator>
-    <rights>©MusiKyoshi 2015</rights>
+    <rights>©</rights>
     <encoding>
-      <software>Finale 2012 for Mac</software>
-      <software>Dolet Light for Finale 2012</software>
-      <encoding-date>2015-11-15</encoding-date>
+      <software>Finale v25 for Mac</software>
+      <encoding-date>2019-08-31</encoding-date>
       <supports attribute="new-system" element="print" type="yes" value="yes"/>
       <supports attribute="new-page" element="print" type="yes" value="yes"/>
+      <supports element="accidental" type="yes"/>
+      <supports element="beam" type="yes"/>
+      <supports element="stem" type="yes"/>
     </encoding>
   </identification>
   <defaults>
@@ -56,32 +57,27 @@
     <word-font font-family="Times New Roman" font-size="10.25"/>
   </defaults>
   <credit page="1">
-    <credit-type>title</credit-type>
-    <credit-words default-x="589" default-y="1481" font-size="24" justify="center" valign="top">13. Four Quarters</credit-words>
-  </credit>
-  <credit page="1">
-    <credit-type>composer</credit-type>
-    <credit-words default-x="1122" default-y="1407" font-size="12" justify="right" valign="top">Shawn McGinn</credit-words>
-  </credit>
-  <credit page="1">
     <credit-type>rights</credit-type>
-    <credit-words default-x="597" default-y="53" font-size="10" justify="center" valign="bottom">©MusiKyoshi 2015</credit-words>
+    <credit-words default-x="597" default-y="53" font-size="10" justify="center" valign="bottom">©</credit-words>
+  </credit>
+  <credit page="1">
+    <credit-words default-x="70" default-y="1478" font-size="12" valign="top">Trumpet in Bb</credit-words>
   </credit>
   <part-list>
     <score-part id="P1">
       <part-name print-object="no">Trumpet in Bb</part-name>
       <part-abbreviation print-object="no">Bb Tpt.</part-abbreviation>
-      <score-instrument id="P1-I7">
-        <instrument-name>Garritan: ARIA Player</instrument-name>
+      <score-instrument id="P1-I10">
+        <instrument-name>ARIA Player</instrument-name>
         <instrument-sound>brass.trumpet.bflat</instrument-sound>
         <virtual-instrument/>
       </score-instrument>
-      <midi-device>Bank 1</midi-device>
-      <midi-instrument id="P1-I7">
-        <midi-channel>7</midi-channel>
+      <midi-device>ARIA Player</midi-device>
+      <midi-instrument id="P1-I10">
+        <midi-channel>11</midi-channel>
         <midi-program>1</midi-program>
         <volume>80</volume>
-        <pan>-34</pan>
+        <pan>-1</pan>
       </midi-instrument>
     </score-part>
   </part-list>
@@ -100,7 +96,7 @@
       </print>
       <attributes>
         <divisions>2</divisions>
-        <key>
+        <key print-object="no">
           <fifths>0</fifths>
           <mode>major</mode>
         </key>
@@ -312,7 +308,7 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="6" width="414">
+    <measure number="6" width="411">
       <print new-system="yes">
         <system-layout>
           <system-distance>114</system-distance>
@@ -328,7 +324,7 @@
         <type>quarter</type>
         <stem default-y="0.5">up</stem>
       </note>
-      <note default-x="142">
+      <note default-x="141">
         <pitch>
           <step>F</step>
           <octave>4</octave>
@@ -338,7 +334,7 @@
         <type>quarter</type>
         <stem default-y="0.5">up</stem>
       </note>
-      <note default-x="233">
+      <note default-x="231">
         <pitch>
           <step>F</step>
           <octave>4</octave>
@@ -348,7 +344,7 @@
         <type>quarter</type>
         <stem default-y="0.5">up</stem>
       </note>
-      <note default-x="323">
+      <note default-x="320">
         <rest/>
         <duration>2</duration>
         <voice>1</voice>
@@ -356,7 +352,7 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="7" width="375">
+    <measure number="7" width="372">
       <note default-x="13">
         <pitch>
           <step>E</step>
@@ -367,13 +363,13 @@
         <type>quarter</type>
         <stem default-y="-4.5">up</stem>
       </note>
-      <note default-x="104">
+      <note default-x="103">
         <rest/>
         <duration>2</duration>
         <voice>1</voice>
         <type>quarter</type>
       </note>
-      <note default-x="194">
+      <note default-x="192">
         <pitch>
           <step>D</step>
           <octave>4</octave>
@@ -383,7 +379,7 @@
         <type>quarter</type>
         <stem default-y="-9">up</stem>
       </note>
-      <note default-x="285">
+      <note default-x="282">
         <rest/>
         <duration>2</duration>
         <voice>1</voice>
@@ -391,7 +387,7 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="8" width="264">
+    <measure number="8" width="271">
       <note default-x="16">
         <pitch>
           <step>C</step>

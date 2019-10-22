@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 3.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
-<score-partwise version="3.0">
+<!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 3.1 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
+<score-partwise version="3.1">
   <movement-title>Rhythm Prep for Tune 10</movement-title>
   <identification>
     <creator type="composer">Shawn McGinn</creator>
     <rights>©MusiKyoshi 2015</rights>
     <encoding>
-      <software>Finale 2012 for Mac</software>
-      <software>Dolet Light for Finale 2012</software>
-      <encoding-date>2016-03-08</encoding-date>
+      <software>Finale v25 for Mac</software>
+      <encoding-date>2019-08-31</encoding-date>
       <supports attribute="new-system" element="print" type="yes" value="yes"/>
       <supports attribute="new-page" element="print" type="yes" value="yes"/>
+      <supports element="accidental" type="yes"/>
+      <supports element="beam" type="yes"/>
+      <supports element="stem" type="yes"/>
     </encoding>
   </identification>
   <defaults>
     <scaling>
-      <millimeters>7.2319</millimeters>
+      <millimeters>7.1967</millimeters>
       <tenths>40</tenths>
     </scaling>
     <page-layout>
-      <page-height>1545</page-height>
-      <page-width>1194</page-width>
+      <page-height>1553</page-height>
+      <page-width>1200</page-width>
       <page-margins type="both">
         <left-margin>70</left-margin>
         <right-margin>70</right-margin>
@@ -52,32 +54,29 @@
       <distance type="hyphen">120</distance>
       <distance type="beam">8</distance>
     </appearance>
-    <music-font font-family="Maestro,engraved" font-size="20.5"/>
-    <word-font font-family="Times New Roman" font-size="10.25"/>
+    <music-font font-family="Maestro,engraved" font-size="20.4"/>
+    <word-font font-family="Times New Roman" font-size="10.2"/>
   </defaults>
   <credit page="1">
-    <credit-type>composer</credit-type>
-    <credit-words default-x="1122" default-y="1407" font-size="12" justify="right" valign="top">Shawn McGinn</credit-words>
+    <credit-words default-x="1127" default-y="1414" font-size="12" justify="right" valign="top">Shawn McGinn</credit-words>
   </credit>
   <credit page="1">
-    <credit-type>rights</credit-type>
-    <credit-words default-x="597" default-y="53" font-size="10" justify="center" valign="bottom">©MusiKyoshi 2015</credit-words>
+    <credit-words default-x="600" default-y="53" font-size="10" justify="center" valign="bottom">©MusiKyoshi 2015</credit-words>
   </credit>
   <credit page="1">
-    <credit-type>title</credit-type>
-    <credit-words default-x="349" default-y="1475" font-size="24" valign="top">Rhythm Prep for Tune 10</credit-words>
+    <credit-words default-x="349" default-y="1482" font-size="24" valign="top">Rhythm Prep for Tune 10</credit-words>
   </credit>
   <part-list>
     <score-part id="P1">
       <part-name print-object="no">Trumpet in Bb</part-name>
       <part-abbreviation print-object="no">Bb Tpt.</part-abbreviation>
-      <score-instrument id="P1-I7">
+      <score-instrument id="P1-I1">
         <instrument-name>Garritan: ARIA Player</instrument-name>
         <instrument-sound>brass.trumpet.bflat</instrument-sound>
         <virtual-instrument/>
       </score-instrument>
       <midi-device>Bank 1</midi-device>
-      <midi-instrument id="P1-I7">
+      <midi-instrument id="P1-I1">
         <midi-channel>7</midi-channel>
         <midi-program>1</midi-program>
         <volume>80</volume>
@@ -87,7 +86,7 @@
   </part-list>
   <!--=========================================================-->
   <part id="P1">
-    <measure number="1" width="199">
+    <measure number="1" width="200">
       <print>
         <system-layout>
           <system-margins>
@@ -128,7 +127,7 @@
         <type>half</type>
         <stem default-y="-5">up</stem>
       </note>
-      <note default-x="139">
+      <note default-x="140">
         <rest/>
         <duration>4</duration>
         <voice>1</voice>
@@ -136,7 +135,7 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="2" width="131">
+    <measure number="2" width="132">
       <note default-x="14">
         <rest/>
         <duration>4</duration>
@@ -155,7 +154,26 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="3" width="131">
+    <measure number="3" width="132">
+      <note default-x="13">
+        <rest/>
+        <duration>4</duration>
+        <voice>1</voice>
+        <type>half</type>
+      </note>
+      <note default-x="74">
+        <pitch>
+          <step>E</step>
+          <octave>4</octave>
+        </pitch>
+        <duration>4</duration>
+        <voice>1</voice>
+        <type>half</type>
+        <stem default-y="-5">up</stem>
+      </note>
+    </measure>
+    <!--=======================================================-->
+    <measure number="4" width="132">
       <note default-x="14">
         <rest/>
         <duration>4</duration>
@@ -174,45 +192,7 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="4" width="131">
-      <note default-x="13">
-        <rest/>
-        <duration>4</duration>
-        <voice>1</voice>
-        <type>half</type>
-      </note>
-      <note default-x="72">
-        <pitch>
-          <step>E</step>
-          <octave>4</octave>
-        </pitch>
-        <duration>4</duration>
-        <voice>1</voice>
-        <type>half</type>
-        <stem default-y="-5">up</stem>
-      </note>
-    </measure>
-    <!--=======================================================-->
-    <measure number="5" width="131">
-      <note default-x="13">
-        <rest/>
-        <duration>4</duration>
-        <voice>1</voice>
-        <type>half</type>
-      </note>
-      <note default-x="72">
-        <pitch>
-          <step>E</step>
-          <octave>4</octave>
-        </pitch>
-        <duration>4</duration>
-        <voice>1</voice>
-        <type>half</type>
-        <stem default-y="-5">up</stem>
-      </note>
-    </measure>
-    <!--=======================================================-->
-    <measure number="6" width="131">
+    <measure number="5" width="132">
       <note default-x="13">
         <rest/>
         <duration>4</duration>
@@ -231,8 +211,14 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="7" width="130">
+    <measure number="6" width="132">
       <note default-x="14">
+        <rest/>
+        <duration>4</duration>
+        <voice>1</voice>
+        <type>half</type>
+      </note>
+      <note default-x="73">
         <pitch>
           <step>E</step>
           <octave>4</octave>
@@ -242,7 +228,20 @@
         <type>half</type>
         <stem default-y="-5">up</stem>
       </note>
-      <note default-x="70">
+    </measure>
+    <!--=======================================================-->
+    <measure number="7" width="129">
+      <note default-x="13">
+        <pitch>
+          <step>E</step>
+          <octave>4</octave>
+        </pitch>
+        <duration>4</duration>
+        <voice>1</voice>
+        <type>half</type>
+        <stem default-y="-5">up</stem>
+      </note>
+      <note default-x="69">
         <rest/>
         <duration>4</duration>
         <voice>1</voice>
@@ -250,19 +249,19 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="8" width="1054">
+    <measure number="8" width="1060">
       <print new-system="yes">
         <system-layout>
           <system-distance>114</system-distance>
         </system-layout>
       </print>
-      <note default-x="52">
+      <note default-x="51">
         <rest/>
         <duration>4</duration>
         <voice>1</voice>
         <type>half</type>
       </note>
-      <note default-x="549">
+      <note default-x="551">
         <pitch>
           <step>E</step>
           <octave>4</octave>

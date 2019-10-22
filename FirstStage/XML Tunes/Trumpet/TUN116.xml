@@ -6,7 +6,7 @@
     <rights>©</rights>
     <encoding>
       <software>Finale v25 for Mac</software>
-      <encoding-date>2018-11-06</encoding-date>
+      <encoding-date>2019-08-31</encoding-date>
       <supports attribute="new-system" element="print" type="yes" value="yes"/>
       <supports attribute="new-page" element="print" type="yes" value="yes"/>
       <supports element="accidental" type="yes"/>
@@ -84,10 +84,7 @@
       <score-instrument id="P1-I1">
         <instrument-name>ARIA Player</instrument-name>
         <instrument-sound>brass.trumpet.bflat</instrument-sound>
-        <virtual-instrument>
-          <virtual-library>Garritan Instruments for Finale</virtual-library>
-          <virtual-name>002. Brass/2. Trumpets/Trumpet Plr1</virtual-name>
-        </virtual-instrument>
+        <virtual-instrument/>
       </score-instrument>
       <midi-device>ARIA Player</midi-device>
       <midi-instrument id="P1-I1">
@@ -299,11 +296,6 @@
         <type>eighth</type>
         <stem default-y="-60">down</stem>
         <beam number="1">end</beam>
-        <notations>
-          <articulations>
-            <breath-mark default-x="18" default-y="8" placement="above"/>
-          </articulations>
-        </notations>
       </note>
     </measure>
     <!--=======================================================-->
@@ -448,11 +440,6 @@
         <type>eighth</type>
         <stem default-y="-55">down</stem>
         <beam number="1">end</beam>
-        <notations>
-          <articulations>
-            <breath-mark default-x="18" default-y="8" placement="above"/>
-          </articulations>
-        </notations>
       </note>
     </measure>
     <!--=======================================================-->
@@ -598,11 +585,6 @@
         <type>eighth</type>
         <stem default-y="-60">down</stem>
         <beam number="1">end</beam>
-        <notations>
-          <articulations>
-            <breath-mark default-x="18" default-y="8" placement="above"/>
-          </articulations>
-        </notations>
       </note>
     </measure>
     <!--=======================================================-->
@@ -866,11 +848,6 @@
         <type>eighth</type>
         <stem default-y="5">up</stem>
         <beam number="1">end</beam>
-        <notations>
-          <articulations>
-            <breath-mark default-x="18" default-y="23" placement="above"/>
-          </articulations>
-        </notations>
       </note>
     </measure>
     <!--=======================================================-->
@@ -1014,11 +991,6 @@
         <type>eighth</type>
         <stem default-y="0">up</stem>
         <beam number="1">end</beam>
-        <notations>
-          <articulations>
-            <breath-mark default-x="18" default-y="18" placement="above"/>
-          </articulations>
-        </notations>
       </note>
     </measure>
     <!--=======================================================-->
@@ -1159,11 +1131,6 @@
         <type>eighth</type>
         <stem default-y="0">up</stem>
         <beam number="1">end</beam>
-        <notations>
-          <articulations>
-            <breath-mark default-x="18" default-y="18" placement="above"/>
-          </articulations>
-        </notations>
       </note>
     </measure>
     <!--=======================================================-->

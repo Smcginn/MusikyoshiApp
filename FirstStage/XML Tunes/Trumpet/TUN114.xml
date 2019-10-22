@@ -6,7 +6,7 @@
     <rights>©</rights>
     <encoding>
       <software>Finale v25 for Mac</software>
-      <encoding-date>2018-11-06</encoding-date>
+      <encoding-date>2019-08-31</encoding-date>
       <supports attribute="new-system" element="print" type="yes" value="yes"/>
       <supports attribute="new-page" element="print" type="yes" value="yes"/>
       <supports element="accidental" type="yes"/>
@@ -84,10 +84,7 @@
       <score-instrument id="P1-I1">
         <instrument-name>Garritan: ARIA Player</instrument-name>
         <instrument-sound>brass.trumpet.bflat</instrument-sound>
-        <virtual-instrument>
-          <virtual-library>Garritan Instruments for Finale</virtual-library>
-          <virtual-name>002. Brass/2. Trumpets/Trumpet Plr1</virtual-name>
-        </virtual-instrument>
+        <virtual-instrument/>
       </score-instrument>
       <midi-device>Bank 1</midi-device>
       <midi-instrument id="P1-I1">

@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 3.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
-<score-partwise version="3.0">
+<!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 3.1 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
+<score-partwise version="3.1">
   <movement-title>18. Like a Boss</movement-title>
   <identification>
     <creator type="composer">Shawn McGinn</creator>
     <rights>©MusiKyoshi 2015</rights>
     <encoding>
-      <software>Finale 2012 for Mac</software>
-      <software>Dolet Light for Finale 2012</software>
-      <encoding-date>2015-11-16</encoding-date>
+      <software>Finale v25 for Mac</software>
+      <encoding-date>2019-08-31</encoding-date>
       <supports attribute="new-system" element="print" type="yes" value="yes"/>
       <supports attribute="new-page" element="print" type="yes" value="yes"/>
+      <supports element="accidental" type="yes"/>
+      <supports element="beam" type="yes"/>
+      <supports element="stem" type="yes"/>
     </encoding>
   </identification>
   <defaults>
     <scaling>
-      <millimeters>7.2319</millimeters>
+      <millimeters>7.1967</millimeters>
       <tenths>40</tenths>
     </scaling>
     <page-layout>
-      <page-height>1545</page-height>
-      <page-width>1194</page-width>
+      <page-height>1553</page-height>
+      <page-width>1200</page-width>
       <page-margins type="both">
         <left-margin>70</left-margin>
         <right-margin>70</right-margin>
@@ -52,30 +54,27 @@
       <distance type="hyphen">120</distance>
       <distance type="beam">8</distance>
     </appearance>
-    <music-font font-family="Maestro,engraved" font-size="20.5"/>
-    <word-font font-family="Times New Roman" font-size="10.25"/>
+    <music-font font-family="Maestro,engraved" font-size="20.4"/>
+    <word-font font-family="Times New Roman" font-size="10.2"/>
   </defaults>
   <credit page="1">
-    <credit-type>title</credit-type>
-    <credit-words default-x="587" default-y="1481" font-size="24" justify="center" valign="top">18. Like a Boss</credit-words>
+    <credit-words default-x="590" default-y="1488" font-size="24" justify="center" valign="top">18. Like a Boss</credit-words>
   </credit>
   <credit page="1">
-    <credit-type>composer</credit-type>
-    <credit-words default-x="1122" default-y="1407" font-size="12" justify="right" valign="top">Shawn McGinn</credit-words>
+    <credit-words default-x="1127" default-y="1414" font-size="12" justify="right" valign="top">Shawn McGinn</credit-words>
   </credit>
   <credit page="1">
-    <credit-type>rights</credit-type>
-    <credit-words default-x="597" default-y="53" font-size="10" justify="center" valign="bottom">©MusiKyoshi 2015</credit-words>
+    <credit-words default-x="600" default-y="53" font-size="10" justify="center" valign="bottom">©MusiKyoshi 2015</credit-words>
   </credit>
   <part-list>
     <score-part id="P1">
       <part-name print-object="no">Trumpet in Bb</part-name>
       <part-abbreviation print-object="no">Bb Tpt.</part-abbreviation>
-      <score-instrument id="P1-I7">
+      <score-instrument id="P1-I1">
         <instrument-name>Garritan: ARIA Player</instrument-name>
         <instrument-sound>brass.trumpet.bflat</instrument-sound>
       </score-instrument>
-      <midi-instrument id="P1-I7">
+      <midi-instrument id="P1-I1">
         <midi-channel>7</midi-channel>
         <midi-bank>15489</midi-bank>
         <midi-program>57</midi-program>
@@ -86,7 +85,7 @@
   </part-list>
   <!--=========================================================-->
   <part id="P1">
-    <measure number="1" width="212">
+    <measure number="1" width="213">
       <print>
         <system-layout>
           <system-margins>
@@ -127,7 +126,7 @@
         <type>half</type>
         <stem default-y="-9.5">up</stem>
       </note>
-      <note default-x="147">
+      <note default-x="148">
         <pitch>
           <step>C</step>
           <octave>4</octave>
@@ -139,7 +138,7 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="2" width="157">
+    <measure number="2" width="158">
       <note default-x="13">
         <pitch>
           <step>E</step>
@@ -149,13 +148,8 @@
         <voice>1</voice>
         <type>half</type>
         <stem default-y="-5">up</stem>
-        <notations>
-          <articulations>
-            <breath-mark default-x="36" default-y="12" placement="above"/>
-          </articulations>
-        </notations>
       </note>
-      <note default-x="77">
+      <note default-x="78">
         <pitch>
           <step>F</step>
           <octave>4</octave>
@@ -163,9 +157,9 @@
         <duration>2</duration>
         <voice>1</voice>
         <type>quarter</type>
-        <stem default-y="0">up</stem>
+        <stem default-y="1">up</stem>
       </note>
-      <note default-x="117">
+      <note default-x="118">
         <pitch>
           <step>G</step>
           <octave>4</octave>
@@ -173,11 +167,11 @@
         <duration>2</duration>
         <voice>1</voice>
         <type>quarter</type>
-        <stem default-y="5.5">up</stem>
+        <stem default-y="6">up</stem>
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="3" width="172">
+    <measure number="3" width="173">
       <note default-x="13">
         <pitch>
           <step>F</step>
@@ -186,7 +180,7 @@
         <duration>2</duration>
         <voice>1</voice>
         <type>quarter</type>
-        <stem default-y="0">up</stem>
+        <stem default-y="1">up</stem>
       </note>
       <note default-x="53">
         <pitch>
@@ -198,7 +192,7 @@
         <type>quarter</type>
         <stem default-y="-5">up</stem>
       </note>
-      <note default-x="92">
+      <note default-x="93">
         <pitch>
           <step>F</step>
           <octave>4</octave>
@@ -206,7 +200,7 @@
         <duration>2</duration>
         <voice>1</voice>
         <type>quarter</type>
-        <stem default-y="0">up</stem>
+        <stem default-y="1">up</stem>
       </note>
       <note default-x="132">
         <pitch>
@@ -220,7 +214,7 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="4" width="142">
+    <measure number="4" width="143">
       <note default-x="13">
         <pitch>
           <step>E</step>
@@ -231,7 +225,7 @@
         <type>half</type>
         <stem default-y="-5">up</stem>
       </note>
-      <note default-x="77">
+      <note default-x="78">
         <pitch>
           <step>C</step>
           <octave>4</octave>
@@ -240,15 +234,10 @@
         <voice>1</voice>
         <type>half</type>
         <stem default-y="-14.5">up</stem>
-        <notations>
-          <articulations>
-            <breath-mark default-x="53" default-y="14" placement="above"/>
-          </articulations>
-        </notations>
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="5" width="160">
+    <measure number="5" width="161">
       <note default-x="17">
         <pitch>
           <step>C</step>
@@ -259,7 +248,7 @@
         <type>half</type>
         <stem default-y="-14.5">up</stem>
       </note>
-      <note default-x="80">
+      <note default-x="81">
         <pitch>
           <step>C</step>
           <octave>4</octave>
@@ -269,7 +258,7 @@
         <type>quarter</type>
         <stem default-y="-14.5">up</stem>
       </note>
-      <note default-x="119">
+      <note default-x="120">
         <pitch>
           <step>D</step>
           <octave>4</octave>
@@ -292,7 +281,7 @@
         <type>half</type>
         <stem default-y="-5">up</stem>
       </note>
-      <note default-x="77">
+      <note default-x="78">
         <pitch>
           <step>E</step>
           <octave>4</octave>
@@ -301,21 +290,16 @@
         <voice>1</voice>
         <type>half</type>
         <stem default-y="-5">up</stem>
-        <notations>
-          <articulations>
-            <breath-mark default-x="45" default-y="18" placement="above"/>
-          </articulations>
-        </notations>
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="7" width="634">
+    <measure number="7" width="632">
       <print new-system="yes">
         <system-layout>
           <system-distance>114</system-distance>
         </system-layout>
       </print>
-      <note default-x="52">
+      <note default-x="51">
         <pitch>
           <step>F</step>
           <octave>4</octave>
@@ -333,7 +317,7 @@
         <duration>2</duration>
         <voice>1</voice>
         <type>quarter</type>
-        <stem default-y="5">up</stem>
+        <stem default-y="5.5">up</stem>
       </note>
       <note default-x="342">
         <pitch>
@@ -345,7 +329,7 @@
         <type>quarter</type>
         <stem default-y="-4.5">up</stem>
       </note>
-      <note default-x="488">
+      <note default-x="487">
         <pitch>
           <step>D</step>
           <octave>4</octave>
@@ -357,7 +341,7 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="8" width="420">
+    <measure number="8" width="427">
       <note default-x="16">
         <pitch>
           <step>C</step>

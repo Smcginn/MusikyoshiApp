@@ -5,7 +5,7 @@
     <rights>©</rights>
     <encoding>
       <software>Finale v25 for Mac</software>
-      <encoding-date>2018-12-30</encoding-date>
+      <encoding-date>2019-07-29</encoding-date>
       <supports attribute="new-system" element="print" type="yes" value="yes"/>
       <supports attribute="new-page" element="print" type="yes" value="yes"/>
       <supports element="accidental" type="yes"/>
@@ -66,23 +66,23 @@
     <score-part id="P1">
       <part-name print-object="no">Horn in F</part-name>
       <part-abbreviation print-object="no">Hn.</part-abbreviation>
-      <score-instrument id="P1-I1">
+      <score-instrument id="P1-I5">
         <instrument-name>ARIA Player</instrument-name>
         <instrument-sound>brass.french-horn</instrument-sound>
         <virtual-instrument/>
       </score-instrument>
       <midi-device>ARIA Player</midi-device>
-      <midi-instrument id="P1-I1">
-        <midi-channel>1</midi-channel>
+      <midi-instrument id="P1-I5">
+        <midi-channel>5</midi-channel>
         <midi-program>1</midi-program>
         <volume>80</volume>
-        <pan>-70</pan>
+        <pan>-20</pan>
       </midi-instrument>
     </score-part>
   </part-list>
   <!--=========================================================-->
   <part id="P1">
-    <measure number="1" width="205">
+    <measure number="1" width="183">
       <print>
         <system-layout>
           <system-margins>
@@ -95,7 +95,7 @@
       </print>
       <attributes>
         <divisions>2</divisions>
-        <key>
+        <key print-object="no">
           <fifths>-1</fifths>
           <mode>major</mode>
         </key>
@@ -120,7 +120,7 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="2" width="110">
+    <measure number="2" width="113">
       <note default-x="13">
         <pitch>
           <step>F</step>
@@ -132,7 +132,7 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="3" width="110">
+    <measure number="3" width="113">
       <note>
         <rest measure="yes"/>
         <duration>8</duration>
@@ -140,7 +140,7 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="4" width="110">
+    <measure number="4" width="113">
       <note default-x="13">
         <pitch>
           <step>F</step>
@@ -152,7 +152,7 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="5" width="110">
+    <measure number="5" width="113">
       <note>
         <rest measure="yes"/>
         <duration>8</duration>
@@ -160,7 +160,7 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="6" width="110">
+    <measure number="6" width="113">
       <note default-x="13">
         <pitch>
           <step>F</step>
@@ -172,7 +172,7 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="7" width="110">
+    <measure number="7" width="113">
       <note>
         <rest measure="yes"/>
         <duration>8</duration>
@@ -180,7 +180,7 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="8" width="119">
+    <measure number="8" width="123">
       <note default-x="13">
         <pitch>
           <step>F</step>

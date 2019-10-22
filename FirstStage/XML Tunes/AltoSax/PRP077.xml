@@ -6,7 +6,7 @@
     <rights>©</rights>
     <encoding>
       <software>Finale v25 for Mac</software>
-      <encoding-date>2019-07-30</encoding-date>
+      <encoding-date>2019-09-30</encoding-date>
       <supports attribute="new-system" element="print" type="yes" value="yes"/>
       <supports attribute="new-page" element="print" type="yes" value="yes"/>
       <supports element="accidental" type="yes"/>
@@ -537,7 +537,7 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="7" width="388">
+    <measure number="7" width="597">
       <print new-system="yes">
         <system-layout>
           <system-distance>114</system-distance>
@@ -555,7 +555,7 @@
         <stem default-y="0">up</stem>
         <beam number="1">begin</beam>
       </note>
-      <note default-x="133">
+      <note default-x="171">
         <pitch>
           <step>F</step>
           <alter>1</alter>
@@ -567,7 +567,7 @@
         <stem default-y="0">up</stem>
         <beam number="1">end</beam>
       </note>
-      <note default-x="188">
+      <note default-x="262">
         <pitch>
           <step>F</step>
           <alter>1</alter>
@@ -582,7 +582,7 @@
           <tied type="start"/>
         </notations>
       </note>
-      <note default-x="277">
+      <note default-x="412">
         <pitch>
           <step>F</step>
           <alter>1</alter>
@@ -598,7 +598,7 @@
           <tied type="stop"/>
         </notations>
       </note>
-      <note default-x="332">
+      <note default-x="504">
         <pitch>
           <step>F</step>
           <alter>1</alter>
@@ -612,8 +612,8 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="8" width="282">
-      <note default-x="13">
+    <measure number="8" width="456">
+      <note default-x="14">
         <pitch>
           <step>F</step>
           <alter>1</alter>
@@ -625,7 +625,7 @@
         <stem default-y="0">up</stem>
         <beam number="1">begin</beam>
       </note>
-      <note default-x="69">
+      <note default-x="107">
         <pitch>
           <step>F</step>
           <alter>1</alter>
@@ -637,7 +637,7 @@
         <stem default-y="0">up</stem>
         <beam number="1">end</beam>
       </note>
-      <note default-x="125">
+      <note default-x="201">
         <pitch>
           <step>F</step>
           <alter>1</alter>
@@ -647,59 +647,6 @@
         <voice>1</voice>
         <type>half</type>
         <stem default-y="0.5">up</stem>
-      </note>
-      <barline location="right">
-        <bar-style>light-heavy</bar-style>
-      </barline>
-    </measure>
-    <!--=======================================================-->
-    <measure number="9" width="384">
-      <attributes>
-        <time>
-          <beats>4</beats>
-          <beat-type>4</beat-type>
-        </time>
-      </attributes>
-      <note default-x="44">
-        <pitch>
-          <step>E</step>
-          <octave>5</octave>
-        </pitch>
-        <duration>1</duration>
-        <voice>1</voice>
-        <type>eighth</type>
-        <stem default-y="-40">down</stem>
-        <beam number="1">begin</beam>
-      </note>
-      <note default-x="104">
-        <pitch>
-          <step>E</step>
-          <octave>5</octave>
-        </pitch>
-        <duration>1</duration>
-        <tie type="start"/>
-        <voice>1</voice>
-        <type>eighth</type>
-        <stem default-y="-40">down</stem>
-        <beam number="1">end</beam>
-        <notations>
-          <tied type="start"/>
-        </notations>
-      </note>
-      <note default-x="165">
-        <pitch>
-          <step>E</step>
-          <octave>5</octave>
-        </pitch>
-        <duration>6</duration>
-        <tie type="stop"/>
-        <voice>1</voice>
-        <type>half</type>
-        <dot/>
-        <stem default-y="-40">down</stem>
-        <notations>
-          <tied type="stop"/>
-        </notations>
       </note>
       <barline location="right">
         <bar-style>light-heavy</bar-style>

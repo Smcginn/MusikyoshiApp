@@ -578,7 +578,6 @@
             <pan>0</pan>
         </midi-instrument>
     </score-part>
-  </part-list>
   <score-part id="P28">
       <part-name>C Trumpet</part-name>
       <part-name-display>
@@ -1036,25 +1035,6 @@
       </midi-instrument>
   </score-part>
   <score-part id="P52">
-      <part-name>C Trumpet</part-name>
-      <part-name-display>
-          <display-text font-family="FreeSerif">C Trumpet</display-text>
-      </part-name-display>
-      <part-abbreviation>C Tpt.</part-abbreviation>
-      <part-abbreviation-display>
-          <display-text font-family="FreeSerif">C Tpt.</display-text>
-      </part-abbreviation-display>
-      <score-instrument id="P27-I27">
-          <instrument-name>C Trumpet</instrument-name>
-      </score-instrument>
-      <midi-instrument id="P27-I27">
-          <midi-channel>4</midi-channel>
-          <midi-program>57</midi-program>
-          <volume>79</volume>
-          <pan>0</pan>
-      </midi-instrument>
-  </score-part>
-  <score-part id="P53">
       <part-name>C Trumpet</part-name>
       <part-name-display>
           <display-text font-family="FreeSerif">C Trumpet</display-text>
@@ -2169,1070 +2149,1002 @@
       </barline>
     </measure>
   </part>
-  <!--=========================================================-->
-  <part id="P28">
-      <measure number="1" width="216">
-          <print>
-              <staff-layout number="1">
-                  <staff-distance>65</staff-distance>
-              </staff-layout>
-              <measure-numbering>none</measure-numbering>
-          </print>
-          <attributes>
-              <divisions>2</divisions>
-              <key>
-                  <fifths>0</fifths>
-                  <mode>major</mode>
-              </key>
-              <time>
-                  <beats>4</beats>
-                  <beat-type>4</beat-type>
-              </time>
-              <clef>
-                  <sign>F</sign>
-                  <line>4</line>
-              </clef>
-          </attributes>
-          <sound tempo="120"/>
-          <note default-x="97">
-              <pitch>
-                  <step>F</step>
-                  <alter>1</alter>
-                  <octave>3</octave>
-              </pitch>
-              <duration>8</duration>
-              <voice>1</voice>
-              <type>whole</type>
-              <accidental>sharp</accidental>
-          </note>
-          <barline location="right">
-              <bar-style>light-heavy</bar-style>
-          </barline>
-      </measure>
-  </part>
-  <!--=========================================================-->
-  <part id="P29">
-      <measure number="1" width="154.41">
-          <print>
-              <system-layout>
-                  <system-margins>
-                      <left-margin>57.99</left-margin>
-                      <right-margin>808.40</right-margin>
-                  </system-margins>
-                  <top-system-distance>43.31</top-system-distance>
-              </system-layout>
-          </print>
-          <attributes>
-              <divisions>1</divisions>
-              <key>
-                  <fifths>0</fifths>
-              </key>
-              <time>
-                  <beats>4</beats>
-                  <beat-type>4</beat-type>
-              </time>
-              <clef>
-                  <sign>F</sign>
-                  <line>4</line>
-              </clef>
-              <transpose>
-                  <diatonic>-1</diatonic>
-                  <chromatic>-2</chromatic>
-              </transpose>
-          </attributes>
-          <note default-x="85.19" default-y="-65.00">
-              <pitch>
-                  <step>G</step>
-                  <octave>3</octave>
-              </pitch>
-              <duration>4</duration>
-              <voice>1</voice>
-              <type>whole</type>
-          </note>
-          <barline location="right">
-              <bar-style>light-heavy</bar-style>
-          </barline>
-      </measure>
-  </part>
-  <!--=========================================================-->
-  <part id="P30">
-      <measure number="1" width="154.41">
-          <print>
-              <staff-layout number="1">
-                  <staff-distance>65.00</staff-distance>
-              </staff-layout>
-          </print>
-          <attributes>
-              <divisions>1</divisions>
-              <key>
-                  <fifths>0</fifths>
-              </key>
-              <time>
-                  <beats>4</beats>
-                  <beat-type>4</beat-type>
-              </time>
-              <clef>
-                  <sign>F</sign>
-                  <line>4</line>
-              </clef>
-              <transpose>
-                  <diatonic>-1</diatonic>
-                  <chromatic>-2</chromatic>
-              </transpose>
-          </attributes>
-          <note default-x="85.19" default-y="-170.00">
-              <pitch>
-                  <step>G</step>
-                  <alter>1</alter>
-                  <octave>3</octave>
-              </pitch>
-              <duration>4</duration>
-              <voice>1</voice>
-              <type>whole</type>
-              <accidental>sharp</accidental>
-          </note>
-          <barline location="right">
-              <bar-style>light-heavy</bar-style>
-          </barline>
-      </measure>
-  </part>
-  <!--=========================================================-->
-  <part id="P31">
-      <measure number="1" width="154.41">
-          <print>
-              <staff-layout number="1">
-                  <staff-distance>65.00</staff-distance>
-              </staff-layout>
-          </print>
-          <attributes>
-              <divisions>1</divisions>
-              <key>
-                  <fifths>0</fifths>
-              </key>
-              <time>
-                  <beats>4</beats>
-                  <beat-type>4</beat-type>
-              </time>
-              <clef>
-                  <sign>F</sign>
-                  <line>4</line>
-              </clef>
-              <transpose>
-                  <diatonic>-1</diatonic>
-                  <chromatic>-2</chromatic>
-              </transpose>
-          </attributes>
-          <note default-x="85.19" default-y="-270.00">
-              <pitch>
-                  <step>A</step>
-                  <octave>3</octave>
-              </pitch>
-              <duration>4</duration>
-              <voice>1</voice>
-              <type>whole</type>
-          </note>
-          <barline location="right">
-              <bar-style>light-heavy</bar-style>
-          </barline>
-      </measure>
-  </part>
-  <!--=========================================================-->
-  <part id="P32">
-      <measure number="1" width="154.41">
-          <print>
-              <staff-layout number="1">
-                  <staff-distance>65.00</staff-distance>
-              </staff-layout>
-          </print>
-          <attributes>
-              <divisions>1</divisions>
-              <key>
-                  <fifths>0</fifths>
-              </key>
-              <time>
-                  <beats>4</beats>
-                  <beat-type>4</beat-type>
-              </time>
-              <clef>
-                  <sign>F</sign>
-                  <line>4</line>
-              </clef>
-              <transpose>
-                  <diatonic>-1</diatonic>
-                  <chromatic>-2</chromatic>
-              </transpose>
-          </attributes>
-          <note default-x="85.19" default-y="-375.00">
-              <pitch>
-                  <step>A</step>
-                  <alter>1</alter>
-                  <octave>3</octave>
-              </pitch>
-              <duration>4</duration>
-              <voice>1</voice>
-              <type>whole</type>
-              <accidental>sharp</accidental>
-          </note>
-          <barline location="right">
-              <bar-style>light-heavy</bar-style>
-          </barline>
-      </measure>
-  </part>
-  <!--=========================================================-->
-  <part id="P33">
-      <measure number="1" width="154.41">
-          <print>
-              <staff-layout number="1">
-                  <staff-distance>65.00</staff-distance>
-              </staff-layout>
-          </print>
-          <attributes>
-              <divisions>1</divisions>
-              <key>
-                  <fifths>0</fifths>
-              </key>
-              <time>
-                  <beats>4</beats>
-                  <beat-type>4</beat-type>
-              </time>
-              <clef>
-                  <sign>F</sign>
-                  <line>4</line>
-              </clef>
-              <transpose>
-                  <diatonic>-1</diatonic>
-                  <chromatic>-2</chromatic>
-              </transpose>
-          </attributes>
-          <note default-x="85.19" default-y="-475.00">
-              <pitch>
-                  <step>B</step>
-                  <octave>3</octave>
-              </pitch>
-              <duration>4</duration>
-              <voice>1</voice>
-              <type>whole</type>
-          </note>
-          <barline location="right">
-              <bar-style>light-heavy</bar-style>
-          </barline>
-      </measure>
-  </part>
-  <!--=========================================================-->
-  <part id="P34">
-      <measure number="1" width="154.41">
-          <print>
-              <staff-layout number="1">
-                  <staff-distance>65.00</staff-distance>
-              </staff-layout>
-          </print>
-          <attributes>
-              <divisions>1</divisions>
-              <key>
-                  <fifths>0</fifths>
-              </key>
-              <time>
-                  <beats>4</beats>
-                  <beat-type>4</beat-type>
-              </time>
-              <clef>
-                  <sign>F</sign>
-                  <line>4</line>
-              </clef>
-              <transpose>
-                  <diatonic>-1</diatonic>
-                  <chromatic>-2</chromatic>
-              </transpose>
-          </attributes>
-          <note default-x="85.19" default-y="-575.00">
-              <pitch>
-                  <step>C</step>
-                  <octave>4</octave>
-              </pitch>
-              <duration>4</duration>
-              <voice>1</voice>
-              <type>whole</type>
-          </note>
-          <barline location="right">
-              <bar-style>light-heavy</bar-style>
-          </barline>
-      </measure>
-  </part>
-  <!--=========================================================-->
-  <part id="P35">
-      <measure number="1" width="154.41">
-          <print>
-              <staff-layout number="1">
-                  <staff-distance>65.00</staff-distance>
-              </staff-layout>
-          </print>
-          <attributes>
-              <divisions>1</divisions>
-              <key>
-                  <fifths>0</fifths>
-              </key>
-              <time>
-                  <beats>4</beats>
-                  <beat-type>4</beat-type>
-              </time>
-              <clef>
-                  <sign>F</sign>
-                  <line>4</line>
-              </clef>
-              <transpose>
-                  <diatonic>-1</diatonic>
-                  <chromatic>-2</chromatic>
-              </transpose>
-          </attributes>
-          <note default-x="85.19" default-y="-680.00">
-              <pitch>
-                  <step>C</step>
-                  <alter>1</alter>
-                  <octave>4</octave>
-              </pitch>
-              <duration>4</duration>
-              <voice>1</voice>
-              <type>whole</type>
-              <accidental>sharp</accidental>
-          </note>
-          <barline location="right">
-              <bar-style>light-heavy</bar-style>
-          </barline>
-      </measure>
-  </part>
-  <!--=========================================================-->
-  <part id="P36">
-      <measure number="1" width="154.41">
-          <print>
-              <staff-layout number="1">
-                  <staff-distance>65.00</staff-distance>
-              </staff-layout>
-          </print>
-          <attributes>
-              <divisions>1</divisions>
-              <key>
-                  <fifths>0</fifths>
-              </key>
-              <time>
-                  <beats>4</beats>
-                  <beat-type>4</beat-type>
-              </time>
-              <clef>
-                  <sign>F</sign>
-                  <line>4</line>
-              </clef>
-              <transpose>
-                  <diatonic>-1</diatonic>
-                  <chromatic>-2</chromatic>
-              </transpose>
-          </attributes>
-          <note default-x="85.19" default-y="-780.00">
-              <pitch>
-                  <step>D</step>
-                  <octave>4</octave>
-              </pitch>
-              <duration>4</duration>
-              <voice>1</voice>
-              <type>whole</type>
-          </note>
-          <barline location="right">
-              <bar-style>light-heavy</bar-style>
-          </barline>
-      </measure>
-  </part>
-  <!--=========================================================-->
-  <part id="P37">
-      <measure number="1" width="154.41">
-          <print>
-              <staff-layout number="1">
-                  <staff-distance>65.00</staff-distance>
-              </staff-layout>
-          </print>
-          <attributes>
-              <divisions>1</divisions>
-              <key>
-                  <fifths>0</fifths>
-              </key>
-              <time>
-                  <beats>4</beats>
-                  <beat-type>4</beat-type>
-              </time>
-              <clef>
-                  <sign>F</sign>
-                  <line>4</line>
-
-              </clef>
-              <transpose>
-                  <diatonic>-1</diatonic>
-                  <chromatic>-2</chromatic>
-              </transpose>
-          </attributes>
-          <note default-x="85.19" default-y="-885.00">
-              <pitch>
-                  <step>D</step>
-                  <alter>1</alter>
-                  <octave>4</octave>
-              </pitch>
-              <duration>4</duration>
-              <voice>1</voice>
-              <type>whole</type>
-              <accidental>sharp</accidental>
-          </note>
-          <barline location="right">
-              <bar-style>light-heavy</bar-style>
-          </barline>
-      </measure>
-  </part>
-  <!--=========================================================-->
-  <part id="P38">
-      <measure number="1" width="154.41">
-          <print>
-              <staff-layout number="1">
-                  <staff-distance>65.00</staff-distance>
-              </staff-layout>
-          </print>
-          <attributes>
-              <divisions>1</divisions>
-              <key>
-                  <fifths>0</fifths>
-              </key>
-              <time>
-                  <beats>4</beats>
-                  <beat-type>4</beat-type>
-              </time>
-              <clef>
-                  <sign>F</sign>
-                  <line>4</line>
-              </clef>
-              <transpose>
-                  <diatonic>-1</diatonic>
-                  <chromatic>-2</chromatic>
-              </transpose>
-          </attributes>
-          <note default-x="85.19" default-y="-985.00">
-              <pitch>
-                  <step>E</step>
-                  <octave>4</octave>
-              </pitch>
-              <duration>4</duration>
-              <voice>1</voice>
-              <type>whole</type>
-          </note>
-          <barline location="right">
-              <bar-style>light-heavy</bar-style>
-          </barline>
-      </measure>
-  </part>
-  <!--=========================================================-->
-  <part id="P39">
-      <measure number="1" width="154.41">
-          <print>
-              <staff-layout number="1">
-                  <staff-distance>65.00</staff-distance>
-              </staff-layout>
-          </print>
-          <attributes>
-              <divisions>1</divisions>
-              <key>
-                  <fifths>0</fifths>
-              </key>
-              <time>
-                  <beats>4</beats>
-                  <beat-type>4</beat-type>
-              </time>
-              <clef>
-                  <sign>F</sign>
-                  <line>4</line>
-              </clef>
-              <transpose>
-                  <diatonic>-1</diatonic>
-                  <chromatic>-2</chromatic>
-              </transpose>
-          </attributes>
-          <note default-x="85.19" default-y="-1085.00">
-              <pitch>
-                  <step>F</step>
-                  <octave>4</octave>
-              </pitch>
-              <duration>4</duration>
-              <voice>1</voice>
-              <type>whole</type>
-          </note>
-          <barline location="right">
-              <bar-style>light-heavy</bar-style>
-          </barline>
-      </measure>
-  </part>
-  <!--=========================================================-->
-  <part id="P40">
-      <measure number="1" width="154.41">
-          <print>
-              <staff-layout number="1">
-                  <staff-distance>65.00</staff-distance>
-              </staff-layout>
-          </print>
-          <attributes>
-              <divisions>1</divisions>
-              <key>
-                  <fifths>0</fifths>
-              </key>
-              <time>
-                  <beats>4</beats>
-                  <beat-type>4</beat-type>
-              </time>
-              <clef>
-                  <sign>F</sign>
-                  <line>4</line>
-              </clef>
-              <transpose>
-                  <diatonic>-1</diatonic>
-                  <chromatic>-2</chromatic>
-              </transpose>
-          </attributes>
-          <note default-x="85.19" default-y="-1190.00">
-              <pitch>
-                  <step>F</step>
-                  <alter>1</alter>
-                  <octave>4</octave>
-              </pitch>
-              <duration>4</duration>
-              <voice>1</voice>
-              <type>whole</type>
-              <accidental>sharp</accidental>
-          </note>
-          <barline location="right">
-              <bar-style>light-heavy</bar-style>
-          </barline>
-      </measure>
-  </part>
-  <!--=========================================================-->
-  <part id="P41">
-      <measure number="1" width="154.41">
-          <print>
-              <staff-layout number="1">
-                  <staff-distance>65.00</staff-distance>
-              </staff-layout>
-          </print>
-          <attributes>
-              <divisions>1</divisions>
-              <key>
-                  <fifths>0</fifths>
-              </key>
-              <time>
-                  <beats>4</beats>
-                  <beat-type>4</beat-type>
-              </time>
-              <clef>
-                  <sign>F</sign>
-                  <line>4</line>
-              </clef>
-              <transpose>
-                  <diatonic>-1</diatonic>
-                  <chromatic>-2</chromatic>
-              </transpose>
-          </attributes>
-          <note default-x="85.19" default-y="-1290.00">
-              <pitch>
-                  <step>G</step>
-                  <octave>4</octave>
-              </pitch>
-              <duration>4</duration>
-              <voice>1</voice>
-              <type>whole</type>
-          </note>
-          <barline location="right">
-              <bar-style>light-heavy</bar-style>
-          </barline>
-      </measure>
-  </part>
-  <!--=========================================================-->
-  <part id="P42">
-      <measure number="1" width="154.41">
-          <print>
-              <staff-layout number="1">
-                  <staff-distance>65.00</staff-distance>
-              </staff-layout>
-          </print>
-          <attributes>
-              <divisions>1</divisions>
-              <key>
-                  <fifths>0</fifths>
-              </key>
-              <time>
-                  <beats>4</beats>
-                  <beat-type>4</beat-type>
-              </time>
-              <clef>
-                  <sign>F</sign>
-                  <line>4</line>
-              </clef>
-              <transpose>
-                  <diatonic>-1</diatonic>
-                  <chromatic>-2</chromatic>
-              </transpose>
-          </attributes>
-          <note default-x="85.19" default-y="-1395.00">
-              <pitch>
-                  <step>G</step>
-                  <alter>1</alter>
-                  <octave>4</octave>
-              </pitch>
-              <duration>4</duration>
-              <voice>1</voice>
-              <type>whole</type>
-              <accidental>sharp</accidental>
-          </note>
-          <barline location="right">
-              <bar-style>light-heavy</bar-style>
-          </barline>
-      </measure>
-  </part>
-  <!--=========================================================-->
-  <part id="P43">
-      <measure number="1" width="154.41">
-          <print>
-              <staff-layout number="1">
-                  <staff-distance>65.00</staff-distance>
-              </staff-layout>
-          </print>
-          <attributes>
-              <divisions>1</divisions>
-              <key>
-                  <fifths>0</fifths>
-              </key>
-              <time>
-                  <beats>4</beats>
-                  <beat-type>4</beat-type>
-              </time>
-              <clef>
-                  <sign>F</sign>
-                  <line>4</line>
-              </clef>
-              <transpose>
-                  <diatonic>-1</diatonic>
-                  <chromatic>-2</chromatic>
-              </transpose>
-          </attributes>
-          <note default-x="85.19" default-y="-1495.00">
-              <pitch>
-                  <step>A</step>
-                  <octave>4</octave>
-              </pitch>
-              <duration>4</duration>
-              <voice>1</voice>
-              <type>whole</type>
-          </note>
-          <barline location="right">
-              <bar-style>light-heavy</bar-style>
-          </barline>
-      </measure>
-  </part>
-  <!--=========================================================-->
-  <part id="P44">
-      <measure number="1" width="154.41">
-          <print>
-              <staff-layout number="1">
-                  <staff-distance>65.00</staff-distance>
-              </staff-layout>
-          </print>
-          <attributes>
-              <divisions>1</divisions>
-              <key>
-                  <fifths>0</fifths>
-              </key>
-              <time>
-                  <beats>4</beats>
-                  <beat-type>4</beat-type>
-              </time>
-              <clef>
-                  <sign>F</sign>
-                  <line>4</line>
-              </clef>
-              <transpose>
-                  <diatonic>-1</diatonic>
-                  <chromatic>-2</chromatic>
-              </transpose>
-          </attributes>
-          <note default-x="85.19" default-y="-1600.00">
-              <pitch>
-                  <step>A</step>
-                  <alter>1</alter>
-                  <octave>4</octave>
-              </pitch>
-              <duration>4</duration>
-              <voice>1</voice>
-              <type>whole</type>
-              <accidental>sharp</accidental>
-          </note>
-          <barline location="right">
-              <bar-style>light-heavy</bar-style>
-          </barline>
-      </measure>
-  </part>
-  <!--=========================================================-->
-  <part id="P45">
-      <measure number="1" width="154.41">
-          <print>
-              <staff-layout number="1">
-                  <staff-distance>65.00</staff-distance>
-              </staff-layout>
-          </print>
-          <attributes>
-              <divisions>1</divisions>
-              <key>
-                  <fifths>0</fifths>
-              </key>
-              <time>
-                  <beats>4</beats>
-                  <beat-type>4</beat-type>
-              </time>
-              <clef>
-                  <sign>F</sign>
-                  <line>4</line>
-              </clef>
-              <transpose>
-                  <diatonic>-1</diatonic>
-                  <chromatic>-2</chromatic>
-              </transpose>
-          </attributes>
-          <note default-x="85.19" default-y="-1700.00">
-              <pitch>
-                  <step>B</step>
-                  <octave>4</octave>
-              </pitch>
-              <duration>4</duration>
-              <voice>1</voice>
-              <type>whole</type>
-          </note>
-          <barline location="right">
-              <bar-style>light-heavy</bar-style>
-          </barline>
-      </measure>
-  </part>
-  <!--=========================================================-->
-  <part id="P46">
-      <measure number="1" width="154.41">
-          <print>
-              <staff-layout number="1">
-                  <staff-distance>65.00</staff-distance>
-              </staff-layout>
-          </print>
-          <attributes>
-              <divisions>1</divisions>
-              <key>
-                  <fifths>0</fifths>
-              </key>
-              <time>
-                  <beats>4</beats>
-                  <beat-type>4</beat-type>
-              </time>
-              <clef>
-                  <sign>F</sign>
-                  <line>4</line>
-              </clef>
-              <transpose>
-                  <diatonic>-1</diatonic>
-                  <chromatic>-2</chromatic>
-              </transpose>
-          </attributes>
-          <note default-x="85.19" default-y="-1800.00">
-              <pitch>
-                  <step>C</step>
-                  <octave>5</octave>
-              </pitch>
-              <duration>4</duration>
-              <voice>1</voice>
-              <type>whole</type>
-          </note>
-          <barline location="right">
-              <bar-style>light-heavy</bar-style>
-          </barline>
-      </measure>
-  </part>
-  <!--=========================================================-->
-  <part id="P47">
-      <measure number="1" width="154.41">
-          <print>
-              <staff-layout number="1">
-                  <staff-distance>65.00</staff-distance>
-              </staff-layout>
-          </print>
-          <attributes>
-              <divisions>1</divisions>
-              <key>
-                  <fifths>0</fifths>
-              </key>
-              <time>
-                  <beats>4</beats>
-                  <beat-type>4</beat-type>
-              </time>
-              <clef>
-                  <sign>F</sign>
-                  <line>4</line>
-              </clef>
-              <transpose>
-                  <diatonic>-1</diatonic>
-                  <chromatic>-2</chromatic>
-              </transpose>
-          </attributes>
-          <note default-x="85.19" default-y="-1905.00">
-              <pitch>
-                  <step>C</step>
-                  <alter>1</alter>
-                  <octave>5</octave>
-              </pitch>
-              <duration>4</duration>
-              <voice>1</voice>
-              <type>whole</type>
-              <accidental>sharp</accidental>
-          </note>
-          <barline location="right">
-              <bar-style>light-heavy</bar-style>
-          </barline>
-      </measure>
-  </part>
-  <!--=========================================================-->
-  <part id="P48">
-      <measure number="1" width="154.41">
-          <print>
-              <staff-layout number="1">
-                  <staff-distance>65.00</staff-distance>
-              </staff-layout>
-          </print>
-          <attributes>
-              <divisions>1</divisions>
-              <key>
-                  <fifths>0</fifths>
-              </key>
-              <time>
-                  <beats>4</beats>
-                  <beat-type>4</beat-type>
-              </time>
-              <clef>
-                  <sign>F</sign>
-                  <line>4</line>
-              </clef>
-              <transpose>
-                  <diatonic>-1</diatonic>
-                  <chromatic>-2</chromatic>
-              </transpose>
-          </attributes>
-          <note default-x="85.19" default-y="-2005.00">
-              <pitch>
-                  <step>D</step>
-                  <octave>5</octave>
-              </pitch>
-              <duration>4</duration>
-              <voice>1</voice>
-              <type>whole</type>
-          </note>
-          <barline location="right">
-              <bar-style>light-heavy</bar-style>
-          </barline>
-      </measure>
-  </part>
-  <!--=========================================================-->
-  <part id="P49">
-      <measure number="1" width="154.41">
-          <print>
-              <staff-layout number="1">
-                  <staff-distance>65.00</staff-distance>
-              </staff-layout>
-          </print>
-          <attributes>
-              <divisions>1</divisions>
-              <key>
-                  <fifths>0</fifths>
-              </key>
-              <time>
-                  <beats>4</beats>
-                  <beat-type>4</beat-type>
-              </time>
-              <clef>
-                  <sign>F</sign>
-                  <line>4</line>
-              </clef>
-              <transpose>
-                  <diatonic>-1</diatonic>
-                  <chromatic>-2</chromatic>
-              </transpose>
-          </attributes>
-          <note default-x="85.19" default-y="-2110.00">
-              <pitch>
-                  <step>D</step>
-                  <alter>1</alter>
-                  <octave>5</octave>
-              </pitch>
-              <duration>4</duration>
-              <voice>1</voice>
-              <type>whole</type>
-              <accidental>sharp</accidental>
-          </note>
-          <barline location="right">
-              <bar-style>light-heavy</bar-style>
-          </barline>
-      </measure>
-  </part>
-  <!--=========================================================-->
-  <part id="P50">
-      <measure number="1" width="154.41">
-          <print>
-              <staff-layout number="1">
-                  <staff-distance>65.00</staff-distance>
-              </staff-layout>
-          </print>
-          <attributes>
-              <divisions>1</divisions>
-              <key>
-                  <fifths>0</fifths>
-              </key>
-              <time>
-                  <beats>4</beats>
-                  <beat-type>4</beat-type>
-              </time>
-              <clef>
-                  <sign>F</sign>
-                  <line>4</line>
-              </clef>
-              <transpose>
-                  <diatonic>-1</diatonic>
-                  <chromatic>-2</chromatic>
-              </transpose>
-          </attributes>
-          <note default-x="85.19" default-y="-2210.00">
-              <pitch>
-                  <step>E</step>
-                  <octave>5</octave>
-              </pitch>
-              <duration>4</duration>
-              <voice>1</voice>
-              <type>whole</type>
-          </note>
-          <barline location="right">
-              <bar-style>light-heavy</bar-style>
-          </barline>
-      </measure>
-  </part>
-  <!--=========================================================-->
-  <part id="P51">
-      <measure number="1" width="154.41">
-          <print>
-              <staff-layout number="1">
-                  <staff-distance>65.00</staff-distance>
-              </staff-layout>
-          </print>
-          <attributes>
-              <divisions>1</divisions>
-              <key>
-                  <fifths>0</fifths>
-              </key>
-              <time>
-                  <beats>4</beats>
-                  <beat-type>4</beat-type>
-              </time>
-              <clef>
-                  <sign>F</sign>
-                  <line>4</line>
-              </clef>
-              <transpose>
-                  <diatonic>-1</diatonic>
-                  <chromatic>-2</chromatic>
-              </transpose>
-          </attributes>
-          <note default-x="85.19" default-y="-2310.00">
-              <pitch>
-                  <step>F</step>
-                  <octave>5</octave>
-              </pitch>
-              <duration>4</duration>
-              <voice>1</voice>
-              <type>whole</type>
-          </note>
-          <barline location="right">
-              <bar-style>light-heavy</bar-style>
-          </barline>
-      </measure>
-  </part>
-  <!--=========================================================-->
-  <part id="P52">
-      <measure number="1" width="154.41">
-          <print>
-              <staff-layout number="1">
-                  <staff-distance>65.00</staff-distance>
-              </staff-layout>
-          </print>
-          <attributes>
-              <divisions>1</divisions>
-              <key>
-                  <fifths>0</fifths>
-              </key>
-              <time>
-                  <beats>4</beats>
-                  <beat-type>4</beat-type>
-              </time>
-              <clef>
-                  <sign>F</sign>
-                  <line>4</line>
-              </clef>
-              <transpose>
-                  <diatonic>-1</diatonic>
-                  <chromatic>-2</chromatic>
-              </transpose>
-          </attributes>
-          <note default-x="85.19" default-y="-2415.00">
-              <pitch>
-                  <step>F</step>
-                  <alter>1</alter>
-                  <octave>5</octave>
-              </pitch>
-              <duration>4</duration>
-              <voice>1</voice>
-              <type>whole</type>
-              <accidental>sharp</accidental>
-          </note>
-          <barline location="right">
-              <bar-style>light-heavy</bar-style>
-          </barline>
-      </measure>
-  </part>
-  <!--=========================================================-->
-  <part id="P53">
-      <measure number="1" width="154.41">
-          <print>
-              <staff-layout number="1">
-                  <staff-distance>65.00</staff-distance>
-              </staff-layout>
-          </print>
-          <attributes>
-              <divisions>1</divisions>
-              <key>
-                  <fifths>0</fifths>
-              </key>
-              <time>
-                  <beats>4</beats>
-                  <beat-type>4</beat-type>
-              </time>
-              <clef>
-                  <sign>F</sign>
-                  <line>4</line>
-              </clef>
-              <transpose>
-                  <diatonic>-1</diatonic>
-                  <chromatic>-2</chromatic>
-              </transpose>
-          </attributes>
-          <note default-x="85.19" default-y="-2515.00">
-              <pitch>
-                  <step>G</step>
-                  <octave>5</octave>
-              </pitch>
-              <duration>4</duration>
-              <voice>1</voice>
-              <type>whole</type>
-          </note>
-          <barline location="right">
-              <bar-style>light-heavy</bar-style>
-          </barline>
-      </measure>
-  </part>
+<!--=========================================================-->
+<part id="P28">
+    <measure number="1" width="216">
+        <print>
+            <staff-layout number="1">
+                <staff-distance>65</staff-distance>
+            </staff-layout>
+            <measure-numbering>none</measure-numbering>
+        </print>
+        <attributes>
+            <divisions>2</divisions>
+            <key>
+                <fifths>0</fifths>
+                <mode>major</mode>
+            </key>
+            <time>
+                <beats>4</beats>
+                <beat-type>4</beat-type>
+            </time>
+            <clef>
+                <sign>F</sign>
+                <line>4</line>
+            </clef>
+        </attributes>
+        <sound tempo="120"/>
+        <note default-x="97">
+            <pitch>
+                <step>F</step>
+                <alter>1</alter>
+                <octave>3</octave>
+            </pitch>
+            <duration>8</duration>
+            <voice>1</voice>
+            <type>whole</type>
+            <accidental>sharp</accidental>
+        </note>
+        <barline location="right">
+            <bar-style>light-heavy</bar-style>
+        </barline>
+    </measure>
+</part>
+<!--=========================================================-->
+<part id="P29">
+    <measure number="1" width="216">
+        <print>
+            <staff-layout number="1">
+                <staff-distance>65</staff-distance>
+            </staff-layout>
+            <measure-numbering>none</measure-numbering>
+        </print>
+        <attributes>
+            <divisions>2</divisions>
+            <key>
+                <fifths>0</fifths>
+                <mode>major</mode>
+            </key>
+            <time>
+                <beats>4</beats>
+                <beat-type>4</beat-type>
+            </time>
+            <clef>
+                <sign>F</sign>
+                <line>4</line>
+            </clef>
+        </attributes>
+        <sound tempo="120"/>
+        <note default-x="97">
+            <pitch>
+                <step>G</step>
+                <octave>3</octave>
+            </pitch>
+            <duration>8</duration>
+            <voice>1</voice>
+            <type>whole</type>
+        </note>
+        <barline location="right">
+            <bar-style>light-heavy</bar-style>
+        </barline>
+    </measure>
+</part>
+<!--=========================================================-->
+<part id="P30">
+    <measure number="1" width="216">
+        <print>
+            <staff-layout number="1">
+                <staff-distance>65</staff-distance>
+            </staff-layout>
+            <measure-numbering>none</measure-numbering>
+        </print>
+        <attributes>
+            <divisions>2</divisions>
+            <key>
+                <fifths>0</fifths>
+                <mode>major</mode>
+            </key>
+            <time>
+                <beats>4</beats>
+                <beat-type>4</beat-type>
+            </time>
+            <clef>
+                <sign>F</sign>
+                <line>4</line>
+            </clef>
+        </attributes>
+        <sound tempo="120"/>
+        <note default-x="97">
+            <pitch>
+                <step>G</step>
+                <alter>1</alter>
+                <octave>3</octave>
+            </pitch>
+            <duration>8</duration>
+            <voice>1</voice>
+            <type>whole</type>
+            <accidental>sharp</accidental>
+        </note>
+        <barline location="right">
+            <bar-style>light-heavy</bar-style>
+        </barline>
+    </measure>
+</part>
+<!--=========================================================-->
+<part id="P31">
+    <measure number="1" width="216">
+        <print>
+            <staff-layout number="1">
+                <staff-distance>65</staff-distance>
+            </staff-layout>
+            <measure-numbering>none</measure-numbering>
+        </print>
+        <attributes>
+            <divisions>2</divisions>
+            <key>
+                <fifths>0</fifths>
+                <mode>major</mode>
+            </key>
+            <time>
+                <beats>4</beats>
+                <beat-type>4</beat-type>
+            </time>
+            <clef>
+                <sign>F</sign>
+                <line>4</line>
+            </clef>
+        </attributes>
+        <sound tempo="120"/>
+        <note default-x="97">
+            <pitch>
+                <step>A</step>
+                <octave>3</octave>
+            </pitch>
+            <duration>8</duration>
+            <voice>1</voice>
+            <type>whole</type>
+        </note>
+        <barline location="right">
+            <bar-style>light-heavy</bar-style>
+        </barline>
+    </measure>
+</part>
+<!--=========================================================-->
+<part id="P32">
+    <measure number="1" width="216">
+        <print>
+            <staff-layout number="1">
+                <staff-distance>65</staff-distance>
+            </staff-layout>
+            <measure-numbering>none</measure-numbering>
+        </print>
+        <attributes>
+            <divisions>2</divisions>
+            <key>
+                <fifths>0</fifths>
+                <mode>major</mode>
+            </key>
+            <time>
+                <beats>4</beats>
+                <beat-type>4</beat-type>
+            </time>
+            <clef>
+                <sign>F</sign>
+                <line>4</line>
+            </clef>
+        </attributes>
+        <sound tempo="120"/>
+        <note default-x="97">
+            <pitch>
+                <step>A</step>
+                <alter>1</alter>
+                <octave>3</octave>
+            </pitch>
+            <duration>8</duration>
+            <voice>1</voice>
+            <type>whole</type>
+            <accidental>sharp</accidental>
+        </note>
+        <barline location="right">
+            <bar-style>light-heavy</bar-style>
+        </barline>
+    </measure>
+</part>
+<!--=========================================================-->
+<part id="P33">
+    <measure number="1" width="216">
+        <print>
+            <staff-layout number="1">
+                <staff-distance>65</staff-distance>
+            </staff-layout>
+            <measure-numbering>none</measure-numbering>
+        </print>
+        <attributes>
+            <divisions>2</divisions>
+            <key>
+                <fifths>0</fifths>
+                <mode>major</mode>
+            </key>
+            <time>
+                <beats>4</beats>
+                <beat-type>4</beat-type>
+            </time>
+            <clef>
+                <sign>F</sign>
+                <line>4</line>
+            </clef>
+        </attributes>
+        <sound tempo="120"/>
+        <note default-x="97">
+            <pitch>
+                <step>B</step>
+                <octave>3</octave>
+            </pitch>
+            <duration>8</duration>
+            <voice>1</voice>
+            <type>whole</type>
+        </note>
+        <barline location="right">
+            <bar-style>light-heavy</bar-style>
+        </barline>
+    </measure>
+</part>
+<!--=========================================================-->
+<part id="P34">
+    <measure number="1" width="216">
+        <print>
+            <staff-layout number="1">
+                <staff-distance>65</staff-distance>
+            </staff-layout>
+            <measure-numbering>none</measure-numbering>
+        </print>
+        <attributes>
+            <divisions>2</divisions>
+            <key>
+                <fifths>0</fifths>
+                <mode>major</mode>
+            </key>
+            <time>
+                <beats>4</beats>
+                <beat-type>4</beat-type>
+            </time>
+            <clef>
+                <sign>F</sign>
+                <line>4</line>
+            </clef>
+        </attributes>
+        <sound tempo="120"/>
+        <note default-x="97">
+            <pitch>
+                <step>C</step>
+                <octave>4</octave>
+            </pitch>
+            <duration>8</duration>
+            <voice>1</voice>
+            <type>whole</type>
+        </note>
+        <barline location="right">
+            <bar-style>light-heavy</bar-style>
+        </barline>
+    </measure>
+</part>
+<!--=========================================================-->
+<part id="P35">
+    <measure number="1" width="216">
+        <print>
+            <staff-layout number="1">
+                <staff-distance>65</staff-distance>
+            </staff-layout>
+            <measure-numbering>none</measure-numbering>
+        </print>
+        <attributes>
+            <divisions>2</divisions>
+            <key>
+                <fifths>0</fifths>
+                <mode>major</mode>
+            </key>
+            <time>
+                <beats>4</beats>
+                <beat-type>4</beat-type>
+            </time>
+            <clef>
+                <sign>F</sign>
+                <line>4</line>
+            </clef>
+        </attributes>
+        <sound tempo="120"/>
+        <note default-x="97">
+            <pitch>
+                <step>C</step>
+                <alter>1</alter>
+                <octave>4</octave>
+            </pitch>
+            <duration>8</duration>
+            <voice>1</voice>
+            <type>whole</type>
+            <accidental>sharp</accidental>
+        </note>
+        <barline location="right">
+            <bar-style>light-heavy</bar-style>
+        </barline>
+    </measure>
+</part>
+<!--=========================================================-->
+<part id="P36">
+    <measure number="1" width="216">
+        <print>
+            <staff-layout number="1">
+                <staff-distance>65</staff-distance>
+            </staff-layout>
+            <measure-numbering>none</measure-numbering>
+        </print>
+        <attributes>
+            <divisions>2</divisions>
+            <key>
+                <fifths>0</fifths>
+                <mode>major</mode>
+            </key>
+            <time>
+                <beats>4</beats>
+                <beat-type>4</beat-type>
+            </time>
+            <clef>
+                <sign>F</sign>
+                <line>4</line>
+            </clef>
+        </attributes>
+        <sound tempo="120"/>
+        <note default-x="97">
+            <pitch>
+                <step>D</step>
+                <octave>4</octave>
+            </pitch>
+            <duration>8</duration>
+            <voice>1</voice>
+            <type>whole</type>
+        </note>
+        <barline location="right">
+            <bar-style>light-heavy</bar-style>
+        </barline>
+    </measure>
+</part>
+<!--=========================================================-->
+<part id="P37">
+    <measure number="1" width="216">
+        <print>
+            <staff-layout number="1">
+                <staff-distance>65</staff-distance>
+            </staff-layout>
+            <measure-numbering>none</measure-numbering>
+        </print>
+        <attributes>
+            <divisions>2</divisions>
+            <key>
+                <fifths>0</fifths>
+                <mode>major</mode>
+            </key>
+            <time>
+                <beats>4</beats>
+                <beat-type>4</beat-type>
+            </time>
+            <clef>
+                <sign>F</sign>
+                <line>4</line>
+            </clef>
+        </attributes>
+        <sound tempo="120"/>
+        <note default-x="97">
+            <pitch>
+                <step>D</step>
+                <alter>1</alter>
+                <octave>4</octave>
+            </pitch>
+            <duration>8</duration>
+            <voice>1</voice>
+            <type>whole</type>
+            <accidental>sharp</accidental>
+        </note>
+        <barline location="right">
+            <bar-style>light-heavy</bar-style>
+        </barline>
+    </measure>
+</part>
+<!--=========================================================-->
+<part id="P38">
+    <measure number="1" width="216">
+        <print>
+            <staff-layout number="1">
+                <staff-distance>65</staff-distance>
+            </staff-layout>
+            <measure-numbering>none</measure-numbering>
+        </print>
+        <attributes>
+            <divisions>2</divisions>
+            <key>
+                <fifths>0</fifths>
+                <mode>major</mode>
+            </key>
+            <time>
+                <beats>4</beats>
+                <beat-type>4</beat-type>
+            </time>
+            <clef>
+                <sign>F</sign>
+                <line>4</line>
+            </clef>
+        </attributes>
+        <sound tempo="120"/>
+        <note default-x="97">
+            <pitch>
+                <step>E</step>
+                <octave>4</octave>
+            </pitch>
+            <duration>8</duration>
+            <voice>1</voice>
+            <type>whole</type>
+        </note>
+        <barline location="right">
+            <bar-style>light-heavy</bar-style>
+        </barline>
+    </measure>
+</part>
+<!--=========================================================-->
+<part id="P39">
+    <measure number="1" width="216">
+        <print>
+            <staff-layout number="1">
+                <staff-distance>65</staff-distance>
+            </staff-layout>
+            <measure-numbering>none</measure-numbering>
+        </print>
+        <attributes>
+            <divisions>2</divisions>
+            <key>
+                <fifths>0</fifths>
+                <mode>major</mode>
+            </key>
+            <time>
+                <beats>4</beats>
+                <beat-type>4</beat-type>
+            </time>
+            <clef>
+                <sign>F</sign>
+                <line>4</line>
+            </clef>
+        </attributes>
+        <sound tempo="120"/>
+        <note default-x="97">
+            <pitch>
+                <step>F</step>
+                <octave>4</octave>
+            </pitch>
+            <duration>8</duration>
+            <voice>1</voice>
+            <type>whole</type>
+        </note>
+        <barline location="right">
+            <bar-style>light-heavy</bar-style>
+        </barline>
+    </measure>
+</part>
+<!--=========================================================-->
+<part id="P40">
+    <measure number="1" width="216">
+        <print>
+            <staff-layout number="1">
+                <staff-distance>65</staff-distance>
+            </staff-layout>
+            <measure-numbering>none</measure-numbering>
+        </print>
+        <attributes>
+            <divisions>2</divisions>
+            <key>
+                <fifths>0</fifths>
+                <mode>major</mode>
+            </key>
+            <time>
+                <beats>4</beats>
+                <beat-type>4</beat-type>
+            </time>
+            <clef>
+                <sign>F</sign>
+                <line>4</line>
+            </clef>
+        </attributes>
+        <sound tempo="120"/>
+        <note default-x="97">
+            <pitch>
+                <step>F</step>
+                <alter>1</alter>
+                <octave>4</octave>
+            </pitch>
+            <duration>8</duration>
+            <voice>1</voice>
+            <type>whole</type>
+            <accidental>sharp</accidental>
+        </note>
+        <barline location="right">
+            <bar-style>light-heavy</bar-style>
+        </barline>
+    </measure>
+</part>
+<!--=========================================================-->
+<part id="P41">
+    <measure number="1" width="216">
+        <print>
+            <staff-layout number="1">
+                <staff-distance>65</staff-distance>
+            </staff-layout>
+            <measure-numbering>none</measure-numbering>
+        </print>
+        <attributes>
+            <divisions>2</divisions>
+            <key>
+                <fifths>0</fifths>
+                <mode>major</mode>
+            </key>
+            <time>
+                <beats>4</beats>
+                <beat-type>4</beat-type>
+            </time>
+            <clef>
+                <sign>F</sign>
+                <line>4</line>
+            </clef>
+        </attributes>
+        <sound tempo="120"/>
+        <note default-x="97">
+            <pitch>
+                <step>G</step>
+                <octave>4</octave>
+            </pitch>
+            <duration>8</duration>
+            <voice>1</voice>
+            <type>whole</type>
+        </note>
+        <barline location="right">
+            <bar-style>light-heavy</bar-style>
+        </barline>
+    </measure>
+</part>
+<!--=========================================================-->
+<part id="P42">
+    <measure number="1" width="216">
+        <print>
+            <staff-layout number="1">
+                <staff-distance>65</staff-distance>
+            </staff-layout>
+            <measure-numbering>none</measure-numbering>
+        </print>
+        <attributes>
+            <divisions>2</divisions>
+            <key>
+                <fifths>0</fifths>
+                <mode>major</mode>
+            </key>
+            <time>
+                <beats>4</beats>
+                <beat-type>4</beat-type>
+            </time>
+            <clef>
+                <sign>F</sign>
+                <line>4</line>
+            </clef>
+        </attributes>
+        <sound tempo="120"/>
+        <note default-x="97">
+            <pitch>
+                <step>G</step>
+                <alter>1</alter>
+                <octave>4</octave>
+            </pitch>
+            <duration>8</duration>
+            <voice>1</voice>
+            <type>whole</type>
+            <accidental>sharp</accidental>
+        </note>
+        <barline location="right">
+            <bar-style>light-heavy</bar-style>
+        </barline>
+    </measure>
+</part>
+<!--=========================================================-->
+<part id="P43">
+    <measure number="1" width="216">
+        <print>
+            <staff-layout number="1">
+                <staff-distance>65</staff-distance>
+            </staff-layout>
+            <measure-numbering>none</measure-numbering>
+        </print>
+        <attributes>
+            <divisions>2</divisions>
+            <key>
+                <fifths>0</fifths>
+                <mode>major</mode>
+            </key>
+            <time>
+                <beats>4</beats>
+                <beat-type>4</beat-type>
+            </time>
+            <clef>
+                <sign>F</sign>
+                <line>4</line>
+            </clef>
+        </attributes>
+        <sound tempo="120"/>
+        <note default-x="97">
+            <pitch>
+                <step>A</step>
+                <octave>4</octave>
+            </pitch>
+            <duration>8</duration>
+            <voice>1</voice>
+            <type>whole</type>
+        </note>
+        <barline location="right">
+            <bar-style>light-heavy</bar-style>
+        </barline>
+    </measure>
+</part>
+<!--=========================================================-->
+<part id="P44">
+    <measure number="1" width="216">
+        <print>
+            <staff-layout number="1">
+                <staff-distance>65</staff-distance>
+            </staff-layout>
+            <measure-numbering>none</measure-numbering>
+        </print>
+        <attributes>
+            <divisions>2</divisions>
+            <key>
+                <fifths>0</fifths>
+                <mode>major</mode>
+            </key>
+            <time>
+                <beats>4</beats>
+                <beat-type>4</beat-type>
+            </time>
+            <clef>
+                <sign>F</sign>
+                <line>4</line>
+            </clef>
+        </attributes>
+        <sound tempo="120"/>
+        <note default-x="97">
+            <pitch>
+                <step>A</step>
+                <alter>1</alter>
+                <octave>4</octave>
+            </pitch>
+            <duration>8</duration>
+            <voice>1</voice>
+            <type>whole</type>
+            <accidental>sharp</accidental>
+        </note>
+        <barline location="right">
+            <bar-style>light-heavy</bar-style>
+        </barline>
+    </measure>
+</part>
+<!--=========================================================-->
+<part id="P45">
+    <measure number="1" width="216">
+        <print>
+            <staff-layout number="1">
+                <staff-distance>65</staff-distance>
+            </staff-layout>
+            <measure-numbering>none</measure-numbering>
+        </print>
+        <attributes>
+            <divisions>2</divisions>
+            <key>
+                <fifths>0</fifths>
+                <mode>major</mode>
+            </key>
+            <time>
+                <beats>4</beats>
+                <beat-type>4</beat-type>
+            </time>
+            <clef>
+                <sign>F</sign>
+                <line>4</line>
+            </clef>
+        </attributes>
+        <sound tempo="120"/>
+        <note default-x="97">
+            <pitch>
+                <step>B</step>
+                <octave>4</octave>
+            </pitch>
+            <duration>8</duration>
+            <voice>1</voice>
+            <type>whole</type>
+        </note>
+        <barline location="right">
+            <bar-style>light-heavy</bar-style>
+        </barline>
+    </measure>
+</part>
+<!--=========================================================-->
+<part id="P46">
+    <measure number="1" width="216">
+        <print>
+            <staff-layout number="1">
+                <staff-distance>65</staff-distance>
+            </staff-layout>
+            <measure-numbering>none</measure-numbering>
+        </print>
+        <attributes>
+            <divisions>2</divisions>
+            <key>
+                <fifths>0</fifths>
+                <mode>major</mode>
+            </key>
+            <time>
+                <beats>4</beats>
+                <beat-type>4</beat-type>
+            </time>
+            <clef>
+                <sign>F</sign>
+                <line>4</line>
+            </clef>
+        </attributes>
+        <sound tempo="120"/>
+        <note default-x="97">
+            <pitch>
+                <step>C</step>
+                <octave>5</octave>
+            </pitch>
+            <duration>8</duration>
+            <voice>1</voice>
+            <type>whole</type>
+        </note>
+        <barline location="right">
+            <bar-style>light-heavy</bar-style>
+        </barline>
+    </measure>
+</part>
+<!--=========================================================-->
+<part id="P47">
+    <measure number="1" width="216">
+        <print>
+            <staff-layout number="1">
+                <staff-distance>65</staff-distance>
+            </staff-layout>
+            <measure-numbering>none</measure-numbering>
+        </print>
+        <attributes>
+            <divisions>2</divisions>
+            <key>
+                <fifths>0</fifths>
+                <mode>major</mode>
+            </key>
+            <time>
+                <beats>4</beats>
+                <beat-type>4</beat-type>
+            </time>
+            <clef>
+                <sign>F</sign>
+                <line>4</line>
+            </clef>
+        </attributes>
+        <sound tempo="120"/>
+        <note default-x="97">
+            <pitch>
+                <step>C</step>
+                <alter>1</alter>
+                <octave>5</octave>
+            </pitch>
+            <duration>8</duration>
+            <voice>1</voice>
+            <type>whole</type>
+            <accidental>sharp</accidental>
+        </note>
+        <barline location="right">
+            <bar-style>light-heavy</bar-style>
+        </barline>
+    </measure>
+</part>
+<!--=========================================================-->
+<part id="P48">
+    <measure number="1" width="216">
+        <print>
+            <staff-layout number="1">
+                <staff-distance>65</staff-distance>
+            </staff-layout>
+            <measure-numbering>none</measure-numbering>
+        </print>
+        <attributes>
+            <divisions>2</divisions>
+            <key>
+                <fifths>0</fifths>
+                <mode>major</mode>
+            </key>
+            <time>
+                <beats>4</beats>
+                <beat-type>4</beat-type>
+            </time>
+            <clef>
+                <sign>F</sign>
+                <line>4</line>
+            </clef>
+        </attributes>
+        <sound tempo="120"/>
+        <note default-x="97">
+            <pitch>
+                <step>D</step>
+                <octave>5</octave>
+            </pitch>
+            <duration>8</duration>
+            <voice>1</voice>
+            <type>whole</type>
+        </note>
+        <barline location="right">
+            <bar-style>light-heavy</bar-style>
+        </barline>
+    </measure>
+</part>
+<!--=========================================================-->
+<part id="P49">
+    <measure number="1" width="216">
+        <print>
+            <staff-layout number="1">
+                <staff-distance>65</staff-distance>
+            </staff-layout>
+            <measure-numbering>none</measure-numbering>
+        </print>
+        <attributes>
+            <divisions>2</divisions>
+            <key>
+                <fifths>0</fifths>
+                <mode>major</mode>
+            </key>
+            <time>
+                <beats>4</beats>
+                <beat-type>4</beat-type>
+            </time>
+            <clef>
+                <sign>F</sign>
+                <line>4</line>
+            </clef>
+        </attributes>
+        <sound tempo="120"/>
+        <note default-x="97">
+            <pitch>
+                <step>D</step>
+                <alter>1</alter>
+                <octave>5</octave>
+            </pitch>
+            <duration>8</duration>
+            <voice>1</voice>
+            <type>whole</type>
+            <accidental>sharp</accidental>
+        </note>
+        <barline location="right">
+            <bar-style>light-heavy</bar-style>
+        </barline>
+    </measure>
+</part>
+<!--=========================================================-->
+<part id="P50">
+    <measure number="1" width="216">
+        <print>
+            <staff-layout number="1">
+                <staff-distance>65</staff-distance>
+            </staff-layout>
+            <measure-numbering>none</measure-numbering>
+        </print>
+        <attributes>
+            <divisions>2</divisions>
+            <key>
+                <fifths>0</fifths>
+                <mode>major</mode>
+            </key>
+            <time>
+                <beats>4</beats>
+                <beat-type>4</beat-type>
+            </time>
+            <clef>
+                <sign>F</sign>
+                <line>4</line>
+            </clef>
+        </attributes>
+        <sound tempo="120"/>
+        <note default-x="97">
+            <pitch>
+                <step>E</step>
+                <octave>5</octave>
+            </pitch>
+            <duration>8</duration>
+            <voice>1</voice>
+            <type>whole</type>
+        </note>
+        <barline location="right">
+            <bar-style>light-heavy</bar-style>
+        </barline>
+    </measure>
+</part>
+<!--=========================================================-->
+<part id="P51">
+    <measure number="1" width="216">
+        <print>
+            <staff-layout number="1">
+                <staff-distance>65</staff-distance>
+            </staff-layout>
+            <measure-numbering>none</measure-numbering>
+        </print>
+        <attributes>
+            <divisions>2</divisions>
+            <key>
+                <fifths>0</fifths>
+                <mode>major</mode>
+            </key>
+            <time>
+                <beats>4</beats>
+                <beat-type>4</beat-type>
+            </time>
+            <clef>
+                <sign>F</sign>
+                <line>4</line>
+            </clef>
+        </attributes>
+        <sound tempo="120"/>
+        <note default-x="97">
+            <pitch>
+                <step>F</step>
+                <octave>5</octave>
+            </pitch>
+            <duration>8</duration>
+            <voice>1</voice>
+            <type>whole</type>
+        </note>
+        <barline location="right">
+            <bar-style>light-heavy</bar-style>
+        </barline>
+    </measure>
+</part>
+<!--=========================================================-->
+<part id="P52">
+    <measure number="1" width="216">
+        <print>
+            <staff-layout number="1">
+                <staff-distance>65</staff-distance>
+            </staff-layout>
+            <measure-numbering>none</measure-numbering>
+        </print>
+        <attributes>
+            <divisions>2</divisions>
+            <key>
+                <fifths>0</fifths>
+                <mode>major</mode>
+            </key>
+            <time>
+                <beats>4</beats>
+                <beat-type>4</beat-type>
+            </time>
+            <clef>
+                <sign>F</sign>
+                <line>4</line>
+            </clef>
+        </attributes>
+        <sound tempo="120"/>
+        <note default-x="97">
+            <pitch>
+                <step>F</step>
+                <alter>1</alter>
+                <octave>5</octave>
+            </pitch>
+            <duration>8</duration>
+            <voice>1</voice>
+            <type>whole</type>
+            <accidental>sharp</accidental>
+        </note>
+        <barline location="right">
+            <bar-style>light-heavy</bar-style>
+        </barline>
+    </measure>
+</part>
+<!--=========================================================-->
 </score-partwise>

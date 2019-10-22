@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 3.1 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise version="3.1">
+  <movement-title>Master Biz</movement-title>
   <identification>
     <rights>©</rights>
     <encoding>
       <software>Finale v25 for Mac</software>
-      <encoding-date>2018-12-30</encoding-date>
+      <encoding-date>2019-07-30</encoding-date>
       <supports attribute="new-system" element="print" type="yes" value="yes"/>
       <supports attribute="new-page" element="print" type="yes" value="yes"/>
       <supports element="accidental" type="yes"/>
@@ -56,6 +57,10 @@
     <word-font font-family="Times New Roman" font-size="10.25"/>
   </defaults>
   <credit page="1">
+    <credit-type>title</credit-type>
+    <credit-words default-x="597" default-y="1475" font-size="24" justify="center" valign="top">Master Biz</credit-words>
+  </credit>
+  <credit page="1">
     <credit-type>rights</credit-type>
     <credit-words default-x="597" default-y="53" font-size="10" justify="center" valign="bottom">©</credit-words>
   </credit>
@@ -66,17 +71,17 @@
     <score-part id="P1">
       <part-name print-object="no">Horn in F</part-name>
       <part-abbreviation print-object="no">Hn.</part-abbreviation>
-      <score-instrument id="P1-I1">
+      <score-instrument id="P1-I3">
         <instrument-name>ARIA Player</instrument-name>
         <instrument-sound>brass.french-horn</instrument-sound>
         <virtual-instrument/>
       </score-instrument>
       <midi-device>ARIA Player</midi-device>
-      <midi-instrument id="P1-I1">
-        <midi-channel>1</midi-channel>
+      <midi-instrument id="P1-I3">
+        <midi-channel>3</midi-channel>
         <midi-program>1</midi-program>
         <volume>80</volume>
-        <pan>-70</pan>
+        <pan>29</pan>
       </midi-instrument>
     </score-part>
   </part-list>
