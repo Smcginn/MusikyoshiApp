@@ -1449,16 +1449,15 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo {
                         // moves more to the right (more or the left remains visible for longer)
                         //let kBeginningPause_ms = 0 // Int(2*bar.duration_ms)
                         let kBeginningPause_ms = Int(bar.duration_ms/2)
-                        //let kBeginningPause = Int(round(Double(kBeginningPause_ms) / 1000))
-                        exerciseDurationWithPause_ms = exerciseDuration_ms + kBeginningPause_ms
-                        //exerciseDuration_ms += kBeginningPause_ms
+                        exerciseDurationWithPause_ms = exerciseDuration_ms +
+                                                       kBeginningPause_ms +
+                                                       Int(2*bar.duration_ms)
                         exerciseDurationWithPause = round(Double(exerciseDurationWithPause_ms) / 1000)
 
                         animValues.append(thisNoteXPos - animHorzOffset)
-                        //animKeyTimes.append(Double(kBeginningPause_ms))
 
                         animKeyTimes.append( Double(kBeginningPause_ms + Int(note.start)) / Double(exerciseDurationWithPause_ms) )
-                        barsDuration_ms += kBeginningPause_ms
+                        barsDuration_ms += Int(bar.duration_ms)
                     } else {
                         let kBeginningPause_ms = Int(2*bar.duration_ms)
                         //let kBeginningPause_ms = 0//Int(bar.duration_ms/2)

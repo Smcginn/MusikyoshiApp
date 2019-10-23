@@ -41,7 +41,7 @@ var kAmpRiseChangeSliderMaxValue = Double(1.2)
 /////////////////////////////////////////////////
 // BPM Range
 
-let kTempoRangeMin:Double =  60.0
+let kTempoRangeMin:Double =  40.0
 let kTempoRangeMax:Double = 160.0
 let kTempoRange = kTempoRangeMax - kTempoRangeMin
 let kBPMMultiplier:Double = 1.0 / kTempoRange

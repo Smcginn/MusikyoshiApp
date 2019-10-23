@@ -429,31 +429,16 @@ class LevelsViewController: UIViewController {
         }
     }
     
-    let kSlursTempCutoff = 120
-    func canDoSlursAtThisTempo() -> Bool {
+     func canDoSlursAtThisTempo() -> Bool {
         if !isSlursLevel {
             return true
         }
         
         let currBpm = Int(getCurrBPM())
-        return currBpm > kSlursTempCutoff ? false : true
-    }
-    
-    func presentCantDoSlursAtThisTempAlert() {
-        let currBPM = Int(getCurrBPM())
-        guard currBPM > 0 else { return }
-        
-        let titleStr = "Slur Exercises Unavailable at this Tempo"
-        var msgStr = "\nFor this release, Slur exercises are unavailable at this tempo (\(currBPM) BPM).\n\n"
-        msgStr += "To play Slur execrcises, you will need to set the BPM to \(kSlursTempCutoff) or less."
-        msgStr += "\n\n(Sorry - we will fix this soon!))"
-
-        let ac = MyUIAlertController(title: titleStr, message: msgStr, preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .default,
-                                   handler: nil))
-        self.present(ac, animated: true, completion: nil)
+        return currBpm > kSlursTempoCutoff ? false : true
     }
 }
+
 
 let kIdxForLipSlurs    = "990"
 let kIdxForLongTones6  = "992"
@@ -576,12 +561,11 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
                     TryOutLevelsManager.sharedInstance.isDayEnabled(levelTitle: selectedLevelTitleStr,
                                                                     dayTitle: cellTitleText )
             }
-
+            
             if dayIsEnabled {
                 cell.dayIsEnabled = true
             } else {
                 cell.dayIsEnabled = false
-
             }
             
             //selectedCell?.isSelectedDay = true
@@ -593,8 +577,6 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
             } else {
                 cell.isSelectedDay = false
             }
-            
-
             
             if gDoLimitLevels && activeLevel > kNumberOfLevelsToShow {
                 itsBad()
@@ -713,7 +695,14 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
                 if let levelIdx = levelsJson?[indexPath.row]["levelIdx"].string {
                     isSlursLevel =  levelIdx == kIdxForLipSlurs ? true : false
                 }
-            }
+                
+                let canDo = canDoSlursAtThisTempo()
+                if !canDo {
+                    DispatchQueue.main.async {
+                        presentCantDoSlursAtThisTempAlert(presentingVC: self, forLevelVC: true)
+                    }
+                }
+           }
 
 //            activeLevel = indexPath.row
 //            setupNewlySelectedLevel()
@@ -727,7 +716,7 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
 //            let canDo = canDoSlursAtThisTempo()
 //            if !canDo {
 //                presentCantDoSlursAtThisTempAlert()
-////                return
+//                return
 //            }
             
             if !selectedLevelIsEnabled {
@@ -735,11 +724,16 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
             }
             
             let selectedCell: DayTableViewCell? = tableView.cellForRow(at: indexPath) as? DayTableViewCell
+            if selectedCell != nil {
+                if !selectedCell!.dayIsEnabled {
+                    return
+                }
+            }
+            
             let selCellTitle = selectedCell?.dayLabel.text
             var dayIsEnabled =
                 TryOutLevelsManager.sharedInstance.isDayEnabled(levelTitle: selectedLevelTitleStr,
                                                                 dayTitle: selCellTitle ?? "" )
-            
             
 //            selectedLevelTitleStr  cell.dayLabel.text
 //            if titleStr != nil {
@@ -895,6 +889,13 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
                 if let levelIdx = levelsJson?[scrollingToIP.row]["levelIdx"].string {
                     isSlursLevel =  levelIdx == kIdxForLipSlurs ? true : false
                 }
+                
+                let canDo = canDoSlursAtThisTempo()
+                if !canDo {
+                    DispatchQueue.main.async {
+                        presentCantDoSlursAtThisTempAlert(presentingVC: self, forLevelVC: true)
+                    }
+                }
            }
             
 //            //let indexPath = NSIndexPath(row: activeLevel, section: 0)
@@ -1011,5 +1012,65 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
         
     }
+}       // extension LevelsViewController:
+
+let kSlursTempoCutoff = 120
+
+var gShowSlursAtFastBPMWarning = true
+var gHaveShownSlursAtFastBPMWarningCount = 0
+var gSkipShowingFastBPMWarnCount = 0
+let kHaveShownSlursFastBPMWarnThreshold = 3
+let kReShowSlursFastBPMWarnThresh = 3
+
+func presentCantDoSlursAtThisTempAlert(presentingVC: UIViewController?,
+                                       forLevelVC: Bool ) {
+    let currBPM = Int(getCurrBPM())
+    guard currBPM > 0 else { return }
     
+    if !gShowSlursAtFastBPMWarning {
+        gSkipShowingFastBPMWarnCount += 1
+        if gSkipShowingFastBPMWarnCount > kReShowSlursFastBPMWarnThresh {
+            gShowSlursAtFastBPMWarning = true
+            gSkipShowingFastBPMWarnCount = 0
+        }
+    }
+    guard gShowSlursAtFastBPMWarning else { return }
+    
+    gHaveShownSlursAtFastBPMWarningCount += 1
+    
+    let titleStr = "You are too awesome!"
+    
+    var msgStr = ""
+    //        if !DeviceType.IS_IPHONE_5orSE {
+    //            msgStr += "\n"
+    //        }
+    if forLevelVC {
+        msgStr += "\nPlayTunes grades slurs very well at \(kSlursTempoCutoff) BPM or below, "
+        msgStr += "so you may want to select a slower tempo (currently \(currBPM))."
+        msgStr += "\n\nYou can go ahead and play at this faster tempo if you wish, but you "
+        msgStr += "may not get an accurate star rating.\n\nWe’re working on this. Thanks!"
+    } else { // For Day
+        msgStr += "\nThis Day contains a Lip Slur exercise.\n\nPlayTunes grades slurs very "
+        msgStr += "well at \(kSlursTempoCutoff) BPM or below (you are currently at \(currBPM)). "
+        msgStr += "You can go ahead and play at this faster tempo, but you may not get "
+        msgStr += "an accurate star rating. So you may want to select a slower tempo. "
+        msgStr += "(We’re working on this. Thanks!)"
+    }
+    
+    let ac = MyUIAlertController(title: titleStr, message: msgStr, preferredStyle: .alert)
+    ac.addAction(UIAlertAction(title: "OK", style: .default,
+                               handler: nil))
+    
+    // See if should add "Got It!" button
+    if gHaveShownSlursAtFastBPMWarningCount > kHaveShownSlursFastBPMWarnThreshold {
+        ac.addAction(UIAlertAction(title: "Got It! - Don't Remind Me For A While", style: .default,
+                                   handler: slursAtHiTempoGotItHandler))
+    }
+    
+    presentingVC?.present(ac, animated: true, completion: nil)
+}
+
+func slursAtHiTempoGotItHandler(_ act: UIAlertAction) {
+    gShowSlursAtFastBPMWarning = false
+    gSkipShowingFastBPMWarnCount = 0
 }
