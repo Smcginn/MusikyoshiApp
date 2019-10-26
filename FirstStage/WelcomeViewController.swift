@@ -97,7 +97,7 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
 //        var tryOutDetText = "You can access Levels 1 & 2 for free, forever. That’s almost 200 exercises!\n\n"
 //        tryOutDetText += "For this free try-out, you don't need to do anything else; you are good to go!"
         
-        var tryOutDetText = "We have lots of free areas of the app to try out for both beginners and those with some experience. Levels 1 and 2 are completely free. Day 1 of these levels is free also: Levels 3, 4, 10, 15, 20, 25, 30.  We even give you parts of our Long Tones Level and Lip Slurs Level.  Go ahead and explore Day 1 of all the Pink levels - you can unlock Gray levels when you purchase a subscription.\n\n"
+        var tryOutDetText = "We have lots of free areas of the app to try out for both beginners and those with some experience. Levels 1 and 2 are completely free. Day 1 of these levels is free also: Levels 3, 4, 7, 10, 15, 20, 25, 30.  We even give you parts of our Long Tones Level and Lip Slurs Level.  Go ahead and explore Day 1 of all the Pink levels - you can unlock Gray levels when you purchase a subscription.\n\n"
         
         tryOutDetText += "That’s hundreds of free exercises to help you get better!\n\n"
         

@@ -381,6 +381,9 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC, 
         
         bpmStepper.tintColor = .pinkColor
         
+        bpmStepper.minimumValue = kTempoRangeMin
+        bpmStepper.maximumValue = kTempoRangeMax
+
         self.instrumentPicker!.dataSource = self //as UIPickerViewDataSource
         self.instrumentPicker!.delegate = self
         

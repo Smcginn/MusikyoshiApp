@@ -156,6 +156,7 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // IAPSUBS
         subscriptionGood = PlayTunesIAPProducts.store.subscriptionGood()
         if subscriptionGood || gDoOverrideSubsPresent || !gDoLimitLevels {
             showingTryoutLevel = false
@@ -228,6 +229,7 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
             return
         }
         
+        // IAPSUBS
         allowAllLevelAccess = PlayTunesIAPProducts.store.subscriptionGood()
         if !allowAllLevelAccess &&
            !PlayTunesIAPProducts.store.userDefsStoredSubscStatusIsKnown() {
@@ -237,7 +239,7 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
     //                print("\n\n        Receipt Data repsonse acquired!   \n\n")
                     // if PlayTunesIAPProducts.store.purchaseStatus.state == .purchaseGood {
      //               if PlayTunesIAPProducts.store.purchaseStatus.subscriptionGood() {
-                    if PlayTunesIAPProducts.store.subscriptionGood() {
+                    if PlayTunesIAPProducts.store.subscriptionGood() { // IAPSUBS
                        allowAllLevelAccess = true
                     } else {
                         allowAllLevelAccess = false

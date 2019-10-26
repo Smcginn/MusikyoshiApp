@@ -630,7 +630,7 @@
         "helpCode2":"",
         "noteWidth":"0",
         "magnification":"0",
-        "frameWidth":"0"
+        "frameWidth":"5500"
         },{
         "fileCode":"TUN057",
         "xmlFile":"TUN057.xml",
@@ -641,7 +641,7 @@
         "helpCode2":"",
         "noteWidth":"0",
         "magnification":"0",
-        "frameWidth":"0"
+        "frameWidth":"5500"
         },{
         "fileCode":"TUN058",
         "xmlFile":"TUN058.xml",
@@ -894,7 +894,7 @@
         "helpCode2":"",
         "noteWidth":"0",
         "magnification":"0",
-        "frameWidth":"0"
+        "frameWidth":"4500"
         },{
         "fileCode":"TUN081",
         "xmlFile":"TUN081.xml",
@@ -1070,7 +1070,7 @@
         "helpCode2":"",
         "noteWidth":"0",
         "magnification":"0",
-        "frameWidth":"0"
+        "frameWidth":"5500"
         },{
         "fileCode":"TUN097",
         "xmlFile":"TUN097.xml",
@@ -1081,7 +1081,7 @@
         "helpCode2":"",
         "noteWidth":"0",
         "magnification":"0",
-        "frameWidth":"0"
+        "frameWidth":"6200"
         },{
         "fileCode":"TUN098",
         "xmlFile":"TUN098.xml",
@@ -1114,7 +1114,7 @@
         "helpCode2":"",
         "noteWidth":"0",
         "magnification":"0",
-        "frameWidth":"0"
+        "frameWidth":"4000"
         },{
         "fileCode":"TUN101",
         "xmlFile":"TUN101.xml",
@@ -1345,7 +1345,7 @@
             "helpCode2":"",
             "noteWidth":"0",
             "magnification":"0",
-            "frameWidth":"0"
+            "frameWidth":"4500"
         },{
             "fileCode":"TUN122",
             "xmlFile":"TUN122.xml",
@@ -1588,7 +1588,7 @@
         "helpCode2":"",
         "noteWidth":"0",
         "magnification":"0",
-        "frameWidth":"0"
+        "frameWidth":"5300"
         },{
         "fileCode":"SLR010",
         "xmlFile":"SLR010.xml",
@@ -1599,7 +1599,7 @@
         "helpCode2":"",
         "noteWidth":"0",
         "magnification":"0",
-        "frameWidth":"0"
+        "frameWidth":"4600"
         },{
         "fileCode":"SLR011",
         "xmlFile":"SLR011.xml",
@@ -1610,7 +1610,7 @@
         "helpCode2":"",
         "noteWidth":"0",
         "magnification":"0",
-        "frameWidth":"0"
+        "frameWidth":"4800"
         },{
         "fileCode":"SLR012",
         "xmlFile":"SLR012.xml",
@@ -1621,7 +1621,7 @@
         "helpCode2":"",
         "noteWidth":"0",
         "magnification":"0",
-        "frameWidth":"0"
+        "frameWidth":"4800"
         },{
         "fileCode":"SLR013",
         "xmlFile":"SLR013.xml",
@@ -1654,7 +1654,7 @@
         "helpCode2":"",
         "noteWidth":"0",
         "magnification":"0",
-        "frameWidth":"0"
+        "frameWidth":"5000"
         },{
         "fileCode":"SLR016",
         "xmlFile":"SLR016.xml",
@@ -1665,7 +1665,7 @@
         "helpCode2":"",
         "noteWidth":"0",
         "magnification":"0",
-        "frameWidth":"0"
+        "frameWidth":"5000"
         },{
         "fileCode":"SLR017",
         "xmlFile":"SLR017.xml",
@@ -1676,7 +1676,7 @@
         "helpCode2":"",
         "noteWidth":"0",
         "magnification":"0",
-        "frameWidth":"0"
+        "frameWidth":"5000"
         },{
         "fileCode":"SLR018",
         "xmlFile":"SLR018.xml",
@@ -1720,7 +1720,7 @@
         "helpCode2":"",
         "noteWidth":"0",
         "magnification":"0",
-        "frameWidth":"0"
+        "frameWidth":"5000"
         },{
         "fileCode":"SLR022",
         "xmlFile":"SLR022.xml",
@@ -1731,7 +1731,7 @@
         "helpCode2":"",
         "noteWidth":"0",
         "magnification":"0",
-        "frameWidth":"0"
+        "frameWidth":"5000"
         },{
         "fileCode":"SLR023",
         "xmlFile":"SLR023.xml",
@@ -2127,7 +2127,7 @@
         "helpCode2":"",
         "noteWidth":"0",
         "magnification":"0",
-        "frameWidth":"0"
+        "frameWidth":"3900"
         },{
         "fileCode":"PTY032",
         "xmlFile":"PTY032.xml",
@@ -2237,7 +2237,7 @@
         "helpCode2":"",
         "noteWidth":"0",
         "magnification":"0",
-        "frameWidth":"0"
+        "frameWidth":"5400"
         },{
         "fileCode":"PTY042",
         "xmlFile":"PTY042.xml",
@@ -2248,7 +2248,7 @@
         "helpCode2":"",
         "noteWidth":"0",
         "magnification":"0",
-        "frameWidth":"0"
+        "frameWidth":"5300"
         },{
         "fileCode":"PTY043",
         "xmlFile":"PTY043.xml",
@@ -2347,7 +2347,7 @@
         "helpCode2":"",
         "noteWidth":"0",
         "magnification":"0",
-        "frameWidth":"0"
+        "frameWidth":"4000"
         },{
         "fileCode":"PTY052",
         "xmlFile":"PTY052.xml",
@@ -2358,7 +2358,7 @@
         "helpCode2":"",
         "noteWidth":"0",
         "magnification":"0",
-        "frameWidth":"0"
+        "frameWidth":"4000"
         },{
         "fileCode":"PTY053",
         "xmlFile":"PTY053.xml",
@@ -2457,7 +2457,7 @@
         "helpCode2":"",
         "noteWidth":"0",
         "magnification":"0",
-        "frameWidth":"0"
+        "frameWidth":"5500"
         },{
         "fileCode":"PTY062",
         "xmlFile":"PTY062.xml",
@@ -2468,7 +2468,7 @@
         "helpCode2":"",
         "noteWidth":"0",
         "magnification":"0",
-        "frameWidth":"0"
+        "frameWidth":"5500"
         },{
         "fileCode":"PRP002",
         "xmlFile":"PRP002.xml",
@@ -2897,7 +2897,7 @@
         "helpCode2":"",
         "noteWidth":"0",
         "magnification":"0",
-        "frameWidth":"0"
+        "frameWidth":"5300"
         },{
             "fileCode":"PRP057",
             "xmlFile":"PRP057.xml",
@@ -2908,7 +2908,7 @@
             "helpCode2":"",
             "noteWidth":"0",
             "magnification":"0",
-            "frameWidth":"0"
+            "frameWidth":"5300"
         },{
         "fileCode":"PRP059",
         "xmlFile":"PRP059.xml",
@@ -3040,7 +3040,7 @@
         "helpCode2":"",
         "noteWidth":"0",
         "magnification":"0",
-        "frameWidth":"0"
+        "frameWidth":"4000"
         },{
         "fileCode":"PRP077",
         "xmlFile":"PRP077.xml",
@@ -3128,7 +3128,7 @@
         "helpCode2":"",
         "noteWidth":"0",
         "magnification":"0",
-        "frameWidth":"0"
+        "frameWidth":"5300"
         },{
         "fileCode":"PRP099",
         "xmlFile":"PRP099.xml",
@@ -3139,7 +3139,7 @@
         "helpCode2":"",
         "noteWidth":"0",
         "magnification":"0",
-        "frameWidth":"0"
+        "frameWidth":"4300"
         },{
          "fileCode":"PRP101",
         "xmlFile":"PRP101.xml",
@@ -3238,7 +3238,7 @@
         "helpCode2":"",
         "noteWidth":"0",
         "magnification":"0",
-        "frameWidth":"0"
+        "frameWidth":"4700"
         },{
         "fileCode":"SCP003",
         "xmlFile":"SCP003.xml",

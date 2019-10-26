@@ -101,7 +101,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
                 gMKDebugOpt_ShowResetBtnInMicCalibScene = true
                 gMKDebugOpt_IsSoundAndLatencySettingsEnabled = true
             } else {
-                gDoOverrideSubsPresent = true
                 settingEnabledBtn.isOpaque = true
  //               settingEnabledBtn.titleLabel?.textColor = UIColor.green
                 settingsEnblBtnBckgrndColor = .lightGray
@@ -151,8 +150,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         }
         
         settingEnabledBtn.backgroundColor = settingsEnblBtnBckgrndColor
-        // should be testing gDoOverrideSubsPresent
-        // if gMKDebugOpt_IsSoundAndLatencySettingsEnabled {
         if gDoOverrideSubsPresent {
             settingEnabledBtn.isHidden = false
             settingEnabledBtn.isEnabled = true

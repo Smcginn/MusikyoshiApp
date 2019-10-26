@@ -674,9 +674,9 @@ static float limit(float val, float mini, float maxi)
                                 //                                    NSLog(@"systemMagnification:%f - width=%f", systemMagnification, frame.size.width);
                                 frame.size.width += 100;
                             }
-                            NSLog(@"    ************  In setupScore, bottom of reduction loop; loop count == %i\n\n",
-                                  loopCount);
-                            NSLog(@"       widthIsTruncated = %s,  systemMag = %f, self.mag = %f",
+                            NSLog(@"    ************  In setupScore, bottom of reduction loop; \n");
+                            NSLog(@"       loop count == %i,     width = %f\n", loopCount, frame.size.width);
+                            NSLog(@"       widthIsTruncated = %s,  systemMag = %f, self.mag = %f\n",
                                   widthIsTruncated ? "YES" : "No", systemMagnification, self.magnification);
                             
                             if (self.forLongToneView) {

@@ -293,7 +293,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // insistance to log into iTunes - this might seem suspicious.
             if PlayTunesIAPProducts.store.userDefsStoredSubscStatusIsKnown()    &&
                PlayTunesIAPProducts.store.userDefsStoredSubscHasBeenPurchased() &&
-               !PlayTunesIAPProducts.store.subscriptionGood() {
+               !PlayTunesIAPProducts.store.subscriptionGood() {   // IAPSUBS
                   // If here, then stored info shows previous purchase has expired.
                   // Need to see if it's been updated since last call to verify.
                   PlayTunesIAPProducts.store.verifySubscription() // showAlerts: false)

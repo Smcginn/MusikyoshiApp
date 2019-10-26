@@ -251,9 +251,9 @@ public class IAPHelper: NSObject {
         if let diffSince1970Str = timeDiff.formatDHMS()
         {
             if timeDiff > 0 {
-                print("In subscriptionGood, diffSince1970Str == \(diffSince1970Str)")
+                print("In subscriptionGood, Good!!  Remaining time: \(diffSince1970Str)")
             } else {
-                print("In subscriptionGood, diffSince1970Str == \(diffSince1970Str)")
+                print("In subscriptionGood, Expired!  Elapsed since expired: \(diffSince1970Str)")
             }
         }
         
@@ -307,7 +307,7 @@ public class IAPHelper: NSObject {
      */
     
 func subscriptionGood() -> Bool {
-        
+    
         //        if userDefsStoredSubscIsGood() {
         //            return true
         //        }
@@ -339,7 +339,7 @@ func subscriptionGood() -> Bool {
         
         //////////////////////////////////
         
-        return userDefsStoredSubscIsGoodToGo()
+        return userDefsStoredSubscIsGoodToGo()   // IAPSUBS
         
         /*
          

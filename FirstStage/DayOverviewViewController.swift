@@ -194,6 +194,10 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
         
         needToCalibrateMic = true
         
+        if dayContainsSlurExer() {
+            presentCantDoSlursAtThisTempAlert(presentingVC: self,
+                                                forLevelVC: false)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -1027,6 +1031,23 @@ extension DayOverviewViewController: UITableViewDelegate, UITableViewDataSource 
         
         return numExers
         
+    }
+    
+    func dayContainsSlurExer() -> Bool {
+        var retVal = false
+        
+        let numExers = LessonScheduler.instance.numExercises(ld: thisViewsLD)
+        for i in 0..<numExers {
+            let nextLDE = makeLDEForViewsLevelDay( andThisExer: i)
+            let exerIDStr = LessonScheduler.instance.getExerIDStr(lde: nextLDE)
+            let exerType = getExerciseType( exerCode: exerIDStr )
+            if exerType == .lipSlurExer {
+                retVal = true
+                break
+            }
+        }
+        
+        return retVal
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

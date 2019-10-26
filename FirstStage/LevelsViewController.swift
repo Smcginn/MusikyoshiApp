@@ -44,7 +44,7 @@ class LevelsViewController: UIViewController {
     //   - this affects Tryout AND showing upper levels
     var subscriptionGood   = false
 
-    var showingTryoutLevel = true
+//    var showingTryoutLevel = true
     var isSlursLevel = false
     var selectedLevelIsEnabled = true
     var selectedLevelTitleStr = ""
@@ -78,10 +78,8 @@ class LevelsViewController: UIViewController {
             retNumToShow = kNumberOfLevelsToShow
         }
         
-        // if !showingTryoutLevel {
-        //  // Don't show tryout level
-            retNumToShow -= 1
-        // }
+        // Don't show tryout level
+        retNumToShow -= 1
         
         if !currInstrumentIsBrass() {
             // Don't show Lip Slurs level
@@ -140,9 +138,11 @@ class LevelsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        subscriptionGood = PlayTunesIAPProducts.store.subscriptionGood()
-        if subscriptionGood || gDoOverrideSubsPresent || !gDoLimitLevels {
-            showingTryoutLevel = false
+        subscriptionGood = PlayTunesIAPProducts.store.subscriptionGood()  // IAPSUBS
+        if subscriptionGood ||
+           gDoOverrideSubsPresent ||
+           gMKDebugOpt_ShowDebugSettingsBtn  {
+            allowAllLevelAccess = true
         }
         
         if let file = Bundle.main.path(forResource: "TrumpetLessons", ofType: "json") {
@@ -257,13 +257,17 @@ class LevelsViewController: UIViewController {
     //        }
     //    }
     
+    
+    //    IAPSUBS
     func assessPurchaseStatus() {
-        if gDoOverrideSubsPresent {
+        if gDoOverrideSubsPresent || gMKDebugOpt_ShowDebugSettingsBtn {
             allowAllLevelAccess = true
+            subscriptionGood = true
             return
         }
         
-        allowAllLevelAccess = PlayTunesIAPProducts.store.subscriptionGood()
+        subscriptionGood = PlayTunesIAPProducts.store.subscriptionGood()
+        allowAllLevelAccess = subscriptionGood
         if !allowAllLevelAccess &&
             !PlayTunesIAPProducts.store.userDefsStoredSubscStatusIsKnown() {
             // see if just waiting for update
@@ -273,8 +277,10 @@ class LevelsViewController: UIViewController {
                     // if PlayTunesIAPProducts.store.purchaseStatus.state == .purchaseGood {
                     //               if PlayTunesIAPProducts.store.purchaseStatus.subscriptionGood() {
                     if PlayTunesIAPProducts.store.subscriptionGood() {
+                        subscriptionGood = true
                         allowAllLevelAccess = true
                     } else {
+                        subscriptionGood = false
                         allowAllLevelAccess = false
                     }
                     break
@@ -286,6 +292,7 @@ class LevelsViewController: UIViewController {
         }
         
         PlayTunesIAPProducts.store.confirmedAttempts = 0
+        //    IAPSUBS
         //        if PlayTunesIAPProducts.store.purchaseStatus.confirmed {
         //            if PlayTunesIAPProducts.store.purchaseStatus.state == .purchaseGood {
         //                allowAllLevelAccess = true
@@ -295,6 +302,7 @@ class LevelsViewController: UIViewController {
         //        }
     }
     
+    //    IAPSUBS
     //    func accessPurchaseStatusRetry() {
     //        if PlayTunesIAPProducts.store.purchaseStatus.confirmedAttempts < 10 {
     //            delay(0.5) {
@@ -304,19 +312,52 @@ class LevelsViewController: UIViewController {
     //        }
     //    }
     
+    //    IAPSUBS
     func displayMustPurchaseAlert() {
-        let titleStr = "For access to all levels, you must purchase a PlayTunes Subscription"
-        var msgStr = "\nLevels 1 & 2 are always free!\n\n"
-        msgStr += "To explore PlayTunes' upper Levels, go to 'Purchase Options' "
-        msgStr += "on the Home screen\n\n"
-        msgStr += "(If you have a valid Subscription from another device, use the Restore button)\n\n"
-        msgStr += "(If you have just completed a purchase, verification can take a while. Try again in a bit.)"
+        //    let titleStr = "For access to all levels, you must purchase a PlayTunes Subscription"
+        //    var msgStr = "\nLevels 1 & 2 are always free!\n\n"
+        //    msgStr += "To explore PlayTunes' upper Levels, go to 'Purchase Options' "
+        //    msgStr += "on the Home screen\n\n"
+        //    msgStr += "(If you have a valid Subscription from another device, use the Restore button)\n\n"
+        //    msgStr += "(If you have just completed a purchase, verification can take a while. Try again in a bit.)"
+        
+        
+        // let titleStr = "To access all Days, you must purchase (or Restore) a PlayTunes Subscription"
+        // let titleStr = "Purchase (or Restore) a Playtunes Subscription to access all of PlayTunes"
+/*
+        let titleStr = "To access all of PlayTunes, Purchase (or Restore) a Subscription"
+        //let titleStr = "For total access PlayTunes, you you must purchase (or Restore) a  Subscription"
+        var msgStr = "\nLevels 1 & 2 are completely free, as are Day 1 of other Pink Levels!\n\n"
+        msgStr += "Go to 'Purchase Options' on the Home screen.\n\n"
+        //        msgStr += "(If you have a valid Subscription from another device, use the Restore button)\n\n"
+        msgStr += "(If you have just completed a purchase or restore, verification can take a while. Try again in a bit.)"
+*/
+        
+        
+        let titleStr = "Try Out Days In Pink Levels For Free!"
+        // All Pink Levels To access all of PlayTunes, Purchase (or Restore) a Subscription"
+        var msgStr = "- All Days of Levels 1 & 2: Free!\n- Day 1 of other Pink Levels - Free!\n\n"
+        msgStr += "For total access PlayTunes, you must purchase (or Restore) a Subscription. "
+        msgStr += "Go to 'Purchase Options' on the Home screen.\n\n"
+        //        msgStr += "(If you have a valid Subscription from another device, use the Restore button)\n\n"
+        msgStr += "(If you just completed a purchase or restore, verification can take a while. Try again in a bit.)"
+        
+        
+        
+
+        
+        
         let ac = MyUIAlertController(title: titleStr, message: msgStr, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         
         self.present(ac, animated: true, completion: nil)
+        
+        
+        
+        
     }
     
+    //    IAPSUBS
     func displaySubsExpiredAlert() {
         let titleStr = "Something is wrong with your Subscription"
         var msgStr = "\nYour subscription to PlayTunes has expired or was cancelled.\n\n"
@@ -328,6 +369,7 @@ class LevelsViewController: UIViewController {
         self.present(ac, animated: true, completion: nil)
     }
     
+    //    IAPSUBS
     func displayTryoutAlert() {
         let titleStr = "Are you a more advanced student?"
         var msgStr = "\n\nWant to see what the upper \nlevels are like?\n\n"
@@ -429,31 +471,16 @@ class LevelsViewController: UIViewController {
         }
     }
     
-    let kSlursTempCutoff = 120
-    func canDoSlursAtThisTempo() -> Bool {
+     func canDoSlursAtThisTempo() -> Bool {
         if !isSlursLevel {
             return true
         }
         
         let currBpm = Int(getCurrBPM())
-        return currBpm > kSlursTempCutoff ? false : true
-    }
-    
-    func presentCantDoSlursAtThisTempAlert() {
-        let currBPM = Int(getCurrBPM())
-        guard currBPM > 0 else { return }
-        
-        let titleStr = "Slur Exercises Unavailable at this Tempo"
-        var msgStr = "\nFor this release, Slur exercises are unavailable at this tempo (\(currBPM) BPM).\n\n"
-        msgStr += "To play Slur execrcises, you will need to set the BPM to \(kSlursTempCutoff) or less."
-        msgStr += "\n\n(Sorry - we will fix this soon!))"
-
-        let ac = MyUIAlertController(title: titleStr, message: msgStr, preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .default,
-                                   handler: nil))
-        self.present(ac, animated: true, completion: nil)
+        return currBpm > kSlursTempoCutoff ? false : true
     }
 }
+
 
 let kIdxForLipSlurs    = "990"
 let kIdxForLongTones6  = "992"
@@ -498,22 +525,28 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
             
             let cell: LevelTableViewCell = tableView.dequeueReusableCell(withIdentifier: "levelsCell", for: indexPath) as! LevelTableViewCell
             
-            if gDoLimitLevels && indexPath.row > kNumberOfLevelsToShow {
-                itsBad()
-            }
+//            if gDoLimitLevels && indexPath.row > kNumberOfLevelsToShow {
+//                itsBad()
+//            }
             
-            var levelIsEnabled = true
+            // IAPSUBS
+            subscriptionGood = PlayTunesIAPProducts.store.subscriptionGood()
+            var levelIsEnabled = subscriptionGood
+            
             
             // The text for the level is not simply index + 1. It's in the json
             var levelTitle = String(indexPath.row + 1) // default
             let titleStr = levelsJson?[indexPath.row]["title"].string
             if titleStr != nil {
                 levelTitle = titleStr!
-                levelIsEnabled =
-                    TryOutLevelsManager.sharedInstance.isLevelEnabled(levelTitle: levelTitle)
+                if !levelIsEnabled { // See if it's a free Tryout Level
+                    levelIsEnabled =
+                        TryOutLevelsManager.sharedInstance.isLevelEnabled(levelTitle: levelTitle)
+                }
             } else {
                 itsBad()
             }
+            
             cell.levelNumberLabel.text = levelTitle
             cell.setLevelLabelToDefaultSettings()
             cell.isEnabled = levelIsEnabled
@@ -572,16 +605,19 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
             if selectedLevelIsEnabled {
                 //let selectedCell: DayTableViewCell? = tableView.cellForRow(at: indexPath) as? DayTableViewCell
                 //let selCellTitle = selectedCell?.dayLabel.text
-                dayIsEnabled =
-                    TryOutLevelsManager.sharedInstance.isDayEnabled(levelTitle: selectedLevelTitleStr,
-                                                                    dayTitle: cellTitleText )
+                dayIsEnabled = subscriptionGood
+                if !dayIsEnabled { // then sub not good. See if in free tryput list
+                    dayIsEnabled =
+                        TryOutLevelsManager.sharedInstance.isDayEnabled(
+                            levelTitle: selectedLevelTitleStr,
+                            dayTitle: cellTitleText )
+                }
             }
-
+            
             if dayIsEnabled {
                 cell.dayIsEnabled = true
             } else {
                 cell.dayIsEnabled = false
-
             }
             
             //selectedCell?.isSelectedDay = true
@@ -593,8 +629,6 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
             } else {
                 cell.isSelectedDay = false
             }
-            
-
             
             if gDoLimitLevels && activeLevel > kNumberOfLevelsToShow {
                 itsBad()
@@ -640,6 +674,19 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
         
     }
     
+    //- (nullable NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath?
+    //func tableView(_ tableView: UITableView,
+    //                       willSelectRowAtIndexPath indexPath: IndexPath) {
+    {
+        if tableView == self.daysTableView {
+            print ("yo")
+        }
+        return indexPath
+    }
+    
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         /*
@@ -677,6 +724,8 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
         
         if tableView == self.levelsTableView {
             
+            // IAPSUBS ?
+            
             // Scroll to tapped level
             let yPos = levelsTableView.rectForRow(at: IndexPath(row: indexPath.row, section: 0)).origin.y
             tableView.setContentOffset(CGPoint(x: tableView.contentOffset.x, y: yPos), animated: true)
@@ -713,7 +762,14 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
                 if let levelIdx = levelsJson?[indexPath.row]["levelIdx"].string {
                     isSlursLevel =  levelIdx == kIdxForLipSlurs ? true : false
                 }
-            }
+                
+                let canDo = canDoSlursAtThisTempo()
+                if !canDo {
+                    DispatchQueue.main.async {
+                        presentCantDoSlursAtThisTempAlert(presentingVC: self, forLevelVC: true)
+                    }
+                }
+           }
 
 //            activeLevel = indexPath.row
 //            setupNewlySelectedLevel()
@@ -727,19 +783,43 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
 //            let canDo = canDoSlursAtThisTempo()
 //            if !canDo {
 //                presentCantDoSlursAtThisTempAlert()
-////                return
+//                return
 //            }
             
-            if !selectedLevelIsEnabled {
-                return
-            }
+//            if !selectedLevelIsEnabled {
+//                // IAPSUBS ?
+//                return
+//            }
             
             let selectedCell: DayTableViewCell? = tableView.cellForRow(at: indexPath) as? DayTableViewCell
-            let selCellTitle = selectedCell?.dayLabel.text
-            var dayIsEnabled =
-                TryOutLevelsManager.sharedInstance.isDayEnabled(levelTitle: selectedLevelTitleStr,
-                                                                dayTitle: selCellTitle ?? "" )
+            guard selectedCell != nil else {
+                itsBad();   return
+            }
+
+            // already in here below!!!!
+            if !selectedCell!.dayIsEnabled {
+
+                if PlayTunesIAPProducts.store.userDefsStoredSubscStatusIsKnown() &&
+                    PlayTunesIAPProducts.store.userDefsStoredSubscHasBeenPurchased() {
+                    //    IAPSUBS
+                    DispatchQueue.main.async {
+                        self.displaySubsExpiredAlert()
+                    }
+                } else {
+                    //    IAPSUBS
+                    DispatchQueue.main.async {
+                        self.displayMustPurchaseAlert()
+                    }
+                    
+                }
+                return
+            }
+        
             
+            let selCellTitle = selectedCell?.dayLabel.text
+//            var dayIsEnabled =
+//                TryOutLevelsManager.sharedInstance.isDayEnabled(levelTitle: selectedLevelTitleStr,
+//                                                                dayTitle: selCellTitle ?? "" )
             
 //            selectedLevelTitleStr  cell.dayLabel.text
 //            if titleStr != nil {
@@ -756,8 +836,8 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
 //                selectedLevelIsEnabled = true
 //            }
 
-            selectedCell?.dayIsEnabled = dayIsEnabled
-            if dayIsEnabled {
+//            selectedCell?.dayIsEnabled = dayIsEnabled
+             if selectedCell!.dayIsEnabled {
  //               selectedCell?.dayLabel.textColor = .black
  //               selectedCell?.dayIsEnabled  = true
                 selectedCell?.isSelectedDay = true
@@ -773,7 +853,24 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
                 let convertedIndexPath = IndexPath(row: indexPath.row, section: jsonIdx)
                 performSegue(withIdentifier: "LessonSegue", sender: convertedIndexPath)  // PPPproblem!!!!!
             } else {
-                selectedCell?.isSelectedDay = false
+                if PlayTunesIAPProducts.store.userDefsStoredSubscStatusIsKnown() &&
+                   PlayTunesIAPProducts.store.userDefsStoredSubscHasBeenPurchased() {
+                    //    IAPSUBS
+                    DispatchQueue.main.async {
+                        self.displaySubsExpiredAlert()
+                    }
+                } else {
+                    //    IAPSUBS
+                    DispatchQueue.main.async {
+                       self.displayMustPurchaseAlert()
+                    }
+                    
+                }
+
+
+
+
+                 selectedCell?.isSelectedDay = false
             }
         }
         
@@ -786,8 +883,10 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
         let titleStr = levelsJson?[activeLevel]["title"].string
         if titleStr != nil {
             levelTitle = titleStr!
-            levelIsEnabled =
-                TryOutLevelsManager.sharedInstance.isLevelEnabled(levelTitle: titleStr!)
+            levelIsEnabled = subscriptionGood
+            if !levelIsEnabled {
+                levelIsEnabled = TryOutLevelsManager.sharedInstance.isLevelEnabled(levelTitle: titleStr!)
+            }
         } else {
             itsBad()
         }
@@ -871,15 +970,15 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
             let roundingRow = Int(((targetContentOffset.pointee.y - scrollingToRect.origin.y) / scrollingToRect.size.height).rounded())
             scrollingToIP.row += roundingRow // + 0/1
             
-            if !allowAllLevelAccess && (showingTryoutLevel && scrollingToIP.row >= kSectionToDisplayTryoutAt) {
-                //            if PlayTunesIAPProducts.store.purchaseStatus.confirmed &&
-                //               PlayTunesIAPProducts.store.purchaseStatus.state == .expired {
-                
-                scrollingToIP.row = kSectionToDisplayTryoutAt - 1
-                
-                shouldDisplayAlertAfterScroll = true
-                
-            }
+//            if !allowAllLevelAccess && (showingTryoutLevel && scrollingToIP.row >= kSectionToDisplayTryoutAt) {
+//                //            if PlayTunesIAPProducts.store.purchaseStatus.confirmed &&
+//                //               PlayTunesIAPProducts.store.purchaseStatus.state == .expired {
+//
+//                scrollingToIP.row = kSectionToDisplayTryoutAt - 1
+//
+//                shouldDisplayAlertAfterScroll = true
+//
+//            }
             
             scrollingToRect = levelsTableView.rectForRow(at: scrollingToIP)
             targetContentOffset.pointee.y = scrollingToRect.origin.y
@@ -894,6 +993,13 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
                 self.daysTableView.reloadData()
                 if let levelIdx = levelsJson?[scrollingToIP.row]["levelIdx"].string {
                     isSlursLevel =  levelIdx == kIdxForLipSlurs ? true : false
+                }
+                
+                let canDo = canDoSlursAtThisTempo()
+                if !canDo {
+                    DispatchQueue.main.async {
+                        presentCantDoSlursAtThisTempAlert(presentingVC: self, forLevelVC: true)
+                    }
                 }
            }
             
@@ -924,22 +1030,24 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         
-        if scrollView == self.levelsTableView {
-            
-            if shouldDisplayAlertAfterScroll {
-                
-                if PlayTunesIAPProducts.store.userDefsStoredSubscStatusIsKnown() &&
-                    PlayTunesIAPProducts.store.userDefsStoredSubscHasBeenPurchased() {
-                    displaySubsExpiredAlert()
-                } else {
-                    displayMustPurchaseAlert()
-                }
-                
-                shouldDisplayAlertAfterScroll = false
-                
-            }
-            
-        }
+//        if scrollView == self.levelsTableView {
+//
+//            if shouldDisplayAlertAfterScroll {
+//
+//                if PlayTunesIAPProducts.store.userDefsStoredSubscStatusIsKnown() &&
+//                    PlayTunesIAPProducts.store.userDefsStoredSubscHasBeenPurchased() {
+//                    //    IAPSUBS
+//                    displaySubsExpiredAlert()
+//                } else {
+//                    //    IAPSUBS
+//                    displayMustPurchaseAlert()
+//                }
+//
+//                shouldDisplayAlertAfterScroll = false
+//
+//            }
+//
+//        }
         
     }
     
@@ -1011,5 +1119,65 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
         
     }
+}       // extension LevelsViewController:
+
+let kSlursTempoCutoff = 120
+
+var gShowSlursAtFastBPMWarning = true
+var gHaveShownSlursAtFastBPMWarningCount = 0
+var gSkipShowingFastBPMWarnCount = 0
+let kHaveShownSlursFastBPMWarnThreshold = 3
+let kReShowSlursFastBPMWarnThresh = 3
+
+func presentCantDoSlursAtThisTempAlert(presentingVC: UIViewController?,
+                                       forLevelVC: Bool ) {
+    let currBPM = Int(getCurrBPM())
+    guard currBPM > 0 else { return }
     
+    if !gShowSlursAtFastBPMWarning {
+        gSkipShowingFastBPMWarnCount += 1
+        if gSkipShowingFastBPMWarnCount > kReShowSlursFastBPMWarnThresh {
+            gShowSlursAtFastBPMWarning = true
+            gSkipShowingFastBPMWarnCount = 0
+        }
+    }
+    guard gShowSlursAtFastBPMWarning else { return }
+    
+    gHaveShownSlursAtFastBPMWarningCount += 1
+    
+    let titleStr = "You are too awesome!"
+    
+    var msgStr = ""
+    //        if !DeviceType.IS_IPHONE_5orSE {
+    //            msgStr += "\n"
+    //        }
+    if forLevelVC {
+        msgStr += "\nPlayTunes grades slurs very well at \(kSlursTempoCutoff) BPM or below, "
+        msgStr += "so you may want to select a slower tempo (currently \(currBPM))."
+        msgStr += "\n\nYou can go ahead and play at this faster tempo if you wish, but you "
+        msgStr += "may not get an accurate star rating.\n\nWe’re working on this. Thanks!"
+    } else { // For Day
+        msgStr += "\nThis Day contains a Lip Slur exercise.\n\nPlayTunes grades slurs very "
+        msgStr += "well at \(kSlursTempoCutoff) BPM or below (you are currently at \(currBPM)). "
+        msgStr += "You can go ahead and play at this faster tempo, but you may not get "
+        msgStr += "an accurate star rating. So you may want to select a slower tempo. "
+        msgStr += "(We’re working on this. Thanks!)"
+    }
+    
+    let ac = MyUIAlertController(title: titleStr, message: msgStr, preferredStyle: .alert)
+    ac.addAction(UIAlertAction(title: "Okay", style: .default,
+                               handler: nil))
+    
+    // See if should add "Got It!" button
+    if gHaveShownSlursAtFastBPMWarningCount > kHaveShownSlursFastBPMWarnThreshold {
+        ac.addAction(UIAlertAction(title: "Got It!", style: .default,
+                                   handler: slursAtHiTempoGotItHandler))
+    }
+    
+    presentingVC?.present(ac, animated: true, completion: nil)
+}
+
+func slursAtHiTempoGotItHandler(_ act: UIAlertAction) {
+    gShowSlursAtFastBPMWarning = false
+    gSkipShowingFastBPMWarnCount = 0
 }
