@@ -49,6 +49,8 @@ class LevelsViewController: UIViewController {
     var selectedLevelIsEnabled = true
     var selectedLevelTitleStr = ""
 
+    var loadedFromHomeScreen = true
+    
     var activeLevel = 0 {
         didSet {
             if oldValue != activeLevel {
@@ -194,6 +196,9 @@ class LevelsViewController: UIViewController {
         daysTableView.reloadData()
         
         testBPM()
+        let yPosActiveRow = levelsTableView.rectForRow(at: IndexPath(row:activeLevel, section: 0)).origin.y
+        print("In viewWillAppear, yPosActiveRow == \(yPosActiveRow)")
+        
         scrollToActiveLevel()
     }
     
@@ -230,12 +235,34 @@ class LevelsViewController: UIViewController {
         //            selector: #selector(LevelSeriesViewController.changeTryputHeaderColor),
         //            userInfo: nil,
         //            repeats: true)
+        
+        
+        // For some reason, the call to levelsTableView.rectForRow() within
+        // scrollToActiveLevel() returns a garbage value if called here on the
+        // initial load of this VC.
+        // It works fine in the initial viewDidLoad().
+        // But if coming back from Day view, it work fine. So:
+        //  - Call scrollToActiveLevel() in viewDidLoad().
+        //  - Don't call scrollToActiveLevel() here if initial load and it's
+        //    been called in viewDidLoad().
+        //  - Do call scrollToActiveLevel() here if coming back from Day screen.
+        if !loadedFromHomeScreen // if coming back from Day view, do it
+        {
+            let yPosActiveRow = levelsTableView.rectForRow(at: IndexPath(row:activeLevel, section: 0)).origin.y
+            print("In viewDidAppear, yPosActiveRow == \(yPosActiveRow)")
+            scrollToActiveLevel(doAnimate: true)
+        } else {
+            print("(In viewDidAppear, skipping scrollToActiveLevel)")
+        }
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         createParticles()
+        
+        let yPosActiveRow = levelsTableView.rectForRow(at: IndexPath(row:activeLevel, section: 0)).origin.y
+        print("In viewDidLayoutSubviews, yPosActiveRow == \(yPosActiveRow)")
     }
     
     @IBAction func backBtnPressed(_ sender: Any) {
@@ -426,6 +453,7 @@ class LevelsViewController: UIViewController {
         if let levels = instrumentJson?["levels"] {
             if let destination = segue.destination as? DayOverviewViewController {
                 if let indexPath = sender as? IndexPath {
+                    loadedFromHomeScreen = false // will be coming back from Day screen
                     _ = LessonScheduler.instance.setCurrentLevel(activeLevel)
                     destination.thisViewsLevel = activeLevel
                     destination.exerLevelIndex = indexPath.row
@@ -471,14 +499,15 @@ class LevelsViewController: UIViewController {
         }
     }
     
-     func canDoSlursAtThisTempo() -> Bool {
-        if !isSlursLevel {
-            return true
-        }
-        
-        let currBpm = Int(getCurrBPM())
-        return currBpm > kSlursTempoCutoff ? false : true
-    }
+//    func canDoSlursAtThisTempo() -> Bool {
+//        if !isSlursLevel {
+//            return true
+//        }
+//
+//        let currBpm = Int(getCurrBPM())
+//            return currBpm > kSlursTempoCutoff ? false : true
+//    }
+    
 }
 
 
@@ -763,12 +792,12 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
                     isSlursLevel =  levelIdx == kIdxForLipSlurs ? true : false
                 }
                 
-                let canDo = canDoSlursAtThisTempo()
-                if !canDo {
-                    DispatchQueue.main.async {
-                        presentCantDoSlursAtThisTempAlert(presentingVC: self, forLevelVC: true)
-                    }
-                }
+//                let canDo = canDoSlursAtThisTempo()
+//                if !canDo {
+//                    DispatchQueue.main.async {
+//                        presentCantDoSlursAtThisTempAlert(presentingVC: self, forLevelVC: true)
+//                    }
+//                }
            }
 
 //            activeLevel = indexPath.row
@@ -995,12 +1024,12 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
                     isSlursLevel =  levelIdx == kIdxForLipSlurs ? true : false
                 }
                 
-                let canDo = canDoSlursAtThisTempo()
-                if !canDo {
-                    DispatchQueue.main.async {
-                        presentCantDoSlursAtThisTempAlert(presentingVC: self, forLevelVC: true)
-                    }
-                }
+//                let canDo = canDoSlursAtThisTempo()
+//                if !canDo {
+//                    DispatchQueue.main.async {
+//                        presentCantDoSlursAtThisTempAlert(presentingVC: self, forLevelVC: true)
+//                    }
+//                }
            }
             
 //            //let indexPath = NSIndexPath(row: activeLevel, section: 0)
@@ -1051,13 +1080,18 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
         
     }
     
-    func scrollToActiveLevel() {
+    func scrollToActiveLevel(doAnimate: Bool = false) {
 //        let yPosActiveRow =
 //            levelsTableView.rectForRow(at: IndexPath(row: levelsTableView.numberOfRows(inSection: 0) - 1,
 //                                                     section: 0)).origin.y
         
-        let yPosActiveRow = levelsTableView.rectForRow(at: IndexPath(row:activeLevel, section: 0)).origin.y
-        self.levelsTableView.setContentOffset(CGPoint(x: self.levelsTableView.contentOffset.x, y: yPosActiveRow), animated: false)
+        let yPosActiveRow =
+            levelsTableView.rectForRow(
+                at: IndexPath(row:activeLevel, section: 0)).origin.y
+        self.levelsTableView.setContentOffset(CGPoint(
+            x: self.levelsTableView.contentOffset.x,
+            y: yPosActiveRow),
+            animated: doAnimate)
 
         //if scrollView.contentOffset.y > yPosLastRow {
 //            scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x, y: yPosActiveRow), animated: false)
@@ -1129,8 +1163,8 @@ var gSkipShowingFastBPMWarnCount = 0
 let kHaveShownSlursFastBPMWarnThreshold = 3
 let kReShowSlursFastBPMWarnThresh = 3
 
-func presentCantDoSlursAtThisTempAlert(presentingVC: UIViewController?,
-                                       forLevelVC: Bool ) {
+func presentSlursAreAProblemAtThisTempAlert(presentingVC: UIViewController?,
+                                            forLevelVC: Bool ) {
     let currBPM = Int(getCurrBPM())
     guard currBPM > 0 else { return }
     

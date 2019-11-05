@@ -150,6 +150,9 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC, 
         loadAmpRiseValuesForCurrentInst()
         setCurrentAmpRiseValsForInstrument(forInstr: currSelInst)
         
+        let lde: tLDE_code = (level: 0, day: 0, exer: 0)
+        _ = LessonScheduler.instance.setCurrentLDE(toLDE: lde)
+
         tableView.beginUpdates()
         tableView.endUpdates()
         

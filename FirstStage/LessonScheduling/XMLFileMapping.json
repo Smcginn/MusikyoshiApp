@@ -1709,7 +1709,7 @@
         "helpCode2":"",
         "noteWidth":"0",
         "magnification":"0",
-        "frameWidth":"0"
+        "frameWidth":"4000"
         },{
         "fileCode":"SLR021",
         "xmlFile":"SLR021.xml",
@@ -1720,7 +1720,7 @@
         "helpCode2":"",
         "noteWidth":"0",
         "magnification":"0",
-        "frameWidth":"5000"
+        "frameWidth":"3000"
         },{
         "fileCode":"SLR022",
         "xmlFile":"SLR022.xml",
@@ -1731,7 +1731,7 @@
         "helpCode2":"",
         "noteWidth":"0",
         "magnification":"0",
-        "frameWidth":"5000"
+        "frameWidth":"3000"
         },{
         "fileCode":"SLR023",
         "xmlFile":"SLR023.xml",
@@ -1742,7 +1742,7 @@
         "helpCode2":"",
         "noteWidth":"0",
         "magnification":"0",
-        "frameWidth":"0"
+        "frameWidth":"3000"
         },{
         "fileCode":"SLR024",
         "xmlFile":"SLR024.xml",
@@ -1786,7 +1786,7 @@
             "helpCode2":"",
             "noteWidth":"25",
             "magnification":"12",
-            "frameWidth":"6000"
+            "frameWidth":"5000"
         },{
         "fileCode":"PTY001",
         "xmlFile":"PTY001.xml",
@@ -3040,7 +3040,7 @@
         "helpCode2":"",
         "noteWidth":"0",
         "magnification":"0",
-        "frameWidth":"4000"
+        "frameWidth":"3000"
         },{
         "fileCode":"PRP077",
         "xmlFile":"PRP077.xml",

@@ -135,7 +135,7 @@ let kTenorSaxSubDir     = "TenorSax/"   // NO!  Trumpet
 let kBaritoneSaxSubDir  = "BariSax/"
 // CHANGEHERE - real vales for above
 
-let kMalletSubDir       = "Mallet/"
+let kMalletSubDir       = "Trumpet/" // "Mallet/"
 
 // specific to Video directories
 let kBrassVideos        = "/brass"

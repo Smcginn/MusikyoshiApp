@@ -73,7 +73,7 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
         
         howToUseDetText += "\u{2022} Select the round “Gear” button to see the Settings.\n\n"
         
-        howToUseDetText += "\u{2022} In Settings, select the instrument, then select the tempo.  You can change the tempo anytime, speed it up as you improve.\n\n"
+        howToUseDetText += "\u{2022} In Settings, select your instrument, then select the tempo.  You can change the tempo anytime, speed it up as you improve.\n\n"
         
 //        howToUseDetText += "\u{2022} In Settings, select the help mode: if you want video feedback (fastest way to improve, videos will popup and suggest a fix based on your performance), select 'Video.' Choose 'Text' if you want to get text help only.  If you want just the star rating, select 'None.'\n\n"
         
@@ -97,11 +97,11 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
 //        var tryOutDetText = "You can access Levels 1 & 2 for free, forever. That’s almost 200 exercises!\n\n"
 //        tryOutDetText += "For this free try-out, you don't need to do anything else; you are good to go!"
         
-        var tryOutDetText = "We have lots of free areas of the app to try out for both beginners and those with some experience. Levels 1 and 2 are completely free. Day 1 of these levels is free also: Levels 3, 4, 7, 10, 15, 20, 25, 30.  We even give you parts of our Long Tones Level and Lip Slurs Level.  Go ahead and explore Day 1 of all the Pink levels - you can unlock Gray levels when you purchase a subscription.\n\n"
+        var tryOutDetText = "We have lots of free areas of the app to try out for both beginners and those with some experience.\n> All Days of Levels 1 and 2 are completely free.\n> Day 1 of these Levels is also free: Levels 3, 4, 7, 10, 15, 20, 25, 30.\n> We even give you parts of our Long Tones Level and Lip Slurs Level.\n\nSo go ahead and explore Day 1 of all the Pink levels - you can unlock Gray Levels and Days when you purchase a subscription.\n\n"
         
         tryOutDetText += "That’s hundreds of free exercises to help you get better!\n\n"
         
-        tryOutDetText += "For access to 150 days of practice, and hundreds of unique exercises, you will need to purchase a PlayTunes All-Level Access Subscription through iTunes.\n\n"
+        tryOutDetText += "For access to 150 days of practice, and hundreds of unique exercises, you will need to purchase a PlayTunes All-Level Access Subscription.\n\n"
         
 //        tryOutDetText += "PlayTunes offers a 1-month ($2.99/month) and 6-month ($12.99 for 6 months) Auto-Renewing Subscriptions.\n\n"
         
@@ -110,9 +110,9 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
         var subDetailText = "" //In order to get access to the 500 exercises in the upper levels, you will need to purchase a PlayTunes All-Level Access Subscription through iTunes.\n\n"
         //subDetailText += "PlayTunes offers 1-month ($9.99 per month) and 6-month ($49.99 for 6 months) Auto-Renewing Subscriptions.\n\n"
         
-        subDetailText += "PlayTunes offers 1-month ($2.99/month) and 6-month ($9.99 for 6 months) Auto-Renewing Subscriptions.\n\n"
+        subDetailText += "PlayTunes offers 1-month and 6-month Auto-Renewing Subscriptions.\n\n"
         
-        subDetailText += "Select 'Purchase Options' to choose and purchase an available Subscription."
+        subDetailText += "To purchase a xPlayTunes subscription:\n> Go to the Settings screen (press the gear button on the main screen),\n> Select 'Purchase Options' to review, choose, and purchase an available Subscription through iTunes.\n\n"
 
         accessUpperLevelsDetailLabel.text = subDetailText
         

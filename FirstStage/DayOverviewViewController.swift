@@ -195,8 +195,11 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
         needToCalibrateMic = true
         
         if dayContainsSlurExer() {
-            presentCantDoSlursAtThisTempAlert(presentingVC: self,
-                                                forLevelVC: false)
+            let currBpm = Int(getCurrBPM())
+            if currBpm > kSlursTempoCutoff {
+                presentSlursAreAProblemAtThisTempAlert(presentingVC: self,
+                                                       forLevelVC: false)
+            }
         }
     }
     
