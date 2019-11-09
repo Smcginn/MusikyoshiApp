@@ -198,6 +198,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Constants.Settings.Mallet_AmpRiseForNewSound:      Double(kMallet_defAmpRiseForNewSound),
             Constants.Settings.Mallet_SkipBeginningSamples:    Int(kMallet_defSkipBeginningSamples),
             Constants.Settings.Mallet_SamplesInAnalysisWindow: Int(kMallet_defSamplesInAnalysisWindow),
+            Constants.Settings.SubsriptionOverridePswdSet: false,
             ])
  
         
@@ -322,7 +323,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        RealTimeSettingsManager.instance.test_getAdjustedAttackToleranceImpl()
         RealTimeSettingsManager.instance.resetFor_CurrInst()
         
+        gDoOverrideSubsPresent = subsriptionOverridePswdWasSet()
+        
         return true
+    }
+    
+    func subsriptionOverridePswdWasSet() -> Bool {
+        let pswdWasSet: Bool =
+            UserDefaults.standard.bool(forKey: Constants.Settings.SubsriptionOverridePswdSet)
+        if pswdWasSet {
+            return true
+        } else {
+            return false
+        }
     }
     
     func initializeUserAttributes() {

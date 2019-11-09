@@ -54,7 +54,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     var numTimesDebugStuffOnTapped = 0
     @IBAction func debugStuffOnPressed(_ sender: Any) {
         numTimesDebugStuffOnTapped += 1
-        if numTimesDebugStuffOnTapped >= 8 {
+        if numTimesDebugStuffOnTapped >= 15 {
             handlingDebugModePassword = true
             hiddenPswdTextField.backgroundColor = .lightGray
             hiddenPswdTextField.isHidden = false
@@ -68,53 +68,148 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     var settingsEnblBtnBckgrndColor = UIColor.clear
     @IBOutlet weak var settingEnabledBtn: UIButton!
     @IBAction func settingEnabledBtnPressed(_ sender: Any) {
+        if gDoOverrideSubsPresent {
+            showLevelsAlreadyEnabledAlert()
+        }
+
         numTimesSettingsEnabledTapped += 1
-        if numTimesSettingsEnabledTapped >= 8 {
+        if numTimesSettingsEnabledTapped >= 5 {
             handlingDebugModePassword = false
             hiddenPswdTextField.backgroundColor = .lightGray
             hiddenPswdTextField.isHidden = false
             hiddenPswdTextField.isEnabled = true
             hiddenPswdTextField.keyboardType = .default
             hiddenPswdTextField.becomeFirstResponder()
+            showEnterPasswordAlert()
         }
+    }
+    
+    
+    let kDebugModeBtn   = 0
+    let kLevelAccessBtn = 1
+    
+    let kEULAPswd       = "EULA"
+    let kDebugPswd      = "DDDDD"
+    let kAllLevelsPswd1 = "PAUSD"
+    let kAllLevelsPswd2 = "FORSCHOOL"
+    let kAllLevelsPswd3 = "FREE-PASS"
+
+    func isValidPassword(forButton: Int, response: String) -> Bool {
+        let upResp = response.uppercased()
+        if forButton == kDebugModeBtn &&
+           (upResp == kDebugPswd || upResp == kEULAPswd) {
+            return true
+        } else if forButton == kLevelAccessBtn &&
+                  (upResp == kAllLevelsPswd1 ||
+                   upResp == kAllLevelsPswd2 ||
+                   upResp == kAllLevelsPswd3 ||
+                   upResp == kEULAPswd)  {
+            return true
+        }
+        return false
+    }
+    
+    func showWrongPasswordAlert() {
+            let titleStr = "That is not the correct Password"
+            let msgStr = "\n\nPlease try again."
+            showAlert(title: titleStr, message: msgStr)
+    }
+    
+    func showLevelsAlreadyEnabledAlert() {
+        let titleStr = "You Already Have\nAll Level Access"
+        let msgStr = "\n\nYou either have entered the correct password, or you have a valid subscription.\n\nYou're good to go!"
+        showAlert(title: titleStr, message: msgStr)
+    }
+    
+    func showLevelsGoodToGoAlert() {
+        let titleStr = "You Now Have\nAll Level Access!"
+        var msgStr = "\n\nYou're good to go!\n\n"
+        msgStr += "You may now enjoy all \naspects of PlayTunes!\n\n"
+        showAlert(title: titleStr, message: msgStr)
+    }
+    
+    func showEnterPasswordAlert() {
+        let titleStr = "Enter Password For\nAll Level Access!"
+        var msgStr = "\n\nIf you have been given a password for PlayTunes "
+        msgStr += "Unlimited All Levels access, enter it in the gray text field, "
+        msgStr += "then press the Return button.\n\n"
+        msgStr += "You will see a confirmation dialog if successful.\n\n"
+
+        showAlert(title: titleStr, message: msgStr)
+    }
+    
+    func showAlert(title: String, message: String) {
+        let ac = MyUIAlertController(title: title,
+                                     message: message,
+                                     preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK",
+                                   style: .default,
+                                   handler: nil))
+        ac.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor =
+                kDefault_AlertBackgroundColor
+        
+        self.present(ac, animated: true, completion: nil)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         print ("yo")
         let response = hiddenPswdTextField.text
+        if response == nil || response == "" {
+            return
+        }
         
         // must match the dev password
-        if response == "EULA" {
-            if handlingDebugModePassword {
-                gMKDebugOpt_ShowDebugSettingsBtn = true
-
-                gMKDebugOpt_HomeScreenDebugOptionsEnabled = true
-                debugStuffOnBtn.isHidden = false
-                debugStuffOnBtn.isOpaque = true
-                debugStuffOnBtn.titleLabel?.isHidden = false
-                debugStuffOnBtn.titleLabel?.textColor = UIColor.green
-                debugStuffOnBtn.backgroundColor =
-                    (UIColor.lightGray).withAlphaComponent(1.0)
-                debugStuffOnBtn.setTitleColor(UIColor.blue, for: .normal)
-                gMKDebugOpt_ShowFakeScoreInLTAlert = true
-                gMKDebugOpt_ShowSlidersBtn = true
-                gMKDebugOpt_ShowResetBtnInMicCalibScene = true
-                gMKDebugOpt_IsSoundAndLatencySettingsEnabled = true
-            } else {
-                settingEnabledBtn.isOpaque = true
- //               settingEnabledBtn.titleLabel?.textColor = UIColor.green
-                settingsEnblBtnBckgrndColor = .lightGray
-                settingEnabledBtn.backgroundColor = settingsEnblBtnBckgrndColor
-                settingEnabledBtn.setTitleColor(UIColor.black, for: .normal)
-                gDoOverrideSubsPresent = true
-                gDoLimitLevels = false
+        if handlingDebugModePassword {
+            if !isValidPassword(forButton: kDebugModeBtn,
+                                response: response!) {
+                showWrongPasswordAlert()
+                return
             }
+            
+            gMKDebugOpt_ShowDebugSettingsBtn = true
+
+            gMKDebugOpt_HomeScreenDebugOptionsEnabled = true
+            debugStuffOnBtn.isHidden = false
+            debugStuffOnBtn.isOpaque = true
+            debugStuffOnBtn.titleLabel?.isHidden = false
+            debugStuffOnBtn.titleLabel?.textColor = UIColor.green
+            debugStuffOnBtn.backgroundColor =
+                (UIColor.lightGray).withAlphaComponent(1.0)
+            debugStuffOnBtn.setTitleColor(UIColor.blue, for: .normal)
+            gMKDebugOpt_ShowFakeScoreInLTAlert = true
+            gMKDebugOpt_ShowSlidersBtn = true
+            gMKDebugOpt_ShowResetBtnInMicCalibScene = true
+            gMKDebugOpt_IsSoundAndLatencySettingsEnabled = true
+        } else {
+            if !isValidPassword(forButton: kLevelAccessBtn,
+                                response: response!) {
+                showWrongPasswordAlert()
+                return
+            }
+            
+            // If still here, then password was good.
+            saveSubsriptionOverridePswdSet()
+            
+            settingEnabledBtn.titleLabel?.textColor = .clear
+            settingsEnblBtnBckgrndColor = .clear
+            settingEnabledBtn.setTitleColor(.clear, for: .normal)
+            settingEnabledBtn.titleLabel?.isHidden = false
+            gDoOverrideSubsPresent = true
+            gDoLimitLevels = false
+            showLevelsGoodToGoAlert()
         }
+        
         
         hiddenPswdTextField.isHidden = true
         hiddenPswdTextField.isEnabled = false
     }
     
+    func saveSubsriptionOverridePswdSet() {
+        UserDefaults.standard.set(
+            true,
+            forKey: Constants.Settings.SubsriptionOverridePswdSet)
+    }
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
@@ -126,8 +221,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         LessonsBtn.layer.cornerRadius = LessonsBtn.frame.width / 2
         
         createParticles()
-        
-        settingEnabledBtn.setTitle("Levels Enabled", for: .normal)
         
         if gMKDebugOpt_HomeScreenDebugOptionsEnabled {
             debugStuffOnBtn.isHidden = false
@@ -151,17 +244,17 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         
         settingEnabledBtn.backgroundColor = settingsEnblBtnBckgrndColor
         if gDoOverrideSubsPresent {
+            settingEnabledBtn.setTitle("Levels Enabled ", for: .normal)
             settingEnabledBtn.isHidden = false
             settingEnabledBtn.isEnabled = true
             settingEnabledBtn.isOpaque = true
             settingEnabledBtn.titleLabel?.textColor = UIColor.green
-            settingEnabledBtn.titleLabel?.isHidden = false
             settingEnabledBtn.setTitleColor(UIColor.black, for: .normal)
         } else {
+            settingEnabledBtn.setTitle("", for: .normal)
             settingEnabledBtn.isHidden = false
             settingEnabledBtn.isEnabled = true
             settingEnabledBtn.isOpaque = false
-            settingEnabledBtn.titleLabel?.isHidden = true
             settingEnabledBtn.setTitleColor(UIColor.clear, for: .normal)
        }
     }
@@ -175,12 +268,15 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         
         numTimesDebugStuffOnTapped = 0
         numTimesSettingsEnabledTapped = 0
+        settingEnabledBtn.titleLabel?.isHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         navigationController?.navigationBar.isHidden = false
+        
+        hiddenPswdTextField.text = "" // otherwise could invoke "wrong pswd" dlg
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -299,6 +395,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         
         dateLabel.text = getFormattedDate()
         
+        hiddenPswdTextField.autocorrectionType = .no
     }
     
     @IBAction func unwindToHomeVC(unwindSegue: UIStoryboardSegue) {

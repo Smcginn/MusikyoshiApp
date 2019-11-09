@@ -47,6 +47,9 @@ struct Constants
         static let LastCheckForAppUpdate = "lastCheckForAppUpdate"
         static let StudentInstrument = "studentInstrument"
         
+        static let SubsriptionOverridePswdSet = "subsriptionOverridePswdSet"
+
+        
         // Amplitude Rise vars, for each instrument
         static let Trumpet_AmpRiseForNewSound        = "trumpet_AmpRiseForNewSound"
         static let Trumpet_SkipBeginningSamples      = "trumpet_SkipBeginningSamples"
