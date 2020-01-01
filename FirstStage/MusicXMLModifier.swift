@@ -509,7 +509,7 @@ class MusicXMLModifier {
             lookForAndFixUnusuallyLongMeasures(part: part)
         }
         
-        print("doc2:\n==============================\n\n\(document.xml)\n===============================\n\n")
+//        print("doc2:\n==============================\n\n\(document.xml)\n===============================\n\n")
         return document.xml.data(using: .utf8)
     }
 

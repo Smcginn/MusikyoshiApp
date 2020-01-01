@@ -290,7 +290,9 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         let versionsEqual =
             LsnSchdlr.instance.scoreMgr.isJsonVersionEqual(versionTuple: appJsonDataVersion)
         if (!versionsEqual) {
-            displayDBCompatibilityAlert()
+            if !LsnSchdlr.instance.scoreMgr.scoreFileCanBeUpdatedToVersion_0_3_x() {
+                displayDBCompatibilityAlert()
+            }
         }
         
         let shouldDisplayOverview = !UserDefaults.standard.bool(forKey: "displayedOverviewPopup")

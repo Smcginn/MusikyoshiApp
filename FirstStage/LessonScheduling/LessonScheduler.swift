@@ -287,6 +287,7 @@ class LessonScheduler
         if  exerEntry.exerType == .rhythmPartyExer   ||
             exerEntry.exerType == .rhythmPrepExer    ||
             exerEntry.exerType == .lipSlurExer       ||
+            exerEntry.exerType == .crossBreakExer    ||
             exerEntry.exerType == .scalePowerExer    ||
             exerEntry.exerType == .intervalExer      ||
             exerEntry.exerType == .tuneExer

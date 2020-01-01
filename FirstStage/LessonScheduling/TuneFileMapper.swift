@@ -162,6 +162,7 @@ enum ExerciseType {
     case scalePowerExer
     case intervalExer
     case tuneExer
+    case crossBreakExer
 }
 
 class TuneFileMapper {
@@ -294,15 +295,22 @@ func getExerciseType( exerCode: String ) -> ExerciseType {
         }
     }
     
+    let currInstr = getCurrentStudentInstrument()
     index = exerCode.index(exerCode.startIndex, offsetBy: 3)
     subStr = exerCode.prefix(upTo: index)
     switch subStr {
+    case "SLR":     return .lipSlurExer
+//        if currInstr == kInst_Clarinet || currInstr == kInst_BassClarinet {
+//            return .crossBreakExer
+//        } else {
+//            return .lipSlurExer
+//        }
     case "PTY":     return .rhythmPartyExer
     case "PRP":     return .rhythmPrepExer
-    case "SLR":     return .lipSlurExer
     case "SCP":     return .scalePowerExer
     case "INT":     return .intervalExer
     case "TUN":     return .tuneExer
+    case "CBR":     return .crossBreakExer
     default:
         return .unknownExer
     }
@@ -316,6 +324,7 @@ func getTextForExerciseType( exerType: ExerciseType ) -> String {
     case .rhythmPartyExer:      return  "Rhythm Party"
     case .rhythmPrepExer:       return  "Rhythm Prep"
     case .lipSlurExer:          return  "LipSlur"
+    case .crossBreakExer:       return  "Cross Break"
     case .scalePowerExer:       return  "Scale Power"
     case .intervalExer:         return  "Interval"
     case .tuneExer:             return  "Tune"

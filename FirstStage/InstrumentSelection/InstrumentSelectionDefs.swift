@@ -300,9 +300,9 @@ let kBassClarinetInstrumentSettings =
 
 let kBassoonInstrumentSettings =
     InstrumentSettings( pitchTranspose:         0,
-                        longToneTranspose:      -26,
+                        longToneTranspose:      -14, // -26,
                         xmlDir:                 kBassoonSubDir,
-                        secondaryXmlDir:        kTrumpetSubDir,
+                        secondaryXmlDir:        kTromboneSubDir,
                         toneLibraryDir:         kBassoonSubDir,
                         primaryVideoLibraryDir: kNoSpecificVideos,
                         baseVideoLibraryDir:    kBrassVideos,
@@ -360,6 +360,15 @@ func getCurrentStudentInstrument() -> Int {
 
 func currInstrumentIsBrass() -> Bool {
     return gInstrumentSettings.isBrassInstrument
+}
+
+func currInstIsAClarinet() -> Bool {
+    if gCurrentInstrument == kInst_Clarinet ||
+       gCurrentInstrument == kInst_BassClarinet {
+        return true
+    } else {
+        return false
+    }
 }
 
 func setCurrentStudentInstrument( instrument: Int ) {

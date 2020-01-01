@@ -51,11 +51,14 @@ class LevelsViewController: UIViewController {
 
     var loadedFromHomeScreen = true
     
+    let kLipSlurLevel = 31
+    var activeLevelIsLipSlur = false
     var activeLevel = 0 {
         didSet {
+            activeLevelIsLipSlur = activeLevel == kLipSlurLevel ? true : false
+            
             if oldValue != activeLevel {
-                
-                let oldCell: LevelTableViewCell? = levelsTableView.cellForRow(at: IndexPath(row: oldValue, section: 0)) as? LevelTableViewCell
+                 let oldCell: LevelTableViewCell? = levelsTableView.cellForRow(at: IndexPath(row: oldValue, section: 0)) as? LevelTableViewCell
                 oldCell?.isActive = false
                 
                 let newCell: LevelTableViewCell? = levelsTableView.cellForRow(at: IndexPath(row: activeLevel, section: 0)) as? LevelTableViewCell
@@ -83,8 +86,8 @@ class LevelsViewController: UIViewController {
         // Don't show tryout level
         retNumToShow -= 1
         
-        if !currInstrumentIsBrass() {
-            // Don't show Lip Slurs level
+        if !currInstrumentIsBrass() && !currInstIsAClarinet() {
+            // Don't show Lip Slurs or CrossBreaks level
             retNumToShow -= 1
         }
         
@@ -462,7 +465,10 @@ class LevelsViewController: UIViewController {
                     if let levelTitle = levels[activeLevel]["title"].string {
                         destination.levelTitle = levelTitle
                     }
-                    
+                    if activeLevelIsLipSlur && currInstIsAClarinet() {
+                        destination.levelTitle  = "The Break"
+                    }
+
                     let daysJson:JSON? = levels[activeLevel]["days"]
                     
                     let day = indexPath.row
@@ -475,6 +481,10 @@ class LevelsViewController: UIViewController {
                     let oneDayExerListStr = daysJson![indexPath.row]["exercises"].string
                     let oneDayExerTitle   = daysJson![indexPath.row]["title"].string
                     destination.dayTitle = (oneDayExerTitle != nil) ? oneDayExerTitle! : ""
+                    if activeLevelIsLipSlur && currInstIsAClarinet() {
+                        destination.dayTitle  = "Break Exercises \(indexPath.row+1)"
+                    }
+                    
                     destination.exercisesListStr = (oneDayExerListStr != nil) ? oneDayExerListStr! : ""
                     
                     destination.thresholdsID         = thresholdsID
@@ -512,12 +522,14 @@ class LevelsViewController: UIViewController {
 
 
 let kIdxForLipSlurs    = "990"
+let kIdxForCrossBreaks = "991"
 let kIdxForLongTones6  = "992"
 let kIdxForLongTones10 = "993"
 let kIdxForLongTones20 = "994"
 let kIdxForLongTones30 = "995"
 func isSpecialLevel( levelIdx: String ) -> Bool {
     if levelIdx == kIdxForLipSlurs     ||
+        levelIdx == kIdxForCrossBreaks  ||
         levelIdx == kIdxForLongTones6   ||
         levelIdx == kIdxForLongTones10  ||
         levelIdx == kIdxForLongTones20  ||
@@ -565,7 +577,8 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
             
             // The text for the level is not simply index + 1. It's in the json
             var levelTitle = String(indexPath.row + 1) // default
-            let titleStr = levelsJson?[indexPath.row]["title"].string
+            var titleStr = levelsJson?[indexPath.row]["title"].string
+            
             if titleStr != nil {
                 levelTitle = titleStr!
                 if !levelIsEnabled { // See if it's a free Tryout Level
@@ -586,6 +599,10 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
                 if isSpecialLevel( levelIdx: levelIdx ) {
                     cell.setLevelLabelForSpecificLabel()
                     cell.levelNumberLabel.text = ""
+                    
+                    if levelIdx == kIdxForLipSlurs && currInstIsAClarinet() {
+                        titleStr = "The Break"
+                    }
                     if titleStr != nil { // NOTE: setting levelLabel, not NumberLabel
                         cell.levelLabel.text = titleStr! // e.g., "Lip Slurs"
                     }
@@ -620,7 +637,10 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
                 if isSpecialLevel( levelIdx: levelIdx ) {
                     let daysJson:JSON? = levelsJson![activeLevel]["days"]
                     if daysJson != nil {
-                        let oneDayExerTitle = daysJson![indexPath.row]["title"].string
+                        var oneDayExerTitle = daysJson![indexPath.row]["title"].string
+                        if activeLevelIsLipSlur && currInstIsAClarinet() {
+                            oneDayExerTitle = "Break Exercises \(indexPath.row+1)"
+                        }
                         if oneDayExerTitle != nil {
                             cellTitleText = oneDayExerTitle!
                         }

@@ -2,8 +2,8 @@
   "name": "trumpet",
   "title": "Beginner and Intermidiate level",
   "jsonVersionMajor":"0",
-  "jsonVersionMid":"2",
-  "jsonVersionMinor":"3",
+  "jsonVersionMid":"3",
+  "jsonVersionMinor":"0",
   "levels":[{
             "Level Comment":"=================== LEVEL 1 ============================",
             "title":"1",
@@ -1024,7 +1024,7 @@
             ],
             "exercises":[]
           },{
-
+              
             "Level Comment":"================= Sampler LEVEL ========================",
             "title":"--> Try out some Upper Level Exercises For Free!",
             "intro":"Examples of Exercises in Levels 3 through 10",

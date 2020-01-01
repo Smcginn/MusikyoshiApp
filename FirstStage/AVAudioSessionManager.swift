@@ -161,6 +161,8 @@ class AVAudioSessionManager: NSObject {
             return false
         }
  
+        delay(0.5) {}
+
         if sessionMode == .usingMicMode  {
 
             let bufferDuration = TimeInterval.init(floatLiteral: 0.005)

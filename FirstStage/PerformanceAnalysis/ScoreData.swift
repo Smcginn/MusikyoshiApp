@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 // Level. Day, Exercise states . . .
 let  kLDEState_FieldEmpty:          Int = -2 // entry valid but no members
@@ -193,6 +194,11 @@ struct studentScoreV2: Codable {
     }
 }
 
+// There is no structural diff bt V2 and V3, it's just diff content (For clarinet,
+// diff num of Levels and diff num of exers in come levels).
+typealias studentScoreV3 = studentScoreV2
+
+
 func create_LevelV2_FromLevelV1(currLevelV1:level,
                                 discardable: Bool = false) -> levelV2 {
     let canDiscardInt = discardable ? 1 : 0
@@ -204,6 +210,170 @@ func create_LevelV2_FromLevelV1(currLevelV1:level,
     
     return levV2
 }
+
+let kSlurLevelIndex = 31
+
+//         SCOREFILEHERE - search tag
+func create_ScoreV3_FromScoreV2(currScoreV2: inout studentScoreV2) -> Bool { // success?
+
+    currScoreV2.jsonVersionMid   = 3
+    currScoreV2.jsonVersionMinor = 0
+
+    
+//    print("\n==============================================\n")
+//    print("        Converting V2 to V3 score file")
+//    print("\n==============================================\n")
+//    print("\n Old V2 file:\n\n")
+//    print("\(currScoreV2)\n\n")
+
+    if  currInstIsAClarinet() {
+
+        // Need to add Clarinet exers where Slurs would go, and
+        // add new level for Clarinet-only exers
+        
+        // Loop through existing Levels, and see if need to add CrossBreak Exers
+        //var levelIdx = 0
+        let numScoreLevels = currScoreV2.levels.count
+        for scrLvlIdx in 0..<numScoreLevels  {
+            let levelID  = currScoreV2.levels[scrLvlIdx].levelID
+            print("--------->>>>>   levelID == \(levelID)")
+            if levelID == kIdxForLipSlurs { // This will change exisitng lip slurs to cross breaks.
+                
+                print("====================\n    Slur Score Level, before conversion: \n\n")
+                print("\(currScoreV2.levels[scrLvlIdx])\n\n =============================")
+
+                currScoreV2.levels[scrLvlIdx].title = ""
+                let numDays = currScoreV2.levels[scrLvlIdx].days.count
+                for dayIdx in 0..<numDays {
+                    let numExers =
+                        currScoreV2.levels[scrLvlIdx].days[dayIdx].exercises.count
+                    for exerIdx in 0..<numExers {
+                        var exerID =
+                            currScoreV2.levels[scrLvlIdx].days[dayIdx].exercises[exerIdx].exerciseID
+                        if getExerciseType(exerCode: exerID) == .lipSlurExer {
+                            changeSlurExerStrToCBExerStr(slrStr: &exerID)
+                            currScoreV2.levels[scrLvlIdx].days[dayIdx].exercises[exerIdx].exerciseID =
+                                exerID
+                        }
+                    }
+                }
+                
+                print("====================\n    Slur Score Level, after conversion: \n\n")
+                print("\(currScoreV2.levels[scrLvlIdx])\n\n =============================")
+            }
+        }
+  
+        // Now, loop through all levels looking for need to insert ....
+ 
+        guard let jsonExerTop = getJsonExerPlan() else {
+            itsBad();  return false }
+        
+        // Need to add Clarinet exers where Slurs would go, and
+        // add new level for Clarinet-only exers
+        
+        // Loop through existing Levels, and see if need to add CrossBreak Exers
+        //var levelIdx = 0
+        for scrLvlIdx in 0..<numScoreLevels  {
+            let jsonLevel  = jsonExerTop["levels"][scrLvlIdx]
+            let levelID  = currScoreV2.levels[scrLvlIdx].levelID
+            print("--------->>>>>   levelID == \(levelID)")
+//            if levelID == kIdxForLipSlurs {
+                
+            print("====================\n    Score Level \(scrLvlIdx), before conversion: \n\n")
+            print("\(currScoreV2.levels[scrLvlIdx])\n\n =============================")
+            
+            currScoreV2.levels[scrLvlIdx].title = ""
+            let numDays = currScoreV2.levels[scrLvlIdx].days.count
+            for dayIdx in 0..<numDays {
+                var jsonDay = jsonLevel["days"][dayIdx]
+                let jsonExersStr = jsonDay["exercises"].string!
+                let exerStringsArray = parseExercises(exercisesList: jsonExersStr)
+                let jsonExerCount = exerStringsArray.count
+                
+                let numScoreExers =
+                    currScoreV2.levels[scrLvlIdx].days[dayIdx].exercises.count
+                
+                if numScoreExers == jsonExerCount { // nothing to do
+                    continue
+                }
+                
+                var dayScoreCopy = currScoreV2.levels[scrLvlIdx].days[dayIdx]
+                
+                var scoreExerIdx = 0 // start out in sync
+                // This will add new cross break exers if not present.
+                if scrLvlIdx == kSlurLevelIndex && numScoreExers == 0 {
+                    // In old scores, there are no exers in the days
+                    for jsonExerIdx in 0..<jsonExerCount {
+                        let jsonExerStr = exerStringsArray[jsonExerIdx]
+                        if getExerciseType( exerCode: jsonExerStr ) == .lipSlurExer {
+                            var newExerStr = jsonExerStr
+                            changeSlurExerStrToCBExerStr(slrStr: &newExerStr)
+                            let newExer = exerciseScore(exerciseID: newExerStr, index: jsonExerIdx)
+                            dayScoreCopy.exercises.insert(newExer, at: jsonExerIdx)
+                        } else {
+                            itsBad()
+                        }
+                    }
+                 }   // else {
+/*
+                     for jsonExerIdx in 0..<jsonExerCount {
+                        let scoreExerID =
+                            currScoreV2.levels[scrLvlIdx].days[dayIdx].exercises[scoreExerIdx].exerciseID
+                        let jsonExerStr = exerStringsArray[jsonExerIdx]
+                        if scoreExerID.uppercased() != jsonExerStr.uppercased() {
+                            if getExerciseType( exerCode: jsonExerStr ) == .lipSlurExer {
+                                var newExerStr = jsonExerStr
+                                changeSlurExerStrToCBExerStr(slrStr: &newExerStr)
+                                let newExer = exerciseScore(exerciseID: newExerStr, index: jsonExerIdx)
+                                dayScoreCopy.exercises.insert(newExer, at: jsonExerIdx)
+                            } else {
+                                itsBad()
+                            }
+                        } else {
+                            scoreExerIdx += 1
+                        }
+                    }
+                }
+*/
+                currScoreV2.levels[scrLvlIdx].days[dayIdx] = dayScoreCopy
+            }
+
+            print("====================\n   Score Level \(scrLvlIdx), after conversion: \n\n")
+            print("\(currScoreV2.levels[scrLvlIdx])\n\n =============================")
+        }
+        
+        return true
+        
+    } else { // current instrument is not a clarinet; nothing to do.
+        
+        return true
+        
+    }
+}
+
+func getJsonExerPlan() -> JSON? {
+    guard let file = Bundle.main.path(forResource: "TrumpetLessons",
+                                      ofType: "json")    else {
+                                        print("Invalid filename/path for TrumpetLessons.JSON")
+                                        return false
+    }
+    
+    guard let jsonData = try? Data(contentsOf: URL(fileURLWithPath: file))  else {
+        print("Could not create JSON data from TrumpetLessons.JSON")
+        itsBad()
+        return false
+    }
+    
+    let instrumentJson = try? JSON(data: jsonData)
+    guard instrumentJson != nil  else {
+        print("Could not create JSON data from TrumpetLessons.JSON")
+        itsBad()
+        return nil
+    }
+
+    return instrumentJson
+}
+
 
 func create_ScoreV2_FromScoreV1(currScoreV1: studentScore,
                                 includingUpToLevel: Int) ->studentScoreV2 {

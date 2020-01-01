@@ -6,7 +6,7 @@
     <rights>©</rights>
     <encoding>
       <software>Finale v25 for Mac</software>
-      <encoding-date>2019-12-14</encoding-date>
+      <encoding-date>2019-12-16</encoding-date>
       <supports attribute="new-system" element="print" type="yes" value="yes"/>
       <supports attribute="new-page" element="print" type="yes" value="yes"/>
       <supports element="accidental" type="yes"/>
@@ -166,6 +166,9 @@
         <voice>1</voice>
         <type>quarter</type>
         <stem default-y="-14">up</stem>
+        <notations>
+          <slur number="1" placement="above" type="start"/>
+        </notations>
       </note>
     </measure>
     <!--=======================================================-->
@@ -179,6 +182,9 @@
         <voice>1</voice>
         <type>quarter</type>
         <stem default-y="-30.5">down</stem>
+        <notations>
+          <slur number="1" type="stop"/>
+        </notations>
       </note>
       <note default-x="52">
         <pitch>
@@ -282,6 +288,9 @@
         <voice>1</voice>
         <type>quarter</type>
         <stem default-y="-20">up</stem>
+        <notations>
+          <slur number="1" placement="above" type="start"/>
+        </notations>
       </note>
     </measure>
     <!--=======================================================-->
@@ -295,6 +304,9 @@
         <voice>1</voice>
         <type>quarter</type>
         <stem default-y="-35">down</stem>
+        <notations>
+          <slur number="1" type="stop"/>
+        </notations>
       </note>
       <note default-x="52">
         <pitch>
@@ -398,6 +410,9 @@
         <voice>1</voice>
         <type>quarter</type>
         <stem default-y="-19.5">up</stem>
+        <notations>
+          <slur number="1" placement="above" type="start"/>
+        </notations>
       </note>
     </measure>
     <!--=======================================================-->
@@ -411,6 +426,9 @@
         <voice>1</voice>
         <type>quarter</type>
         <stem default-y="-40.5">down</stem>
+        <notations>
+          <slur number="1" type="stop"/>
+        </notations>
       </note>
       <note default-x="51">
         <pitch>
@@ -509,6 +527,9 @@
         <voice>1</voice>
         <type>quarter</type>
         <stem default-y="-19.5">up</stem>
+        <notations>
+          <slur number="1" placement="above" type="start"/>
+        </notations>
       </note>
     </measure>
     <!--=======================================================-->
@@ -522,6 +543,9 @@
         <voice>1</voice>
         <type>quarter</type>
         <stem default-y="-45.5">down</stem>
+        <notations>
+          <slur number="1" type="stop"/>
+        </notations>
       </note>
       <note default-x="50">
         <pitch>

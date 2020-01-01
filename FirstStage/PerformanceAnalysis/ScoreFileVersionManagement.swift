@@ -139,9 +139,18 @@ extension ScoreMgr {
             }
         }
 
-        
-        
-        
+        // HERE
+        // This is at leaset a V2 file, possible a V3.  If V2, convert to V3
+        if !scoreFileIsVersion_0_3_x() { // need to upgrade
+            if scoreFileCanBeUpdatedToVersion_0_3_x() {
+                let success = create_ScoreV3_FromScoreV2(currScoreV2: &currUserScore!)
+                print("success: \(success)")
+                if success {
+                    _ = saveScoreFile()
+                }
+            }
+        }
+
         
         // Old stuff, for V1 file
         /*
@@ -488,11 +497,11 @@ extension ScoreMgr {
         let jsonData: Data? = try? jsonEncoder.encode(currUserScore)
         if jsonData != nil  {
             try? jsonData!.write(to: mkScoreFileUrl!, options: .atomic)
-            //if let jsonString = String(data:jsonData!, encoding: .utf8) {
-                //                print("\nJSON when creating initial Student Score file:\n")
-                //                print(jsonString)
-                //                print("\n")
-            //}
+//            if let jsonString = String(data:jsonData!, encoding: .utf8) {
+//                                print("\nJSON when creating initial Student Score file:\n")
+//                                print(jsonString)
+//                                print("\n")
+//            }
         }
         if fm.fileExists(atPath: mkScoreFilePath) {
             succeeded = true
@@ -541,6 +550,7 @@ extension ScoreMgr {
     ////////////////////////////////////////////////////////////////////////
     // If first time in App, this method is called to create the
     // initial in-memory StudentScoreData
+    //         SCOREFILEHERE - search tag
     func createStudentScoreDataFromJSON(forV2File: Bool = true) -> Bool {
         guard let file = Bundle.main.path(forResource: "TrumpetLessons",
                                           ofType: "json")    else {
@@ -594,12 +604,23 @@ extension ScoreMgr {
 //            return true
 //        }
         
+        let currInst = getCurrentStudentInstrument()
+        
         // Populate the empty top level score struct with entries, using Levels
         // and Exercise entries in TrumpetLessons.JSON data
+        var arrayLvl = 0
         for lvlIdx in 0...numLevels-1 {
             let oneJsonLevel = jsonLevels[lvlIdx]
-            let levelTag:   String = oneJsonLevel["title"].string!
+            var levelTag:   String = oneJsonLevel["title"].string!
             let levelIdx:   String = oneJsonLevel["levelIdx"].string!
+            
+            let currInst = getCurrentStudentInstrument()
+            
+            let isSlurLevel = levelIdx == kIdxForLipSlurs ? true : false
+            if isSlurLevel && currInstIsAClarinet() {
+                levelTag = "Clarinet"
+            }
+            
             var canDiscard: Int = 1
             if let canDiscardStr = oneJsonLevel["canDiscardForMerge"].string {
                 if canDiscardStr == "Y" {
@@ -619,23 +640,38 @@ extension ScoreMgr {
             let jsonDays = oneJsonLevel["days"]
             let numDays  = jsonDays.count // jsonLevels[lvlIdx]["days"].count
             for dayIdx in 0...numDays-1 {
-                let dayTitle: String = jsonDays[dayIdx]["title"].string!
-                
+                var dayTitle: String = jsonDays[dayIdx]["title"].string!
+                if isSlurLevel &&
+                    (currInst == kInst_Clarinet || currInst == kInst_BassClarinet) {
+                    dayTitle = "Cross Breaks \(dayIdx+1)"
+                }
                 let oneDayScore = dayScore(dayTitle: dayTitle, index: dayIdx)
-                currUserScore?.levels[lvlIdx].days.append(oneDayScore)
+                currUserScore?.levels[arrayLvl].days.append(oneDayScore)
                 
                 // now, get the exercises and add them
                 let exercisesStr = jsonDays[dayIdx]["exercises"].string!
                 let exerStrings = parseExercises(exercisesList: exercisesStr)
                 let numExers  = exerStrings.count
                 for exerIdx in 0...numExers-1 {
-                    let oneExerStr = exerStrings[exerIdx]
+                    var oneExerStr = exerStrings[exerIdx]
                     
                     var skipThisOne = false
                     if !currInstrumentIsBrass() { // then have to check for slurs
                         let exerType = getExerciseType( exerCode: oneExerStr )
-                        if exerType == .lipSlurExer { // Lips slurs only valid for brass
-                            skipThisOne = true
+                        if exerType == .lipSlurExer {
+                            // Lips slurs only valid for brass, UNLESS the curr inst
+                            // is clarinet or bass clarinet.  In that case, substitute
+                            // cross bresk exer below
+                            if isSlurLevel && currInstIsAClarinet() {
+//
+//                                currInst == kInst_BassClarinet ||
+//                               currInst == kInst_Clarinet {
+                                // change to equivelant Cross Break exer string
+                                changeSlurExerStrToCBExerStr(slrStr: &oneExerStr)
+                            } else {
+                                skipThisOne = true
+                            }
+//                            skipThisOne = true
                         }
                         if getCurrentStudentInstrument() == kInst_Mallet &&
                            (exerType == .longtoneExer || exerType == .longtoneRecordExer) {
@@ -645,15 +681,17 @@ extension ScoreMgr {
                     
                     if !skipThisOne {
                         let oneExerScore = exerciseScore(exerciseID: oneExerStr, index: exerIdx)
-                        currUserScore?.levels[lvlIdx].days[dayIdx].exercises.append(oneExerScore)
+                        currUserScore?.levels[arrayLvl].days[dayIdx].exercises.append(oneExerScore)
                     }
                 }
             }
+            arrayLvl += 1
         }
         
         print("Succesfully created empty StudentScore data in memory from JSON")
         return true
     }
+    
     
     /////////////////////////////////////////////////////////////
     // MARK: - -- JSON version in the TrumpetLessons.json file
@@ -729,6 +767,30 @@ extension ScoreMgr {
         }
     }
 
+    func scoreFileIsVersion_0_3_x() -> Bool {
+        let dbMajor = getDBMajorVersion()
+        let dbMid   = getDBMidVersion()
+        
+        if dbMajor == 0 && dbMid == 3 {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func scoreFileCanBeUpdatedToVersion_0_3_x() -> Bool {
+        let dbMajor = getDBMajorVersion()
+        let dbMid   = getDBMidVersion()
+        let dbMinor = getDBMinorVersion()
+
+        // The version right before 0.3.0 was 0.2.3
+        if dbMajor == 0 && dbMid == 2 && dbMinor == 3 {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     // Instrument json will have this to be stored in future.  For now, return 1 for Trumpet
     func getInstrumentCode() -> Int {
         return 1; // Trumpet
@@ -776,6 +838,18 @@ extension ScoreMgr {
         return fileSz
     }
 }
+
+func changeSlurExerStrToCBExerStr(slrStr: inout String) {
+    
+    var tempStr = "CBR"
+    
+    // Get range of all characters past the first 6.
+    let range = slrStr.index(slrStr.startIndex, offsetBy: 3)..<slrStr.endIndex
+    let tempStr2 = slrStr[range]
+    tempStr += tempStr2
+    slrStr = tempStr
+}
+
 
 // methods that deal with converting V1 file to V2 file
 extension ScoreMgr {

@@ -74,7 +74,7 @@ class AudioKitManager: NSObject {
         
         print("\n\n          In AudioKitManager.setup, rebuilding everything, recreating Mic, Tracker, etc.\n\n")
 
-        
+
         // Attempting to analyze (fix?) the Crash were the output sampe rates don't match
         let ak_sampRate = AKSettings.sampleRate
         let ak_chanCount = AKSettings.channelCount
@@ -96,20 +96,40 @@ class AudioKitManager: NSObject {
         print("      AudioKit.engine.inputNode.inputFormatChanCount   = \(inChannelCount)")
         print("      AudioKit.engine.inputNode.outputFormatsampleRate = \(outSampRate)")
         print("      AudioKit.engine.inputNode.outputFormatChanCount  = \(outChannelCount)")
-        
-        if outSampRate != inSampRate {
+ 
+        /*
+        if outSampRate != inSampRate || ak_sampRate != outSampRate {
             // Disabling. Restore commented code to enable bug fix.
             
             // This can cause a crash. Set them so they are equal. The output is often
             // lower than the input.
-            print("\n  !!!!!!  AKAKAK  !!!!!!   outSampRate != inSampRate  !!!!!!!\n\n")
+            if outSampRate != inSampRate {
+                print("\n  !!!!!!  AKAKAK  !!!!!!   outSampRate != inSampRate  !!!!!!!\n\n")
+            }
+            if ak_sampRate != outSampRate {
+                print("\n  !!!!!!  AKAKAK  !!!!!!   ak_sampRate != inSampRate  !!!!!!!\n\n")
+            }
+
 //            print("    outSampRate != inSampRate -  attempting to change")
-//            AKSettings.sampleRate = inSampRate
+//            AKSettings.sampleRate = si_sampleRate // 48000.0 // inSampRate
+//            AKSettings.channelCount = outChannelCount
 //            let outSampRate2 = AudioKit.engine.outputNode.outputFormat(forBus: 0).sampleRate
 //            print("    New outSampRate = \(outSampRate2)\n\n")
         } else {
             print("\n\n")
         }
+        
+        delay(0.5) {}
+*/
+        
+        // This seems to fix the device HW sample rate dosena't match the
+        // requested sample rate
+        var inputFormat = AudioKit.engine.inputNode.outputFormat(forBus: 0)
+        AKLog("wrong rate---> session rate: \(AVAudioSession.sharedInstance().sampleRate) input rate: \(inputFormat.sampleRate)")
+        inputFormat = AudioKit.engine.inputNode.outputFormat(forBus: 0)
+        AKSettings.sampleRate = inputFormat.sampleRate
+        AKSettings.channelCount = inputFormat.channelCount
+        AKLog("correct rate--->  session rate: \(AVAudioSession.sharedInstance().sampleRate) input rate: \(inputFormat.sampleRate) aksettings rate:\(AKSettings.sampleRate)")
         
         microphone = AKMicrophone()
 
