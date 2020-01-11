@@ -62,6 +62,8 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
             WelcomeTitleLabel.font = UIFont(name: "Futura-Bold", size: 27.0)
         }
         
+        let helpText = "Problems? Questions? Please contact us at Shawn@musikyoshi.com\n"
+
         // var howToUseDetText = "\u{2022} Select “Levels” to see the\n   available Practice Levels\n"
         // howToUseDetText += "\u{2022} Select a Level to see the Days\n   within that Level\n"
         // howToUseDetText += "\u{2022} Select a Day to display the exercises\n   within that Day, then:\n"
@@ -85,6 +87,8 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
         
         howToUseDetText += "\u{2022} If you complete an exercise and you don’t get the star rating you would like, we will remember your score so you can come back later that day or another day and try to improve it.\n\n"
         
+        howToUseDetText += helpText
+        
         howToUseDetailsLabel.text = howToUseDetText
         
         // 123456789012345678901234567890123456789012345 67890
@@ -97,7 +101,7 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
 //        var tryOutDetText = "You can access Levels 1 & 2 for free, forever. That’s almost 200 exercises!\n\n"
 //        tryOutDetText += "For this free try-out, you don't need to do anything else; you are good to go!"
         
-        var tryOutDetText = "We have lots of free areas of the app to try out for both beginners and those with some experience.\n> All Days of Levels 1 and 2 are completely free.\n> Day 1 of these Levels is also free: Levels 3, 4, 7, 10, 15, 20, 25, 30.\n> We even give you parts of our Long Tones Level and Lip Slurs Level.\n\nSo go ahead and explore Day 1 of all the Pink levels - you can unlock Gray Levels and Days when you purchase a subscription.\n\n"
+        var tryOutDetText = "We have lots of free areas of the app to try out for both beginners and those with some experience.\n> All Days of Levels 1 and 2 are completely free.\n> Day 1 of these Levels is also free: Levels 3, 4, 7, 10, 15, 20, 25, 30.\n> We even give you parts of our Long Tones Level, the Lip Slurs Level, and the Clarinet Breaks Level.\n\nSo go ahead and explore Day 1 of all the Pink levels - you can unlock Gray Levels and Days when you purchase a subscription.\n\n"
         
         tryOutDetText += "That’s hundreds of free exercises to help you get better!\n\n"
         
@@ -125,9 +129,11 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
         arSubMsgStr += "\u{2022} Subscriptions may be managed by the user and auto-renewal may be turned off by going to the user's Account Settings after purchase\n"
         arSubMsgStr += "\u{2022} Current subscription may not be cancelled during the active subscription period\n"
         arSubMsgStr += "\u{2022} Any unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription to that publication, where applicable"
- 
         
-        subsDetailLabel.text = arSubMsgStr + "\n"
+        arSubMsgStr += "\n\n\n" + helpText
+        
+        subsDetailLabel.text = arSubMsgStr
+        
         
         scrollView.showsVerticalScrollIndicator = true
     }
