@@ -925,11 +925,23 @@
                                     <action selector="settingEnabledBtnPressed:" destination="f5A-ka-z5R" eventType="touchUpInside" id="ka9-pd-1VV"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="aLF-1m-V5y" userLabel="SendPerfDataBtn">
+                                <rect key="frame" x="389" y="344" width="118" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="aVf-ze-kIt"/>
+                                    <constraint firstAttribute="width" constant="118" id="d7q-5X-q5d"/>
+                                </constraints>
+                                <state key="normal" title="    Send Perf Data Enabled"/>
+                                <connections>
+                                    <action selector="SendPerfDataBtnPressed:" destination="f5A-ka-z5R" eventType="touchUpInside" id="xfI-J0-F1k"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="IF5-t9-1nd" firstAttribute="leading" secondItem="2qZ-KA-D5G" secondAttribute="trailing" id="5J0-Pz-7KC"/>
                             <constraint firstAttribute="trailing" secondItem="GF6-Jt-A1h" secondAttribute="trailing" id="9A0-aX-2zV"/>
+                            <constraint firstItem="aLF-1m-V5y" firstAttribute="centerX" secondItem="Mbg-Kz-D8R" secondAttribute="centerX" id="IV9-5H-FqC"/>
                             <constraint firstItem="2qZ-KA-D5G" firstAttribute="top" secondItem="Uob-Uo-04w" secondAttribute="bottom" id="IcZ-kf-feE"/>
                             <constraint firstAttribute="centerX" secondItem="2BT-8T-CGh" secondAttribute="trailing" id="L2L-1j-Khp"/>
                             <constraint firstAttribute="trailing" secondItem="GF6-Jt-A1h" secondAttribute="trailing" id="N5u-Ds-n0O"/>
@@ -943,6 +955,7 @@
                             <constraint firstItem="FRG-uR-Ctt" firstAttribute="top" secondItem="qm4-xY-E1O" secondAttribute="bottom" id="aHd-x2-G1H"/>
                             <constraint firstItem="IF5-t9-1nd" firstAttribute="leading" secondItem="TYX-Cp-cKs" secondAttribute="trailing" id="aI8-UG-avP"/>
                             <constraint firstAttribute="bottom" secondItem="GF6-Jt-A1h" secondAttribute="bottom" id="bLd-ev-DpM"/>
+                            <constraint firstAttribute="bottom" secondItem="aLF-1m-V5y" secondAttribute="bottom" id="cKl-0u-7ny"/>
                             <constraint firstItem="TYX-Cp-cKs" firstAttribute="centerY" secondItem="Mbg-Kz-D8R" secondAttribute="centerY" id="dbQ-4H-Mme"/>
                             <constraint firstItem="2BT-8T-CGh" firstAttribute="leading" secondItem="FRG-uR-Ctt" secondAttribute="trailing" id="fJ0-rm-zSW"/>
                             <constraint firstAttribute="bottom" secondItem="FRG-uR-Ctt" secondAttribute="bottom" id="fqB-UI-7O6"/>
@@ -963,6 +976,7 @@
                     <connections>
                         <outlet property="LessonsBtn" destination="TYX-Cp-cKs" id="GIB-dG-bJk"/>
                         <outlet property="OverviewBtn" destination="bkE-ev-XRb" id="8jg-hZ-POA"/>
+                        <outlet property="SendPerfDataBtn" destination="aLF-1m-V5y" id="cPm-bR-4Qs"/>
                         <outlet property="dateLabel" destination="VDa-Ln-Jil" id="3TV-zm-abV"/>
                         <outlet property="debugStuffOnBtn" destination="PoY-45-ngp" id="zYp-sD-A4B"/>
                         <outlet property="hiddenPswdTextField" destination="2qZ-KA-D5G" id="Oue-EG-NJM"/>

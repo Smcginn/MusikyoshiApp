@@ -48,12 +48,12 @@ struct StarThresholds {
 
 let kNoneAvailable: Int = -1
 
-enum issueType {
-    case notSet
-    case overall
-    case pitch
-    case attack  // includes notes played over rests  RESTCHANGE
-    case duration
+enum issueType: Int {
+    case notSet     = 0
+    case overall    = 1
+    case pitch      = 2
+    case attack     = 3  // includes notes played over rests  RESTCHANGE
+    case duration   = 4
 }
 
 class PerfIssue {

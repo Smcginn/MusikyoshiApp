@@ -779,6 +779,8 @@
 		6DF3A11A21E68A8300C3D525 /* tuba.62.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DF3A0C521E68A8300C3D525 /* tuba.62.mp3 */; };
 		6DF3A11B21E68A8300C3D525 /* tuba.39.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DF3A0C621E68A8300C3D525 /* tuba.39.mp3 */; };
 		6DF3A11C21E68A8300C3D525 /* tuba.39.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DF3A0C621E68A8300C3D525 /* tuba.39.mp3 */; };
+		6DFCF7A623D0F88300868E48 /* PerfDataCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFCF7A523D0F88200868E48 /* PerfDataCollector.swift */; };
+		6DFCF7A723D0F88300868E48 /* PerfDataCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFCF7A523D0F88200868E48 /* PerfDataCollector.swift */; };
 		BD8B79051F95BF75005B31CB /* PracticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8B79041F95BF75005B31CB /* PracticeViewController.swift */; };
 		BD8B79061F95BF75005B31CB /* PracticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8B79041F95BF75005B31CB /* PracticeViewController.swift */; };
 		BD8B79111F95C11B005B31CB /* UserAtributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8B79101F95C11B005B31CB /* UserAtributes.swift */; };
@@ -1075,7 +1077,7 @@
 		1C33BB702016E80900CD83A6 /* SwiftyJSONTests.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SwiftyJSONTests.json; sourceTree = "<group>"; };
 		1C33BB712016E80900CD83A6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1C33BB722016E80900CD83A6 /* Example.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Example.xcodeproj; sourceTree = "<group>"; };
-		1C33BB752016E80A00CD83A6 /* Playground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Playground.playground; sourceTree = "<group>"; };
+		1C33BB752016E80A00CD83A6 /* Playground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Playground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		1C33BB762016E80A00CD83A6 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		1C33BB772016E80A00CD83A6 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		1C33BB782016E80A00CD83A6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -1518,6 +1520,7 @@
 		6DF3A0C421E68A8300C3D525 /* tuba.63.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = tuba.63.mp3; path = "synth-samples/tuba-samples/tuba.63.mp3"; sourceTree = "<group>"; };
 		6DF3A0C521E68A8300C3D525 /* tuba.62.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = tuba.62.mp3; path = "synth-samples/tuba-samples/tuba.62.mp3"; sourceTree = "<group>"; };
 		6DF3A0C621E68A8300C3D525 /* tuba.39.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = tuba.39.mp3; path = "synth-samples/tuba-samples/tuba.39.mp3"; sourceTree = "<group>"; };
+		6DFCF7A523D0F88200868E48 /* PerfDataCollector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PerfDataCollector.swift; path = PerformanceAnalysis/PerfDataCapture/PerfDataCollector.swift; sourceTree = "<group>"; };
 		BD8B79041F95BF75005B31CB /* PracticeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PracticeViewController.swift; sourceTree = "<group>"; };
 		BD8B79101F95C11B005B31CB /* UserAtributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAtributes.swift; sourceTree = "<group>"; };
 		C90339361FB131D3005A9C7D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -2492,6 +2495,14 @@
 			name = "tuba-samples";
 			sourceTree = "<group>";
 		};
+		6DFCF79523D0F7DF00868E48 /* Send Performance Data */ = {
+			isa = PBXGroup;
+			children = (
+				6DFCF7A523D0F88200868E48 /* PerfDataCollector.swift */,
+			);
+			name = "Send Performance Data";
+			sourceTree = "<group>";
+		};
 		E9794BAB1FFDB36200CDC7FD /* Videos */ = {
 			isa = PBXGroup;
 			children = (
@@ -2536,6 +2547,7 @@
 		E9AD0C991FD115F1006472CE /* PerformanceAnalysis */ = {
 			isa = PBXGroup;
 			children = (
+				6DFCF79523D0F7DF00868E48 /* Send Performance Data */,
 				E9AD0CDF1FDF4457006472CE /* PerformanceAndTrackingDefs.swift */,
 				6D10768C23465624005E66D8 /* Debug SubViews */,
 				6D817BDE2186033F00258980 /* PerfAnalysisTesting */,
@@ -3692,6 +3704,7 @@
 				63D5E8871EA37BEA007AE8D4 /* NoteOffset.swift in Sources */,
 				63D5E88B1EA37C1B007AE8D4 /* LongToneViewController.swift in Sources */,
 				E4564D2122D05716000B4FA4 /* ExerciseTableViewCell.swift in Sources */,
+				6DFCF7A723D0F88300868E48 /* PerfDataCollector.swift in Sources */,
 				6D431C2021975EC4009DBBE9 /* PlayTunesIAPProducts.swift in Sources */,
 				1C87C0A92016F0040038784E /* LevelOverviewViewController.swift in Sources */,
 				E40C311F22E19997002FFCCB /* OnboardingSlideView.swift in Sources */,
@@ -3825,6 +3838,7 @@
 				6D40FC8021D722FD006E1742 /* TrombonePartials.swift in Sources */,
 				63D5E8881EA37BEA007AE8D4 /* NoteOffset.swift in Sources */,
 				63D5E88C1EA37C1B007AE8D4 /* LongToneViewController.swift in Sources */,
+				6DFCF7A623D0F88300868E48 /* PerfDataCollector.swift in Sources */,
 				6D431C1F21975EC4009DBBE9 /* PlayTunesIAPProducts.swift in Sources */,
 				BD8B79051F95BF75005B31CB /* PracticeViewController.swift in Sources */,
 				E409164322CC387500E5E034 /* SettingsTableViewController.swift in Sources */,

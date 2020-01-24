@@ -345,22 +345,7 @@ extension ScoreMgr {
     
     /////////////////////////////////////////////////////////////
     // MARK: - -- Support methods for file opening and saving
-
-    // Get the app's sandbox dir
-    func getAppSupportDir() -> URL? {
-        var retUrl: URL? = nil
-        do {
-            let fm = FileManager.default
-            retUrl = try fm.url(for: .applicationSupportDirectory,
-                                in: .userDomainMask,
-                                appropriateFor: nil,
-                                create: true)
-        } catch {
-            // TODO deal with error
-        }
-        return retUrl
-    }
-
+    
     // Get the MKData dir, within the app's sandbox dir
     func getMKDataDir() -> URL? {
         var mkDataURL: URL? = nil

@@ -185,44 +185,44 @@ enum InstrumentSpecificError {
     case lowerPartial
 }
 
-enum performanceRating { // for attack, duration, and pitch
+enum performanceRating: Int { // for attack, duration, and pitch
     
-    case notRated
-    case missedNote
+    case notRated               =  0
+    case missedNote             =  1
     
     // the associated score is the sum of the attack, duration, and pitch scores
-    case cumulative
+    case cumulative             =  2
     
     // attack
-    case veryEarly
-    case slightlyEarly
-    case timingOrRestGood
-    case slightlyLate
-    case veryLate
+    case veryEarly              =  3
+    case slightlyEarly          =  4
+    case timingOrRestGood       =  5
+    case slightlyLate           =  6
+    case veryLate               =  7
     
-    case soundsDuringRest  // Only applies to rests. One or more sounds...
+    case soundsDuringRest       =  8 // Only applies to rests. One or more sounds...
     
     // duration
-    case tooShort
-    case veryShort
-    case slightlyShort
-    case durationGood
-    case slightlyLong
-    case veryLong
-    case tooLong
+    case tooShort               =  9
+    case veryShort              = 10
+    case slightlyShort          = 11
+    case durationGood           = 12
+    case slightlyLong           = 13
+    case veryLong               = 14
+    case tooLong                = 15
     
     // pitch
-    case wrongNoteFlat
-    case slightlyFlat
-    case pitchGood
-    case slightlySharp
-    case wrongNoteSharp
-    case isUpperPartial
-    case isLowerPartial
-    case fluctuatingReasonable
-    case fluctuatingAcceptable
+    case wrongNoteFlat          = 16
+    case slightlyFlat           = 17
+    case pitchGood              = 18
+    case slightlySharp          = 19
+    case wrongNoteSharp         = 20
+    case isUpperPartial         = 21
+    case isLowerPartial         = 22
+    case fluctuatingReasonable  = 23
+    case fluctuatingAcceptable  = 24
 
-    case noSound
+    case noSound                = 25
     
     static func displayStringForRating( _ rating : performanceRating,
                                         ratingText: inout String ) {
@@ -356,6 +356,7 @@ var gMKDebugOpt_IsSoundAndLatencySettingsEnabled = false
 var gMKDebugOpt_HomeScreenDebugOptionsEnabled = false
 
 var gMKDebugOpt_ShowDebugSettingsBtn = false
+var gMKDebugOpt_SendPerfDataEnabled = false
 var gMKDebugOpt_ShowSlidersBtn = false
 var gMKDebugOpt_ShowFakeScoreInLTAlert = false
 var gMKDebugOpt_ShowResetBtnInMicCalibScene = false

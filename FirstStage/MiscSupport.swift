@@ -446,3 +446,30 @@ public class AtomicInteger {
         return value
     }
 }
+
+// Get the app's sandbox dir
+func getAppSupportDir() -> URL? {
+    var retUrl: URL? = nil
+    do {
+        let fm = FileManager.default
+        retUrl = try fm.url(for: .applicationSupportDirectory,
+                            in: .userDomainMask,
+                            appropriateFor: nil,
+                            create: true)
+    } catch {
+        // TODO deal with error
+    }
+    return retUrl
+}
+extension Bundle {
+    var releaseVersionNumber: String? {
+        return infoDictionary?["CFBundleShortVersionString"] as? String
+    }
+    var buildVersionNumber: String? {
+        return infoDictionary?["CFBundleVersion"] as? String
+    }
+    var releaseVersionNumberPretty: String {
+        return "v\(releaseVersionNumber ?? "1.0.0")"
+    }
+}
+

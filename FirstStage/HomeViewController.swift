@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import MessageUI
 
 class HomeViewController: UIViewController, UITextFieldDelegate {
     
@@ -48,14 +49,20 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         displayWelcomeVC()
     }
     
-    var handlingDebugModePassword = true
+    enum passwordFor {
+        case none
+        case debugPW
+        case levelsAccessPW
+        case sendPerfDataPW
+    }
+    var handlingPasswordFor = passwordFor.none
     
     @IBOutlet weak var debugStuffOnBtn: UIButton!
     var numTimesDebugStuffOnTapped = 0
     @IBAction func debugStuffOnPressed(_ sender: Any) {
         numTimesDebugStuffOnTapped += 1
         if numTimesDebugStuffOnTapped >= 15 {
-            handlingDebugModePassword = true
+            handlingPasswordFor = .debugPW
             hiddenPswdTextField.backgroundColor = .lightGray
             hiddenPswdTextField.isHidden = false
             hiddenPswdTextField.isEnabled = true
@@ -74,36 +81,99 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
 
         numTimesSettingsEnabledTapped += 1
         if numTimesSettingsEnabledTapped >= 5 {
-            handlingDebugModePassword = false
+            handlingPasswordFor = .levelsAccessPW
             hiddenPswdTextField.backgroundColor = .lightGray
             hiddenPswdTextField.isHidden = false
             hiddenPswdTextField.isEnabled = true
             hiddenPswdTextField.keyboardType = .default
             hiddenPswdTextField.becomeFirstResponder()
-            showEnterPasswordAlert()
+            showEnterLevelsPasswordAlert()
         }
     }
     
+    @IBOutlet weak var SendPerfDataBtn: UIButton!
+    var numTimesSendPerfDataTapped = 0
+    @IBAction func SendPerfDataBtnPressed(_ sender: Any) {
+        if numTimesSendPerfDataTapped >= 8 {
+            
+            if !MFMailComposeViewController.canSendMail() {
+                showMailNotConfiguredAlert()
+                return
+            }
+            
+            handlingPasswordFor = .sendPerfDataPW
+            SendPerfDataBtn.setTitle("Send Perf\n  Data?", for: .normal)
+            SendPerfDataBtn.setTitleColor(UIColor.blue, for: .normal)
+
+            //SendPerfDataBtn.titleLabel?.text = "Send Perf\n    Data"
+            hiddenPswdTextField.backgroundColor = .lightGray
+            hiddenPswdTextField.isHidden = false
+            hiddenPswdTextField.isEnabled = true
+            hiddenPswdTextField.keyboardType = .default
+            hiddenPswdTextField.becomeFirstResponder()
+            hiddenPswdTextField.text = ""
+            showSendPerfDataPasswordAlert()
+        } else {
+            numTimesSendPerfDataTapped += 1
+        }
+    }
     
-    let kDebugModeBtn   = 0
-    let kLevelAccessBtn = 1
-    
-    let kEULAPswd       = "EULA"
+    let kDebugModeBtn    = 0
+    let kLevelAccessBtn  = 1
+    let kSendPerfDataBtn = 2
+
+    // To Enter debug mode
     let kDebugPswd      = "DDDDD"
+    
+    // To enter either all-levels-free or debug mode
+    // (will work for either)
+    let kEULAPswd       = "EULA"
+
+    // To enter all-levels-free mode
     let kAllLevelsPswd1 = "PAUSD"
     let kAllLevelsPswd2 = "FORSCHOOL"
     let kAllLevelsPswd3 = "FREE-PASS"
 
+    // To enter Send Perf Data mode
+    let kSendPerfDataPswd = "SENDPERF"
+    
+    // The bottom-right hidden button has double duty, and what it turns on
+    // is determined by the password entered:
+    //   If a Debug-mode password is entered, then debug mode is enabled.
+    //   if the Send Performnce Data password is entered, that mode is enabled.
+    // (You can do both by doing this twice with two separate passwords.)
     func isValidPassword(forButton: Int, response: String) -> Bool {
         let upResp = response.uppercased()
         if forButton == kDebugModeBtn &&
-           (upResp == kDebugPswd || upResp == kEULAPswd) {
-            return true
+            (upResp == kDebugPswd ||
+             upResp == kEULAPswd  ||
+             upResp == kSendPerfDataPswd) {
+                return true
         } else if forButton == kLevelAccessBtn &&
                   (upResp == kAllLevelsPswd1 ||
                    upResp == kAllLevelsPswd2 ||
                    upResp == kAllLevelsPswd3 ||
                    upResp == kEULAPswd)  {
+            return true
+        } else if forButton == kSendPerfDataBtn && upResp == kSendPerfDataPswd {
+            return true
+        }
+
+        
+        return false
+    }
+
+    func isValidSendPerfDataPassword(response: String) -> Bool {
+        let upResp = response.uppercased()
+        if upResp == kSendPerfDataPswd {
+            return true
+        }
+        return false
+    }
+    
+    func isValidDebugPassword(response: String) -> Bool {
+        let upResp = response.uppercased()
+        if upResp == kDebugPswd || upResp == kEULAPswd  {
             return true
         }
         return false
@@ -128,13 +198,41 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         showAlert(title: titleStr, message: msgStr)
     }
     
-    func showEnterPasswordAlert() {
+    func showSendPerfDataGoodToGoAlert() {
+        let titleStr = "Sending Performance Data is now enabled."
+        var msgStr = "\n\nWhen you're in a Tune Exercise, after a performance "
+        msgStr += "you will have the option of sending data to PlayTunes developers. "
+        showAlert(title: titleStr, message: msgStr)
+    }
+    
+    func showMailNotConfiguredAlert() {
+        let titleStr = "You have not configured email on this device"
+        var msgStr = "\nYou need to have email configured to send PlayTunes "
+        msgStr    += "Performance Data. If you're not sure how to do this, "
+        msgStr    += "please do a search on how to add your email account, or "
+        msgStr    += "write us at shawn@musikyoshi.com for help. Please keep "
+        msgStr    += "trying - the info will be extremely helpful!!"
+
+        showAlert(title: titleStr, message: msgStr)
+    }
+    
+    func showEnterLevelsPasswordAlert() {
         let titleStr = "Enter Password For\nAll Level Access!"
         var msgStr = "\n\nIf you have been given a password for PlayTunes "
         msgStr += "Unlimited All Levels access, enter it in the gray text field, "
         msgStr += "then press the Return button.\n\n"
         msgStr += "You will see a confirmation dialog if successful.\n\n"
-
+        
+        showAlert(title: titleStr, message: msgStr)
+    }
+    
+    func showSendPerfDataPasswordAlert() {
+        let titleStr = "Enter Password For Sending Performance Data"
+        var msgStr = "\n\nIf you have been given a password to send "
+        msgStr += "performance data, enter it in the gray text field, "
+        msgStr += "then press the Return button.\n\n"
+        msgStr += "You will see a confirmation dialog if successful.\n\n"
+        
         showAlert(title: titleStr, message: msgStr)
     }
     
@@ -159,7 +257,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         }
         
         // must match the dev password
-        if handlingDebugModePassword {
+        if handlingPasswordFor == .debugPW {
             if !isValidPassword(forButton: kDebugModeBtn,
                                 response: response!) {
                 showWrongPasswordAlert()
@@ -180,7 +278,8 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
             gMKDebugOpt_ShowSlidersBtn = true
             gMKDebugOpt_ShowResetBtnInMicCalibScene = true
             gMKDebugOpt_IsSoundAndLatencySettingsEnabled = true
-        } else {
+            
+        } else if handlingPasswordFor == .levelsAccessPW {
             if !isValidPassword(forButton: kLevelAccessBtn,
                                 response: response!) {
                 showWrongPasswordAlert()
@@ -197,8 +296,21 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
             gDoOverrideSubsPresent = true
             gDoLimitLevels = false
             showLevelsGoodToGoAlert()
+            
+        } else if handlingPasswordFor == .sendPerfDataPW {
+            if !isValidPassword(forButton: kSendPerfDataBtn,
+                                response: response!) {
+                showWrongPasswordAlert()
+                SendPerfDataBtn.setTitle("", for: .normal)
+                return
+            }
+            
+            // If still here, then password was good.
+            SendPerfDataBtn.setTitle("    Send Perf\nData Enabled", for: .normal)
+            gMKDebugOpt_SendPerfDataEnabled = true
+            showSendPerfDataGoodToGoAlert()
         }
-        
+
         
         hiddenPswdTextField.isHidden = true
         hiddenPswdTextField.isEnabled = false
@@ -268,7 +380,11 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         
         numTimesDebugStuffOnTapped = 0
         numTimesSettingsEnabledTapped = 0
-        settingEnabledBtn.titleLabel?.isHidden = true
+//        settingEnabledBtn.titleLabel?.isHidden = true
+//        SendPerfDataBtn.titleLabel?.textColor = .clear
+        SendPerfDataBtn.setTitleColor(UIColor.clear, for: .normal)
+
+        //SendPerfDataBtn.titleLabel?.text = ""
     }
     
     override func viewWillDisappear(_ animated: Bool) {
