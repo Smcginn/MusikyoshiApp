@@ -6,7 +6,7 @@
     <rights>©</rights>
     <encoding>
       <software>Finale v25 for Mac</software>
-      <encoding-date>2019-09-26</encoding-date>
+      <encoding-date>2020-03-15</encoding-date>
       <supports attribute="new-system" element="print" type="yes" value="yes"/>
       <supports attribute="new-page" element="print" type="yes" value="yes"/>
       <supports element="accidental" type="yes"/>
@@ -83,7 +83,7 @@
         <instrument-sound>brass.trumpet.bflat</instrument-sound>
         <virtual-instrument/>
       </score-instrument>
-      <midi-device>ARIA Player</midi-device>
+      <midi-device>Bank 1</midi-device>
       <midi-instrument id="P1-I1">
         <midi-channel>1</midi-channel>
         <midi-program>1</midi-program>
@@ -182,7 +182,7 @@
         <stem default-y="20">up</stem>
         <beam number="1">begin</beam>
       </note>
-      <note default-x="38">
+      <note default-x="39">
         <pitch>
           <step>G</step>
           <octave>4</octave>
@@ -237,7 +237,7 @@
     </measure>
     <!--=======================================================-->
     <measure number="3" width="159">
-      <note default-x="17">
+      <note default-x="16">
         <pitch>
           <step>B</step>
           <octave>3</octave>
@@ -354,7 +354,7 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="5" width="168">
+    <measure number="5" width="167">
       <note default-x="25">
         <pitch>
           <step>B</step>
@@ -392,7 +392,7 @@
         <accidental>flat</accidental>
         <stem default-y="-55">down</stem>
       </note>
-      <note default-x="132">
+      <note default-x="131">
         <pitch>
           <step>F</step>
           <octave>4</octave>
@@ -404,13 +404,13 @@
       </note>
     </measure>
     <!--=======================================================-->
-    <measure number="6" width="212">
+    <measure number="6" width="211">
       <print new-system="yes">
         <system-layout>
           <system-distance>114</system-distance>
         </system-layout>
       </print>
-      <note default-x="64">
+      <note default-x="63">
         <pitch>
           <step>B</step>
           <alter>-1</alter>
@@ -472,7 +472,7 @@
           <slur number="1" type="stop"/>
         </notations>
       </note>
-      <note default-x="185">
+      <note default-x="184">
         <rest/>
         <duration>2</duration>
         <voice>1</voice>
@@ -815,7 +815,7 @@
         <stem default-y="5">up</stem>
         <beam number="1">end</beam>
       </note>
-      <note default-x="210">
+      <note default-x="209">
         <pitch>
           <step>G</step>
           <octave>3</octave>
@@ -828,7 +828,7 @@
           <slur number="1" type="stop"/>
         </notations>
       </note>
-      <note default-x="273">
+      <note default-x="272">
         <rest/>
         <duration>2</duration>
         <voice>1</voice>
@@ -960,18 +960,6 @@
         <duration>2</duration>
         <voice>1</voice>
         <type>quarter</type>
-      </note>
-      <barline location="right">
-        <bar-style>light-heavy</bar-style>
-      </barline>
-    </measure>
-    <!--=======================================================-->
-    <measure number="15" width="989">
-      <print new-system="yes"/>
-      <note>
-        <rest measure="yes"/>
-        <duration>8</duration>
-        <voice>1</voice>
       </note>
       <barline location="right">
         <bar-style>light-heavy</bar-style>
