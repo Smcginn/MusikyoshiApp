@@ -75,19 +75,34 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     var settingsEnblBtnBckgrndColor = UIColor.clear
     @IBOutlet weak var settingEnabledBtn: UIButton!
     @IBAction func settingEnabledBtnPressed(_ sender: Any) {
-        if gDoOverrideSubsPresent {
-            showLevelsAlreadyEnabledAlert()
-        }
-
+        // JUNE15 - Disabling subscription status lookup
         numTimesSettingsEnabledTapped += 1
         if numTimesSettingsEnabledTapped >= 5 {
-            handlingPasswordFor = .levelsAccessPW
-            hiddenPswdTextField.backgroundColor = .lightGray
-            hiddenPswdTextField.isHidden = false
-            hiddenPswdTextField.isEnabled = true
-            hiddenPswdTextField.keyboardType = .default
-            hiddenPswdTextField.becomeFirstResponder()
-            showEnterLevelsPasswordAlert()
+            if gDoOverrideSubsPresent {
+                showDontHaveToRightCornerTap()
+            }
+        }
+        return;
+            
+            
+        numTimesSettingsEnabledTapped += 1
+        if numTimesSettingsEnabledTapped >= 5 {
+            // JUNE15 - For users who have been given instructions to tap in corner to
+            // get free all access, and don't know if already free (at the moment):
+            // Just lauch "You're all set" alert.
+            
+            showLevelsGoodToGoAlert()
+
+            
+            // Retore below for normal action:
+            
+//            handlingPasswordFor = .levelsAccessPW
+//            hiddenPswdTextField.backgroundColor = .lightGray
+//            hiddenPswdTextField.isHidden = false
+//            hiddenPswdTextField.isEnabled = true
+//            hiddenPswdTextField.keyboardType = .default
+//            hiddenPswdTextField.becomeFirstResponder()
+//            showEnterLevelsPasswordAlert()
         }
     }
     
@@ -188,6 +203,12 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     func showLevelsAlreadyEnabledAlert() {
         let titleStr = "You Already Have\nAll Level Access"
         let msgStr = "\n\nYou either have entered the correct password, or you have a valid subscription.\n\nYou're good to go!"
+        showAlert(title: titleStr, message: msgStr)
+    }
+    
+    func showDontHaveToRightCornerTap() {
+        let titleStr = "You Already Have\nAll Level Access"
+        let msgStr = "\n\nIf you have been told to tap in the bottom-right corner to get All-Level access, you don't have to do this. For this release, PlayTunes is completely free until June 15, 2020.\n\nYou're good to go!"
         showAlert(title: titleStr, message: msgStr)
     }
     
@@ -354,21 +375,28 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
                 (UIColor.lightGray).withAlphaComponent(0.0)
         }
         
+        // JUNE15
         settingEnabledBtn.backgroundColor = settingsEnblBtnBckgrndColor
-        if gDoOverrideSubsPresent {
-            settingEnabledBtn.setTitle("Levels Enabled ", for: .normal)
-            settingEnabledBtn.isHidden = false
-            settingEnabledBtn.isEnabled = true
-            settingEnabledBtn.isOpaque = true
-            settingEnabledBtn.titleLabel?.textColor = UIColor.green
-            settingEnabledBtn.setTitleColor(UIColor.black, for: .normal)
-        } else {
-            settingEnabledBtn.setTitle("", for: .normal)
-            settingEnabledBtn.isHidden = false
-            settingEnabledBtn.isEnabled = true
-            settingEnabledBtn.isOpaque = false
-            settingEnabledBtn.setTitleColor(UIColor.clear, for: .normal)
-       }
+        settingEnabledBtn.setTitle("", for: .normal)
+        settingEnabledBtn.isHidden = false // Leave enabled so can tell them . . .
+        settingEnabledBtn.isEnabled = true //   . . . they don't need to tap here
+        
+//        settingEnabledBtn.isOpaque = false
+        settingEnabledBtn.setTitleColor(UIColor.clear, for: .normal)
+//        if gDoOverrideSubsPresent {
+//            settingEnabledBtn.setTitle("Levels Enabled ", for: .normal)
+//            settingEnabledBtn.isHidden = false
+//            settingEnabledBtn.isEnabled = true
+//            settingEnabledBtn.isOpaque = true
+//            settingEnabledBtn.titleLabel?.textColor = UIColor.green
+//            settingEnabledBtn.setTitleColor(UIColor.black, for: .normal)
+//        } else {
+//            settingEnabledBtn.setTitle("", for: .normal)
+//            settingEnabledBtn.isHidden = false
+//            settingEnabledBtn.isEnabled = true
+//            settingEnabledBtn.isOpaque = false
+//            settingEnabledBtn.setTitleColor(UIColor.clear, for: .normal)
+//       }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -384,6 +412,22 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
 //        SendPerfDataBtn.titleLabel?.textColor = .clear
         SendPerfDataBtn.setTitleColor(UIColor.clear, for: .normal)
 
+    
+        // JUNE15
+        
+        if gTrialPeriodExpired {
+            showEndDateExpiredAlert(parentVC: self)
+        } else {
+            let numDays = daysUntilFreePeriodEndDate()
+            if numDays > 0 {
+                setTrialNotExpiredVars()
+                displayFreeTrialExpiryWarningIfNeeded(parentVC: self)
+            } else {
+                setTrialExpiredVars()
+                showEndDateExpiredAlert(parentVC: self)
+            }
+        }
+        
         //SendPerfDataBtn.titleLabel?.text = ""
     }
     
@@ -429,6 +473,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         animateViews()
         
     }
+    
     
     func animateViews() {
         
@@ -502,6 +547,8 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // let numDays = daysUntilFreePeriodEndDate()
         
         // UI customization
         
@@ -604,3 +651,5 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     }
     
 }
+
+

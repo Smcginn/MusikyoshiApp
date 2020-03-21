@@ -302,18 +302,22 @@ class LessonScheduler
         } else if exerEntry.exerType == .longtoneExer {
             let ltInfo:longtoneExerciseInfo = getLongtoneInfo(forLTCode: exerEntry.exerCodeStr)
             //retStr = "Long Tone - Play a \(ltInfo.note) for \(ltInfo.durationSecs) Seconds"
+            var noteName = ltInfo.note
+            correctForLongToneNameFlatBug(noteName: &noteName)
             if useAn(noteName: ltInfo.note) {
-                retStr = "Long Tone - Play an \(ltInfo.note) for \(ltInfo.durationSecs) Seconds"
+                retStr = "Long Tone - Play an \(noteName) for \(ltInfo.durationSecs) Seconds"
             } else {
-                retStr = "Long Tone - Play a \(ltInfo.note) for \(ltInfo.durationSecs) Seconds"
+                retStr = "Long Tone - Play a \(noteName) for \(ltInfo.durationSecs) Seconds"
             }
         } else if exerEntry.exerType ==  .longtoneRecordExer {
             let ltInfo:longtoneExerciseInfo = getLongtoneRecordInfo(forLTCode: exerEntry.exerCodeStr)
             //retStr = "Long Tone Record - Play a \(ltInfo.note) for as long as you can"
+            var noteName = ltInfo.note
+            correctForLongToneNameFlatBug(noteName: &noteName)
             if useAn(noteName: ltInfo.note) {
-                retStr = "Long Tone Record - Play an \(ltInfo.note) for as long as you can"
+                retStr = "Long Tone Record - Play an \(noteName) for as long as you can"
             } else {
-                retStr = "Long Tone Record - Play a \(ltInfo.note) for as long as you can"
+                retStr = "Long Tone Record - Play a \(noteName) for as long as you can"
             }
         }
         return retStr

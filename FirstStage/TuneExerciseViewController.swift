@@ -15,9 +15,11 @@ protocol DoneShowingVideo : class {
     func VideoViewClosed()
 }
 
+let kTimeMult = Double(0.988) //    1.012)
 
-class TuneExerciseViewController: PlaybackInstrumentViewController, SSUTempo, SSNoteHandler,
-OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailComposeViewControllerDelegate {
+class TuneExerciseViewController: PlaybackInstrumentViewController, SSUTempo,
+    SSNoteHandler, OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo,
+    MFMailComposeViewControllerDelegate, VideoHelpViewDelegate {
 
    // @IBOutlet weak var orderStatusNavigationbar: UINavigationBar!
     
@@ -170,6 +172,9 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
                   PerfDataCollector.instance.markSongStart()
             }
             
+            if kWorkingFromPerfDataFile {
+                PerfDataCollector.instance.syncToSoundStart()
+            }
 //            PerfTrkMgr.instance.signalDetectedDuringPerformance = false
 //            PerfTrkMgr.instance.perfLongEnoughToDetectNoSound = false
        }
@@ -178,10 +183,11 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
         didSet {
             PerformanceTrackingMgr.instance.songStartTimeOffset = songStartTmOffset
             print("\n      ====================================================================")
-            print("                                      Song Start")
+            print("                       Song Start     - tag: SS SS SS")
             print("      ====================================================================\n")
         }
     }
+    var songStarted = false
     var shouldSetSongStartTime  = true
     var currNoteXPos: CGFloat = -1.0
     var notInCountdown    = false
@@ -330,6 +336,46 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
             createAudioSampAnlysView()
             createFreqSampAnlysView()
         }
+        
+        if kWorkingFromPerfDataFile {
+            
+            var keepGoing = true
+            if (PerfDataCollector.instance.loadPerfDataFile()) {
+                let currInst = getCurrentStudentInstrument()
+                
+                let currLDE = LsnSchdlr.instance.getCurrentLDE()
+                let currLevel = currLDE.level
+                let currDay   = currLDE.day
+                //let currExer  = currLDE.exer
+                
+                let pdLD = PerfDataCollector.instance.getLDFromFilePerfData()
+                let pdExerID = PerfDataCollector.instance.getExerIDFromFilePerfData()
+                let pdInst = PerfDataCollector.instance.getInstrumentFromFilePerfData()
+                if currInst  != pdInst     ||
+                   currLevel != pdLD.level ||
+                   currDay   != pdLD.day   ||
+                   exerciseName    != pdExerID {
+                        itsBad()
+                        keepGoing = false
+                }
+                if keepGoing {
+                    let pdBPM = PerfDataCollector.instance.getBPMFromFilePerfData()
+                    var currBPM = UserDefaults.standard.double(forKey: Constants.Settings.BPM)
+                    var currBPMInt = Int(currBPM)
+                    if  currBPMInt != pdBPM {
+                        UserDefaults.standard.set(pdBPM, forKey: Constants.Settings.BPM)
+                        currBPM = UserDefaults.standard.double(forKey: Constants.Settings.BPM)
+                        currBPMInt = Int(currBPM)
+                        if  currBPMInt != pdBPM {
+                            itsBad()
+                         }
+                    }
+                    PerfDataCollector.instance.findSongStartIndex()
+                }
+            } else {
+                itsBad()
+            }
+        }
     }
     
     func createFreqSampAnlysView() {
@@ -381,6 +427,10 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
     }
     
     func setAnalysisCriteria( exerType: ExerciseType, forPass: sortCriteriaPass ) {
+        guard !gTesterDidOverridePerfIssueSortCriteria else {
+            return
+        }
+        
         if forPass == .starScoreGrading {
             switch exerType {
             case .rhythmPartyExer:
@@ -612,6 +662,8 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
 //    }
 
     @IBAction func playButtonTapped(_ sender: UIButton) {
+        songStarted = false
+        gCurrElapsedTime = -1.0
         
         if sendPerfDataBtn != nil && gMKDebugOpt_SendPerfDataEnabled {
             sendPerfDataBtn?.isHidden = true
@@ -622,6 +674,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
             print("\n\n\n      exerciseDuration == \(exerciseDuration)\n\n\n\n")
         }
 
+        PerfDataCollector.instance.resetPerfDatasSampIndex()
         RTEventMgr.sharedInstance.clearAllEntries()
 
         animatePanel(direction: .out)
@@ -1147,11 +1200,27 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
         // animateMonkeyImageView();   return  // won't do doPostPerfAnalysis
 
         if doPostPerfAnalysis {
+            if sendPerfDataBtn != nil && gMKDebugOpt_SendPerfDataEnabled {
+                PerfDataCollector.instance.markSongEnd()
+            }
             kMKDebugOpt_PrintMinimalNoteAnalysis = true
             performPostPerfAnalysis()
             if sendPerfDataBtn != nil && gMKDebugOpt_SendPerfDataEnabled {
                 sendPerfDataBtn?.isHidden = false
                 PerfDataCollector.instance.printEntries()
+            }
+
+            if !soundDetectedDuringSession {
+                if gMKDebugOpt_ShowDebugSettingsBtn &&
+                   !kWorkingFromPerfDataFile {
+                    delay(0.5) {
+                        self.checkForNoSound()
+                    }
+                } else {
+                    delay(0.5) {
+                        self.checkForNoSoundPermissionDenied()
+                    }
+                }
             }
         }
         ssScrollView.isScrollEnabled = true
@@ -1231,8 +1300,13 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
             PerformanceIssueMgr.instance.averageScore(justForNotes: false)
         let avgNotesScore =
             PerformanceIssueMgr.instance.averageScore(justForNotes: true)
+        
+        var containsSlurs = false
+        if exerciseType == .lipSlurExer {
+            containsSlurs = true
+        }
         perfStarScore =
-            PerformanceIssueMgr.instance.getStarScoreForMostRecentPerformance()
+            PerformanceIssueMgr.instance.getStarScoreForMostRecentPerformance(containsSlurs: containsSlurs)
         
         print("\n-------------------------------------------------")
         print("  Worst Score:                \(worstScore)")
@@ -1265,7 +1339,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
 //        starScoreView.setStarCount(numStars: bestStarScore)
 //        starScoreView.isHidden = false
         
-        if  gMKDebugOpt_ShowDebugSettingsBtn {
+        if  gMKDebugOpt_ShowDebugSettingsBtn && soundDetectedDuringSession {
             let titleStr = "Note Attack Summary\n('-' is early; otherwise late)"
             
             let minDiffStr = String(format: "%.4f", gLastRunMinAttackDiff)
@@ -1329,7 +1403,8 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
 //        var videoTestCode = vidIDs.kVid_NoVideoAvailable
         
         // Reacting to worst issue must be delayed slightly
-        if soundDetectedDuringSession || !PerfTrkMgr.instance.doDetectedDuringPerformance {
+        // if soundDetectedDuringSession || !PerfTrkMgr.instance.doDetectedDuringPerformance {
+        if soundDetectedDuringSession || PerfTrkMgr.instance.doDetectedDuringPerformance {
             delay(0.1) {
                 let worstPerfIssue = PerformanceIssueMgr.instance.getFirstPerfIssue()
     // delme            if doTestVideos && worstPerfIssue != nil {
@@ -1344,7 +1419,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
                             PerformanceIssueMgr.instance.getSeverity(issueScore: issScore)
                         let perfNoteID:Int32 = worstPerfIssue!.perfScoreObjectID
                         let helpMode = getVideoHelpMode()
-                        if helpMode == kVideoHelpMode_Video &&
+                        if (helpMode == kVideoHelpMode_Video || !self.soundDetectedDuringSession) &&
                            worstPerfIssue!.videoID != vidIDs.kVid_NoVideoAvailable {
                             self.scrollToNoteAndLaunchVideo(perfNoteID: perfNoteID,
                                                             videoID: worstPerfIssue!.videoID,
@@ -1379,6 +1454,47 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
 //    }
     
     
+    func checkForNoSoundPermissionDenied() {
+        // Ask for permission to use the microphone, if not already granted
+        var permissionDenied = false
+        switch AVAudioSession.sharedInstance().recordPermission() {
+            case AVAudioSessionRecordPermission.denied:
+                permissionDenied = true
+            default:
+                permissionDenied = false
+        }
+        if permissionDenied {
+            let titleStr = "You denied permission to use the microphone"
+            var msgStr = "\nPlease go to Settings > Privacy > Microphone to enable the microphone for PlayTunes.\n\n"
+            msgStr += "PlayTunes simply can't work unless it can use the built-in microphone. (How else can it hear what you're playing?)"
+            let ac = MyUIAlertController(title: titleStr,
+                                         message: msgStr,
+                                         preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Okay",
+                                       style: .default,
+                                       handler: nil))
+            ac.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = kDefault_AlertBackgroundColor
+            self.present(ac, animated: true, completion: nil)
+        }
+    }
+ 
+    func checkForNoSound() {
+        if !soundDetectedDuringSession &&
+           gMKDebugOpt_ShowDebugSettingsBtn &&
+           !kWorkingFromPerfDataFile
+        {
+            let titleStr = "No Sound detected during that Performance"
+            let msgStr = "Please try to think of anything you did differenctly"
+            let ac = MyUIAlertController(title: titleStr,
+                                         message: msgStr,
+                                         preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK",
+                                       style: .default,
+                                       handler: nil))
+            ac.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = kDefault_AlertBackgroundColor
+            self.present(ac, animated: true, completion: nil)
+        }
+    }
     
     func adjustMetronomeLeftEdge() {
         
@@ -1595,6 +1711,16 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
  //       AudioKitManager.sharedInstance.stop()  // SFAUDIO
     }
 
+    func updateCurrNoteIsInSlur() {
+        guard let currNote = PerformanceTrackingMgr.instance.currentPerfNote else {
+            return }
+        
+        let currInSlur = MusicXMLNoteTracker.instance.isNoteWithinASlur()
+        if currInSlur && !currNote.isInSlur { // do not to set false if ever was true
+            currNote.isInSlur = true
+        }
+    }
+    
     //////////////////////////////////////////////////////////////////////////////
     //     TODO: Ultimately want to move this func out (or most of it) to
     //        PerformanceTrackingMgr, but currently this func uses too many vars
@@ -1607,7 +1733,13 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
     //        be that hard.
     //
     func trackSounds() {
-
+        
+        // These were put here to track issues with a specific PerfData file's
+        // sound or Note #12. While that particular test case is not valid in general,
+        // the spots where the checks are done are useful, so leaving this in.
+        var its21 = false
+        var firstTimeIts21 = true
+        
         guard perfTrkgMgr != nil else { return }
 
         // Do one of:
@@ -1623,7 +1755,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
         var currAmpltd = 0.0
         var currFreq   = 0.0
         
-        
+        var pdTime: Double = -1.0
         let lastTestSampleIdx = testFreqAndPitchSampleSim.lastSampleIndex
         if kDoingPitchAmplitudePitchSimTest &&
            testFreqAndPitchSampleSim.canBeginTesting &&
@@ -1631,6 +1763,18 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
             currAmpltd = testFreqAndPitchSampleSim.amplitudeSamples[lastTestSampleIdx]
             currFreq   = testFreqAndPitchSampleSim.getPitchAt(index: lastTestSampleIdx)
             testFreqAndPitchSampleSim.lastSampleIndex += 1
+        } else if kWorkingFromPerfDataFile {
+            _ = PerfDataCollector.instance.getNextSampleData(
+                    time:  &pdTime,
+                    amp:   &currAmpltd,
+                    pitch: &currFreq)
+            if pdTime < 0.0 { // start time; for now, skip
+                // do it again
+                _ = PerfDataCollector.instance.getNextSampleData(
+                    time:  &pdTime,
+                    amp:   &currAmpltd,
+                    pitch: &currFreq)
+            }
         } else { // get actual live sample and pitch data
             if AudioKitManager.sharedInstance.amplitudeTracker != nil {
                 currAmpltd = AudioKitManager.sharedInstance.amplitudeTracker.amplitude
@@ -1645,7 +1789,18 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
      //       let currAmpltd = AudioKitManager.sharedInstance.frequencyTracker.amplitude
         }
         
-        let elapsedTime = Date().timeIntervalSince(songStartTm)
+        var elapsedTime = Date().timeIntervalSince(songStartTm)
+        if kWorkingFromPerfDataFile && !(pdTime < 0.0) {
+            print("$$$$$ Comparing elapsedTime: \(elapsedTime)  to  pdTime: \(pdTime)")
+            elapsedTime = pdTime
+            print("  current Sound == \(PerfTrkMgr_CurrSoundID()),   current Note == \(PerfTrkMgr_CurrNoteID())")
+        }
+        if songStarted {
+            gCurrElapsedTime = elapsedTime
+        } else {
+            gCurrElapsedTime = -1.0
+        }
+        
         var currSoundID: Int32 = 0
         if let currSound : PerformanceSound = perfTrkgMgr.currentSound {
             currSoundID = currSound.soundID
@@ -1677,9 +1832,21 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
         if signalDetected {
             soundDetectedDuringSession = true
         }
-
+  
+        if !signalDetected && PerfTrkMgr_CurrSoundID() > 0 {
+            print("SOUND DEAD -> !signalDetected && PerfTrkMgr_CurrSoundID() > 0")
+        }
+        
+        if !signalDetected && PerfTrkMgr_CurrSoundID() == 21 {
+            its21 = true
+            firstTimeIts21 = false
+        }
+        
  //       let currFreq = AudioKitManager.sharedInstance.frequencyTracker.frequency
-        let timeSinceAnalysisStart : TimeInterval = Date().timeIntervalSince(startTime)
+        var timeSinceAnalysisStart : TimeInterval = Date().timeIntervalSince(startTime)
+        if kWorkingFromPerfDataFile {
+            timeSinceAnalysisStart = elapsedTime + PerformanceTrackingMgr.instance.songStartTimeOffset
+        }
         let timeSinceSongStart =
             timeSinceAnalysisStart - PerformanceTrackingMgr.instance.songStartTimeOffset
         
@@ -1691,40 +1858,54 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
 
         //       print("\n    In TuneExer::trackSounds, currAmpltd == \(currAmpltd)\n")
         if kDoPrintFrequency {
-            print("    In TuneExer::trackSounds, currFreq == \(currFreq)")
+            print("    In TuneExer::trackSounds, currFreq == \(currFreq) Hertz")
         }
         
         if signalDetected && PerformanceTrackingMgr.instance.currentlyTrackingSound {
             // Currently tracking a sound; update it
-
+            
             guard let currSound : PerformanceSound = perfTrkgMgr.currentSound else { return }
-
+            let isActiveStr = currSound.linkedNoteActive() ? "YES" : "NO"
+//            print ("Current Sound is linked to active note: \(isActiveStr)")
+            gCurrSoundsLinkedNoteIsEnded = !currSound.linkedNoteActive()
+            gCurrSoundsLinkedNoteWillEndSoon = currSound.linkedNoteWillEndSoon()
+//            gCurrNoteID = currSound.linkedNoteObject?.perfNoteOrRestID ?? 0
+            
             perfTrkgMgr.addAmplitudeValue(ampVal: currAmpltd, absTime: timeSinceAnalysisStart)
             
             if !currSound.initialPitchHasStablized() { // Not enough samples yet
                 currSound.addPitchSample(pitchSample: currFreq) // Just update, no qualifying
 
+                if its21 {
+                    print("Why am I here?")
+                }
+                
             } else { // sound with stable pitch exists
                 var soundStopped = false
                 if perfTrkgMgr.currentSoundWillEnd() { // one way or the other
                     printSoundRelatedMsg(msg: "   !!   Sound finished at: \(timeSinceSongStart)   !!")
                     if perfTrkgMgr.currentSoundFinished() &&
                        perfTrkgMgr.isANewNoteBCofAmpChange() {
-                        let soundStartTIme = perfTrkgMgr.absTimeForNewSound
+                        let soundStartTime = perfTrkgMgr.absTimeForNewSound
+                        let soundStartTImeComp = perfTrkgMgr.absTimeForNewSound
                         print("\n")
                         printSoundRelatedMsg(msg: " !!   Stopping Sound, creating new bc of amplitude drop at: \(timeSinceSongStart)   !!\n")
  
                         let currSoundID = getCurrentSoundID()
-                        let elapsedTime = Date().timeIntervalSince(songStartTm)
+                        // let elapsedTime = Date().timeIntervalSince(songStartTm)
                         let soundEndEvt = createSoundEndEvent( soundID:    currSoundID,
                                                                timestamp:  elapsedTime,
                                                                reason:     kRTEVDetail_SoundEnd_AmpRise )
                         RTEventMgr.sharedInstance.addEntry( newEvent: soundEndEvt) // SE_2
 
-                        stopCurrentSound( soundEndTime: soundStartTIme )
+                        stopCurrentSound( soundEndTime: soundStartTime )
                     }
                     soundStopped = true
                     
+                    if its21 {
+                        let csid = PerfTrkMgr_CurrSoundID()
+                        print("currSoundID == \(currSoundID), \(firstTimeIts21)")
+                    }
 //                } else
 //
 //               // First, test for new note either bc of amp or pitch change
@@ -1735,11 +1916,31 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
                 
                 // Not a new note bc of Amp change (if soundStopped remains false).
                 // Check for a new note because of a pitch change during legato playing.
+                
+                gCurrentlyInSlur = MusicXMLNoteTracker.instance.isNoteWithinASlur()
+                updateCurrNoteIsInSlur()
+                
+//                let currNoteCompStartTime =  // below will return 0.0 if no current note
+//                    PerformanceTrackingMgr.instance.getCurrentNoteCompStartTime()
+                
+                let deepCurrSoundIsLinkedAndNewNoteStarted =
+                    PerfTrkMgr.instance.deepCurrSoundLinkedAndNewNoteStarted(currTime: elapsedTime)
+                if deepCurrSoundIsLinkedAndNewNoteStarted {
+                    print ("deepCurrSoundLinkedAndNewNoteStarted() returned true")
+                } else {
+                    print ("deepCurrSoundLinkedAndNewNoteStarted() returned false")
+                }
+                
+//                if // gCurrentlyInSlur &&
+//                    deepCurrSoundIsLinkedAndNewNoteStarted { // }&&
+//                   // currNoteCompStartTime > 0.001 { // make sure it actually started
+//                    gScanForPitchDuringLegatoPlayingAbsolute = true
+//                } else {
+//                    gScanForPitchDuringLegatoPlayingAbsolute = false
+//                }
+                
                 if !soundStopped &&
-                    gScanForPitchDuringLegatoPlayingAbsolute &&
-                    MusicXMLNoteTracker.instance.isNoteWithinASlur() {
-//                   gScanForPitchDuringLegatoPlaying {
-
+                   gScanForPitchDuringLegatoPlayingAbsolute   {
                     let oldFreq = currSound.averagePitchRunning
                     if areDifferentNotes( pitch1: oldFreq, pitch2: currFreq ) {
                         // The student could be playing legato, transitioning to diff note.
@@ -1748,6 +1949,9 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
                         currSound.addDifferentPitchSample(sample: currFreq,
                                                           sampleTime: timeSinceAnalysisStart)
                         if currSound.isDefinitelyADifferentNote() { // last sample decided it
+                            
+                            //   !!!!!  PITCH CHANGE  !!!!!
+                            
                             // Stop this sound
 
                             if kMKDebugOpt_PrintStudentPerformanceDataDebugOutput  ||
@@ -1771,13 +1975,19 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
                                 noteOffset: perfTrkgMgr.songStartTimeOffset,
                                 splitTime: &splitTime )
 
+                            
+                            let splitTimeComp = splitTime - perfTrkgMgr.songStartTimeOffset
+                            
                             let currSoundID = getCurrentSoundID()
-                            let elapsedTime = Date().timeIntervalSince(songStartTm)
+                            //  let elapsedTime = Date().timeIntervalSince(songStartTm)
                             let soundEndEvt = createSoundEndEvent( soundID:   currSoundID,
-                                                                   timestamp: elapsedTime,
+                                                                   timestamp: splitTimeComp,
                                                                    reason:    kRTEVDetail_SoundEnd_Pitch )
                             RTEventMgr.sharedInstance.addEntry( newEvent: soundEndEvt) // SE_3
-                            
+                            gCurrSoundIsLinkedAndNewNoteStarted = false
+                            gCurrSoundsLinkedNoteWillEndSoon    = false
+                            gCurrSoundsLinkedNoteIsEnded        = false
+
                             // Create a new sound.
                             let soundMode : soundType = isTune ? .pitched : .percusive
                             perfTrkgMgr.startTrackingPerformanceSound(
@@ -1787,10 +1997,10 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
 
                             if kMKDebugOpt_PrintStudentPerformanceDataDebugOutput ||
                                kMKDebugOpt_PrintMinimalNoteAndSoundResults     { // first half
-                                let startABSStr     = String(format: "%.3f", currSound.startTime_abs)
+                                let startABSStr      = String(format: "%.3f", currSound.startTime_abs)
                                 let startSongStr     = String(format: "%.3f", currSound.startTime_song)
                                 let startCompStr     = String(format: "%.3f", currSound.startTime_comp)
-
+                                
                                 printSoundRelatedMsg(msg: "  S S =====================  Sound  / / / / / / / / /  Sound  ======")
                                 printSoundRelatedMsg(msg: "  S S   Legato Split")
                                 printSoundRelatedMsg(msg: "  S S      Old Sound: \(currSound.soundID)       - Legato Split")
@@ -1801,11 +2011,10 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
                             }
                             
                             
-                            
+                            print("    splitTime == \(splitTime)")
                             perfTrkgMgr.resetAmpTracker()
 //                            PerfTrkMgr.instance.evaluateSkipWindows() // blar
 
-                            
                             // Try to link this new sound to a new note
                             if let newSound = perfTrkgMgr.currentSound {
                                 newSound.xOffsetStart = firstNoteOrRestXOffset + currXOffset
@@ -1814,9 +2023,9 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
       //                          print("   Calling linkCurrSoundToCurrScoreObject() from trackSounds 1")
                                 if kMKDebugOpt_PrintStudentPerformanceDataDebugOutput ||
                                    kMKDebugOpt_PrintMinimalNoteAndSoundResults     { // second half
-                                    let startABSStr      = String(format: "%.3f", currSound.startTime_abs)
-                                    let startSongStr     = String(format: "%.3f", currSound.startTime_song)
-                                    let startCompStr     = String(format: "%.3f", currSound.startTime_comp)
+                                    let startABSStr      = String(format: "%.3f", newSound.startTime_abs)
+                                    let startSongStr     = String(format: "%.3f", newSound.startTime_song)
+                                    let startCompStr     = String(format: "%.3f", newSound.startTime_comp)
                                     
                                     printSoundRelatedMsg(msg: "  S S      New Sound: \(newSound.soundID)")
                                     printSoundRelatedMsg(msg: "  S S         Start Time ABS:          \(startABSStr)")
@@ -1839,10 +2048,10 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
 
                                 
                                 let currSoundID = getCurrentSoundID()
-                                let elapsedTime = Date().timeIntervalSince(songStartTm)
+                                //  let elapsedTime = Date().timeIntervalSince(songStartTm)
                                 let soundEndEvt =
                                     createSoundStartEvent( newSoundID: currSoundID,
-                                                           timestamp:  elapsedTime,
+                                                           timestamp:  splitTimeComp,
                                                            reason:     kRTEVDetail_NewSound_Pitch )
                                 RTEventMgr.sharedInstance.addEntry( newEvent: soundEndEvt) // SS_3
 
@@ -1851,12 +2060,84 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
                     }  // if areDifferentNotes
                 } // not a new note bc of Amp change; Check pitch change during legato playing
                 else { // pitch is same as current sound average, so just update.
+                    if its21 {
+                        print("Why am I here?")
+                    }
                     currSound.addPitchSample(pitchSample: currFreq)
+                }
+                if its21 {
+                    print("Why am I here?")
                 }
 
             } // else - sound with stable pitch exists
+            if its21 {
+                print("Why am I here?")
+            }
+
         } // signalDetected &&  currentlyTrackingSound
 
+        // Note: Moved this else section up for 2.0.5; was AFTER
+        //    // New sound detected - simple, rose above isASound threshold
+        //    else if signalDetected && !perfTrkgMgr.currentlyTrackingSound && notInCountdown {
+        //       . . .
+            
+        else if !signalDetected && perfTrkgMgr.currentlyTrackingSound {
+            //            gCurrNoteID = 0
+            
+            // Existing sound ended
+            
+            //            gUseEighthIsSoundThresholdNow.set(0) // may have been on - make sure it's off
+            //            print(")))))))) Turning gUseEighthIsSoundThresholdNow  OFF")
+            
+            print("\n")
+            printSoundRelatedMsg(msg: "  !!   Stopping Sound, Simple:  at: \(timeSinceSongStart)!!\n")
+            perfTrkgMgr.resetAmpTracker()
+            
+            let currSoundID = getCurrentSoundID()
+            // let elapsedTime = Date().timeIntervalSince(songStartTm)
+            let soundEndEvt = createSoundEndEvent( soundID:   currSoundID,
+                                                   timestamp: elapsedTime,
+                                                   reason:    kRTEVDetail_SoundEnd_Detected )
+            RTEventMgr.sharedInstance.addEntry( newEvent: soundEndEvt) // SE_1
+            
+            gCurrSoundIsLinkedAndNewNoteStarted = false
+            stopCurrentSound( soundEndTime: timeSinceAnalysisStart )
+            
+            if its21 {
+                let csid = PerfTrkMgr_CurrSoundID()
+                let cnid = PerfTrkMgr_CurrNoteID()
+                print("Why oh Why am I here?")
+                print("Why am I here?")
+            }
+            
+            /*
+             if kMKDebugOpt_PrintStudentPerformanceDataDebugOutput ||
+             kMKDebugOpt_PrintMinimalNoteAndSoundResults      {
+             //               print ("  Stopping dead sound at \(timeSinceSongStart)")
+             }
+             
+             var currXOffset = Int(ssScrollView.getCurrentXOffset())
+             currXOffset -= kOverlayPixelAdjustment
+             if let currSound = perfTrkgMgr.currentSound {
+             currSound.xOffsetEnd = currXOffset + firstNoteOrRestXOffset
+             }
+             
+             perfTrkgMgr.updateCurrentNoteIfLinked()
+             perfTrkgMgr.endTrackedSoundAsSignalStopped(
+             soundEndTime: timeSinceAnalysisStart,
+             noteOffset: perfTrkgMgr.songStartTimeOffset )
+             */
+        }
+
+            
+            
+            
+            
+            
+            
+            
+            
+            
         // New sound detected - simple, rose above isASound threshold
         else if signalDetected && !perfTrkgMgr.currentlyTrackingSound && notInCountdown {
             // New sound detected
@@ -1906,49 +2187,17 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
                 currSound.xOffsetStart = firstNoteOrRestXOffset + currXOffset
                 soundID = currSound.soundID
             }
-            let elapsedTime = Date().timeIntervalSince(songStartTm)
+            //  let elapsedTime = Date().timeIntervalSince(songStartTm)
             let soundStartEvt = createSoundStartEvent( newSoundID:    soundID,
                                                        timestamp:     elapsedTime,
                                                        reason:        newSoundReason )
             RTEventMgr.sharedInstance.addEntry( newEvent: soundStartEvt) // SS_1, SS_2
         }
-
-        else if !signalDetected && perfTrkgMgr.currentlyTrackingSound {
-            // Existing sound ended
-
-//            gUseEighthIsSoundThresholdNow.set(0) // may have been on - make sure it's off
-//            print(")))))))) Turning gUseEighthIsSoundThresholdNow  OFF")
-
-            print("\n")
-            printSoundRelatedMsg(msg: "  !!   Stopping Sound, Simple:  at: \(timeSinceSongStart)!!\n")
-            perfTrkgMgr.resetAmpTracker()
-            
-            let currSoundID = getCurrentSoundID()
-            let elapsedTime = Date().timeIntervalSince(songStartTm)
-            let soundEndEvt = createSoundEndEvent( soundID:   currSoundID,
-                                                   timestamp: elapsedTime,
-                                                   reason:    kRTEVDetail_SoundEnd_Detected )
-            RTEventMgr.sharedInstance.addEntry( newEvent: soundEndEvt) // SE_1
-            
-            stopCurrentSound( soundEndTime: timeSinceAnalysisStart )
-            
-            /*
-            if kMKDebugOpt_PrintStudentPerformanceDataDebugOutput ||
-               kMKDebugOpt_PrintMinimalNoteAndSoundResults      {
- //               print ("  Stopping dead sound at \(timeSinceSongStart)")
+        
+        else {
+            if signalDetected {
+                print("WTF?")
             }
-
-            var currXOffset = Int(ssScrollView.getCurrentXOffset())
-            currXOffset -= kOverlayPixelAdjustment
-            if let currSound = perfTrkgMgr.currentSound {
-                currSound.xOffsetEnd = currXOffset + firstNoteOrRestXOffset
-            }
-
-            perfTrkgMgr.updateCurrentNoteIfLinked()
-            perfTrkgMgr.endTrackedSoundAsSignalStopped(
-                soundEndTime: timeSinceAnalysisStart,
-                noteOffset: perfTrkgMgr.songStartTimeOffset )
-             */
         }
     }
 
@@ -1961,6 +2210,9 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
     }
     
     func stopCurrentSound(soundEndTime: TimeInterval) {
+        gCurrSoundIsLinkedAndNewNoteStarted = false
+        gCurrSoundsLinkedNoteWillEndSoon    = false
+        gCurrSoundsLinkedNoteIsEnded        = false
         if kMKDebugOpt_PrintStudentPerformanceDataDebugOutput ||
             kMKDebugOpt_PrintMinimalNoteAndSoundResults      {
             //               print ("  Stopping dead sound at \(timeSinceSongStart)")
@@ -1971,11 +2223,15 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
         if let currSound = perfTrkgMgr.currentSound {
             currSound.xOffsetEnd = currXOffset + firstNoteOrRestXOffset
         }
-        
+
+        let csid = PerfTrkMgr_CurrSoundID()
+        print("\nIn stopCurrentSound(csid), stopping Sound #\(csid), ")
+
         perfTrkgMgr.updateCurrentNoteIfLinked()
         perfTrkgMgr.endTrackedSoundAsSignalStopped(
             soundEndTime: soundEndTime,
             noteOffset: perfTrkgMgr.songStartTimeOffset )
+        
     }
 
 
@@ -2536,9 +2792,29 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
 
         PerformanceTrackingMgr.instance.currentlyInAScoreNote = true
         let newNote : PerformanceNote = PerformanceNote.init()
+        
+        if newNote.perfNoteOrRestID == 10 {
+            print("yoohoo")
+        }
+        
+        // See if the current sound is linked to the previous note. If so,
+        // will adjust (elsewhere) sensitivity when looking for sound break.
+        if let currSound : PerformanceSound = perfTrkgMgr.currentSound {
+//            if currSound.isLinkedToNote {
+//                print("Creating new Note #\(newNote.perfNoteOrRestID); curr sound \(currSound.soundID) is linked to Note")
+//            } else {
+//                print("Creating new Note #\(newNote.perfNoteOrRestID); curr sound \(currSound.soundID) is NOT linked to Note")
+//            }
+//            gCurrSoundIsLinkedAndNewNoteStarted = currSound.isLinkedToNote
+        } else { // no current sound
+            gCurrSoundIsLinkedAndNewNoteStarted = false
+            gCurrSoundsLinkedNoteWillEndSoon    = false
+            gCurrSoundsLinkedNoteIsEnded        = false
+        }
+        
         let noteDur = nsNote.duration
         
-        // hyarbarlen
+        // barlen
         let barStartIntvl =
             mXMLNoteStartInterval( bpm: bpm(),
                                    beatsPerBar: Int32(beatsPerBar),
@@ -2586,6 +2862,11 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
         if let freq = NoteService.getNote( Int(nsNote.midiPitch) )?.frequency {
             targetPitch = freq
             newNote.expectedFrequency = freq
+        }
+        
+        let currInSlur = MusicXMLNoteTracker.instance.isNoteWithinASlur()
+        if currInSlur {
+            newNote.isInSlur = true
         }
         
         PerfScoreObjScheduler.instance.addPerfScoreObj(perfScoreObj: newNote)
@@ -2909,6 +3190,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
                 svc.songStartTm = nowPlus
                 svc.songStartTmOffset = svc.songStartTm.timeIntervalSince(svc.startTime)
                 svc.shouldSetSongStartTime  = false
+                svc.songStarted = true
             }
 
             svc.printBeatTime(dispatch_time: dispatch_time)
@@ -3370,8 +3652,9 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
                 y  = 25.0
             }
             let frm = CGRect( x: x, y:y, width: sz.width, height: sz.height )
-            self.vhView = VideoHelpView.init(frame: frm)
+            self.vhView = VideoHelpView.init(frame: frm)    // vidhere
             self.vhView?.tag = vhViewTag
+            self.vhView?.parentVC = self
             self.view.addSubview(self.vhView!)
             self.vhView?.doneShowingVideoDelegate = self
         }
@@ -3406,7 +3689,8 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
         }
         
         // If the student has turned off video and text help, then get out.
-        if !(gVideoHelpMode == kVideoHelpMode_Video || gVideoHelpMode == kVideoHelpMode_Text ) {
+        if soundDetectedDuringSession &&
+           !(gVideoHelpMode == kVideoHelpMode_Video || gVideoHelpMode == kVideoHelpMode_Text ) {
             return
         }
         
@@ -3417,6 +3701,7 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
                 if self.vhView == nil {
                     self.createVideoHelpView()
                 }
+                self.vhView?.reset() // vidIDs.kVid_Pitch_VeryLow_SpeedUpAir // videoID
                 self.vhView?.videoID = videoID // vidIDs.kVid_Pitch_VeryLow_SpeedUpAir // videoID
                 self.vhView?.showVideoVC()
                 
@@ -3449,6 +3734,13 @@ OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo, MFMailCompose
                 self.vhView?.showTempMsg(tempMsg: msgText)
             }
         }
+    }
+    
+    // protocol VideoHelpViewDelegate method, for Video help view
+    func attemptScrollToNoteAndHighlight(perfNoteID: Int32, severity: Int) -> Bool {
+        let highlightsuccessful = ssScrollView.highlightScoreObject(perfNoteID,
+                                                                    severity: Int32(severity))
+        return highlightsuccessful
     }
     
     func scrollToNoteAndHighlight(perfNoteID: Int32, severity: Int) {
@@ -3716,7 +4008,7 @@ DELETE ABOVE, ADD BACK HERE
             
             var msgStr = "Add any additional info you wish to here:\n"
             msgStr += "  (specific notes that you think are correct, etc.)\n\n\n\n\n"
-            msgStr += "Please do delete or change anything below this line:"
+            msgStr += "Please do not delete or change anything below this line:"
             msgStr += "\n====================================\n"
             msgStr += "Performance Data for:\n"
             msgStr += "  Level:           \(currLevel+1)\n"
@@ -3724,7 +4016,7 @@ DELETE ABOVE, ADD BACK HERE
             msgStr += "  Exercise:        \(exerciseName)\n"
             msgStr += "  BPM:             \(BPM)\n"
             msgStr += "  Instrument:      \(instStr)\n"
-            msgStr += "  Perf Star Score: \(instStr)\n"
+            msgStr += "  Perf Star Score: \(currStarScore)\n"
             msgStr += "  AppVersion:      \(appVersion ?? "")\n"
             msgStr += "  AppBuild:        \(build ?? "")\n"
             msgStr += "  Perf Unique ID:  \(PerfDataCollector.instance.perfDataUUID)\n"

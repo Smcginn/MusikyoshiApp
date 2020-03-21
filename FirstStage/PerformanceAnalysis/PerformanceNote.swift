@@ -110,7 +110,9 @@ public class PerformanceNote : PerformanceScoreObject
     // Was the freq an accidental partial of the expected note? If so which one?
     var isActFreqIsPartial = false
     var specificPartial: tNoteFreqRangeData = kEmptyNoteFreqRangeData
-        
+    
+    var isInSlur = false // will be set if brass inst, and note within slur
+    
     init () {
         super.init(noteOrRest : .note)
         perfNoteOrRestID = PerformanceScoreObject.getUniqueNoteID()
@@ -275,6 +277,21 @@ public class PerformanceNote : PerformanceScoreObject
         msgString += "\nWorst Rating: " + worstStr
     }
 }
+
+// Do the performance freq match the expected freq?
+func freqMatchesTarget(targetFreq: Double,
+                       perfFreq: Double,
+                       pitchTolerance: Double) -> Bool {
+    let freqLo = targetFreq*pitchTolerance
+    let freqHi = targetFreq/pitchTolerance
+
+    if perfFreq >= freqLo && perfFreq <= freqHi {
+        return true
+    }
+
+    return false
+}
+
 
 // frequencyToMIDINote copied from AudioKeyHelpers - couldn't figure out how to bring 
 // into project Extension to Double to get the a MIDI Note Number from the frequency 

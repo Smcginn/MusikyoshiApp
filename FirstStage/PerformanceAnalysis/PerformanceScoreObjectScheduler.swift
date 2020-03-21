@@ -8,6 +8,9 @@
 
 import Foundation
 
+var gCurrNoteID = Int32(0)
+let kWillEndSoonInterval = 0.005
+
 typealias PerfScoreObjScheduler = PerformanceScoreObjectScheduler
 
 class PerformanceScoreObjectScheduler {
@@ -53,7 +56,7 @@ class PerformanceScoreObjectScheduler {
            index += 1
         }
     }
-        
+    
     func checkStartTimeForActivating(perfScObj: PerformanceScoreObject) {
         // Must wait until the song started to schedule a note.
         guard PerfTrkMgr.instance.songStarted else { return }
@@ -72,7 +75,10 @@ class PerformanceScoreObjectScheduler {
         if currSongTime > perfScObj.expectedStartTime {
             print("\n")
             if perfScObj.isNote() {
-                printNoteRelatedMsg(msg: "Activating PerfNote #\(perfScObj.perfNoteOrRestID), at \(currSongTime)\n")
+                printNoteRelatedMsg(msg: "ACTIVATING ACTIVATING  PerfNote #\(perfScObj.perfNoteOrRestID), at \(currSongTime)\n")
+//                let csid = PerfTrkMgr_CurrSoundID()
+                printNoteInfo(perfNote: perfScObj)
+//                print("\t\t(currSoundID == \(csid))")
             } else {
                 printNoteRelatedMsg(msg: "Activating PerfRest #\(perfScObj.perfNoteOrRestID), at \(currSongTime)\n")
             }
@@ -81,8 +87,25 @@ class PerformanceScoreObjectScheduler {
             PerfTrkMgr.instance.perfNotesAndRests.append( perfScObj )
              if perfScObj.isNote() {
                 PerfTrkMgr.instance.currentPerfNote = perfScObj as? PerformanceNote
+                gCurrNoteID = perfScObj.perfNoteOrRestID
                 PerfTrkMgr.instance.currentlyInAScoreNote = true
                 PerfTrkMgr.instance.linkCurrSoundToCurrScoreObject(isNewScoreObject: true)
+                
+                if let currSound : PerformanceSound = PerformanceTrackingMgr.instance.currentSound {
+                    if currSound.isLinkedToNote {
+                        print("Activating Note #\(gCurrNoteID); curr sound \(currSound.soundID) is linked to Note")
+                    } else {
+                        print("Activating Note #\(gCurrNoteID); curr sound \(currSound.soundID) is NOT linked to Note")
+                    }
+                    gCurrSoundIsLinkedAndNewNoteStarted = currSound.isLinkedToNote
+                }
+//                else { // no current sound
+//                    gCurrSoundIsLinkedAndNewNoteStarted = false
+//                    gCurrSoundsLinkedNoteWillEndSoon    = false
+//                    gCurrSoundsLinkedNoteIsEnded        = false
+//                }
+                
+
                 
  //               PerfTrkMgr.instance.evaluateSkipWindows()
                 
@@ -126,11 +149,21 @@ class PerformanceScoreObjectScheduler {
         let currSongTime = currentSongTime()
         let deactivateTime = perfScObj.isNote() ? perfScObj._deactivateTime_comp
                                                 : perfScObj._deactivateTime_comp
+        
+        if currSongTime + kWillEndSoonInterval > deactivateTime &&
+           perfScObj.isNote()  {
+            perfScObj.willEndSoon = true
+        }
+        
         if currSongTime > deactivateTime {    // perfScObj._deactivateTime_comp {
             var isGood = true
             if perfScObj.isNote() {
+                gCurrNoteID = 0
                 print("\n")
-                printNoteRelatedMsg(msg: "Attempting to deactivate PerfNote #\(perfScObj.perfNoteOrRestID), at \(currSongTime)\n")
+                printNoteRelatedMsg(msg: "DEACTIVATE DEACTIVATE   Attempting to deactivate PerfNote #\(perfScObj.perfNoteOrRestID), at \(currSongTime)\n")
+//                let csid = PerfTrkMgr_CurrSoundID()
+//                print("\t\t(currSoundID == \(csid))")
+                printNoteInfo(perfNote: perfScObj)
                 let currPerfNote = PerfTrkMgr.instance.currentPerfNote
                 if currPerfNote != nil {
                     if doEjectorSeat {
@@ -138,6 +171,7 @@ class PerformanceScoreObjectScheduler {
                         scanNoteForIssuesForEjection(perfNote: currPerfNote)
                     }
                     if currPerfNote!.perfNoteOrRestID == perfScObj.perfNoteOrRestID {
+                        PerfTrkMgr.instance.checkCurrNoteForLinking()
                         PerfTrkMgr.instance.currentPerfNote = nil
                         PerfTrkMgr.instance.currentlyInAScoreNote = false
                     }
@@ -200,3 +234,40 @@ class PerformanceScoreObjectScheduler {
         }
     }
 }
+
+func printNoteInfo(perfNote: PerformanceScoreObject) {
+    guard let perfNote = perfNote as? PerformanceNote else {
+        return
+    }
+    
+    printNoteInfo(perfNote: perfNote)
+ }
+
+func printNoteInfo(perfNote: PerformanceNote) {
+    guard perfNote.isNote() else {
+        return
+    }
+    
+    let noteID = perfNote.perfNoteOrRestID
+    let attackTol = getRealtimeAttackTolerance(perfNote)
+    let noteStartTime = perfNote.expectedStartTime
+    let noteDuration  = perfNote.expectedDuration
+    let noteEndTime   = perfNote.expectedEndTime
+    let minAttackTime = noteStartTime - attackTol
+    let maxAttackTime = noteStartTime + attackTol
+    
+    let soundStartOffset = getSoundStartOffset()
+    let noteStartTimeComp = noteStartTime + soundStartOffset
+    let noteEndTimeComp = noteEndTime + soundStartOffset
+
+    print("For Note #\(noteID)")
+    print("  Start Time: \(noteStartTime),       Attack Tolereance: \(attackTol)")
+    print("  Duration:   \(noteDuration),       End Time: \(noteEndTime)")
+    print("    ('Compenstated' Start Time:  \(noteStartTimeComp))")
+    print("    ('Compenstated' End Time:    \(noteEndTimeComp))")
+
+    print("  Min Attack Time: \(minAttackTime)")
+    print("  Max Attack Time: \(maxAttackTime)")
+}
+
+

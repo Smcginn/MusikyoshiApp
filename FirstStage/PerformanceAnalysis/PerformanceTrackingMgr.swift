@@ -34,6 +34,14 @@ import Foundation
 // "PerformanceTrackingMgr.instance"
 typealias PerfTrkMgr = PerformanceTrackingMgr
 
+func PerfTrkMgr_CurrNoteID() -> Int32 {
+    return PerformanceTrackingMgr.instance.currentPerfNoteID
+}
+
+func PerfTrkMgr_CurrSoundID() -> Int32 {
+    return PerformanceTrackingMgr.instance.currentSoundID
+}
+
 class PerformanceTrackingMgr {
 
     // PerformanceTrackingMgr keeps track of:
@@ -112,7 +120,8 @@ class PerformanceTrackingMgr {
     // Sound's data is the basis for the "reality" portion, and can be compared 
     // to the expectations for the given note.
     var perfNotesAndRests = [PerformanceScoreObject]()
-    
+    var unlinkedPerfNotes = [PerformanceScoreObject]()
+
     func numPerfNotes() -> Int {
         var numNotes = 0
         let numPerfObjects = perfNotesAndRests.count
@@ -151,6 +160,42 @@ class PerformanceTrackingMgr {
     // note, etc.)
     public weak var currentPerfNote : PerformanceNote?
     var currentlyInAScoreNote = false
+    var currentPerfNoteID: Int32 {
+        if currentPerfNote == nil {
+            return -1
+        } else {
+            return currentPerfNote!.perfNoteOrRestID
+        }
+    }
+    
+    func checkCurrNoteForLinking() {
+        guard currentPerfNote != nil else {
+            return
+        }
+        
+        if !currentPerfNote!.isLinkedToSound {
+            print("Adding PerfNote \(currentPerfNote!.perfNoteOrRestID) to UnlinkedPerfNotes")
+            unlinkedPerfNotes.append(currentPerfNote!)
+        }
+    }
+    
+    func getCurrentNoteCompStartTime() -> Double {
+        if currentPerfNote != nil {
+            let startTimeComp = currentPerfNote!.expectedStartTime_comp
+            return startTimeComp
+        }
+        return 0.0
+    }
+    
+    func getCurrentNoteCompEndTime() -> Double {
+        if currentPerfNote != nil {
+            let endTimeComp = currentPerfNote!.expectedEndTime_comp
+            return endTimeComp
+        }
+        return 0.0
+    }
+    
+    
     public weak var currentPerfRest : PerformanceRest?
     var currentlyInAScoreRest = false
 
@@ -168,12 +213,21 @@ class PerformanceTrackingMgr {
     // Container of Sounds as they occured in real time. (A Sound may or may not be
     // linked to Note.)
     var performanceSounds = [PerformanceSound?]()
-    
+    var unlinkedPerfSounds = [PerformanceSound?]()
+
     // If there is a current active Sound, these will be set (cleared when the Sound
     // ends, set for the next Sound, etc.)
     public weak var currentSound : PerformanceSound?
     var currentlyTrackingSound = false
 
+    var currentSoundID: Int32 {
+        if currentSound == nil {
+            return -1
+        } else {
+            return currentSound!.soundID
+        }
+    }
+    
     // Create a new PerformanceSound and add it to collection of sounds
     @discardableResult
     func startTrackingPerformanceSound( startAt: TimeInterval,
@@ -200,12 +254,24 @@ class PerformanceTrackingMgr {
     func endTrackedSoundAsSignalStopped(soundEndTime: TimeInterval,
                                         noteOffset: TimeInterval ) {
         guard currentlyTrackingSound,
-              let currSound = currentSound   else { return }
+              let currSound = currentSound   else {
+                return }
         
         currSound.setEndTimeAbs(endTimeAbs: soundEndTime)
         
         if let soundsNote = currSound.linkedNoteObject {
             soundsNote.setActualEndTimeAbs( endTimeAbs: soundEndTime )
+        }
+        
+        if !currSound.isLinkedToNote &&
+           currSound.considerThisNote != noScoreObjIDSet {
+            _ = compareSoundsForNote(theNoteID: currSound.considerThisNote,
+                                     possibleSoundID: currSound.soundID)
+        }
+
+        if !(currSound.isLinkedToNote || currSound.isLinkedToRest) {
+            // sound not linked
+            unlinkedPerfSounds.append(currSound)
         }
         print("\n")
         printSoundRelatedMsg(msg: "Sound #\(currSound.soundID) stopped bc sound stopped at (comp) \(currSound._endTime_comp)\n")
@@ -231,6 +297,114 @@ class PerformanceTrackingMgr {
         currSound.printSoundResults()
         currentSound = nil
         currentlyTrackingSound = false
+    }
+    
+    func compareSoundsForNote(theNoteID: Int32,
+                              possibleSoundID: Int32) -> Bool {
+        // This code deals with the following issue:
+        // The player starts to play a (short) sound, stops, and plays a second.
+        // THe second sound is the one they really menat to play. But the Note will
+        // be linked to the first sound, and all of the grading will be using the info
+        // from this first, short sound.
+        
+        // We are here because when the second sound was created, the code noted that
+        // it was within the correct attack zone for the currentNote, but that note
+        // was already linked to a sound. So the code set the "considerThisNote" field
+        // with the id of the currentNote, to be compared here, when the second
+        // sound ended.
+        
+        let noteID = Int(theNoteID)
+        guard let note = getPerfNote(withID: noteID) else {
+            return false }
+        
+        guard note.isLinkedToSound,
+              let linkedSound = note.linkedSoundObject else {
+            return false }
+        
+        guard let possibleSound = findSoundBySoundID(soundID: possibleSoundID) else {
+            return false }
+        
+        let attackTol = getRealtimeAttackTolerance(note)
+        let noteStart = note.expectedStartTime
+        let noteExpectedDur = note.expectedDuration
+
+        let linkedSoundStart = linkedSound.startTime_comp
+        let linkedSoundDur   = linkedSound.duration
+        
+        let linkedAttackDiff = abs(noteStart - linkedSoundStart)
+        let linkedAttackPerc = Double(linkedAttackDiff)/Double(attackTol)
+        let linkedAttackScore = 1.0/linkedAttackPerc
+
+        let possSoundStart = possibleSound.startTime_comp
+        let possSoundDur   = possibleSound.duration
+        
+        let possAttackDiff = abs(noteStart - possSoundStart)
+        let possAttackPerc = Double(possAttackDiff)/Double(attackTol)
+        let possAttackScore = 1.0/possAttackPerc
+
+        let linkedDurPerc = linkedSoundDur/noteExpectedDur
+        let linkedDurScore = linkedDurPerc * 10.0
+        
+        let possDurPerc = possSoundDur/noteExpectedDur
+        let possDurScore = possDurPerc * 10.0
+        
+        let linkedSoundScore = linkedDurScore
+        let possSoundScore   = possDurScore
+
+        let linkedSoundID = linkedSound.soundID
+        print("\n\n In compareSoundsForNote, Linked Sound \(linkedSoundID) vs Sound \(possibleSoundID)")
+        print("            linked Sound Score = \(linkedSoundScore)  (\(linkedAttackScore), \(linkedDurScore)")
+        print("            poss   Sound Score = \(possSoundScore)  (\(possAttackScore), \(possDurScore)\n")
+
+        if possSoundScore > linkedSoundScore {
+            print("\n     HEY    !!!!!!     possSoundScore > linkedSoundScore    !!!!  \n\n")
+            linkCurrentNoteToThisSound(perfNote: note,
+                                       perfSound: possibleSound)
+            return true
+        }
+        return false
+    }
+    
+    func linkCurrentNoteToThisSound(perfNote:  PerformanceNote,
+                                    perfSound: PerformanceSound) { // -> Bool {
+        // first unlink
+        if perfNote.linkedSoundObject != nil {
+            perfNote.linkedSoundObject = nil
+            perfNote.isLinkedToSound = false
+        }
+        
+        // link to other sound
+        printLinkingRelatedMsg(msg: "SO to SC Linking: -> Note LINKED !\n")
+        perfNote.linkToSound(soundID: perfSound.soundID, sound: perfSound)
+        perfSound.linkToNote(noteID: perfNote.perfNoteOrRestID, note: perfNote)
+        perfNote.actualStartTime_song = perfSound.startTime_song
+        perfNote.actualFrequency = perfSound.averagePitchRunning
+        
+//        evaluateSkipWindows()       // ?
+
+        perfSound.updateCurrentNoteIfLinkedFinal()   // ?
+        
+        return // true
+    }
+    
+    func deepCurrSoundLinkedAndNewNoteStarted(currTime: TimeInterval) -> Bool {
+        //return false
+        
+        guard currentSound != nil,
+              currentSound!.isLinkedToNote else {
+            return false }
+        
+        let linkedNoteID = currentSound!.linkedToNote
+        let linkedNotePlus1ID = linkedNoteID + 1
+        guard let linkedNotePlus1 = getPerfNote(withID: Int(linkedNotePlus1ID)) else {
+            return false }
+
+        let linkedPlus1StartComp = linkedNotePlus1.expectedStartTime_comp
+        if currTime >= linkedPlus1StartComp  {
+            return true
+        }
+        
+        return false
     }
     
     ///////////////////////////////////////////////////////////////////////////
@@ -342,6 +516,8 @@ class PerformanceTrackingMgr {
         currentSound = nil
         perfNotesAndRests.removeAll()
         performanceSounds.removeAll()
+        unlinkedPerfSounds.removeAll()
+        unlinkedPerfNotes.removeAll()
         PerformanceSound.resetUniqueSoundID()
         PerformanceScoreObject.resetUniqueIDs()
         currentlyInAScoreNote  = false
@@ -470,13 +646,83 @@ class PerformanceTrackingMgr {
     }
     
   
+    func checkUnlinkedSounds() -> Bool { // return true if unlinked Sound is Linked
+        guard let currPerfNote : PerformanceNote = currentPerfNote else {
+            return false
+        }
+        
+        let nID = currPerfNote.perfNoteOrRestID
+        let attackTol = getRealtimeAttackTolerance(currPerfNote)
+
+        for oneSound in unlinkedPerfSounds {
+             // = InstSettingsMgr.sharedInstance.getAdjustedAttackTolerance(currPerfNote)
+            
+            let sID = oneSound?.soundID
+            
+            let diff = abs( oneSound!.startTime_comp - currPerfNote.expectedStartTime  )
+            if diff < attackTol {
+                print("yoohoo!")
+            }
+        }
+        return false
+    }
+    
+    func checkUnlinkedNotes() -> Bool { // return true if unlinked Note is Linked
+//        print("In checkUnlinkedNotes()")
+        guard currentlyTrackingSound   else {
+            printLinkingRelatedMsg(msg: "    - rejecting; not currently Tracking Sound\n");
+            return false
+        }
+        guard let currSound : PerformanceSound = currentSound else {
+            printLinkingRelatedMsg(msg: "    - rejecting; cannot get current Sound\n");
+            return false
+        }
+        
+        let sID = currSound.soundID
+        
+        var idx = 0
+        for onePerfObj in unlinkedPerfNotes {
+            let oneNote = onePerfObj as! PerformanceNote
+            let attackTol = getRealtimeAttackTolerance(oneNote )
+            // = InstSettingsMgr.sharedInstance.getAdjustedAttackTolerance(currPerfNote)
+            
+            let nID = oneNote.perfNoteOrRestID
+            
+            let diff = abs( currSound.startTime_comp - oneNote.expectedStartTime  )
+            if diff < attackTol {
+                print("\n       ########  For Linking -> in checkUnlinkedNotes(), and have found a Match!  ########\n")
+                
+                printLinkingRelatedMsg(msg: "SO to SC Linking: For Sound \(sID), StartTime_song =  \(currSound.startTime_comp)")
+                printLinkingRelatedMsg(msg: "SO to SC Linking: For Note  \(nID), exp/act start diff = \(diff), attackTol = \(attackTol)")
+                printLinkingRelatedMsg(msg: "SO to SC Linking: -> Note LINKED !\n")
+                oneNote.linkToSound(soundID: currSound.soundID, sound: currSound)
+                currSound.linkToNote(noteID: oneNote.perfNoteOrRestID, note: oneNote)
+                oneNote.actualStartTime_song = currSound.startTime_song
+                oneNote.actualFrequency = currSound.averagePitchRunning
+                
+                print("Removing PerfNote \(nID) from UnlinkedPerfNotes")
+                unlinkedPerfNotes.remove(at: idx)
+                return true
+            } else {
+                print("Reveiwing Unlinked Notes for linking to Sound \(sID); rejecting Note #\(nID), diff = \(diff), tol = \(attackTol)")
+            }
+            idx += 1
+        }
+        
+        return false
+    }
+    
+
+    
     // called when either a new note or rest begins in the score, or new sound is detected
     func linkCurrSoundToCurrScoreObject(isNewScoreObject: Bool) {
         
         print("\n")
         if isNewScoreObject {
             printLinkingRelatedMsg(msg: "SO to SC Linking: New Note or Rest, looking for Sound")
-        } else {
+            if checkUnlinkedSounds() {
+                return }
+        } else { // new sound
             printLinkingRelatedMsg(msg: "SO to SC Linking: New Sound, looking for Note or Rest")
         }
         
@@ -487,8 +733,43 @@ class PerformanceTrackingMgr {
         guard let currSound : PerformanceSound = currentSound   else {
             printLinkingRelatedMsg(msg: "    - rejecting; cannot get currSound\n");       return
         }
+        
+        if !isNewScoreObject { // it's a new sound
+            // if there's a current note, already linked to previous sound, add this as a contender
+            if currentPerfNote != nil && currentPerfNote!.isLinkedToSound {
+                // when the sound ends, managing code will compare the two sounds' info,
+                // and possibly use the new sound instead of the currently linked one.
+                currSound.considerThisNote = currentPerfNote!.perfNoteOrRestID
+                print("\n  Marking ConsiderThisNote, for note: \(currentPerfNote!.perfNoteOrRestID), sound: \(currSound.soundID)\n")
+            }
+            
+            // Below was not fruitful, but might be if better honed.  Trying to see
+            // if note before current note is a candidate . . .
+//            if currentPerfNote != nil,
+//               currSound.considerThisNote != noScoreObjIDSet { // then check the previous note
+//                let prevNoteNum = currentPerfNote!.perfNoteOrRestID - 1
+//                if prevNoteNum > 0 {
+//                    if let prevNote = getPerfNote(withID: Int(prevNoteNum)) {
+//                        if prevNote.expectedEndTime_comp > currSound._startTime_comp {
+//                            currSound.considerThisNote = prevNoteNum
+//                        }
+//                    }
+//                }
+//            }
+        }
+        
         guard !(currSound.isLinkedToNote || currSound.isLinkedToRest)   else {
             printLinkingRelatedMsg(msg: "    - rejecting; currSound already Linked to Note or Rest\n");  return
+        }
+        
+        if currSound.soundID == 17 && !isNewScoreObject {
+            print("hey")
+        }
+        
+        if !isNewScoreObject { // it's a new sound
+            // See if any unlinked Notes match.
+            if checkUnlinkedNotes() { // if it returns true, it linked to something
+                return }
         }
         
         // Confirm in a Note or Rest
@@ -525,6 +806,7 @@ class PerformanceTrackingMgr {
                 evaluateSkipWindows()
             } else {
                 printLinkingRelatedMsg(msg: "SO to SC Linking:   -> Rejecting, bc (diff <= attackTol)")
+                _ = checkUnlinkedNotes()
             }
         }
         
@@ -600,6 +882,7 @@ class PerformanceTrackingMgr {
         // Note compared with expectations
         rhythmAnalyzer.resetAverages()
         resetAttackDiffs()
+        gPartialCount = 0
         for onePerfScoreObj in perfNotesAndRests {
             onePerfScoreObj.weightedScore = 0
             if onePerfScoreObj.isNote() {
@@ -611,6 +894,9 @@ class PerformanceTrackingMgr {
                 restAnalyzer.analyzeScoreObject( perfScoreObject: onePerfScoreObj )
              }
         }
+        print("\n\n          gPartialCount == \(gPartialCount)\n\n")
+        
+        
         addCurrAttackDiffAvgToRunningAvg()
         
         // VIDREDO

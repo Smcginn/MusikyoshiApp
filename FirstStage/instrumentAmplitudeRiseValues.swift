@@ -78,7 +78,7 @@ let kAmpRiseForNewSound_max:               Double   = 1.0
 ///////////////////////////////////////////////////////////////////////
 // MARK:- Globsls used by app in realtime
 
-let kNumSamplesForStillSound = 8
+let kNumSamplesForStillSound = 0
 
 var gSkipBeginningSamples:      UInt     = 15
 var gSamplesInAnalysisWindow:   UInt     =  2

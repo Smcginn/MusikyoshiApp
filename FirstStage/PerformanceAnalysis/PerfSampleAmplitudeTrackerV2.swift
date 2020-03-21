@@ -8,6 +8,8 @@
 
 import Foundation
 
+let kPrintAmpChange_FalseBCCanttCalc = false
+
 
 class sortOfCirularBuffer {
     
@@ -29,7 +31,9 @@ class sortOfCirularBuffer {
     }
     
     func setWindowSize(newSize: Int) {
-        self.windowSize = newSize
+        if self.windowSize != newSize {
+            self.windowSize = newSize
+        }
     }
     
     func addSample(sample: Double) {
@@ -79,6 +83,8 @@ class sortOfCirularBuffer {
         let startIdx = countingIdx
         var min = buffer[countingIdx]
         var max = buffer[countingIdx]
+        var minIdx = countingIdx
+        var maxIdx = countingIdx
 
         var count = 1
         while count < windowSize {
@@ -87,14 +93,40 @@ class sortOfCirularBuffer {
             let idx = getIndexForVirtualIndex(virtIdx: countingIdx)
             if buffer[idx] > max {
                 max = buffer[idx]
+                maxIdx = countingIdx
             }
             if buffer[idx] < min {
                 min = buffer[idx]
+                minIdx = countingIdx
             }
         }
-        print ("min = \(min), max = \(max);  window size: \(windowSize);   indexes used: start: \(startIdx), end: \(countingIdx)")
-        let range = max - min
+//        print ("min = \(min), max = \(max);  window size: \(windowSize);   indexes used: start: \(startIdx), end: \(countingIdx)")
+        var range = max - min
+        if minIdx > maxIdx {
+            range = -range
+        }
+        print("    >>>>>>>>>>>>> Amp Range == \(range)")
         return range
+    }
+    
+    func printCurrSamples() {
+        let startIdx = getIndexForStartOfWindow()
+        print("    Window Start Index: \(startIdx)")
+
+        print("    All Samples:")
+        for idx in 0..<bufferSize {
+            let idxStr = "\(idx)"
+            let val = buffer[idx]
+            print("        [\(idxStr)]: \(val)")
+        }
+        
+        print("    In Virtual Window:")
+        let numSamples = min(currVirtualIndex,bufferSize)
+        for virtIdx in 0..<currVirtualIndex-numSamples {
+            let idx = getIndexForVirtualIndex(virtIdx: virtIdx)
+            let val = buffer[idx]
+            print("        \(val)")
+        }
     }
 }
 
@@ -123,9 +155,6 @@ class PerfSampleAmplitudeTrackerV2 {
     var ampSkipWindowToUse:Int = 20
     
     var numRunningSamples: UInt = 0
-    
-    // 10 * 10 ms = .1 second
-    // 30 * 10 ms = .3 second
     
     typealias tAmpAndTime = ( amp: tSoundAmpVal, absTime: TimeInterval )
     
@@ -166,12 +195,8 @@ class PerfSampleAmplitudeTrackerV2 {
             return false
         }
         
-        // getAdjustedAmpRiseSkipWindow
-        // ampSkipWindowToUse2 = getAmpRiseSkipWindow(noteDur: currNoteDuration)
-        
         let numElems = audioBuffer.getVirtualCount()
 
-        //if numElems >= Int(gSkipBeginningSamples)  &&
         if numElems >= Int(ampSkipWindowToUse)  &&
             numElems >= Int(gSamplesInAnalysisWindow) {
             return true
@@ -181,13 +206,8 @@ class PerfSampleAmplitudeTrackerV2 {
     }
     
     func enqueue(_ newAmp: tSoundAmpVal, _ newTime: TimeInterval) {
-        //        print ("--------------------------------------------------------------------------")
-        //        print ("    Enqueuing:  \(newAmp)")
-        //        print ("    Queue before append:  \(queue)")
-        
         lastAmpSample = newAmp
         let amplitudeThresholdForIsSound = getIsASoundThreshold()
-        // if newAmp < kAmplitudeThresholdForIsSound {
         if newAmp < amplitudeThresholdForIsSound {
             noSignal         = true // should stop tracking sound . . .
             finished         = true
@@ -200,19 +220,12 @@ class PerfSampleAmplitudeTrackerV2 {
                 doCreateNewSound = true
             }
             
-            // RETHINK.  THis logic is part of the "if sounds drops some amount"
-            //           instead of "if sound rises some amount"
-            if newAmp > ampAtKillPoint { // amplitude going back up
-                doCreateNewSound = true
-                finished         = true
-            }
+            doCreateNewSound = true
+            finished         = true
         }
         
-        // RETHINK - perhaps comment this out - Buffer is taking care of this.
         numRunningSamples += 1
-        //if numRunningSamples < gSkipBeginningSamples { return } // then skip this one
-        //let ampSkipWindowToUse2 = getAmpRiseSkipWindow(noteDur: currNoteDuration)
-         if numRunningSamples < ampSkipWindowToUse {
+        if numRunningSamples < ampSkipWindowToUse {
             return } // then skip this one
         
         audioBuffer.addSample(sample: newAmp)
@@ -231,6 +244,7 @@ class PerfSampleAmplitudeTrackerV2 {
         numSamplesSinceSoundIsDead  = 0
         ampAtKillPoint = 0.0
         finished = false
+        numRunningSamples = 0
     }
     
     func getAmpRiseOverWindow() -> tSoundAmpVal {
@@ -238,33 +252,50 @@ class PerfSampleAmplitudeTrackerV2 {
         return audioBuffer.getMaxRangeForWindow()
     }
     
+    func printSamplesInBuffers() {
+        print("\n  Values in Ciruclar Buffers:")
+        print("\n    Values in Audio Buffer:")
+        audioBuffer.printCurrSamples()
+        print("\n    Values in Time Buffer:")
+        timeBuffer.printCurrSamples()
+        print("\n\n")
+    }
+    
     func isDiffNoteBCofAmpChange() -> Bool {
         if !canCalcAmpChange() { // not enough data to attempt calc
-            print ("isDiffNoteBCofAmpChange: returning false b/c !canCalcAmpChange")
+            if kPrintAmpChange_FalseBCCanttCalc {
+                print ("isDiffNoteBCofAmpChange: returning false b/c !canCalcAmpChange")
+            }
             return false
         } else {
-            var ampDiff = audioBuffer.getMaxRangeForWindow()
-            ampDiff = abs(ampDiff)
+            resetForLevelAndBPM()
+            let ampDiff = audioBuffer.getMaxRangeForWindow()
+            let ampDiffABS = abs(ampDiff)
             
-//            var ampRiseToUse = gAmpRiseForNewSound
-//            if gUseAmpRiseChangeSlowFastValues {
-//                ampRiseToUse = gRTSM_AmpRise
-//            }
+            let ampRiseToUse = getAmpRiseChangeValue()
+            var analysisWinSize = getAmpRiseAnalysisWindow()
             
-            var ampRiseToUse = getAmpRiseChangeValue()
-            
-            // if ampDiff > gAmpRiseForNewSound {
-            if ampDiff > ampRiseToUse {
+            // Don't consider samples in the skip window
+            if analysisWinSize > numRunningSamples {
+                analysisWinSize = Int(numRunningSamples)
+            }
+
+            audioBuffer.setWindowSize(newSize: analysisWinSize)
+
+            if ampDiff > 0 && ampDiffABS > ampRiseToUse {
                 if !currSoundIsDead {
+                    let soundID = PerfTrkMgr_CurrSoundID()
                     let currSongzTime = currentSongTime()
-                    printSoundRelatedMsg(msg: "  CURRENT SOUND DONE  BC of AMP Rise! At: \(currSongzTime)   Amp Diff: \(ampDiff)")
+                    printSoundRelatedMsg(msg: "  CURRENT SOUND (\(soundID)) DONE  BC of AMP Rise! At: \(currSongzTime)   Amp Diff: \(ampDiff)")
+                    printSamplesInBuffers()
                 }
+                print("It's Dead!")
                 currSoundIsDead = true
                 ampAtKillPoint  = audioBuffer.getValueAtCurrentIndex()
-                killSoundTime   = timeBuffer.getValueAtCurrentIndex()  
+                killSoundTime   = timeBuffer.getValueAtCurrentIndex()
                 return true
             } else {
-                print("  Is NOT new note:  Amp Diff: \(ampDiff)")
+//                print("  Is NOT new note:  Amp Diff: \(ampDiff)")
                 return false
             }
         }
@@ -326,8 +357,6 @@ class PerfSampleAmplitudeTrackerV2 {
     }
 */
 }
-
-
 
 
 

@@ -452,6 +452,8 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
 //            firstTimeAfterAKRestart = true  // AK_ISSUE
 //        }
         
+        correctForLongToneNameFlatBug(noteName: &noteName)
+        
         setNoteID()
         setUseAn()
         absoluteTargetNote = NoteService.getNote(targetNoteID + transpositionOffset)

@@ -97,5 +97,7 @@ struct Constants
         static let Mallet_AmpRiseForNewSound            = "mallet_AmpRiseForNewSound"
         static let Mallet_SkipBeginningSamples          = "mallet_SkipBeginningSamples"
         static let Mallet_SamplesInAnalysisWindow       = "mallet_SamplesInAnalysisWindow"
+ 
+        static let FreeTrial_6_15_2020_NumDaysLeft      = "freeTrial_6_15_2020_NumDaysLeft"
     }
 }

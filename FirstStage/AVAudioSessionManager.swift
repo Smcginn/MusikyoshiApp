@@ -188,7 +188,7 @@ class AVAudioSessionManager: NSObject {
                 print(error)
                 return false
             }
-        
+
         } // if sessionMode == .usingMicMode
         
         /*

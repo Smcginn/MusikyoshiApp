@@ -18,8 +18,8 @@ var gRTSM_AmpRiseAnalysisWindow:Int      =   16
 var gRTSM_AmpRise:Double                 =    0.4
 var gRTSM_IsASoundThreshold: Double      =    0.4
 var gRTSM_SoundStartOffset: Double       =    0.145
-var gRTSM_SamplesDeterminePitch: Int     =   22
-var gRTSM_SamplesLegatoPitchChange: Int  =   22
+var gRTSM_SamplesDeterminePitch: Int     =   32
+var gRTSM_SamplesLegatoPitchChange: Int  =   32
 
 /*
  

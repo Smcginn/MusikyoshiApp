@@ -29,6 +29,10 @@ import Foundation
 import AVFoundation
 import AVKit
 
+protocol VideoHelpViewDelegate {
+    func attemptScrollToNoteAndHighlight(perfNoteID: Int32, severity: Int) -> Bool
+}
+
 // As noted above - programmatic, for quick proof of concept. Size consts:
 var avcHt = 250.0  // 285.0 for iPhone 7.  320.0 works for iPhone 7 Plus
 var avcWd = avcHt * 1.777
@@ -36,9 +40,12 @@ let bottomButtonSpacing = 40.0
 
 class VideoHelpView: UIView {
 
+    var parentVC: VideoHelpViewDelegate? = nil
+    
     var doneBtn: UIButton?
     var againBtn: UIButton?
-    
+    var nextBtn: UIButton?
+
     var avPlayer: AVPlayer?
     var avpVC: AVPlayerViewController?
     
@@ -48,6 +55,9 @@ class VideoHelpView: UIView {
 
     var doneShowingVideoDelegate: DoneShowingVideo?
     
+    var numVidsShown = 1
+    let kMaxVids = 3
+
     static func getSize() -> CGSize {
         let sz = CGSize(width: avcWd, height: avcHt+bottomButtonSpacing)
         return sz
@@ -115,16 +125,20 @@ class VideoHelpView: UIView {
     }
     
     func addButtons() {
-        let doneBtnWd: CGFloat  =  80.0
-        let againBtnWd: CGFloat = 160.0
+        let againBtnWd: CGFloat = 120.0
+        let nextBtnWd: CGFloat  =  60.0
+        let doneBtnWd: CGFloat  =  60.0
         let btnHt: CGFloat      =  35.0
-        let leftBtnX: CGFloat   =  50.0
-        let rightBtnX: CGFloat  = frame.size.width - (leftBtnX + againBtnWd)
+        let leftBtnX: CGFloat   =  25.0
+        let rightBtnX: CGFloat  = frame.size.width - (leftBtnX + doneBtnWd)
         let btnY: CGFloat       = frame.size.height - (btnHt + 2)
+        
+        let midBtnX: CGFloat    =  leftBtnX + againBtnWd + 40.0
+        
         
         ////////////////////////////////////////////////////////////////////////
         // Done button
-        var btnFrame = CGRect( x: leftBtnX , y: btnY, width: doneBtnWd, height: btnHt )
+        var btnFrame = CGRect( x: rightBtnX , y: btnY, width: doneBtnWd, height: btnHt )
         doneBtn = UIButton(frame: btnFrame)
         doneBtn?.roundedButton()
         doneBtn?.backgroundColor = .orangeColor
@@ -140,14 +154,28 @@ class VideoHelpView: UIView {
 //                                        size: 24.0)!])
 //        doneBtn?.titleLabel?.attributedText = doneMutableString
 //        doneBtn?.titleLabel?.textColor = UIColor.yellow
-        doneBtn?.setTitle("Okay", for: .normal)
+        doneBtn?.setTitle("Done", for: .normal)
         doneBtn?.titleLabel?.font = UIFont(name: "Futura-Medium", size: 16)
         self.addSubview(doneBtn!)
+ 
+        ////////////////////////////////////////////////////////////////////////
+        // Next button
+        btnFrame = CGRect( x: midBtnX , y: btnY, width: nextBtnWd, height: btnHt )
+        nextBtn = UIButton(frame: btnFrame)
+        nextBtn?.roundedButton()
+        nextBtn?.backgroundColor = .orangeColor
+        nextBtn?.addTarget(self,
+                           action: #selector(playNext(sender:)),
+                           for: .touchUpInside )
+        nextBtn?.isEnabled = true
+        nextBtn?.setTitle("Next", for: .normal)
+        nextBtn?.titleLabel?.font = UIFont(name: "Futura-Medium", size: 16)
+        self.addSubview(nextBtn!)
         
         ////////////////////////////////////////////////////////////////////////
         // Again button
         btnFrame.size.width = againBtnWd
-        btnFrame.origin.x = rightBtnX
+        btnFrame.origin.x = leftBtnX
         againBtn = UIButton(frame: btnFrame)
         againBtn?.roundedButton()
         againBtn?.backgroundColor = .orangeColor
@@ -155,15 +183,6 @@ class VideoHelpView: UIView {
                             action: #selector(playAgain(sender:)),
                             for: .touchUpInside )
         againBtn?.isEnabled = true
-        
-//        let str = "Watch Again"
-//        let againMutableString =
-//            NSMutableAttributedString( string: str,
-//                                       attributes: [NSAttributedStringKey.font:UIFont(
-//                                        name: "Marker Felt",
-//                                        size: 24.0)!])
-//        againBtn?.titleLabel?.attributedText = againMutableString
-//        againBtn?.titleLabel?.textColor = UIColor.yellow
         againBtn?.setTitle("Watch Again", for: .normal)
         againBtn?.titleLabel?.font = UIFont(name: "Futura-Medium", size: 16)
         self.addSubview(againBtn!)
@@ -218,19 +237,14 @@ class VideoHelpView: UIView {
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineBreakMode = .byWordWrapping
-//        let issueMsgAttrStr =
-//            NSMutableAttributedString(
-//                string: issueMsgText!,
-//                attributes: [NSAttributedStringKey.font:UIFont(name: "Marker Felt",
-//                                                        size: 24.0)!,
-//                             NSAttributedStringKey.paragraphStyle: paragraphStyle])
-//        issueMsgLabel?.attributedText  = issueMsgAttrStr
         issueMsgLabel?.text = issueMsgText
         issueMsgLabel?.font = UIFont(name: "Futura-Medium", size: 21)
         
         avpVC?.view.isHidden = true
         setButtonsVisibilityAndOpacity(mode: kVideoDialogMode_ShowText)
         isHidden = false
+        
+        setNextButtonVisibility()
     }
     
     let kVideoDialogMode_ShowVideo = 0
@@ -281,6 +295,8 @@ class VideoHelpView: UIView {
         guard createPlayerItemForVideoID( videoIDToUse ) else {
             return // format like this so can add a breakpoint
         }
+        
+        setNextButtonVisibility()
 
         avPlayer?.replaceCurrentItem(with: playerItem)
         let playerStatus = avPlayer?.status
@@ -301,11 +317,103 @@ class VideoHelpView: UIView {
             }
         }
     }
+
+    func setNextButtonVisibility() {
+        if numVidsShown < kMaxVids {
+            if PerformanceIssueMgr.instance.thereIsANextIssue()
+            {
+                nextBtn?.isEnabled = true
+                nextBtn?.isHidden  = false
+            } else {
+                nextBtn?.isEnabled = false
+                nextBtn?.isHidden  = true
+            }
+        } else {
+            nextBtn?.isEnabled = false
+            nextBtn?.isHidden  = true
+        }
+    }
     
     @objc func playAgain(sender: UIButton) {
         avPlayer?.pause()
         avPlayer?.seek(to: kCMTimeZero)
         avPlayer?.play()
+    }
+    
+    @objc func playNext(sender: UIButton) {
+        avPlayer?.pause()
+
+        if parentVC != nil {
+            goToNextIssue()
+        }
+    }
+    
+    func reset() {
+        numVidsShown = 1
+    }
+    
+    func goToNextIssue() {
+        
+        let numIssues = PerformanceIssueMgr.instance.sortedPerfIssueCount
+        
+        guard parentVC != nil,
+              PerformanceIssueMgr.instance.thereIsANextIssue() else {
+            return
+        }
+        
+        var perfIsuse: PerfIssue? = nil
+        var issueIndex = PerformanceIssueMgr.instance.getNextPerfIssueIndex()
+        repeat {
+            perfIsuse = PerformanceIssueMgr.instance.getPerfIssue(atIndex: issueIndex)
+            if perfIsuse == nil { // that issue was rejected for soe reason
+                if PerformanceIssueMgr.instance.thereIsANextIssue() {
+                issueIndex = PerformanceIssueMgr.instance.getNextPerfIssueIndex()
+                } else {
+                    issueIndex = -1
+                }
+            }
+        } while issueIndex >= 0 && perfIsuse == nil
+        if issueIndex < 0 || perfIsuse == nil {
+            return
+        }
+        
+        numVidsShown += 1
+        setNextButtonVisibility()
+        
+        if perfIsuse!.issueScore >= kLaunchVideoThreshold {
+            
+            let issScore = perfIsuse!.issueScore
+            let severity =
+                    PerformanceIssueMgr.instance.getSeverity(issueScore: issScore)
+            let perfNoteID:Int32 = perfIsuse!.perfScoreObjectID
+            
+            let couldScrollTo =
+                parentVC!.attemptScrollToNoteAndHighlight(perfNoteID: perfNoteID,
+                                                          severity: severity)
+            guard couldScrollTo else {
+                return }
+            
+            let helpMode = getVideoHelpMode()
+            if helpMode == kVideoHelpMode_Video &&
+               perfIsuse!.videoID != vidIDs.kVid_NoVideoAvailable {
+                videoID = perfIsuse!.videoID
+                againBtn?.isHidden  = false
+                againBtn?.isEnabled = true
+                showVideoVC()
+            } else if helpMode != kVideoHelpMode_None &&
+                      perfIsuse!.alertID != alertIDs.kAlt_NoAlertMsgAvailable {
+                // Alert
+                hideVideoVC()
+                againBtn?.isHidden  = true
+                againBtn?.isEnabled = false
+                videoID = vidIDs.kVid_NoVideoAvailable
+                let msgText = getMsgTextForAlertID(perfIsuse!.alertID)
+                showTempMsg(tempMsg: msgText)
+            } else {
+                againBtn?.isHidden  = true
+                againBtn?.isEnabled = false
+            }
+        }
     }
     
     @objc func allDone(sender: UIButton) {

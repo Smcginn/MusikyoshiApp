@@ -10,6 +10,13 @@ import UIKit
 import Foundation
 import SwiftyJSON
 
+// THIS SHOULD NEVER BE TRUE FOR RELEASE
+//
+// If this is set to true, then the entire app will ignore the amplitude and freq
+// data from the Microphone and instead use values from the MKPerfData file (which
+// is from an actual performance supplied by a user.
+let kWorkingFromPerfDataFile = false
+
 let perfDataVersMaj = 1
 let perfDataVersMin = 0
 
@@ -115,6 +122,7 @@ struct perfData: Codable {
 
 let kBlankPerfSample     = "0.0, 0.0, 0.0"
 let kSongStartPerfSample = "   -1.0, -1.0, -1.0"
+let kSongEndPerfSample   = "   -100.0, -100.0, -100.0"
 
 class PerfDataCollector {
     
@@ -125,6 +133,14 @@ class PerfDataCollector {
     var numSamples:   Int  = 0
     var storeCapcity: Int  = 0
     var perfDataUUID = ""
+    
+    // Below are for working with PerfData supplied by a user
+    var perfDataFromFile: perfData? = nil // = perfData()
+    
+    ////////////////////////////////////////////////////////////////////////////
+    // - MARK:- Creating PerfData during and after a performance
+    // and the file
+    //          if requested
     
     func setupForRecordingPerf(size: Int) {
         numSamples = 0
@@ -171,24 +187,14 @@ class PerfDataCollector {
         numSamples += 1
     }
     
-    func printEntries() {
+    func markSongEnd() {
         guard store != nil,
-              numSamples < store!.count else {
+            store!.count > numSamples+10  else {
                 itsBad()
                 return
         }
-        
-        let count = store!.count
-        
-        print ("\n\n\n============================================\n")
-        print ("       In PerfDataCollector.printEntries\n\n")
-        print ("Num Entries: \(numSamples)")
-        print ("Store szie:  \(count)")
-
-        for idx in 0..<numSamples {
-            let oneEntry = store![idx]
-            print (oneEntry)
-        }
+        store![numSamples] = kSongEndPerfSample
+        numSamples += 1
     }
     
     func createPerfDataFileFromLastPerf(level:      Int,
@@ -213,6 +219,7 @@ class PerfDataCollector {
         perfDataForFile.day        = day
         perfDataForFile.exerID     = exerID
         perfDataForFile.bpm        = bpm
+        perfDataForFile.starScore  = starScore
         perfDataForFile.instrument = instr
         perfDataForFile.data =  self.store!
         populateNoteScores(notesScores: &perfDataForFile.noteScores)
@@ -294,6 +301,204 @@ class PerfDataCollector {
         }
     }
     
+    /////////////////////////////////////////////////////////////////////
+    // - MARK:- Using user-supplied Perf Data File
+    
+    ////////////////////////////////////////////////////////////////////
+    // Find Score file on disk, and and open it.
+    //   If first time in App, will create.
+    func loadPerfDataFile() -> Bool {
+//        var succeeded = false
+        guard kWorkingFromPerfDataFile,
+              let perfDataPath = getUserSuppliedPerfDataPath() else {
+                itsBad(); return false }
+        
+        //let perfDataPath = getUserSuppliedPerfDataPath()
+        //let mkPerfDataFilePath = perfDataURL.path
+        let fm = FileManager.default
+        guard fm.fileExists(atPath: perfDataPath) else {
+            itsBad(); return false }
+
+//        guard let perfDataUrl = URL(string: perfDataPath) else {
+//            itsBad(); return false }
+        
+        //let retreivedData = try? Data(contentsOf:perfDataUrl)
+        
+        let jsonData = try? Data(contentsOf: URL(fileURLWithPath: perfDataPath))
+
+        
+        // Uncomment to print out contents of score file as JSON data
+        //            if let jsonString = String(data:retreivedData!, encoding: .utf8) {
+        //                               print("\nLoaded file:\n")
+        //                               print(jsonString)
+        //                              print("\n")
+        //            }
+        let jsonDecoder = JSONDecoder()
+        perfDataFromFile = try? jsonDecoder.decode(perfData.self, from: jsonData!)
+        if perfDataFromFile != nil {
+            return true
+        } else {
+            return false
+        }
+        
+        
+        /*
+        
+        
+        let fm = FileManager.default
+        let currInstr = getCurrentStudentInstrument()
+        if !vers2ScoreFileExistsForInst(instr: currInstr) {
+            // Is there a version 1 file that needs to be converted?
+            if vers1ScoreFileExists() {
+                _ = convertV1FileToV2File(forInstrument: currInstr)
+                // Convert the file                     TODO
+            }
+            else {
+                let currInstr = getCurrentStudentInstrument()
+                guard let mkScoreFileURL = getURLForV2ScoreFile(instr: currInstr) else {
+                    itsBad() // todo real error handling!
+                    return false
+                }
+                let mkScoreFilePath = mkScoreFileURL.path
+                if !fm.fileExists(atPath: mkScoreFilePath) {
+                    // first time in App. Try to create the Score file.
+                    if !createScoreFile(mkScoreFileUrl: mkScoreFileURL) { return succeeded }
+                }
+            }
+        }
+ */
+    }
+    
+    func getLDFromFilePerfData() -> tLD_code {
+        var retLD: tLD_code  = ( level: 0, day: 0)
+        if perfDataFromFile == nil {
+            itsBad(); return retLD }
+        
+        retLD.level = perfDataFromFile!.level
+        retLD.day   = perfDataFromFile!.day
+        return retLD
+    }
+    
+    func getExerIDFromFilePerfData() -> String {
+        if perfDataFromFile == nil {
+            itsBad(); return "" }
+        
+        let exerID = perfDataFromFile!.exerID
+        return exerID
+    }
+    
+    var bpm:               Int = 60
+    var instrument:        Int =  0
+
+    func getBPMFromFilePerfData() -> Int {
+        if perfDataFromFile == nil {
+            itsBad(); return 0 }
+        
+        let bpm = perfDataFromFile!.bpm
+        return bpm
+    }
+    
+    func getInstrumentFromFilePerfData() -> Int {
+        if perfDataFromFile == nil {
+            itsBad(); return kInst_Trumpet }
+        
+        let instrument = perfDataFromFile!.instrument
+        return instrument
+    }
+    
+    var perfDatasSampIndex = 0
+    func resetPerfDatasSampIndex() {
+        perfDatasSampIndex = 0
+    }
+    
+    func getNextSampleData(time:  inout Double,
+                           amp:   inout Double,
+                           pitch: inout Double) -> Bool {
+        guard perfDataFromFile != nil else {
+            itsBad(); return false }
+        
+        let numPDSamples = perfDataFromFile!.data.count
+        guard perfDatasSampIndex + 1 < numPDSamples else {
+            itsBad(); return false }
+        
+        let dataStr = perfDataFromFile!.data[perfDatasSampIndex]
+        getSampleValuesFromTriString(dataStr,    time:  &time,
+                                     amp: &amp,  pitch: &pitch)
+        perfDatasSampIndex += 1
+
+        return true
+    }
+    
+    func getSampleValuesFromTriString(_ triString: String,
+                                      time:  inout Double,
+                                      amp:   inout Double,
+                                      pitch: inout Double) {
+        time  = 0.0
+        amp   = 0.0
+        pitch = 0.0
+        
+        let strNoBlanks = triString.removingWhitespaces()
+        //let strNoBlanksUp = strNoBlanks.uppercased()
+        let strArray = strNoBlanks.components(separatedBy: ",")
+        guard strArray.count == 3 else {
+            itsBad(); return }
+        
+        let timeStr = strArray[0]
+        let ampStr   = strArray[1]
+        let pitchStr = strArray[2]
+        
+        time  = Double(timeStr) ?? 0.0
+        amp   = Double(ampStr) ?? 0.0
+        pitch = Double(pitchStr) ?? 0.0
+        
+    }
+    
+    var songStartIndex = 0
+
+    func findSongStartIndex() -> Bool {
+        guard perfDataFromFile != nil else {
+            itsBad(); return false }
+
+        let numPDSamples = perfDataFromFile!.data.count
+        for idx in 0..<numPDSamples {
+            if perfDataFromFile!.data[idx] == kSongStartPerfSample {
+                songStartIndex = idx
+                return true
+            }
+        }
+        
+        return false
+    }
+
+    func syncToSoundStart() {
+        guard perfDataFromFile != nil else {
+            itsBad(); return }
+        perfDatasSampIndex = songStartIndex
+    }
+    
+    /////////////////////////////////////////////////////////////////////
+    // - MARK:- Misc support funcs
+    
+    func printEntries() {
+        guard store != nil,
+            numSamples < store!.count else {
+                itsBad()
+                return
+        }
+        
+        let count = store!.count
+        
+        print ("\n\n\n============================================\n")
+        print ("       In PerfDataCollector.printEntries\n\n")
+        print ("Num Entries: \(numSamples)")
+        print ("Store szie:  \(count)")
+        
+        for idx in 0..<numSamples {
+            let oneEntry = store![idx]
+            print (oneEntry)
+        }
+    }
+    
     func deletePerfDataFileIfExists() {
         let perfDataURL = getMKPerfDataDir()
         guard perfDataURL != nil else { itsBad();    return }
@@ -337,5 +542,18 @@ class PerfDataCollector {
         }
         
         return mkPerfDataURL
+    }
+    
+    func getUserSuppliedPerfDataPath() -> String? {
+        let subPath = "UserSuppliedPerfData/PT_PerfData"
+        let filePath = Bundle.main.path(forResource: subPath,
+                                           ofType: "txt")
+        if filePath != nil {
+            let fm = FileManager.default
+            if fm.fileExists(atPath: filePath!) {
+                return filePath
+            }
+        }
+        return ""
     }
 }

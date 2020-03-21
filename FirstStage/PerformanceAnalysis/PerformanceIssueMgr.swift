@@ -8,6 +8,8 @@
 
 import Foundation
 
+var kAdjustFinalStarScore = true // be more lenient if in Slur exer, fast BPM, etc.
+var gIgnorePartialErrors  = false // used in video windows
 
 let kFourStars  = 4
 let kThreeStars = 3
@@ -123,11 +125,37 @@ class PerformanceIssueMgr {
     var sortedPerfIssueCount: Int {
         return sortedPerfIssues.count
     }
+    var numActualSortedPerfIssues = 0
+    var numJustNotesActualSortedPerfIssues = 0
+
+    var currPerfIssue = 0
+    func getNextPerfIssueIndex() -> Int {
+        if currPerfIssue + 1 < sortedPerfIssueCount {
+            currPerfIssue += 1
+        }
+        return currPerfIssue
+    }
+    
+    func thereIsANextIssue() -> Bool {        
+//        if currPerfIssue + 1 < sortedPerfIssueCount {
+        if currPerfIssue + 1 < numActualSortedPerfIssues {
+            return true
+        } else {
+            return false
+        }
+    }
     
     func getPerfIssue( atIndex index: Int) -> PerfIssue? {
         guard sortedPerfIssues.count >= 1 && index < sortedPerfIssues.count
             else { return nil }
-        return sortedPerfIssues[0]
+        
+        let perfIssue = sortedPerfIssues[index]
+        if perfIssue.issueCode == .isLowerPartial ||
+           perfIssue.issueCode == .isUpperPartial    {
+            return nil // must look for next error
+        }
+        
+        return perfIssue
     }
     
     // Since the issues will have been sorted by issue severity, first is worst
@@ -137,10 +165,13 @@ class PerformanceIssueMgr {
     }
     
     func clearExisitingIssues() {
+        currPerfIssue = 0
         perfIssues.removeAll()
         sortedPerfIssues.removeAll()
         justNotesPerfIssues.removeAll()
         sortedJustNotesPerfIssues.removeAll()
+        numActualSortedPerfIssues = 0
+        numJustNotesActualSortedPerfIssues = 0
    }
     
     func worstScore() -> Int {
@@ -229,6 +260,21 @@ class PerformanceIssueMgr {
             let er0 = $0.issueScore, er1 = $1.issueScore
             return er0 > er1 ? true : false
         }
+        
+        for oneIssue in sortedPerfIssues {
+            if oneIssue.issueScore > kLaunchVideoThreshold {
+                numActualSortedPerfIssues += 1
+            } else {
+                break
+            }
+        }
+        for oneJustNotesIssue in justNotesPerfIssues {
+            if oneJustNotesIssue.issueScore > kLaunchVideoThreshold {
+                numJustNotesActualSortedPerfIssues += 1
+            } else {
+                break
+            }
+        }
     }
     
     // Can be called for single note/rest ("Ejector Seat"), as well as
@@ -307,6 +353,27 @@ class PerformanceIssueMgr {
         }
     }
     
+    func useDefaultStarThresholds() {
+        setStarThresholds( fourStarMaxScore:  kDefaultMaxScore_FourStars,
+                           threeStarMaxScore: kDefaultMaxScore_ThreeStars,
+                           twoStarMaxScore:   kDefaultMaxScore_TwoStars,
+                           oneStarMaxScore:   kDefaultMaxScore_OneStars )
+    }
+    
+    func useMediumLenientThresholds() {
+        setStarThresholds( fourStarMaxScore:  kMediumMaxScore_FourStars,
+                           threeStarMaxScore: kMediumMaxScore_ThreeStars,
+                           twoStarMaxScore:   kMediumMaxScore_TwoStars,
+                           oneStarMaxScore:   kMediumMaxScore_OneStars )
+    }
+    
+    func useVeryLenientThresholds() {
+        setStarThresholds( fourStarMaxScore:  kVeryMaxScore_FourStars,
+                           threeStarMaxScore: kVeryMaxScore_ThreeStars,
+                           twoStarMaxScore:   kVeryMaxScore_TwoStars,
+                           oneStarMaxScore:   kVeryMaxScore_OneStars )
+    }
+    
     func setStarThresholds( fourStarMaxScore:  Int,
                             threeStarMaxScore: Int,
                             twoStarMaxScore:   Int,
@@ -338,10 +405,35 @@ class PerformanceIssueMgr {
         //var retVal = Int(round(floatScore))
 
         let avgAsInt = Int(round(perfAvgFlt))
-        return getStarScoreForPerformanceAverage(perfAvg: avgAsInt)
+        let numStars = getStarScoreForPerformanceAverage(perfAvg: avgAsInt)
+
+        print("\n\n  In getStarScoreForPerformanceAverage:")
+        print("        perfAvgFlt = \(perfAvgFlt),  avgAsInt = \(avgAsInt),  numStars = \(numStars)\n\n")
+
+        return numStars
     }
     
-    func getStarScoreForMostRecentPerformance() -> Int {
+
+    let kVeryFastTempo: Int32 = 110
+    let kFastTempo:     Int32 = 100
+    func getStarScoreForMostRecentPerformance(containsSlurs: Bool) -> Int {
+        gIgnorePartialErrors = false
+        if kAdjustFinalStarScore {
+            if containsSlurs {
+                let currBPM = Int32(getCurrBPM())
+                if currBPM >= kVeryFastTempo {
+                    gIgnorePartialErrors = true
+                    useVeryLenientThresholds()
+                } else if currBPM >= kFastTempo {
+                    gIgnorePartialErrors = true
+                    useMediumLenientThresholds()
+                }
+            } else {
+                useDefaultStarThresholds()
+            }
+        } else {
+            useDefaultStarThresholds()
+        }
         let avgScoreFlt = Float(averageScore(justForNotes: true))
         let starScoreInt = getStarScoreForPerformanceAverage( perfAvgFlt: avgScoreFlt)
         return starScoreInt

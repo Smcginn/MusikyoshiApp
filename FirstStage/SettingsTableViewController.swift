@@ -518,13 +518,30 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC, 
 
         if indexPath.section == 0 &&
            indexPath.row == kTCIndex_PurchOptions {
-            if let parent = self.parent as? SettingsViewController {
-                parent.performSegue(withIdentifier: "toPurchaseOptions", sender: nil)
-            }
+            
+            showPurchOptionsAlert()
+            // JUNE15 was:
+//            if let parent = self.parent as? SettingsViewController {
+//                parent.performSegue(withIdentifier: "toPurchaseOptions", sender: nil)
+//            }
         }
-        
     }
-    
+
+    func showPurchOptionsAlert() {   // JUNE15
+        let titleStr = "We are re-evaluating our purchase options"
+        let msgStr = "\nUse PlayTunes for Free until June 15, 2020!\n\nAfter June 15, please go to the App Store for more information and to download the latest version of PlayTunes.\n\nNote: If you have purchased a subscription, please email us at Shawn@musikyoshi.com."
+        
+        let ac = MyUIAlertController(title: titleStr,
+                                     message: msgStr,
+                                     preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK",
+                                   style: .default,
+                                   handler: nil))
+        ac.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = kDefault_AlertBackgroundColor
+        
+        self.present(ac, animated: true, completion: nil)
+    }
+
     // Table View Cell indices
     let kTCIndex_InstPicker         = 0
     let kTCIndex_BPM                = 1

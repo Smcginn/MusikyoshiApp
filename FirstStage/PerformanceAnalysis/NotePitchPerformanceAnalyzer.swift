@@ -11,6 +11,9 @@
 
 import Foundation
 
+var gPartialCount = 0
+let kTryAdjustingForFastEighths = true
+
 /////////////////////////////////////////////////////////////////////////
 // NotePitchPerformanceAnalyzer - Analyzes PerformanceNote for
 //                                Gross and Fine Pitch accuracy
@@ -63,16 +66,40 @@ class NotePitchPerformanceAnalyzer : NotePerformanceAnalyzer {
                 // no weighting to add . . .
             
             } else {
+                var handled = false
+//                var threshCorrect    = kWeightedPitch_Threshold_Correct
+//                var threshReasonable = kWeightedPitch_Threshold_Reasonable
+//                var threshAcceptable = kWeightedPitch_Threshold_Acceptable
+                
                 // first, check to see if partial played
                 if mostCommonNotePerc > kWeightedPitch_MostCommonNotePlayedThreshold {
                     let freq = NoteService.getFreqForNoteID( noteID: mostCommonNote )
                     note.actualFrequency = freq
 
-                    // isInstrSpecificVeryHiLowIssue() sets weights, etc., if is partial
-                    isPartial = isInstrSpecificVeryHiLowIssue( perfNote: note )
+                    // Bug fix: The target pitch can/will be in the partials list.
+                    // So if we don't test for correct pitch first, will eroneously
+                    // declare correct pitch as partial of correct pitch.
+                    let pitchTolerance = tolerances.correctPitchPC
+                    if freqMatchesTarget(targetFreq: note.expectedFrequency,
+                                         perfFreq: freq,
+                                         pitchTolerance: pitchTolerance) {
+                        isPartial = false
+                    } else {
+                        // isInstrSpecificVeryHiLowIssue() sets weights, etc., if is partial
+                        isPartial = isInstrSpecificVeryHiLowIssue( perfNote: note )
+                        if isPartial && kTryAdjustingForFastEighths {
+                            if notPartialDueToRelaxedToleranceWhileInSlur(perfNote: note) {
+                                handled = true
+                                isPartial = false
+                            }
+                        }
+                        if isPartial {
+                            gPartialCount += 1
+                        }
+                    }
                 }
                 
-                if !isPartial { // continue the "weighting" game
+                if !isPartial && !handled { // continue the "weighting" game
                     if weightedPCCorrect >= kWeightedPitch_Threshold_Reasonable {
                         // use the percentage of time in the actual note to
                         // determine if this is wavering, or just a wrong note
@@ -90,7 +117,7 @@ class NotePitchPerformanceAnalyzer : NotePerformanceAnalyzer {
                             note.weightedScore += note.pitchScore
                         }
                         
-                    } else if weightedPCCorrect >= kWeightedPitch_Threshold_Accecptable {
+                    } else if weightedPCCorrect >= kWeightedPitch_Threshold_Acceptable {
                         note.pitchRating = .fluctuatingAcceptable
                         note.pitchScore = IssueWeight.kWaveringAcceptable
                         note.weightedScore += note.pitchScore
@@ -158,6 +185,68 @@ class NotePitchPerformanceAnalyzer : NotePerformanceAnalyzer {
         }
     }
     
+    func notPartialDueToRelaxedToleranceWhileInSlur(perfNote: PerformanceNote) -> Bool {
+        var notPartial = false
+        
+        // When tempo is fast, and brass instr in a slur, need to relax tolerances
+        // and allow for correct note if they have played some portion of the note correctly.
+        let noteDur = perfNote.expectedDuration
+        let isEighth = noteIsEighthOrLess(dur: noteDur)
+        
+        if perfNote.isInSlur && isEighth {
+            let currPitchScore  = perfNote.pitchScore
+ //           let currPitchRating = perfNote.pitchRating
+            
+//            let weightedPCCorrect = perfNote.getWeightedPercentageCorrect()
+            let correctNotePlayedPercentage =  perfNote.correctNotePlayedPercentage
+            
+            let threshCorrect    = calcedWeightedPitch_Threshold_Correct(isEighth: isEighth)
+            let threshReasonable = calcedWeightedPitch_Threshold_Reasonable(isEighth: isEighth)
+            let threshAcceptable = calcedWeightedPitch_Threshold_Acceptable(isEighth: isEighth)
+            let isFlat = perfNote.expectedFrequency > perfNote.actualFrequency
+
+            if correctNotePlayedPercentage >= threshCorrect {
+                perfNote.pitchRating = .pitchGood
+                perfNote.pitchScore = IssueWeight.kWaveringReasonable
+                perfNote.weightedScore -= currPitchScore
+                perfNote.weightedScore += perfNote.pitchScore                // no weighting to add . . .
+                print("In notPartialDueToRelaxedToleranceWhileInSlur, setting to Correct")
+                notPartial = true
+            } else if correctNotePlayedPercentage >= threshReasonable {
+                perfNote.pitchRating = .fluctuatingReasonable
+                perfNote.pitchScore = IssueWeight.kWaveringReasonable
+                perfNote.weightedScore -= currPitchScore
+                perfNote.weightedScore += perfNote.pitchScore
+                print("In notPartialDueToRelaxedToleranceWhileInSlur, setting to WaveringReasonable")
+                notPartial = true
+           } else if correctNotePlayedPercentage >= threshAcceptable {
+                perfNote.pitchRating = .fluctuatingAcceptable
+                perfNote.pitchScore = IssueWeight.kWaveringAcceptable
+                perfNote.weightedScore -= currPitchScore
+                perfNote.weightedScore += perfNote.pitchScore
+                print("In notPartialDueToRelaxedToleranceWhileInSlur, setting to WaveringAcceptable")
+                notPartial = true
+            }  /* else {  // pitch is in the "very flat" or very sharp" range
+                if isFlat {
+                    perfNote.pitchRating = .wrongNoteFlat
+                } else {
+                    perfNote.pitchRating = .wrongNoteSharp
+                }
+                perfNote.pitchScore = IssueWeight.kFlatOrSharpWrongNote
+                perfNote.weightedScore += perfNote.pitchScore
+            }
+              */
+        }
+        if notPartial {
+            perfNote.isInstrSpecificIssue = false
+            perfNote.isActFreqIsPartial = false
+            perfNote.specificPartial = kEmptyNoteFreqRangeData
+            return true
+        } else {
+            return false
+        }
+    }
+    
     // derived classes should override this if necessary
     func isInstrSpecificVeryHiLowIssue( perfNote: PerformanceNote ) -> Bool {
         return false // nothing instrument specific about this
@@ -168,6 +257,11 @@ class BrassPitchPerformanceAnalyzer : NotePitchPerformanceAnalyzer {
     
     override func isInstrSpecificVeryHiLowIssue( perfNote: PerformanceNote )
         -> Bool {
+           
+//      Consider:
+//            if gIgnorePartialErrors {
+//                return false
+//            }
             
             // Check for partials
             let actFreq = perfNote.actualFrequency

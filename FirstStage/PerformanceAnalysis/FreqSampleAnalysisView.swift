@@ -155,6 +155,44 @@ class FrequencySampleAnalysisView: UIView, UIScrollViewDelegate, UIPickerViewDat
         } else {
             var scrollText = "If Note Linked to Sound, samples for that Sound displayed below.\n"
             scrollText += "   (If no Sound linked to Note, nothing will show below)\n\n"
+            
+            let expFreqStr = String(format: "%.2f", perfNote!.expectedFrequency)
+
+            var expectedNoteName = ""
+            let expNote = NoteService.getNote(Int(perfNote!.transExpectedNoteID))
+            if expNote != nil {
+                expectedNoteName = expNote!.fullName
+            }
+
+            scrollText += "   Expected Note: " + expectedNoteName + "\n"
+            scrollText += "   Expected Freq: " + expFreqStr + "\n\n"
+            
+            
+            if gUseWeightedPitchScore {
+                let actualNoteIDTransposed =
+                    concertNoteIdToInstrumentNoteID( noteID: perfNote!.actualMidiNote)
+                var actualNoteName = ""
+                let actNote = NoteService.getNote(Int(actualNoteIDTransposed))
+                if actNote != nil {
+                    actualNoteName = actNote!.fullName
+                }
+
+                scrollText += "  - - - - -\n\n"
+                var actFreqStr = ""
+//                var pitchRatingStr = ""
+                let mostCommonFreq = NoteService.getFreqForNoteID( noteID: perfNote!.mostCommonPlayedNote )
+                actFreqStr = String(format: "%.2f", mostCommonFreq)
+                actFreqStr += ", "
+                let convPC = perfNote!.mostCommonPlayedNotePercentage * 100.0
+                let convPCInt = Int(convPC)
+                let percStr = String(convPCInt) // mostCommonPlayedNotePercentage)
+                actFreqStr += percStr + "%"
+
+                scrollText += "Actual Frequency:    " + actFreqStr + "\n"
+                scrollText += "       Note (Guess): " + actualNoteName + "\n"
+                scrollText += "\n  - - - - -\n\n"            }
+                        
+            
             let soundTxt = perfNote!.getSamplesForDisplay()
             scrollText += soundTxt
             freqDataScrollView?.setScollingText(newText: scrollText)
@@ -220,7 +258,7 @@ class FrequencySampleAnalysisView: UIView, UIScrollViewDelegate, UIPickerViewDat
     }
     
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print("hey")
+//        print("hey")
         freqDataScrollView!.textView.setNeedsDisplay()
     }
 }

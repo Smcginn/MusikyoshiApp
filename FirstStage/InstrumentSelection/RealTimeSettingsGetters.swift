@@ -8,6 +8,49 @@
 
 import Foundation
 
+// These globals can be set from a number of places in the app, and are used
+// for dynaically adjusting realtime values that are used to determine when to
+// break a current sound to create a new one.
+var gCurrentlyInSlur = false
+var gCurrSoundsLinkedNoteIsEnded = false
+var gCurrSoundsLinkedNoteWillEndSoon = false
+// "The current Sound is linked to a Note that has ended AND a new Note has started"
+var gCurrSoundIsLinkedAndNewNoteStarted = false
+
+var gCurrElapsedTime: TimeInterval = -1.0
+
+var gAmpRiseCalced: Double {
+    var retVal = 0.0
+    
+    if gCurrSoundsLinkedNoteWillEndSoon {
+        retVal -= 0.05
+    } else if gCurrSoundsLinkedNoteIsEnded {
+        retVal -= 0.1
+    }
+    if gCurrSoundIsLinkedAndNewNoteStarted {
+        retVal -= 0.1
+    }
+    
+    if gCurrElapsedTime >= 0 {
+        let deepCurrSoundIsLinkedAndNewNoteStarted =
+            PerfTrkMgr.instance.deepCurrSoundLinkedAndNewNoteStarted(currTime: gCurrElapsedTime)
+        if deepCurrSoundIsLinkedAndNewNoteStarted {
+           retVal -= 0.05
+        }
+    }
+    
+    if gCurrentlyInSlur {
+        if gCurrSoundIsLinkedAndNewNoteStarted {
+            retVal -= 0.1
+        } else {
+            retVal -= 0.05
+        }
+    }
+
+    return retVal
+}
+
+
 
 func getRealtimeAttackTolerance( _ perfNote: PerformanceNote ) -> TimeInterval {
     return RTSMgr.instance.getAdjustedAttackTolerance(perfNote)
@@ -43,13 +86,80 @@ func getAmpRiseAnalysisWindow() -> Int {
         print("\nARAR - In getAmpRiseAnalysisWindow, using old, Window == \(analysisCount)\n")
         return Int(analysisCount)
     } else {
+        if gCurrNoteID == 2 || gCurrNoteID == 6 || gCurrNoteID == 10 {
+            //print ("yo")
+        }
+        var retVal = gRTSM_AmpRiseAnalysisWindow
+        
+        if gCurrSoundsLinkedNoteWillEndSoon {
+            retVal += 1
+        } else if gCurrSoundsLinkedNoteIsEnded {
+            retVal += 3  // from 1 to 2
+        }
+        if gCurrSoundIsLinkedAndNewNoteStarted {
+            retVal += 4 // 3
+        }
+        if gCurrentlyInSlur {
+            retVal += 1
+        }
+//        print ("\nARAR - In getAmpRiseAnalysisWindow, using \(retVal), gCurrNoteID = \(gCurrNoteID)")
+
+        print("   AmpRiseChangeWindow == \(retVal)")
+        
+        return retVal
+        
+        /*
         let arawStr = "\(gRTSM_AmpRiseAnalysisWindow)"
         print("\nARAR - In getAmpRiseAnalysisWindow, using new, Window == \(arawStr)\n")
         return gRTSM_AmpRiseAnalysisWindow
+ */
     }
 }
 
+func currSoundShouldEndSoon() -> Bool {
+    var retVal = false
+//    let currInNote = false
+    if gCurrSoundsLinkedNoteIsEnded || gCurrSoundsLinkedNoteWillEndSoon {
+        retVal = true
+    }
+    return retVal
+}
+
+
 func getAmpRiseChangeValue() -> Double {
+    
+    var retVal = 0.434
+    
+    // Disable test for gCurrSoundsLinkedNoteWillEndSoon
+    // to help eliminate early break?
+    
+    if gCurrSoundsLinkedNoteWillEndSoon {
+        retVal -= 0.05
+    } else if gCurrSoundsLinkedNoteIsEnded {
+        retVal -= 0.1
+    }
+    if gCurrSoundIsLinkedAndNewNoteStarted {
+        retVal -= 0.05
+    }
+    if gCurrentlyInSlur {
+        retVal -= 0.05
+    }
+ 
+//    var outStr = "\nARAR - In getAmpRiseChangeValue, using \(retVal).  "
+////    outStr += "\n  current Sound == \(PerfTrkMgr_CurrSoundID()),   current Note == \(PerfTrkMgr_CurrNoteID())"
+//    outStr += "\n  gCurrSoundsLinkedNoteWillEndSoon == \(gCurrSoundsLinkedNoteWillEndSoon)"
+//    outStr += "\n  gCurrSoundsLinkedNoteIsEnded == \(gCurrSoundsLinkedNoteIsEnded)"
+//    outStr += "\n  gCurrSoundIsLinkedAndNewNoteStarted == \(gCurrSoundIsLinkedAndNewNoteStarted)"
+//    outStr += "\n  gCurrentlyInSlur == \(gCurrentlyInSlur)\n"
+//
+//    print(outStr)
+    
+    print("   AmpRiseChangeValue  == \(retVal)")
+    
+    return  retVal
+    
+    /*
+// RESTORE
     var outStr = "\nARAR - In getAmpRiseChangeValue, using "
     if gUseOldRealtimeSettings {
         if gUseAmpRiseChangeSlowFastValues {
@@ -66,9 +176,16 @@ func getAmpRiseChangeValue() -> Double {
         print(outStr)
         return gRTSM_AmpRise
     }
+ */
 }
 
 func getIsASoundThreshold() -> Double {
+    let retVal = 0.3926
+    var outStr = "\nISAS- In getIsASoundThreshold, using \(0.3926)"
+    return retVal
+    
+
+
     if gUseOldRealtimeSettings {
         print("\nISAS- In getIsASoundThreshold, using old, Thresh == \(gUseOldRealtimeSettings)\n")
         return kAmplitudeThresholdForIsSound
@@ -126,3 +243,32 @@ func getSamplesForLegatoPitchChange() -> Int {
  
  
  */
+
+
+/*
+"instrument":"Euphonium",
+"levelZones":[
+{
+"zone":"defaultsAllZones",
+"isASoundThresholdLow":"0.511",
+"isASoundThresholdMid":"0.511",
+"isASoundThresholdHigh":"0.511",
+"attackTolerance":"0.5",
+"numSamplesToDeterminePitch":"13",
+"numSamplesForLegatoPitchChange":"12",
+"ampRise_SkipWindow":"10",
+"ampRise_AnalysisWindow":"2",
+"ampRise_RiseLowBPM":"0.440",
+"ampRise_RiseMidBPM":"0.390",
+"ampRise_RiseHighBPM":"0.340",
+"soundStartOffSet":"0.116",
+"rhythmPercent_correct":"0.3",
+"rhythmPercent_aBit":"0.4",
+"rhythmPercent_Very":"0.5",
+"pitchcCorrectPC":"0.97",
+"pitchABitToVeryPC":"0.915",
+"pitchVeryBoundaryPC":"0.5"
+}
+]
+}, {
+*/

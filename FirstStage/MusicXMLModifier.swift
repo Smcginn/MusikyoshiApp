@@ -371,25 +371,36 @@ class MusicXMLModifier {
 //            measureWidth *= 2
             measure.attributes["width"] = "\(measureWidth)"
 
+            var loopCount = 0
             var isFirstElem = true
             var measureDiff: Double = 0.0
             for note in measure["note"].all! {
-
-                // Check for slurs, and if found, notate
-                var noteData = NoteData()
-                noteData.noteID = currNoteID
-                let noteNotations = note["notations"]
-                if noteNotations.error == nil {
-                    if let typeStr = noteNotations["slur"].attributes["type"] {
-                        if typeStr == "start" {
-                            noteData.beginSlur = true
-                        } else if typeStr == "stop" {
-                            noteData.endSlur = true
+                
+                loopCount += 1
+                
+                var isRest = false
+                let rest = note["rest"]
+                if rest.error   == nil {
+                    isRest = true
+                }
+                
+                if !isRest {
+                    // Check for slurs, and if found, notate
+                    var noteData = NoteData()
+                    noteData.noteID = currNoteID
+                    let noteNotations = note["notations"]
+                    if noteNotations.error == nil {
+                        if let typeStr = noteNotations["slur"].attributes["type"] {
+                            if typeStr == "start" {
+                                noteData.beginSlur = true
+                            } else if typeStr == "stop" {
+                                noteData.endSlur = true
+                            }
                         }
                     }
+                    MusicXMLNoteTracker.instance.addNoteEntry(noteData)
+                    currNoteID += 1
                 }
-                MusicXMLNoteTracker.instance.addNoteEntry(noteData)
-                currNoteID += 1
                 
                 // Fix for accidentals on measure line
                 if isFirstElem {

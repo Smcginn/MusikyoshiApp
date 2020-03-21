@@ -203,7 +203,7 @@ class AudioSampleAnalysisView: UIView, UIScrollViewDelegate {
     }
     
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print("hey")
+        //print("hey")
         waveformView!.setNeedsDisplay()
     }
 

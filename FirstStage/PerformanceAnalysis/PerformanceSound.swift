@@ -42,6 +42,27 @@ public class PerformanceSound
         linkedNoteObject = note
     }
  
+    // If the current Note is already linked to a sound, but this one matches the
+    // attack criteria, then when the sound ends, managing code will compare the two
+    // sounds' info, and possibly use the new sound instead of the currently linked one.
+    var considerThisNote = noScoreObjIDSet
+    
+    func linkedNoteActive() -> Bool {
+        if !isLinkedToNote || linkedNoteObject == nil {
+            return false
+        }
+        let isActive = linkedNoteObject!.isActive()
+        return isActive
+    }
+    
+    func linkedNoteWillEndSoon() -> Bool {
+        if !isLinkedToNote || linkedNoteObject == nil {
+            return false
+        }
+        let willEndSoon = linkedNoteObject!.willEndSoon
+        return willEndSoon
+    }
+
     // separate vars for Rests and Notes.
     var isLinkedToRest    = false
     var linkedToRest    = noScoreObjIDSet
@@ -192,7 +213,7 @@ public class PerformanceSound
         if kSavePitchSamples {
             pitchSamples.append(pitchSample)
             let sampCount = pitchSamples.count
-            print ("Added pitch sample to pitchSamples array, count = \(sampCount)")
+//            print ("Added pitch sample to pitchSamples array, count = \(sampCount)")
             let pitchSum = pitchSamples.reduce(0, +)
             averagePitch = pitchSum/Double(pitchSamples.count)
         } else {
@@ -215,6 +236,7 @@ public class PerformanceSound
         consecutiveDiffPitches += 1
         if consecutiveDiffPitches == 1 {    // save time of first diff pitch, as
             diffPitchSplitTime = sampleTime // potentially used later as sound end time
+//            print("   ********* sampleTime == \(sampleTime);  diffPitchSplitTime == \(diffPitchSplitTime)")
         }
     }
     
@@ -270,10 +292,10 @@ public class PerformanceSound
 
             // was adding that one enough?
             if !initialPitchHasStablized() {
-                print ("initial pitch not stable; returning")
+//                print ("initial pitch not stable; returning")
                 return
             } else {
-                print ("initial pitch stable; continuing")
+//                print ("initial pitch stable; continuing")
             }
             // else fall through
         }
@@ -491,17 +513,17 @@ public class PerformanceSound
  
         var concertNoteName: String = ""
         var trasnposedNoteName: String = ""
-        let avgPitchStr = String(format: "%.1f", self.averagePitch)
-        let avgPitchRunStr = String(format: "%.1f", self.averagePitchRunning)
+//        let avgPitchStr = String(format: "%.1f", self.averagePitch)
+//        let avgPitchRunStr = String(format: "%.1f", self.averagePitchRunning)
         
 //        print ("\n==============================================================\n")
-        retStr +=  ("   Pitch Samples for Sound #\(self.soundID)\n\n")
+        retStr +=  ("Pitch Samples for Sound #\(self.soundID)\n\n")
         if createdBecauseOfLegatoPitchChange {
             retStr += ("   Sound created because of pitch change\n\n")
         }
-        retStr +=  ("       - avgPitch:  \(avgPitchStr)\n")
-        retStr +=  ("       - avgPtcRun: \(avgPitchRunStr)\n")
-        retStr +=  ("\nSound had \(self.numPitchSamples()) pitched samples:\n")
+//        retStr +=  ("       - avgPitch:  \(avgPitchStr)\n")
+//        retStr +=  ("       - avgPtcRun: \(avgPitchRunStr)\n")
+        retStr +=  ("\n Sound had \(self.numPitchSamples()) pitched samples:\n")
         retStr +=  ( "\n            -------- Early samples: ------\n" )
         for eSamp in earlySamples {
             getNoteInfoForPitch(pitch: eSamp,

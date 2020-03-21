@@ -143,12 +143,30 @@ class LevelsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        subscriptionGood = PlayTunesIAPProducts.store.subscriptionGood()  // IAPSUBS
-        if subscriptionGood ||
-           gDoOverrideSubsPresent ||
-           gMKDebugOpt_ShowDebugSettingsBtn  {
+        // JUNE15
+        // For the time being - until June 15, 2020,  no longer checking subs, etc.
+        // So this is set to always allow all access.
+        if gTrialPeriodExpired {
+//            subscriptionGood = PlayTunesIAPProducts.store.subscriptionGood()  // IAPSUBS
+//            if subscriptionGood ||
+//               gDoOverrideSubsPresent ||
+//               gMKDebugOpt_ShowDebugSettingsBtn  {
+//                allowAllLevelAccess = true
+//            } else {
+//                allowAllLevelAccess = false
+//            }
+            allowAllLevelAccess = false
+       } else {
             allowAllLevelAccess = true
         }
+        
+        // Restore for subs check:
+//        subscriptionGood = PlayTunesIAPProducts.store.subscriptionGood()  // IAPSUBS
+//        if subscriptionGood ||
+//           gDoOverrideSubsPresent ||
+//           gMKDebugOpt_ShowDebugSettingsBtn  {
+//            allowAllLevelAccess = true
+//        }
         
         if let file = Bundle.main.path(forResource: "TrumpetLessons", ofType: "json") {
             let jsonData = try? Data(contentsOf: URL(fileURLWithPath: file))
@@ -187,8 +205,23 @@ class LevelsViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+ //       gTestExpirationCount += 1
+        
+        // JUNE15
+        let numDays = daysUntilFreePeriodEndDate()
+//        if gTestExpirationCount > 5 {
+//            numDays = 0
+//        }
+        if numDays > 0 && !gTrialPeriodExpired {
+            displayFreeTrialExpiryWarningIfNeeded(parentVC: self)
+        } else if !gTrialPeriodExpired {
+            setTrialExpiredVars()
+            showEndDateExpiredAlert(parentVC: self)
+        }
         
         assessPurchaseStatus()
         
@@ -290,6 +323,19 @@ class LevelsViewController: UIViewController {
     
     //    IAPSUBS
     func assessPurchaseStatus() {
+
+        if !gTrialPeriodExpired {
+            // JUNE15
+            // For the time being - until June 15, 2020,  no longer checking subs, etc.
+            // So this is set to always allow all access.
+            allowAllLevelAccess = true
+            subscriptionGood = true
+            return
+        } else {
+            allowAllLevelAccess = false
+            subscriptionGood = false
+        }
+        
         if gDoOverrideSubsPresent || gMKDebugOpt_ShowDebugSettingsBtn {
             allowAllLevelAccess = true
             subscriptionGood = true
@@ -364,6 +410,16 @@ class LevelsViewController: UIViewController {
 */
         
         
+        
+        // JUNE15 - Remove this:
+        let titleStr = "Try Out Days In Pink Levels For Free!"
+        var msgStr = "- All Days of Levels 1 & 2: Free!\n- Day 1 of other Pink Levels - Free!\n\n"
+        msgStr += "Now that the Spring 2020 Free Trial period is over, "
+        msgStr += "you must download the latest version of PlayTunes to view the current purchase options (including possible free trial extensions).\n\n"
+        msgStr += "Please go to the App Store to get info on purchase options and download the latest version of PlayTunes."
+
+        // JUNE15 - and restore this:
+        /*
         let titleStr = "Try Out Days In Pink Levels For Free!"
         // All Pink Levels To access all of PlayTunes, Purchase (or Restore) a Subscription"
         var msgStr = "- All Days of Levels 1 & 2: Free!\n- Day 1 of other Pink Levels - Free!\n\n"
@@ -371,7 +427,7 @@ class LevelsViewController: UIViewController {
         msgStr += "Go to 'Purchase Options' on the Home screen.\n\n"
         //        msgStr += "(If you have a valid Subscription from another device, use the Restore button)\n\n"
         msgStr += "(If you just completed a purchase or restore, verification can take a while. Try again in a bit.)"
-        
+        */
         
         
 
@@ -1175,7 +1231,7 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }       // extension LevelsViewController:
 
-let kSlursTempoCutoff = 120
+let kSlursTempoCutoff =  90
 
 var gShowSlursAtFastBPMWarning = true
 var gHaveShownSlursAtFastBPMWarningCount = 0
@@ -1209,12 +1265,12 @@ func presentSlursAreAProblemAtThisTempAlert(presentingVC: UIViewController?,
         msgStr += "\nPlayTunes grades slurs very well at \(kSlursTempoCutoff) BPM or below, "
         msgStr += "so you may want to select a slower tempo (currently \(currBPM))."
         msgStr += "\n\nYou can go ahead and play at this faster tempo if you wish, but you "
-        msgStr += "may not get an accurate star rating.\n\nWe’re working on this. Thanks!"
+        msgStr += "may not get an accurate star rating (may ignore partials).\n\nWe’re working on this. Thanks!"
     } else { // For Day
         msgStr += "\nThis Day contains a Lip Slur exercise.\n\nPlayTunes grades slurs very "
         msgStr += "well at \(kSlursTempoCutoff) BPM or below (you are currently at \(currBPM)). "
         msgStr += "You can go ahead and play at this faster tempo, but you may not get "
-        msgStr += "an accurate star rating. So you may want to select a slower tempo. "
+        msgStr += "an accurate star rating (may ignore partials). So you may want to select a slower tempo. "
         msgStr += "(We’re working on this. Thanks!)"
     }
     

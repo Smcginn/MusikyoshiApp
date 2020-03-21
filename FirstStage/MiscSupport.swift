@@ -461,6 +461,7 @@ func getAppSupportDir() -> URL? {
     }
     return retUrl
 }
+
 extension Bundle {
     var releaseVersionNumber: String? {
         return infoDictionary?["CFBundleShortVersionString"] as? String
@@ -470,6 +471,61 @@ extension Bundle {
     }
     var releaseVersionNumberPretty: String {
         return "v\(releaseVersionNumber ?? "1.0.0")"
+    }
+}
+
+extension Date {
+    
+    /// Returns the amount of days from another date
+    func days(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.day], from: date, to: self).day ?? 0
+    }
+
+}
+
+////////////////////////////////////////////////////////////////////
+//
+// For fixing the "EB4" to "Eb4" bug for LongTone exers and titles
+//
+
+func noteNameContains(noteName: String,
+                      subString: String) -> Bool {
+    let range1 = noteName.range(of: subString)
+    if range1 != nil {
+        return true
+    } else {
+        return false
+    }
+}
+
+//func indexOfNoteNameSubstring(subString: String) -> Int {
+//    let range1 = noteName.range(of: subString)
+//    if range1 != nil {
+//        let index: Int = noteName.distance(from: noteName.startIndex,
+//                                           to: range1!.lowerBound)
+//        return index
+//    } else {
+//        return -1
+//    }
+//}
+
+func correctForLongToneNameFlatBug(noteName: inout String) {
+    // Astonishingly, as of release 2.0.4, All LT exercises with a flat in
+    // the name were not working. The noteID lookup is case sensitive; e.g.,
+    // "Eb4" would work but "EB4" would not.   All exer names in the score file
+    // are upper case, so they are (and remian) in the form "EB4".
+    // So: detect if this is a flat note, and if so, change the "B" to a "b".
+    
+    if noteNameContains(noteName: noteName, subString: "DB") {
+        noteName = noteName.replacingOccurrences(of: "DB", with: "Db")
+    } else if noteNameContains(noteName: noteName, subString: "EB") {
+        noteName = noteName.replacingOccurrences(of: "EB", with: "Eb")
+    } else if noteNameContains(noteName: noteName, subString: "GB") {
+        noteName = noteName.replacingOccurrences(of: "GB", with: "Gb")
+    } else if noteNameContains(noteName: noteName, subString: "AB") {
+        noteName = noteName.replacingOccurrences(of: "AB", with: "Ab")
+    } else if noteNameContains(noteName: noteName, subString: "BB") {
+        noteName = noteName.replacingOccurrences(of: "BB", with: "Bb")
     }
 }
 

@@ -93,6 +93,14 @@ class MusicXMLNoteTracker {
     
     func isNoteWithinASlur() -> Bool {
         return currentlyInSlur
+        /*
+        // this SHOULD work, but cause all sorts of issues.  Revisit.
+        if currentlyInSlur || onLastNoteOfSlur {
+            return true
+        } else {
+            return false
+        }
+        */
     }
     
     func isNoteLastNoteOfASlur() -> Bool {

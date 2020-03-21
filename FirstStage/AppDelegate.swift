@@ -199,6 +199,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Constants.Settings.Mallet_SkipBeginningSamples:    Int(kMallet_defSkipBeginningSamples),
             Constants.Settings.Mallet_SamplesInAnalysisWindow: Int(kMallet_defSamplesInAnalysisWindow),
             Constants.Settings.SubsriptionOverridePswdSet: false,
+            Constants.Settings.FreeTrial_6_15_2020_NumDaysLeft: Int(-1),
             ])
  
         
@@ -225,7 +226,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // This line was active in original file:
  //       _ = AVAudioSessionManager.sharedInstance.setupAudioSession()
-        
         
         
         let entityName = String(describing: UserAttributes.self)
@@ -323,7 +323,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        RealTimeSettingsManager.instance.test_getAdjustedAttackToleranceImpl()
         RealTimeSettingsManager.instance.resetFor_CurrInst()
         
-        gDoOverrideSubsPresent = subsriptionOverridePswdWasSet()
+        // JUNE15 - Disabling subscription status lookup
+        // gDoOverrideSubsPresent = subsriptionOverridePswdWasSet()
+        
+ //       setTrialExpiredVars() // JUNE15
         
         return true
     }

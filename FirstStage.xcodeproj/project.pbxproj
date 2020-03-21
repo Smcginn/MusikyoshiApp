@@ -340,6 +340,10 @@
 		6D1076A82348EA30005E66D8 /* RealTimeSettingsGetters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1076A72348EA30005E66D8 /* RealTimeSettingsGetters.swift */; };
 		6D1076A92348EA30005E66D8 /* RealTimeSettingsGetters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1076A72348EA30005E66D8 /* RealTimeSettingsGetters.swift */; };
 		6D1509F622722747008F0490 /* AEXML.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 635A60991EC6B7BA0099154A /* AEXML.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6D1AC25523DF560600670C06 /* PT_PerfData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6D1AC25423DF560600670C06 /* PT_PerfData.txt */; };
+		6D1AC25623DF560600670C06 /* PT_PerfData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6D1AC25423DF560600670C06 /* PT_PerfData.txt */; };
+		6D1AC25823DF605900670C06 /* UserSuppliedPerfData in Resources */ = {isa = PBXBuildFile; fileRef = 6D1AC25723DF605900670C06 /* UserSuppliedPerfData */; };
+		6D1AC25923DF605900670C06 /* UserSuppliedPerfData in Resources */ = {isa = PBXBuildFile; fileRef = 6D1AC25723DF605900670C06 /* UserSuppliedPerfData */; };
 		6D22AEC620D06E8200ACEC81 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633D1B6C1CF94BEC00B5C4FD /* FeedbackView.swift */; };
 		6D268BEB21CD3C12002DA293 /* InstrumentSelectionDefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D268BEA21CD3C12002DA293 /* InstrumentSelectionDefs.swift */; };
 		6D268BEC21CD3C12002DA293 /* InstrumentSelectionDefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D268BEA21CD3C12002DA293 /* InstrumentSelectionDefs.swift */; };
@@ -420,6 +424,8 @@
 		6D8E104D2131031D00B1B3B8 /* Current Arrow 36x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D8E104B2131031C00B1B3B8 /* Current Arrow 36x16.png */; };
 		6D8E104F213103DA00B1B3B8 /* Current Arrow 30x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D8E104E213103DA00B1B3B8 /* Current Arrow 30x16.png */; };
 		6D8E1050213103DA00B1B3B8 /* Current Arrow 30x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D8E104E213103DA00B1B3B8 /* Current Arrow 30x16.png */; };
+		6D8E890D2423D7FA003AD786 /* FreeTrialPeriodMisc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8E890C2423D7FA003AD786 /* FreeTrialPeriodMisc.swift */; };
+		6D8E890E2423D7FA003AD786 /* FreeTrialPeriodMisc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8E890C2423D7FA003AD786 /* FreeTrialPeriodMisc.swift */; };
 		6D912C1F231EB63D0033532E /* FreqSampleAnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D912C1E231EB63D0033532E /* FreqSampleAnalysisView.swift */; };
 		6D912C20231EB63D0033532E /* FreqSampleAnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D912C1E231EB63D0033532E /* FreqSampleAnalysisView.swift */; };
 		6D912C22232BE1FF0033532E /* PerformanceLevelSettings.json in Resources */ = {isa = PBXBuildFile; fileRef = 6D912C21232BE1FF0033532E /* PerformanceLevelSettings.json */; };
@@ -1300,6 +1306,8 @@
 		6D1076A123465A74005E66D8 /* LevelSettingsInterpolating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LevelSettingsInterpolating.swift; path = PerformanceAnalysis/LevelSettingsInterpolating.swift; sourceTree = "<group>"; };
 		6D1076A4234819AF005E66D8 /* RealTimeSettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RealTimeSettingsManager.swift; path = InstrumentSelection/RealTimeSettingsManager.swift; sourceTree = "<group>"; };
 		6D1076A72348EA30005E66D8 /* RealTimeSettingsGetters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RealTimeSettingsGetters.swift; path = InstrumentSelection/RealTimeSettingsGetters.swift; sourceTree = "<group>"; };
+		6D1AC25423DF560600670C06 /* PT_PerfData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PT_PerfData.txt; path = UserSuppliedPerfData/PT_PerfData.txt; sourceTree = "<group>"; };
+		6D1AC25723DF605900670C06 /* UserSuppliedPerfData */ = {isa = PBXFileReference; lastKnownFileType = folder; path = UserSuppliedPerfData; sourceTree = "<group>"; };
 		6D268BEA21CD3C12002DA293 /* InstrumentSelectionDefs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InstrumentSelectionDefs.swift; path = InstrumentSelection/InstrumentSelectionDefs.swift; sourceTree = "<group>"; };
 		6D277EBC220A9DFF00247359 /* PerfSampleAmplitudeTrackerV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PerfSampleAmplitudeTrackerV2.swift; path = PerformanceAnalysis/PerfSampleAmplitudeTrackerV2.swift; sourceTree = "<group>"; };
 		6D34A17C2139F9E10071BAB6 /* AppDefs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDefs.swift; sourceTree = "<group>"; };
@@ -1342,6 +1350,7 @@
 		6D8E10482130E77200B1B3B8 /* Current Arrow 22x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Current Arrow 22x16.png"; path = "Images/Current Arrow 22x16.png"; sourceTree = "<group>"; };
 		6D8E104B2131031C00B1B3B8 /* Current Arrow 36x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Current Arrow 36x16.png"; path = "Images/Current Arrow 36x16.png"; sourceTree = "<group>"; };
 		6D8E104E213103DA00B1B3B8 /* Current Arrow 30x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Current Arrow 30x16.png"; path = "Images/Current Arrow 30x16.png"; sourceTree = "<group>"; };
+		6D8E890C2423D7FA003AD786 /* FreeTrialPeriodMisc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeTrialPeriodMisc.swift; sourceTree = "<group>"; };
 		6D912C1E231EB63D0033532E /* FreqSampleAnalysisView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FreqSampleAnalysisView.swift; path = PerformanceAnalysis/FreqSampleAnalysisView.swift; sourceTree = "<group>"; };
 		6D912C21232BE1FF0033532E /* PerformanceLevelSettings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = PerformanceLevelSettings.json; path = PerformanceAnalysis/PerformanceLevelSettings.json; sourceTree = "<group>"; };
 		6D912C24232C0D5E0033532E /* PerformanceLevelSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PerformanceLevelSettings.swift; path = PerformanceAnalysis/PerformanceLevelSettings.swift; sourceTree = "<group>"; };
@@ -2210,6 +2219,7 @@
 				6D5A266D2138C2BD00D2B637 /* MiscSupport.swift */,
 				6D34A17C2139F9E10071BAB6 /* AppDefs.swift */,
 				6D6245FF21F6455E00451400 /* DiscFileSystermSupport.swift */,
+				6D8E890C2423D7FA003AD786 /* FreeTrialPeriodMisc.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -2498,6 +2508,8 @@
 		6DFCF79523D0F7DF00868E48 /* Send Performance Data */ = {
 			isa = PBXGroup;
 			children = (
+				6D1AC25723DF605900670C06 /* UserSuppliedPerfData */,
+				6D1AC25423DF560600670C06 /* PT_PerfData.txt */,
 				6DFCF7A523D0F88200868E48 /* PerfDataCollector.swift */,
 			);
 			name = "Send Performance Data";
@@ -3109,6 +3121,7 @@
 				6D9C009F21DBD0490012A03B /* TenorTrombone.57.m4a in Resources */,
 				E9CFE62620263C0700C69C43 /* Monkey_Jumping Temples_monkey 04@2x.png in Resources */,
 				6DF3A10221E68A8300C3D525 /* tuba.59.mp3 in Resources */,
+				6D1AC25623DF560600670C06 /* PT_PerfData.txt in Resources */,
 				6DBF1F34213EEB850052AD57 /* Pitch - A bit low - firm up embouchure.mp4 in Resources */,
 				634658D31E90C68E00C162CF /* Piano.mf.88.m4a in Resources */,
 				6D9C007721DBD0490012A03B /* TenorTrombone.70.m4a in Resources */,
@@ -3125,6 +3138,7 @@
 				6355ECF81CF68EB70037945F /* marmstk1.wav in Resources */,
 				633C2ADE1CE813E7001C5C16 /* XML Tunes in Resources */,
 				6346590F1E90C6A000C162CF /* Trumpet.novib.mf.56.m4a in Resources */,
+				6D1AC25923DF605900670C06 /* UserSuppliedPerfData in Resources */,
 				E42B243F22F78F5B0024A4AE /* Balloon_Orange.png in Resources */,
 				6D9C00EE21DBD0C80012A03B /* Horn.mf.50.m4a in Resources */,
 				634658DB1E90C68E00C162CF /* Piano.mf.96.m4a in Resources */,
@@ -3364,9 +3378,11 @@
 				6DBF1F39213EEB850052AD57 /* Pitch - A Bit Low, Speed Up Air_512Kbps_288p.mp4 in Resources */,
 				6336B1DC1EA32B0200A78D02 /* Piano.mf.64.m4a in Resources */,
 				6336B1E21EA32B0200A78D02 /* Piano.mf.70.m4a in Resources */,
+				6D1AC25523DF560600670C06 /* PT_PerfData.txt in Resources */,
 				6336B19C1EA32AF000A78D02 /* Trumpet.novib.mf.64.m4a in Resources */,
 				6DC3FE912119628100168950 /* bananas@2x.png in Resources */,
 				6D8E104F213103DA00B1B3B8 /* Current Arrow 30x16.png in Resources */,
+				6D1AC25823DF605900670C06 /* UserSuppliedPerfData in Resources */,
 				6DBF1F43213EEB850052AD57 /* Duration - Too short_512Kbps_288p.mp4 in Resources */,
 				6336B1F41EA32B0200A78D02 /* Piano.mf.88.m4a in Resources */,
 				6D9C010721DBD0C80012A03B /* Horn.mf.73.m4a in Resources */,
@@ -3699,6 +3715,7 @@
 				6DDE849F2135A61B00A81875 /* LongtonePersonalBestSupport.swift in Sources */,
 				E409163822CC385700E5E034 /* AppDelegate.swift in Sources */,
 				6D40FC8221D72303006E1742 /* TrombonePartials.swift in Sources */,
+				6D8E890E2423D7FA003AD786 /* FreeTrialPeriodMisc.swift in Sources */,
 				6D917E672318AE94008A597C /* WaveformView.swift in Sources */,
 				6D912C26232C0D5E0033532E /* PerformanceLevelSettings.swift in Sources */,
 				63D5E8871EA37BEA007AE8D4 /* NoteOffset.swift in Sources */,
@@ -3833,6 +3850,7 @@
 				633C2AE11CE86915001C5C16 /* Constants.swift in Sources */,
 				E940183E1FA998CF00FC6271 /* FSAnalysisOverlayView.m in Sources */,
 				6DDE849E2135A61B00A81875 /* LongtonePersonalBestSupport.swift in Sources */,
+				6D8E890D2423D7FA003AD786 /* FreeTrialPeriodMisc.swift in Sources */,
 				6D917E662318AE94008A597C /* WaveformView.swift in Sources */,
 				6D912C25232C0D5E0033532E /* PerformanceLevelSettings.swift in Sources */,
 				6D40FC8021D722FD006E1742 /* TrombonePartials.swift in Sources */,

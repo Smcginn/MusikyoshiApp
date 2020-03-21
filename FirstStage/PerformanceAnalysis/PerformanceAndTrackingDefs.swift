@@ -98,13 +98,31 @@ struct IssueWeight {
 }
 
 
-let kLaunchVideoThreshold = Int(0) // (IssueWeight.kVeryEarlyOrLate)
+let kLaunchVideoThreshold = Int(1) // (IssueWeight.kVeryEarlyOrLate)
+
+enum starScoreGradation {
+    case normalLenient
+    case mediumLenient
+    case veryLenient
+}
+
 
 // matched against average scores to determine start score
-let kDefaultMaxScore_FourStars:  Int = 5
-let kDefaultMaxScore_ThreeStars: Int = 8
+let kDefaultMaxScore_FourStars:  Int =  5
+let kDefaultMaxScore_ThreeStars: Int =  8
 let kDefaultMaxScore_TwoStars:   Int = 11
 let kDefaultMaxScore_OneStars:   Int = 16
+
+let kMediumMaxScore_FourStars:   Int =  6
+let kMediumMaxScore_ThreeStars:  Int =  9
+let kMediumMaxScore_TwoStars:    Int = 12
+let kMediumMaxScore_OneStars:    Int = 17
+
+let kVeryMaxScore_FourStars:     Int =  7
+let kVeryMaxScore_ThreeStars:    Int = 10
+let kVeryMaxScore_TwoStars:      Int = 13
+let kVeryMaxScore_OneStars:      Int = 18
+
 // SLIDERABLE ^
 
 // Save samples into a collection in the sound object? (useful for debugging)
@@ -266,6 +284,7 @@ enum performanceRating: Int { // for attack, duration, and pitch
 // Used after post-performance analysis to determine which is the worst
 // issue for all performed notes
 var gPerfIssueSortCriteria: PerformanceIssueMgr.sortCriteria = .byIndividualRating
+var gTesterDidOverridePerfIssueSortCriteria = false
 func setPerfIssueSortCriteria(sortCrit: PerformanceIssueMgr.sortCriteria) {
     gPerfIssueSortCriteria = sortCrit
     print("\n  Just set gPerfIssueSortCriteria to \(gPerfIssueSortCriteria)\n")
@@ -314,7 +333,7 @@ let kWeightedPitch_NoteQuiteLowHigh_Weight:   Double = 0.4
 // Percentage thresholds for scoring overall weighted score
 let kWeightedPitch_Threshold_Correct:         Double = 0.75
 let kWeightedPitch_Threshold_Reasonable:      Double = 0.60
-let kWeightedPitch_Threshold_Accecptable:     Double = 0.35
+let kWeightedPitch_Threshold_Acceptable:      Double = 0.35
 // If the weighted pitch isn't the correct pitch, then need to check for partials.
 // To do that, see if there is a most common note played (other than the target).
 // To do *that*, see if *some* note was played a reasonable pecntage of the time.
@@ -323,6 +342,72 @@ let kWeightedPitch_MostCommonNotePlayedThreshold: Double = 0.6
 // Student must have played at least this much of the time to not get Wrong Note
 // (Will still not be correct, but gets different msg)
 let kCorrectNotePlayedPercThreshold:          Double = 0.40
+
+func noteIsEighthOrLess(dur: Double) -> Bool {
+    let currBPM = getCurrBPM()
+    let bpmRatio = 60.0 / currBPM
+    let adjDur = dur / bpmRatio
+    
+    if adjDur <= 0.502 {
+        return  true
+    } else {
+        return false
+    }
+}
+
+let kTryAdjstWeights = true
+let kWtMult = 1.5
+func calcedWeightedPitch_Threshold_Correct(isEighth: Bool) -> Double {
+    
+    if isEighth && kTryAdjstWeights {
+        let currBPM = getCurrBPM()
+        let bpmRatio = 60.0 / currBPM
+        let multValue = kWeightedPitch_Threshold_Correct * bpmRatio
+        let calcedThreshold_Correct =
+            ((kWtMult * kWeightedPitch_Threshold_Correct) + multValue) / (kWtMult + 1.0)
+        
+        print("*****>>>>> At \(currBPM) BPM, kWeightedPitch_Threshold_Correct = \(kWeightedPitch_Threshold_Correct), calcedThreshold_Correct = \(calcedThreshold_Correct)")
+    
+        return calcedThreshold_Correct
+    } else {
+        return kWeightedPitch_Threshold_Correct
+    }
+}
+
+//var gWeightedPitch_Threshold_Reasonable: Double {
+func calcedWeightedPitch_Threshold_Reasonable(isEighth: Bool) -> Double {
+    if isEighth && kTryAdjstWeights {
+        let currBPM = getCurrBPM()
+        let bpmRatio = 60.0 / currBPM
+        let multValue = kWeightedPitch_Threshold_Reasonable * bpmRatio
+        let calcedThreshold_Reasonable =
+            ((kWtMult * kWeightedPitch_Threshold_Reasonable) + multValue) / (kWtMult + 1.0)
+        
+        print("*****>>>>> At \(currBPM) BPM, kWeightedPitch_Threshold_Reasonable = \(kWeightedPitch_Threshold_Reasonable), calcedThreshold_Reasonable = \(calcedThreshold_Reasonable)")
+        
+        return calcedThreshold_Reasonable
+    } else {
+        return kWeightedPitch_Threshold_Reasonable
+    }
+}
+
+//var gWeightedPitch_Threshold_Acceptable: Double {
+func calcedWeightedPitch_Threshold_Acceptable(isEighth: Bool) -> Double {
+    if isEighth && kTryAdjstWeights {
+        let currBPM = getCurrBPM()
+        let bpmRatio = 60.0 / currBPM
+        let multValue = kWeightedPitch_Threshold_Acceptable * bpmRatio
+        let calcedThreshold_Accecptable =
+            ((kWtMult * kWeightedPitch_Threshold_Acceptable) + multValue) / (kWtMult + 1.0)
+        
+        print("*****>>>>> At \(currBPM) BPM, kWeightedPitch_Threshold_Acceptable = \(kWeightedPitch_Threshold_Acceptable), calcedThreshold_Accecptable = \(calcedThreshold_Accecptable)")
+        
+        return calcedThreshold_Accecptable
+    } else {
+        return kWeightedPitch_Threshold_Acceptable
+    }
+}
+
 
 /////////////////////////////////////////////////////////////////////////
 //  Video help, or not
@@ -355,7 +440,7 @@ var gUseTextNotVideoScore = false
 var gMKDebugOpt_IsSoundAndLatencySettingsEnabled = false
 var gMKDebugOpt_HomeScreenDebugOptionsEnabled = false
 
-var gMKDebugOpt_ShowDebugSettingsBtn = false
+var gMKDebugOpt_ShowDebugSettingsBtn = false   // To turn "DebugMode" on
 var gMKDebugOpt_SendPerfDataEnabled = false
 var gMKDebugOpt_ShowSlidersBtn = false
 var gMKDebugOpt_ShowFakeScoreInLTAlert = false
@@ -369,9 +454,9 @@ let kMKDebugOpt_PrintMinimalNoteAndSoundResults = true
 var kMKDebugOpt_PrintMinimalNoteAnalysis        = true
 
 let kDoPrintAmplitude = true
-let kDoPrintFrequency = false
+let kDoPrintFrequency = true
 let kAmplitudePrintoutMultiplier_Sim =  12.0
-let kAmplitudePrintoutMultiplier_HW  =  100.0
+let kAmplitudePrintoutMultiplier_HW  =  70.0
 var gAmplitudePrintoutMultiplier = kAmplitudePrintoutMultiplier_Sim
 
 var gDoAmplitudeRiseChecking = true

@@ -15,8 +15,12 @@ import Foundation
 import SwiftyJSON
 import AudioKit
 
-var gDoOverrideSubsPresent = false      // CHECK_THIS_FOR_SUBMIT
-var gDoLimitLevels = false              // CHECK_THIS_FOR_SUBMIT
+// For the time being - until June 15, 2020,  no longer checking subs, etc.
+// So this is set to always allow all access.
+var gDoOverrideSubsPresent = true // JUNE15      // CHECK_THIS_FOR_SUBMIT
+
+
+var gDoLimitLevels = false                       // CHECK_THIS_FOR_SUBMIT
 let kNumberOfLevelsToShow: Int = 16
 
 // This is the artificial level number to display the tryput section at (it is not

@@ -96,16 +96,28 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
         // PlayTunes for Trumpet, English Help Videos
         
        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        accessUpperLevelsLabel.text = "To Access All Of PlayTunes' Upper Levels"
         
+        // JUNE15
+        accessUpperLevelsLabel.text = ""
+        // was: accessUpperLevelsLabel.text = "To Access All Of PlayTunes' Upper Levels"
+
 //        var tryOutDetText = "You can access Levels 1 & 2 for free, forever. That’s almost 200 exercises!\n\n"
 //        tryOutDetText += "For this free try-out, you don't need to do anything else; you are good to go!"
         
-        var tryOutDetText = "We have lots of free areas of the app to try out for both beginners and those with some experience.\n> All Days of Levels 1 and 2 are completely free.\n> Day 1 of these Levels is also free: Levels 3, 4, 7, 10, 15, 20, 25, 30.\n> We even give you parts of our Long Tones Level, the Lip Slurs Level, and the Clarinet Breaks Level.\n\nSo go ahead and explore Day 1 of all the Pink levels - you can unlock Gray Levels and Days when you purchase a subscription.\n\n"
+        // JUNE15
+        var tryOutDetText = " Until June 15, 2020, playTunes is completely Free!  All Levels!\n\n\nAfter June 15, 2020, "
         
-        tryOutDetText += "That’s hundreds of free exercises to help you get better!\n\n"
+        tryOutDetText += "we have lots of free areas of the app to try out for both beginners and those with some experience.\n> All Days of Levels 1 and 2 are completely free.\n> Day 1 of these Levels is also free: Levels 3, 4, 7, 10, 15, 20, 25, 30.\n> We even give you parts of our Long Tones Level, the Lip Slurs Level, and the Clarinet Breaks Level.\n\nSo go ahead and explore Day 1 of all the Pink levels - you can unlock Gray Levels and Days when you purchase a subscription.\n\n"
         
-        tryOutDetText += "For access to 150 days of practice, and hundreds of unique exercises, you will need to purchase a PlayTunes All-Level Access Subscription.\n\n"
+        tryOutDetText += "That’s hundreds of free exercises to help you get better!\n\n\n"
+        
+        // JUNE15, was:
+//        tryOutDetText += "For access to 150 days of practice, and hundreds of unique exercises, you will need to purchase a PlayTunes All-Level Access Subscription.\n\n"
+        
+        tryOutDetText += "After June 15, 2020:\n\nFor access to 150 days of practice, and hundreds of unique exercises, you will need to go to the App Store to see what the current purchase options are (including a possible free trial extension). At a minimum you will need to download the latest version of PlayTunes."
+       
+        // JUNE15
+        tryOutDetText += "\n\nNote: If you have purchased a subscription, please email us at Shawn@musikyoshi.com."
         
 //        tryOutDetText += "PlayTunes offers a 1-month ($2.99/month) and 6-month ($12.99 for 6 months) Auto-Renewing Subscriptions.\n\n"
         
@@ -114,13 +126,17 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
         var subDetailText = "" //In order to get access to the 500 exercises in the upper levels, you will need to purchase a PlayTunes All-Level Access Subscription through iTunes.\n\n"
         //subDetailText += "PlayTunes offers 1-month ($9.99 per month) and 6-month ($49.99 for 6 months) Auto-Renewing Subscriptions.\n\n"
         
-        subDetailText += "PlayTunes offers 1-month and 6-month Auto-Renewing Subscriptions.\n\n"
+        // JUNE15, was:       subDetailText += "PlayTunes offers 1-month and 6-month Auto-Renewing Subscriptions.\n\n"
         
-        subDetailText += "To purchase a xPlayTunes subscription:\n> Go to the Settings screen (press the gear button on the main screen),\n> Select 'Purchase Options' to review, choose, and purchase an available Subscription through iTunes.\n\n"
+        // JUNE15, was:subDetailText += "To purchase a xPlayTunes subscription:\n> Go to the Settings screen (press the gear button on the main screen),\n> Select 'Purchase Options' to review, choose, and purchase an available Subscription through iTunes.\n\n"
 
         accessUpperLevelsDetailLabel.text = subDetailText
         
+        // JUNE15
+        subsDetailLabel.text = ""
         
+        // JUNE15, was:
+        /*
         var arSubMsgStr = "Please read below about the nature of Auto-Renewing Subscriptions purchased through iTunes:\n"
 //        var arSubMsgStr = "Auto-Renewing Subscriptons purchased through iTunes have the following features:\n"
         arSubMsgStr += "\u{2022} Payment will be charged to iTunes Account at confirmation of purchase\n"
@@ -131,9 +147,10 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
         arSubMsgStr += "\u{2022} Any unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription to that publication, where applicable"
         
         arSubMsgStr += "\n\n\n" + helpText
-        
+ 
         subsDetailLabel.text = arSubMsgStr
-        
+         */
+
         
         scrollView.showsVerticalScrollIndicator = true
     }

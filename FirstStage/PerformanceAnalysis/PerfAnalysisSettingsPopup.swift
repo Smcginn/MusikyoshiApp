@@ -250,6 +250,7 @@ class PerfAnalysisSettingsPopupView: UIView, UIPickerViewDataSource, UIPickerVie
         // include when available
         // default: kPerfIssueSortCriteria = .byOverallRating
         }
+        gTesterDidOverridePerfIssueSortCriteria = true
     }
     
     func showPopup() {

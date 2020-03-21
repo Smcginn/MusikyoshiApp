@@ -122,6 +122,11 @@ class AudioKitManager: NSObject {
         delay(0.5) {}
 */
         
+        
+        let yoInputFormat = AudioKit.engine.inputNode.inputFormat(forBus: 0)
+        let yoChanCount = yoInputFormat.channelCount
+        let yoSampRate  = yoInputFormat.sampleRate
+        
         // This seems to fix the device HW sample rate dosena't match the
         // requested sample rate
         var inputFormat = AudioKit.engine.inputNode.outputFormat(forBus: 0)

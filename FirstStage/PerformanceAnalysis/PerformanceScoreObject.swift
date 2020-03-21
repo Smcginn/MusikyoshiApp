@@ -39,7 +39,16 @@ public class PerformanceScoreObject
     var status: perfObjStatus = .pendingStart
     var completed: Bool = false
     
+    var willEndSoon = false
     
+    func hasEnded() -> Bool {
+        return status == .ended ? true : false
+    }
+    
+    func isActive() -> Bool {
+        return status == .active ? true : false
+    }
+
     ////////////////////////////////////////////////////////////////////////////
     //  ""Expected": values based on XML file: EXACTLY when the note/rest
     //  should start and end, and it's duration. These are used to determine if
