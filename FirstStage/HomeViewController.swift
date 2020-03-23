@@ -415,18 +415,18 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     
         // JUNE15
         
-        if gTrialPeriodExpired {
-            showEndDateExpiredAlert(parentVC: self)
-        } else {
-            let numDays = daysUntilFreePeriodEndDate()
-            if numDays > 0 {
-                setTrialNotExpiredVars()
-                displayFreeTrialExpiryWarningIfNeeded(parentVC: self)
-            } else {
-                setTrialExpiredVars()
-                showEndDateExpiredAlert(parentVC: self)
-            }
-        }
+//        if gTrialPeriodExpired {
+//            showEndDateExpiredAlert(parentVC: self)
+//        } else {
+//            let numDays = daysUntilFreePeriodEndDate()
+//            if numDays > 0 {
+//                setTrialNotExpiredVars()
+//                displayFreeTrialExpiryWarningIfNeeded(parentVC: self)
+//            } else {
+//                setTrialExpiredVars()
+//                showEndDateExpiredAlert(parentVC: self)
+//            }
+//        }
         
         //SendPerfDataBtn.titleLabel?.text = ""
     }
@@ -456,10 +456,12 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         }
         
         let shouldDisplayOverview = !UserDefaults.standard.bool(forKey: "displayedOverviewPopup")
-        
         if shouldDisplayOverview {
-            displayWelcomeVC()
-            UserDefaults.standard.set(true, forKey: "displayedOverviewPopup")
+            delay(0.5) {
+                self.displayWelcomeVC()
+                // JUNE15_2
+                // restore:  UserDefaults.standard.set(true, forKey: "displayedOverviewPopup")
+            }
         }
         
 //        if !didDisplayOverview {

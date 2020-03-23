@@ -182,6 +182,11 @@ class InAppPurchasesViewController: UIViewController {
             ac.addAction(UIAlertAction(title: "OK", style: .default,
                                        handler: alreadyPurchasedHandler))
             self.present(ac, animated: true, completion: nil)
+        } else {
+            let numDays = daysUntilFreePeriodEndDate()
+            if numDays > 4 {
+                showDontNeedToPurchaserAlert(parentVC: self)
+            }
         }
     }
     
@@ -503,5 +508,24 @@ class InAppPurchasesViewController: UIViewController {
         }
         return foundNode
     }
+}
+
+func showDontNeedToPurchaserAlert(parentVC: UIViewController) {   // JUNE15_2
+    let numDays = daysUntilFreePeriodEndDate()
+    // let titleStr = "Use PlayTunes for Free until June 15, 2020!\n\n\(numDays) days remaining - Enjoy!"
+    let titleStr = "Use PlayTunes for Free until June 15, 2020"
+//    let msgStr = "\nAfter June 15, 2020, you will have purchase options if you wish to continue. Please visit the App Store in June for more info. (Your use of PlayTunes now does not commit you in any way to purchasing.)"
+    
+    let msgStr = "\nYou don't need to purchase a subscription until after June 15, 2020 - you have \(numDays) days remaining for Free All-Level access.\n\nBut if you are enjoying PlayTunes and wish to continue using it, here are the subscriptions we offer."
+    
+    let ac = MyUIAlertController(title: titleStr,
+                                 message: msgStr,
+                                 preferredStyle: .alert)
+    ac.addAction(UIAlertAction(title: "OK",
+                               style: .default,
+                               handler: nil))
+    ac.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = kDefault_AlertBackgroundColor
+    
+    parentVC.present(ac, animated: true, completion: nil)
 }
 

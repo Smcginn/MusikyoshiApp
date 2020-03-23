@@ -71,7 +71,13 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
         // howToUseDetText += "   > Select 'Choose' to pick individual exercises\n\n"
         // howToUseDetText += "Tip: It's best to use earbuds or headphones so you can hear the metronome."
 
-        var howToUseDetText = "\u{2022} Use Headphones! We have a built-in metronome which REALLY helps your accuracy, and your score!  You can only hear the metronome with headphones.\n\n"
+        
+        var howToUseDetText = "2020 School Term-End Giveaway! Use all of PlayTunes for Free until June 15, 2020! - Enjoy!\n"
+        howToUseDetText +=  "\nAfter June 15, 2020, you can still access many levels for free (see below). If you wish to continue with full-access, you can purchase a subscription (subscriptions are also explained below).\n\nBut until then, you do not have to sign up for anything! And your free use of PlayTunes does not commit you in any way to a purchase.\n\n\n"
+
+        howToUseDetText += "Basic Usage:\n\n"
+        
+        howToUseDetText += "\u{2022} Use Headphones! We have a built-in metronome which REALLY helps your accuracy, and your score!  You can only hear the metronome with headphones.\n\n"
         
         howToUseDetText += "\u{2022} Select the round “Gear” button to see the Settings.\n\n"
         
@@ -97,27 +103,28 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
         
        ////////////////////////////////////////////////////////////////////////////////////////////////////
         
-        // JUNE15
-        accessUpperLevelsLabel.text = ""
-        // was: accessUpperLevelsLabel.text = "To Access All Of PlayTunes' Upper Levels"
+        // JUNE15_2
+        // accessUpperLevelsLabel.text = ""
+        accessUpperLevelsLabel.text = "To Access All Of PlayTunes' Upper Levels"
 
 //        var tryOutDetText = "You can access Levels 1 & 2 for free, forever. That’s almost 200 exercises!\n\n"
 //        tryOutDetText += "For this free try-out, you don't need to do anything else; you are good to go!"
         
         // JUNE15
-        var tryOutDetText = " Until June 15, 2020, playTunes is completely Free!  All Levels!\n\n\nAfter June 15, 2020, "
+        var tryOutDetText = " Until June 15, 2020, playTunes is completely Free!  All Levels!\n\n\nAfter June 15, 2020, you can either explore our standard Free Trial, or purchase a subscription.\n\n"
         
-        tryOutDetText += "we have lots of free areas of the app to try out for both beginners and those with some experience.\n> All Days of Levels 1 and 2 are completely free.\n> Day 1 of these Levels is also free: Levels 3, 4, 7, 10, 15, 20, 25, 30.\n> We even give you parts of our Long Tones Level, the Lip Slurs Level, and the Clarinet Breaks Level.\n\nSo go ahead and explore Day 1 of all the Pink levels - you can unlock Gray Levels and Days when you purchase a subscription.\n\n"
+        tryOutDetText += "Standard Free Trial: We have lots of free areas of the app to try out for both beginners and those with some experience.\n> All Days of Levels 1 and 2 are completely free.\n> Day 1 of these Levels is also free: Levels 3, 4, 7, 10, 15, 20, 25, 30.\n> We even give you parts of our Long Tones Level, the Lip Slurs Level, and the Clarinet Breaks Level.\n\nSo go ahead and explore Day 1 of all the Pink levels - you can unlock Gray Levels and Days when you purchase a subscription.\n\n"
         
         tryOutDetText += "That’s hundreds of free exercises to help you get better!\n\n\n"
         
         // JUNE15, was:
-//        tryOutDetText += "For access to 150 days of practice, and hundreds of unique exercises, you will need to purchase a PlayTunes All-Level Access Subscription.\n\n"
         
-        tryOutDetText += "After June 15, 2020:\n\nFor access to 150 days of practice, and hundreds of unique exercises, you will need to go to the App Store to see what the current purchase options are (including a possible free trial extension). At a minimum you will need to download the latest version of PlayTunes."
-       
+        //tryOutDetText += "\n\n"
+        
+        tryOutDetText += "After June 15, 2020, for access to all 150 days of practice, and hundreds of unique exercises, you will need to purchase a PlayTunes All-Level Access Subscription.\n\n"
+
         // JUNE15
-        tryOutDetText += "\n\nNote: If you have purchased a subscription, please email us at Shawn@musikyoshi.com."
+//        tryOutDetText += "\n\nNote: If you have purchased a subscription, please email us at Shawn@musikyoshi.com."
         
 //        tryOutDetText += "PlayTunes offers a 1-month ($2.99/month) and 6-month ($12.99 for 6 months) Auto-Renewing Subscriptions.\n\n"
         
@@ -126,17 +133,17 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
         var subDetailText = "" //In order to get access to the 500 exercises in the upper levels, you will need to purchase a PlayTunes All-Level Access Subscription through iTunes.\n\n"
         //subDetailText += "PlayTunes offers 1-month ($9.99 per month) and 6-month ($49.99 for 6 months) Auto-Renewing Subscriptions.\n\n"
         
-        // JUNE15, was:       subDetailText += "PlayTunes offers 1-month and 6-month Auto-Renewing Subscriptions.\n\n"
+        subDetailText += "PlayTunes offers 1-month and 6-month Auto-Renewing Subscriptions.\n\n"
         
-        // JUNE15, was:subDetailText += "To purchase a xPlayTunes subscription:\n> Go to the Settings screen (press the gear button on the main screen),\n> Select 'Purchase Options' to review, choose, and purchase an available Subscription through iTunes.\n\n"
+        subDetailText += "To purchase a PlayTunes subscription:\n> Go to the Settings screen (press the gear button on the main screen),\n> Select 'Purchase Options' to review, choose, and purchase an available Subscription through iTunes.\n\n"
 
         accessUpperLevelsDetailLabel.text = subDetailText
         
         // JUNE15
-        subsDetailLabel.text = ""
+        //subsDetailLabel.text = ""
         
         // JUNE15, was:
-        /*
+        
         var arSubMsgStr = "Please read below about the nature of Auto-Renewing Subscriptions purchased through iTunes:\n"
 //        var arSubMsgStr = "Auto-Renewing Subscriptons purchased through iTunes have the following features:\n"
         arSubMsgStr += "\u{2022} Payment will be charged to iTunes Account at confirmation of purchase\n"
@@ -149,8 +156,6 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
         arSubMsgStr += "\n\n\n" + helpText
  
         subsDetailLabel.text = arSubMsgStr
-         */
-
         
         scrollView.showsVerticalScrollIndicator = true
     }
@@ -164,6 +169,28 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
                     userInfo: nil,
                     repeats: true)
         scrollView.flashScrollIndicators()
+        
+        // JUNE_15
+        let shouldDisplayOverview = !UserDefaults.standard.bool(forKey: "displayedOverviewPopup")
+        if shouldDisplayOverview { // first time in app, first time here
+
+            if !gTrialPeriodExpired {
+                let numDays = daysUntilFreePeriodEndDate()
+                if numDays > 0 {
+                    setTrialNotExpiredVars()
+                    showFirstTimeAlert()
+                    let nextWarningDay = getDayCountForNextWarning()
+                    UserDefaults.standard.set(nextWarningDay,
+                                              forKey: Constants.Settings.FreeTrial_6_15_2020_NumDaysLeft)
+                 } else {
+                    UserDefaults.standard.set(true, forKey: "displayedOverviewPopup")
+                    setTrialExpiredVars()
+                    showEndDateExpiredAlert(parentVC: self)
+                }
+            }
+            // Put back in if get rid of call in alerts:
+            //     UserDefaults.standard.set(true, forKey: "displayedOverviewPopup")
+        }
     }
     
     @objc func flashScrollBar() {
@@ -175,6 +202,42 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
         timer.invalidate()
     }
     
+    func showFirstTimeAlert() {   // JUNE15
+        let numDays = daysUntilFreePeriodEndDate()
+        let titleStr = "2020 School Term-End Giveaway! Use PlayTunes for Free until June 15, 2020!\n\n\(numDays) days remaining - Enjoy!"
+        let msgStr = "\n\nAfter June 15, 2020, if you wish to continue, you can purchase a subscription (explained on this screen) at that time.\n(But until then, you do not have to sign up for anything! And your free use of PlayTunes does not commit you in any way to a purchase.)"
+        
+        let ac = MyUIAlertController(title: titleStr,
+                                     message: msgStr,
+                                     preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK",
+                                   style: .default,
+                                   handler: showThisIsHelpScreenAlert))
+        ac.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = kDefault_AlertBackgroundColor
+        
+        self.present(ac, animated: true, completion: nil)
+    }
+    
+    func showThisIsHelpScreenAlert(_ act: UIAlertAction) {
+        UserDefaults.standard.set(true, forKey: "displayedOverviewPopup")
+
+        let titleStr = "This is the Help Screen"
+        var msgStr = "\nIt discusses how to use PlayTunes, how the Free Trial works, contact information, and purchase options.\n\n"
+        
+        msgStr += "You can come back to this screen by pressing the Information button on the Home screen (the circle with an 'i' in the middle)."
+        
+        let ac = MyUIAlertController(title: titleStr,
+                                     message: msgStr,
+                                     preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK - Got it!",
+                                   style: .default,
+                                   handler: nil))
+        ac.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = kDefault_AlertBackgroundColor
+        
+        self.present(ac, animated: true, completion: nil)
+    }
+    
+
 //    override func viewDidLayoutSubviews() {
 //        super.viewDidLayoutSubviews()
 //        

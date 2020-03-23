@@ -519,14 +519,16 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC, 
         if indexPath.section == 0 &&
            indexPath.row == kTCIndex_PurchOptions {
             
-            showPurchOptionsAlert()
-            // JUNE15 was:
-//            if let parent = self.parent as? SettingsViewController {
-//                parent.performSegue(withIdentifier: "toPurchaseOptions", sender: nil)
-//            }
+            // JUNE15_2 was:
+            //  showPurchOptionsAlert()
+            
+            if let parent = self.parent as? SettingsViewController {
+                parent.performSegue(withIdentifier: "toPurchaseOptions", sender: nil)
+            }
         }
     }
 
+/* For original JUNE15 work:
     func showPurchOptionsAlert() {   // JUNE15
         let titleStr = "We are re-evaluating our purchase options"
         let msgStr = "\nUse PlayTunes for Free until June 15, 2020!\n\nAfter June 15, please go to the App Store for more information and to download the latest version of PlayTunes.\n\nNote: If you have purchased a subscription, please email us at Shawn@musikyoshi.com."
@@ -541,7 +543,8 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC, 
         
         self.present(ac, animated: true, completion: nil)
     }
-
+*/
+    
     // Table View Cell indices
     let kTCIndex_InstPicker         = 0
     let kTCIndex_BPM                = 1

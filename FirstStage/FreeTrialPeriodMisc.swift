@@ -14,7 +14,7 @@ var gTrialPeriodExpired = false
 
 
 // Temp for testing
-// var gTestExpirationCount = 0
+var gTestExpirationCount = 0
 
 
 // These vars control if the app is all-level-access enabled
@@ -29,6 +29,10 @@ func setTrialNotExpiredVars() {
 }
 
 func daysUntilFreePeriodEndDate() -> Int {
+//    if gTestExpirationCount > 3 {
+//        return 19
+//    }
+    
     guard let endDate = getFreePeriodEndDate() else {
         itsBad()
         return 0
@@ -56,12 +60,16 @@ func localDate() -> Date {
 }
 */
 
+// Need to add 2 to day so math works out, hence the 17.   (1 day so won't return 0 when
+// get to transition day, and 1 day to allow for extra hours due to locale differences).
+let June_15_2020_text = "06/17/2020"
+
+let testDate_text     = "03/20/2020"
+
 func getFreePeriodEndDate() -> Date? {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "MM/dd/yyyy"
-    // Need to add 2 to day, hence the 17   (1 so won't return 0 when getting
-    // num days, and 1 to allow for extra hours due to locale differences)
-    if let June15_2020 = dateFormatter.date(from: "06/17/2020") {
+    if let June15_2020 = dateFormatter.date(from: June_15_2020_text) {
         return June15_2020
     } else {
         return nil
@@ -111,14 +119,22 @@ func displayFreeTrialExpiryWarningIfNeeded(parentVC: UIViewController) {
 // Alert-displaying funcs
 
 func showEndDateAlert(parentVC: UIViewController) {   // JUNE15
-    let numDays = daysUntilFreePeriodEndDate()
-    let titleStr = "Use PlayTunes for Free until June 15, 2020!\n\n\(numDays) days remaining - Enjoy!"
-    let msgStr = "\nAfter June 15, 2020, you will have purchase options if you wish to continue. Please visit the App Store in June for more info. (Your use of PlayTunes now does not commit you in any way to purchasing.)"
-    
+    let numDaysLeft = daysUntilFreePeriodEndDate()
+    let titleStr = "Use PlayTunes for Free until June 15, 2020!\n\n\(numDaysLeft) days remaining - Enjoy!"
+    var msgStr = ""
+    var okText = ""
+
+    if numDaysLeft > 21 {
+        msgStr += "\nYou do not have to sign up for anything, and your use of PlayTunes does not commit you in any way to a purchase.  Stay Safe!"
+        okText = "Okay - Got it"
+    } else {
+        msgStr += "\nAfter June 15, 2020, if you wish to continue, you can purchase a subscription. (Subscriptions are explained on the Help screen, or go to Settings > Purchase Options.)\n\n(For the next \(numDaysLeft) days, you do not have to sign up for anything, and your use of PlayTunes does not commit you in any way to a purchase.)"
+        okText = "Okay"
+   }
     let ac = MyUIAlertController(title: titleStr,
                                  message: msgStr,
                                  preferredStyle: .alert)
-    ac.addAction(UIAlertAction(title: "OK",
+    ac.addAction(UIAlertAction(title: okText,
                                style: .default,
                                handler: nil))
     ac.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = kDefault_AlertBackgroundColor
@@ -130,8 +146,9 @@ func showEndDateExpiredAlert(parentVC: UIViewController) {   // JUNE15
     let titleStr = "PlayTunes All-Level access\nis no longer free"
     var msgStr = "\nThe Spring 2020 Free trial period ended on June 15.\n\n"
     msgStr += "Many Levels/Days are still free for tryout. To get full-level access, "
-    msgStr += "you will need to go to the App Store and search for PlayTunes to download "
-    msgStr += "the latest version and see the current offerings."
+    msgStr += "you will need to purchase a subscription. Go to Settings > Purchase Options to view our current offerings, or to the Help screen to see a general discussion of Subscriptions."
+    msgStr += "\n\n(You should first make sure you have the latest version of PlayTunes.)"
+
     //msgStr += "(You may also visit Musikyoshi.com for more details.)"
     
     let ac = MyUIAlertController(title: titleStr,
@@ -145,8 +162,15 @@ func showEndDateExpiredAlert(parentVC: UIViewController) {   // JUNE15
     parentVC.present(ac, animated: true, completion: nil)
 }
 
-
-
+func quickCheckUserHasValidSub() -> Bool {
+    
+    if PlayTunesIAPProducts.store.userDefsStoredSubscStatusIsKnown() &&
+       PlayTunesIAPProducts.store.userDefsStoredSubscIsGoodToGo() {
+        return true
+    } else {
+        return false
+    }
+}
 
 /*
  //Ref date

@@ -209,13 +209,11 @@ class LevelsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
- //       gTestExpirationCount += 1
+        // for testing:   JUNE15
+//        gTestExpirationCount += 1
         
         // JUNE15
-        let numDays = daysUntilFreePeriodEndDate()
-//        if gTestExpirationCount > 5 {
-//            numDays = 0
-//        }
+        var numDays = daysUntilFreePeriodEndDate()
         if numDays > 0 && !gTrialPeriodExpired {
             displayFreeTrialExpiryWarningIfNeeded(parentVC: self)
         } else if !gTrialPeriodExpired {
@@ -412,35 +410,29 @@ class LevelsViewController: UIViewController {
         
         
         // JUNE15 - Remove this:
-        let titleStr = "Try Out Days In Pink Levels For Free!"
-        var msgStr = "- All Days of Levels 1 & 2: Free!\n- Day 1 of other Pink Levels - Free!\n\n"
-        msgStr += "Now that the Spring 2020 Free Trial period is over, "
-        msgStr += "you must download the latest version of PlayTunes to view the current purchase options (including possible free trial extensions).\n\n"
-        msgStr += "Please go to the App Store to get info on purchase options and download the latest version of PlayTunes."
+//        let titleStr = "Try Out Days In Pink Levels For Free!"
+//        var msgStr = "- All Days of Levels 1 & 2: Free!\n- Day 1 of other Pink Levels - Free!\n\n"
+//        msgStr += "Now that the Spring 2020 Free Trial period is over, "
+//        msgStr += "you must download the latest version of PlayTunes to view the current purchase options (including possible free trial extensions).\n\n"
+//        msgStr += "Please go to the App Store to get info on purchase options and download the latest version of PlayTunes."
 
         // JUNE15 - and restore this:
-        /*
+        
         let titleStr = "Try Out Days In Pink Levels For Free!"
         // All Pink Levels To access all of PlayTunes, Purchase (or Restore) a Subscription"
         var msgStr = "- All Days of Levels 1 & 2: Free!\n- Day 1 of other Pink Levels - Free!\n\n"
-        msgStr += "For total access PlayTunes, you must purchase (or Restore) a Subscription. "
-        msgStr += "Go to 'Purchase Options' on the Home screen.\n\n"
+        msgStr += "Now that the Spring 2020 Free Trial period is over, for total access PlayTunes, you must purchase (or Restore) a Subscription. "
+        msgStr += "Go to Settings > Purchase Options.\n\n"
+        msgStr += "(You should first make sure you have the latest version of PlayTunes.)\n\n"
+        
         //        msgStr += "(If you have a valid Subscription from another device, use the Restore button)\n\n"
         msgStr += "(If you just completed a purchase or restore, verification can take a while. Try again in a bit.)"
-        */
-        
-        
-
         
         
         let ac = MyUIAlertController(title: titleStr, message: msgStr, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         
         self.present(ac, animated: true, completion: nil)
-        
-        
-        
-        
     }
     
     //    IAPSUBS
