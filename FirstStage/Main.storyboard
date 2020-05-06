@@ -288,7 +288,7 @@
         <!--Levels View Controller-->
         <scene sceneID="jyE-0C-4kk">
             <objects>
-                <viewController id="rEJ-4l-r7A" customClass="LevelsViewController" customModule="PlayTunes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="LevelsViewController" storyboardIdentifier="LevelsViewController" id="rEJ-4l-r7A" customClass="LevelsViewController" customModule="PlayTunes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LB7-jh-rb8"/>
                         <viewControllerLayoutGuide type="bottom" id="Qxq-TR-bRS"/>
@@ -3741,9 +3741,9 @@
         <image name="star" width="52" height="49"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="U1z-RF-J8N"/>
-        <segue reference="V6H-VQ-iwn"/>
-        <segue reference="oBi-bD-xs0"/>
+        <segue reference="VV6-MN-jRE"/>
+        <segue reference="QwO-5n-4O7"/>
+        <segue reference="q4t-qW-U8B"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.23921568627450979" blue="0.6588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
