@@ -127,7 +127,7 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
         // Ask for permission to use the microphone, if not already granted
         var permissionGranted = false
         if alwaysFalseToSuppressWarn() { print("\(permissionGranted)") }
-        switch AVAudioSession.sharedInstance().recordPermission() {
+        switch AVAudioSession.sharedInstance().recordPermission {
         case AVAudioSessionRecordPermission.granted:
             permissionGranted = true
         case AVAudioSessionRecordPermission.denied:

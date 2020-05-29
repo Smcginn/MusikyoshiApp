@@ -33,7 +33,7 @@ class OnboardingViewController: UIViewController {
         var pageIndColor =  pageControl.pageIndicatorTintColor
         var currPageIndColor =  pageControl.currentPageIndicatorTintColor
         
-        view.bringSubview(toFront: pageControl)
+        view.bringSubviewToFront(pageControl)
         
     }
     

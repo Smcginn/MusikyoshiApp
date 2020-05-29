@@ -15,7 +15,7 @@ class OnboardingSlideView: UIView {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var startButton: UIButton!
     
-    func addTarget(target: AnyObject, action: Selector, forControlEvents: UIControlEvents) {
+    func addTarget(target: AnyObject, action: Selector, forControlEvents: UIControl.Event) {
         startButton.addTarget(target, action: action, for: forControlEvents)
     }
 

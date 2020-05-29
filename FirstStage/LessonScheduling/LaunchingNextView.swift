@@ -237,7 +237,7 @@ class LaunchingNextView: UIView {
         let pauseStr = "Pause"
         let pauseMutableString =
             NSMutableAttributedString( string: pauseStr,
-                                       attributes: [NSAttributedStringKey.font:UIFont(
+                                       attributes: [NSAttributedString.Key.font:UIFont(
                                         name: "Marker Felt",
                                         size: kBtnTextFontSz)!])
         pauseBtn?.titleLabel?.attributedText = pauseMutableString
@@ -254,9 +254,9 @@ class LaunchingNextView: UIView {
             NSMutableAttributedString(
                 string: forString,
                 attributes: [
-                    NSAttributedStringKey.font:UIFont( name: "Marker Felt",
+                    NSAttributedString.Key.font:UIFont( name: "Marker Felt",
                                                        size: fontSize)!,
-                    NSAttributedStringKey.paragraphStyle: paragraphStyle] )
+                    NSAttributedString.Key.paragraphStyle: paragraphStyle] )
         return retMutableStr
     }
     
@@ -305,10 +305,10 @@ class LaunchingNextView: UIView {
         let ldingNextAttrStr =
             NSMutableAttributedString(
                 string: ldingNextStr,
-                attributes: [ NSAttributedStringKey.font:UIFont(
+                attributes: [ NSAttributedString.Key.font:UIFont(
                     name: "Marker Felt",
                     size: kMediumTextFontSz)!,
-                              NSAttributedStringKey.paragraphStyle: paragraphStyle])
+                              NSAttributedString.Key.paragraphStyle: paragraphStyle])
         loadingNextLbl?.attributedText  = ldingNextAttrStr
         loadingNextLbl?.textColor = UIColor.black
         self.addSubview(loadingNextLbl!)

@@ -440,7 +440,7 @@ var gUseTextNotVideoScore = false
 var gMKDebugOpt_IsSoundAndLatencySettingsEnabled = false
 var gMKDebugOpt_HomeScreenDebugOptionsEnabled = false
 
-var gMKDebugOpt_ShowDebugSettingsBtn = false   // To turn "DebugMode" on
+var gMKDebugOpt_ShowDebugSettingsBtn = true   // To turn "DebugMode" on
 var gMKDebugOpt_SendPerfDataEnabled = false
 var gMKDebugOpt_ShowSlidersBtn = false
 var gMKDebugOpt_ShowFakeScoreInLTAlert = false

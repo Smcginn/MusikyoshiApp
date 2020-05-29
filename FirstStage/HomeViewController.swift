@@ -573,7 +573,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         
         particleEmitter.emitterPosition = CGPoint(x: LessonsBtn.frame.midX, y: LessonsBtn.frame.midY)
         particleEmitter.zPosition = -1.0
-        particleEmitter.emitterShape = "point"
+        particleEmitter.emitterShape = CAEmitterLayerEmitterShape(rawValue: "point")
         particleEmitter.emitterSize = CGSize(width: LessonsBtn.frame.width, height: LessonsBtn.frame.height)
         
         let wholeNoteOrange = makeEmitterCell(imageName: "wholeNote", color: .orangeColor)

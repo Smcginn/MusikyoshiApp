@@ -193,8 +193,8 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
     var sparkLineCount : CGFloat = 0
     let nearUpArrowImage = UIImage(named: "NearArrow")
     let farUpArrowImage = UIImage(named: "FarArrow")
-    let nearDownArrowImage = UIImage(cgImage: (UIImage(named: "NearArrow")?.cgImage)!, scale: CGFloat(1.0), orientation: UIImageOrientation.downMirrored)
-    let farDownArrowImage = UIImage(cgImage: (UIImage(named: "FarArrow")?.cgImage)!, scale: CGFloat(1.0), orientation: UIImageOrientation.downMirrored)
+    let nearDownArrowImage = UIImage(cgImage: (UIImage(named: "NearArrow")?.cgImage)!, scale: CGFloat(1.0), orientation: UIImage.Orientation.downMirrored)
+    let farDownArrowImage = UIImage(cgImage: (UIImage(named: "FarArrow")?.cgImage)!, scale: CGFloat(1.0), orientation: UIImage.Orientation.downMirrored)
     var arrowImageView : UIImageView!
     var smileImage = UIImage(named: "GreenSmile")
     var smileImageView : UIImageView!
@@ -567,7 +567,7 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
         NotificationCenter.default.addObserver(
                 self,
                 selector: #selector(handleAVAudioInterruption(_:)),
-                name: NSNotification.Name.AVAudioSessionInterruption,
+                name: AVAudioSession.interruptionNotification,
                 object: self)
         
         balloon.defaultRadius =  10.0
@@ -599,7 +599,7 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
         let btnStr = "Clear All Long\nTone Personal\nBest Records"
         let btnAttrStr =
             NSMutableAttributedString( string: btnStr,
-                                       attributes: [NSAttributedStringKey.font:UIFont(
+                                       attributes: [NSAttributedString.Key.font:UIFont(
                                         name: "System Font",
                                         size: 14.0)!])
         clearLTRecordsBtn?.titleLabel?.attributedText = btnAttrStr
@@ -658,7 +658,7 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
         let btnStr = "Fake The\nScore And\nReturn"
         let btnAttrStr =
             NSMutableAttributedString( string: btnStr,
-                                       attributes: [NSAttributedStringKey.font:UIFont(
+                                       attributes: [NSAttributedString.Key.font:UIFont(
                                         name: "System Font",
                                         size: 14.0)!])
         showDoFakeScoreBtn?.titleLabel?.attributedText = btnAttrStr
@@ -1640,7 +1640,7 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
     @objc func handleAVAudioInterruption(_ n: Notification) {
         print("In LongTones::handleAVAudioInterruption")
         guard let why = n.userInfo?[AVAudioSessionInterruptionTypeKey] as? UInt else { return }
-        guard let type = AVAudioSessionInterruptionType(rawValue: why) else { return }
+        guard let type = AVAudioSession.InterruptionType(rawValue: why) else { return }
         if type == .began {
             if synth != nil && (synth?.isPlaying)! {
                 synth?.reset()

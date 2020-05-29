@@ -307,7 +307,7 @@ class InternalSettingsTableViewController : UITableViewController {
         
         if ampRiseSlidersChanged {
             // TODO: call reset, etc.
-            if self.isMovingFromParentViewController {
+            if self.isMovingFromParent {
                 DispatchQueue.main.async {
                     self.showCurrAmpValueAlert()
                     //wrapperClass.BasicAlert("View is Dismissed", message: "", view: self)

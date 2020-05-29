@@ -98,7 +98,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         //initialize Settings
         
@@ -247,7 +247,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let request = NSFetchRequest<UserAttributes>(entityName: entityName)
         let objects = (try? managedObjectContext.fetch(request) as? [UserAttributes])
         if let results = objects {
-            if results!.count < 1 {
+            if results.count < 1 {
                 initializeUserAttributes()
             }
         }

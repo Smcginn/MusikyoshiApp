@@ -193,7 +193,7 @@ class LevelsViewController: UIViewController {
         levelsTableView.dataSource = self
         levelsTableView.separatorStyle = .none
         levelsTableViewFooter.frame.size.height = view.frame.size.height
-        levelsTableView.decelerationRate = UIScrollViewDecelerationRateFast
+        levelsTableView.decelerationRate = UIScrollView.DecelerationRate.fast
         
         daysTableView.delegate = self
         daysTableView.dataSource = self
@@ -246,7 +246,7 @@ class LevelsViewController: UIViewController {
         // Ask for permission to use the microphone, if not already granted
         var permissionGranted = false
         if alwaysFalseToSuppressWarn() { print("\(permissionGranted)") }
-        switch AVAudioSession.sharedInstance().recordPermission() {
+        switch AVAudioSession.sharedInstance().recordPermission {
         case AVAudioSessionRecordPermission.granted:
             permissionGranted = true
         case AVAudioSessionRecordPermission.denied:
@@ -1021,15 +1021,23 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
     func setupNewlySelectedLevel() {
         var levelIsEnabled = true
         
+        if levelsJson == nil {
+            print("In setupNewlySelectedLevel(), levelsJson == nil !!!!!")
+        } else {
+            print("In setupNewlySelectedLevel(), levelsJson != nil")
+        }
+        
         var levelTitle = String(activeLevel + 1) // default
         let titleStr = levelsJson?[activeLevel]["title"].string
         if titleStr != nil {
+            print("In setupNewlySelectedLevel(), title str not nil, and == \(titleStr!)")
             levelTitle = titleStr!
             levelIsEnabled = subscriptionGood
             if !levelIsEnabled {
                 levelIsEnabled = TryOutLevelsManager.sharedInstance.isLevelEnabled(levelTitle: titleStr!)
             }
         } else {
+            print("In setupNewlySelectedLevel(), title == nil !!!")
             itsBad()
         }
         if !levelIsEnabled {
@@ -1256,7 +1264,7 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
         
         particleEmitter.emitterPosition = CGPoint(x: daysBackgroundView.frame.minX + 50, y: view.center.y)
         particleEmitter.zPosition = -1.0
-        particleEmitter.emitterShape = "rectangle"
+        particleEmitter.emitterShape = CAEmitterLayerEmitterShape(rawValue: "rectangle")
         particleEmitter.emitterSize = CGSize(width: 1, height: view.frame.height)
         
         let wholeNote = makeEmitterCell(imageName: "wholeNote")
