@@ -82,7 +82,7 @@ let tEmptyRuntimeEvent = tRuntimeEvent(eventType:      kRuntimeEventType_NotSet,
                                        associatedID:   0,
                                        timestamp:      0.0)
 
-let kEventArrayCapacity = 5000
+let kEventArrayCapacity = 15000
 
 class RuntimeEventManager {
     

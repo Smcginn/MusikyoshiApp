@@ -32,6 +32,10 @@ import AudioKit
 
 class LevelsViewController: UIViewController {
 
+    var classKitPath = [String]()
+    var CK_Level = Int32(-1)
+    var CK_Day   = Int32(-1)
+
     @IBOutlet weak var levelsTableView: UITableView!
     @IBOutlet weak var daysTableView: UITableView!
     @IBOutlet weak var levelsTableViewFooter: UIView!
@@ -189,7 +193,7 @@ class LevelsViewController: UIViewController {
         levelsTableView.dataSource = self
         levelsTableView.separatorStyle = .none
         levelsTableViewFooter.frame.size.height = view.frame.size.height
-        levelsTableView.decelerationRate = UIScrollViewDecelerationRateFast
+        levelsTableView.decelerationRate = UIScrollView.DecelerationRate.fast
         
         daysTableView.delegate = self
         daysTableView.dataSource = self
@@ -242,7 +246,7 @@ class LevelsViewController: UIViewController {
         // Ask for permission to use the microphone, if not already granted
         var permissionGranted = false
         if alwaysFalseToSuppressWarn() { print("\(permissionGranted)") }
-        switch AVAudioSession.sharedInstance().recordPermission() {
+        switch AVAudioSession.sharedInstance().recordPermission {
         case AVAudioSessionRecordPermission.granted:
             permissionGranted = true
         case AVAudioSessionRecordPermission.denied:
@@ -288,6 +292,49 @@ class LevelsViewController: UIViewController {
         } else {
             print("(In viewDidAppear, skipping scrollToActiveLevel)")
         }
+        
+        // ClassKit
+        /*
+        if classKitPath.count == 0 {
+            print("YooHoo")
+        } else {
+            if classKitPath.count == 3 {
+                let level = classKitPath[1]
+                switch level {
+                    case kCK_Level1_ID:
+                        CK_Level = 0;   break
+                    case kCK_Level2_ID:
+                        CK_Level = 1;   break
+                    case kCK_Level12_ID:
+                        CK_Level = 11;   break
+                    case kCK_Level22_ID:
+                        CK_Level = 21;   break
+                    default:
+                        CK_Level = 0;
+                }
+                
+                let day   = classKitPath[2]
+                switch day {
+                    case kCK_Day1_ID:
+                        CK_Day = 0;   break
+                    case kCK_Day2_ID:
+                        CK_Day = 1;   break
+                    case kCK_Day3_ID:
+                        CK_Day = 2;   break
+                    case kCK_Day4_ID:
+                        CK_Day = 3;   break
+                    case kCK_Day5_ID:
+                        CK_Day = 4;   break
+                    default:
+                        CK_Day = 0;   break
+                }
+
+                print("HooYoo")
+                activeLevel = Int(CK_Level)
+                scrollToActiveLevel()
+            }
+        }
+        */
     }
     
     override func viewDidLayoutSubviews() {
@@ -976,15 +1023,23 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
     func setupNewlySelectedLevel() {
         var levelIsEnabled = true
         
+        if levelsJson == nil {
+            print("In setupNewlySelectedLevel(), levelsJson == nil !!!!!")
+        } else {
+            print("In setupNewlySelectedLevel(), levelsJson != nil")
+        }
+        
         var levelTitle = String(activeLevel + 1) // default
         let titleStr = levelsJson?[activeLevel]["title"].string
         if titleStr != nil {
+            print("In setupNewlySelectedLevel(), title str not nil, and == \(titleStr!)")
             levelTitle = titleStr!
             levelIsEnabled = subscriptionGood
             if !levelIsEnabled {
                 levelIsEnabled = TryOutLevelsManager.sharedInstance.isLevelEnabled(levelTitle: titleStr!)
             }
         } else {
+            print("In setupNewlySelectedLevel(), title == nil !!!")
             itsBad()
         }
         if !levelIsEnabled {
@@ -1121,8 +1176,15 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
                 scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x, y: yPosLastRow), animated: false)
             }
             
+            // ClassKit
+            /*
+            if CK_Day >= 0 {
+                delay( 0.25) {
+                    self.scrollToClassKitDay()
+                }
+            }
+            */
         }
-        
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -1149,9 +1211,9 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func scrollToActiveLevel(doAnimate: Bool = false) {
-//        let yPosActiveRow =
-//            levelsTableView.rectForRow(at: IndexPath(row: levelsTableView.numberOfRows(inSection: 0) - 1,
-//                                                     section: 0)).origin.y
+        //        let yPosActiveRow =
+        //            levelsTableView.rectForRow(at: IndexPath(row: levelsTableView.numberOfRows(inSection: 0) - 1,
+        //                                                     section: 0)).origin.y
         
         let yPosActiveRow =
             levelsTableView.rectForRow(
@@ -1159,20 +1221,57 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
         self.levelsTableView.setContentOffset(CGPoint(
             x: self.levelsTableView.contentOffset.x,
             y: yPosActiveRow),
-            animated: doAnimate)
-
+                                              animated: doAnimate)
+        
         //if scrollView.contentOffset.y > yPosLastRow {
-//            scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x, y: yPosActiveRow), animated: false)
+        //            scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x, y: yPosActiveRow), animated: false)
         //}
     }
     
-    
+    // ClassKit
+    /*
+    func scrollToClassKitDay(doAnimate: Bool = false) {
+        //        let yPosActiveRow =
+        //            levelsTableView.rectForRow(at: IndexPath(row: levelsTableView.numberOfRows(inSection: 0) - 1,
+        //                                                     section: 0)).origin.y
+        
+        let yPosActiveRow =
+            daysTableView.rectForRow(
+                at: IndexPath(row:Int(CK_Day), section: 0)).origin.y
+        self.daysTableView.setContentOffset(CGPoint(
+            x: self.daysTableView.contentOffset.x,
+            y: yPosActiveRow),
+                                              animated: doAnimate)
+        
+        let IndPath = IndexPath(row:Int(CK_Day), section: 0)
+        self.daysTableView.selectRow(at: IndPath, animated: true, scrollPosition: .top)
+        
+        
+        currDay = Int(CK_Day)
+        
+        let lde: tLDE_code = (level: activeLevel, day: currDay, exer: 0)
+        _ = LessonScheduler.instance.setCurrentLDE(toLDE: lde)
+        
+        daysTableView.reloadData()
+        
+        
+        let jsonIdx = jsonIndexForRow(activeLevel)
+        let convertedIndexPath = IndexPath(row: Int(CK_Day), section: jsonIdx)
+        CK_Day = -1
+        performSegue(withIdentifier: "LessonSegue", sender: convertedIndexPath)  // PPPproblem!!!!!
+        
+        //if scrollView.contentOffset.y > yPosLastRow {
+        //            scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x, y: yPosActiveRow), animated: false)
+        //}
+    }
+    */
+
     
     private func createParticles() {
         
         particleEmitter.emitterPosition = CGPoint(x: daysBackgroundView.frame.minX + 50, y: view.center.y)
         particleEmitter.zPosition = -1.0
-        particleEmitter.emitterShape = "rectangle"
+        particleEmitter.emitterShape = CAEmitterLayerEmitterShape(rawValue: "rectangle")
         particleEmitter.emitterSize = CGSize(width: 1, height: view.frame.height)
         
         let wholeNote = makeEmitterCell(imageName: "wholeNote")

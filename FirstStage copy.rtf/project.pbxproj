@@ -406,6 +406,8 @@
 		6D7249192128A8B100378131 /* Monkey_Ballon-Face02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7249172128A8B100378131 /* Monkey_Ballon-Face02@2x.png */; };
 		6D72491B2128FD6100378131 /* MonkeyPlaneWithProp large.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D72491A2128FD6000378131 /* MonkeyPlaneWithProp large.png */; };
 		6D72491C2128FD6100378131 /* MonkeyPlaneWithProp large.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D72491A2128FD6000378131 /* MonkeyPlaneWithProp large.png */; };
+		6D8072AF227B863300FEC160 /* AEXML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D8072AE227B863300FEC160 /* AEXML.framework */; };
+		6D8072B1227B866700FEC160 /* AEXML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D8072B0227B866700FEC160 /* AEXML.framework */; };
 		6D817BE02186042A00258980 /* PATest_FreqAndPitchSampleSim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D817BDF2186042A00258980 /* PATest_FreqAndPitchSampleSim.swift */; };
 		6D817BE12186042A00258980 /* PATest_FreqAndPitchSampleSim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D817BDF2186042A00258980 /* PATest_FreqAndPitchSampleSim.swift */; };
 		6D82A20C23391B7600026BD8 /* TryOutLevelsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D82A20B23391B7600026BD8 /* TryOutLevelsManager.swift */; };
@@ -610,6 +612,10 @@
 		6DA7F6A721B7440500800099 /* AppVersionMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA7F6A321B7440500800099 /* AppVersionMonitor.swift */; };
 		6DA7F6AC21B74A3200800099 /* AppVersionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA7F6AB21B74A3200800099 /* AppVersionHelper.swift */; };
 		6DA7F6AD21B74A3200800099 /* AppVersionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA7F6AB21B74A3200800099 /* AppVersionHelper.swift */; };
+		6DA923A7247C91E100DC88ED /* AEXML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 635A60991EC6B7BA0099154A /* AEXML.framework */; };
+		6DA923B2247C941100DC88ED /* AEXML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D8072B0227B866700FEC160 /* AEXML.framework */; };
+		6DA923B3247C941100DC88ED /* AEXML.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6D8072B0227B866700FEC160 /* AEXML.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6DA923B7247C94B400DC88ED /* AEXML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D8072B0227B866700FEC160 /* AEXML.framework */; };
 		6DB8533A21248EF600F999C3 /* XMLFileMapping.json in Resources */ = {isa = PBXBuildFile; fileRef = 6DB8532A21248EF500F999C3 /* XMLFileMapping.json */; };
 		6DB8533B212498C700F999C3 /* XMLFileMapping.json in Resources */ = {isa = PBXBuildFile; fileRef = 6DB8532A21248EF500F999C3 /* XMLFileMapping.json */; };
 		6DB8533D2126438E00F999C3 /* LaunchingNextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB8533C2126438E00F999C3 /* LaunchingNextView.swift */; };
@@ -1022,6 +1028,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				635A60A91EC6BADD0099154A /* AEXML.framework in Embed Frameworks */,
+				6DA923B3247C941100DC88ED /* AEXML.framework in Embed Frameworks */,
 				BDF308FB1F630AF500F0A819 /* SeeScoreLib.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -1590,6 +1597,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D06E003246C93DA00193062 /* AudioKit.framework in Frameworks */,
+				6D8072B1227B866700FEC160 /* AEXML.framework in Frameworks */,
 				6DD52D7E2257F40100F1C668 /* StoreKit.framework in Frameworks */,
 				6DD52D7B2257EE5C00F1C668 /* AudioKit.framework in Frameworks */,
 				6DD52D7A2257ED8D00F1C668 /* SeeScoreLib.framework in Frameworks */,
@@ -1617,10 +1625,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D06E002246C6EC500193062 /* AudioKit.framework in Frameworks */,
+				6DA923A7247C91E100DC88ED /* AEXML.framework in Frameworks */,
+				6D8072AF227B863300FEC160 /* AEXML.framework in Frameworks */,
 				6D431C342198EA67009DBBE9 /* SwiftyStoreKit.framework in Frameworks */,
 				1C33BBB62016E81D00CD83A6 /* SwiftyJSON.framework in Frameworks */,
 				6D3AE1422176846A005ECC60 /* StoreKit.framework in Frameworks */,
+				6DA923B7247C94B400DC88ED /* AEXML.framework in Frameworks */,
 				C90339351FB126AA005A9C7D /* AudioKit.framework in Frameworks */,
+				6DA923B2247C941100DC88ED /* AEXML.framework in Frameworks */,
 				BDF308FA1F630AF500F0A819 /* SeeScoreLib.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4046,7 +4058,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.0.42;
+				CURRENT_PROJECT_VERSION = 2.0.40;
 				DEVELOPMENT_TEAM = PXMA5KCSKK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4087,7 +4099,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.0.42;
+				CURRENT_PROJECT_VERSION = 2.0.40;
 				DEVELOPMENT_TEAM = PXMA5KCSKK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4175,7 +4187,7 @@
 				CODE_SIGN_ENTITLEMENTS = PlayTunes.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: sfreshour.musikyoshi@gmail.com (R8U395JZ7G)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 2.0.42;
+				CURRENT_PROJECT_VERSION = 2.0.40;
 				DEVELOPMENT_TEAM = PXMA5KCSKK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4215,7 +4227,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: sfreshour.musikyoshi@gmail.com (R8U395JZ7G)";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: sfreshour.musikyoshi@gmail.com (R8U395JZ7G)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 2.0.42;
+				CURRENT_PROJECT_VERSION = 2.0.40;
 				DEVELOPMENT_TEAM = PXMA5KCSKK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

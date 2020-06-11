@@ -17,7 +17,7 @@ import AudioKit
 
 // For the time being - until June 15, 2020,  no longer checking subs, etc.
 // So this is set to always allow all access.
-var gDoOverrideSubsPresent = true // JUNE15      // CHECK_THIS_FOR_SUBMIT
+var gDoOverrideSubsPresent = true // JUNE15  JULY07 // CHECK_THIS_FOR_SUBMIT
 
 
 var gDoLimitLevels = false                       // CHECK_THIS_FOR_SUBMIT
@@ -127,7 +127,7 @@ class LevelSeriesViewController: UIViewController, UITableViewDelegate, UITableV
         // Ask for permission to use the microphone, if not already granted
         var permissionGranted = false
         if alwaysFalseToSuppressWarn() { print("\(permissionGranted)") }
-        switch AVAudioSession.sharedInstance().recordPermission() {
+        switch AVAudioSession.sharedInstance().recordPermission {
         case AVAudioSessionRecordPermission.granted:
             permissionGranted = true
         case AVAudioSessionRecordPermission.denied:

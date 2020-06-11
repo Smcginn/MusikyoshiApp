@@ -281,7 +281,7 @@ class VideoHelpView: UIView {
         
         setButtonsVisibilityAndOpacity(mode: kVideoDialogMode_ShowVideo)
         avPlayer?.pause()
-        avPlayer?.seek(to: kCMTimeZero)
+        avPlayer?.seek(to: CMTime.zero)
         
         var videoIDToUse = self.videoID
         if self.doTestVideos {  // Only invoked if testing
@@ -336,7 +336,7 @@ class VideoHelpView: UIView {
     
     @objc func playAgain(sender: UIButton) {
         avPlayer?.pause()
-        avPlayer?.seek(to: kCMTimeZero)
+        avPlayer?.seek(to: CMTime.zero)
         avPlayer?.play()
     }
     
@@ -422,13 +422,13 @@ class VideoHelpView: UIView {
     
     func hideVideoVC() {
         avPlayer?.pause()
-        avPlayer?.seek(to: kCMTimeZero)
+        avPlayer?.seek(to: CMTime.zero)
         self.isHidden = true
     } 
     
     func stop_hide_andResignModal() {   //  Not really Modal . . .
         avPlayer?.pause()
-        avPlayer?.seek(to: kCMTimeZero)
+        avPlayer?.seek(to: CMTime.zero)
         self.isHidden = true
         if doneShowingVideoDelegate != nil {
             doneShowingVideoDelegate!.VideoViewClosed()

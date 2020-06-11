@@ -61,8 +61,8 @@ class LessonOverviewViewController: UIViewController, UIPickerViewDelegate, UIPi
         
         selectedRhythmName = tuneNames.first!
         selectedTuneName = tuneNames.first!
-        playRhythmBtn.setTitle("Play \(selectedRhythmName)", for: UIControlState())
-        playTuneBtn.setTitle("Play \(selectedTuneName)", for: UIControlState())
+        playRhythmBtn.setTitle("Play \(selectedRhythmName)", for: UIControl.State())
+        playTuneBtn.setTitle("Play \(selectedTuneName)", for: UIControl.State())
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -166,7 +166,7 @@ class LessonOverviewViewController: UIViewController, UIPickerViewDelegate, UIPi
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         func handler(_ act: UIAlertAction) {
-            playRhythmBtn.setTitle("Play \(selectedRhythmName)", for: UIControlState())
+            playRhythmBtn.setTitle("Play \(selectedRhythmName)", for: UIControl.State())
         }
         
         ac.setValue(vc, forKey: "contentViewController")
@@ -192,7 +192,7 @@ class LessonOverviewViewController: UIViewController, UIPickerViewDelegate, UIPi
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         func handler(_ act: UIAlertAction) {
-            playTuneBtn.setTitle("Play \(selectedTuneName)", for: UIControlState())
+            playTuneBtn.setTitle("Play \(selectedTuneName)", for: UIControl.State())
         }
         
         ac.setValue(vc, forKey: "contentViewController")
@@ -271,7 +271,7 @@ class LessonOverviewViewController: UIViewController, UIPickerViewDelegate, UIPi
         let entityName = String(describing: UserAttributes.self)
         let request = NSFetchRequest<UserAttributes>(entityName: entityName)
         if let fetchResults = (try? managedContext.fetch(request) as? [UserAttributes]) {
-            userAttributes = fetchResults?.first!
+            userAttributes = fetchResults.first!
         }
     }
 }

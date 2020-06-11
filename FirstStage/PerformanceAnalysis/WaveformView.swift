@@ -217,9 +217,9 @@ class WaveformView: UIScrollView {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = NSTextAlignment.center
         let attribs: [NSAttributedString.Key : Any] = [
-            NSAttributedStringKey.font:UIFont( name: "Futura", size: 18.0)!,
-            NSAttributedStringKey.paragraphStyle: paragraphStyle,
-            NSAttributedStringKey.foregroundColor : UIColor.black]
+            NSAttributedString.Key.font:UIFont( name: "Futura", size: 18.0)!,
+            NSAttributedString.Key.paragraphStyle: paragraphStyle,
+            NSAttributedString.Key.foregroundColor : UIColor.black]
         
         let retAttrStr =
             NSMutableAttributedString(
@@ -285,9 +285,9 @@ class WaveformView: UIScrollView {
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.alignment = NSTextAlignment.center
             let attribs: [NSAttributedString.Key : Any] = [
-                NSAttributedStringKey.font:UIFont( name: "Futura", size: 18.0)!,
-                NSAttributedStringKey.paragraphStyle: paragraphStyle,
-                NSAttributedStringKey.foregroundColor : UIColor.black]
+                NSAttributedString.Key.font:UIFont( name: "Futura", size: 18.0)!,
+                NSAttributedString.Key.paragraphStyle: paragraphStyle,
+                NSAttributedString.Key.foregroundColor : UIColor.black]
             
             var retAttrStr =
                 NSMutableAttributedString(

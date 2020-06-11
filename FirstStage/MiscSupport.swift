@@ -137,10 +137,10 @@ func createAttributedText(str: String, fontSize: CGFloat) -> NSMutableAttributed
         NSMutableAttributedString(
             string: str,
             attributes: [
-                NSAttributedStringKey.font:UIFont( name: "Futura-Bold",
+                NSAttributedString.Key.font:UIFont( name: "Futura-Bold",
                                                    size: fontSize)!,
-                NSAttributedStringKey.paragraphStyle: paragraphStyle,
-                NSAttributedStringKey.foregroundColor : UIColor.white] )
+                NSAttributedString.Key.paragraphStyle: paragraphStyle,
+                NSAttributedString.Key.foregroundColor : UIColor.white] )
     if retAttrStr.length == 0 {
         print ("Unable to create NSMutableAttributedString in createAttributedText()")
     }
@@ -156,10 +156,10 @@ func createAttributedText(str: String, fontSize: CGFloat, color: UIColor) -> NSM
         NSMutableAttributedString(
             string: str,
             attributes: [
-                NSAttributedStringKey.font:UIFont( name: "Marker Felt",
+                NSAttributedString.Key.font:UIFont( name: "Marker Felt",
                                                    size: fontSize)!,
-                NSAttributedStringKey.paragraphStyle: paragraphStyle,
-                NSAttributedStringKey.foregroundColor : color] )
+                NSAttributedString.Key.paragraphStyle: paragraphStyle,
+                NSAttributedString.Key.foregroundColor : color] )
     if retAttrStr.length == 0 {
         print ("Unable to create NSMutableAttributedString in createAttributedText()")
     }
@@ -321,7 +321,8 @@ struct DeviceType
     static let IS_IPHONE_5orSE      = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.SCREEN_MAX_LENGTH == 568.0
     static let IS_IPHONE_6          = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.SCREEN_MAX_LENGTH == 667.0
     static let IS_IPHONE_6P         = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.SCREEN_MAX_LENGTH == 736.0
-    static let IS_IPAD              = UIDevice.current.userInterfaceIdiom == .pad && ScreenSize.SCREEN_MAX_LENGTH == 1024.0
+//    static let IS_IPAD              = UIDevice.current.userInterfaceIdiom == .pad && ScreenSize.SCREEN_MAX_LENGTH == 1024.0
+    static let IS_IPAD              = UIDevice.current.userInterfaceIdiom == .pad 
 }
 
 class MyUIAlertController : UIAlertController {

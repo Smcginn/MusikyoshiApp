@@ -168,7 +168,7 @@ class PerfAnalysisSettingsPopupView: UIView, UIPickerViewDataSource, UIPickerVie
         let okStr = "OK"
         let doneMutableString =
             NSMutableAttributedString( string: okStr,
-                                       attributes: [NSAttributedStringKey.font:UIFont(
+                                       attributes: [NSAttributedString.Key.font:UIFont(
                                         name: "Marker Felt",
                                         size: 18.0)!])
         doneBtn?.titleLabel?.attributedText = doneMutableString

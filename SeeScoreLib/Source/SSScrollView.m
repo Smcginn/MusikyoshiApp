@@ -1269,6 +1269,7 @@ static float min(float a, float b)
     if (_scoreIsSetup) {
  // LEAVING FOR LONGTONE WORK         NSLog(@"\n\nWHITE TRACKING #13  : SSCrollView::layoutSubviews()   setting  _layoutCompletedAfterScoreSetup = YES \n\n");
         _layoutCompletedAfterScoreSetup = YES;
+        _layoutFrozen = YES;
     }
     
 } // End of merged layoutSubviews
@@ -2715,11 +2716,17 @@ static float min(float a, float b)
     _layoutFrozen = NO;
 }
 
--(void) freezeLayout;
+-(void) freezeLayout
 {
     // Keeps the SeeScore view from thrashing through unneeded
     // (and error-producing) calls to LayoutSubviews, etc.
     _layoutFrozen = YES;
+}
+
+-(void) thawLayout
+{
+    _layoutFrozen = NO;
+    [self setHidden: YES];
 }
 
 // MKMOD - added noteTappedAtXCoord - 11/20/17

@@ -1019,10 +1019,10 @@ class PerformanceTrackingMgr {
         let messageText = NSMutableAttributedString(
             string: msgStr,
             attributes: [
-                NSAttributedStringKey.paragraphStyle: paragraphStyle
+                NSAttributedString.Key.paragraphStyle: paragraphStyle
             ]
         )
-        messageText.addAttribute(NSAttributedStringKey.font,
+        messageText.addAttribute(NSAttributedString.Key.font,
                                  value:fnt!,
                                  range: NSRange.init(location: 0,
                                                      length: msgStr.count))

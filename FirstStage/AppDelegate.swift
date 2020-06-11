@@ -6,10 +6,26 @@
 //  Copyright © 2016 Musikyoshi. All rights reserved.
 //
 
+// ClassKit
+/*
+// Move these:
+let kCK_Level1_ID  = "Level 1"
+let kCK_Level2_ID  = "Level 2"
+let kCK_Level12_ID = "Level 12"
+let kCK_Level22_ID = "Level 22"
+
+let kCK_Day1_ID = "Day 1"
+let kCK_Day2_ID = "Day 2"
+let kCK_Day3_ID = "Day 3"
+let kCK_Day4_ID = "Day 4"
+let kCK_Day5_ID = "Day 5"
+*/
+
 import UIKit
 import CoreData
 import StoreKit
 import SwiftyStoreKit
+// import ClassKit
 
 func delay(_ delay:Double, closure:@escaping ()->()){
     DispatchQueue.main.asyncAfter(
@@ -84,7 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         //initialize Settings
         
@@ -201,7 +217,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Constants.Settings.SubsriptionOverridePswdSet: false,
             Constants.Settings.FreeTrial_6_15_2020_NumDaysLeft: Int(-1),
             ])
- 
+
+        UserDefaults.standard.set(-1,
+                                  forKey: Constants.Settings.FreeTrial_6_15_2020_NumDaysLeft)
+
+        // ClassKit
+        // publishContextsIfNeeded()
         
         setCheckForAppUpdateTimeIfFirstRun()
         
@@ -232,7 +253,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let request = NSFetchRequest<UserAttributes>(entityName: entityName)
         let objects = (try? managedObjectContext.fetch(request) as? [UserAttributes])
         if let results = objects {
-            if results!.count < 1 {
+            if results.count < 1 {
                 initializeUserAttributes()
             }
         }
@@ -501,4 +522,188 @@ extension AppDelegate: SKPaymentTransactionObserver {
     func handleDeferredState(for transaction: SKPaymentTransaction, in queue: SKPaymentQueue) {
         print("Purchase deferred for product id: \(transaction.payment.productIdentifier)")
     }
+    
+    func showRestorationHandlerCalledAlert() {
+        let titleStr = "RestorationHandler Called"
+        let msgStr = "\nYep.\n"
+        let ac = MyUIAlertController(title: titleStr, message: msgStr, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        
+        UIApplication.shared.windows[0].rootViewController?.present(ac, animated: true, completion: nil)
+        //self.present(ac, animated: true, completion: nil)
+    }
+
+    // ClassKit
+    /*
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        
+    
+//    func application(_ application: UIApplication,
+//                     continue userActivity: NSUserActivity,
+//                     restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+    
+//    func application(_ application: UIApplication,
+//                     continue userActivity: NSUserActivity,
+//                     restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+    
+//        showRestorationHandlerCalledAlert()
+        
+        
+        
+        
+//    func application(_ application: UIApplication,
+//                     continue userActivity: NSUserActivity,
+//                     restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        // grab the context path
+        guard
+            let contextPath = userActivity.contextIdentifierPath
+            //let level = Level.level(for: contextPath)
+            else {
+                return false
+        }
+        
+        let ct2 = contextPath
+        
+        // make sure the context exists
+        publishContextsIfNeeded { (error) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+
+            DispatchQueue.main.async {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                guard
+                    let controller =
+                    storyboard.instantiateViewController(withIdentifier:"LevelsViewController") as? LevelsViewController else {
+                        return
+                }
+                
+//                guard
+//                    let navController = self.window?.rootViewController as! UINavigationController? else {
+//                        return
+//                }
+                
+//                guard
+//                    let navController = UIApplication.shared.keyWindow?.rootViewController as? UINavigationController else {
+//                        return
+//                }
+//                guard
+//                    let navController1 = self.window?.rootViewController?.navigationController else {
+//                        return
+//                }
+
+//                guard
+//                    let navController = UIApplication.shared.keyWindow?.rootViewController?.navigationController else {
+//                        return
+//                }
+                
+                guard
+                    let navController = UIApplication.shared.keyWindow?.rootViewController as? UINavigationController else {
+                        return
+                }
+                
+                controller.classKitPath = contextPath
+                navController.popToRootViewController(animated: false)
+                navController.pushViewController(controller, animated: true)
+            }
+        }
+        
+        return true
+    }
+    
+    */
+    
+//    let kCK_Level1_ID  = "Level 1"
+//    let kCK_Level2_ID  = "Level 2"
+//    let kCK_Level12_ID = "Level 12"
+//    let kCK_Level22_ID = "Level 12"
+
+//    let kCK_Day1_ID = "Day 1"
+//    let kCK_Day2_ID = "Day 2"
+//    let kCK_Day3_ID = "Day 3"
+//    let kCK_Day4_ID = "Day 4"
+//    let kCK_Day5_ID = "Day 5"
+
+    // ClassKit
+    /*
+    func publishContextsIfNeeded(completion: ((Error?) -> Void)? = nil) {
+        let level1Ctx = CLSContext(type: .level, identifier:kCK_Level1_ID, title: kCK_Level1_ID)
+        level1Ctx.displayOrder = 0
+        
+        let level2Ctx = CLSContext(type: .level, identifier:kCK_Level2_ID, title: kCK_Level2_ID)
+        level2Ctx.displayOrder = 1
+        
+        let level12Ctx = CLSContext(type: .level, identifier:kCK_Level12_ID, title: kCK_Level12_ID)
+        level2Ctx.displayOrder = 2
+        
+        let level22Ctx = CLSContext(type: .level, identifier:kCK_Level22_ID, title: kCK_Level22_ID)
+        level2Ctx.displayOrder = 3
+        
+        // dictionary of contexts we need to create
+        var contextToCreate: [String: CLSContext] = [
+            level1Ctx.identifier: level1Ctx,
+            level2Ctx.identifier: level2Ctx,
+            level12Ctx.identifier: level12Ctx,
+            level22Ctx.identifier: level22Ctx
+        ]
+ 
+
+        let parent = CLSDataStore.shared.mainAppContext
+        
+        let predicate = NSPredicate(format: "parent = %@", parent)
+        CLSDataStore.shared.contexts(matching: predicate) { contexts, error in
+            // see if any already there
+            for context in contexts {
+                contextToCreate.removeValue(forKey: context.identifier)
+            }
+            
+            for (_, context) in contextToCreate {
+                    parent.addChildContext(context)
+                
+                let levelStr = context.title
+                var title = levelStr + ", " + kCK_Day1_ID
+                let day1Ctx = CLSContext(type: .lesson, identifier: kCK_Day1_ID, title: title)
+                day1Ctx.displayOrder = 0
+                context.addChildContext(day1Ctx)
+
+                //id = kCK_Day2_ID
+                title = levelStr + ", " + kCK_Day2_ID
+                let day2Ctx = CLSContext(type: .lesson, identifier: kCK_Day2_ID, title: title) // gets correct result
+                day2Ctx.displayOrder = 1
+                context.addChildContext(day2Ctx)
+
+                //id = "Day 3"
+                title = levelStr + ", " + kCK_Day3_ID
+                let day3Ctx = CLSContext(type: .lesson, identifier: kCK_Day3_ID, title: title)
+                day3Ctx.displayOrder = 2
+                context.addChildContext(day3Ctx)
+
+                //id = "Day 4"
+                title = levelStr + ", " + kCK_Day4_ID
+                let day4Ctx = CLSContext(type: .lesson, identifier: kCK_Day4_ID, title: title)
+                day4Ctx.displayOrder = 3
+                context.addChildContext(day4Ctx)
+
+                //id = "Day 5"
+                title = levelStr + ", " + kCK_Day5_ID
+                let day5Ctx = CLSContext(type: .lesson, identifier: kCK_Day5_ID, title: title)
+                day5Ctx.displayOrder = 4
+                context.addChildContext(day5Ctx)
+            }
+            
+            CLSDataStore.shared.save { (error) in
+                completion?(error)
+                
+                if let error = error {
+//                    print(error._userInfo?[1].value[0])  // ==
+//                        .CLSErrorCodeClassKitUnavailable
+                    print(error.localizedDescription)
+                } else {
+                    print("ClassKit initialized without errors!")
+                }
+            }
+        }
+    }
+    */
 }
