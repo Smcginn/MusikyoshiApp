@@ -1,8 +1,7 @@
-# These are locked to specific releases for Xcode/swift compatibility. At the
-# moment there is nothing special about these particular versions; they worked 
-# best for my current Swift/Xcode versions. (Current versions would not compile.)
-# It will probably be necessary to upgrade to newer versions to match 
-# the current Xcode environment.
-github "audiokit/AudioKit"  
-github "SwiftyJSON/SwiftyJSON"  
-github "bizz84/SwiftyStoreKit" 
+# These are locked to specific releases for Xcode/swift compatibility, as well as 
+# compatibility with the current SeeScore library. 
+# It will be necessary to upgrade to newer versions to match 
+# the current Xcode environment when upgrading Xcode and/or SeeScore.
+github "audiokit/AudioKit" == 4.9.5
+github "SwiftyJSON/SwiftyJSON" == 5.0.0
+github "bizz84/SwiftyStoreKit" == 0.15.1
