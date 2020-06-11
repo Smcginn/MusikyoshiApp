@@ -63,13 +63,14 @@ func localDate() -> Date {
 // Need to add 2 to day so math works out, hence the 17.   (1 day so won't return 0 when
 // get to transition day, and 1 day to allow for extra hours due to locale differences).
 let June_15_2020_text = "06/17/2020"
+let July_07_2020_text = "07/09/2020"
 
 let testDate_text     = "03/20/2020"
 
 func getFreePeriodEndDate() -> Date? {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "MM/dd/yyyy"
-    if let June15_2020 = dateFormatter.date(from: June_15_2020_text) {
+    if let June15_2020 = dateFormatter.date(from: July_07_2020_text) {
         return June15_2020
     } else {
         return nil
@@ -118,17 +119,17 @@ func displayFreeTrialExpiryWarningIfNeeded(parentVC: UIViewController) {
 ////////////////////////////////////////////////////////////
 // Alert-displaying funcs
 
-func showEndDateAlert(parentVC: UIViewController) {   // JUNE15
+func showEndDateAlert(parentVC: UIViewController) {   // JUNE15 JULY07
     let numDaysLeft = daysUntilFreePeriodEndDate()
-    let titleStr = "Use PlayTunes for Free until June 15, 2020!\n\n\(numDaysLeft) days remaining - Enjoy!"
+    let titleStr = "Extended! Use PlayTunes for Free until July 7, 2020!\n\n\(numDaysLeft) days remaining - Enjoy!"
     var msgStr = ""
     var okText = ""
 
     if numDaysLeft > 21 {
         msgStr += "\nYou do not have to sign up for anything, and your use of PlayTunes does not commit you in any way to a purchase.  Stay Safe!"
         okText = "Okay - Got it"
-    } else {
-        msgStr += "\nAfter June 15, 2020, if you wish to continue, you can purchase a subscription. (Subscriptions are explained on the Help screen, or go to Settings > Purchase Options.)\n\n(For the next \(numDaysLeft) days, you do not have to sign up for anything, and your use of PlayTunes does not commit you in any way to a purchase.)"
+    } else { //  JULY07
+        msgStr += "\nAfter July 7, 2020, if you wish to continue, you can purchase a subscription. (Subscriptions are explained on the Help screen, or go to Settings > Purchase Options.)\n\n(For the next \(numDaysLeft) days, you do not have to sign up for anything, and your use of PlayTunes does not commit you in any way to a purchase.)"
         okText = "Okay"
    }
     let ac = MyUIAlertController(title: titleStr,
@@ -142,9 +143,9 @@ func showEndDateAlert(parentVC: UIViewController) {   // JUNE15
     parentVC.present(ac, animated: true, completion: nil)
 }
 
-func showEndDateExpiredAlert(parentVC: UIViewController) {   // JUNE15
+func showEndDateExpiredAlert(parentVC: UIViewController) {   // JUNE15 JULY07
     let titleStr = "PlayTunes All-Level access\nis no longer free"
-    var msgStr = "\nThe Spring 2020 Free trial period ended on June 15.\n\n"
+    var msgStr = "\nThe Spring 2020 Free trial period ended on July 7.\n\n"
     msgStr += "Many Levels/Days are still free for tryout. To get full-level access, "
     msgStr += "you will need to purchase a subscription. Go to Settings > Purchase Options to view our current offerings, or to the Help screen to see a general discussion of Subscriptions."
     msgStr += "\n\n(You should first make sure you have the latest version of PlayTunes.)"

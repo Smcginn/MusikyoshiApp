@@ -655,6 +655,9 @@ enum ScrollType_e {scroll_off, scroll_system, scroll_bar};
 // (and error-producing) calls to LayoutSubviews, etc.
 -(void) freezeLayout;
 
+// Allows (visually) smooth exit when closing down view
+-(void) thawLayout;
+
 -(void) setSpecifiedFrameWidth:(int)iSpecifiedFrameWidth;
 
 @end

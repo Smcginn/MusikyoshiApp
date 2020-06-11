@@ -97,10 +97,19 @@ class MusicXMLModifier {
             return nil
         }
         
+        
+        
+        
+        
+        
+        
+        
+        
         let currInst = getCurrentStudentInstrument()
 
 //        print("doc1:\n\(document.xml)\n")
 
+// DEAD as of 6/1/20
 /* added ~ 8/12/19    leave out
         for measure in document["score-partwise"]["part"]["measure"].all! {
             var isFirstElem = true
@@ -194,6 +203,7 @@ class MusicXMLModifier {
                     shortestNoteDuration = thisNoteDuration
                 }
     
+// DEAD as of 6/1/20
 // Added ~ 8/12/19
 //                if isFirstElem {
 //                    let notePitch = note["pitch"]
@@ -292,11 +302,12 @@ class MusicXMLModifier {
 
 // Added ~ 8/12/19        loopCount = 0
         
+        var measureIdx = 0
         for measure in document["score-partwise"]["part"]["measure"].all! {
 
             // adjust the first measure width based on number of sharps/flats in key sig
             let measureKey = measure["attributes"]["key"]
-            if measureKey.error == nil {
+            if measureKey.error == nil && measureIdx == 0 {
                 if InstrMods.makeKeySig_C { // negate any key signature info, make it "C"
                     print("\nIn modifyXMLToData; Forcing Key signature to C\n")
                     if measureKey["fifths"].int != nil {
@@ -317,6 +328,7 @@ class MusicXMLModifier {
 
             
             
+// DEAD as of 6/1/20
 /* Added ~ 8/12/19
             let clefLine = getClefLineForInstr(instr: currInst)
             
@@ -331,7 +343,8 @@ class MusicXMLModifier {
                 }
             }
  */
-            
+   
+// DEAD as of 6/1/20
 //            typealias tTransDiaChrm = (diatonic: Int, chromatic: Int)
 //            let kNoTransDiaChrmChange =  (diatonic: 0, chromatic: 0)
 //            let kBariTransDiaChrm = (diatonic: -8, chromatic: -12)
@@ -339,6 +352,7 @@ class MusicXMLModifier {
 
 // Added ~ 8/12/19            loopCount += 1
             
+// DEAD as of 6/1/20
 //            let measureTranspose =  measure["attributes"]["transpose"]
 //            if measureTranspose.error == nil {
 //                let transDiaChrm = getTransDiaChrmForInstr(instr: currInst)
@@ -368,6 +382,10 @@ class MusicXMLModifier {
 
             let mWd = measure.attributes["width"]
 
+            if mWd != nil {
+                print ("          --> Measure \(measureIdx); 1: Measure Width in XML: \(mWd!); setting to: \(measureWidth)")
+            }
+            
 //            measureWidth *= 2
             measure.attributes["width"] = "\(measureWidth)"
 
@@ -415,16 +433,37 @@ class MusicXMLModifier {
                     if accidentalOnFirstNoteOfBar, let defNoteXStr = note.attributes["default-x"] {
                         let defNoteX = Double(defNoteXStr)!
                         if defNoteX > noteX {
-                            measureDiff = defNoteX - noteX
+                            measureDiff += defNoteX - noteX
                             noteX = defNoteX
                         }
                     }
                 }
                 isFirstElem = false
-                if measureDiff != 0 {
-                    measureWidth += measureDiff
-                    measure.attributes["width"] = "\(measureWidth)"    //YO
+                
+                // As of SS V365, we have to look for triplets, and add extra space
+                // for the 3rd note of the triplet
+                let notations = note["notations"]
+                if notations.error == nil {
+                    let tuplet = notations["tuplet"]
+                    if tuplet.error == nil {
+                        let tuplet = notations["tuplet"]
+                        if tuplet.error == nil {
+                            if let tupType = tuplet.attributes["type"] {
+                                if tupType == "stop" { // the end of the triplet
+                                    measureDiff += 30  //    ... do only once per triplet
+                                    if measureIdx == 0 {  // 1st measure needs a little
+                                        measureDiff += 5 //   ... extra for some reason
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
+                
+//                if measureDiff != 0 {
+//                    measureWidth += measureDiff
+//                    measure.attributes["width"] = "\(measureWidth)"    //YO
+//                }
                 
                 note.attributes["default-x"] = "\(noteX)"
                 noteX += getNoteWidth(note: note, dotted: true)
@@ -457,7 +496,9 @@ class MusicXMLModifier {
                     }
                 }
 
+
                 
+// DEAD as of 6/1/20
 //                let notePitch = note["pitch"]
 //                if notePitch.error == nil {
 //                    let octaveInt = notePitch["octave"].int
@@ -509,11 +550,22 @@ class MusicXMLModifier {
 //                }
                 
             }
+            
+            if measureDiff != 0 {
+                measureWidth += measureDiff
+                if mWd != nil {
+                    print ("          --> Measure \(measureIdx); 2: Measure Width in XML: \(mWd!); setting to: \(measureWidth)")
+                }
+                measure.attributes["width"] = "\(measureWidth)"    //YO
+            }
 
             //reset first note (and measure width) in measure position
             measureWidth = basicMeasureWidth
             noteX = smallestWidth / 2
             accidentalOnFirstNoteOfBar = false
+            
+            measureDiff = 0 // added 6/1/2020
+            measureIdx += 1
         }
 
         for part in document["score-partwise"]["part"].all! {
@@ -521,6 +573,10 @@ class MusicXMLModifier {
         }
         
 //        print("doc2:\n==============================\n\n\(document.xml)\n===============================\n\n")
+        
+        
+        
+        
         return document.xml.data(using: .utf8)
     }
 
@@ -749,10 +805,23 @@ class MusicXMLModifier {
                               maxMeasureWidth: &maxMeasureWd,
                               maxFirstX: &maxFirstXOffset)
         
+        let numMeasures = getNumMeasures(part: part)
+
         for measure in part["measure"].all! {
-            if measCount == 0 {
+            if measCount == 0 { // this is the first measure
+                if numMeasures == 1 { // special case for 1-measure scores (LongTones).
+                    
+                    if let mWdStr: String = measure.attributes["width"] {
+                        print ("\n\n\n            Single Measure width == \(mWdStr)\n\n\n")
+                        if let measureWdDbl = Double(mWdStr) {
+                            let measureWd = Int(measureWdDbl)
+                            adjustLastMeasure(measure: measure, measureWidth: measureWd, maxFirstX: 0)
+                        }
+                    }
+                }
+                
                 measCount += 1
-                continue  // skip because of Time and Key signature makes it longer
+                continue  // skip more processing b/c Time and Key signature makes it longer
             }
             
 //            var measureWidth = 0
@@ -793,9 +862,28 @@ class MusicXMLModifier {
 //                var yomaxFirstX = defNoteX
 //                print ("\(yomaxFirstX)")
             }
-            
+ 
+            if measCount == numMeasures-1 { // this is the last measure
+                
+                if let mWdStr: String = measure.attributes["width"] {
+                    print ("\n\n\n            Single Measure width == \(mWdStr)\n\n\n")
+                    if let measureWdDbl = Double(mWdStr) {
+                        let measureWd = Int(measureWdDbl)
+                        adjustLastMeasure(measure: measure, measureWidth: measureWd, maxFirstX: 0)
+                    }
+                }
+            }
+
             measCount += 1
         }
+    }
+    
+    class func getNumMeasures(part: AEXMLElement) -> Int {
+        var measCount = 0
+        for _ in part["measure"].all! {
+            measCount += 1
+        }
+        return measCount
     }
     
     class func adjustMeasureToAverageVals(measure: AEXMLElement,
@@ -833,4 +921,43 @@ class MusicXMLModifier {
             measure.attributes["width"] = "\(adjustedMeasWd)"
         }
     }
+    
+    
+    class func adjustLastMeasure(measure: AEXMLElement,
+                                 measureWidth: Int,
+                                 maxFirstX: Double) {
+        
+        //let maxMeasureWidth = Int(200)
+        var xDiff: Double = 0.0
+        
+        var couldGetFirstElemOffset = false
+        var isFirstElem = true
+//        for note in measure["note"].all! {
+//            if let defNoteXStr = note.attributes["default-x"] {
+//                let defNoteX = Double(defNoteXStr) ?? 0.0
+//                if defNoteX != 0
+//                {
+//                    if isFirstElem {
+//                        xDiff = defNoteX - maxFirstX
+//                        xDiff *= 0.9 // just to make sure it isn't too close
+//                        couldGetFirstElemOffset = true
+//                        isFirstElem = false
+//                    }
+//                    
+//                    let newX = defNoteX - xDiff
+//                    note.attributes["default-x"] = "\(newX)"
+//                }
+//            }
+//            if isFirstElem && !couldGetFirstElemOffset {
+//                break // no point in continuing
+//            }
+//        }
+
+ //       if couldGetFirstElemOffset && xDiff != 0 {
+            // add 10% to give a little space at end . . .
+            let adjustedMeasWd = Int(Double(measureWidth) * 1.50)
+            measure.attributes["width"] = "\(adjustedMeasWd)"
+ //       }
+    }
+
 }

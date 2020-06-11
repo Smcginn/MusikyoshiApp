@@ -71,9 +71,9 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
         // howToUseDetText += "   > Select 'Choose' to pick individual exercises\n\n"
         // howToUseDetText += "Tip: It's best to use earbuds or headphones so you can hear the metronome."
 
-        
-        var howToUseDetText = "2020 School Term-End Giveaway! Use all of PlayTunes for Free until June 15, 2020! - Enjoy!\n"
-        howToUseDetText +=  "\nAfter June 15, 2020, you can still access many levels for free (see below). If you wish to continue with full-access, you can purchase a subscription (subscriptions are also explained below).\n\nBut until then, you do not have to sign up for anything! And your free use of PlayTunes does not commit you in any way to a purchase.\n\n\n"
+        //  JUNE15 JULY07
+        var howToUseDetText = "2020 School Term-End Giveaway! Use all of PlayTunes for Free until July 7, 2020! - Enjoy!\n"
+        howToUseDetText +=  "\nAfter July 7, 2020, you can still access many levels for free (see below). If you wish to continue with full-access, you can purchase a subscription (subscriptions are also explained below).\n\nBut until then, you do not have to sign up for anything! And your free use of PlayTunes does not commit you in any way to a purchase.\n\n\n"
 
         howToUseDetText += "Basic Usage:\n\n"
         
@@ -110,8 +110,8 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
 //        var tryOutDetText = "You can access Levels 1 & 2 for free, forever. That’s almost 200 exercises!\n\n"
 //        tryOutDetText += "For this free try-out, you don't need to do anything else; you are good to go!"
         
-        // JUNE15
-        var tryOutDetText = " Until June 15, 2020, playTunes is completely Free!  All Levels!\n\n\nAfter June 15, 2020, you can either explore our standard Free Trial, or purchase a subscription.\n\n"
+        // JUNE15  JULY07
+        var tryOutDetText = " Until July 7, 2020, playTunes is completely Free!  All Levels!\n\n\nAfter July 7, 2020, you can either explore our standard Free Trial, or purchase a subscription.\n\n"
         
         tryOutDetText += "Standard Free Trial: We have lots of free areas of the app to try out for both beginners and those with some experience.\n> All Days of Levels 1 and 2 are completely free.\n> Day 1 of these Levels is also free: Levels 3, 4, 7, 10, 15, 20, 25, 30.\n> We even give you parts of our Long Tones Level, the Lip Slurs Level, and the Clarinet Breaks Level.\n\nSo go ahead and explore Day 1 of all the Pink levels - you can unlock Gray Levels and Days when you purchase a subscription.\n\n"
         
@@ -121,7 +121,8 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
         
         //tryOutDetText += "\n\n"
         
-        tryOutDetText += "After June 15, 2020, for access to all 150 days of practice, and hundreds of unique exercises, you will need to purchase a PlayTunes All-Level Access Subscription.\n\n"
+        // JUNE15 JULY07
+        tryOutDetText += "After July 7, 2020, for access to all 150 days of practice, and hundreds of unique exercises, you will need to purchase a PlayTunes All-Level Access Subscription.\n\n"
 
         // JUNE15
 //        tryOutDetText += "\n\nNote: If you have purchased a subscription, please email us at Shawn@musikyoshi.com."
@@ -202,10 +203,10 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
         timer.invalidate()
     }
     
-    func showFirstTimeAlert() {   // JUNE15
+    func showFirstTimeAlert() {   // JUNE15  JULY07
         let numDays = daysUntilFreePeriodEndDate()
-        let titleStr = "2020 School Term-End Giveaway! Use PlayTunes for Free until June 15, 2020!\n\n\(numDays) days remaining - Enjoy!"
-        let msgStr = "\n\nAfter June 15, 2020, if you wish to continue, you can purchase a subscription (explained on this screen) at that time.\n(But until then, you do not have to sign up for anything! And your free use of PlayTunes does not commit you in any way to a purchase.)"
+        let titleStr = "2020 School Term-End Giveaway! Use PlayTunes for Free until July 7, 2020!\n\n\(numDays) days remaining - Enjoy!"
+        let msgStr = "\n\nAfter July 7, 2020, if you wish to continue, you can purchase a subscription (explained on this screen) at that time.\n(But until then, you do not have to sign up for anything! And your free use of PlayTunes does not commit you in any way to a purchase.)"
         
         let ac = MyUIAlertController(title: titleStr,
                                      message: msgStr,

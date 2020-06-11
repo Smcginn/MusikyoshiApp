@@ -6,6 +6,8 @@
 //  Copyright © 2016 Musikyoshi. All rights reserved.
 //
 
+// ClassKit
+/*
 // Move these:
 let kCK_Level1_ID  = "Level 1"
 let kCK_Level2_ID  = "Level 2"
@@ -17,13 +19,13 @@ let kCK_Day2_ID = "Day 2"
 let kCK_Day3_ID = "Day 3"
 let kCK_Day4_ID = "Day 4"
 let kCK_Day5_ID = "Day 5"
-
+*/
 
 import UIKit
 import CoreData
 import StoreKit
 import SwiftyStoreKit
-import ClassKit
+// import ClassKit
 
 func delay(_ delay:Double, closure:@escaping ()->()){
     DispatchQueue.main.asyncAfter(
@@ -215,8 +217,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Constants.Settings.SubsriptionOverridePswdSet: false,
             Constants.Settings.FreeTrial_6_15_2020_NumDaysLeft: Int(-1),
             ])
- 
-        publishContextsIfNeeded()
+
+        UserDefaults.standard.set(-1,
+                                  forKey: Constants.Settings.FreeTrial_6_15_2020_NumDaysLeft)
+
+        // ClassKit
+        // publishContextsIfNeeded()
         
         setCheckForAppUpdateTimeIfFirstRun()
         
@@ -527,6 +533,8 @@ extension AppDelegate: SKPaymentTransactionObserver {
         //self.present(ac, animated: true, completion: nil)
     }
 
+    // ClassKit
+    /*
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
         
     
@@ -595,7 +603,6 @@ extension AppDelegate: SKPaymentTransactionObserver {
                         return
                 }
                 
-
                 controller.classKitPath = contextPath
                 navController.popToRootViewController(animated: false)
                 navController.pushViewController(controller, animated: true)
@@ -604,6 +611,8 @@ extension AppDelegate: SKPaymentTransactionObserver {
         
         return true
     }
+    
+    */
     
 //    let kCK_Level1_ID  = "Level 1"
 //    let kCK_Level2_ID  = "Level 2"
@@ -616,6 +625,8 @@ extension AppDelegate: SKPaymentTransactionObserver {
 //    let kCK_Day4_ID = "Day 4"
 //    let kCK_Day5_ID = "Day 5"
 
+    // ClassKit
+    /*
     func publishContextsIfNeeded(completion: ((Error?) -> Void)? = nil) {
         let level1Ctx = CLSContext(type: .level, identifier:kCK_Level1_ID, title: kCK_Level1_ID)
         level1Ctx.displayOrder = 0
@@ -694,4 +705,5 @@ extension AppDelegate: SKPaymentTransactionObserver {
             }
         }
     }
+    */
 }

@@ -293,7 +293,8 @@ class LevelsViewController: UIViewController {
             print("(In viewDidAppear, skipping scrollToActiveLevel)")
         }
         
-        
+        // ClassKit
+        /*
         if classKitPath.count == 0 {
             print("YooHoo")
         } else {
@@ -333,6 +334,7 @@ class LevelsViewController: UIViewController {
                 scrollToActiveLevel()
             }
         }
+        */
     }
     
     override func viewDidLayoutSubviews() {
@@ -1174,11 +1176,14 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
                 scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x, y: yPosLastRow), animated: false)
             }
             
+            // ClassKit
+            /*
             if CK_Day >= 0 {
                 delay( 0.25) {
                     self.scrollToClassKitDay()
                 }
             }
+            */
         }
     }
     
@@ -1223,6 +1228,8 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
         //}
     }
     
+    // ClassKit
+    /*
     func scrollToClassKitDay(doAnimate: Bool = false) {
         //        let yPosActiveRow =
         //            levelsTableView.rectForRow(at: IndexPath(row: levelsTableView.numberOfRows(inSection: 0) - 1,
@@ -1257,7 +1264,7 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
         //            scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x, y: yPosActiveRow), animated: false)
         //}
     }
-    
+    */
 
     
     private func createParticles() {

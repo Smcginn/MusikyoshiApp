@@ -57,7 +57,8 @@ class TuneExerciseViewController: PlaybackInstrumentViewController, SSUTempo,
         callingVCDelegate?.setExerciseResults(exerNumber: exerNumber,
                                               exerStatus: kLDEState_Completed,
                                               exerScore:  bestStarScore)
-         navigationController?.popViewController(animated: true)
+        thawSeeScoreLayout()
+        navigationController?.popViewController(animated: true)
     }
 
     
@@ -3769,11 +3770,17 @@ class TuneExerciseViewController: PlaybackInstrumentViewController, SSUTempo,
     }
     
     func freezeSeeScoreLayout() {
-        // Keeps the SeeScore view from thrashing through unneeded
-        // (and error-producing) calls to LayoutSubviews, etc.
-        ssScrollView.freezeLayout()
+         // Keeps the SeeScore view from thrashing through unneeded
+         // (and error-producing) calls to LayoutSubviews, etc.
+         ssScrollView.freezeLayout()
     }
-    
+     
+    func thawSeeScoreLayout() {
+         // Keeps the SeeScore view from thrashing through unneeded
+         // (and error-producing) calls to LayoutSubviews, etc.
+         ssScrollView.thawLayout()
+     }
+     
     //MARK: - Jumping Monkey stuff
     
     ////////////////////////////////////////////////////////////////////////////
