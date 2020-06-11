@@ -327,6 +327,8 @@
 		6D01C40121238C75004B8440 /* LessonScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D01C3FF21238C75004B8440 /* LessonScheduler.swift */; };
 		6D01C40321238CAC004B8440 /* TuneFileMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D01C40221238CAC004B8440 /* TuneFileMapper.swift */; };
 		6D01C40421238CAC004B8440 /* TuneFileMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D01C40221238CAC004B8440 /* TuneFileMapper.swift */; };
+		6D06E002246C6EC500193062 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D06E001246C6EC500193062 /* AudioKit.framework */; };
+		6D06E003246C93DA00193062 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D06E001246C6EC500193062 /* AudioKit.framework */; };
 		6D08D74D219DDB0300928463 /* NetworkActivityIndicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D08D73C219DDB0300928463 /* NetworkActivityIndicatorManager.swift */; };
 		6D08D74E219DDB0300928463 /* NetworkActivityIndicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D08D73C219DDB0300928463 /* NetworkActivityIndicatorManager.swift */; };
 		6D08D758219E4E7500928463 /* AutoRenewNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D08D757219E4E7500928463 /* AutoRenewNotificationViewController.swift */; };
@@ -404,8 +406,6 @@
 		6D7249192128A8B100378131 /* Monkey_Ballon-Face02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7249172128A8B100378131 /* Monkey_Ballon-Face02@2x.png */; };
 		6D72491B2128FD6100378131 /* MonkeyPlaneWithProp large.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D72491A2128FD6000378131 /* MonkeyPlaneWithProp large.png */; };
 		6D72491C2128FD6100378131 /* MonkeyPlaneWithProp large.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D72491A2128FD6000378131 /* MonkeyPlaneWithProp large.png */; };
-		6D8072AF227B863300FEC160 /* AEXML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D8072AE227B863300FEC160 /* AEXML.framework */; };
-		6D8072B1227B866700FEC160 /* AEXML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D8072B0227B866700FEC160 /* AEXML.framework */; };
 		6D817BE02186042A00258980 /* PATest_FreqAndPitchSampleSim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D817BDF2186042A00258980 /* PATest_FreqAndPitchSampleSim.swift */; };
 		6D817BE12186042A00258980 /* PATest_FreqAndPitchSampleSim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D817BDF2186042A00258980 /* PATest_FreqAndPitchSampleSim.swift */; };
 		6D82A20C23391B7600026BD8 /* TryOutLevelsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D82A20B23391B7600026BD8 /* TryOutLevelsManager.swift */; };
@@ -1300,6 +1300,7 @@
 		6D0018CC2162C03500B7B498 /* InternalSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalSettingsViewController.swift; sourceTree = "<group>"; };
 		6D01C3FF21238C75004B8440 /* LessonScheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LessonScheduler.swift; path = LessonScheduling/LessonScheduler.swift; sourceTree = "<group>"; };
 		6D01C40221238CAC004B8440 /* TuneFileMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TuneFileMapper.swift; path = LessonScheduling/TuneFileMapper.swift; sourceTree = "<group>"; };
+		6D06E001246C6EC500193062 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioKit.framework; path = Carthage/Build/iOS/Static/AudioKit.framework; sourceTree = "<group>"; };
 		6D08D73C219DDB0300928463 /* NetworkActivityIndicatorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkActivityIndicatorManager.swift; path = InAppPurchases/NetworkActivityIndicatorManager.swift; sourceTree = "<group>"; };
 		6D08D757219E4E7500928463 /* AutoRenewNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoRenewNotificationViewController.swift; sourceTree = "<group>"; };
 		6D0C5F01217E33D400273E93 /* IsASoundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsASoundViewController.swift; sourceTree = "<group>"; };
@@ -1443,6 +1444,9 @@
 		6DA7F6A221B7440500800099 /* AppVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppVersion.swift; path = AppVersionMonitor/AppVersion.swift; sourceTree = "<group>"; };
 		6DA7F6A321B7440500800099 /* AppVersionMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppVersionMonitor.swift; path = AppVersionMonitor/AppVersionMonitor.swift; sourceTree = "<group>"; };
 		6DA7F6AB21B74A3200800099 /* AppVersionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppVersionHelper.swift; path = AppVersionMonitor/AppVersionHelper.swift; sourceTree = "<group>"; };
+		6DA923B1247C939F00DC88ED /* Debug-iphoneos */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "Debug-iphoneos"; path = "../../../../Library/Developer/Xcode/DerivedData/FirstStage-etnsojllxxjcrghdzqznbedmtrhm/Build/Products/Debug-iphoneos"; sourceTree = "<group>"; };
+		6DA923B4247C945000DC88ED /* AEXML */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = AEXML; path = "../../../../Library/Developer/Xcode/DerivedData/FirstStage-etnsojllxxjcrghdzqznbedmtrhm/Build/Products/Debug-iphoneos/AEXML.framework/AEXML"; sourceTree = "<group>"; };
+		6DB782B42457480A0032B8E4 /* PlayTunes.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PlayTunes.entitlements; sourceTree = "<group>"; };
 		6DB8532A21248EF500F999C3 /* XMLFileMapping.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = XMLFileMapping.json; path = LessonScheduling/XMLFileMapping.json; sourceTree = "<group>"; };
 		6DB8533C2126438E00F999C3 /* LaunchingNextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LaunchingNextView.swift; path = LessonScheduling/LaunchingNextView.swift; sourceTree = "<group>"; };
 		6DB8533F2127A87500F999C3 /* Monkey_Skiing_03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Monkey_Skiing_03@2x.png"; path = "Images/Monkey_Skiing_03@2x.png"; sourceTree = "<group>"; };
@@ -1585,7 +1589,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D8072B1227B866700FEC160 /* AEXML.framework in Frameworks */,
+				6D06E003246C93DA00193062 /* AudioKit.framework in Frameworks */,
 				6DD52D7E2257F40100F1C668 /* StoreKit.framework in Frameworks */,
 				6DD52D7B2257EE5C00F1C668 /* AudioKit.framework in Frameworks */,
 				6DD52D7A2257ED8D00F1C668 /* SeeScoreLib.framework in Frameworks */,
@@ -1612,7 +1616,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D8072AF227B863300FEC160 /* AEXML.framework in Frameworks */,
+				6D06E002246C6EC500193062 /* AudioKit.framework in Frameworks */,
 				6D431C342198EA67009DBBE9 /* SwiftyStoreKit.framework in Frameworks */,
 				1C33BBB62016E81D00CD83A6 /* SwiftyJSON.framework in Frameworks */,
 				6D3AE1422176846A005ECC60 /* StoreKit.framework in Frameworks */,
@@ -1851,6 +1855,7 @@
 		6324D2C61CE71B19001934A5 = {
 			isa = PBXGroup;
 			children = (
+				6DB782B42457480A0032B8E4 /* PlayTunes.entitlements */,
 				6D917E6223185006008A597C /* RuntimeEventManager.swift */,
 				6DD52D7C2257EF9300F1C668 /* SeeScoreLib.framework */,
 				6D431C322198EA33009DBBE9 /* SwiftyStoreKit.framework */,
@@ -1923,6 +1928,9 @@
 		6324D31D1CE7329A001934A5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6DA923B4247C945000DC88ED /* AEXML */,
+				6DA923B1247C939F00DC88ED /* Debug-iphoneos */,
+				6D06E001246C6EC500193062 /* AudioKit.framework */,
 				6D8072AE227B863300FEC160 /* AEXML.framework */,
 				6D8072B0227B866700FEC160 /* AEXML.framework */,
 				6D431C302198E955009DBBE9 /* SwiftyStoreKit */,
@@ -2711,6 +2719,9 @@
 							com.apple.BackgroundModes = {
 								enabled = 0;
 							};
+							com.apple.ClassKit = {
+								enabled = 1;
+							};
 							com.apple.InAppPurchase = {
 								enabled = 1;
 							};
@@ -2733,6 +2744,9 @@
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
+							};
+							com.apple.ClassKit = {
+								enabled = 1;
 							};
 							com.apple.InAppPurchase = {
 								enabled = 1;
@@ -4028,9 +4042,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: sfreshour.musikyoshi@gmail.com (R8U395JZ7G)";
+				CODE_SIGN_ENTITLEMENTS = PlayTunes.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2.0.42;
 				DEVELOPMENT_TEAM = PXMA5KCSKK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4038,11 +4054,13 @@
 					"$(PROJECT_DIR)/SeeScoreLib/AppStore-Release",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = FirstStage/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				MARKETING_VERSION = 2.0.6;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -4053,7 +4071,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FirstStage/FirstStage-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "AudioKit/AudioKit/**";
 			};
@@ -4065,9 +4083,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: sfreshour.musikyoshi@gmail.com (R8U395JZ7G)";
+				CODE_SIGN_ENTITLEMENTS = PlayTunes.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2.0.42;
 				DEVELOPMENT_TEAM = PXMA5KCSKK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4075,11 +4095,13 @@
 					"$(PROJECT_DIR)/SeeScoreLib/AppStore-Release",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = FirstStage/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				MARKETING_VERSION = 2.0.6;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -4089,7 +4111,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FirstStage/FirstStage-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "AudioKit/AudioKit/**";
 			};
@@ -4150,8 +4172,10 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = PlayTunes.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: sfreshour.musikyoshi@gmail.com (R8U395JZ7G)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 2.0.42;
 				DEVELOPMENT_TEAM = PXMA5KCSKK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4159,11 +4183,13 @@
 					"$(PROJECT_DIR)/SeeScoreLib/Universal",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = FirstStage/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				MARKETING_VERSION = 2.0.6;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -4174,7 +4200,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FirstStage/FirstStage-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "AudioKit/AudioKit/**";
 			};
@@ -4185,9 +4211,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = PlayTunes.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: sfreshour.musikyoshi@gmail.com (R8U395JZ7G)";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: sfreshour.musikyoshi@gmail.com (R8U395JZ7G)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 2.0.42;
 				DEVELOPMENT_TEAM = PXMA5KCSKK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4195,11 +4223,13 @@
 					"$(PROJECT_DIR)/SeeScoreLib/Universal",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				INFOPLIST_FILE = FirstStage/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				MARKETING_VERSION = 2.0.6;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -4209,7 +4239,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FirstStage/FirstStage-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "AudioKit/AudioKit/**";
 			};

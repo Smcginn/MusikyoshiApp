@@ -206,9 +206,9 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         showAlert(title: titleStr, message: msgStr)
     }
     
-    func showDontHaveToRightCornerTap() {
+    func showDontHaveToRightCornerTap() { //  JULY07
         let titleStr = "You Already Have\nAll Level Access"
-        let msgStr = "\n\nIf you have been told to tap in the bottom-right corner to get All-Level access, you don't have to do this. For this release, PlayTunes is completely free until June 15, 2020.\n\nYou're good to go!"
+        let msgStr = "\n\nIf you have been told to tap in the bottom-right corner to get All-Level access, you don't have to do this. For this release, PlayTunes is completely free until July 7, 2020.\n\nYou're good to go!"
         showAlert(title: titleStr, message: msgStr)
     }
     
@@ -573,7 +573,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         
         particleEmitter.emitterPosition = CGPoint(x: LessonsBtn.frame.midX, y: LessonsBtn.frame.midY)
         particleEmitter.zPosition = -1.0
-        particleEmitter.emitterShape = "point"
+        particleEmitter.emitterShape = CAEmitterLayerEmitterShape(rawValue: "point")
         particleEmitter.emitterSize = CGSize(width: LessonsBtn.frame.width, height: LessonsBtn.frame.height)
         
         let wholeNoteOrange = makeEmitterCell(imageName: "wholeNote", color: .orangeColor)

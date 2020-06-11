@@ -871,7 +871,7 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
         
         particleEmitter.emitterPosition = CGPoint(x: resumeBtn.frame.midX, y: resumeBtn.frame.midY)
         particleEmitter.zPosition = -1.0
-        particleEmitter.emitterShape = "point"
+        particleEmitter.emitterShape = CAEmitterLayerEmitterShape(rawValue: "point")
         particleEmitter.emitterSize = CGSize(width: resumeBtn.frame.width, height: resumeBtn.frame.height)
         
         let wholeNote = makeEmitterCell(imageName: "wholeNote")

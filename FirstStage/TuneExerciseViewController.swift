@@ -57,7 +57,8 @@ class TuneExerciseViewController: PlaybackInstrumentViewController, SSUTempo,
         callingVCDelegate?.setExerciseResults(exerNumber: exerNumber,
                                               exerStatus: kLDEState_Completed,
                                               exerScore:  bestStarScore)
-         navigationController?.popViewController(animated: true)
+        thawSeeScoreLayout()
+        navigationController?.popViewController(animated: true)
     }
 
     
@@ -324,7 +325,7 @@ class TuneExerciseViewController: PlaybackInstrumentViewController, SSUTempo,
         NotificationCenter.default.addObserver(
                 self,
                 selector: #selector(handleAVAudioInterruption(_:)),
-                name: NSNotification.Name.AVAudioSessionInterruption,
+                name: AVAudioSession.interruptionNotification,
                 object: self)
         if kDoingPitchAmplitudePitchSimTest {
             testFreqAndPitchSampleSim.SetupLegatoPitchTest1()
@@ -695,7 +696,7 @@ class TuneExerciseViewController: PlaybackInstrumentViewController, SSUTempo,
 //            AVAudioSessionManager.sharedInstance.setSessionMode(forVideoPlayback: false)
             
 //            playButton.setTitle("Stop", forState: UIControlState.Normal)
-            playButton.setTitle("Listening...", for: UIControlState())
+            playButton.setTitle("Listening...", for: UIControl.State())
 //            let playBtnAttrStr = createAttributedText(str: "Listening ...", fontSize: 18.0)
 //            playButton.titleLabel?.attributedText = playBtnAttrStr
 
@@ -709,7 +710,7 @@ class TuneExerciseViewController: PlaybackInstrumentViewController, SSUTempo,
             _ = navigationController?.popViewController(animated: true)
             return
         } else {
-            playButton.setTitle("Stopping...", for: UIControlState())
+            playButton.setTitle("Stopping...", for: UIControl.State())
 //            let playBtnAttrStr = createAttributedText(str: "Stopping ...", fontSize: 18.0)
 //            playButton.titleLabel?.attributedText = playBtnAttrStr
             delay(0.1) {
@@ -737,7 +738,7 @@ class TuneExerciseViewController: PlaybackInstrumentViewController, SSUTempo,
         playingSynth = true
         
         playForMeButton.isEnabled = false
-        playButton.setTitle("PLAYING...", for: UIControlState())
+        playButton.setTitle("PLAYING...", for: UIControl.State())
 //        let playBtnAttrStr = createAttributedText(str: "Playing ...", fontSize: 18.0)
 //        playButton.titleLabel?.attributedText = playBtnAttrStr
         playScore()
@@ -777,7 +778,7 @@ class TuneExerciseViewController: PlaybackInstrumentViewController, SSUTempo,
     }
     
     func loadFile(_ scoreFile: String) {
-        playButton.setTitle("PLAY", for: UIControlState())
+        playButton.setTitle("PLAY", for: UIControl.State())
 //        let playBtnAttrStr = createAttributedText(str: "Start Playing", fontSize: 18.0)
 //        playButton.titleLabel?.attributedText = playBtnAttrStr
 //        playButton.isEnabled = true
@@ -1181,7 +1182,7 @@ class TuneExerciseViewController: PlaybackInstrumentViewController, SSUTempo,
         
         animatePanel(direction: .back)
 
-        playButton.setTitle("PLAY", for: UIControlState())
+        playButton.setTitle("PLAY", for: UIControl.State())
 //        let playBtnAttrStr = createAttributedText(str: "Start Playing", fontSize: 18.0)
 //        playButton.titleLabel?.attributedText = playBtnAttrStr
 //        playButton.setTitle("Next Exercise", for: UIControlState())
@@ -1457,7 +1458,7 @@ class TuneExerciseViewController: PlaybackInstrumentViewController, SSUTempo,
     func checkForNoSoundPermissionDenied() {
         // Ask for permission to use the microphone, if not already granted
         var permissionDenied = false
-        switch AVAudioSession.sharedInstance().recordPermission() {
+        switch AVAudioSession.sharedInstance().recordPermission {
             case AVAudioSessionRecordPermission.denied:
                 permissionDenied = true
             default:
@@ -3152,7 +3153,7 @@ class TuneExerciseViewController: PlaybackInstrumentViewController, SSUTempo,
                     if currentRoute.outputs != nil {
                         print("\nHEADPHONES: currentRoute.outputs != nil")
                         for description in currentRoute.outputs {
-                            if description.portType == AVAudioSessionPortHeadphones {
+                            if description.portType == AVAudioSession.Port.headphones {
                                 headphonesInUse = true
                                 print("\nHEADPHONES: looping through currentRoute.outputs, headphones  found!!")
                                 break
@@ -3308,7 +3309,7 @@ class TuneExerciseViewController: PlaybackInstrumentViewController, SSUTempo,
         let btnStr = "    Performance\nGrading Settings"
         let btnAttrStr =
             NSMutableAttributedString( string: btnStr,
-                                       attributes: [NSAttributedStringKey.font:UIFont(
+                                       attributes: [NSAttributedString.Key.font:UIFont(
                                         name: "System Font",
                                         size: 11.0)!])
         showDebugSettingsBtn?.titleLabel?.attributedText = btnAttrStr
@@ -3339,7 +3340,7 @@ class TuneExerciseViewController: PlaybackInstrumentViewController, SSUTempo,
         let btnStr = "Show Sound\nAnalysis Window"
         let btnAttrStr =
             NSMutableAttributedString( string: btnStr,
-                                       attributes: [NSAttributedStringKey.font:UIFont(
+                                       attributes: [NSAttributedString.Key.font:UIFont(
                                         name: "System Font",
                                         size: 14.0)!])
         showSoundAnalysisBtn?.titleLabel?.attributedText = btnAttrStr
@@ -3367,6 +3368,10 @@ class TuneExerciseViewController: PlaybackInstrumentViewController, SSUTempo,
     var showFreqAnalysisBtn: UIButton?
     
     func setupShowFreqAnalysisViewBtn() {
+        
+        let devIsIpad = UIDevice.current.userInterfaceIdiom == .pad
+        let screenLen = ScreenSize.SCREEN_MAX_LENGTH
+        
         guard gMKDebugOpt_ShowDebugSettingsBtn else { return }
         guard DeviceType.IS_IPAD else { return }
         
@@ -3385,7 +3390,7 @@ class TuneExerciseViewController: PlaybackInstrumentViewController, SSUTempo,
         let btnStr = "Show Sound\nFrequency Window"
         let btnAttrStr =
             NSMutableAttributedString( string: btnStr,
-                                       attributes: [NSAttributedStringKey.font:UIFont(
+                                       attributes: [NSAttributedString.Key.font:UIFont(
                                         name: "System Font",
                                         size: 14.0)!])
         showFreqAnalysisBtn?.titleLabel?.attributedText = btnAttrStr
@@ -3433,7 +3438,7 @@ class TuneExerciseViewController: PlaybackInstrumentViewController, SSUTempo,
         let btnStr = "Fake The\nScore And\nReturn"
         let btnAttrStr =
             NSMutableAttributedString( string: btnStr,
-                                       attributes: [NSAttributedStringKey.font:UIFont(
+                                       attributes: [NSAttributedString.Key.font:UIFont(
                                         name: "System Font",
                                         size: 14.0)!])
         showDoFakeScoreBtn?.titleLabel?.attributedText = btnAttrStr
@@ -3476,7 +3481,7 @@ class TuneExerciseViewController: PlaybackInstrumentViewController, SSUTempo,
         let btnStr = "  Reset\nThis Exer's\nStar Score"
         let btnAttrStr =
             NSMutableAttributedString( string: btnStr,
-                                       attributes: [NSAttributedStringKey.font:UIFont(
+                                       attributes: [NSAttributedString.Key.font:UIFont(
                                         name: "System Font",
                                         size: 14.0)!])
         resetThisExerScoreBtn?.titleLabel?.attributedText = btnAttrStr
@@ -3520,7 +3525,7 @@ class TuneExerciseViewController: PlaybackInstrumentViewController, SSUTempo,
         let btnStr = "Display Current\nInstrument Settings"
         let btnAttrStr =
             NSMutableAttributedString( string: btnStr,
-                                       attributes: [NSAttributedStringKey.font:UIFont(
+                                       attributes: [NSAttributedString.Key.font:UIFont(
                                         name: "System Font",
                                         size: 14.0)!])
         currSettingsBtn?.titleLabel?.attributedText = btnAttrStr
@@ -3558,7 +3563,7 @@ class TuneExerciseViewController: PlaybackInstrumentViewController, SSUTempo,
         let btnStr = "Send Perf Data"
         let btnAttrStr =
             NSMutableAttributedString( string: btnStr,
-                                       attributes: [NSAttributedStringKey.font:UIFont(
+                                       attributes: [NSAttributedString.Key.font:UIFont(
                                         name: "System Font",
                                         size: 14.0)!])
         sendPerfDataBtn?.titleLabel?.attributedText = btnAttrStr
@@ -3765,11 +3770,17 @@ class TuneExerciseViewController: PlaybackInstrumentViewController, SSUTempo,
     }
     
     func freezeSeeScoreLayout() {
-        // Keeps the SeeScore view from thrashing through unneeded
-        // (and error-producing) calls to LayoutSubviews, etc.
-        ssScrollView.freezeLayout()
+         // Keeps the SeeScore view from thrashing through unneeded
+         // (and error-producing) calls to LayoutSubviews, etc.
+         ssScrollView.freezeLayout()
     }
-    
+     
+    func thawSeeScoreLayout() {
+         // Keeps the SeeScore view from thrashing through unneeded
+         // (and error-producing) calls to LayoutSubviews, etc.
+         ssScrollView.thawLayout()
+     }
+     
     //MARK: - Jumping Monkey stuff
     
     ////////////////////////////////////////////////////////////////////////////
@@ -3815,7 +3826,7 @@ class TuneExerciseViewController: PlaybackInstrumentViewController, SSUTempo,
     @objc func handleAVAudioInterruption(_ n: Notification) {
         print("In TuneExer::handleAVAudioInterruption")
         guard let why = n.userInfo?[AVAudioSessionInterruptionTypeKey] as? UInt else { return }
-        guard let type = AVAudioSessionInterruptionType(rawValue: why) else { return }
+        guard let type = AVAudioSession.InterruptionType(rawValue: why) else { return }
         if type == .began {
             stopPlaying()
             if vhView != nil && !(vhView!.isHidden) {

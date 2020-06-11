@@ -57,8 +57,8 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         
         selectedRhythmName = tuneNames.first!
         selectedTuneName = tuneNames.first!
-        playRhythmBtn.setTitle("Play \(selectedRhythmName)", for: UIControlState())
-        playTuneBtn.setTitle("Play \(selectedTuneName)", for: UIControlState())
+        playRhythmBtn.setTitle("Play \(selectedRhythmName)", for: UIControl.State())
+        playTuneBtn.setTitle("Play \(selectedTuneName)", for: UIControl.State())
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -163,7 +163,7 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         func handler(_ act: UIAlertAction) {
-            playRhythmBtn.setTitle("Play \(selectedRhythmName)", for: UIControlState())
+            playRhythmBtn.setTitle("Play \(selectedRhythmName)", for: UIControl.State())
         }
         
         ac.setValue(vc, forKey: "contentViewController")
@@ -189,7 +189,7 @@ class PracticeViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         func handler(_ act: UIAlertAction) {
-            playTuneBtn.setTitle("Play \(selectedTuneName)", for: UIControlState())
+            playTuneBtn.setTitle("Play \(selectedTuneName)", for: UIControl.State())
         }
         
         ac.setValue(vc, forKey: "contentViewController")

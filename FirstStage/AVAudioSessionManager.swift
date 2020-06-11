@@ -116,7 +116,7 @@ class AVAudioSessionManager: NSObject {
         do {
             if sessionMode == .usingMicMode {
                 print("  About to call MULTI  AudioSess.setCat(AVAudioSessionCategoryPlayAndRecord)")
-                let sessMode = AVAudioSessionModeMeasurement      // AVAudioSessionModeDefault
+                let sessMode = AVAudioSession.Mode.measurement      // AVAudioSessionModeDefault
 //                if !forImmediateUse {
 //                    // AVAudioSessionModeDefault is used here so Metronome can be heard.
 //                    // Will be set to AVAudioSessionModeMeasurement in a subsequent
@@ -124,12 +124,12 @@ class AVAudioSessionManager: NSObject {
 //                    sessMode = AVAudioSessionModeDefault
 //                }
                 try sessionInstance.setCategory(
-                            AVAudioSessionCategoryPlayAndRecord,
+                    AVAudioSession.Category.playAndRecord,
                             mode: sessMode,
-                            options: AVAudioSessionCategoryOptions.defaultToSpeaker)
+                            options: AVAudioSession.CategoryOptions.defaultToSpeaker)
                 print("  About to call AudioSess.overrideOutputAudioPort)")
                 if !AKSettings.headPhonesPlugged {
-                    try sessionInstance.overrideOutputAudioPort(AVAudioSessionPortOverride.speaker)
+                    try sessionInstance.overrideOutputAudioPort(AVAudioSession.PortOverride.speaker)
                 }
                 
             } else { // Playback
@@ -139,9 +139,9 @@ class AVAudioSessionManager: NSObject {
                 // MixWithOthers, duckOthers, InterruptSpokenAudioAndMixWithOthers
                 
                 try sessionInstance.setCategory(
-                    AVAudioSessionCategoryPlayback,
-                    mode: AVAudioSessionModeMoviePlayback, //AVAudioSessionModeDefault
-                    options: AVAudioSessionCategoryOptions.duckOthers)
+                    AVAudioSession.Category.playback,
+                    mode: AVAudioSession.Mode.moviePlayback, //AVAudioSessionModeDefault
+                    options: AVAudioSession.CategoryOptions.duckOthers)
                 
 //                print("  About to call AudioSess.overrideOutputAudioPort)")
 //                if !AKSettings.headPhonesPlugged {
@@ -211,10 +211,10 @@ class AVAudioSessionManager: NSObject {
         */
 
         // add interruption handler
-        NotificationCenter.default.addObserver(self, selector: #selector(handleInterruption), name: NSNotification.Name.AVAudioSessionInterruption, object: sessionInstance)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleInterruption), name: AVAudioSession.interruptionNotification, object: sessionInstance)
         
         // we don't do anything special in the route change notification
-        NotificationCenter.default.addObserver(self, selector: #selector(handleRouteChange), name: NSNotification.Name.AVAudioSessionRouteChange, object: sessionInstance)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleRouteChange), name: AVAudioSession.routeChangeNotification, object: sessionInstance)
         
         // we don't do anything special in the media server reset notification
 //        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(handleMediaServerReset), name: AVAudioSessionMediaServicesWereResetNotification, object: sessionInstance)
@@ -241,9 +241,9 @@ class AVAudioSessionManager: NSObject {
             
             switch output.portType {
                 
-            case AVAudioSessionPortHeadphones:
+            case AVAudioSession.Port.headphones:
                 print("Headphones are on.")
-            case AVAudioSessionPortBuiltInSpeaker:
+            case AVAudioSession.Port.builtInSpeaker:
                 print("Speaker is on.")
             default:
                 break
@@ -391,11 +391,11 @@ class AVAudioSessionManager: NSObject {
         let reasonValue = (notification.userInfo?[AVAudioSessionRouteChangeReasonKey] as AnyObject).uintValue
         //AVAudioSessionRouteDescription *routeDescription = [notification.userInfo valueForKey:AVAudioSessionRouteChangePreviousRouteKey];
         
-        if reasonValue == AVAudioSessionRouteChangeReason.oldDeviceUnavailable.rawValue {
+        if reasonValue == AVAudioSession.RouteChangeReason.oldDeviceUnavailable.rawValue {
             //do we need to do something here?
         }
         
-        if reasonValue == AVAudioSessionRouteChangeReason.categoryChange.rawValue {
+        if reasonValue == AVAudioSession.RouteChangeReason.categoryChange.rawValue {
             let sessionInstance = AVAudioSession.sharedInstance()
             let catStr = sessionInstance.category
             print("\n\n . . . Yep, Cat Change   new cat:\(catStr) !!!!!!!!!!!!!!!!!!!!!!! \n\n")
@@ -429,7 +429,7 @@ class AVAudioSessionManager: NSObject {
         //print("Audio interruption")
         print("\n\n@@@@@@ handleInterruption called\n")
         guard let why = n.userInfo?[AVAudioSessionInterruptionTypeKey] as? UInt else { return }
-        guard let type = AVAudioSessionInterruptionType(rawValue: why) else { return }
+        guard let type = AVAudioSession.InterruptionType(rawValue: why) else { return }
 
         if type == .began {
             print("interruption began:\n\(n.userInfo!)")

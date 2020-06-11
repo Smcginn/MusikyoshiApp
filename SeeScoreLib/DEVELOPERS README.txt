@@ -1,24 +1,26 @@
 
 The SeeScore framework files must be downloaded from GoogleDrive and unzipped. The app will not build until you perform this step.
 
-For this release, you want Version 330.
+For this release, you want Version 365.
 
 The framework libraries are in the MusiKyoshi Google Drive. You will need to contact Shawn for access to this drive if you don't already have it.
 
-You must download the framework zip files (there are two), place them in the corresponding directories (this is very important!), and unzip them.
+If you don't have the correct versions of the frameworks in place, you must download the framework zip files (there are two), place them in the corresponding directories (this is very important!), and unzip them.
+
+(To avoid any issues with stale files, first move the existing SeeScoreLib.framework folder to Trash before downloading and unzipping the V365 framework libraries. You can leave this text file in place.)
 
 The framework files are in the Google Drive under Developer Resources as follows:
 
 GoogleDrive/
 ... Developer Resources/
 ...... SeeScore/
-......... Version 330/
+......... Version 365/
 ............ AppStore-Release Framework/
 ............... AppStore-Release SeeScoreLib.framework.zip
 ............ Universal Framework/
 ............... Universal SeeScoreLib.framework.zip
 
-Again, for this release, you want Version 330.
+Again, for this release, you want Version 365.
 
 When you are done, your folders, on your Mac, should look like this:
 
@@ -61,8 +63,8 @@ One of these files is the actual framework, SeeScoreLib.framework. There are act
 
 Prior to SeeScore version 330, we were able to zip up these framework libraries and include them as part of a GitHub push to origin. However, for for files submitted within a commit, GitHub restricts individual file sizes to 100MB. 
 
-As of SeeScore v330, the zipped version of the Universal framework library exceeds 100MB, and the upload to the GitHub repo is not allowed. GitHub’s suggestion for how to handle this is to use include links to an external storage, such as DropBox, Google Drive, etc.
+As of SeeScore v330, the zipped version of the Universal framework library exceeded 100MB, and the upload to the GitHub repo is not allowed. GitHub’s suggestion for how to handle this is to use include links to an external storage, such as DropBox, Google Drive, etc.
 
-Even though the AppStore-Release framework is still small enough to include in a commit, I decided to put both up on the Google Drive to avoid possible confusion.
+(Even though the AppStore-Release framework is still small enough to include in a GitHub commit, I decided to put both up on the Google Drive to avoid possible confusion.)
 
-Scott Freshour - 5/2/2019
+Scott Freshour - 6/10/2020

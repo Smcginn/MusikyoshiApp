@@ -33,7 +33,7 @@ class OnboardingViewController: UIViewController {
         var pageIndColor =  pageControl.pageIndicatorTintColor
         var currPageIndColor =  pageControl.currentPageIndicatorTintColor
         
-        view.bringSubview(toFront: pageControl)
+        view.bringSubviewToFront(pageControl)
         
     }
     
@@ -44,6 +44,15 @@ class OnboardingViewController: UIViewController {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let controller = storyboard.instantiateViewController(withIdentifier: "NavController")
             self.present(controller, animated: false, completion: nil)
+            
+            // ClassKit
+            /*
+             let storyboard = UIStoryboard(name: "Main", bundle: nil)
+             let navController = storyboard.instantiateViewController(withIdentifier: "NavController")
+             UIApplication.shared.keyWindow?.rootViewController = navController
+             //self.window?.rootViewController = navController
+             self.present(navController, animated: false, completion: nil)
+             */
         }
         
     }

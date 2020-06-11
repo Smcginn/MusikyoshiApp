@@ -719,8 +719,8 @@ func showAutoCalcSettingsHandler(_ act: UIAlertAction) {
     let messageText = NSMutableAttributedString(
         string: msgStr,
         attributes: [
-            NSAttributedStringKey.paragraphStyle: paragraphStyle,
-            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14.0)
+            NSAttributedString.Key.paragraphStyle: paragraphStyle,
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14.0)
         ]
     )
     
@@ -833,8 +833,8 @@ func showEditableSettingsHandler(_ act: UIAlertAction) {
     let messageText = NSMutableAttributedString(
         string: msgStr,
         attributes: [
-            NSAttributedStringKey.paragraphStyle: paragraphStyle,
-            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14.0)
+            NSAttributedString.Key.paragraphStyle: paragraphStyle,
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14.0)
         ]
     )
     
