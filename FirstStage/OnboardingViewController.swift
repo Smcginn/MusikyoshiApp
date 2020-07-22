@@ -40,20 +40,40 @@ class OnboardingViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if UserDefaults.standard.bool(forKey: "shownOnboarding") {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let controller = storyboard.instantiateViewController(withIdentifier: "NavController")
-            self.present(controller, animated: false, completion: nil)
-            
-            // ClassKit
-            /*
+         // NAV_CONTROLLER_ISSUE - put it here?
+        
+          //self.window?.rootViewController = navController
+         /*
+         if UserDefaults.standard.bool(forKey: "shownOnboarding") {
+             /*
+             let storyboard = UIStoryboard(name: "Main", bundle: nil)
+             let controller = storyboard.instantiateViewController(withIdentifier: "NavController")
+             self.present(controller, animated: false, completion: nil)
+             */
+             
+             // ClassKit
              let storyboard = UIStoryboard(name: "Main", bundle: nil)
              let navController = storyboard.instantiateViewController(withIdentifier: "NavController")
              UIApplication.shared.keyWindow?.rootViewController = navController
-             //self.window?.rootViewController = navController
              self.present(navController, animated: false, completion: nil)
-             */
+         }
+         */
+        
+        if UserDefaults.standard.bool(forKey: "shownOnboarding") {
+            /*
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let controller = storyboard.instantiateViewController(withIdentifier: "NavController")
+            self.present(controller, animated: false, completion: nil)
+            */
+            
+            // ClassKit
+            
         }
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let navController = storyboard.instantiateViewController(withIdentifier: "NavController")
+        UIApplication.shared.keyWindow?.rootViewController = navController
+        //self.window?.rootViewController = navController
+        self.present(navController, animated: false, completion: nil)
         
     }
     
@@ -95,10 +115,16 @@ class OnboardingViewController: UIViewController {
         
         UserDefaults.standard.set(true, forKey: "shownOnboarding")
         
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let controller = storyboard.instantiateViewController(withIdentifier: "NavController")
+//        self.present(controller, animated: true, completion: nil)
+
+        // NAV_CONTROLLER_ISSUE
+
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "NavController")
-        self.present(controller, animated: true, completion: nil)
-        
+        let navController = storyboard.instantiateViewController(withIdentifier: "NavController")
+        UIApplication.shared.keyWindow?.rootViewController = navController
+        self.present(navController, animated: false, completion: nil)
     }
     
     func setupSlideScrollView(slides: [OnboardingSlideView]) {

@@ -15,7 +15,8 @@ import Foundation
 import SwiftyJSON
 
 protocol ExerciseResults {
-    func setExerciseResults( exerNumber: Int, exerStatus: Int, exerScore: Int)
+    func setExerciseResults( exerNumber: Int, exerStatus: Int, exerScore: Int,
+                              numAttempts: Int, bpmOrPercTargetTime: Double)
 }
 
 class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ViewFinished, ExerciseResults, PresentingMicCalibVC {
@@ -726,9 +727,8 @@ class LevelOverviewViewController: UIViewController, UITableViewDataSource, UITa
     var allDoneWithLevelAlso    = false
 
     // Longtones or TuneExercise VC calls this with results
-    func setExerciseResults( exerNumber: Int,
-                             exerStatus: Int,
-                             exerScore: Int) {
+    func setExerciseResults( exerNumber: Int, exerStatus: Int, exerScore: Int,
+                             numAttempts: Int, bpmOrPercTargetTime: Double) {
         let thisLDE = makeLDEForViewsLevelDay(andThisExer: exerNumber)
         
         // compare existing score status, etc., before overwriting

@@ -406,6 +406,8 @@
 		6D7249192128A8B100378131 /* Monkey_Ballon-Face02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7249172128A8B100378131 /* Monkey_Ballon-Face02@2x.png */; };
 		6D72491B2128FD6100378131 /* MonkeyPlaneWithProp large.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D72491A2128FD6000378131 /* MonkeyPlaneWithProp large.png */; };
 		6D72491C2128FD6100378131 /* MonkeyPlaneWithProp large.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D72491A2128FD6000378131 /* MonkeyPlaneWithProp large.png */; };
+		6D772A62249D23B900C3A55F /* CKContextManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D772A61249D23B800C3A55F /* CKContextManager.swift */; };
+		6D772A63249D23B900C3A55F /* CKContextManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D772A61249D23B800C3A55F /* CKContextManager.swift */; };
 		6D817BE02186042A00258980 /* PATest_FreqAndPitchSampleSim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D817BDF2186042A00258980 /* PATest_FreqAndPitchSampleSim.swift */; };
 		6D817BE12186042A00258980 /* PATest_FreqAndPitchSampleSim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D817BDF2186042A00258980 /* PATest_FreqAndPitchSampleSim.swift */; };
 		6D82A20C23391B7600026BD8 /* TryOutLevelsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D82A20B23391B7600026BD8 /* TryOutLevelsManager.swift */; };
@@ -624,6 +626,10 @@
 		6DB8534A2127A87600F999C3 /* Monkey_Skiing_06@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DB853422127A87600F999C3 /* Monkey_Skiing_06@2x.png */; };
 		6DB9A96F21FCC7E000719BBF /* ScoreFileVersionManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB9A96E21FCC7E000719BBF /* ScoreFileVersionManagement.swift */; };
 		6DB9A97021FCC7E000719BBF /* ScoreFileVersionManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB9A96E21FCC7E000719BBF /* ScoreFileVersionManagement.swift */; };
+		6DBCD32B24A7CC22000679D4 /* DayScoreSummarizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBCD32A24A7CC22000679D4 /* DayScoreSummarizer.swift */; };
+		6DBCD32C24A7CC22000679D4 /* DayScoreSummarizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBCD32A24A7CC22000679D4 /* DayScoreSummarizer.swift */; };
+		6DBCD34024AA3337000679D4 /* DayCKActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBCD33F24AA3337000679D4 /* DayCKActivityManager.swift */; };
+		6DBCD34124AA3337000679D4 /* DayCKActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBCD33F24AA3337000679D4 /* DayCKActivityManager.swift */; };
 		6DBF1F29213EEB850052AD57 /* Duration - A bit short.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F0E213EEB820052AD57 /* Duration - A bit short.mp4 */; };
 		6DBF1F2A213EEB850052AD57 /* Duration - A bit short.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F0E213EEB820052AD57 /* Duration - A bit short.mp4 */; };
 		6DBF1F2B213EEB850052AD57 /* Duration - Too Long.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF1F0F213EEB820052AD57 /* Duration - Too Long.mp4 */; };
@@ -1340,6 +1346,7 @@
 		6D7249102128991F00378131 /* Blank 64x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Blank 64x16.png"; path = "Images/Blank 64x16.png"; sourceTree = "<group>"; };
 		6D7249172128A8B100378131 /* Monkey_Ballon-Face02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Monkey_Ballon-Face02@2x.png"; path = "Images/Monkey_Ballon-Face02@2x.png"; sourceTree = "<group>"; };
 		6D72491A2128FD6000378131 /* MonkeyPlaneWithProp large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "MonkeyPlaneWithProp large.png"; path = "Images/MonkeyPlaneWithProp large.png"; sourceTree = "<group>"; };
+		6D772A61249D23B800C3A55F /* CKContextManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CKContextManager.swift; path = ClassKit/CKContextManager.swift; sourceTree = "<group>"; };
 		6D8072AE227B863300FEC160 /* AEXML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AEXML.framework; path = "../../../../Library/Developer/Xcode/DerivedData/FirstStage-etnsojllxxjcrghdzqznbedmtrhm/Build/Products/Debug-iphonesimulator/AEXML.framework"; sourceTree = "<group>"; };
 		6D8072B0227B866700FEC160 /* AEXML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AEXML.framework; path = "../../../../Library/Developer/Xcode/DerivedData/FirstStage-etnsojllxxjcrghdzqznbedmtrhm/Build/Products/Debug-iphoneos/AEXML.framework"; sourceTree = "<group>"; };
 		6D817BDF2186042A00258980 /* PATest_FreqAndPitchSampleSim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PATest_FreqAndPitchSampleSim.swift; path = PerformanceAnalysis/PerfAnalysisTesting/PATest_FreqAndPitchSampleSim.swift; sourceTree = "<group>"; };
@@ -1454,6 +1461,8 @@
 		6DB853412127A87500F999C3 /* Monkey_Skiing_01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Monkey_Skiing_01@2x.png"; path = "Images/Monkey_Skiing_01@2x.png"; sourceTree = "<group>"; };
 		6DB853422127A87600F999C3 /* Monkey_Skiing_06@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Monkey_Skiing_06@2x.png"; path = "Images/Monkey_Skiing_06@2x.png"; sourceTree = "<group>"; };
 		6DB9A96E21FCC7E000719BBF /* ScoreFileVersionManagement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScoreFileVersionManagement.swift; path = PerformanceAnalysis/ScoreFileVersionManagement.swift; sourceTree = "<group>"; };
+		6DBCD32A24A7CC22000679D4 /* DayScoreSummarizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DayScoreSummarizer.swift; path = LessonScheduling/DayScoreSummarizer.swift; sourceTree = "<group>"; };
+		6DBCD33F24AA3337000679D4 /* DayCKActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DayCKActivityManager.swift; path = ClassKit/DayCKActivityManager.swift; sourceTree = "<group>"; };
 		6DBF1F0E213EEB820052AD57 /* Duration - A bit short.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Duration - A bit short.mp4"; path = "Videos/Duration - A bit short.mp4"; sourceTree = "<group>"; };
 		6DBF1F0F213EEB820052AD57 /* Duration - Too Long.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Duration - Too Long.mp4"; path = "Videos/Duration - Too Long.mp4"; sourceTree = "<group>"; };
 		6DBF1F10213EEB820052AD57 /* No Sound - relax embouchure_512Kbps_288p.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "No Sound - relax embouchure_512Kbps_288p.mp4"; path = "Videos/No Sound - relax embouchure_512Kbps_288p.mp4"; sourceTree = "<group>"; };
@@ -1884,6 +1893,7 @@
 		6324D2D11CE71B19001934A5 /* FirstStage */ = {
 			isa = PBXGroup;
 			children = (
+				6D772A25249AC30F00C3A55F /* ClassKit */,
 				6D268BDA21CD3ACC002DA293 /* InstrumentSelection */,
 				6DA7F69221B743CF00800099 /* AppVersionMonitor */,
 				6D3AE143217684B5005ECC60 /* InApp Purchases */,
@@ -2242,6 +2252,7 @@
 				6D6C8CEC2123422B00874F86 /* PerformanceScoreObjectScheduler.swift */,
 				6D01C40221238CAC004B8440 /* TuneFileMapper.swift */,
 				6DB8532A21248EF500F999C3 /* XMLFileMapping.json */,
+				6DBCD32A24A7CC22000679D4 /* DayScoreSummarizer.swift */,
 			);
 			name = LessonScheduling;
 			sourceTree = "<group>";
@@ -2343,6 +2354,31 @@
 				6D82A20B23391B7600026BD8 /* TryOutLevelsManager.swift */,
 			);
 			name = "InApp Purchases";
+			sourceTree = "<group>";
+		};
+		6D772A25249AC30F00C3A55F /* ClassKit */ = {
+			isa = PBXGroup;
+			children = (
+				6DBCD33F24AA3337000679D4 /* DayCKActivityManager.swift */,
+				6D772A42249AD22B00C3A55F /* Model */,
+				6D772A41249AD1FF00C3A55F /* ClassKit */,
+				6D772A61249D23B800C3A55F /* CKContextManager.swift */,
+			);
+			name = ClassKit;
+			sourceTree = "<group>";
+		};
+		6D772A41249AD1FF00C3A55F /* ClassKit */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ClassKit;
+			sourceTree = "<group>";
+		};
+		6D772A42249AD22B00C3A55F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		6D817BDE2186033F00258980 /* PerfAnalysisTesting */ = {
@@ -3662,10 +3698,12 @@
 				6D817BE12186042A00258980 /* PATest_FreqAndPitchSampleSim.swift in Sources */,
 				E409164222CC387500E5E034 /* SettingsViewController.swift in Sources */,
 				E9815A392005124D0046445B /* VideoHelpResources.swift in Sources */,
+				6DBCD32C24A7CC22000679D4 /* DayScoreSummarizer.swift in Sources */,
 				6D08D74E219DDB0300928463 /* NetworkActivityIndicatorManager.swift in Sources */,
 				E9815A37200511430046445B /* VideoHelpView.swift in Sources */,
 				E9AD0CE71FE09D32006472CE /* NotePitchPerformanceAnalyzer.swift in Sources */,
 				6D40FC8621D72D58006E1742 /* FrenchHornPartials.swift in Sources */,
+				6D772A63249D23B900C3A55F /* CKContextManager.swift in Sources */,
 				6D6093BC21163E1800874A40 /* ThresholdsMgr.swift in Sources */,
 				639A2E461CF5AB09004F7B1A /* DotView.swift in Sources */,
 				6D56674921A30C4200603DCD /* SKProduct+LocalizedPrice.swift in Sources */,
@@ -3674,6 +3712,7 @@
 				6D6C8CEE2123422B00874F86 /* PerformanceScoreObjectScheduler.swift in Sources */,
 				6D62460121F6455E00451400 /* DiscFileSystermSupport.swift in Sources */,
 				6D631687212DF4D5004F2DE4 /* LevelSeriesTableViewHeaderFooterView.swift in Sources */,
+				6DBCD34124AA3337000679D4 /* DayCKActivityManager.swift in Sources */,
 				6324D3611CE73C47001934A5 /* SSSystemView.m in Sources */,
 				E9AD0CBF1FD9BCDF006472CE /* NoteIDs.swift in Sources */,
 				635A60A61EC6B8050099154A /* MusicXMLModifier.swift in Sources */,
@@ -3797,10 +3836,12 @@
 				6324D3071CE72F8D001934A5 /* FirstStage.xcdatamodeld in Sources */,
 				6D817BE02186042A00258980 /* PATest_FreqAndPitchSampleSim.swift in Sources */,
 				639A2E451CF5AB09004F7B1A /* DotView.swift in Sources */,
+				6DBCD32B24A7CC22000679D4 /* DayScoreSummarizer.swift in Sources */,
 				6D08D74D219DDB0300928463 /* NetworkActivityIndicatorManager.swift in Sources */,
 				E9815A3B200512810046445B /* VideoHelpView.swift in Sources */,
 				6D40FC8521D72D4C006E1742 /* FrenchHornPartials.swift in Sources */,
 				E9AD0CE61FE09D32006472CE /* NotePitchPerformanceAnalyzer.swift in Sources */,
+				6D772A62249D23B900C3A55F /* CKContextManager.swift in Sources */,
 				6D6093BB21163E1800874A40 /* ThresholdsMgr.swift in Sources */,
 				6379EE911CE9C8ED00188A70 /* AudioKitManager.swift in Sources */,
 				6D56674821A30C2600603DCD /* SKProduct+LocalizedPrice.swift in Sources */,
@@ -3809,6 +3850,7 @@
 				E409165E22CC396B00E5E034 /* WelcomeViewController.swift in Sources */,
 				6D62460021F6455E00451400 /* DiscFileSystermSupport.swift in Sources */,
 				6D6C8CED2123422B00874F86 /* PerformanceScoreObjectScheduler.swift in Sources */,
+				6DBCD34024AA3337000679D4 /* DayCKActivityManager.swift in Sources */,
 				6D631686212DF4D5004F2DE4 /* LevelSeriesTableViewHeaderFooterView.swift in Sources */,
 				635A60A71EC6B8060099154A /* MusicXMLModifier.swift in Sources */,
 				6324D3601CE73C47001934A5 /* SSSystemView.m in Sources */,
@@ -4043,10 +4085,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = PlayTunes.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Musikyoshi, Inc. (PXMA5KCSKK)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.0.42;
+				CURRENT_PROJECT_VERSION = 2.1.2;
 				DEVELOPMENT_TEAM = PXMA5KCSKK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4060,7 +4102,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 2.0.6;
+				MARKETING_VERSION = 2.1.0;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -4084,10 +4126,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = PlayTunes.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Musikyoshi, Inc. (PXMA5KCSKK)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.0.42;
+				CURRENT_PROJECT_VERSION = 2.1.2;
 				DEVELOPMENT_TEAM = PXMA5KCSKK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4101,7 +4143,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 2.0.6;
+				MARKETING_VERSION = 2.1.0;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -4175,7 +4217,7 @@
 				CODE_SIGN_ENTITLEMENTS = PlayTunes.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: sfreshour.musikyoshi@gmail.com (R8U395JZ7G)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 2.0.42;
+				CURRENT_PROJECT_VERSION = 2.1.2;
 				DEVELOPMENT_TEAM = PXMA5KCSKK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4189,7 +4231,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 2.0.6;
+				MARKETING_VERSION = 2.1.0;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -4215,7 +4257,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: sfreshour.musikyoshi@gmail.com (R8U395JZ7G)";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: sfreshour.musikyoshi@gmail.com (R8U395JZ7G)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 2.0.42;
+				CURRENT_PROJECT_VERSION = 2.1.2;
 				DEVELOPMENT_TEAM = PXMA5KCSKK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4229,7 +4271,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 2.0.6;
+				MARKETING_VERSION = 2.1.0;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",

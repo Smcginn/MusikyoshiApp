@@ -15,6 +15,7 @@
 import UIKit
 import SwiftyJSON
 import AudioKit
+import ClassKit
 
 //var gDoOverrideSubsPresent = false     // CHECK_THIS_FOR_SUBMIT
 //var gDoLimitLevels = true              // CHECK_THIS_FOR_SUBMIT
@@ -32,9 +33,35 @@ import AudioKit
 
 class LevelsViewController: UIViewController {
 
+//     var activityIndicator = UIActivityIndicatorView()
+    
+    var goingIntoOrReturningFromDayVC = false
+    var alreadyHandlingCKAutoScroll = false
+    
+    func getClassKitDayContext() {
+        debug_checkForNonEmpty(contextPath: classKitPath)
+        
+        // get day catergory from path
+        var subPath: [String] = []
+        subPath.append(classKitPath[1])
+        subPath.append(classKitPath[2])
+        print("In getClassKitDayContext(), looking for \(subPath)")
+        print("Issuing call to CLSDataStore...descendant()")
+        CLSDataStore.shared.mainAppContext.descendant(matchingIdentifierPath: subPath) {
+            context, _ in
+            let contextIsNil = context == nil ? true : false
+
+            print("Finally In CLSDataStore...descendant() Closure; contextIsNil == \(contextIsNil) ")
+            self.ckDayContext = context
+
+            debug_checkForNonNil(context: self.ckDayContext)
+        }
+    }
+
     var classKitPath = [String]()
     var CK_Level = Int32(-1)
     var CK_Day   = Int32(-1)
+    var ckDayContext: CLSContext?
 
     @IBOutlet weak var levelsTableView: UITableView!
     @IBOutlet weak var daysTableView: UITableView!
@@ -147,6 +174,9 @@ class LevelsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("\n\n &*&*&*      In LEVELS::viewDidLoad\n\n")
+        
+
         // JUNE15
         // For the time being - until June 15, 2020,  no longer checking subs, etc.
         // So this is set to always allow all access.
@@ -207,12 +237,82 @@ class LevelsViewController: UIViewController {
         }
         
         navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        if classKitPath.count == 0 {
+            print("YooHoo")
+        } else if classKitPath.count == 2 {
+            displayMustInvokedADayAlert(fromVC: self)
+        } else if classKitPath.count == 3 { // root/level/day, as expected!
+            let levelStr = classKitPath[1]
+            CK_Level = getLevelNumFromCKTitle(ckTitle: levelStr)
+            activeLevel = Int(CK_Level)
+            
+            
+            /*
+//            UIApplication.shared.beginIgnoringInteractionEvents()
+            //self.activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 150, y: 180, width: 50, height: 50))
+            self.activityIndicator = UIActivityIndicatorView(style: .whiteLarge )//: CGRect(x: 150, y: 180, width: 50, height: 50))
+            self.activityIndicator.color =  .yellow
+            DispatchQueue.main.async {
+                self.activityIndicator.backgroundColor =  .black
+            }
+            self.activityIndicator.frame = self.activityIndicator.frame.insetBy(dx:-10, dy:-10)
+            let cf = self.view.convert(self.view.bounds, from: self.view)
+            self.activityIndicator.center = CGPoint(x: cf.midX, y: cf.midY)
+            //self.activityIndicator.center = self.view.center
+            self.activityIndicator.hidesWhenStopped = true
+//            self.activityIndicator.style =  UIActivityIndicatorView.Style.gray
+ //           self.activityIndicator.backgroundColor =  .black
+            self.view.addSubview(self.activityIndicator)
+            print("\n\n\n\n\n\t\t\t\t\t\t& & & & & &  Starting Activity Indicator animation\n\n\n\n\n")
+            self.activityIndicator.startAnimating()
+            */
+            
+            getClassKitDayContext()
+            
+            // give the async part of getClassKitDayContext() a little time
+            var tryCount = 0
+            
+            while getAppHasBeenInvokedBySchoolWork() &&
+                  self.ckDayContext == nil  &&
+                  tryCount < 5 // 10 seconds
+            {
+                sleep(1)
+                tryCount += 1
+                let ckDayContextIsNil = self.ckDayContext == nil ? true : false
+                print("Waiting at end of while loop; ckDayContextIsNil == \(ckDayContextIsNil),  tryCount == \(tryCount)")
+            }
+            
+            /*
+            // ActivityIndicator - stop
+            print("\n\n\n\n\n\t\t\t\t\t\t& & & & & &  Stopping Activity Indicator animation\n\n\n\n\n")
+            self.activityIndicator.stopAnimating()
+            self.activityIndicator.removeFromSuperview()
+            */
+            
+            debug_checkForNonNil(context: self.ckDayContext)
+            if ckDayContext == nil  {
+                displayMustInvokedFromSchoolWorkAlert(fromVC: self)
+            } else { // ckDayContext is good to go.
+                let dayStr   = classKitPath[2]
+                CK_Day = getDayNumFromCKTitle(ckTitle: dayStr)
+                //CK_Day -= 1
+                print("&&&&&&       CK_Day == \(CK_Day)")
+                
+                print("\(CK_Day)")
+            }
+        }
+        
+        // activityIndicator
+        
+        
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        print("\n\n &*&*&*      In LEVELS::viewWillAppear\n\n")
+
         // for testing:   JUNE15
 //        gTestExpirationCount += 1
         
@@ -243,6 +343,10 @@ class LevelsViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        print("\n\n &*&*&*      In LEVELS::viewDidAppear\n\n")
+        let combinedPath = classKitPath.joined(separator: ", ")
+        print ("In LevelsVC:viewDidAppear,  classKitPath ==  \(combinedPath)")
+
         // Ask for permission to use the microphone, if not already granted
         var permissionGranted = false
         if alwaysFalseToSuppressWarn() { print("\(permissionGranted)") }
@@ -286,11 +390,32 @@ class LevelsViewController: UIViewController {
         //  - Do call scrollToActiveLevel() here if coming back from Day screen.
         if !loadedFromHomeScreen // if coming back from Day view, do it
         {
+            print("(In viewDidAppear, doing scrollToActiveLevel)")
             let yPosActiveRow = levelsTableView.rectForRow(at: IndexPath(row:activeLevel, section: 0)).origin.y
             print("In viewDidAppear, yPosActiveRow == \(yPosActiveRow)")
             scrollToActiveLevel(doAnimate: true)
-        } else {
-            print("(In viewDidAppear, skipping scrollToActiveLevel)")
+        } else { // loaded from Home Screen - first time in.
+            if CK_Level >= 0 { // this means apps been invoked through SchoolWork
+                if !ctxIsAppropriateForCurrInstr(contextPath: classKitPath) {
+                    var levName = ""
+                    if classKitPath.count == 3 {
+                        levName = classKitPath[1]
+                    }
+                    delay(0.5) {
+                        self.displayLevelNotValidForInstrumentAlert(levelName: levName)
+                    }
+                } else {
+                    print("(In viewDidAppear, skipping scrollToActiveLevel)")
+                    activeLevel = Int(CK_Level)
+                    scrollToActiveLevel()
+                    if CK_Day >= 0 {
+                        print("(In viewDidAppear, Doing scrollToClassKitDay)")
+                        delay( 0.5) {
+                            self.scrollToClassKitDay()
+                        }
+                    }
+                }
+            }
         }
         
         // ClassKit
@@ -337,6 +462,16 @@ class LevelsViewController: UIViewController {
         */
     }
     
+    override func viewWillDisappear(_ animated : Bool) {
+        super.viewWillDisappear(animated)
+        print("\n\n &*&*&*      In LEVELS::viewWillDisappear\n\n")
+    }
+    
+    override func viewDidDisappear(_ animated : Bool) {
+        super.viewDidDisappear(animated)
+        print("\n\n &*&*&*      In LEVELS::viewDidDisappear\n\n")
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -344,6 +479,25 @@ class LevelsViewController: UIViewController {
         
         let yPosActiveRow = levelsTableView.rectForRow(at: IndexPath(row:activeLevel, section: 0)).origin.y
         print("In viewDidLayoutSubviews, yPosActiveRow == \(yPosActiveRow)")
+    }
+    
+    func displayLevelNotValidForInstrumentAlert(levelName: String) {
+        let instr = getCurrentStudentInstrument()
+        let instrStr = getInstrString(inst: instr)
+        
+        let titleStr = "Assignment Not Valid For Your Selected Instrument"
+        var msgStr = "\nYou currently have '\(instrStr)' selected as your instrument. "
+        msgStr += "Your teacher has assigned you a Level/Day "
+        if levelName.isNotEmpty {
+            msgStr += "-  '\(levelName)'  - "
+        }
+        msgStr += "that is not possible for \(instrStr).\n\n"
+        msgStr += "If \(instrStr) is wrong for you, then go to the Settings Screen and select the correct instrument.\n\n"
+        msgStr += "If \(instrStr) is correct, then you need to discuss this with your teacher.\n"
+        let ac = MyUIAlertController(title: titleStr, message: msgStr, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        
+        self.present(ac, animated: true, completion: nil)
     }
     
     @IBAction func backBtnPressed(_ sender: Any) {
@@ -556,7 +710,10 @@ class LevelsViewController: UIViewController {
                     destination.thisViewsLevel = activeLevel
                     destination.exerLevelIndex = indexPath.row
                     destination.lessonsJson = levels[activeLevel]["exercises"]
-
+                    destination.classKitPath = classKitPath
+//                    debug_checkForNonNil(context: self.ckDayContext)
+                    destination.ckDayContext = ckDayContext
+                    
                     if let levelTitle = levels[activeLevel]["title"].string {
                         destination.levelTitle = levelTitle
                     }
@@ -868,6 +1025,17 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
         
         if tableView == self.levelsTableView {
             
+            // ClassKit - We are here because the user pressed a Level on the screen.
+            // (If handling a call from SchoolWork, tableView-didSelectRowAt is not invoked.)
+            // So clear ClassKit related vars, forcing user to go back to SchoolWork.
+            let selRow = indexPath.row
+            if selRow != CK_Level {
+                classKitPath = [String]()
+                CK_Level = Int32(-1)
+                CK_Day   = Int32(-1)
+                ckDayContext = nil
+            }
+            
             // IAPSUBS ?
             
             // Scroll to tapped level
@@ -924,6 +1092,16 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
             
         } else if tableView == self.daysTableView {
             
+            // ClassKit - We are here because the user pressed a day on the screen.
+            // (If handling a call from SchoolWork, tableView-didSelectRowAt is not invoked.)
+            // So clear ClassKit related vars, forcing user to go back to SchoolWork.
+            let selRow = indexPath.row
+            if selRow != CK_Day {
+                classKitPath = [String]()
+                CK_Level = Int32(-1)
+                CK_Day   = Int32(-1)
+                ckDayContext = nil
+            }
 //            let canDo = canDoSlursAtThisTempo()
 //            if !canDo {
 //                presentCantDoSlursAtThisTempAlert()
@@ -1175,15 +1353,6 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
             if scrollView.contentOffset.y > yPosLastRow {
                 scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x, y: yPosLastRow), animated: false)
             }
-            
-            // ClassKit
-            /*
-            if CK_Day >= 0 {
-                delay( 0.25) {
-                    self.scrollToClassKitDay()
-                }
-            }
-            */
         }
     }
     
@@ -1229,12 +1398,12 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     // ClassKit
-    /*
+    
     func scrollToClassKitDay(doAnimate: Bool = false) {
         //        let yPosActiveRow =
         //            levelsTableView.rectForRow(at: IndexPath(row: levelsTableView.numberOfRows(inSection: 0) - 1,
         //                                                     section: 0)).origin.y
-        
+                
         let yPosActiveRow =
             daysTableView.rectForRow(
                 at: IndexPath(row:Int(CK_Day), section: 0)).origin.y
@@ -1257,14 +1426,17 @@ extension LevelsViewController: UITableViewDelegate, UITableViewDataSource {
         
         let jsonIdx = jsonIndexForRow(activeLevel)
         let convertedIndexPath = IndexPath(row: Int(CK_Day), section: jsonIdx)
-        CK_Day = -1
-        performSegue(withIdentifier: "LessonSegue", sender: convertedIndexPath)  // PPPproblem!!!!!
+        
+        alreadyHandlingCKAutoScroll = true
+        delay(0.5) {
+            self.performSegue(withIdentifier: "LessonSegue", sender: convertedIndexPath)  // PPPproblem!!!!!
+        }
         
         //if scrollView.contentOffset.y > yPosLastRow {
         //            scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x, y: yPosActiveRow), animated: false)
         //}
     }
-    */
+    
 
     
     private func createParticles() {

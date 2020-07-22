@@ -8,13 +8,24 @@
 
 import UIKit
 import SwiftyJSON
+import ClassKit
 
 // ********* REPLACEMENT FOR LevelOverviewViewController (old files saved though) ********* 
 
+
 class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults, PresentingMicCalibVC {
+        
+    // ClassKit
+    var dayCKActivMgr: DayCKActivityManager? = nil
+    var goingIntoOrReturningFromExerVC = false
     
-    
-    
+    var classKitPath = [String]() // var for path of Day's category
+    var ckDayContext: CLSContext?
+
+    var ckNumExers          = Int(0)
+    var ckNumExersDone      = Int(0)
+    var ckPercentExersDone  = Double(0.0)
+
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var resumeBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
@@ -111,20 +122,66 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
     var firstTimeInView = true
     
     // MARK: - View load, show, hide, etc.
+        
     
-//    override func viewWillDisappear(_ animated : Bool) {
-//        super.viewWillDisappear(animated)
-//        
-//        // Orientation BS - LevelOverviewVC --> viewWillDisappear
-//        let appDel = UIApplication.shared.delegate as! AppDelegate
-//        appDel.orientationLock = .landscapeRight
-//        AppDelegate.AppUtility.lockOrientationToLandscape()
-//        //        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight,
-//        //                                               andRotateTo: UIInterfaceOrientation.landscapeRight)
-//    }
-    
+    func displayWantToWorkFromSchoolWorkAlert() {
+        let title = "Did you want to work on this as a SchoolWork Assignment?\n"
+        var msg = "\nWe're asking because you have previously worked on this or other Days from SchoolWork."
+        msg += "\n\nIf you want to explore PlayTunes on your own - that's fine. (It may not count in SchoolWork, though.) If so, select 'Explore On My Own'."
+        msg += "\n\nIf you're trying to do this Day from a SchoolWork Assignment, select 'SchoolWork Assignment'.\n"
+//        msg += "\n\nWhat do you want to do?\n"
+
+        let wantSchoolWorkText  = "SchoolWork Assignment"
+        let itsOkayText         = "Explore On My Own"
+
+        let ac = MyUIAlertController(title: title,
+                                     message: msg,
+                                     preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: itsOkayText,
+                                   style: .default,
+                                   handler: nil))
+        ac.addAction(UIAlertAction(title: wantSchoolWorkText,
+                                   style: .default,
+                                   handler: wantToDoSWHandler))
+        ac.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor =
+                kDefault_AlertBackgroundColor
+        
+        self.present(ac, animated: true, completion: nil)
+    }
+
+    func wantToDoSWHandler(_ act: UIAlertAction) {
+        displayMustInvokedFromSchoolWorkAlert(fromVC: self)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        thisViewsLD = (level: thisViewsLevel, day: thisViewsLevelDay)
+        _ = verifyThisViewsLDSet()
+        var invokedFromCKSession =
+            LsnSchdlr.instance.getDayInvokedFromCKSession(forLD: thisViewsLD)
+        
+        let cpCount = classKitPath.count
+        if getAppHasBeenInvokedBySchoolWork() && ckDayContext != nil {
+        // if gDoingAClassKitInvocation {
+            // AND thisViewsLD == classKitPath's LD
+            invokedFromCKSession = true
+            LsnSchdlr.instance.setDayInvokedFromCKSession( forLD: thisViewsLD,
+                                                           invokedFromCKSession: true)
+        }
+        
+        if invokedFromCKSession || getAppHasBeenInvokedBySchoolWork() {
+            if ckDayContext == nil || cpCount != 3 {
+                displayWantToWorkFromSchoolWorkAlert()
+                //displayMustInvokedFromSchoolWorkAlert(fromVC: self)
+            } else {
+                debug_checkForNonNil(context: ckDayContext)
+                debug_checkForNonEmpty(contextPath: classKitPath)
+                dayCKActivMgr = DayCKActivityManager(levelDay_LDCode: thisViewsLD,
+                                                     dayContext: ckDayContext,
+                                                     dayContextPath: classKitPath)
+            }
+        }
         
         if DeviceType.IS_IPHONE_5orSE {
             titleLabel.font = UIFont(name: "Futura-Bold", size: 27.0)
@@ -138,9 +195,6 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
 //        //        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight,
 //        //                                               andRotateTo: UIInterfaceOrientation.landscapeRight)
         
-        thisViewsLD = (level: thisViewsLevel, day: thisViewsLevelDay)
-        _ = verifyThisViewsLDSet()
-        
         _ = LessonScheduler.instance.setCurrentLevel(thisViewsLevel)
         _ = LessonScheduler.instance.setCurrentDay(thisViewsLevelDay)
         
@@ -151,7 +205,7 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
         if !exersLoaded {
             print("Unable to load exercises in LevelOverviewViewController::viewDidLoad()")
         }
-        
+                
         let possCurrLDE = makeLDEForViewsLevelDay(andThisExer: 0)
         var itWorked = true
         if LsnSchdlr.instance.verifyLDE(possCurrLDE) {
@@ -244,6 +298,36 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        let startedAsCKSession =
+            LsnSchdlr.instance.getDayInvokedFromCKSession( forLD: thisViewsLD)
+        let dayState = LsnSchdlr.instance.getDayState(forLD: thisViewsLD)
+        if !startedAsCKSession && ckDayContext != nil && dayState == kLDEState_Completed {
+            print ("yo!")
+        }
+        
+        
+        if startedAsCKSession && !gDoingAClassKitInvocation {
+            // We probably lost the connection. They should re-launch from SW.
+            print("Here's da place")
+        }
+        
+        dayCKActivMgr?.reactivateIfNeeded()
+        dayCKActivMgr?.updateClassKitActivtyItems()
+
+        // ClassKit:  This is here to distinguich between coming in from Levels view
+        //    or coming back from Exer view. Not sure it matters now, but leaving it.
+        if !goingIntoOrReturningFromExerVC {
+             
+            print("  ^^^^^ In DayOverviewVC::viewDidAppear -> Starting Day Activity")
+            if self.ckDayContext != nil {
+            }
+        } else { // coming back from an exer view
+            
+            
+            print("  ^^^^^ In DayOverviewVC::viewDidAppear -> setting goingIntoOrReturningFromExerVC false")
+            goingIntoOrReturningFromExerVC = false
+        }
+        
 //        if needToCalibrateMic {
 //            goToCalibrateMicVCIfAppropriate()
 //        }
@@ -281,6 +365,16 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
         
     }
     
+    override func viewWillDisappear(_ animated : Bool) {
+        //  print("\n\n         @@@  DayOverviewVC::viewWillDisappear called\n\n")
+        super.viewWillDisappear(animated)
+    }
+
+    override func viewDidDisappear(_ animated : Bool) {
+        //  print("\n\n         @@@  DayOverviewVC::viewDidDisappear called\n\n")
+        super.viewDidDisappear(animated)
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -309,31 +403,6 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
     func hideViews() {
         resumeBtn.alpha = 0
     }
-    
-    // DELME
-    /*
-     func thisorthat()
-     {
-     if firstTimeInView {
-     firstTimeInView = false
-     self.launchingNextView?.isHidden =  true
-     var titleStr = "Press 'Go' to automatically go through exercises in order"
-     titleStr +=    "\n\nPress 'Choose' to select exercises"
-     // if !firstTimeInView
-     titleStr +=    "(or Exit)"
-     let ac = MyUIAlertController(title: "Press 'Go' to automatically go through exercises in order\n\nPress 'Choose' to select exercises",
-     message: "",
-     preferredStyle: .alert)
-     ac.addAction(UIAlertAction(title: "Go",
-     style: .default,
-     handler: startAutoSchedHandler))
-     ac.addAction(UIAlertAction(title: "Choose",
-     style: .default,
-     handler: nil))
-     self.present(ac, animated: true, completion: nil)
-     }
-     }
-     */
     
     func startAutoSchedHandler( /* _ act: UIAlertAction */ ) {
         print("startAutoSchedHandler  called")
@@ -434,22 +503,24 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
         navigationController?.popViewController(animated: true)
     }
     
-    /*
-     func showAllDoneAlert() {
-     guard allDoneFirstTime else { return }
-     
-     let titleStr = "! Way to Go !"
-     let msgStr = "You have finished all the exercises for the day. Next time, you'll do the next day"
-     let ac = MyUIAlertController(title: titleStr,
-     message: msgStr,
-     preferredStyle: .alert)
-     ac.addAction(UIAlertAction(title: "OK!",
-     style: .default,
-     handler: doneWithDayHandler))
-     ac.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = kDefault_AlertBackgroundColor
-     self.present(ac, animated: true, completion: nil)
-     }
-     */
+    
+    func showNeedToMarkAsDoneAlert() {
+        let titleStr = "\nYou have finished all the exercises for this Day!"
+        
+        var msgStr =  "\nNow that you are finished, you need to use SchoolWork to tell your teacher you are done with the assignment."
+        msgStr +=  "\n\nTo do this, open the SchoolWork app, find the Day assignment, and press the Done button."
+        
+        msgStr += "\n\n\nEven though you've completed all the exercises, you can try to improve some of your scores for the exercises in this Day if you wish. (You will never get a lower score than you already have.)\n\nJust remember to to use SchoolWork to mark your assignment as Done when you're finished - we won't remind you again."
+        
+        let ac = MyUIAlertController(title: titleStr,
+                                     message: msgStr,
+                                     preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Okay",
+                                   style: .default,
+                                   handler: nil))
+        ac.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = kDefault_AlertBackgroundColor
+        self.present(ac, animated: true, completion: nil)
+    }
     
     func showAllDoneAlert() {
         guard allDoneFirstTime else { return }
@@ -457,6 +528,13 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
         
         let titleStr = "! Way to Go !"
         
+        // Are we in ClassKit Mode?
+        if ckDayContext != nil && classKitPath.count == 3 {
+            showNeedToMarkAsDoneAlert()
+            return
+        }
+
+        // if still here, not in ClassKit mode
         if !allDoneWithLevelAlso {
             var msgStr = "\nYou have finished all the exercises for this Day!"
             msgStr +=    "\n\nPress 'Done' to go back to Level Overview"
@@ -567,6 +645,17 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
         //        }
     }
     
+    func doneWithDayInCKHandler(_ act: UIAlertAction) {
+        guard classKitPath.count == 3 else { return }
+        
+        var noRootPath = [String]()
+        noRootPath.append(classKitPath[1])
+        noRootPath.append(classKitPath[2])
+//        markAsDone(identifierPath: noRootPath)
+        navigationController?.popViewController(animated: true)
+    }
+
+    
     // may be called in a closure
     func setupForViewWillAppear() {
         if self.launchingNextView == nil {
@@ -663,7 +752,7 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
             } else { // .longtoneRecordExer
                 ltInfo = getLongtoneRecordInfo(forLTCode: exerCodeStr)
             }
-            
+        
             ltNoteID = ltInfo.note
             ltDuration = Double(ltInfo.durationSecs)
             performSegue(withIdentifier: longToneSegueIdentifier, sender: self)
@@ -683,7 +772,7 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
             let magStr: String = tuneInfo.magnification
             let magInt:Int = Int(magStr)!
             selectedMagnification = Float(magInt)/10.0
-            
+                        
             if selectedTuneId != kFieldDataNotDefined {
                 performSegue(withIdentifier: tuneSegueIdentifier, sender: self)
             } else {
@@ -693,15 +782,20 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
     }
     
     // Longtones or TuneExercise VC calls this with results
-    func setExerciseResults( exerNumber: Int,
-                             exerStatus: Int,
-                             exerScore: Int) {
+    func setExerciseResults(exerNumber: Int, exerStatus: Int, exerScore: Int,
+                            numAttempts: Int, bpmOrPercTargetTime: Double) {
+
         let thisLDE = makeLDEForViewsLevelDay(andThisExer: exerNumber)
         
         // compare existing score status, etc., before overwriting
         var doSave = false
         let currExerStatus = LessonScheduler.instance.getExerState( lde: thisLDE )
         if currExerStatus != kLDEState_Completed {
+            if exerStatus == kLDEState_Completed {
+                ckNumExersDone += 1
+                ckPercentExersDone = Double(ckNumExersDone)/Double(ckNumExers)
+
+            }
             doSave = true
         } else { // student already did this. Compare scores before overwriting
             let currExerScore = LessonScheduler.instance.getExerStarScore( lde: thisLDE )
@@ -710,6 +804,9 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
             }
         }
         
+        // ClassKitScore - Above - take out else clause?  Always update if greater?
+        // ClassKitScore - Update average score?
+        
         if doSave {
             self.exerResultsSet = true
             self.exerResultsNumber = exerNumber
@@ -717,9 +814,13 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
             self.exerResultsScore  = exerScore
             _ = LessonScheduler.instance.updateScoreFields( forLDE: thisLDE,
                                                             rawScore: Float(exerScore),
-                                                            starScore:
-                exerScore, state: exerStatus  )
+                                                            starScore: exerScore,
+                                                            state: exerStatus  )
+            LessonScheduler.instance.setExerciseNumAttempts( lde: thisLDE, numAttempts: numAttempts )
+            LessonScheduler.instance.setExerBPM( lde: thisLDE, bpm: bpmOrPercTargetTime )
             _ = LessonScheduler.instance.saveScoreFile()
+            
+            dayCKActivMgr?.updateClassKitActivtyItems()
         }
         
         // In any case, move on to next exer . . .
@@ -761,7 +862,8 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
                 }
             }
             exercisesDone = true
-            
+            // ClassKitScore - Update AllDone?
+
             //            let titleStr = "! Way to Go !"
             //            let msgStr = "You can redo exercises you've completed (for a btter score)\n\nOr Exit to the Levels Screen"
             //            let ac = MyUIAlertController(title: titleStr,
@@ -959,6 +1061,8 @@ class DayOverviewViewController: UIViewController, ViewFinished, ExerciseResults
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // self.title = ""
+        print("  ^^^^^ In DayOverviewVC::prepare(for segue) -> setting goingIntoOrReturningFromExerVC true")
+        goingIntoOrReturningFromExerVC = true
         
         if segue.identifier == tuneSegueIdentifier {
             if let destination = segue.destination as? TuneExerciseViewController {

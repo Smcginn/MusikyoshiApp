@@ -207,11 +207,15 @@ func printAmplitude(currAmp: Double, at: Double, atComp: Double) {
 
 // MARK: - for debugging and robustness
 
+// This is sprinkled everywhere, in situations that a problem has occurred that
+// shouldn't have. The func obviously does nothing, but enables you to set a
+// breakpoint here and you catch problem without having to resort to a hard ASSERT.
 func itsBad() {
     print ("It's Bad")
 }
 
-// An "ASSERT" to be able to set a breakpoint for
+// An "ASSERT" to be able to set a breakpoint. Similar in intent to itsBad()
+// above, but with a boolean test, without having to resort to a hard ASSERT.
 func ASSUME(_ testThis: Bool) -> Bool {
     if testThis {
         return true
@@ -329,6 +333,21 @@ class MyUIAlertController : UIAlertController {
     override var shouldAutorotate: Bool {
         return false
     }
+}
+
+func showOKAlert(title: String,
+                 message: String,
+                 presentingVC: UIViewController) {
+    let ac = MyUIAlertController(title: title,
+                                 message: message,
+                                 preferredStyle: .alert)
+    ac.addAction(UIAlertAction(title: "OK",
+                               style: .default,
+                               handler: nil))
+    ac.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor =
+            kDefault_AlertBackgroundColor
+    
+    presentingVC.present(ac, animated: true, completion: nil)
 }
 
 // Double, Int, UInt
@@ -458,6 +477,7 @@ func getAppSupportDir() -> URL? {
                             appropriateFor: nil,
                             create: true)
     } catch {
+        print("ouch")
         // TODO deal with error
     }
     return retUrl
@@ -530,3 +550,13 @@ func correctForLongToneNameFlatBug(noteName: inout String) {
     }
 }
 
+func getRandomFakeStarScore() -> Int {
+    let starScore = Int.random(in: 1...4)
+    return starScore
+}
+
+func getRandomFakeLTTime() -> Double {
+    let randTimeLarge = Double.random(in: 10.0...70.0)
+    let randTime = randTimeLarge / 10.0
+    return randTime
+}
