@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 import AudioKit
 import MessageUI
+import ClassKit
 
 protocol DoneShowingVideo : class {
     func VideoViewClosed()
@@ -20,8 +21,8 @@ let kTimeMult = Double(0.988) //    1.012)
 class TuneExerciseViewController: PlaybackInstrumentViewController, SSUTempo,
     SSNoteHandler, OverlayViewDelegate,PerfAnalysisSettingsChanged, DoneShowingVideo,
     MFMailComposeViewControllerDelegate, VideoHelpViewDelegate {
-
-   // @IBOutlet weak var orderStatusNavigationbar: UINavigationBar!
+    
+    // @IBOutlet weak var orderStatusNavigationbar: UINavigationBar!
     
     // Invoking VC sets these
     var navBarTitle:String   = ""         // to use as the screen's title
@@ -54,9 +55,12 @@ class TuneExerciseViewController: PlaybackInstrumentViewController, SSUTempo,
         if synth != nil && (synth?.isPlaying)! {
             synth?.reset()
         }
-        callingVCDelegate?.setExerciseResults(exerNumber: exerNumber,
-                                              exerStatus: kLDEState_Completed,
-                                              exerScore:  bestStarScore)
+
+        callingVCDelegate?.setExerciseResults(exerNumber:           exerNumber,
+                                              exerStatus:           kLDEState_Completed,
+                                              exerScore:            bestStarScore,
+                                              numAttempts:          numberOfAttempts,
+                                              bpmOrPercTargetTime:  Double(tempoBPM))
         thawSeeScoreLayout()
         navigationController?.popViewController(animated: true)
     }
@@ -633,6 +637,7 @@ class TuneExerciseViewController: PlaybackInstrumentViewController, SSUTempo,
     }
 
     override func viewWillDisappear(_ animated: Bool) {
+
         stopPlaying()
         PerfScoreObjScheduler.instance.setVC(vc: nil)
         if vhView != nil {
@@ -663,6 +668,8 @@ class TuneExerciseViewController: PlaybackInstrumentViewController, SSUTempo,
 //    }
 
     @IBAction func playButtonTapped(_ sender: UIButton) {
+        numberOfAttempts += 1
+
         songStarted = false
         gCurrElapsedTime = -1.0
         
@@ -3452,7 +3459,7 @@ class TuneExerciseViewController: PlaybackInstrumentViewController, SSUTempo,
         guard gMKDebugOpt_ShowDebugSettingsBtn else { return }
         
         print("")
-        bestStarScore = 3
+        bestStarScore = getRandomFakeStarScore()
         returnToCallingVC()
 
     }
@@ -3496,9 +3503,11 @@ class TuneExerciseViewController: PlaybackInstrumentViewController, SSUTempo,
         
         print("")
         bestStarScore = 0
-        callingVCDelegate?.setExerciseResults(exerNumber: exerNumber,
-                                              exerStatus: kLDEState_NotStarted,
-                                              exerScore:  bestStarScore)
+        callingVCDelegate?.setExerciseResults(exerNumber:           exerNumber,
+                                              exerStatus:           kLDEState_NotStarted,
+                                              exerScore:            bestStarScore,
+                                              numAttempts:          numberOfAttempts,
+                                              bpmOrPercTargetTime:  Double(tempoBPM))
         setStarScore(score: 0)
     }
     

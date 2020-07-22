@@ -140,6 +140,35 @@ class LessonScheduler
         return scoreMgr.getExerciseStarScore(lde: lde)
     }
     
+    func getExerNumAttempts( lde: tLDE_code ) -> Int {
+        return scoreMgr.getExerciseNumAttempts( lde: lde)
+    }
+    
+    func getExerBPM( lde: tLDE_code ) -> Double {
+        let bpm = scoreMgr.getExerciseScoreSubField( lde: lde,
+                                                     subField: kExerScore_BPM)
+        return Double(bpm)
+    }
+    
+    func getExerPercentOfTargetTime( lde: tLDE_code ) -> Double {
+        let bpm = scoreMgr.getExerciseScoreSubField( lde: lde,
+                                                     subField: kExerScore_PercentOfTargetTime)
+        return Double(bpm)
+    }
+    
+    func setExerciseNumAttempts( lde: tLDE_code, numAttempts: Int ) {
+        scoreMgr.setExerciseNumAttempts( lde: lde, numAttempts: numAttempts )
+    }
+    
+    func setExerBPM( lde: tLDE_code, bpm: Double ) {
+        scoreMgr.setExerciseScoreSubField( lde: lde, subField: kExerScore_BPM, value: Float(bpm) )
+
+    }
+    
+    func setExerPercentOfTargetTime( lde: tLDE_code, percent: Double ) {
+        scoreMgr.setExerciseScoreSubField( lde: lde, subField: kExerScore_PercentOfTargetTime, value: Float(percent) )
+    }
+    
     /////////////  LDE Setters . . .
     func setExerciseState( lde: tLDE_code, exerState: Int ) {
         scoreMgr.setExerciseState( lde: lde, exerState: exerState )
@@ -190,6 +219,16 @@ class LessonScheduler
         return true
     }
     
+    
+    func setDayInvokedFromCKSession( forLD: tLD_code,invokedFromCKSession: Bool) {
+        scoreMgr.setDayInvokedFromCKSession( forLD: forLD, invokedFromCKSession: invokedFromCKSession)
+    }
+    
+    func getDayInvokedFromCKSession( forLD: tLD_code) -> Bool {
+        return scoreMgr.getDayInvokedFromCKSession( forLD: forLD)
+    }
+
+    
     func setCurrentLevel(_ levelIdx: Int) -> Bool {
         guard scoreMgr.verifyLevel(level:levelIdx) else {
             print ("Something wrong in LessonScheduler::setCurrentLevel()")
@@ -223,7 +262,7 @@ class LessonScheduler
         return tuneFileMapper.getTuneFileInfo(forFileCode: forFileCode)
     }
 
-     func loadLevelDay(ld: tLD_code) -> Bool {
+    func loadLevelDay(ld: tLD_code) -> Bool {
         reset()
         scoreMgr.setCurrLevel(ld.level)  // REDUX - like get rid of this
         scoreMgr.setCurrDay(ld.day)      // REDUX - like get rid of this
@@ -344,8 +383,8 @@ class LessonScheduler
         return true
     }
     
-    func saveScoreFile() -> Bool {
-        return scoreMgr.saveScoreFile()
+    func saveScoreFile(versionType: Int = kSaveScoreFileAsMostRecentVersion) -> Bool {
+        return scoreMgr.saveScoreFile(versionType: versionType)
     }
 
     // MARK: - Personal Best
@@ -357,4 +396,30 @@ class LessonScheduler
     func setPersonalBestTime(forNoteID: Int, newPersBest: Double) {
         scoreMgr.setPersonalBestTime(forNoteID: forNoteID, newPersBest: newPersBest)
     }
+    
+    
+    
+    // Nothing calls this
+    func updateScoreFields2(forLDE: tLDE_code,
+                            rawScore: Float,
+                            starScore: Int,
+                            state: Int,
+                            field1: Float,
+                            field2: Float,
+                            field3: Float )  -> Bool  {
+        guard scoreMgr.verifyLDE(lde: forLDE) else {
+            print("Error: In updateScoreFields; verifyLDE failed")
+            itsBad()
+            return false
+        }
+        
+        scoreMgr.setExerciseState( lde: forLDE, exerState: state )
+        scoreMgr.setExerciseStarScore( lde: forLDE, starScore: starScore )
+        scoreMgr.setExerciseRawScore( lde: forLDE, rawScore: rawScore )
+        
+        return true
+    }
+    
+
+    
 }

@@ -15,6 +15,13 @@ import UIKit
 import Foundation
 import SwiftyJSON
 
+let kExerScore_SubField1 = 1
+let kExerScore_SubField2 = 2
+let kExerScore_SubField3 = 3
+
+let kExerScore_BPM                      = kExerScore_SubField1   // For Tune exers
+let kExerScore_PercentOfTargetTime      = kExerScore_SubField1   // For LT exers
+
 // TODO: Save score data when backgrounded, etc.
 
 let kPrintJsonBeforeWritingToDisk = true
@@ -24,16 +31,32 @@ let kBadDBVersion: tDB_Version = (major: -1, mid: -1, minor: -1)
 
 class ScoreMgr {
     
-    var currUserScore: studentScoreV2? = nil
-    
+    // SCOREFILEV3_V4
+    //var currUserScore: studentScoreV2? = nil
+    // SCOREFILEV3_V4 - switched to this for V4:
+    var currUserScore: studentScoreV4? = nil
+
     // This is only needed if we need to convert an exsiting V1 Score file to
     // a V2 score file
     var tempV1UserScore: studentScore? = nil
     
+    //=================================================================
+    // V3 Temp Score file?
+    //   There is no structural difference between V2 and V3 files - just what's
+    //   in them: how many levels, and the number and types of exercises.
+    //     Examples:
+    //       Brass Instruments:  Slur Level, Slurs exers in lower Levels
+    //       Clarinets:          Breaks Level, no Break or Slur exers in lower Levels
+    //       All the rest:       No Slur or Break Level, no Slur or Break exers
+    var tempV2UserScore: studentScoreV2? = nil
+
     private var _currLevel: Int = 0
     private var _currDay: Int = 0
     private var _currExer: Int = 0
-    private var _currExerciseData: exerciseScore = exerciseScore()
+    // SCOREFILEV3_V4 - was:   private var _currExerciseData: exerciseScore = exerciseScore()
+    // SCOREFILEV3_V4 - switched to this for V4:
+    private var _currExerciseData: exerciseScoreV4 = exerciseScoreV4()
+    
     func setCurrLevel(_ level: Int) {
         guard verifyLevel(level: level) else {
             itsBad()
@@ -70,7 +93,9 @@ class ScoreMgr {
         _currLevel  = 0
         _currDay    = 0
         _currExer   = 0
-        _currExerciseData = exerciseScore()
+        // SCOREFILEV3_V4 - was:  _currExerciseData = exerciseScore()
+        // SCOREFILEV3_V4 - switched to this for V4:
+        _currExerciseData = exerciseScoreV4()
     }
 
     
@@ -190,6 +215,74 @@ class ScoreMgr {
         }
         
         currUserScore!.levels[lde.level].days[lde.day].exercises[lde.exer].rawScore = rawScore
+    }
+    
+    func setExerciseNumAttempts( lde: tLDE_code, numAttempts: Int ) {
+        guard verifyLDE(lde: lde) else {
+            print("Error: In setExerciseNumAttempts; verifyLDE failed")
+            itsBad()
+            return
+        }
+        
+        // SCOREFILEV3_V4
+        currUserScore!.levels[lde.level].days[lde.day].exercises[lde.exer].numAttempts = numAttempts
+    }
+    
+    func getExerciseNumAttempts( lde: tLDE_code ) -> Int {
+        guard verifyLDE(lde: lde) else {
+            print("Error: In getExerciseNumAttempts; verifyLDE failed")
+            itsBad()
+            return 0
+        }
+        
+        // SCOREFILEV3_V4
+        let retVal = currUserScore!.levels[lde.level].days[lde.day].exercises[lde.exer].numAttempts
+        return retVal
+    }
+    
+    func setExerciseScoreSubField( lde: tLDE_code, subField: Int, value: Float ) {
+        guard verifyLDE(lde: lde) else {
+            print("Error: In setExerciseScoreSubField; verifyLDE failed")
+            itsBad()
+            return
+        }
+        
+        switch(subField) {
+        case kExerScore_SubField2:
+            // SCOREFILEV3_V4
+            currUserScore!.levels[lde.level].days[lde.day].exercises[lde.exer].exerVar2 = value
+        case kExerScore_SubField3:
+            // SCOREFILEV3_V4
+            currUserScore!.levels[lde.level].days[lde.day].exercises[lde.exer].exerVar3 = value
+
+        default:  // kExerScore_SubField1
+            // SCOREFILEV3_V4
+            currUserScore!.levels[lde.level].days[lde.day].exercises[lde.exer].exerVar1 = value
+        }
+    }
+    
+    func getExerciseScoreSubField( lde: tLDE_code, subField: Int) -> Float {
+        guard verifyLDE(lde: lde) else {
+            print("Error: In getExerciseScoreSubField; verifyLDE failed")
+            itsBad()
+            return -1.0   // FIXME
+        }
+        
+        var retVal = Float(-1.0)
+        switch(subField) {
+        case kExerScore_SubField2:
+            // SCOREFILEV3_V4
+            retVal = currUserScore!.levels[lde.level].days[lde.day].exercises[lde.exer].exerVar2
+        case kExerScore_SubField3:
+            // SCOREFILEV3_V4
+            retVal = currUserScore!.levels[lde.level].days[lde.day].exercises[lde.exer].exerVar3
+
+        default:  // kExerScore_SubField1
+            // SCOREFILEV3_V4
+            retVal = currUserScore!.levels[lde.level].days[lde.day].exercises[lde.exer].exerVar1
+        }
+        
+        return retVal
     }
     
     func updateScoreFields( forLDE: tLDE_code, rawScore: Float,
@@ -330,6 +423,17 @@ class ScoreMgr {
         return currUserScore!.levels[forLD.level].days[forLD.day].dayState
     }
     
+    // MARK: - -- Day InvokedByCKSession
+    
+    func setDayInvokedFromCKSession(forLD: tLD_code, invokedFromCKSession: Bool) {
+        guard verifyLD(forLD) else { itsBad();  return }
+        currUserScore!.levels[forLD.level].days[forLD.day].invokedFromCKSession = invokedFromCKSession
+    }
+    
+    func getDayInvokedFromCKSession(forLD: tLD_code) -> Bool {
+        guard verifyLD(forLD) else { itsBad();  return false }
+        return currUserScore!.levels[forLD.level].days[forLD.day].invokedFromCKSession
+    }
     
     // MARK: - -- Verify Level, Day, Exercise
     
@@ -389,7 +493,13 @@ class ScoreMgr {
                 return
         }
         
+        // SCOREFILEV3_V4
+        //       Cannot assign value of type 'exerciseScore' to subscript of type 'exerciseScoreV2'
+        // SCOREFILEV3_V4 - was: currUserScore!.levels[_currLevel].days[_currDay].exercises[_currExer] = _currExerciseData
+        
+        // SCOREFILEV3_V4 - switched to this for V4:
         currUserScore!.levels[_currLevel].days[_currDay].exercises[_currExer] = _currExerciseData
+
         print("In ScoreMgr.saveCurrentExercise(). Level:\(_currLevel), Day:\(_currDay), Exer:\(_currExer)")
     }
     
@@ -707,7 +817,7 @@ class ScoreMgr {
         var succeeded = false
         
         // Create the in-memory ScoreData, in the form to be saved to disk
-        guard createStudentScoreDataFromJSON() else {
+//CMTOUT        guard createStudentScoreDataFromJSON() else {
             print ("Unable to create initial in-memory data storage from JSON")
             return false
         }
@@ -741,7 +851,7 @@ class ScoreMgr {
         var succeeded = false
         
         // Create the in-memory ScoreData, in the form to be saved to disk
-        guard createStudentScoreDataFromJSON() else {
+//CMTOUT        guard createStudentScoreDataFromJSON() else {
             print ("Unable to create initial in-memory data storage from JSON")
             return false
         }
@@ -805,7 +915,7 @@ class ScoreMgr {
     ////////////////////////////////////////////////////////////////////////
     // If first time in App, this method is called to create the
     // initial in-memory StudentScoreData
-    func createStudentScoreDataFromJSON() -> Bool {
+//CMTOUT    func createStudentScoreDataFromJSON() -> Bool {
         guard let file = Bundle.main.path(forResource: "TrumpetLessons",
                                                ofType: "json")    else {
             print("Invalid filename/path for TrumpetLessons.JSON")
