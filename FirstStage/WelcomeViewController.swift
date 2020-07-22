@@ -62,7 +62,23 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
             WelcomeTitleLabel.font = UIFont(name: "Futura-Bold", size: 27.0)
         }
         
+        // Try to add the version info
+//        var versionStr = ""
+//        var buildStr = ""
+//        if let dict = Bundle.main.infoDictionary {
+//            versionStr  = dict["CFBundleShortVersionString"] as? String ?? ""
+//            buildStr    = dict["CFBundleVersion"] as? String ?? ""
+//        }
+        
         let helpText = "Problems? Questions? Please contact us at Shawn@musikyoshi.com\n"
+//        if versionStr.isNotEmpty {
+//            helpText += "\nPlayTunes Version: \(versionStr)"
+//            if buildStr.isNotEmpty {
+//                helpText += "   (build \(buildStr))\n"
+//            } else {
+//                helpText += "\n"
+//            }
+//        }
 
         // var howToUseDetText = "\u{2022} Select “Levels” to see the\n   available Practice Levels\n"
         // howToUseDetText += "\u{2022} Select a Level to see the Days\n   within that Level\n"
@@ -71,9 +87,9 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
         // howToUseDetText += "   > Select 'Choose' to pick individual exercises\n\n"
         // howToUseDetText += "Tip: It's best to use earbuds or headphones so you can hear the metronome."
 
-        //  JUNE15 JULY07
-        var howToUseDetText = "2020 School Term-End Giveaway! Use all of PlayTunes for Free until July 7, 2020! - Enjoy!\n"
-        howToUseDetText +=  "\nAfter July 7, 2020, you can still access many levels for free (see below). If you wish to continue with full-access, you can purchase a subscription (subscriptions are also explained below).\n\nBut until then, you do not have to sign up for anything! And your free use of PlayTunes does not commit you in any way to a purchase.\n\n\n"
+        //  JUNE15 JULY07 AUGUST1
+        var howToUseDetText = "2020 School Term-End and Evaluation Period Giveaway! Use all of PlayTunes for Free until August 1, 2020! - Enjoy!\n"
+        howToUseDetText +=  "\nAfter August 1, 2020, you can still access many levels for free (see below). If you wish to continue with full-access, you can purchase a subscription (subscriptions are also explained below).\n\nBut until then, you do not have to sign up for anything! And your free use of PlayTunes does not commit you in any way to a purchase.\n\n\n"
 
         howToUseDetText += "Basic Usage:\n\n"
         
@@ -91,8 +107,26 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
         
         howToUseDetText += "\u{2022} You can decide if you would like to have the exercises move to the next exercise automatically or if you want to jump around and choose exercises yourself.\n> If you want the app to lead you through the practice session (recommended, especially for beginners) just press 'Start.'\n> If you want to select exercises yourself, just scroll to the exercise you want and tap it.\n\n"
         
-        howToUseDetText += "\u{2022} If you complete an exercise and you don’t get the star rating you would like, we will remember your score so you can come back later that day or another day and try to improve it.\n\n"
+        howToUseDetText += "\u{2022} If you complete an exercise and you don’t get the star rating you would like, we will remember your score so you can come back later that day or another day and try to improve it.\n\n\n"
         
+        
+        howToUseDetText += "PlayTunes with SchoolWork\n\n"
+
+        howToUseDetText += "If you are using PlayTunes in SchoolWork,  here are a few guidelines:\n\n"
+
+        howToUseDetText += "\u{2022} Always start your assignment from within the SchoolWork app.\n"
+        howToUseDetText += " - Open SchoolWork\n"
+        howToUseDetText += " - Open your Handout with a PlayTunes assignment\n"
+        howToUseDetText += " - Select a PlayTunes Day\n"
+        howToUseDetText += " - Press Start or Continue\n\n"
+
+        howToUseDetText += "\u{2022} Always select a PlayTunes Day, not a Level\n"
+        howToUseDetText += " - If your teacher has assigned a full PlayTunes Level, select the one of the individual Days with the Level to Start as an assignment (don’t press Start or Continue on the Level itself).\n\n"
+
+        howToUseDetText += "\u{2022} If you get a message from PlayTunes that you have “lost the link to SchoolWork,” just go back and Start or Continue the Assignment from SchoolWork.\n"
+        howToUseDetText += " - This can happen if you leave the Exercises screen and go back up to the Levels screen for any reason - to change the BPM setting, for example.\n"
+        howToUseDetText += " - (If it does happen, don’t worry, you haven’t lost any of your work.)\n\n"
+
         howToUseDetText += helpText
         
         howToUseDetailsLabel.text = howToUseDetText
@@ -110,8 +144,8 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
 //        var tryOutDetText = "You can access Levels 1 & 2 for free, forever. That’s almost 200 exercises!\n\n"
 //        tryOutDetText += "For this free try-out, you don't need to do anything else; you are good to go!"
         
-        // JUNE15  JULY07
-        var tryOutDetText = " Until July 7, 2020, playTunes is completely Free!  All Levels!\n\n\nAfter July 7, 2020, you can either explore our standard Free Trial, or purchase a subscription.\n\n"
+        // JUNE15  JULY07 AUGUST1
+        var tryOutDetText = " Until August 1, 2020, PlayTunes is completely Free!  All Levels!\n\n\nAfter August 1, 2020, you can either explore our standard Free Trial, or purchase a subscription.\n\n"
         
         tryOutDetText += "Standard Free Trial: We have lots of free areas of the app to try out for both beginners and those with some experience.\n> All Days of Levels 1 and 2 are completely free.\n> Day 1 of these Levels is also free: Levels 3, 4, 7, 10, 15, 20, 25, 30.\n> We even give you parts of our Long Tones Level, the Lip Slurs Level, and the Clarinet Breaks Level.\n\nSo go ahead and explore Day 1 of all the Pink levels - you can unlock Gray Levels and Days when you purchase a subscription.\n\n"
         
@@ -121,8 +155,8 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
         
         //tryOutDetText += "\n\n"
         
-        // JUNE15 JULY07
-        tryOutDetText += "After July 7, 2020, for access to all 150 days of practice, and hundreds of unique exercises, you will need to purchase a PlayTunes All-Level Access Subscription.\n\n"
+        // JUNE15 JULY07 AUGUST1
+        tryOutDetText += "After August 1, 2020, for access to all 150 days of practice, and hundreds of unique exercises, you will need to purchase a PlayTunes All-Level Access Subscription.\n\n"
 
         // JUNE15
 //        tryOutDetText += "\n\nNote: If you have purchased a subscription, please email us at Shawn@musikyoshi.com."
@@ -154,7 +188,26 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
         arSubMsgStr += "\u{2022} Current subscription may not be cancelled during the active subscription period\n"
         arSubMsgStr += "\u{2022} Any unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription to that publication, where applicable"
         
-        arSubMsgStr += "\n\n\n" + helpText
+        arSubMsgStr += "\n\n\n"
+            
+        // Try to add the version info
+        var versionStr = ""
+        var buildStr = ""
+        if let dict = Bundle.main.infoDictionary {
+            versionStr  = dict["CFBundleShortVersionString"] as? String ?? ""
+            buildStr    = dict["CFBundleVersion"] as? String ?? ""
+        }
+        
+        if versionStr.isNotEmpty {
+            arSubMsgStr += "PlayTunes Version: \(versionStr)"
+            if buildStr.isNotEmpty {
+                arSubMsgStr += "   (build \(buildStr))\n\n"
+            } else {
+                arSubMsgStr += "\n\n"
+            }
+        }
+        
+        arSubMsgStr +=  helpText
  
         subsDetailLabel.text = arSubMsgStr
         
@@ -203,10 +256,10 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
         timer.invalidate()
     }
     
-    func showFirstTimeAlert() {   // JUNE15  JULY07
+    func showFirstTimeAlert() {   // JUNE15  JULY07 AUGUST1
         let numDays = daysUntilFreePeriodEndDate()
-        let titleStr = "2020 School Term-End Giveaway! Use PlayTunes for Free until July 7, 2020!\n\n\(numDays) days remaining - Enjoy!"
-        let msgStr = "\n\nAfter July 7, 2020, if you wish to continue, you can purchase a subscription (explained on this screen) at that time.\n(But until then, you do not have to sign up for anything! And your free use of PlayTunes does not commit you in any way to a purchase.)"
+        let titleStr = "2020 School Term-End Giveaway! Use PlayTunes for Free until August 1, 2020!\n\n\(numDays) days remaining - Enjoy!"
+        let msgStr = "\n\nAfter August 1, 2020, if you wish to continue, you can purchase a subscription (explained on this screen) at that time.\n(But until then, you do not have to sign up for anything! And your free use of PlayTunes does not commit you in any way to a purchase.)"
         
         let ac = MyUIAlertController(title: titleStr,
                                      message: msgStr,

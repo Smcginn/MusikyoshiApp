@@ -10,6 +10,7 @@
 import UIKit
 import AVFoundation
 import AudioKit
+import ClassKit
 
 enum enharmonicSpelling {
     case displayAsNatural
@@ -275,15 +276,26 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
         if synth != nil && (synth?.isPlaying)! {
             synth?.reset()
         }
+        
+        // FIXME:  Calc percentage of target time
+        let bpmOrPercTargetTime = Double(0.65)
+        
         if doSaveScore {
-            callingVCDelegate?.setExerciseResults(exerNumber: exerNumber,
+             callingVCDelegate?.setExerciseResults(exerNumber: exerNumber,
                                                   exerStatus: kLDEState_Completed,
-                                                  exerScore:  bestStarScore)
+                                                  exerScore:  bestStarScore,
+                                                  numAttempts: numberOfAttempts,
+                                                  bpmOrPercTargetTime: bpmOrPercTargetTime)
         } else {
             callingVCDelegate?.setExerciseResults(exerNumber: exerNumber,
                                                   exerStatus: kLDEState_NotStarted,
-                                                  exerScore:  0)
+                                                  exerScore:  0,
+                                                  numAttempts: numberOfAttempts,
+                                                  bpmOrPercTargetTime: 0.0)
         }
+        
+
+        
         // self.dismiss(animated: true, completion: nil)
         navigationController?.popViewController(animated: true)
     }
@@ -399,7 +411,8 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        
         setStarScore(score: bestStarScore)
         
         playingSynth = true
@@ -672,7 +685,8 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
         guard gMKDebugOpt_ShowDebugSettingsBtn else { return }
         
         print("")
-        bestStarScore = 3
+        bestStarScore = getRandomFakeStarScore()
+        currentTime   = getRandomFakeLTTime()
         returnToCallingVC(doSaveScore: true)
     }
 
@@ -1607,6 +1621,8 @@ class LongToneViewController: PlaybackInstrumentViewController, SSUTempo {
     func fakeScoreHandler(_ act: UIAlertAction) {
         print("fakeScoreHandler  called")
         bestStarScore = 3
+        currentTime = targetTime * 0.75
+
         returnToCallingVC(doSaveScore: true)
     }
     

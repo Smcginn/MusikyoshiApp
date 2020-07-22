@@ -2,7 +2,7 @@
   "name": "trumpet",
   "title": "Beginner and Intermidiate level",
   "jsonVersionMajor":"0",
-  "jsonVersionMid":"3",
+  "jsonVersionMid":"4",
   "jsonVersionMinor":"0",
   "levels":[{
             "Level Comment":"=================== LEVEL 1 ============================",
@@ -50,13 +50,13 @@
                     "exercises":"LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, PRP006, TUN006, PTY004, PRP007, TUN007, PTY005, TUN008, LTR_B3, PRP009, TUN009, PRP010, TUN010"
                     },{
                     "title":"L2 Day 2",
-                    "exercises":"LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, PTY003, TUN004, TUN005, PRP006, TUN006, PTY004, TUN006, PTY005, TUN007, TUN008, LTR_B3, PRP009, TUN009"
+                    "exercises":"LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, PTY003, TUN003, TUN004, TUN005, PRP006, TUN006, PTY004, PTY005, TUN007, TUN008, LTR_B3, PRP009, TUN009"
                     },{
                     "title":"L2 Day 3",
                     "exercises":"LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, PRP006, TUN006, PTY004, PRP007, TUN007, PTY005, TUN008, LTR_B3, PRP009, TUN009, PRP010, TUN010"
                     },{
                     "title":"L2 Day 4",
-                    "exercises":"LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, PTY003, TUN004, TUN005, PRP006, TUN006, PTY004, TUN006, PTY005, TUN007, TUN008, LTR_B3, PRP009, TUN009"
+                    "exercises":"LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, PTY003, TUN003, TUN004, TUN005, PRP006, TUN006, PTY004, PTY005, TUN007, TUN008, LTR_B3, PRP009, TUN009"
                     },{
                     "title":"L2 Day 5",
                     "exercises":"LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, PRP006, TUN006, PTY004, PRP007, TUN007, PTY005, TUN008, LTR_B3, PRP009, TUN009, PRP010, TUN010"
@@ -83,13 +83,13 @@
                     "exercises":"LT_B3_3, LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, LT_G4_3, PRP010, TUN010, PTY006, TUN006, TUN011, PRP007, TUN007, TUN009, LTR_F4, PRP013, TUN013"
                     },{
                     "title":"Day 2",
-                    "exercises":"LT_B3_3, LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, LT_G4_3, PTY003, TUN004, TUN005, PRP006, TUN006, PTY004, TUN006, PTY005, TUN007, TUN008, LTR_F4, PRP009, TUN009"
+                    "exercises":"LT_B3_3, LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, LT_G4_3, PTY005, PRP006, TUN006, PTY004, TUN007, PTY005, TUN008, TUN008, TUN009, TUN010, LTR_F4, TUN011, TUN012"
                     },{
                     "title":"Day 3",
                     "exercises":"LT_B3_3, LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, LT_G4_3, PRP010, TUN010, PTY006, TUN006, TUN011, PRP007, TUN007, TUN009, LTR_F4, PRP013, TUN013"
                     },{
                     "title":"Day 4",
-                    "exercises":"LT_B3_3, LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, LT_G4_3, PTY003, TUN004, TUN005, PRP006, TUN006, PTY004, TUN006, PTY005, TUN007, TUN008, LTR_F4, PRP009, TUN009"
+                    "exercises":"LT_B3_3, LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, LT_G4_3, PTY005, PRP006, TUN006, PTY004, TUN007, PTY005, TUN008, TUN008, TUN009, TUN010, LTR_F4, TUN011, TUN012"
                     },{
                     "title":"Day 5",
                     "exercises":"LT_B3_3, LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, LT_G4_3, PRP010, TUN010, PTY006, TUN006, TUN011, PRP007, TUN007, TUN009, LTR_F4, PRP013, TUN013"
@@ -115,13 +115,13 @@
                     "exercises":"LT_B3_3, LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, LT_G4_3, SLR001, SLR002, PRP013, TUN013, PTY009, TUN014, TUN015, PTY010, PRP016, TUN016, LTR_E4, TUN017"
                     },{
                     "title":"Day 2",
-                    "exercises":"LT_B3_3, LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, LT_G4_3, SLR001, SLR002, TUN005, PRP006, TUN006, PTY004, TUN006, PTY005, TUN007, TUN008, LTR_F4, PRP009, TUN009"
+                    "exercises":"LT_B3_3, LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, LT_G4_3, SLR001, SLR002, PTY004, PRP010, TUN010, TUN011, TUN012, PRP013, TUN013, PTY005, LTR_F4, TUN014, TUN015"
                     },{
                     "title":"Day 3",
                     "exercises":"LT_B3_3, LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, LT_G4_3, SLR001, SLR002, PRP013, TUN013, PTY009, TUN014, TUN015, PTY010, PRP016, TUN016, LTR_E4, TUN017"
                     },{
                     "title":"Day 4",
-                    "exercises":"LT_B3_3, LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, LT_G4_3, SLR001, SLR002, TUN005, PRP006, TUN006, PTY004, TUN006, PTY005, TUN007, TUN008, LTR_F4, PRP009, TUN009"
+                    "exercises":"LT_B3_3, LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, LT_G4_3, SLR001, SLR002, PTY004, PRP010, TUN010, TUN011, TUN012, PRP013, TUN013, PTY005, LTR_F4, TUN014, TUN015"
                     },{
                     "title":"Day 5",
                     "exercises":"LT_B3_3, LT_C4_3, LT_D4_3, LT_E4_3, LT_F4_3, LT_G4_3, SLR001, SLR002, PRP013, TUN013, PTY009, TUN014, TUN015, PTY010, PRP016, TUN016, LTR_E4, TUN017"

@@ -17,7 +17,7 @@ import AudioKit
 
 // For the time being - until June 15, 2020,  no longer checking subs, etc.
 // So this is set to always allow all access.
-var gDoOverrideSubsPresent = true // JUNE15  JULY07 // CHECK_THIS_FOR_SUBMIT
+var gDoOverrideSubsPresent = true // JUNE15  JULY07 AUGUST1 // CHECK_THIS_FOR_SUBMIT
 
 
 var gDoLimitLevels = false                       // CHECK_THIS_FOR_SUBMIT
