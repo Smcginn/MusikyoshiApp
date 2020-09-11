@@ -4088,7 +4088,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Musikyoshi, Inc. (PXMA5KCSKK)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.1.2;
+				CURRENT_PROJECT_VERSION = 2.1.4;
 				DEVELOPMENT_TEAM = PXMA5KCSKK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4102,7 +4102,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.1.1;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -4129,7 +4129,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Musikyoshi, Inc. (PXMA5KCSKK)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.1.2;
+				CURRENT_PROJECT_VERSION = 2.1.4;
 				DEVELOPMENT_TEAM = PXMA5KCSKK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4143,7 +4143,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.1.1;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -4217,7 +4217,7 @@
 				CODE_SIGN_ENTITLEMENTS = PlayTunes.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: sfreshour.musikyoshi@gmail.com (R8U395JZ7G)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 2.1.2;
+				CURRENT_PROJECT_VERSION = 2.1.4;
 				DEVELOPMENT_TEAM = PXMA5KCSKK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4231,7 +4231,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.1.1;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -4257,7 +4257,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: sfreshour.musikyoshi@gmail.com (R8U395JZ7G)";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: sfreshour.musikyoshi@gmail.com (R8U395JZ7G)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 2.1.2;
+				CURRENT_PROJECT_VERSION = 2.1.4;
 				DEVELOPMENT_TEAM = PXMA5KCSKK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4271,7 +4271,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.1.1;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",

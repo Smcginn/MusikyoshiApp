@@ -88,9 +88,12 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
         // howToUseDetText += "Tip: It's best to use earbuds or headphones so you can hear the metronome."
 
         //  JUNE15 JULY07 AUGUST1
-        var howToUseDetText = "2020 School Term-End and Evaluation Period Giveaway! Use all of PlayTunes for Free until August 1, 2020! - Enjoy!\n"
+        var howToUseDetText = ""
+        /*
+        "2020 School Term-End and Evaluation Period Giveaway! Use all of PlayTunes for Free until August 1, 2020! - Enjoy!\n"
         howToUseDetText +=  "\nAfter August 1, 2020, you can still access many levels for free (see below). If you wish to continue with full-access, you can purchase a subscription (subscriptions are also explained below).\n\nBut until then, you do not have to sign up for anything! And your free use of PlayTunes does not commit you in any way to a purchase.\n\n\n"
-
+        */
+        
         howToUseDetText += "Basic Usage:\n\n"
         
         howToUseDetText += "\u{2022} Use Headphones! We have a built-in metronome which REALLY helps your accuracy, and your score!  You can only hear the metronome with headphones.\n\n"
@@ -145,7 +148,10 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
 //        tryOutDetText += "For this free try-out, you don't need to do anything else; you are good to go!"
         
         // JUNE15  JULY07 AUGUST1
-        var tryOutDetText = " Until August 1, 2020, PlayTunes is completely Free!  All Levels!\n\n\nAfter August 1, 2020, you can either explore our standard Free Trial, or purchase a subscription.\n\n"
+        var tryOutDetText = ""
+        /*
+ "Until August 1, 2020, PlayTunes is completely Free!  All Levels!\n\n\nAfter August 1, 2020, you can either explore our standard Free Trial, or purchase a subscription.\n\n"
+        */
         
         tryOutDetText += "Standard Free Trial: We have lots of free areas of the app to try out for both beginners and those with some experience.\n> All Days of Levels 1 and 2 are completely free.\n> Day 1 of these Levels is also free: Levels 3, 4, 7, 10, 15, 20, 25, 30.\n> We even give you parts of our Long Tones Level, the Lip Slurs Level, and the Clarinet Breaks Level.\n\nSo go ahead and explore Day 1 of all the Pink levels - you can unlock Gray Levels and Days when you purchase a subscription.\n\n"
         
@@ -156,7 +162,7 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
         //tryOutDetText += "\n\n"
         
         // JUNE15 JULY07 AUGUST1
-        tryOutDetText += "After August 1, 2020, for access to all 150 days of practice, and hundreds of unique exercises, you will need to purchase a PlayTunes All-Level Access Subscription.\n\n"
+        //tryOutDetText += "For access to all 150 days of practice, and hundreds of unique exercises, you will need to purchase a PlayTunes All-Level Access Subscription.\n\n"
 
         // JUNE15
 //        tryOutDetText += "\n\nNote: If you have purchased a subscription, please email us at Shawn@musikyoshi.com."
@@ -165,12 +171,12 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
         
         tryOutPTForFreeDetailsLabel.text = tryOutDetText
 
-        var subDetailText = "" //In order to get access to the 500 exercises in the upper levels, you will need to purchase a PlayTunes All-Level Access Subscription through iTunes.\n\n"
-        //subDetailText += "PlayTunes offers 1-month ($9.99 per month) and 6-month ($49.99 for 6 months) Auto-Renewing Subscriptions.\n\n"
+        var subDetailText = "In order to get access to the 500 exercises in the upper levels, you will need to purchase a PlayTunes All-Level Access Subscription through iTunes.\n\n"
+        // subDetailText += "PlayTunes offers 1-month ($9.99 per month) and 6-month ($49.99 for 6 months) Auto-Renewing Subscriptions.\n\n"
         
-        subDetailText += "PlayTunes offers 1-month and 6-month Auto-Renewing Subscriptions.\n\n"
+        subDetailText += "PlayTunes offers 1-year and 1-month Auto-Renewing Subscriptions.\n\n"
         
-        subDetailText += "To purchase a PlayTunes subscription:\n> Go to the Settings screen (press the gear button on the main screen),\n> Select 'Purchase Options' to review, choose, and purchase an available Subscription through iTunes.\n\n"
+        subDetailText += "To purchase a PlayTunes subscription:\n> Go to the Settings screen (press the gear button on the main screen),\n> Select 'Purchase Options' to review, choose, and purchase an available Subscription (purchase will be handled by iTunes).\n\n"
 
         accessUpperLevelsDetailLabel.text = subDetailText
         
@@ -239,7 +245,7 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
                  } else {
                     UserDefaults.standard.set(true, forKey: "displayedOverviewPopup")
                     setTrialExpiredVars()
-                    showEndDateExpiredAlert(parentVC: self)
+// REMOVE_FREE_TRIAL_CODE showEndDateExpiredAlert(parentVC: self)
                 }
             }
             // Put back in if get rid of call in alerts:

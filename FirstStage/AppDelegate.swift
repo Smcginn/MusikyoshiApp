@@ -331,10 +331,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        RealTimeSettingsManager.instance.test_getAdjustedAttackToleranceImpl()
         RealTimeSettingsManager.instance.resetFor_CurrInst()
         
-        // JUNE15 - Disabling subscription status lookup
-        // gDoOverrideSubsPresent = subsriptionOverridePswdWasSet()
+        // REMOVE_FREE_TRIAL_CODE
+        gDoOverrideSubsPresent = subsriptionOverridePswdWasSet()
         
- //       setTrialExpiredVars() // JUNE15
+        setTrialExpiredVars() // REMOVE_FREE_TRIAL_CODE
         
         return true
     }

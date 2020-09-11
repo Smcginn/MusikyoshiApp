@@ -38,7 +38,41 @@ class AvailableInAppPurchasesMgr {
     
     static let sharedInstance = AvailableInAppPurchasesMgr()
 
+    var didFilter = false
+    
     var availIAPs: [AvailableInAppPurchaseData] = []
+    
+    // For V2.1.1, we added a 1-Year sub. We wanted to get rid of the 6 month
+    //    sub.  Problem is, I'm unsure of what happens if you delete a sub in
+    //    AppStoreConnect if it is listed in the App's IAPs. The app might not
+    //    pass the review. So . . . making this temp move to just not show the
+    //    6-month sub.
+    func filterAvailAPs() {
+        if didFilter { return }
+
+        let tempAvailAPs = availIAPs
+        availIAPs = []
+        
+        // first, look for and add 1-Year sub back in
+        for oneAP in tempAvailAPs {
+            if oneAP.prodIdentifier == SubScript_1Y {
+                availIAPs.append(oneAP)
+                break
+            }
+        }
+        
+        // next, look for and add 1-Month sub back in
+        for oneAP in tempAvailAPs {
+            if oneAP.prodIdentifier == SubScript_1M {
+                availIAPs.append(oneAP)
+                break
+            }
+        }
+
+        // do not include 6-Month in list of available subs.
+        
+        didFilter = true
+    }
     
     func addOneInAppPurchaseData(data: AvailableInAppPurchaseData) {
         availIAPs.append(data)
