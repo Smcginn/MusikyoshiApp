@@ -176,24 +176,17 @@ class LevelsViewController: UIViewController {
         
         print("\n\n &*&*&*      In LEVELS::viewDidLoad\n\n")
         
-
-        // JUNE15
-        // For the time being - until June 15, 2020,  no longer checking subs, etc.
-        // So this is set to always allow all access.
-        if gTrialPeriodExpired {
-//            subscriptionGood = PlayTunesIAPProducts.store.subscriptionGood()  // IAPSUBS
-//            if subscriptionGood ||
-//               gDoOverrideSubsPresent ||
-//               gMKDebugOpt_ShowDebugSettingsBtn  {
-//                allowAllLevelAccess = true
-//            } else {
-//                allowAllLevelAccess = false
-//            }
-            allowAllLevelAccess = false
-       } else {
-            allowAllLevelAccess = true
-        }
+        // REMOVE_FREE_TRIAL_CODE
         
+        subscriptionGood = PlayTunesIAPProducts.store.subscriptionGood()  // IAPSUBS
+        if subscriptionGood ||
+           gDoOverrideSubsPresent ||
+           gMKDebugOpt_ShowDebugSettingsBtn  {
+             allowAllLevelAccess = true
+        } else {
+             allowAllLevelAccess = false
+        }
+         
         // Restore for subs check:
 //        subscriptionGood = PlayTunesIAPProducts.store.subscriptionGood()  // IAPSUBS
 //        if subscriptionGood ||
@@ -313,17 +306,7 @@ class LevelsViewController: UIViewController {
         
         print("\n\n &*&*&*      In LEVELS::viewWillAppear\n\n")
 
-        // for testing:   JUNE15
-//        gTestExpirationCount += 1
-        
-        // JUNE15
-        var numDays = daysUntilFreePeriodEndDate()
-        if numDays > 0 && !gTrialPeriodExpired {
-            displayFreeTrialExpiryWarningIfNeeded(parentVC: self)
-        } else if !gTrialPeriodExpired {
-            setTrialExpiredVars()
-            showEndDateExpiredAlert(parentVC: self)
-        }
+        // REMOVE_FREE_TRIAL_CODE - code takedn out here
         
         assessPurchaseStatus()
         
@@ -523,17 +506,10 @@ class LevelsViewController: UIViewController {
     //    IAPSUBS
     func assessPurchaseStatus() {
 
-        if !gTrialPeriodExpired {
-            // JUNE15
-            // For the time being - until June 15, 2020,  no longer checking subs, etc.
-            // So this is set to always allow all access.
-            allowAllLevelAccess = true
-            subscriptionGood = true
-            return
-        } else {
-            allowAllLevelAccess = false
-            subscriptionGood = false
-        }
+        // REMOVE_FREE_TRIAL_CODE - code removed here
+
+        allowAllLevelAccess = false
+        subscriptionGood = false
         
         if gDoOverrideSubsPresent || gMKDebugOpt_ShowDebugSettingsBtn {
             allowAllLevelAccess = true
@@ -622,12 +598,12 @@ class LevelsViewController: UIViewController {
         let titleStr = "Try Out Days In Pink Levels For Free!"
         // All Pink Levels To access all of PlayTunes, Purchase (or Restore) a Subscription"
         var msgStr = "- All Days of Levels 1 & 2: Free!\n- Day 1 of other Pink Levels - Free!\n\n"
-        msgStr += "Now that the Spring 2020 Free Trial period is over, for total access PlayTunes, you must purchase (or Restore) a Subscription. "
+        msgStr += "For total access PlayTunes, you must purchase (or Restore) a Subscription. "
         msgStr += "Go to Settings > Purchase Options.\n\n"
-        msgStr += "(You should first make sure you have the latest version of PlayTunes.)\n\n"
+        msgStr += "- You should first make sure you have the latest version of PlayTunes.\n"
         
-        //        msgStr += "(If you have a valid Subscription from another device, use the Restore button)\n\n"
-        msgStr += "(If you just completed a purchase or restore, verification can take a while. Try again in a bit.)"
+        msgStr += "- If you have a valid Subscription from another device, use the Restore button.\n"
+        msgStr += "- If you just completed a purchase or restore, verification can take a while. Try again in a bit."
         
         
         let ac = MyUIAlertController(title: titleStr, message: msgStr, preferredStyle: .alert)

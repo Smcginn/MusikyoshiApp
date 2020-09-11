@@ -527,13 +527,12 @@ extension IAPHelper {
                     var productIds: Set<ProductIdentifier>
                     
                  productIds =  kUsingSubScript_1W_toss ?   [SubScript_1W_toss,
+                                                            SubScript_1Y,
                                                             SubScript_6M,
                                                             SubScript_1M]
-                                                       :   [SubScript_6M,
+                                                       :   [SubScript_1Y,
+                                                            SubScript_6M,
                                                             SubScript_1M]
-//                    = Set([ SubScript_1W_toss,
-//                                   SubScript_1M,
-//                                   SubScript_6M])
                 let purchaseResult = SwiftyStoreKit.verifySubscriptions(productIds: productIds, inReceipt: receipt)
                 switch purchaseResult {
                 case .purchased(let expiryDate, let items):

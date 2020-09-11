@@ -17,14 +17,17 @@ let SubScript_1W_toss: ProductIdentifier = "com.musikyoshi.playtunes.PT001_EN_1W
 //let SubScript_6M: ProductIdentifier = "com.musikyoshi.playtunes.PTB01_EN_6MSUB"
 let SubScript_1M: ProductIdentifier = "com.musikyoshi.playtunes.PTBW1_EN_1M"
 let SubScript_6M: ProductIdentifier = "com.musikyoshi.playtunes.PTBW1_EN_6M"
+let SubScript_1Y: ProductIdentifier = "com.musikyoshi.playtunes.PTBW1_EN_1YR"
 
 public struct PlayTunesIAPProducts {
     
     private static let productIdentifiers: Set<ProductIdentifier> =
         kUsingSubScript_1W_toss ?   [SubScript_1W_toss,
+                                     SubScript_1Y,
                                      SubScript_6M,
                                      SubScript_1M]
-                                :   [SubScript_6M,
+                                :   [SubScript_1Y,
+                                     SubScript_6M,
                                      SubScript_1M]
 
     public static let store = IAPHelper(prodIds: PlayTunesIAPProducts.productIdentifiers)

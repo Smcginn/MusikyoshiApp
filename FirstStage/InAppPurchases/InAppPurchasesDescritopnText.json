@@ -4,48 +4,48 @@
   "iapJsonVersion":"0",
   "knownIapPurchaseOptions":[
   {
-     "One IAP Comment":"All-Level Access, 1 Month",
-     "ProductID":"com.musikyoshi.playtunes.PTBW1_EN_1M",
-     "Title":"One Month Subscription",
-     "Language":"English",
-     "Instrument":"Brass, Woodwinds",
-     "PurchaseType1":"Monthly Subscription",
-     "PurchaseType2":"",
-     "OverviewText":[
-        {
+      "One IAP Comment":"All-Level Access, 1 Year",
+      "ProductID":"com.musikyoshi.playtunes.PTBW1_EN_1YR",
+      "Title":"One Year Subscription",
+      "Language":"English",
+      "Instrument":"Brass, Woodwinds",
+      "PurchaseType1":"One Year Subscription",
+      "PurchaseType2":"",
+      "OverviewText":[
+         {
              "oneLine":"Includes: Trumpet, Trombone,\n"
-        },{
+         },{
              "oneLine":"  Tuba, French Horn, Euphonium,\n"
-        },{
+         },{
              "oneLine":"  Flute, Clarinet, Bass Clarinet,\n"
-        },{
+         },{
              "oneLine":"  Oboe, Bassoon, Alto Sax,\n"
-        },{
+         },{
              "oneLine":"  Tenor Sax, and Baritone Sax.\n\n"
-        },{
+         },{
              "oneLine":"      Discounted Price for\n"
-        },{
+         },{
              "oneLine":"      Initial Offering!\n\n"
-        },{
+         },{
              "oneLine":"- Video Help in English\n"
-        },{
+         },{
              "oneLine":"- Access to all Levels\n"
-        },{
+         },{
              "oneLine":"- Subscription is Auto-renewing\n\n"
-        },{
-             "oneLine":"    (Full Subscription details\n"
-        },{
-             "oneLine":"     on Confirm Purchase Page)"
-        }]
+         },{
+              "oneLine":"    (Full Subscription details\n"
+         },{
+              "oneLine":"     on Confirm Purchase Page)"
+         }]
   },{
-     "One IAP Comment":"All-Level Access, 6 Months",
-     "ProductID":"com.musikyoshi.playtunes.PTBW1_EN_6M",
-     "Title":"Six Month Subscription",
-     "Language":"English",
-     "Instrument":"Brass, Woodwinds",
-     "PurchaseType1":"Six Month Subscription",
-     "PurchaseType2":"",
-     "OverviewText":[
+      "One IAP Comment":"All-Level Access, 6 Months",
+      "ProductID":"com.musikyoshi.playtunes.PTBW1_EN_6M",
+      "Title":"Six Month Subscription",
+      "Language":"English",
+      "Instrument":"Brass, Woodwinds",
+      "PurchaseType1":"Six Month Subscription",
+      "PurchaseType2":"",
+      "OverviewText":[
         {
             "oneLine":"Includes: Trumpet, Trombone,\n"
         },{
@@ -71,6 +71,40 @@
         },{
              "oneLine":"     on Confirm Purchase Page)"
         }]
+  },{
+      "One IAP Comment":"All-Level Access, 1 Month",
+      "ProductID":"com.musikyoshi.playtunes.PTBW1_EN_1M",
+      "Title":"One Month Subscription",
+      "Language":"English",
+      "Instrument":"Brass, Woodwinds",
+      "PurchaseType1":"Monthly Subscription",
+      "PurchaseType2":"",
+      "OverviewText":[
+         {
+              "oneLine":"Includes: Trumpet, Trombone,\n"
+         },{
+              "oneLine":"  Tuba, French Horn, Euphonium,\n"
+         },{
+              "oneLine":"  Flute, Clarinet, Bass Clarinet,\n"
+         },{
+              "oneLine":"  Oboe, Bassoon, Alto Sax,\n"
+         },{
+              "oneLine":"  Tenor Sax, and Baritone Sax.\n\n"
+         },{
+              "oneLine":"      Discounted Price for\n"
+         },{
+              "oneLine":"      Initial Offering!\n\n"
+         },{
+              "oneLine":"- Video Help in English\n"
+         },{
+              "oneLine":"- Access to all Levels\n"
+         },{
+              "oneLine":"- Subscription is Auto-renewing\n\n"
+         },{
+              "oneLine":"    (Full Subscription details\n"
+         },{
+              "oneLine":"     on Confirm Purchase Page)"
+         }]
   }
   ]
 }

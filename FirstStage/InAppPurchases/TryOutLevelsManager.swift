@@ -72,9 +72,9 @@ class TryOutLevelsManager {
         // }
         
         // JUNE15 - Disabling subscription status lookup; ALL LEVELS FREE
-        if !gTrialPeriodExpired {
-            return true
-        }
+//        if !gTrialPeriodExpired {
+//            return true
+//        }
         
         // Are we in a debug mode that supports showing all Levels/Days?
         if gDoOverrideSubsPresent  ||

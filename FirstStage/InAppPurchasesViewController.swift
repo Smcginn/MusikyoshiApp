@@ -61,6 +61,13 @@ class InAppPurchasesViewController: UIViewController {
         // iapScrollView.backgroundColor = kDarkSkyBlue
          contentHt = contentTopBottomSpacing
 
+        // For V2.1.1, we added a 1-Year sub. We wanted to get rid of the 6 month
+        //    sub.  Problem is, I'm unsure of what happens if you delete a sub in
+        //    AppStoreConnect if it is listed in the App's IAPs. The app might not
+        //    pass the review. So . . . making this temp move to just not show the
+        //    6-month sub.
+        AvailIapPurchsMgr.sharedInstance.filterAvailAPs()
+        
         let numIAPEntries = AvailIapPurchsMgr.sharedInstance.numIAPEntries()
         
         if numIAPEntries <= 0 {
@@ -182,12 +189,16 @@ class InAppPurchasesViewController: UIViewController {
             ac.addAction(UIAlertAction(title: "OK", style: .default,
                                        handler: alreadyPurchasedHandler))
             self.present(ac, animated: true, completion: nil)
-        } else {
+        }
+        
+        // REMOVE_FREE_TRIAL
+        /* else {
             let numDays = daysUntilFreePeriodEndDate()
             if numDays > 4 {
                 showDontNeedToPurchaserAlert(parentVC: self)
             }
         }
+        */
     }
     
     override func viewDidLayoutSubviews() {

@@ -38,7 +38,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var hiddenPswdTextField: UITextField!
     
-//    var didDisplayOverview = false
+    var didDisplayOverview = false
     
     let particleEmitter = CAEmitterLayer()
     
@@ -75,34 +75,21 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     var settingsEnblBtnBckgrndColor = UIColor.clear
     @IBOutlet weak var settingEnabledBtn: UIButton!
     @IBAction func settingEnabledBtnPressed(_ sender: Any) {
-        // JUNE15 - Disabling subscription status lookup
-        numTimesSettingsEnabledTapped += 1
-        if numTimesSettingsEnabledTapped >= 5 {
-            if gDoOverrideSubsPresent {
-                showDontHaveToRightCornerTap()
-            }
+        
+        if gDoOverrideSubsPresent {
+            showLevelsAlreadyEnabledAlert()
+            return
         }
-        return;
-            
             
         numTimesSettingsEnabledTapped += 1
         if numTimesSettingsEnabledTapped >= 5 {
-            // JUNE15 - For users who have been given instructions to tap in corner to
-            // get free all access, and don't know if already free (at the moment):
-            // Just lauch "You're all set" alert.
-            
-            showLevelsGoodToGoAlert()
-
-            
-            // Retore below for normal action:
-            
-//            handlingPasswordFor = .levelsAccessPW
-//            hiddenPswdTextField.backgroundColor = .lightGray
-//            hiddenPswdTextField.isHidden = false
-//            hiddenPswdTextField.isEnabled = true
-//            hiddenPswdTextField.keyboardType = .default
-//            hiddenPswdTextField.becomeFirstResponder()
-//            showEnterLevelsPasswordAlert()
+            handlingPasswordFor = .levelsAccessPW
+            hiddenPswdTextField.backgroundColor = .lightGray
+            hiddenPswdTextField.isHidden = false
+            hiddenPswdTextField.isEnabled = true
+            hiddenPswdTextField.keyboardType = .default
+            hiddenPswdTextField.becomeFirstResponder()
+            showEnterLevelsPasswordAlert()
         }
     }
     
@@ -376,27 +363,28 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         }
         
         // JUNE15
-        settingEnabledBtn.backgroundColor = settingsEnblBtnBckgrndColor
-        settingEnabledBtn.setTitle("", for: .normal)
-        settingEnabledBtn.isHidden = false // Leave enabled so can tell them . . .
-        settingEnabledBtn.isEnabled = true //   . . . they don't need to tap here
+//        settingEnabledBtn.backgroundColor = settingsEnblBtnBckgrndColor
+//        settingEnabledBtn.setTitle("", for: .normal)
+//        settingEnabledBtn.isHidden = false // Leave enabled so can tell them . . .
+//        settingEnabledBtn.isEnabled = true //   . . . they don't need to tap here
         
-//        settingEnabledBtn.isOpaque = false
-        settingEnabledBtn.setTitleColor(UIColor.clear, for: .normal)
-//        if gDoOverrideSubsPresent {
-//            settingEnabledBtn.setTitle("Levels Enabled ", for: .normal)
-//            settingEnabledBtn.isHidden = false
-//            settingEnabledBtn.isEnabled = true
-//            settingEnabledBtn.isOpaque = true
-//            settingEnabledBtn.titleLabel?.textColor = UIColor.green
-//            settingEnabledBtn.setTitleColor(UIColor.black, for: .normal)
-//        } else {
-//            settingEnabledBtn.setTitle("", for: .normal)
-//            settingEnabledBtn.isHidden = false
-//            settingEnabledBtn.isEnabled = true
-//            settingEnabledBtn.isOpaque = false
-//            settingEnabledBtn.setTitleColor(UIColor.clear, for: .normal)
-//       }
+ //       settingEnabledBtn.isOpaque = false
+//        settingEnabledBtn.setTitleColor(UIColor.clear, for: .normal)
+
+        if gDoOverrideSubsPresent {
+            settingEnabledBtn.setTitle("Levels Enabled ", for: .normal)
+            settingEnabledBtn.isHidden = false
+            settingEnabledBtn.isEnabled = true
+            settingEnabledBtn.isOpaque = true
+            settingEnabledBtn.titleLabel?.textColor = UIColor.green
+            settingEnabledBtn.setTitleColor(UIColor.black, for: .normal)
+        } else {
+            settingEnabledBtn.setTitle("", for: .normal)
+            settingEnabledBtn.isHidden = false
+            settingEnabledBtn.isEnabled = true
+            settingEnabledBtn.isOpaque = false
+            settingEnabledBtn.setTitleColor(UIColor.clear, for: .normal)
+       }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -460,7 +448,8 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
             delay(0.5) {
                 self.displayWelcomeVC()
                 // JUNE15_2
-                // restore:  UserDefaults.standard.set(true, forKey: "displayedOverviewPopup")
+                // restore:
+                UserDefaults.standard.set(true, forKey: "displayedOverviewPopup")
             }
         }
         

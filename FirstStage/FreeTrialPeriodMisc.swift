@@ -10,7 +10,7 @@ import Foundation
 
 // Set when the trial period has expired. Several places in the code
 // refer to this.
-var gTrialPeriodExpired = false
+var gTrialPeriodExpired = true  // REMOVE_FREE_TRIAL_CODE
 
 
 // Temp for testing
