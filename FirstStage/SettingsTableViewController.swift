@@ -12,6 +12,7 @@
 let kSettingsPresentMicCalibSegueID = "SettingsPresentMicCalibVCSegue"
 
 import UIKit
+import Firebase
 
 class SettingsTableViewController: UITableViewController, PresentingMicCalibVC, UIPickerViewDataSource, UIPickerViewDelegate {
     
@@ -526,6 +527,17 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC, 
                 parent.performSegue(withIdentifier: "toPurchaseOptions", sender: nil)
             }
         }
+        
+        if indexPath.section == 0 && indexPath.row == kTCIndex_LogOut {
+            let firebaseAuth = Auth.auth()
+            do {
+                try firebaseAuth.signOut()
+                self.performSegue(withIdentifier: "unwindToSignIn", sender: nil)
+            } catch let signOutError as NSError {
+                print ("Error signing out: %@", signOutError)
+            }
+        }
+        
     }
 
 /* For original JUNE15 work:
@@ -550,11 +562,12 @@ class SettingsTableViewController: UITableViewController, PresentingMicCalibVC, 
     let kTCIndex_BPM                = 1
     let kTCIndex_CorrectionSettings = 2
     let kTCIndex_PurchOptions       = 3
-    let kTCIndex_AmpRise            = 4
-    let kTCIndex_IsASound           = 5
-    let kTCIndex_MicCalibrate       = 6
-    let kTCIndex_SmallestNoteWd     = 7
-    let kTCIndex_SigWd              = 8
+    let kTCIndex_LogOut             = 4
+    let kTCIndex_AmpRise            = 5
+    let kTCIndex_IsASound           = 6
+    let kTCIndex_MicCalibrate       = 7
+    let kTCIndex_SmallestNoteWd     = 8
+    let kTCIndex_SigWd              = 9
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         

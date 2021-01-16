@@ -11,6 +11,7 @@ import AVFoundation
 import AudioKit
 import MessageUI
 import ClassKit
+import Firebase
 
 protocol DoneShowingVideo : class {
     func VideoViewClosed()
@@ -23,6 +24,13 @@ class TuneExerciseViewController: PlaybackInstrumentViewController, SSUTempo,
     MFMailComposeViewControllerDelegate, VideoHelpViewDelegate {
     
     // @IBOutlet weak var orderStatusNavigationbar: UINavigationBar!
+    
+    var inChallengeMode = false
+    var newChallenge = false
+    var challengeId: String? = nil
+    var challengeIssuer: String? = nil
+    var challengeResponder: String? = nil
+    var challengeTurn: String? = nil
     
     // Invoking VC sets these
     var navBarTitle:String   = ""         // to use as the screen's title
@@ -48,7 +56,52 @@ class TuneExerciseViewController: PlaybackInstrumentViewController, SSUTempo,
     
     @IBOutlet weak var doneBtn: UIButton!
     @IBAction func doneBtnTapped(_ sender: Any) {
-        returnToCallingVC()
+        
+        if inChallengeMode {
+            if !newChallenge {
+                if challengeTurn == "issuer" {
+                    // User is issuer
+                    Firestore.firestore().collection("challenges").document(challengeId!).setData([
+                        "issuerScore" : 10, // TODO: placeholder
+                        "turn" : "responder"
+                    ], merge: true) { (error) in
+                        if let error = error {
+                            print(error)
+                        } else {
+                            self.performSegue(withIdentifier: "unwindToChallenges", sender: nil)
+                        }
+                    }
+                } else if challengeTurn == "responder" {
+                    // User is responder
+                    Firestore.firestore().collection("challenges").document(challengeId!).setData([
+                        "responderScore" : 10, // TODO: placeholder
+                        "turn" : "issuer"
+                    ], merge: true) { (error) in
+                        if let error = error {
+                            print(error)
+                        } else {
+                            self.performSegue(withIdentifier: "unwindToChallenges", sender: nil)
+                        }
+                    }
+                }
+            } else {
+                Firestore.firestore().collection("challenges").document().setData([
+                    "issuer" : challengeIssuer ?? "",
+                    "responder" : challengeResponder ?? "",
+                    "issuerScore" : 10, // TODO: placeholder
+                    "turn" : "responder"
+                ]) { (error) in
+                    if let error = error {
+                        print(error)
+                    } else {
+                        self.performSegue(withIdentifier: "unwindToChallenges", sender: nil)
+                    }
+                }
+            }
+        } else {
+            returnToCallingVC()
+        }
+        
     }
     
     func returnToCallingVC() {
@@ -238,6 +291,10 @@ class TuneExerciseViewController: PlaybackInstrumentViewController, SSUTempo,
         AppDelegate.AppUtility.lockOrientationToLandscape()
 //        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight,
 //                                               andRotateTo: UIInterfaceOrientation.landscapeRight)
+        
+//        if inChallengeMode {
+//            doneBtn.isHidden = true
+//        }
         
         if exerciseType == .rhythmPartyExer {
             title = "Rhythm Party!"

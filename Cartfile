@@ -5,3 +5,8 @@
 github "audiokit/AudioKit" == 4.9.5
 github "SwiftyJSON/SwiftyJSON" == 5.0.0
 github "bizz84/SwiftyStoreKit" == 0.15.1
+github "algolia/algoliasearch-client-swift" ~> 7.0.0
+
+binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseAnalyticsBinary.json"
+binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseFirestoreBinary.json"
+binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseAuthBinary.json"

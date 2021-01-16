@@ -844,6 +844,11 @@
 		E4564D2122D05716000B4FA4 /* ExerciseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E409168B22CFEFCC00E5E034 /* ExerciseTableViewCell.swift */; };
 		E940183E1FA998CF00FC6271 /* FSAnalysisOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = E940183D1FA998CF00FC6271 /* FSAnalysisOverlayView.m */; };
 		E940183F1FA998CF00FC6271 /* FSAnalysisOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = E940183D1FA998CF00FC6271 /* FSAnalysisOverlayView.m */; };
+		E9587CF72591BF3700F08314 /* ChallengesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9587CF62591BF3700F08314 /* ChallengesViewController.swift */; };
+		E9587D082591C4F700F08314 /* NewChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9587D072591C4F700F08314 /* NewChallengeViewController.swift */; };
+		E9587D0A2591DBAD00F08314 /* PickChallengeExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9587D092591DBAD00F08314 /* PickChallengeExerciseViewController.swift */; };
+		E9645B07257D9D3C00A84551 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9645B06257D9D3C00A84551 /* SignUpViewController.swift */; };
+		E9645B09257D9D4700A84551 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9645B08257D9D4700A84551 /* SignInViewController.swift */; };
 		E9794BA91FFD45EA00CDC7FD /* PerformanceIssueMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9794BA81FFD45EA00CDC7FD /* PerformanceIssueMgr.swift */; };
 		E9794BAA1FFD45EA00CDC7FD /* PerformanceIssueMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9794BA81FFD45EA00CDC7FD /* PerformanceIssueMgr.swift */; };
 		E9815A37200511430046445B /* VideoHelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9815A36200511430046445B /* VideoHelpView.swift */; };
@@ -874,6 +879,50 @@
 		E9AD0CE71FE09D32006472CE /* NotePitchPerformanceAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AD0CE51FE09D32006472CE /* NotePitchPerformanceAnalyzer.swift */; };
 		E9AD0CE91FE09E63006472CE /* NoteRhythmPerformanceAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AD0CE81FE09E63006472CE /* NoteRhythmPerformanceAnalyzer.swift */; };
 		E9AD0CEA1FE09E63006472CE /* NoteRhythmPerformanceAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AD0CE81FE09E63006472CE /* NoteRhythmPerformanceAnalyzer.swift */; };
+		E9BB304A2599A5320024E00D /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9645B06257D9D3C00A84551 /* SignUpViewController.swift */; };
+		E9BB304D2599A5350024E00D /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9645B08257D9D4700A84551 /* SignInViewController.swift */; };
+		E9BB30502599A53C0024E00D /* PickChallengeExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9587D092591DBAD00F08314 /* PickChallengeExerciseViewController.swift */; };
+		E9BB30512599A53F0024E00D /* NewChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9587D072591C4F700F08314 /* NewChallengeViewController.swift */; };
+		E9BB30542599A5410024E00D /* ChallengesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9587CF62591BF3700F08314 /* ChallengesViewController.swift */; };
+		E9CC8B12258DCDD100B00264 /* FirebaseInstallations.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8AF0258DCDCD00B00264 /* FirebaseInstallations.framework */; };
+		E9CC8B13258DCDD100B00264 /* FirebaseInstallations.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8AF0258DCDCD00B00264 /* FirebaseInstallations.framework */; };
+		E9CC8B14258DCDD100B00264 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8B00258DCDCE00B00264 /* Firebase.framework */; };
+		E9CC8B16258DCDD100B00264 /* abseil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8B01258DCDCE00B00264 /* abseil.framework */; };
+		E9CC8B17258DCDD100B00264 /* abseil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8B01258DCDCE00B00264 /* abseil.framework */; };
+		E9CC8B18258DCDD100B00264 /* leveldb-library.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8B02258DCDCE00B00264 /* leveldb-library.framework */; };
+		E9CC8B19258DCDD100B00264 /* leveldb-library.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8B02258DCDCE00B00264 /* leveldb-library.framework */; };
+		E9CC8B1A258DCDD100B00264 /* nanopb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8B03258DCDCE00B00264 /* nanopb.framework */; };
+		E9CC8B1B258DCDD100B00264 /* nanopb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8B03258DCDCE00B00264 /* nanopb.framework */; };
+		E9CC8B1C258DCDD100B00264 /* BoringSSL-GRPC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8B04258DCDCE00B00264 /* BoringSSL-GRPC.framework */; };
+		E9CC8B1D258DCDD100B00264 /* BoringSSL-GRPC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8B04258DCDCE00B00264 /* BoringSSL-GRPC.framework */; };
+		E9CC8B1E258DCDD100B00264 /* GoogleDataTransport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8B05258DCDCE00B00264 /* GoogleDataTransport.framework */; };
+		E9CC8B1F258DCDD100B00264 /* GoogleDataTransport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8B05258DCDCE00B00264 /* GoogleDataTransport.framework */; };
+		E9CC8B20258DCDD100B00264 /* FirebaseAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8B06258DCDCF00B00264 /* FirebaseAuth.framework */; };
+		E9CC8B21258DCDD100B00264 /* FirebaseAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8B06258DCDCF00B00264 /* FirebaseAuth.framework */; };
+		E9CC8B22258DCDD100B00264 /* GTMSessionFetcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8B07258DCDCF00B00264 /* GTMSessionFetcher.framework */; };
+		E9CC8B23258DCDD100B00264 /* GTMSessionFetcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8B07258DCDCF00B00264 /* GTMSessionFetcher.framework */; };
+		E9CC8B24258DCDD100B00264 /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8B08258DCDCF00B00264 /* GoogleUtilities.framework */; };
+		E9CC8B25258DCDD100B00264 /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8B08258DCDCF00B00264 /* GoogleUtilities.framework */; };
+		E9CC8B26258DCDD100B00264 /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8B09258DCDCF00B00264 /* FirebaseCore.framework */; };
+		E9CC8B27258DCDD100B00264 /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8B09258DCDCF00B00264 /* FirebaseCore.framework */; };
+		E9CC8B28258DCDD100B00264 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8B0A258DCDCF00B00264 /* FirebaseAnalytics.framework */; };
+		E9CC8B29258DCDD100B00264 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8B0A258DCDCF00B00264 /* FirebaseAnalytics.framework */; };
+		E9CC8B2A258DCDD100B00264 /* gRPC-Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8B0B258DCDCF00B00264 /* gRPC-Core.framework */; };
+		E9CC8B2B258DCDD100B00264 /* gRPC-Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8B0B258DCDCF00B00264 /* gRPC-Core.framework */; };
+		E9CC8B2C258DCDD100B00264 /* PromisesObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8B0C258DCDD000B00264 /* PromisesObjC.framework */; };
+		E9CC8B2D258DCDD100B00264 /* PromisesObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8B0C258DCDD000B00264 /* PromisesObjC.framework */; };
+		E9CC8B2E258DCDD100B00264 /* FirebaseCoreDiagnostics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8B0D258DCDD000B00264 /* FirebaseCoreDiagnostics.framework */; };
+		E9CC8B2F258DCDD100B00264 /* FirebaseCoreDiagnostics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8B0D258DCDD000B00264 /* FirebaseCoreDiagnostics.framework */; };
+		E9CC8B30258DCDD100B00264 /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8B0E258DCDD000B00264 /* GoogleAppMeasurement.framework */; };
+		E9CC8B31258DCDD100B00264 /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8B0E258DCDD000B00264 /* GoogleAppMeasurement.framework */; };
+		E9CC8B32258DCDD100B00264 /* FIRAnalyticsConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8B0F258DCDD000B00264 /* FIRAnalyticsConnector.framework */; };
+		E9CC8B33258DCDD100B00264 /* FIRAnalyticsConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8B0F258DCDD000B00264 /* FIRAnalyticsConnector.framework */; };
+		E9CC8B34258DCDD100B00264 /* FirebaseFirestore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8B10258DCDD000B00264 /* FirebaseFirestore.framework */; };
+		E9CC8B35258DCDD100B00264 /* FirebaseFirestore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8B10258DCDD000B00264 /* FirebaseFirestore.framework */; };
+		E9CC8B36258DCDD100B00264 /* gRPC-C++.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8B11258DCDD000B00264 /* gRPC-C++.framework */; };
+		E9CC8B37258DCDD100B00264 /* gRPC-C++.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CC8B11258DCDD000B00264 /* gRPC-C++.framework */; };
+		E9CC8B39258DCE8100B00264 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E9CC8B38258DCE8000B00264 /* GoogleService-Info.plist */; };
+		E9CC8B3A258DCE8100B00264 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E9CC8B38258DCE8000B00264 /* GoogleService-Info.plist */; };
 		E9CFE62420263C0700C69C43 /* Monkey_Jumping Temples_monkey 02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E9CFE62020263C0700C69C43 /* Monkey_Jumping Temples_monkey 02@2x.png */; };
 		E9CFE62520263C0700C69C43 /* Monkey_Jumping Temples_monkey 03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E9CFE62120263C0700C69C43 /* Monkey_Jumping Temples_monkey 03@2x.png */; };
 		E9CFE62620263C0700C69C43 /* Monkey_Jumping Temples_monkey 04@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E9CFE62220263C0700C69C43 /* Monkey_Jumping Temples_monkey 04@2x.png */; };
@@ -1572,6 +1621,11 @@
 		E42B244222F790E90024A4AE /* Balloon_Explode_Purple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Balloon_Explode_Purple.png; sourceTree = "<group>"; };
 		E940183C1FA998CF00FC6271 /* FSAnalysisOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSAnalysisOverlayView.h; path = SeeScoreLib/Source/FSAnalysisOverlayView.h; sourceTree = SOURCE_ROOT; };
 		E940183D1FA998CF00FC6271 /* FSAnalysisOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSAnalysisOverlayView.m; path = SeeScoreLib/Source/FSAnalysisOverlayView.m; sourceTree = SOURCE_ROOT; };
+		E9587CF62591BF3700F08314 /* ChallengesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengesViewController.swift; sourceTree = "<group>"; };
+		E9587D072591C4F700F08314 /* NewChallengeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChallengeViewController.swift; sourceTree = "<group>"; };
+		E9587D092591DBAD00F08314 /* PickChallengeExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickChallengeExerciseViewController.swift; sourceTree = "<group>"; };
+		E9645B06257D9D3C00A84551 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		E9645B08257D9D4700A84551 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		E9794BA81FFD45EA00CDC7FD /* PerformanceIssueMgr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PerformanceIssueMgr.swift; path = PerformanceAnalysis/PerformanceIssueMgr.swift; sourceTree = "<group>"; };
 		E9815A36200511430046445B /* VideoHelpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoHelpView.swift; sourceTree = "<group>"; };
 		E9815A382005124D0046445B /* VideoHelpResources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoHelpResources.swift; path = PerformanceAnalysis/VideoHelpResources.swift; sourceTree = "<group>"; };
@@ -1587,6 +1641,26 @@
 		E9AD0CE21FE09B77006472CE /* NotePerformanceAnalyzer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotePerformanceAnalyzer.swift; path = PerformanceAnalysis/NotePerformanceAnalyzer.swift; sourceTree = "<group>"; };
 		E9AD0CE51FE09D32006472CE /* NotePitchPerformanceAnalyzer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotePitchPerformanceAnalyzer.swift; path = PerformanceAnalysis/NotePitchPerformanceAnalyzer.swift; sourceTree = "<group>"; };
 		E9AD0CE81FE09E63006472CE /* NoteRhythmPerformanceAnalyzer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NoteRhythmPerformanceAnalyzer.swift; path = PerformanceAnalysis/NoteRhythmPerformanceAnalyzer.swift; sourceTree = "<group>"; };
+		E9CC8AF0258DCDCD00B00264 /* FirebaseInstallations.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseInstallations.framework; path = Carthage/Build/iOS/FirebaseInstallations.framework; sourceTree = "<group>"; };
+		E9CC8B00258DCDCE00B00264 /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Firebase.framework; path = Carthage/Build/iOS/Firebase.framework; sourceTree = "<group>"; };
+		E9CC8B01258DCDCE00B00264 /* abseil.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = abseil.framework; path = Carthage/Build/iOS/abseil.framework; sourceTree = "<group>"; };
+		E9CC8B02258DCDCE00B00264 /* leveldb-library.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "leveldb-library.framework"; path = "Carthage/Build/iOS/leveldb-library.framework"; sourceTree = "<group>"; };
+		E9CC8B03258DCDCE00B00264 /* nanopb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = nanopb.framework; path = Carthage/Build/iOS/nanopb.framework; sourceTree = "<group>"; };
+		E9CC8B04258DCDCE00B00264 /* BoringSSL-GRPC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "BoringSSL-GRPC.framework"; path = "Carthage/Build/iOS/BoringSSL-GRPC.framework"; sourceTree = "<group>"; };
+		E9CC8B05258DCDCE00B00264 /* GoogleDataTransport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleDataTransport.framework; path = Carthage/Build/iOS/GoogleDataTransport.framework; sourceTree = "<group>"; };
+		E9CC8B06258DCDCF00B00264 /* FirebaseAuth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAuth.framework; path = Carthage/Build/iOS/FirebaseAuth.framework; sourceTree = "<group>"; };
+		E9CC8B07258DCDCF00B00264 /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTMSessionFetcher.framework; path = Carthage/Build/iOS/GTMSessionFetcher.framework; sourceTree = "<group>"; };
+		E9CC8B08258DCDCF00B00264 /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleUtilities.framework; path = Carthage/Build/iOS/GoogleUtilities.framework; sourceTree = "<group>"; };
+		E9CC8B09258DCDCF00B00264 /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCore.framework; path = Carthage/Build/iOS/FirebaseCore.framework; sourceTree = "<group>"; };
+		E9CC8B0A258DCDCF00B00264 /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAnalytics.framework; path = Carthage/Build/iOS/FirebaseAnalytics.framework; sourceTree = "<group>"; };
+		E9CC8B0B258DCDCF00B00264 /* gRPC-Core.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "gRPC-Core.framework"; path = "Carthage/Build/iOS/gRPC-Core.framework"; sourceTree = "<group>"; };
+		E9CC8B0C258DCDD000B00264 /* PromisesObjC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromisesObjC.framework; path = Carthage/Build/iOS/PromisesObjC.framework; sourceTree = "<group>"; };
+		E9CC8B0D258DCDD000B00264 /* FirebaseCoreDiagnostics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCoreDiagnostics.framework; path = Carthage/Build/iOS/FirebaseCoreDiagnostics.framework; sourceTree = "<group>"; };
+		E9CC8B0E258DCDD000B00264 /* GoogleAppMeasurement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleAppMeasurement.framework; path = Carthage/Build/iOS/GoogleAppMeasurement.framework; sourceTree = "<group>"; };
+		E9CC8B0F258DCDD000B00264 /* FIRAnalyticsConnector.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FIRAnalyticsConnector.framework; path = Carthage/Build/iOS/FIRAnalyticsConnector.framework; sourceTree = "<group>"; };
+		E9CC8B10258DCDD000B00264 /* FirebaseFirestore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseFirestore.framework; path = Carthage/Build/iOS/FirebaseFirestore.framework; sourceTree = "<group>"; };
+		E9CC8B11258DCDD000B00264 /* gRPC-C++.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "gRPC-C++.framework"; path = "Carthage/Build/iOS/gRPC-C++.framework"; sourceTree = "<group>"; };
+		E9CC8B38258DCE8000B00264 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E9CFE62020263C0700C69C43 /* Monkey_Jumping Temples_monkey 02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Monkey_Jumping Temples_monkey 02@2x.png"; path = "Images/Monkey_Jumping Temples_monkey 02@2x.png"; sourceTree = "<group>"; };
 		E9CFE62120263C0700C69C43 /* Monkey_Jumping Temples_monkey 03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Monkey_Jumping Temples_monkey 03@2x.png"; path = "Images/Monkey_Jumping Temples_monkey 03@2x.png"; sourceTree = "<group>"; };
 		E9CFE62220263C0700C69C43 /* Monkey_Jumping Temples_monkey 04@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Monkey_Jumping Temples_monkey 04@2x.png"; path = "Images/Monkey_Jumping Temples_monkey 04@2x.png"; sourceTree = "<group>"; };
@@ -1598,12 +1672,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9CC8B2B258DCDD100B00264 /* gRPC-Core.framework in Frameworks */,
 				6D06E003246C93DA00193062 /* AudioKit.framework in Frameworks */,
+				E9CC8B31258DCDD100B00264 /* GoogleAppMeasurement.framework in Frameworks */,
+				E9CC8B21258DCDD100B00264 /* FirebaseAuth.framework in Frameworks */,
+				E9CC8B29258DCDD100B00264 /* FirebaseAnalytics.framework in Frameworks */,
 				6DD52D7E2257F40100F1C668 /* StoreKit.framework in Frameworks */,
+				E9CC8B1B258DCDD100B00264 /* nanopb.framework in Frameworks */,
+				E9CC8B23258DCDD100B00264 /* GTMSessionFetcher.framework in Frameworks */,
+				E9CC8B17258DCDD100B00264 /* abseil.framework in Frameworks */,
+				E9CC8B1D258DCDD100B00264 /* BoringSSL-GRPC.framework in Frameworks */,
 				6DD52D7B2257EE5C00F1C668 /* AudioKit.framework in Frameworks */,
+				E9CC8B35258DCDD100B00264 /* FirebaseFirestore.framework in Frameworks */,
+				E9CC8B2D258DCDD100B00264 /* PromisesObjC.framework in Frameworks */,
 				6DD52D7A2257ED8D00F1C668 /* SeeScoreLib.framework in Frameworks */,
 				6DD52D792257ED5600F1C668 /* SwiftyStoreKit.framework in Frameworks */,
+				E9CC8B27258DCDD100B00264 /* FirebaseCore.framework in Frameworks */,
 				6DD52D782257A32400F1C668 /* SwiftyJSON.framework in Frameworks */,
+				E9CC8B13258DCDD100B00264 /* FirebaseInstallations.framework in Frameworks */,
+				E9CC8B33258DCDD100B00264 /* FIRAnalyticsConnector.framework in Frameworks */,
+				E9CC8B37258DCDD100B00264 /* gRPC-C++.framework in Frameworks */,
+				E9CC8B1F258DCDD100B00264 /* GoogleDataTransport.framework in Frameworks */,
+				E9CC8B2F258DCDD100B00264 /* FirebaseCoreDiagnostics.framework in Frameworks */,
+				E9CC8B25258DCDD100B00264 /* GoogleUtilities.framework in Frameworks */,
+				E9CC8B19258DCDD100B00264 /* leveldb-library.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1625,12 +1717,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9CC8B2A258DCDD100B00264 /* gRPC-Core.framework in Frameworks */,
 				6D06E002246C6EC500193062 /* AudioKit.framework in Frameworks */,
+				E9CC8B30258DCDD100B00264 /* GoogleAppMeasurement.framework in Frameworks */,
+				E9CC8B20258DCDD100B00264 /* FirebaseAuth.framework in Frameworks */,
+				E9CC8B28258DCDD100B00264 /* FirebaseAnalytics.framework in Frameworks */,
 				6D431C342198EA67009DBBE9 /* SwiftyStoreKit.framework in Frameworks */,
+				E9CC8B1A258DCDD100B00264 /* nanopb.framework in Frameworks */,
+				E9CC8B22258DCDD100B00264 /* GTMSessionFetcher.framework in Frameworks */,
+				E9CC8B16258DCDD100B00264 /* abseil.framework in Frameworks */,
+				E9CC8B1C258DCDD100B00264 /* BoringSSL-GRPC.framework in Frameworks */,
 				1C33BBB62016E81D00CD83A6 /* SwiftyJSON.framework in Frameworks */,
+				E9CC8B34258DCDD100B00264 /* FirebaseFirestore.framework in Frameworks */,
+				E9CC8B2C258DCDD100B00264 /* PromisesObjC.framework in Frameworks */,
 				6D3AE1422176846A005ECC60 /* StoreKit.framework in Frameworks */,
 				C90339351FB126AA005A9C7D /* AudioKit.framework in Frameworks */,
+				E9CC8B26258DCDD100B00264 /* FirebaseCore.framework in Frameworks */,
 				BDF308FA1F630AF500F0A819 /* SeeScoreLib.framework in Frameworks */,
+				E9CC8B12258DCDD100B00264 /* FirebaseInstallations.framework in Frameworks */,
+				E9CC8B32258DCDD100B00264 /* FIRAnalyticsConnector.framework in Frameworks */,
+				E9CC8B36258DCDD100B00264 /* gRPC-C++.framework in Frameworks */,
+				E9CC8B1E258DCDD100B00264 /* GoogleDataTransport.framework in Frameworks */,
+				E9CC8B14258DCDD100B00264 /* Firebase.framework in Frameworks */,
+				E9CC8B2E258DCDD100B00264 /* FirebaseCoreDiagnostics.framework in Frameworks */,
+				E9CC8B24258DCDD100B00264 /* GoogleUtilities.framework in Frameworks */,
+				E9CC8B18258DCDD100B00264 /* leveldb-library.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1866,6 +1977,25 @@
 			children = (
 				6DB782B42457480A0032B8E4 /* PlayTunes.entitlements */,
 				6D917E6223185006008A597C /* RuntimeEventManager.swift */,
+				E9CC8B01258DCDCE00B00264 /* abseil.framework */,
+				E9CC8B04258DCDCE00B00264 /* BoringSSL-GRPC.framework */,
+				E9CC8B0F258DCDD000B00264 /* FIRAnalyticsConnector.framework */,
+				E9CC8B00258DCDCE00B00264 /* Firebase.framework */,
+				E9CC8B0A258DCDCF00B00264 /* FirebaseAnalytics.framework */,
+				E9CC8B06258DCDCF00B00264 /* FirebaseAuth.framework */,
+				E9CC8B09258DCDCF00B00264 /* FirebaseCore.framework */,
+				E9CC8B0D258DCDD000B00264 /* FirebaseCoreDiagnostics.framework */,
+				E9CC8B10258DCDD000B00264 /* FirebaseFirestore.framework */,
+				E9CC8AF0258DCDCD00B00264 /* FirebaseInstallations.framework */,
+				E9CC8B0E258DCDD000B00264 /* GoogleAppMeasurement.framework */,
+				E9CC8B05258DCDCE00B00264 /* GoogleDataTransport.framework */,
+				E9CC8B08258DCDCF00B00264 /* GoogleUtilities.framework */,
+				E9CC8B11258DCDD000B00264 /* gRPC-C++.framework */,
+				E9CC8B0B258DCDCF00B00264 /* gRPC-Core.framework */,
+				E9CC8B07258DCDCF00B00264 /* GTMSessionFetcher.framework */,
+				E9CC8B02258DCDCE00B00264 /* leveldb-library.framework */,
+				E9CC8B03258DCDCE00B00264 /* nanopb.framework */,
+				E9CC8B0C258DCDD000B00264 /* PromisesObjC.framework */,
 				6DD52D7C2257EF9300F1C668 /* SeeScoreLib.framework */,
 				6D431C322198EA33009DBBE9 /* SwiftyStoreKit.framework */,
 				C90339381FB13239005A9C7D /* Changelog.md */,
@@ -1909,6 +2039,7 @@
 				6324D2DC1CE71B1A001934A5 /* Assets.xcassets */,
 				634658391E90C63900C162CF /* synth-samples */,
 				6324D2E11CE71B1A001934A5 /* Info.plist */,
+				E9CC8B38258DCE8000B00264 /* GoogleService-Info.plist */,
 				6324D2D91CE71B1A001934A5 /* FirstStage.xcdatamodeld */,
 				E409163922CC386800E5E034 /* Main.storyboard */,
 				638129551CF05C6100A40C8E /* Views */,
@@ -2002,6 +2133,8 @@
 		633C2AD81CE80D80001C5C16 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				E9645AF5257D9CF200A84551 /* Auth */,
+				E9645B05257D9CFA00A84551 /* Challenges */,
 				E40C310A22DE5733002FFCCB /* OnboardingViewController.swift */,
 				6DA1EA122193789D0069942D /* InAppPurchasesViewController.swift */,
 				6D0018CC2162C03500B7B498 /* InternalSettingsViewController.swift */,
@@ -2559,6 +2692,25 @@
 			name = "Send Performance Data";
 			sourceTree = "<group>";
 		};
+		E9645AF5257D9CF200A84551 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				E9645B06257D9D3C00A84551 /* SignUpViewController.swift */,
+				E9645B08257D9D4700A84551 /* SignInViewController.swift */,
+			);
+			name = Auth;
+			sourceTree = "<group>";
+		};
+		E9645B05257D9CFA00A84551 /* Challenges */ = {
+			isa = PBXGroup;
+			children = (
+				E9587CF62591BF3700F08314 /* ChallengesViewController.swift */,
+				E9587D072591C4F700F08314 /* NewChallengeViewController.swift */,
+				E9587D092591DBAD00F08314 /* PickChallengeExerciseViewController.swift */,
+			);
+			name = Challenges;
+			sourceTree = "<group>";
+		};
 		E9794BAB1FFDB36200CDC7FD /* Videos */ = {
 			isa = PBXGroup;
 			children = (
@@ -2668,6 +2820,7 @@
 				6324D2CD1CE71B19001934A5 /* Resources */,
 				C9BCD1621FB1437600E3434F /* Copy Carthage Frameworks */,
 				6324D31C1CE7327F001934A5 /* Embed Frameworks */,
+				E9123E5E2599B568002907F5 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -3197,6 +3350,7 @@
 				6DF3A11821E68A8300C3D525 /* tuba.63.mp3 in Resources */,
 				6DF3A0D221E68A8300C3D525 /* tuba.43.mp3 in Resources */,
 				6DB853482127A87600F999C3 /* Monkey_Skiing_01@2x.png in Resources */,
+				E9CC8B3A258DCE8100B00264 /* GoogleService-Info.plist in Resources */,
 				634658B41E90C68E00C162CF /* Piano.mf.57.m4a in Resources */,
 				6DC3FE922119628100168950 /* bananas@2x.png in Resources */,
 				6DBF1F2C213EEB850052AD57 /* Duration - Too Long.mp4 in Resources */,
@@ -3546,6 +3700,7 @@
 				6336B1FC1EA32B0200A78D02 /* Piano.mf.96.m4a in Resources */,
 				6336B1A61EA32AF000A78D02 /* Trumpet.novib.mf.74.m4a in Resources */,
 				6336B1DE1EA32B0200A78D02 /* Piano.mf.66.m4a in Resources */,
+				E9CC8B39258DCE8100B00264 /* GoogleService-Info.plist in Resources */,
 				6DF3A0EB21E68A8300C3D525 /* tuba.36.mp3 in Resources */,
 				6DF3A0DB21E68A8300C3D525 /* tuba.60.mp3 in Resources */,
 				6336B1D91EA32B0200A78D02 /* Piano.mf.61.m4a in Resources */,
@@ -3661,6 +3816,24 @@
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 			showEnvVarsInLog = 0;
 		};
+		E9123E5E2599B568002907F5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/InstantSearchClient.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -3673,6 +3846,7 @@
 				6DA1EA11219377610069942D /* OneAvailableInAppPurchaseView.swift in Sources */,
 				6DA7F6A521B7440500800099 /* AppVersion.swift in Sources */,
 				E9794BAA1FFD45EA00CDC7FD /* PerformanceIssueMgr.swift in Sources */,
+				E9BB304D2599A5350024E00D /* SignInViewController.swift in Sources */,
 				E9AD0CC21FD9BCDF006472CE /* PerformanceSound.swift in Sources */,
 				6DA7F6A721B7440500800099 /* AppVersionMonitor.swift in Sources */,
 				633D1B6D1CF94BEC00B5C4FD /* FeedbackView.swift in Sources */,
@@ -3692,6 +3866,7 @@
 				E9AD0CC11FD9BCDF006472CE /* PerformanceNote.swift in Sources */,
 				6D484A5B22FBA60900816DD3 /* LevelSeriesViewController.swift in Sources */,
 				6D82A20D23391B7600026BD8 /* TryOutLevelsManager.swift in Sources */,
+				E9BB30502599A53C0024E00D /* PickChallengeExerciseViewController.swift in Sources */,
 				6D917E6423185006008A597C /* RuntimeEventManager.swift in Sources */,
 				6D917E612318495F008A597C /* AudioSampleAnalysisView.swift in Sources */,
 				E409165C22CC392000E5E034 /* HomeViewController.swift in Sources */,
@@ -3712,6 +3887,7 @@
 				6D6C8CEE2123422B00874F86 /* PerformanceScoreObjectScheduler.swift in Sources */,
 				6D62460121F6455E00451400 /* DiscFileSystermSupport.swift in Sources */,
 				6D631687212DF4D5004F2DE4 /* LevelSeriesTableViewHeaderFooterView.swift in Sources */,
+				E9BB30542599A5410024E00D /* ChallengesViewController.swift in Sources */,
 				6DBCD34124AA3337000679D4 /* DayCKActivityManager.swift in Sources */,
 				6324D3611CE73C47001934A5 /* SSSystemView.m in Sources */,
 				E9AD0CBF1FD9BCDF006472CE /* NoteIDs.swift in Sources */,
@@ -3733,6 +3909,7 @@
 				63D5E8861EA37BDA007AE8D4 /* Note.swift in Sources */,
 				6DA5763D21473C26002D1D58 /* PerfSampleAmplitudeTracker.swift in Sources */,
 				63D5E8831EA37BCC007AE8D4 /* NoteService.swift in Sources */,
+				E9BB30512599A53F0024E00D /* NewChallengeViewController.swift in Sources */,
 				6324D3041CE72E5D001934A5 /* TuneExerciseViewController.swift in Sources */,
 				E9AD0CC01FD9BCDF006472CE /* PerformanceAnalysisMgr.swift in Sources */,
 				E409164422CC387500E5E034 /* SettingsTableViewController.swift in Sources */,
@@ -3742,6 +3919,7 @@
 				6324D3651CE73C47001934A5 /* SSPlayLoopGraphics.m in Sources */,
 				6D8486DD21949EB3003D9D6A /* InAppAvailablePurchasesData.swift in Sources */,
 				6324D35F1CE73C47001934A5 /* SSScrollView.m in Sources */,
+				E9BB304A2599A5320024E00D /* SignUpViewController.swift in Sources */,
 				6DA54C48210BC8FA004BECB2 /* ScoreMgr.swift in Sources */,
 				6DC3FE8C2119617500168950 /* StarScoreView.swift in Sources */,
 				BD8B79121F95C11B005B31CB /* UserAtributes.swift in Sources */,
@@ -3811,6 +3989,7 @@
 				6DA1EA10219377610069942D /* OneAvailableInAppPurchaseView.swift in Sources */,
 				6DA7F6A421B7440500800099 /* AppVersion.swift in Sources */,
 				E9AD0CCB1FD9BF08006472CE /* PerformanceSound.swift in Sources */,
+				E9645B09257D9D4700A84551 /* SignInViewController.swift in Sources */,
 				E409168C22CFEFCC00E5E034 /* ExerciseTableViewCell.swift in Sources */,
 				E9794BA91FFD45EA00CDC7FD /* PerformanceIssueMgr.swift in Sources */,
 				6DA7F6A621B7440500800099 /* AppVersionMonitor.swift in Sources */,
@@ -3826,6 +4005,7 @@
 				E9815A3A2005127B0046445B /* VideoHelpResources.swift in Sources */,
 				6D34A17D2139F9E10071BAB6 /* AppDefs.swift in Sources */,
 				638129581CF05C7900A40C8E /* Balloon.swift in Sources */,
+				E9587D0A2591DBAD00F08314 /* PickChallengeExerciseViewController.swift in Sources */,
 				E9AD0CC71FD9BEF6006472CE /* NoteFreqRangeTable.swift in Sources */,
 				6DA7F6AC21B74A3200800099 /* AppVersionHelper.swift in Sources */,
 				6D277EBD220A9DFF00247359 /* PerfSampleAmplitudeTrackerV2.swift in Sources */,
@@ -3872,6 +4052,7 @@
 				E9AD0CCA1FD9BF02006472CE /* PerformanceNote.swift in Sources */,
 				6324D3091CE72F8D001934A5 /* TuneExerciseViewController.swift in Sources */,
 				6DA5763C21473C26002D1D58 /* PerfSampleAmplitudeTracker.swift in Sources */,
+				E9587D082591C4F700F08314 /* NewChallengeViewController.swift in Sources */,
 				63B4275D1E5057C2000E35AA /* SSSettingsViewController.swift in Sources */,
 				639A2E541CF5E6CA004F7B1A /* VisualMetronomeView.swift in Sources */,
 				6D6093B62114F6C000874A40 /* PerformanceScoreObject.swift in Sources */,
@@ -3880,6 +4061,7 @@
 				6324D3641CE73C47001934A5 /* SSPlayLoopGraphics.m in Sources */,
 				6324D35E1CE73C47001934A5 /* SSScrollView.m in Sources */,
 				1C87C0A82016F0030038784E /* LevelOverviewViewController.swift in Sources */,
+				E9645B07257D9D3C00A84551 /* SignUpViewController.swift in Sources */,
 				6D8486CD21949DE4003D9D6A /* InAppAvailablePurchasesData.swift in Sources */,
 				BD8B79111F95C11B005B31CB /* UserAtributes.swift in Sources */,
 				1C87C0AE2016F3F70038784E /* LessonOverviewViewController.swift in Sources */,
@@ -3914,6 +4096,7 @@
 				63D5E88C1EA37C1B007AE8D4 /* LongToneViewController.swift in Sources */,
 				6DFCF7A623D0F88300868E48 /* PerfDataCollector.swift in Sources */,
 				6D431C1F21975EC4009DBBE9 /* PlayTunesIAPProducts.swift in Sources */,
+				E9587CF72591BF3700F08314 /* ChallengesViewController.swift in Sources */,
 				BD8B79051F95BF75005B31CB /* PracticeViewController.swift in Sources */,
 				E409164322CC387500E5E034 /* SettingsTableViewController.swift in Sources */,
 				6D6093B82114F6CB00874A40 /* RestPerformanceAnalyzer.swift in Sources */,

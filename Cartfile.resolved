@@ -1,3 +1,7 @@
+binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseAnalyticsBinary.json" "7.3.0"
+binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseAuthBinary.json" "7.3.0"
+binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseFirestoreBinary.json" "7.3.0"
 github "SwiftyJSON/SwiftyJSON" "5.0.0"
+github "algolia/algoliasearch-client-swift" "7.0.5"
 github "audiokit/AudioKit" "v4.9.5"
 github "bizz84/SwiftyStoreKit" "0.15.1"

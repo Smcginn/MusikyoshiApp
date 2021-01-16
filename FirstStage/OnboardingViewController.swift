@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class OnboardingViewController: UIViewController {
 
@@ -42,39 +43,20 @@ class OnboardingViewController: UIViewController {
         
          // NAV_CONTROLLER_ISSUE - put it here?
         
-          //self.window?.rootViewController = navController
-         /*
-         if UserDefaults.standard.bool(forKey: "shownOnboarding") {
-             /*
-             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-             let controller = storyboard.instantiateViewController(withIdentifier: "NavController")
-             self.present(controller, animated: false, completion: nil)
-             */
-             
-             // ClassKit
-             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-             let navController = storyboard.instantiateViewController(withIdentifier: "NavController")
-             UIApplication.shared.keyWindow?.rootViewController = navController
-             self.present(navController, animated: false, completion: nil)
-         }
-         */
-        
         if UserDefaults.standard.bool(forKey: "shownOnboarding") {
-            /*
+            
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let controller = storyboard.instantiateViewController(withIdentifier: "NavController")
-            self.present(controller, animated: false, completion: nil)
-            */
             
-            // ClassKit
-            
+            if Auth.auth().currentUser != nil {
+                // User is signed in
+                let vc = storyboard.instantiateViewController(withIdentifier: "NavController")
+                self.present(vc, animated: false, completion: nil)
+            } else {
+                let vc = storyboard.instantiateViewController(withIdentifier: "AuthNav")
+                self.present(vc, animated: false, completion: nil)
+            }
         }
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let navController = storyboard.instantiateViewController(withIdentifier: "NavController")
-        UIApplication.shared.keyWindow?.rootViewController = navController
-        //self.window?.rootViewController = navController
-        self.present(navController, animated: false, completion: nil)
-        
+
     }
     
     override func viewDidLayoutSubviews() {
@@ -122,9 +104,16 @@ class OnboardingViewController: UIViewController {
         // NAV_CONTROLLER_ISSUE
 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let navController = storyboard.instantiateViewController(withIdentifier: "NavController")
-        UIApplication.shared.keyWindow?.rootViewController = navController
-        self.present(navController, animated: false, completion: nil)
+        
+        if Auth.auth().currentUser != nil {
+            // User is signed in
+            let vc = storyboard.instantiateViewController(withIdentifier: "NavController")
+            self.present(vc, animated: false, completion: nil)
+        } else {
+            let vc = storyboard.instantiateViewController(withIdentifier: "AuthNav")
+            self.present(vc, animated: false, completion: nil)
+        }
+        
     }
     
     func setupSlideScrollView(slides: [OnboardingSlideView]) {

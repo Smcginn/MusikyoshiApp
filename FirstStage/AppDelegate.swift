@@ -11,6 +11,7 @@ import CoreData
 import StoreKit
 import SwiftyStoreKit
 import ClassKit
+import Firebase
 
 func delay(_ delay:Double, closure:@escaping ()->()){
     DispatchQueue.main.asyncAfter(
@@ -89,6 +90,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         //initialize Settings
+        
+        FirebaseApp.configure()
         
         self.window?.tintColor = .pinkColor
         
